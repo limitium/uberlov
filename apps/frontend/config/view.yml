@@ -11,7 +11,7 @@ default:
 
   stylesheets:    [main]
 
-  javascripts:    [lib/jquery,moduleManager]
+  javascripts:    [lib/jquery,lib/jqueryBlockUI,moduleManager]
 
   has_layout:     true
   layout:         layout

@@ -341,32 +341,32 @@ var asm = {
 
 //LOADER
 
-//function Loader(marker){
-//    this.marker = marker;
-//}
-//
-//Loader.prototype = new GOverlay();
-//Loader.prototype.initialize = function(map){
-//    var img = document.createElement("img");
-//    img.src = "/images/loader.gif";
-//    img.style.position = "absolute";
-//    map.getPane(G_MAP_MAP_PANE).appendChild(img);
-//    this.map_ = map;
-//    this.img_ = img;
-//}
-//Loader.prototype.remove = function(){
-//    this.img_.parentNode.removeChild(this.img_);
-//}
-//Loader.prototype.copy = function(){
-//    return new Rectangle(this.marker);
-//}
-//Loader.prototype.redraw = function(force){
-//    if (!force)
-//        return;
-//    var point = this.map_.fromLatLngToDivPixel(this.marker.getLatLng());
-//    this.img_.style.left = (point.x) + "px";
-//    this.img_.style.top = (point.y) + "px";
-//}
+function Loader(marker){
+    this.marker = marker;
+}
+
+Loader.prototype = new GOverlay();
+Loader.prototype.initialize = function(map){
+    var img = document.createElement("img");
+    img.src = "/images/loader.gif";
+    img.style.position = "absolute";
+    map.getPane(G_MAP_MAP_PANE).appendChild(img);
+    this.map_ = map;
+    this.img_ = img;
+}
+Loader.prototype.remove = function(){
+    this.img_.parentNode.removeChild(this.img_);
+}
+Loader.prototype.copy = function(){
+    return new Rectangle(this.marker);
+}
+Loader.prototype.redraw = function(force){
+    if (!force)
+        return;
+    var point = this.map_.fromLatLngToDivPixel(this.marker.getLatLng());
+    this.img_.style.left = (point.x) + "px";
+    this.img_.style.top = (point.y) + "px";
+}
 ////END CONTROLS
 ////MISC
 //Array.prototype.copy = function(start, end){
