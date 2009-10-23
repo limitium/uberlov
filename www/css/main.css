@@ -1,9 +1,19 @@
 @charset "utf-8";
+/*styles*/
+
 * {
     margin: 0;
     padding: 0;
 }
+a.dashed:visited {
+    color:#0053E4;
+}
+a.dashed:link, a.dashed:active, a.dashed:visited, a.dashed:hover {
+    border-bottom:1px dashed;
+    text-decoration:none;
+}
 
+/*layout*/
 div{
     border: 1px solid red;
 }
@@ -47,4 +57,3 @@ div{
     height: 500px;
     float:left;
 }
-	
