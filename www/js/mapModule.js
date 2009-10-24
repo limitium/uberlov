@@ -54,6 +54,11 @@ mapModule.prototype.createLocation = function(opt){
     this.addLocationListener(location);
 }
 
+mapModule.prototype.createPoly = function(opt){
+    opt.map = this.map;
+    return new gm.Polyline(opt);
+}
+
 mapModule.prototype.createMarker = function(opt){
     opt.map = this.map;
     return new gm.Marker(opt);

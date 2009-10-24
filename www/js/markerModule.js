@@ -1,7 +1,6 @@
 function markerModule(){
     this.mm = app.getModule('mapModule');
     this.listenerClick = null;
-    this.markerModule = null;
     this.initMenu();
 
 }
@@ -67,7 +66,8 @@ markerModule.prototype.addSubmitHandler = function(form){
             },
             css: {
                 border:		'0px',
-                backgroundColor:'#f5f5f5'
+                opacity:        '0.5',
+                backgroundColor:'#eee'
             }
         });
 
