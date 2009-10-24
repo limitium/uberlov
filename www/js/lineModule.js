@@ -10,6 +10,7 @@ ModuleManager.add(lineModule);
 
 lineModule.prototype.initMenu = function(){
     $('#new_line').click(this.startEdit.delegate(this));
+    $('#save').click(this.startEdit.delegate(this));
 }
 
 lineModule.prototype.startEdit = function(){
@@ -149,11 +150,15 @@ lineModule.prototype.onPointClick = function(e,point){
         this.poly.points.getAt(i).index-=1;
     }
 
-    if(point.index==0){
-        this.poly.points.getAt(0).midPoint.setMap(null);
-        this.poly.points.getAt(0).midPoint = null;
-    }else{
-        point.midPoint.setMap(null);
+    //first but not last
+    if(this.poly.points.length!=0){
+        if(point.index==0){
+            this.poly.points.getAt(0).midPoint.setMap(null);
+            this.poly.points.getAt(0).midPoint = null;
+        }else{
+            point.midPoint.setMap(null);
+            point.midPoint = null;
+        }
     }
     point.setMap(null);
 
