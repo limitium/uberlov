@@ -1,0 +1,82 @@
+Location:
+  Location_1:
+    name: agrtwgare
+    description: dfgwegr
+    location_type_id: '1'
+    latitude: '55.0561485290527'
+    longitude: '35.5951728820801'
+    created_at: '1970-01-01 00:00:00'
+    updated_at: '1970-01-01 00:00:00'
+  Location_2:
+    name: zxczxc23tgwe
+    description: r32fwergt
+    location_type_id: '1'
+    latitude: '55.522214'
+    longitude: '35.600665'
+    created_at: '1970-01-01 00:00:00'
+    updated_at: '1970-01-01 00:00:00'
+  Location_3:
+    name: fsdgfthyj2er3t4g
+    description: 5qdwfegrhtyjtrqwfegrh
+    location_type_id: '1'
+    latitude: '55.316444'
+    longitude: '36.155475'
+    created_at: '1970-01-01 00:00:00'
+    updated_at: '1970-01-01 00:00:00'
+  Location_4:
+    name: yahooo
+    description: '1111111111111111'
+    location_type_id: '1'
+    latitude: '54.702206'
+    longitude: '36.94649'
+    created_at: '1970-01-01 00:00:00'
+    updated_at: '1970-01-01 00:00:00'
+  Location_5:
+    name: gdfdfgdfg
+    description: dfhestnrnsfgn
+    location_type_id: '1'
+    latitude: '54.895364'
+    longitude: '35.952228'
+    created_at: '1970-01-01 00:00:00'
+    updated_at: '1970-01-01 00:00:00'
+  Location_6:
+    name: drgsdfh
+    description: srghsdthj
+    location_type_id: '1'
+    latitude: '55.184941'
+    longitude: '37.402423'
+    created_at: '1970-01-01 00:00:00'
+    updated_at: '1970-01-01 00:00:00'
+  Location_7:
+    name: asdftyui
+    description: wertwertgaerh
+    location_type_id: '1'
+    latitude: '55.600459'
+    longitude: '38.481486'
+    created_at: '1970-01-01 00:00:00'
+    updated_at: '1970-01-01 00:00:00'
+  Location_8:
+    name: etujtdy
+    description: ertertery
+    location_type_id: '1'
+    latitude: '55.336592'
+    longitude: '36.366463'
+    created_at: '1970-01-01 00:00:00'
+    updated_at: '1970-01-01 00:00:00'
+  Location_9:
+    name: 'Пляж на угре'
+    description: 'Красивое место'
+    location_type_id: '1'
+    latitude: '54.829993'
+    longitude: '35.025137'
+    created_at: '1970-01-01 00:00:00'
+    updated_at: '1970-01-01 00:00:00'
+LocationType:
+  LocationType_1:
+    name: most
+  LocationType_2:
+    name: yama
+  LocationType_3:
+    name: derevo
+  LocationType_4:
+    name: stolb

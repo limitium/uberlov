@@ -22261,3 +22261,988 @@ Oct 24 17:55:06 symfony [info] {sfWebDebugLogger} Action "collector/data" 115.63
 Oct 24 17:55:06 symfony [info] {sfWebDebugLogger} Database (Doctrine) 0.01 ms (2)
 Oct 24 17:55:06 symfony [info] {sfWebDebugLogger} View "Success" for "collector/data" 136.94 ms (1)
 Oct 24 17:55:06 symfony [info] {sfWebResponse} Send content (707 o)
+Oct 24 18:38:25 symfony [info] {sfPatternRouting} Match route "default" (/:module/:action/*) for /collector/map with parameters array (  'module' => 'collector',  'action' => 'map',)
+Oct 24 18:38:25 symfony [info] {myUser} Automatic user logout due to timeout
+Oct 24 18:38:25 symfony [info] {myUser} User is not authenticated
+Oct 24 18:38:26 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Oct 24 18:38:26 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Oct 24 18:38:26 symfony [info] {collectorActions} Call "collectorActions->executeMap()"
+Oct 24 18:38:26 symfony [info] {sfPHPView} Render "Z:\home\HT\apps\frontend\modules/collector/templates/mapSuccess.php"
+Oct 24 18:38:26 symfony [info] {sfPartialView} Render "Z:\home\HT\apps\frontend\modules/collector/templates/_map.php"
+Oct 24 18:38:28 symfony [info] {main} Set slot "content_menu"
+Oct 24 18:38:28 symfony [info] {sfPHPView} Decorate content with "Z:\home\HT\apps\frontend\templates/layout.php"
+Oct 24 18:38:28 symfony [info] {sfPHPView} Render "Z:\home\HT\apps\frontend\templates/layout.php"
+Oct 24 18:38:28 symfony [info] {main} Call "user->executeMenu()"
+Oct 24 18:38:28 symfony [info] {sfPartialView} Render "Z:\home\HT\apps\frontend\modules/user/templates/_menu.php"
+Oct 24 18:38:28 symfony [info] {main} Call "collector->executeStats()"
+Oct 24 18:38:28 symfony [info] {sfPartialView} Render "Z:\home\HT\apps\frontend\modules/collector/templates/_stats.php"
+Oct 24 18:38:28 symfony [info] {main} Get slot "content_menu"
+Oct 24 18:38:28 symfony [info] {sfWebResponse} Send status "HTTP/1.1 200 OK"
+Oct 24 18:38:28 symfony [info] {sfWebResponse} Send header "Content-Type: text/html; charset=utf-8"
+Oct 24 18:38:28 symfony [info] {sfWebDebugLogger} Configuration 1631.85 ms (13)
+Oct 24 18:38:28 symfony [info] {sfWebDebugLogger} Factories 2056.69 ms (1)
+Oct 24 18:38:28 symfony [info] {sfWebDebugLogger} Action "collector/map" 0.68 ms (1)
+Oct 24 18:38:28 symfony [info] {sfWebDebugLogger} View "Success" for "collector/map" 2026.23 ms (1)
+Oct 24 18:38:28 symfony [info] {sfWebDebugLogger} Partial "collector/_map" 1598.95 ms (1)
+Oct 24 18:38:28 symfony [info] {sfWebDebugLogger} Component "user/menu" 0.03 ms (1)
+Oct 24 18:38:28 symfony [info] {sfWebDebugLogger} Partial "user/_menu" 12.65 ms (1)
+Oct 24 18:38:28 symfony [info] {sfWebDebugLogger} Component "collector/stats" 0.02 ms (1)
+Oct 24 18:38:28 symfony [info] {sfWebDebugLogger} Partial "collector/_stats" 13.60 ms (1)
+Oct 24 18:38:28 symfony [info] {sfWebResponse} Send content (76725 o)
+Oct 24 18:38:38 symfony [info] {sfPatternRouting} Match route "default" (/:module/:action/*) for /collector/data with parameters array (  'module' => 'collector',  'action' => 'data',)
+Oct 24 18:38:38 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Oct 24 18:38:38 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Oct 24 18:38:38 symfony [info] {collectorActions} Call "collectorActions->executeData()"
+Oct 24 18:38:39 symfony [info] {Doctrine_Connection_Mysql} exec : SET NAMES 'UTF8' - ()
+Oct 24 18:38:40 symfony [info] {Doctrine_Connection_Mysql} query : SELECT l.id AS l__id, l.name AS l__name, l.description AS l__description, l.location_type_id AS l__location_type_id, l.lat AS l__lat, l.lng AS l__lng, l.created_at AS l__created_at, l.updated_at AS l__updated_at FROM location l - ()
+Oct 24 18:38:40 symfony [info] {sfPHPView} Render "Z:\home\HT\apps\frontend\modules/collector/templates/dataSuccess.php"
+Oct 24 18:38:40 symfony [info] {sfWebResponse} Send status "HTTP/1.1 200 OK"
+Oct 24 18:38:40 symfony [info] {sfWebResponse} Send header "Content-Type: text/html; charset=utf-8"
+Oct 24 18:38:40 symfony [info] {sfWebDebugLogger} Configuration 27.74 ms (9)
+Oct 24 18:38:40 symfony [info] {sfWebDebugLogger} Factories 71.01 ms (1)
+Oct 24 18:38:40 symfony [info] {sfWebDebugLogger} Action "collector/data" 2293.15 ms (1)
+Oct 24 18:38:40 symfony [info] {sfWebDebugLogger} Database (Doctrine) 0.02 ms (2)
+Oct 24 18:38:40 symfony [info] {sfWebDebugLogger} View "Success" for "collector/data" 297.86 ms (1)
+Oct 24 18:38:40 symfony [info] {sfWebResponse} Send content (707 o)
+Oct 24 18:39:14 symfony [info] {sfPatternRouting} Match route "default" (/:module/:action/*) for /collector/map with parameters array (  'module' => 'collector',  'action' => 'map',)
+Oct 24 18:39:14 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Oct 24 18:39:14 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Oct 24 18:39:14 symfony [info] {collectorActions} Call "collectorActions->executeMap()"
+Oct 24 18:39:14 symfony [info] {sfPHPView} Render "Z:\home\HT\apps\frontend\modules/collector/templates/mapSuccess.php"
+Oct 24 18:39:14 symfony [info] {sfPartialView} Render "Z:\home\HT\apps\frontend\modules/collector/templates/_map.php"
+Oct 24 18:39:16 symfony [info] {main} Set slot "content_menu"
+Oct 24 18:39:16 symfony [info] {sfPHPView} Decorate content with "Z:\home\HT\apps\frontend\templates/layout.php"
+Oct 24 18:39:16 symfony [info] {sfPHPView} Render "Z:\home\HT\apps\frontend\templates/layout.php"
+Oct 24 18:39:16 symfony [info] {main} Call "user->executeMenu()"
+Oct 24 18:39:16 symfony [info] {sfPartialView} Render "Z:\home\HT\apps\frontend\modules/user/templates/_menu.php"
+Oct 24 18:39:16 symfony [info] {main} Call "collector->executeStats()"
+Oct 24 18:39:16 symfony [info] {sfPartialView} Render "Z:\home\HT\apps\frontend\modules/collector/templates/_stats.php"
+Oct 24 18:39:16 symfony [info] {main} Get slot "content_menu"
+Oct 24 18:39:16 symfony [info] {sfWebResponse} Send status "HTTP/1.1 200 OK"
+Oct 24 18:39:16 symfony [info] {sfWebResponse} Send header "Content-Type: text/html; charset=utf-8"
+Oct 24 18:39:16 symfony [info] {sfWebDebugLogger} Configuration 1507.34 ms (13)
+Oct 24 18:39:16 symfony [info] {sfWebDebugLogger} Factories 296.11 ms (1)
+Oct 24 18:39:16 symfony [info] {sfWebDebugLogger} Action "collector/map" 0.18 ms (1)
+Oct 24 18:39:16 symfony [info] {sfWebDebugLogger} View "Success" for "collector/map" 1828.82 ms (1)
+Oct 24 18:39:16 symfony [info] {sfWebDebugLogger} Partial "collector/_map" 1517.70 ms (1)
+Oct 24 18:39:16 symfony [info] {sfWebDebugLogger} Component "user/menu" 0.03 ms (1)
+Oct 24 18:39:16 symfony [info] {sfWebDebugLogger} Partial "user/_menu" 1.13 ms (1)
+Oct 24 18:39:16 symfony [info] {sfWebDebugLogger} Component "collector/stats" 0.02 ms (1)
+Oct 24 18:39:16 symfony [info] {sfWebDebugLogger} Partial "collector/_stats" 0.66 ms (1)
+Oct 24 18:39:16 symfony [info] {sfWebResponse} Send content (73306 o)
+Oct 24 18:39:19 symfony [info] {sfPatternRouting} Match route "default" (/:module/:action/*) for /collector/data with parameters array (  'module' => 'collector',  'action' => 'data',)
+Oct 24 18:39:19 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Oct 24 18:39:19 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Oct 24 18:39:19 symfony [info] {collectorActions} Call "collectorActions->executeData()"
+Oct 24 18:39:20 symfony [info] {Doctrine_Connection_Mysql} exec : SET NAMES 'UTF8' - ()
+Oct 24 18:39:20 symfony [info] {Doctrine_Connection_Mysql} query : SELECT l.id AS l__id, l.name AS l__name, l.description AS l__description, l.location_type_id AS l__location_type_id, l.lat AS l__lat, l.lng AS l__lng, l.created_at AS l__created_at, l.updated_at AS l__updated_at FROM location l - ()
+Oct 24 18:39:20 symfony [info] {sfPHPView} Render "Z:\home\HT\apps\frontend\modules/collector/templates/dataSuccess.php"
+Oct 24 18:39:20 symfony [info] {sfWebResponse} Send status "HTTP/1.1 200 OK"
+Oct 24 18:39:20 symfony [info] {sfWebResponse} Send header "Content-Type: text/html; charset=utf-8"
+Oct 24 18:39:20 symfony [info] {sfWebDebugLogger} Configuration 14.99 ms (9)
+Oct 24 18:39:20 symfony [info] {sfWebDebugLogger} Factories 245.27 ms (1)
+Oct 24 18:39:20 symfony [info] {sfWebDebugLogger} Action "collector/data" 641.97 ms (1)
+Oct 24 18:39:20 symfony [info] {sfWebDebugLogger} Database (Doctrine) 0.01 ms (2)
+Oct 24 18:39:20 symfony [info] {sfWebDebugLogger} View "Success" for "collector/data" 152.67 ms (1)
+Oct 24 18:39:20 symfony [info] {sfWebResponse} Send content (707 o)
+Oct 24 18:40:53 symfony [info] {sfPatternRouting} Match route "default" (/:module/:action/*) for /collector/map with parameters array (  'module' => 'collector',  'action' => 'map',)
+Oct 24 18:40:54 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Oct 24 18:40:54 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Oct 24 18:40:54 symfony [info] {collectorActions} Call "collectorActions->executeMap()"
+Oct 24 18:40:54 symfony [info] {sfPHPView} Render "Z:\home\HT\apps\frontend\modules/collector/templates/mapSuccess.php"
+Oct 24 18:40:54 symfony [info] {sfPartialView} Render "Z:\home\HT\apps\frontend\modules/collector/templates/_map.php"
+Oct 24 18:40:55 symfony [info] {main} Set slot "content_menu"
+Oct 24 18:40:55 symfony [info] {sfPHPView} Decorate content with "Z:\home\HT\apps\frontend\templates/layout.php"
+Oct 24 18:40:55 symfony [info] {sfPHPView} Render "Z:\home\HT\apps\frontend\templates/layout.php"
+Oct 24 18:40:56 symfony [info] {main} Call "user->executeMenu()"
+Oct 24 18:40:56 symfony [info] {sfPartialView} Render "Z:\home\HT\apps\frontend\modules/user/templates/_menu.php"
+Oct 24 18:40:56 symfony [info] {main} Call "collector->executeStats()"
+Oct 24 18:40:56 symfony [info] {sfPartialView} Render "Z:\home\HT\apps\frontend\modules/collector/templates/_stats.php"
+Oct 24 18:40:56 symfony [info] {main} Get slot "content_menu"
+Oct 24 18:40:56 symfony [info] {sfWebResponse} Send status "HTTP/1.1 200 OK"
+Oct 24 18:40:56 symfony [info] {sfWebResponse} Send header "Content-Type: text/html; charset=utf-8"
+Oct 24 18:40:56 symfony [info] {sfWebDebugLogger} Configuration 1308.08 ms (13)
+Oct 24 18:40:56 symfony [info] {sfWebDebugLogger} Factories 1414.39 ms (1)
+Oct 24 18:40:56 symfony [info] {sfWebDebugLogger} Action "collector/map" 35.51 ms (1)
+Oct 24 18:40:56 symfony [info] {sfWebDebugLogger} View "Success" for "collector/map" 1798.36 ms (1)
+Oct 24 18:40:56 symfony [info] {sfWebDebugLogger} Partial "collector/_map" 1357.19 ms (1)
+Oct 24 18:40:56 symfony [info] {sfWebDebugLogger} Component "user/menu" 0.04 ms (1)
+Oct 24 18:40:56 symfony [info] {sfWebDebugLogger} Partial "user/_menu" 2.18 ms (1)
+Oct 24 18:40:56 symfony [info] {sfWebDebugLogger} Component "collector/stats" 0.02 ms (1)
+Oct 24 18:40:56 symfony [info] {sfWebDebugLogger} Partial "collector/_stats" 0.59 ms (1)
+Oct 24 18:40:56 symfony [info] {sfWebResponse} Send content (73309 o)
+Oct 24 18:41:20 symfony [info] {sfPatternRouting} Match route "default" (/:module/:action/*) for /collector/map with parameters array (  'module' => 'collector',  'action' => 'map',)
+Oct 24 18:41:21 symfony [info] {sfPatternRouting} Match route "default" (/:module/:action/*) for /collector/map with parameters array (  'module' => 'collector',  'action' => 'map',)
+Oct 24 18:41:21 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Oct 24 18:41:21 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Oct 24 18:41:21 symfony [info] {collectorActions} Call "collectorActions->executeMap()"
+Oct 24 18:41:21 symfony [info] {sfPHPView} Render "Z:\home\HT\apps\frontend\modules/collector/templates/mapSuccess.php"
+Oct 24 18:41:21 symfony [info] {sfPartialView} Render "Z:\home\HT\apps\frontend\modules/collector/templates/_map.php"
+Oct 24 18:41:24 symfony [info] {main} Set slot "content_menu"
+Oct 24 18:41:24 symfony [info] {sfPHPView} Decorate content with "Z:\home\HT\apps\frontend\templates/layout.php"
+Oct 24 18:41:24 symfony [info] {sfPHPView} Render "Z:\home\HT\apps\frontend\templates/layout.php"
+Oct 24 18:41:24 symfony [info] {main} Call "user->executeMenu()"
+Oct 24 18:41:24 symfony [info] {sfPartialView} Render "Z:\home\HT\apps\frontend\modules/user/templates/_menu.php"
+Oct 24 18:41:24 symfony [info] {main} Call "collector->executeStats()"
+Oct 24 18:41:24 symfony [info] {sfPartialView} Render "Z:\home\HT\apps\frontend\modules/collector/templates/_stats.php"
+Oct 24 18:41:24 symfony [info] {main} Get slot "content_menu"
+Oct 24 18:41:24 symfony [info] {sfWebResponse} Send status "HTTP/1.1 200 OK"
+Oct 24 18:41:24 symfony [info] {sfWebResponse} Send header "Content-Type: text/html; charset=utf-8"
+Oct 24 18:41:24 symfony [info] {sfWebDebugLogger} Configuration 2433.23 ms (13)
+Oct 24 18:41:24 symfony [info] {sfWebDebugLogger} Factories 1521.32 ms (1)
+Oct 24 18:41:24 symfony [info] {sfWebDebugLogger} Action "collector/map" 0.17 ms (1)
+Oct 24 18:41:24 symfony [info] {sfWebDebugLogger} View "Success" for "collector/map" 3093.36 ms (1)
+Oct 24 18:41:24 symfony [info] {sfWebDebugLogger} Partial "collector/_map" 2518.81 ms (1)
+Oct 24 18:41:24 symfony [info] {sfWebDebugLogger} Component "user/menu" 0.03 ms (1)
+Oct 24 18:41:24 symfony [info] {sfWebDebugLogger} Partial "user/_menu" 23.81 ms (1)
+Oct 24 18:41:24 symfony [info] {sfWebDebugLogger} Component "collector/stats" 0.02 ms (1)
+Oct 24 18:41:24 symfony [info] {sfWebDebugLogger} Partial "collector/_stats" 0.57 ms (1)
+Oct 24 18:41:24 symfony [info] {sfWebResponse} Send content (73315 o)
+Oct 24 18:41:24 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Oct 24 18:41:24 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Oct 24 18:41:24 symfony [info] {collectorActions} Call "collectorActions->executeMap()"
+Oct 24 18:41:25 symfony [info] {sfPHPView} Render "Z:\home\HT\apps\frontend\modules/collector/templates/mapSuccess.php"
+Oct 24 18:41:25 symfony [info] {sfPartialView} Render "Z:\home\HT\apps\frontend\modules/collector/templates/_map.php"
+Oct 24 18:41:26 symfony [info] {main} Set slot "content_menu"
+Oct 24 18:41:26 symfony [info] {sfPHPView} Decorate content with "Z:\home\HT\apps\frontend\templates/layout.php"
+Oct 24 18:41:26 symfony [info] {sfPHPView} Render "Z:\home\HT\apps\frontend\templates/layout.php"
+Oct 24 18:41:26 symfony [info] {main} Call "user->executeMenu()"
+Oct 24 18:41:26 symfony [info] {sfPartialView} Render "Z:\home\HT\apps\frontend\modules/user/templates/_menu.php"
+Oct 24 18:41:26 symfony [info] {main} Call "collector->executeStats()"
+Oct 24 18:41:26 symfony [info] {sfPartialView} Render "Z:\home\HT\apps\frontend\modules/collector/templates/_stats.php"
+Oct 24 18:41:26 symfony [info] {main} Get slot "content_menu"
+Oct 24 18:41:26 symfony [info] {sfWebResponse} Send status "HTTP/1.1 200 OK"
+Oct 24 18:41:26 symfony [info] {sfWebResponse} Send header "Content-Type: text/html; charset=utf-8"
+Oct 24 18:41:26 symfony [info] {sfWebDebugLogger} Configuration 730.69 ms (13)
+Oct 24 18:41:26 symfony [info] {sfWebDebugLogger} Factories 3878.73 ms (1)
+Oct 24 18:41:26 symfony [info] {sfWebDebugLogger} Action "collector/map" 0.16 ms (1)
+Oct 24 18:41:26 symfony [info] {sfWebDebugLogger} View "Success" for "collector/map" 1140.02 ms (1)
+Oct 24 18:41:26 symfony [info] {sfWebDebugLogger} Partial "collector/_map" 774.32 ms (1)
+Oct 24 18:41:26 symfony [info] {sfWebDebugLogger} Component "user/menu" 0.03 ms (1)
+Oct 24 18:41:26 symfony [info] {sfWebDebugLogger} Partial "user/_menu" 1.03 ms (1)
+Oct 24 18:41:26 symfony [info] {sfWebDebugLogger} Component "collector/stats" 0.02 ms (1)
+Oct 24 18:41:26 symfony [info] {sfWebDebugLogger} Partial "collector/_stats" 0.58 ms (1)
+Oct 24 18:41:26 symfony [info] {sfWebResponse} Send content (73312 o)
+Oct 24 18:41:43 symfony [info] {sfPatternRouting} Match route "default" (/:module/:action/*) for /collector/data with parameters array (  'module' => 'collector',  'action' => 'data',)
+Oct 24 18:41:44 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Oct 24 18:41:44 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Oct 24 18:41:44 symfony [info] {collectorActions} Call "collectorActions->executeData()"
+Oct 24 18:41:49 symfony [info] {Doctrine_Connection_Mysql} exec : SET NAMES 'UTF8' - ()
+Oct 24 18:41:51 symfony [info] {Doctrine_Connection_Mysql} query : SELECT l.id AS l__id, l.name AS l__name, l.description AS l__description, l.location_type_id AS l__location_type_id, l.lat AS l__lat, l.lng AS l__lng, l.created_at AS l__created_at, l.updated_at AS l__updated_at FROM location l - ()
+Oct 24 18:41:53 symfony [info] {sfPHPView} Render "Z:\home\HT\apps\frontend\modules/collector/templates/dataSuccess.php"
+Oct 24 18:41:54 symfony [info] {sfWebResponse} Send status "HTTP/1.1 200 OK"
+Oct 24 18:41:54 symfony [info] {sfWebResponse} Send header "Content-Type: text/html; charset=utf-8"
+Oct 24 18:41:54 symfony [info] {sfWebDebugLogger} Configuration 85.14 ms (9)
+Oct 24 18:41:54 symfony [info] {sfWebDebugLogger} Factories 1092.68 ms (1)
+Oct 24 18:41:54 symfony [info] {sfWebDebugLogger} Action "collector/data" 8906.23 ms (1)
+Oct 24 18:41:54 symfony [info] {sfWebDebugLogger} Database (Doctrine) 0.02 ms (2)
+Oct 24 18:41:54 symfony [info] {sfWebDebugLogger} View "Success" for "collector/data" 948.12 ms (1)
+Oct 24 18:41:54 symfony [info] {sfWebResponse} Send content (707 o)
+Oct 24 18:49:57 symfony [info] {sfPatternRouting} Match route "default" (/:module/:action/*) for /collector/map with parameters array (  'module' => 'collector',  'action' => 'map',)
+Oct 24 18:49:57 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Oct 24 18:49:57 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Oct 24 18:49:57 symfony [info] {collectorActions} Call "collectorActions->executeMap()"
+Oct 24 18:49:57 symfony [info] {sfPHPView} Render "Z:\home\HT\apps\frontend\modules/collector/templates/mapSuccess.php"
+Oct 24 18:49:57 symfony [info] {sfPartialView} Render "Z:\home\HT\apps\frontend\modules/collector/templates/_map.php"
+Oct 24 18:49:58 symfony [info] {main} Set slot "content_menu"
+Oct 24 18:49:58 symfony [info] {sfPHPView} Decorate content with "Z:\home\HT\apps\frontend\templates/layout.php"
+Oct 24 18:49:58 symfony [info] {sfPHPView} Render "Z:\home\HT\apps\frontend\templates/layout.php"
+Oct 24 18:49:58 symfony [info] {main} Call "user->executeMenu()"
+Oct 24 18:49:58 symfony [info] {sfPartialView} Render "Z:\home\HT\apps\frontend\modules/user/templates/_menu.php"
+Oct 24 18:49:58 symfony [info] {main} Call "collector->executeStats()"
+Oct 24 18:49:58 symfony [info] {sfPartialView} Render "Z:\home\HT\apps\frontend\modules/collector/templates/_stats.php"
+Oct 24 18:49:58 symfony [info] {main} Get slot "content_menu"
+Oct 24 18:49:58 symfony [info] {sfWebResponse} Send status "HTTP/1.1 200 OK"
+Oct 24 18:49:58 symfony [info] {sfWebResponse} Send header "Content-Type: text/html; charset=utf-8"
+Oct 24 18:49:58 symfony [info] {sfWebDebugLogger} Configuration 603.31 ms (13)
+Oct 24 18:49:58 symfony [info] {sfWebDebugLogger} Factories 646.82 ms (1)
+Oct 24 18:49:58 symfony [info] {sfWebDebugLogger} Action "collector/map" 0.66 ms (1)
+Oct 24 18:49:58 symfony [info] {sfWebDebugLogger} View "Success" for "collector/map" 873.86 ms (1)
+Oct 24 18:49:58 symfony [info] {sfWebDebugLogger} Partial "collector/_map" 619.47 ms (1)
+Oct 24 18:49:58 symfony [info] {sfWebDebugLogger} Component "user/menu" 0.03 ms (1)
+Oct 24 18:49:58 symfony [info] {sfWebDebugLogger} Partial "user/_menu" 12.44 ms (1)
+Oct 24 18:49:58 symfony [info] {sfWebDebugLogger} Component "collector/stats" 0.02 ms (1)
+Oct 24 18:49:58 symfony [info] {sfWebDebugLogger} Partial "collector/_stats" 0.50 ms (1)
+Oct 24 18:49:58 symfony [info] {sfWebResponse} Send content (73311 o)
+Oct 24 18:50:05 symfony [info] {sfPatternRouting} Match route "default" (/:module/:action/*) for /collector/data with parameters array (  'module' => 'collector',  'action' => 'data',)
+Oct 24 18:50:05 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Oct 24 18:50:05 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Oct 24 18:50:05 symfony [info] {collectorActions} Call "collectorActions->executeData()"
+Oct 24 18:50:06 symfony [info] {Doctrine_Connection_Mysql} exec : SET NAMES 'UTF8' - ()
+Oct 24 18:50:07 symfony [info] {Doctrine_Connection_Mysql} query : SELECT l.id AS l__id, l.name AS l__name, l.description AS l__description, l.location_type_id AS l__location_type_id, l.lat AS l__lat, l.lng AS l__lng, l.created_at AS l__created_at, l.updated_at AS l__updated_at FROM location l - ()
+Oct 24 18:50:07 symfony [info] {sfPHPView} Render "Z:\home\HT\apps\frontend\modules/collector/templates/dataSuccess.php"
+Oct 24 18:50:07 symfony [info] {sfWebResponse} Send status "HTTP/1.1 200 OK"
+Oct 24 18:50:07 symfony [info] {sfWebResponse} Send header "Content-Type: text/html; charset=utf-8"
+Oct 24 18:50:07 symfony [info] {sfWebDebugLogger} Configuration 18.97 ms (9)
+Oct 24 18:50:07 symfony [info] {sfWebDebugLogger} Factories 300.34 ms (1)
+Oct 24 18:50:07 symfony [info] {sfWebDebugLogger} Action "collector/data" 1715.20 ms (1)
+Oct 24 18:50:07 symfony [info] {sfWebDebugLogger} Database (Doctrine) 0.01 ms (2)
+Oct 24 18:50:07 symfony [info] {sfWebDebugLogger} View "Success" for "collector/data" 451.42 ms (1)
+Oct 24 18:50:07 symfony [info] {sfWebResponse} Send content (707 o)
+Oct 24 19:35:51 symfony [info] {sfPatternRouting} Match route "default_index" (/:module) for /route with parameters array (  'module' => 'route',  'action' => 'index',)
+Oct 24 19:35:51 symfony [info] {myUser} Automatic user logout due to timeout
+Oct 24 19:35:51 symfony [info] {myUser} User is not authenticated
+Oct 24 19:35:52 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Oct 24 19:35:52 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Oct 24 19:35:52 symfony [info] {routeActions} Call "routeActions->executeIndex()"
+Oct 24 19:35:52 symfony [info] {Doctrine_Connection_Mysql} exec : SET NAMES 'UTF8' - ()
+Oct 24 19:35:52 symfony [info] {Doctrine_Connection_Mysql} query : SELECT r.id AS r__id, r.name AS r__name, r.description AS r__description FROM route r - ()
+Oct 24 19:35:53 symfony [info] {sfPHPView} Render "Z:\home\HT\apps\frontend\modules/route/templates/indexSuccess.php"
+Oct 24 19:35:53 symfony [info] {sfPHPView} Decorate content with "Z:\home\HT\apps\frontend\templates/layout.php"
+Oct 24 19:35:53 symfony [info] {sfPHPView} Render "Z:\home\HT\apps\frontend\templates/layout.php"
+Oct 24 19:35:54 symfony [info] {main} Call "user->executeMenu()"
+Oct 24 19:35:54 symfony [info] {sfPartialView} Render "Z:\home\HT\apps\frontend\modules/user/templates/_menu.php"
+Oct 24 19:35:54 symfony [info] {main} Call "collector->executeStats()"
+Oct 24 19:35:54 symfony [info] {sfPartialView} Render "Z:\home\HT\apps\frontend\modules/collector/templates/_stats.php"
+Oct 24 19:35:54 symfony [info] {main} Get slot "content_menu"
+Oct 24 19:35:54 symfony [info] {sfWebResponse} Send status "HTTP/1.1 200 OK"
+Oct 24 19:35:54 symfony [info] {sfWebResponse} Send header "Content-Type: text/html; charset=utf-8"
+Oct 24 19:35:54 symfony [info] {sfWebDebugLogger} Configuration 1547.42 ms (13)
+Oct 24 19:35:54 symfony [info] {sfWebDebugLogger} Factories 877.00 ms (1)
+Oct 24 19:35:54 symfony [info] {sfWebDebugLogger} Action "route/index" 1114.94 ms (1)
+Oct 24 19:35:54 symfony [info] {sfWebDebugLogger} Database (Doctrine) 0.01 ms (2)
+Oct 24 19:35:54 symfony [info] {sfWebDebugLogger} View "Success" for "route/index" 1514.44 ms (1)
+Oct 24 19:35:54 symfony [info] {sfWebDebugLogger} Component "user/menu" 0.04 ms (1)
+Oct 24 19:35:54 symfony [info] {sfWebDebugLogger} Partial "user/_menu" 1.35 ms (1)
+Oct 24 19:35:54 symfony [info] {sfWebDebugLogger} Component "collector/stats" 0.02 ms (1)
+Oct 24 19:35:54 symfony [info] {sfWebDebugLogger} Partial "collector/_stats" 0.51 ms (1)
+Oct 24 19:35:55 symfony [info] {sfWebResponse} Send content (87078 o)
+Oct 24 19:35:59 symfony [info] {sfPatternRouting} Match route "default" (/:module/:action/*) for /route/new with parameters array (  'module' => 'route',  'action' => 'new',)
+Oct 24 19:35:59 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Oct 24 19:35:59 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Oct 24 19:35:59 symfony [info] {routeActions} Call "routeActions->executeNew()"
+Oct 24 19:36:00 symfony [info] {sfPHPView} Render "Z:\home\HT\apps\frontend\modules/route/templates/newSuccess.php"
+Oct 24 19:36:00 symfony [info] {sfPartialView} Render "Z:\home\HT\apps\frontend\modules/route/templates/_form.php"
+Oct 24 19:36:00 symfony [info] {sfPHPView} Decorate content with "Z:\home\HT\apps\frontend\templates/layout.php"
+Oct 24 19:36:00 symfony [info] {sfPHPView} Render "Z:\home\HT\apps\frontend\templates/layout.php"
+Oct 24 19:36:00 symfony [info] {main} Call "user->executeMenu()"
+Oct 24 19:36:00 symfony [info] {sfPartialView} Render "Z:\home\HT\apps\frontend\modules/user/templates/_menu.php"
+Oct 24 19:36:00 symfony [info] {main} Call "collector->executeStats()"
+Oct 24 19:36:00 symfony [info] {sfPartialView} Render "Z:\home\HT\apps\frontend\modules/collector/templates/_stats.php"
+Oct 24 19:36:00 symfony [info] {main} Get slot "content_menu"
+Oct 24 19:36:00 symfony [info] {sfWebResponse} Send status "HTTP/1.1 200 OK"
+Oct 24 19:36:00 symfony [info] {sfWebResponse} Send header "Content-Type: text/html; charset=utf-8"
+Oct 24 19:36:00 symfony [info] {sfWebDebugLogger} Configuration 163.86 ms (13)
+Oct 24 19:36:00 symfony [info] {sfWebDebugLogger} Factories 47.91 ms (1)
+Oct 24 19:36:00 symfony [info] {sfWebDebugLogger} Action "route/new" 478.66 ms (1)
+Oct 24 19:36:00 symfony [info] {sfWebDebugLogger} View "Success" for "route/new" 242.60 ms (1)
+Oct 24 19:36:00 symfony [info] {sfWebDebugLogger} Partial "route/_form" 42.05 ms (1)
+Oct 24 19:36:00 symfony [info] {sfWebDebugLogger} Component "user/menu" 0.04 ms (1)
+Oct 24 19:36:00 symfony [info] {sfWebDebugLogger} Partial "user/_menu" 1.61 ms (1)
+Oct 24 19:36:00 symfony [info] {sfWebDebugLogger} Component "collector/stats" 0.02 ms (1)
+Oct 24 19:36:00 symfony [info] {sfWebDebugLogger} Partial "collector/_stats" 0.60 ms (1)
+Oct 24 19:36:00 symfony [info] {sfWebResponse} Send content (72120 o)
+Oct 24 19:44:17 symfony [info] {sfPatternRouting} Match route "default" (/:module/:action/*) for /collector/map with parameters array (  'module' => 'collector',  'action' => 'map',)
+Oct 24 19:44:17 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Oct 24 19:44:17 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Oct 24 19:44:17 symfony [info] {collectorActions} Call "collectorActions->executeMap()"
+Oct 24 19:44:17 symfony [info] {sfPHPView} Render "Z:\home\HT\apps\frontend\modules/collector/templates/mapSuccess.php"
+Oct 24 19:44:18 symfony [info] {sfPartialView} Render "Z:\home\HT\apps\frontend\modules/collector/templates/_map.php"
+Oct 24 19:44:19 symfony [info] {main} Set slot "content_menu"
+Oct 24 19:44:19 symfony [info] {sfPHPView} Decorate content with "Z:\home\HT\apps\frontend\templates/layout.php"
+Oct 24 19:44:19 symfony [info] {sfPHPView} Render "Z:\home\HT\apps\frontend\templates/layout.php"
+Oct 24 19:44:19 symfony [info] {main} Call "user->executeMenu()"
+Oct 24 19:44:19 symfony [info] {sfPartialView} Render "Z:\home\HT\apps\frontend\modules/user/templates/_menu.php"
+Oct 24 19:44:19 symfony [info] {main} Call "collector->executeStats()"
+Oct 24 19:44:19 symfony [info] {sfPartialView} Render "Z:\home\HT\apps\frontend\modules/collector/templates/_stats.php"
+Oct 24 19:44:19 symfony [info] {main} Get slot "content_menu"
+Oct 24 19:44:19 symfony [info] {sfWebResponse} Send status "HTTP/1.1 200 OK"
+Oct 24 19:44:19 symfony [info] {sfWebResponse} Send header "Content-Type: text/html; charset=utf-8"
+Oct 24 19:44:19 symfony [info] {sfWebDebugLogger} Configuration 1539.94 ms (13)
+Oct 24 19:44:19 symfony [info] {sfWebDebugLogger} Factories 1111.14 ms (1)
+Oct 24 19:44:19 symfony [info] {sfWebDebugLogger} Action "collector/map" 0.71 ms (1)
+Oct 24 19:44:19 symfony [info] {sfWebDebugLogger} View "Success" for "collector/map" 2078.77 ms (1)
+Oct 24 19:44:19 symfony [info] {sfWebDebugLogger} Partial "collector/_map" 1410.18 ms (1)
+Oct 24 19:44:19 symfony [info] {sfWebDebugLogger} Component "user/menu" 0.03 ms (1)
+Oct 24 19:44:19 symfony [info] {sfWebDebugLogger} Partial "user/_menu" 28.76 ms (1)
+Oct 24 19:44:19 symfony [info] {sfWebDebugLogger} Component "collector/stats" 0.02 ms (1)
+Oct 24 19:44:19 symfony [info] {sfWebDebugLogger} Partial "collector/_stats" 5.67 ms (1)
+Oct 24 19:44:20 symfony [info] {sfWebResponse} Send content (73315 o)
+Oct 24 19:44:32 symfony [info] {sfPatternRouting} Match route "default" (/:module/:action/*) for /collector/data with parameters array (  'module' => 'collector',  'action' => 'data',)
+Oct 24 19:44:32 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Oct 24 19:44:32 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Oct 24 19:44:32 symfony [info] {collectorActions} Call "collectorActions->executeData()"
+Oct 24 19:44:33 symfony [info] {Doctrine_Connection_Mysql} exec : SET NAMES 'UTF8' - ()
+Oct 24 19:44:33 symfony [info] {Doctrine_Connection_Mysql} query : SELECT l.id AS l__id, l.name AS l__name, l.description AS l__description, l.location_type_id AS l__location_type_id, l.lat AS l__lat, l.lng AS l__lng, l.created_at AS l__created_at, l.updated_at AS l__updated_at FROM location l - ()
+Oct 24 19:44:34 symfony [info] {sfPHPView} Render "Z:\home\HT\apps\frontend\modules/collector/templates/dataSuccess.php"
+Oct 24 19:44:34 symfony [info] {sfWebResponse} Send status "HTTP/1.1 200 OK"
+Oct 24 19:44:34 symfony [info] {sfWebResponse} Send header "Content-Type: text/html; charset=utf-8"
+Oct 24 19:44:34 symfony [info] {sfWebDebugLogger} Configuration 12.84 ms (9)
+Oct 24 19:44:34 symfony [info] {sfWebDebugLogger} Factories 305.76 ms (1)
+Oct 24 19:44:34 symfony [info] {sfWebDebugLogger} Action "collector/data" 1716.28 ms (1)
+Oct 24 19:44:34 symfony [info] {sfWebDebugLogger} Database (Doctrine) 0.02 ms (2)
+Oct 24 19:44:34 symfony [info] {sfWebDebugLogger} View "Success" for "collector/data" 219.78 ms (1)
+Oct 24 19:44:34 symfony [info] {sfWebResponse} Send content (707 o)
+Oct 24 19:45:16 symfony [info] {sfPatternRouting} Match route "default" (/:module/:action/*) for /collector/map with parameters array (  'module' => 'collector',  'action' => 'map',)
+Oct 24 19:45:17 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Oct 24 19:45:17 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Oct 24 19:45:17 symfony [info] {collectorActions} Call "collectorActions->executeMap()"
+Oct 24 19:45:17 symfony [info] {sfPHPView} Render "Z:\home\HT\apps\frontend\modules/collector/templates/mapSuccess.php"
+Oct 24 19:45:18 symfony [info] {sfPartialView} Render "Z:\home\HT\apps\frontend\modules/collector/templates/_map.php"
+Oct 24 19:45:20 symfony [info] {main} Set slot "content_menu"
+Oct 24 19:45:20 symfony [info] {sfPHPView} Decorate content with "Z:\home\HT\apps\frontend\templates/layout.php"
+Oct 24 19:45:20 symfony [info] {sfPHPView} Render "Z:\home\HT\apps\frontend\templates/layout.php"
+Oct 24 19:45:20 symfony [info] {main} Call "user->executeMenu()"
+Oct 24 19:45:20 symfony [info] {sfPartialView} Render "Z:\home\HT\apps\frontend\modules/user/templates/_menu.php"
+Oct 24 19:45:20 symfony [info] {main} Call "collector->executeStats()"
+Oct 24 19:45:20 symfony [info] {sfPartialView} Render "Z:\home\HT\apps\frontend\modules/collector/templates/_stats.php"
+Oct 24 19:45:20 symfony [info] {main} Get slot "content_menu"
+Oct 24 19:45:20 symfony [info] {sfWebResponse} Send status "HTTP/1.1 200 OK"
+Oct 24 19:45:20 symfony [info] {sfWebResponse} Send header "Content-Type: text/html; charset=utf-8"
+Oct 24 19:45:20 symfony [info] {sfWebDebugLogger} Configuration 2242.08 ms (13)
+Oct 24 19:45:20 symfony [info] {sfWebDebugLogger} Factories 1030.69 ms (1)
+Oct 24 19:45:20 symfony [info] {sfWebDebugLogger} Action "collector/map" 0.17 ms (1)
+Oct 24 19:45:20 symfony [info] {sfWebDebugLogger} View "Success" for "collector/map" 2848.97 ms (1)
+Oct 24 19:45:20 symfony [info] {sfWebDebugLogger} Partial "collector/_map" 2227.85 ms (1)
+Oct 24 19:45:20 symfony [info] {sfWebDebugLogger} Component "user/menu" 0.03 ms (1)
+Oct 24 19:45:20 symfony [info] {sfWebDebugLogger} Partial "user/_menu" 1.10 ms (1)
+Oct 24 19:45:20 symfony [info] {sfWebDebugLogger} Component "collector/stats" 0.02 ms (1)
+Oct 24 19:45:20 symfony [info] {sfWebDebugLogger} Partial "collector/_stats" 0.55 ms (1)
+Oct 24 19:45:20 symfony [info] {sfWebResponse} Send content (73314 o)
+Oct 24 19:45:27 symfony [info] {sfPatternRouting} Match route "default" (/:module/:action/*) for /collector/data with parameters array (  'module' => 'collector',  'action' => 'data',)
+Oct 24 19:45:28 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Oct 24 19:45:28 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Oct 24 19:45:28 symfony [info] {collectorActions} Call "collectorActions->executeData()"
+Oct 24 19:45:30 symfony [info] {Doctrine_Connection_Mysql} exec : SET NAMES 'UTF8' - ()
+Oct 24 19:45:30 symfony [info] {Doctrine_Connection_Mysql} query : SELECT l.id AS l__id, l.name AS l__name, l.description AS l__description, l.location_type_id AS l__location_type_id, l.lat AS l__lat, l.lng AS l__lng, l.created_at AS l__created_at, l.updated_at AS l__updated_at FROM location l - ()
+Oct 24 19:45:30 symfony [info] {sfPHPView} Render "Z:\home\HT\apps\frontend\modules/collector/templates/dataSuccess.php"
+Oct 24 19:45:31 symfony [info] {sfWebResponse} Send status "HTTP/1.1 200 OK"
+Oct 24 19:45:31 symfony [info] {sfWebResponse} Send header "Content-Type: text/html; charset=utf-8"
+Oct 24 19:45:31 symfony [info] {sfWebDebugLogger} Configuration 120.38 ms (9)
+Oct 24 19:45:31 symfony [info] {sfWebDebugLogger} Factories 416.33 ms (1)
+Oct 24 19:45:31 symfony [info] {sfWebDebugLogger} Action "collector/data" 2388.36 ms (1)
+Oct 24 19:45:31 symfony [info] {sfWebDebugLogger} Database (Doctrine) 0.01 ms (2)
+Oct 24 19:45:31 symfony [info] {sfWebDebugLogger} View "Success" for "collector/data" 925.81 ms (1)
+Oct 24 19:45:31 symfony [info] {sfWebResponse} Send content (707 o)
+Oct 24 19:47:01 symfony [info] {sfPatternRouting} Match route "default" (/:module/:action/*) for /collector/map with parameters array (  'module' => 'collector',  'action' => 'map',)
+Oct 24 19:47:03 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Oct 24 19:47:03 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Oct 24 19:47:03 symfony [info] {collectorActions} Call "collectorActions->executeMap()"
+Oct 24 19:47:03 symfony [info] {sfPHPView} Render "Z:\home\HT\apps\frontend\modules/collector/templates/mapSuccess.php"
+Oct 24 19:47:03 symfony [info] {sfPartialView} Render "Z:\home\HT\apps\frontend\modules/collector/templates/_map.php"
+Oct 24 19:47:04 symfony [info] {main} Set slot "content_menu"
+Oct 24 19:47:04 symfony [info] {sfPHPView} Decorate content with "Z:\home\HT\apps\frontend\templates/layout.php"
+Oct 24 19:47:04 symfony [info] {sfPHPView} Render "Z:\home\HT\apps\frontend\templates/layout.php"
+Oct 24 19:47:05 symfony [info] {main} Call "user->executeMenu()"
+Oct 24 19:47:05 symfony [info] {sfPartialView} Render "Z:\home\HT\apps\frontend\modules/user/templates/_menu.php"
+Oct 24 19:47:05 symfony [info] {main} Call "collector->executeStats()"
+Oct 24 19:47:05 symfony [info] {sfPartialView} Render "Z:\home\HT\apps\frontend\modules/collector/templates/_stats.php"
+Oct 24 19:47:05 symfony [info] {main} Get slot "content_menu"
+Oct 24 19:47:05 symfony [info] {sfWebResponse} Send status "HTTP/1.1 200 OK"
+Oct 24 19:47:05 symfony [info] {sfWebResponse} Send header "Content-Type: text/html; charset=utf-8"
+Oct 24 19:47:05 symfony [info] {sfWebDebugLogger} Configuration 1360.88 ms (13)
+Oct 24 19:47:05 symfony [info] {sfWebDebugLogger} Factories 700.84 ms (1)
+Oct 24 19:47:05 symfony [info] {sfWebDebugLogger} Action "collector/map" 0.17 ms (1)
+Oct 24 19:47:05 symfony [info] {sfWebDebugLogger} View "Success" for "collector/map" 1943.52 ms (1)
+Oct 24 19:47:05 symfony [info] {sfWebDebugLogger} Partial "collector/_map" 1481.52 ms (1)
+Oct 24 19:47:05 symfony [info] {sfWebDebugLogger} Component "user/menu" 0.03 ms (1)
+Oct 24 19:47:05 symfony [info] {sfWebDebugLogger} Partial "user/_menu" 8.90 ms (1)
+Oct 24 19:47:05 symfony [info] {sfWebDebugLogger} Component "collector/stats" 0.02 ms (1)
+Oct 24 19:47:05 symfony [info] {sfWebDebugLogger} Partial "collector/_stats" 0.54 ms (1)
+Oct 24 19:47:05 symfony [info] {sfWebResponse} Send content (73313 o)
+Oct 24 19:47:10 symfony [info] {sfPatternRouting} Match route "default" (/:module/:action/*) for /collector/data with parameters array (  'module' => 'collector',  'action' => 'data',)
+Oct 24 19:47:10 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Oct 24 19:47:10 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Oct 24 19:47:10 symfony [info] {collectorActions} Call "collectorActions->executeData()"
+Oct 24 19:47:11 symfony [info] {Doctrine_Connection_Mysql} exec : SET NAMES 'UTF8' - ()
+Oct 24 19:47:11 symfony [info] {Doctrine_Connection_Mysql} query : SELECT l.id AS l__id, l.name AS l__name, l.description AS l__description, l.location_type_id AS l__location_type_id, l.lat AS l__lat, l.lng AS l__lng, l.created_at AS l__created_at, l.updated_at AS l__updated_at FROM location l - ()
+Oct 24 19:47:11 symfony [info] {sfPHPView} Render "Z:\home\HT\apps\frontend\modules/collector/templates/dataSuccess.php"
+Oct 24 19:47:11 symfony [info] {sfWebResponse} Send status "HTTP/1.1 200 OK"
+Oct 24 19:47:11 symfony [info] {sfWebResponse} Send header "Content-Type: text/html; charset=utf-8"
+Oct 24 19:47:11 symfony [info] {sfWebDebugLogger} Configuration 14.72 ms (9)
+Oct 24 19:47:11 symfony [info] {sfWebDebugLogger} Factories 209.80 ms (1)
+Oct 24 19:47:11 symfony [info] {sfWebDebugLogger} Action "collector/data" 386.83 ms (1)
+Oct 24 19:47:11 symfony [info] {sfWebDebugLogger} Database (Doctrine) 0.01 ms (2)
+Oct 24 19:47:11 symfony [info] {sfWebDebugLogger} View "Success" for "collector/data" 87.93 ms (1)
+Oct 24 19:47:11 symfony [info] {sfWebResponse} Send content (707 o)
+Oct 24 19:47:53 symfony [info] {sfPatternRouting} Match route "default" (/:module/:action/*) for /collector/map with parameters array (  'module' => 'collector',  'action' => 'map',)
+Oct 24 19:47:53 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Oct 24 19:47:53 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Oct 24 19:47:53 symfony [info] {collectorActions} Call "collectorActions->executeMap()"
+Oct 24 19:47:53 symfony [info] {sfPHPView} Render "Z:\home\HT\apps\frontend\modules/collector/templates/mapSuccess.php"
+Oct 24 19:47:53 symfony [info] {sfPartialView} Render "Z:\home\HT\apps\frontend\modules/collector/templates/_map.php"
+Oct 24 19:47:53 symfony [info] {main} Set slot "content_menu"
+Oct 24 19:47:53 symfony [info] {sfPHPView} Decorate content with "Z:\home\HT\apps\frontend\templates/layout.php"
+Oct 24 19:47:53 symfony [info] {sfPHPView} Render "Z:\home\HT\apps\frontend\templates/layout.php"
+Oct 24 19:47:53 symfony [info] {main} Call "user->executeMenu()"
+Oct 24 19:47:53 symfony [info] {sfPartialView} Render "Z:\home\HT\apps\frontend\modules/user/templates/_menu.php"
+Oct 24 19:47:53 symfony [info] {main} Call "collector->executeStats()"
+Oct 24 19:47:53 symfony [info] {sfPartialView} Render "Z:\home\HT\apps\frontend\modules/collector/templates/_stats.php"
+Oct 24 19:47:53 symfony [info] {main} Get slot "content_menu"
+Oct 24 19:47:53 symfony [info] {sfWebResponse} Send status "HTTP/1.1 200 OK"
+Oct 24 19:47:53 symfony [info] {sfWebResponse} Send header "Content-Type: text/html; charset=utf-8"
+Oct 24 19:47:53 symfony [info] {sfWebDebugLogger} Configuration 487.90 ms (13)
+Oct 24 19:47:53 symfony [info] {sfWebDebugLogger} Factories 168.11 ms (1)
+Oct 24 19:47:53 symfony [info] {sfWebDebugLogger} Action "collector/map" 0.17 ms (1)
+Oct 24 19:47:53 symfony [info] {sfWebDebugLogger} View "Success" for "collector/map" 637.50 ms (1)
+Oct 24 19:47:53 symfony [info] {sfWebDebugLogger} Partial "collector/_map" 481.20 ms (1)
+Oct 24 19:47:53 symfony [info] {sfWebDebugLogger} Component "user/menu" 0.03 ms (1)
+Oct 24 19:47:53 symfony [info] {sfWebDebugLogger} Partial "user/_menu" 1.07 ms (1)
+Oct 24 19:47:53 symfony [info] {sfWebDebugLogger} Component "collector/stats" 0.02 ms (1)
+Oct 24 19:47:53 symfony [info] {sfWebDebugLogger} Partial "collector/_stats" 0.50 ms (1)
+Oct 24 19:47:53 symfony [info] {sfWebResponse} Send content (73310 o)
+Oct 24 19:47:55 symfony [info] {sfPatternRouting} Match route "default" (/:module/:action/*) for /collector/data with parameters array (  'module' => 'collector',  'action' => 'data',)
+Oct 24 19:47:55 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Oct 24 19:47:55 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Oct 24 19:47:55 symfony [info] {collectorActions} Call "collectorActions->executeData()"
+Oct 24 19:47:56 symfony [info] {Doctrine_Connection_Mysql} exec : SET NAMES 'UTF8' - ()
+Oct 24 19:47:56 symfony [info] {Doctrine_Connection_Mysql} query : SELECT l.id AS l__id, l.name AS l__name, l.description AS l__description, l.location_type_id AS l__location_type_id, l.lat AS l__lat, l.lng AS l__lng, l.created_at AS l__created_at, l.updated_at AS l__updated_at FROM location l - ()
+Oct 24 19:47:56 symfony [info] {sfPHPView} Render "Z:\home\HT\apps\frontend\modules/collector/templates/dataSuccess.php"
+Oct 24 19:47:56 symfony [info] {sfWebResponse} Send status "HTTP/1.1 200 OK"
+Oct 24 19:47:56 symfony [info] {sfWebResponse} Send header "Content-Type: text/html; charset=utf-8"
+Oct 24 19:47:56 symfony [info] {sfWebDebugLogger} Configuration 12.86 ms (9)
+Oct 24 19:47:56 symfony [info] {sfWebDebugLogger} Factories 66.26 ms (1)
+Oct 24 19:47:56 symfony [info] {sfWebDebugLogger} Action "collector/data" 206.19 ms (1)
+Oct 24 19:47:56 symfony [info] {sfWebDebugLogger} Database (Doctrine) 0.01 ms (2)
+Oct 24 19:47:56 symfony [info] {sfWebDebugLogger} View "Success" for "collector/data" 53.16 ms (1)
+Oct 24 19:47:56 symfony [info] {sfWebResponse} Send content (707 o)
+Oct 24 19:48:18 symfony [info] {sfPatternRouting} Match route "default" (/:module/:action/*) for /collector/map with parameters array (  'module' => 'collector',  'action' => 'map',)
+Oct 24 19:48:18 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Oct 24 19:48:18 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Oct 24 19:48:18 symfony [info] {collectorActions} Call "collectorActions->executeMap()"
+Oct 24 19:48:18 symfony [info] {sfPHPView} Render "Z:\home\HT\apps\frontend\modules/collector/templates/mapSuccess.php"
+Oct 24 19:48:18 symfony [info] {sfPartialView} Render "Z:\home\HT\apps\frontend\modules/collector/templates/_map.php"
+Oct 24 19:48:18 symfony [info] {main} Set slot "content_menu"
+Oct 24 19:48:18 symfony [info] {sfPHPView} Decorate content with "Z:\home\HT\apps\frontend\templates/layout.php"
+Oct 24 19:48:18 symfony [info] {sfPHPView} Render "Z:\home\HT\apps\frontend\templates/layout.php"
+Oct 24 19:48:18 symfony [info] {main} Call "user->executeMenu()"
+Oct 24 19:48:18 symfony [info] {sfPartialView} Render "Z:\home\HT\apps\frontend\modules/user/templates/_menu.php"
+Oct 24 19:48:18 symfony [info] {main} Call "collector->executeStats()"
+Oct 24 19:48:18 symfony [info] {sfPartialView} Render "Z:\home\HT\apps\frontend\modules/collector/templates/_stats.php"
+Oct 24 19:48:18 symfony [info] {main} Get slot "content_menu"
+Oct 24 19:48:18 symfony [info] {sfWebResponse} Send status "HTTP/1.1 200 OK"
+Oct 24 19:48:18 symfony [info] {sfWebResponse} Send header "Content-Type: text/html; charset=utf-8"
+Oct 24 19:48:18 symfony [info] {sfWebDebugLogger} Configuration 420.78 ms (13)
+Oct 24 19:48:18 symfony [info] {sfWebDebugLogger} Factories 71.77 ms (1)
+Oct 24 19:48:18 symfony [info] {sfWebDebugLogger} Action "collector/map" 0.17 ms (1)
+Oct 24 19:48:18 symfony [info] {sfWebDebugLogger} View "Success" for "collector/map" 431.37 ms (1)
+Oct 24 19:48:18 symfony [info] {sfWebDebugLogger} Partial "collector/_map" 401.50 ms (1)
+Oct 24 19:48:18 symfony [info] {sfWebDebugLogger} Component "user/menu" 0.03 ms (1)
+Oct 24 19:48:18 symfony [info] {sfWebDebugLogger} Partial "user/_menu" 1.06 ms (1)
+Oct 24 19:48:18 symfony [info] {sfWebDebugLogger} Component "collector/stats" 0.02 ms (1)
+Oct 24 19:48:18 symfony [info] {sfWebDebugLogger} Partial "collector/_stats" 0.49 ms (1)
+Oct 24 19:48:18 symfony [info] {sfWebResponse} Send content (73308 o)
+Oct 24 19:48:20 symfony [info] {sfPatternRouting} Match route "default" (/:module/:action/*) for /collector/data with parameters array (  'module' => 'collector',  'action' => 'data',)
+Oct 24 19:48:20 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Oct 24 19:48:20 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Oct 24 19:48:20 symfony [info] {collectorActions} Call "collectorActions->executeData()"
+Oct 24 19:48:20 symfony [info] {Doctrine_Connection_Mysql} exec : SET NAMES 'UTF8' - ()
+Oct 24 19:48:20 symfony [info] {Doctrine_Connection_Mysql} query : SELECT l.id AS l__id, l.name AS l__name, l.description AS l__description, l.location_type_id AS l__location_type_id, l.lat AS l__lat, l.lng AS l__lng, l.created_at AS l__created_at, l.updated_at AS l__updated_at FROM location l - ()
+Oct 24 19:48:20 symfony [info] {sfPHPView} Render "Z:\home\HT\apps\frontend\modules/collector/templates/dataSuccess.php"
+Oct 24 19:48:20 symfony [info] {sfWebResponse} Send status "HTTP/1.1 200 OK"
+Oct 24 19:48:20 symfony [info] {sfWebResponse} Send header "Content-Type: text/html; charset=utf-8"
+Oct 24 19:48:20 symfony [info] {sfWebDebugLogger} Configuration 14.42 ms (9)
+Oct 24 19:48:20 symfony [info] {sfWebDebugLogger} Factories 135.66 ms (1)
+Oct 24 19:48:20 symfony [info] {sfWebDebugLogger} Action "collector/data" 48.94 ms (1)
+Oct 24 19:48:20 symfony [info] {sfWebDebugLogger} Database (Doctrine) 0.01 ms (2)
+Oct 24 19:48:20 symfony [info] {sfWebDebugLogger} View "Success" for "collector/data" 90.44 ms (1)
+Oct 24 19:48:20 symfony [info] {sfWebResponse} Send content (707 o)
+Oct 24 19:48:53 symfony [info] {sfPatternRouting} Match route "default" (/:module/:action/*) for /collector/map with parameters array (  'module' => 'collector',  'action' => 'map',)
+Oct 24 19:48:53 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Oct 24 19:48:53 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Oct 24 19:48:53 symfony [info] {collectorActions} Call "collectorActions->executeMap()"
+Oct 24 19:48:53 symfony [info] {sfPHPView} Render "Z:\home\HT\apps\frontend\modules/collector/templates/mapSuccess.php"
+Oct 24 19:48:54 symfony [info] {sfPartialView} Render "Z:\home\HT\apps\frontend\modules/collector/templates/_map.php"
+Oct 24 19:48:55 symfony [info] {main} Set slot "content_menu"
+Oct 24 19:48:55 symfony [info] {sfPHPView} Decorate content with "Z:\home\HT\apps\frontend\templates/layout.php"
+Oct 24 19:48:55 symfony [info] {sfPHPView} Render "Z:\home\HT\apps\frontend\templates/layout.php"
+Oct 24 19:48:55 symfony [info] {main} Call "user->executeMenu()"
+Oct 24 19:48:55 symfony [info] {sfPartialView} Render "Z:\home\HT\apps\frontend\modules/user/templates/_menu.php"
+Oct 24 19:48:55 symfony [info] {main} Call "collector->executeStats()"
+Oct 24 19:48:55 symfony [info] {sfPartialView} Render "Z:\home\HT\apps\frontend\modules/collector/templates/_stats.php"
+Oct 24 19:48:55 symfony [info] {main} Get slot "content_menu"
+Oct 24 19:48:55 symfony [info] {sfWebResponse} Send status "HTTP/1.1 200 OK"
+Oct 24 19:48:55 symfony [info] {sfWebResponse} Send header "Content-Type: text/html; charset=utf-8"
+Oct 24 19:48:55 symfony [info] {sfWebDebugLogger} Configuration 1356.48 ms (13)
+Oct 24 19:48:55 symfony [info] {sfWebDebugLogger} Factories 776.42 ms (1)
+Oct 24 19:48:55 symfony [info] {sfWebDebugLogger} Action "collector/map" 0.17 ms (1)
+Oct 24 19:48:55 symfony [info] {sfWebDebugLogger} View "Success" for "collector/map" 1785.83 ms (1)
+Oct 24 19:48:55 symfony [info] {sfWebDebugLogger} Partial "collector/_map" 1450.73 ms (1)
+Oct 24 19:48:55 symfony [info] {sfWebDebugLogger} Component "user/menu" 0.03 ms (1)
+Oct 24 19:48:55 symfony [info] {sfWebDebugLogger} Partial "user/_menu" 1.32 ms (1)
+Oct 24 19:48:55 symfony [info] {sfWebDebugLogger} Component "collector/stats" 0.02 ms (1)
+Oct 24 19:48:55 symfony [info] {sfWebDebugLogger} Partial "collector/_stats" 1.31 ms (1)
+Oct 24 19:48:55 symfony [info] {sfWebResponse} Send content (73313 o)
+Oct 24 19:48:58 symfony [info] {sfPatternRouting} Match route "default" (/:module/:action/*) for /collector/data with parameters array (  'module' => 'collector',  'action' => 'data',)
+Oct 24 19:48:58 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Oct 24 19:48:58 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Oct 24 19:48:58 symfony [info] {collectorActions} Call "collectorActions->executeData()"
+Oct 24 19:48:59 symfony [info] {Doctrine_Connection_Mysql} exec : SET NAMES 'UTF8' - ()
+Oct 24 19:48:59 symfony [info] {Doctrine_Connection_Mysql} query : SELECT l.id AS l__id, l.name AS l__name, l.description AS l__description, l.location_type_id AS l__location_type_id, l.lat AS l__lat, l.lng AS l__lng, l.created_at AS l__created_at, l.updated_at AS l__updated_at FROM location l - ()
+Oct 24 19:48:59 symfony [info] {sfPHPView} Render "Z:\home\HT\apps\frontend\modules/collector/templates/dataSuccess.php"
+Oct 24 19:48:59 symfony [info] {sfWebResponse} Send status "HTTP/1.1 200 OK"
+Oct 24 19:48:59 symfony [info] {sfWebResponse} Send header "Content-Type: text/html; charset=utf-8"
+Oct 24 19:48:59 symfony [info] {sfWebDebugLogger} Configuration 13.13 ms (9)
+Oct 24 19:48:59 symfony [info] {sfWebDebugLogger} Factories 52.71 ms (1)
+Oct 24 19:48:59 symfony [info] {sfWebDebugLogger} Action "collector/data" 572.29 ms (1)
+Oct 24 19:48:59 symfony [info] {sfWebDebugLogger} Database (Doctrine) 0.01 ms (2)
+Oct 24 19:48:59 symfony [info] {sfWebDebugLogger} View "Success" for "collector/data" 119.10 ms (1)
+Oct 24 19:48:59 symfony [info] {sfWebResponse} Send content (707 o)
+Oct 24 19:50:48 symfony [info] {sfPatternRouting} Match route "default" (/:module/:action/*) for /collector/map with parameters array (  'module' => 'collector',  'action' => 'map',)
+Oct 24 19:50:48 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Oct 24 19:50:48 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Oct 24 19:50:48 symfony [info] {collectorActions} Call "collectorActions->executeMap()"
+Oct 24 19:50:48 symfony [info] {sfPHPView} Render "Z:\home\HT\apps\frontend\modules/collector/templates/mapSuccess.php"
+Oct 24 19:50:48 symfony [info] {sfPartialView} Render "Z:\home\HT\apps\frontend\modules/collector/templates/_map.php"
+Oct 24 19:50:48 symfony [info] {main} Set slot "content_menu"
+Oct 24 19:50:48 symfony [info] {sfPHPView} Decorate content with "Z:\home\HT\apps\frontend\templates/layout.php"
+Oct 24 19:50:48 symfony [info] {sfPHPView} Render "Z:\home\HT\apps\frontend\templates/layout.php"
+Oct 24 19:50:48 symfony [info] {main} Call "user->executeMenu()"
+Oct 24 19:50:48 symfony [info] {sfPartialView} Render "Z:\home\HT\apps\frontend\modules/user/templates/_menu.php"
+Oct 24 19:50:48 symfony [info] {main} Call "collector->executeStats()"
+Oct 24 19:50:48 symfony [info] {sfPartialView} Render "Z:\home\HT\apps\frontend\modules/collector/templates/_stats.php"
+Oct 24 19:50:48 symfony [info] {main} Get slot "content_menu"
+Oct 24 19:50:48 symfony [info] {sfWebResponse} Send status "HTTP/1.1 200 OK"
+Oct 24 19:50:48 symfony [info] {sfWebResponse} Send header "Content-Type: text/html; charset=utf-8"
+Oct 24 19:50:48 symfony [info] {sfWebDebugLogger} Configuration 384.10 ms (13)
+Oct 24 19:50:48 symfony [info] {sfWebDebugLogger} Factories 207.64 ms (1)
+Oct 24 19:50:48 symfony [info] {sfWebDebugLogger} Action "collector/map" 0.16 ms (1)
+Oct 24 19:50:48 symfony [info] {sfWebDebugLogger} View "Success" for "collector/map" 473.27 ms (1)
+Oct 24 19:50:48 symfony [info] {sfWebDebugLogger} Partial "collector/_map" 376.25 ms (1)
+Oct 24 19:50:48 symfony [info] {sfWebDebugLogger} Component "user/menu" 0.03 ms (1)
+Oct 24 19:50:48 symfony [info] {sfWebDebugLogger} Partial "user/_menu" 1.12 ms (1)
+Oct 24 19:50:48 symfony [info] {sfWebDebugLogger} Component "collector/stats" 0.02 ms (1)
+Oct 24 19:50:48 symfony [info] {sfWebDebugLogger} Partial "collector/_stats" 0.54 ms (1)
+Oct 24 19:50:48 symfony [info] {sfWebResponse} Send content (73310 o)
+Oct 24 19:50:49 symfony [info] {sfPatternRouting} Match route "default" (/:module/:action/*) for /collector/data with parameters array (  'module' => 'collector',  'action' => 'data',)
+Oct 24 19:50:50 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Oct 24 19:50:50 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Oct 24 19:50:50 symfony [info] {collectorActions} Call "collectorActions->executeData()"
+Oct 24 19:50:50 symfony [info] {Doctrine_Connection_Mysql} exec : SET NAMES 'UTF8' - ()
+Oct 24 19:50:50 symfony [info] {Doctrine_Connection_Mysql} query : SELECT l.id AS l__id, l.name AS l__name, l.description AS l__description, l.location_type_id AS l__location_type_id, l.lat AS l__lat, l.lng AS l__lng, l.created_at AS l__created_at, l.updated_at AS l__updated_at FROM location l - ()
+Oct 24 19:50:50 symfony [info] {sfPHPView} Render "Z:\home\HT\apps\frontend\modules/collector/templates/dataSuccess.php"
+Oct 24 19:50:50 symfony [info] {sfWebResponse} Send status "HTTP/1.1 200 OK"
+Oct 24 19:50:50 symfony [info] {sfWebResponse} Send header "Content-Type: text/html; charset=utf-8"
+Oct 24 19:50:50 symfony [info] {sfWebDebugLogger} Configuration 13.12 ms (9)
+Oct 24 19:50:50 symfony [info] {sfWebDebugLogger} Factories 130.82 ms (1)
+Oct 24 19:50:50 symfony [info] {sfWebDebugLogger} Action "collector/data" 218.38 ms (1)
+Oct 24 19:50:50 symfony [info] {sfWebDebugLogger} Database (Doctrine) 0.01 ms (2)
+Oct 24 19:50:50 symfony [info] {sfWebDebugLogger} View "Success" for "collector/data" 103.35 ms (1)
+Oct 24 19:50:50 symfony [info] {sfWebResponse} Send content (707 o)
+Oct 24 22:20:02 symfony [info] {sfPatternRouting} Match route "default" (/:module/:action/*) for /collector/map with parameters array (  'module' => 'collector',  'action' => 'map',)
+Oct 24 22:20:02 symfony [info] {myUser} Automatic user logout due to timeout
+Oct 24 22:20:02 symfony [info] {myUser} User is not authenticated
+Oct 24 22:20:03 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Oct 24 22:20:03 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Oct 24 22:20:03 symfony [info] {collectorActions} Call "collectorActions->executeMap()"
+Oct 24 22:20:03 symfony [info] {sfPHPView} Render "Z:\home\HT\apps\frontend\modules/collector/templates/mapSuccess.php"
+Oct 24 22:20:05 symfony [info] {sfPartialView} Render "Z:\home\HT\apps\frontend\modules/collector/templates/_map.php"
+Oct 24 22:20:07 symfony [info] {main} Set slot "content_menu"
+Oct 24 22:20:07 symfony [info] {sfPHPView} Decorate content with "Z:\home\HT\apps\frontend\templates/layout.php"
+Oct 24 22:20:07 symfony [info] {sfPHPView} Render "Z:\home\HT\apps\frontend\templates/layout.php"
+Oct 24 22:20:07 symfony [info] {main} Call "user->executeMenu()"
+Oct 24 22:20:07 symfony [info] {sfPartialView} Render "Z:\home\HT\apps\frontend\modules/user/templates/_menu.php"
+Oct 24 22:20:07 symfony [info] {main} Call "collector->executeStats()"
+Oct 24 22:20:07 symfony [info] {sfPartialView} Render "Z:\home\HT\apps\frontend\modules/collector/templates/_stats.php"
+Oct 24 22:20:07 symfony [info] {main} Get slot "content_menu"
+Oct 24 22:20:07 symfony [info] {sfWebResponse} Send status "HTTP/1.1 200 OK"
+Oct 24 22:20:07 symfony [info] {sfWebResponse} Send header "Content-Type: text/html; charset=utf-8"
+Oct 24 22:20:07 symfony [info] {sfWebDebugLogger} Configuration 2512.53 ms (13)
+Oct 24 22:20:07 symfony [info] {sfWebDebugLogger} Factories 1564.43 ms (1)
+Oct 24 22:20:07 symfony [info] {sfWebDebugLogger} Action "collector/map" 18.90 ms (1)
+Oct 24 22:20:07 symfony [info] {sfWebDebugLogger} View "Success" for "collector/map" 4095.79 ms (1)
+Oct 24 22:20:07 symfony [info] {sfWebDebugLogger} Partial "collector/_map" 2509.03 ms (1)
+Oct 24 22:20:07 symfony [info] {sfWebDebugLogger} Component "user/menu" 0.03 ms (1)
+Oct 24 22:20:07 symfony [info] {sfWebDebugLogger} Partial "user/_menu" 64.44 ms (1)
+Oct 24 22:20:07 symfony [info] {sfWebDebugLogger} Component "collector/stats" 0.02 ms (1)
+Oct 24 22:20:07 symfony [info] {sfWebDebugLogger} Partial "collector/_stats" 0.59 ms (1)
+Oct 24 22:20:08 symfony [info] {sfWebResponse} Send content (76766 o)
+Oct 24 22:21:30 symfony [info] {sfPatternRouting} Match route "default" (/:module/:action/*) for /collector/data with parameters array (  'module' => 'collector',  'action' => 'data',)
+Oct 24 22:21:36 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Oct 24 22:21:36 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Oct 24 22:21:36 symfony [info] {collectorActions} Call "collectorActions->executeData()"
+Oct 24 22:21:37 symfony [info] {Doctrine_Connection_Mysql} exec : SET NAMES 'UTF8' - ()
+Oct 24 22:21:37 symfony [info] {Doctrine_Connection_Mysql} query : SELECT l.id AS l__id, l.name AS l__name, l.description AS l__description, l.location_type_id AS l__location_type_id, l.latitude AS l__latitude, l.longitude AS l__longitude, l.created_at AS l__created_at, l.updated_at AS l__updated_at FROM location l - ()
+Oct 24 22:21:37 symfony [info] {sfPHPView} Render "Z:\home\HT\apps\frontend\modules/collector/templates/dataSuccess.php"
+Oct 24 22:21:38 symfony [info] {sfWebResponse} Send status "HTTP/1.1 200 OK"
+Oct 24 22:21:38 symfony [info] {sfWebResponse} Send header "Content-Type: text/html; charset=utf-8"
+Oct 24 22:21:38 symfony [info] {sfWebDebugLogger} Configuration 13.68 ms (9)
+Oct 24 22:21:38 symfony [info] {sfWebDebugLogger} Factories 6981.60 ms (1)
+Oct 24 22:21:38 symfony [info] {sfWebDebugLogger} Action "collector/data" 1001.77 ms (1)
+Oct 24 22:21:38 symfony [info] {sfWebDebugLogger} Database (Doctrine) 0.02 ms (2)
+Oct 24 22:21:38 symfony [info] {sfWebDebugLogger} View "Success" for "collector/data" 428.02 ms (1)
+Oct 24 22:21:38 symfony [info] {sfWebResponse} Send content (5 o)
+Oct 24 22:22:46 symfony [info] {sfPatternRouting} Match route "default" (/:module/:action/*) for /collector/map with parameters array (  'module' => 'collector',  'action' => 'map',)
+Oct 24 22:22:46 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Oct 24 22:22:46 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Oct 24 22:22:46 symfony [info] {collectorActions} Call "collectorActions->executeMap()"
+Oct 24 22:22:47 symfony [info] {sfPHPView} Render "Z:\home\HT\apps\frontend\modules/collector/templates/mapSuccess.php"
+Oct 24 22:22:47 symfony [info] {sfPartialView} Render "Z:\home\HT\apps\frontend\modules/collector/templates/_map.php"
+Oct 24 22:22:49 symfony [info] {main} Set slot "content_menu"
+Oct 24 22:22:49 symfony [info] {sfPHPView} Decorate content with "Z:\home\HT\apps\frontend\templates/layout.php"
+Oct 24 22:22:49 symfony [info] {sfPHPView} Render "Z:\home\HT\apps\frontend\templates/layout.php"
+Oct 24 22:22:49 symfony [info] {main} Call "user->executeMenu()"
+Oct 24 22:22:49 symfony [info] {sfPartialView} Render "Z:\home\HT\apps\frontend\modules/user/templates/_menu.php"
+Oct 24 22:22:49 symfony [info] {main} Call "collector->executeStats()"
+Oct 24 22:22:49 symfony [info] {sfPartialView} Render "Z:\home\HT\apps\frontend\modules/collector/templates/_stats.php"
+Oct 24 22:22:49 symfony [info] {main} Get slot "content_menu"
+Oct 24 22:22:49 symfony [info] {sfWebResponse} Send status "HTTP/1.1 200 OK"
+Oct 24 22:22:49 symfony [info] {sfWebResponse} Send header "Content-Type: text/html; charset=utf-8"
+Oct 24 22:22:49 symfony [info] {sfWebDebugLogger} Configuration 1796.61 ms (13)
+Oct 24 22:22:49 symfony [info] {sfWebDebugLogger} Factories 1373.63 ms (1)
+Oct 24 22:22:49 symfony [info] {sfWebDebugLogger} Action "collector/map" 0.17 ms (1)
+Oct 24 22:22:49 symfony [info] {sfWebDebugLogger} View "Success" for "collector/map" 2407.12 ms (1)
+Oct 24 22:22:49 symfony [info] {sfWebDebugLogger} Partial "collector/_map" 1917.09 ms (1)
+Oct 24 22:22:49 symfony [info] {sfWebDebugLogger} Component "user/menu" 0.04 ms (1)
+Oct 24 22:22:49 symfony [info] {sfWebDebugLogger} Partial "user/_menu" 1.50 ms (1)
+Oct 24 22:22:49 symfony [info] {sfWebDebugLogger} Component "collector/stats" 0.02 ms (1)
+Oct 24 22:22:49 symfony [info] {sfWebDebugLogger} Partial "collector/_stats" 0.56 ms (1)
+Oct 24 22:22:49 symfony [info] {sfWebResponse} Send content (73314 o)
+Oct 24 22:23:01 symfony [info] {sfPatternRouting} Match route "default" (/:module/:action/*) for /collector/data with parameters array (  'module' => 'collector',  'action' => 'data',)
+Oct 24 22:23:02 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Oct 24 22:23:02 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Oct 24 22:23:02 symfony [info] {collectorActions} Call "collectorActions->executeData()"
+Oct 24 22:23:06 symfony [info] {Doctrine_Connection_Mysql} exec : SET NAMES 'UTF8' - ()
+Oct 24 22:23:06 symfony [info] {Doctrine_Connection_Mysql} query : SELECT l.id AS l__id, l.name AS l__name, l.description AS l__description, l.location_type_id AS l__location_type_id, l.latitude AS l__latitude, l.longitude AS l__longitude, l.created_at AS l__created_at, l.updated_at AS l__updated_at FROM location l - ()
+Oct 24 22:23:06 symfony [info] {sfPHPView} Render "Z:\home\HT\apps\frontend\modules/collector/templates/dataSuccess.php"
+Oct 24 22:23:07 symfony [err] {Doctrine_Record_UnknownPropertyException} Unknown method Location::getLat
+Oct 24 22:23:08 symfony [info] {sfWebResponse} Send status "HTTP/1.1 500 Internal Server Error"
+Oct 24 22:23:08 symfony [info] {sfWebResponse} Send header "Content-Type: text/html; charset=utf-8"
+Oct 24 22:23:08 symfony [info] {sfWebDebugLogger} Configuration 12.93 ms (9)
+Oct 24 22:23:08 symfony [info] {sfWebDebugLogger} Factories 1696.15 ms (1)
+Oct 24 22:23:08 symfony [info] {sfWebDebugLogger} Action "collector/data" 3614.74 ms (1)
+Oct 24 22:23:08 symfony [info] {sfWebDebugLogger} Database (Doctrine) 0.02 ms (2)
+Oct 24 22:23:08 symfony [info] {sfWebDebugLogger} View "Success" for "collector/data" 1698.18 ms (1)
+Oct 24 22:25:21 symfony [info] {sfPatternRouting} Match route "default" (/:module/:action/*) for /collector/map with parameters array (  'module' => 'collector',  'action' => 'map',)
+Oct 24 22:25:22 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Oct 24 22:25:22 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Oct 24 22:25:22 symfony [info] {collectorActions} Call "collectorActions->executeMap()"
+Oct 24 22:25:23 symfony [info] {sfPHPView} Render "Z:\home\HT\apps\frontend\modules/collector/templates/mapSuccess.php"
+Oct 24 22:25:23 symfony [info] {sfPartialView} Render "Z:\home\HT\apps\frontend\modules/collector/templates/_map.php"
+Oct 24 22:25:25 symfony [info] {main} Set slot "content_menu"
+Oct 24 22:25:25 symfony [info] {sfPHPView} Decorate content with "Z:\home\HT\apps\frontend\templates/layout.php"
+Oct 24 22:25:25 symfony [info] {sfPHPView} Render "Z:\home\HT\apps\frontend\templates/layout.php"
+Oct 24 22:25:25 symfony [info] {main} Call "user->executeMenu()"
+Oct 24 22:25:25 symfony [info] {sfPartialView} Render "Z:\home\HT\apps\frontend\modules/user/templates/_menu.php"
+Oct 24 22:25:25 symfony [info] {main} Call "collector->executeStats()"
+Oct 24 22:25:25 symfony [info] {sfPartialView} Render "Z:\home\HT\apps\frontend\modules/collector/templates/_stats.php"
+Oct 24 22:25:25 symfony [info] {main} Get slot "content_menu"
+Oct 24 22:25:25 symfony [info] {sfWebResponse} Send status "HTTP/1.1 200 OK"
+Oct 24 22:25:25 symfony [info] {sfWebResponse} Send header "Content-Type: text/html; charset=utf-8"
+Oct 24 22:25:25 symfony [info] {sfWebDebugLogger} Configuration 2114.32 ms (13)
+Oct 24 22:25:25 symfony [info] {sfWebDebugLogger} Factories 1685.48 ms (1)
+Oct 24 22:25:25 symfony [info] {sfWebDebugLogger} Action "collector/map" 0.17 ms (1)
+Oct 24 22:25:25 symfony [info] {sfWebDebugLogger} View "Success" for "collector/map" 2906.23 ms (1)
+Oct 24 22:25:25 symfony [info] {sfWebDebugLogger} Partial "collector/_map" 2235.53 ms (1)
+Oct 24 22:25:25 symfony [info] {sfWebDebugLogger} Component "user/menu" 0.03 ms (1)
+Oct 24 22:25:25 symfony [info] {sfWebDebugLogger} Partial "user/_menu" 1.14 ms (1)
+Oct 24 22:25:25 symfony [info] {sfWebDebugLogger} Component "collector/stats" 0.02 ms (1)
+Oct 24 22:25:25 symfony [info] {sfWebDebugLogger} Partial "collector/_stats" 2.03 ms (1)
+Oct 24 22:25:25 symfony [info] {sfWebResponse} Send content (73314 o)
+Oct 24 22:25:41 symfony [info] {sfPatternRouting} Match route "default" (/:module/:action/*) for /collector/data with parameters array (  'module' => 'collector',  'action' => 'data',)
+Oct 24 22:25:42 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Oct 24 22:25:42 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Oct 24 22:25:42 symfony [info] {collectorActions} Call "collectorActions->executeData()"
+Oct 24 22:25:42 symfony [info] {Doctrine_Connection_Mysql} exec : SET NAMES 'UTF8' - ()
+Oct 24 22:25:42 symfony [info] {Doctrine_Connection_Mysql} query : SELECT l.id AS l__id, l.name AS l__name, l.description AS l__description, l.location_type_id AS l__location_type_id, l.latitude AS l__latitude, l.longitude AS l__longitude, l.created_at AS l__created_at, l.updated_at AS l__updated_at FROM location l - ()
+Oct 24 22:25:43 symfony [info] {sfPHPView} Render "Z:\home\HT\apps\frontend\modules/collector/templates/dataSuccess.php"
+Oct 24 22:25:43 symfony [info] {sfWebResponse} Send status "HTTP/1.1 200 OK"
+Oct 24 22:25:43 symfony [info] {sfWebResponse} Send header "Content-Type: text/html; charset=utf-8"
+Oct 24 22:25:43 symfony [info] {sfWebDebugLogger} Configuration 36.03 ms (9)
+Oct 24 22:25:43 symfony [info] {sfWebDebugLogger} Factories 942.46 ms (1)
+Oct 24 22:25:43 symfony [info] {sfWebDebugLogger} Action "collector/data" 842.68 ms (1)
+Oct 24 22:25:43 symfony [info] {sfWebDebugLogger} Database (Doctrine) 0.01 ms (2)
+Oct 24 22:25:43 symfony [info] {sfWebDebugLogger} View "Success" for "collector/data" 774.33 ms (1)
+Oct 24 22:25:43 symfony [info] {sfWebResponse} Send content (707 o)
+Oct 24 22:26:01 symfony [info] {sfPatternRouting} Match route "default" (/:module/:action/*) for /location/new with parameters array (  'module' => 'location',  'action' => 'new',)
+Oct 24 22:26:01 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Oct 24 22:26:01 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Oct 24 22:26:01 symfony [info] {locationActions} Call "locationActions->executeNew()"
+Oct 24 22:26:01 symfony [info] {sfPHPView} Render "Z:\home\HT\apps\frontend\modules/location/templates/newSuccess.php"
+Oct 24 22:26:02 symfony [info] {sfPartialView} Render "Z:\home\HT\apps\frontend\modules/location/templates/_form.php"
+Oct 24 22:26:02 symfony [info] {Doctrine_Connection_Mysql} exec : SET NAMES 'UTF8' - ()
+Oct 24 22:26:02 symfony [info] {Doctrine_Connection_Mysql} query : SELECT l.id AS l__id, l.name AS l__name FROM location_type l - ()
+Oct 24 22:26:02 symfony [info] {sfWebResponse} Send status "HTTP/1.1 200 OK"
+Oct 24 22:26:02 symfony [info] {sfWebResponse} Send header "Content-Type: text/html; charset=utf-8"
+Oct 24 22:26:02 symfony [info] {sfWebDebugLogger} Configuration 41.45 ms (9)
+Oct 24 22:26:02 symfony [info] {sfWebDebugLogger} Factories 236.94 ms (1)
+Oct 24 22:26:02 symfony [info] {sfWebDebugLogger} Action "location/new" 268.85 ms (1)
+Oct 24 22:26:02 symfony [info] {sfWebDebugLogger} View "Success" for "location/new" 266.68 ms (1)
+Oct 24 22:26:02 symfony [info] {sfWebDebugLogger} Partial "location/_form" 197.92 ms (1)
+Oct 24 22:26:02 symfony [info] {sfWebDebugLogger} Database (Doctrine) 0.01 ms (2)
+Oct 24 22:26:02 symfony [info] {sfWebResponse} Send content (1737 o)
+Oct 24 22:32:18 symfony [info] {sfPatternRouting} Match route "default" (/:module/:action/*) for /location/new with parameters array (  'module' => 'location',  'action' => 'new',)
+Oct 24 22:32:19 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Oct 24 22:32:19 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Oct 24 22:32:19 symfony [info] {locationActions} Call "locationActions->executeNew()"
+Oct 24 22:32:20 symfony [info] {sfPHPView} Render "Z:\home\HT\apps\frontend\modules/location/templates/newSuccess.php"
+Oct 24 22:32:21 symfony [info] {sfPartialView} Render "Z:\home\HT\apps\frontend\modules/location/templates/_form.php"
+Oct 24 22:32:23 symfony [info] {Doctrine_Connection_Mysql} exec : SET NAMES 'UTF8' - ()
+Oct 24 22:32:23 symfony [info] {Doctrine_Connection_Mysql} query : SELECT l.id AS l__id, l.name AS l__name FROM location_type l - ()
+Oct 24 22:32:23 symfony [info] {sfWebResponse} Send status "HTTP/1.1 200 OK"
+Oct 24 22:32:23 symfony [info] {sfWebResponse} Send header "Content-Type: text/html; charset=utf-8"
+Oct 24 22:32:23 symfony [info] {sfWebDebugLogger} Configuration 134.57 ms (9)
+Oct 24 22:32:23 symfony [info] {sfWebDebugLogger} Factories 1164.05 ms (1)
+Oct 24 22:32:23 symfony [info] {sfWebDebugLogger} Action "location/new" 1456.91 ms (1)
+Oct 24 22:32:23 symfony [info] {sfWebDebugLogger} View "Success" for "location/new" 2987.45 ms (1)
+Oct 24 22:32:23 symfony [info] {sfWebDebugLogger} Partial "location/_form" 2163.63 ms (1)
+Oct 24 22:32:23 symfony [info] {sfWebDebugLogger} Database (Doctrine) 0.02 ms (2)
+Oct 24 22:32:23 symfony [info] {sfWebResponse} Send content (1759 o)
+Oct 24 22:32:39 symfony [info] {sfPatternRouting} Match route "default" (/:module/:action/*) for /location/create with parameters array (  'module' => 'location',  'action' => 'create',)
+Oct 24 22:32:39 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Oct 24 22:32:39 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Oct 24 22:32:39 symfony [info] {locationActions} Call "locationActions->executeCreate()"
+Oct 24 22:32:39 symfony [info] {locationActions} Change template to "CURRENT/new"
+Oct 24 22:32:39 symfony [info] {Doctrine_Connection_Mysql} exec : SET NAMES 'UTF8' - ()
+Oct 24 22:32:39 symfony [info] {Doctrine_Connection_Statement} execute : INSERT INTO location (name, description, location_type_id, created_at, updated_at) VALUES (?, ?, ?, ?, ?) - (test, teeeeeeeeeeest, 1, 2009-10-24 22:32:39, 2009-10-24 22:32:39)
+Oct 24 22:32:40 symfony [info] {locationActions} Change template to "CURRENT/created"
+Oct 24 22:32:40 symfony [info] {sfPHPView} Render "Z:\home\HT\apps\frontend\modules/location/templates/createdSuccess.php"
+Oct 24 22:32:40 symfony [info] {sfWebResponse} Send status "HTTP/1.1 200 OK"
+Oct 24 22:32:40 symfony [info] {sfWebResponse} Send header "Content-Type: text/html; charset=utf-8"
+Oct 24 22:32:40 symfony [info] {sfWebDebugLogger} Configuration 42.28 ms (9)
+Oct 24 22:32:40 symfony [info] {sfWebDebugLogger} Factories 113.95 ms (1)
+Oct 24 22:32:40 symfony [info] {sfWebDebugLogger} Action "location/create" 877.67 ms (1)
+Oct 24 22:32:40 symfony [info] {sfWebDebugLogger} Database (Doctrine) 0.02 ms (2)
+Oct 24 22:32:40 symfony [info] {sfWebDebugLogger} View "Success" for "location/create" 139.61 ms (1)
+Oct 24 22:32:40 symfony [info] {sfWebResponse} Send content (7 o)
+Oct 24 22:35:58 symfony [info] {sfPatternRouting} Match route "default" (/:module/:action/*) for /collector/map with parameters array (  'module' => 'collector',  'action' => 'map',)
+Oct 24 22:35:58 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Oct 24 22:35:58 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Oct 24 22:35:58 symfony [info] {collectorActions} Call "collectorActions->executeMap()"
+Oct 24 22:35:59 symfony [info] {sfPHPView} Render "Z:\home\HT\apps\frontend\modules/collector/templates/mapSuccess.php"
+Oct 24 22:35:59 symfony [info] {sfPartialView} Render "Z:\home\HT\apps\frontend\modules/collector/templates/_map.php"
+Oct 24 22:36:00 symfony [info] {main} Set slot "content_menu"
+Oct 24 22:36:00 symfony [info] {sfPHPView} Decorate content with "Z:\home\HT\apps\frontend\templates/layout.php"
+Oct 24 22:36:00 symfony [info] {sfPHPView} Render "Z:\home\HT\apps\frontend\templates/layout.php"
+Oct 24 22:36:00 symfony [info] {main} Call "user->executeMenu()"
+Oct 24 22:36:00 symfony [info] {sfPartialView} Render "Z:\home\HT\apps\frontend\modules/user/templates/_menu.php"
+Oct 24 22:36:00 symfony [info] {main} Call "collector->executeStats()"
+Oct 24 22:36:00 symfony [info] {sfPartialView} Render "Z:\home\HT\apps\frontend\modules/collector/templates/_stats.php"
+Oct 24 22:36:00 symfony [info] {main} Get slot "content_menu"
+Oct 24 22:36:00 symfony [info] {sfWebResponse} Send status "HTTP/1.1 200 OK"
+Oct 24 22:36:00 symfony [info] {sfWebResponse} Send header "Content-Type: text/html; charset=utf-8"
+Oct 24 22:36:00 symfony [info] {sfWebDebugLogger} Configuration 861.00 ms (13)
+Oct 24 22:36:00 symfony [info] {sfWebDebugLogger} Factories 480.19 ms (1)
+Oct 24 22:36:00 symfony [info] {sfWebDebugLogger} Action "collector/map" 0.47 ms (1)
+Oct 24 22:36:00 symfony [info] {sfWebDebugLogger} View "Success" for "collector/map" 1132.33 ms (1)
+Oct 24 22:36:00 symfony [info] {sfWebDebugLogger} Partial "collector/_map" 937.61 ms (1)
+Oct 24 22:36:00 symfony [info] {sfWebDebugLogger} Component "user/menu" 0.03 ms (1)
+Oct 24 22:36:00 symfony [info] {sfWebDebugLogger} Partial "user/_menu" 8.98 ms (1)
+Oct 24 22:36:00 symfony [info] {sfWebDebugLogger} Component "collector/stats" 0.02 ms (1)
+Oct 24 22:36:00 symfony [info] {sfWebDebugLogger} Partial "collector/_stats" 0.52 ms (1)
+Oct 24 22:36:00 symfony [info] {sfWebResponse} Send content (73311 o)
+Oct 24 22:36:24 symfony [info] {sfPatternRouting} Match route "default" (/:module/:action/*) for /collector/data with parameters array (  'module' => 'collector',  'action' => 'data',)
+Oct 24 22:36:24 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Oct 24 22:36:24 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Oct 24 22:36:24 symfony [info] {collectorActions} Call "collectorActions->executeData()"
+Oct 24 22:36:27 symfony [info] {Doctrine_Connection_Mysql} exec : SET NAMES 'UTF8' - ()
+Oct 24 22:36:28 symfony [info] {Doctrine_Connection_Mysql} query : SELECT l.id AS l__id, l.name AS l__name, l.description AS l__description, l.location_type_id AS l__location_type_id, l.latitude AS l__latitude, l.longitude AS l__longitude, l.created_at AS l__created_at, l.updated_at AS l__updated_at FROM location l - ()
+Oct 24 22:36:30 symfony [info] {sfPHPView} Render "Z:\home\HT\apps\frontend\modules/collector/templates/dataSuccess.php"
+Oct 24 22:36:31 symfony [info] {sfWebResponse} Send status "HTTP/1.1 200 OK"
+Oct 24 22:36:31 symfony [info] {sfWebResponse} Send header "Content-Type: text/html; charset=utf-8"
+Oct 24 22:36:31 symfony [info] {sfWebDebugLogger} Configuration 12.59 ms (9)
+Oct 24 22:36:31 symfony [info] {sfWebDebugLogger} Factories 559.93 ms (1)
+Oct 24 22:36:31 symfony [info] {sfWebDebugLogger} Action "collector/data" 3979.16 ms (1)
+Oct 24 22:36:31 symfony [info] {sfWebDebugLogger} Database (Doctrine) 0.02 ms (2)
+Oct 24 22:36:31 symfony [info] {sfWebDebugLogger} View "Success" for "collector/data" 2292.03 ms (1)
+Oct 24 22:36:31 symfony [info] {sfWebResponse} Send content (707 o)
+Oct 24 22:36:54 symfony [info] {sfPatternRouting} Match route "default" (/:module/:action/*) for /location/new with parameters array (  'module' => 'location',  'action' => 'new',)
+Oct 24 22:36:54 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Oct 24 22:36:54 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Oct 24 22:36:54 symfony [info] {locationActions} Call "locationActions->executeNew()"
+Oct 24 22:36:54 symfony [info] {sfPHPView} Render "Z:\home\HT\apps\frontend\modules/location/templates/newSuccess.php"
+Oct 24 22:36:54 symfony [info] {sfPartialView} Render "Z:\home\HT\apps\frontend\modules/location/templates/_form.php"
+Oct 24 22:36:54 symfony [info] {Doctrine_Connection_Mysql} exec : SET NAMES 'UTF8' - ()
+Oct 24 22:36:54 symfony [info] {Doctrine_Connection_Mysql} query : SELECT l.id AS l__id, l.name AS l__name FROM location_type l - ()
+Oct 24 22:36:55 symfony [info] {sfWebResponse} Send status "HTTP/1.1 200 OK"
+Oct 24 22:36:55 symfony [info] {sfWebResponse} Send header "Content-Type: text/html; charset=utf-8"
+Oct 24 22:36:55 symfony [info] {sfWebDebugLogger} Configuration 31.08 ms (9)
+Oct 24 22:36:55 symfony [info] {sfWebDebugLogger} Factories 184.76 ms (1)
+Oct 24 22:36:55 symfony [info] {sfWebDebugLogger} Action "location/new" 302.88 ms (1)
+Oct 24 22:36:55 symfony [info] {sfWebDebugLogger} View "Success" for "location/new" 374.39 ms (1)
+Oct 24 22:36:55 symfony [info] {sfWebDebugLogger} Partial "location/_form" 258.04 ms (1)
+Oct 24 22:36:55 symfony [info] {sfWebDebugLogger} Database (Doctrine) 0.02 ms (2)
+Oct 24 22:36:55 symfony [info] {sfWebResponse} Send content (1759 o)
+Oct 24 22:37:03 symfony [info] {sfPatternRouting} Match route "default" (/:module/:action/*) for /location/create with parameters array (  'module' => 'location',  'action' => 'create',)
+Oct 24 22:37:03 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Oct 24 22:37:03 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Oct 24 22:37:03 symfony [info] {locationActions} Call "locationActions->executeCreate()"
+Oct 24 22:37:03 symfony [info] {locationActions} Change template to "CURRENT/new"
+Oct 24 22:37:03 symfony [info] {sfPHPView} Render "Z:\home\HT\apps\frontend\modules/location/templates/newSuccess.php"
+Oct 24 22:37:03 symfony [info] {sfPartialView} Render "Z:\home\HT\apps\frontend\modules/location/templates/_form.php"
+Oct 24 22:37:03 symfony [info] {Doctrine_Connection_Mysql} exec : SET NAMES 'UTF8' - ()
+Oct 24 22:37:03 symfony [info] {Doctrine_Connection_Mysql} query : SELECT l.id AS l__id, l.name AS l__name FROM location_type l - ()
+Oct 24 22:37:03 symfony [info] {sfWebResponse} Send status "HTTP/1.1 200 OK"
+Oct 24 22:37:03 symfony [info] {sfWebResponse} Send header "Content-Type: text/html; charset=utf-8"
+Oct 24 22:37:03 symfony [info] {sfWebDebugLogger} Configuration 11.26 ms (9)
+Oct 24 22:37:03 symfony [info] {sfWebDebugLogger} Factories 44.01 ms (1)
+Oct 24 22:37:03 symfony [info] {sfWebDebugLogger} Action "location/create" 53.64 ms (1)
+Oct 24 22:37:03 symfony [info] {sfWebDebugLogger} View "Success" for "location/create" 45.63 ms (1)
+Oct 24 22:37:03 symfony [info] {sfWebDebugLogger} Partial "location/_form" 29.89 ms (1)
+Oct 24 22:37:03 symfony [info] {sfWebDebugLogger} Database (Doctrine) 0.01 ms (2)
+Oct 24 22:37:03 symfony [info] {sfWebResponse} Send content (2045 o)
+Oct 24 22:38:31 symfony [info] {sfPatternRouting} Match route "default" (/:module/:action/*) for /location/create with parameters array (  'module' => 'location',  'action' => 'create',)
+Oct 24 22:38:31 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Oct 24 22:38:31 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Oct 24 22:38:31 symfony [info] {locationActions} Call "locationActions->executeCreate()"
+Oct 24 22:38:32 symfony [info] {locationActions} Change template to "CURRENT/new"
+Oct 24 22:38:32 symfony [info] {Doctrine_Connection_Mysql} exec : SET NAMES 'UTF8' - ()
+Oct 24 22:38:32 symfony [info] {Doctrine_Connection_Statement} execute : INSERT INTO location (name, description, latitude, longitude, location_type_id, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?) - (wqeqwewq, easfdgfhgjhklji;ko'poiefscv !!!, 54.6482104077, 35.5292539063, 1, 2009-10-24 22:38:32, 2009-10-24 22:38:32)
+Oct 24 22:38:32 symfony [info] {locationActions} Change template to "CURRENT/created"
+Oct 24 22:38:32 symfony [info] {sfPHPView} Render "Z:\home\HT\apps\frontend\modules/location/templates/createdSuccess.php"
+Oct 24 22:38:33 symfony [info] {sfWebResponse} Send status "HTTP/1.1 200 OK"
+Oct 24 22:38:33 symfony [info] {sfWebResponse} Send header "Content-Type: text/html; charset=utf-8"
+Oct 24 22:38:33 symfony [info] {sfWebDebugLogger} Configuration 13.74 ms (9)
+Oct 24 22:38:33 symfony [info] {sfWebDebugLogger} Factories 313.86 ms (1)
+Oct 24 22:38:33 symfony [info] {sfWebDebugLogger} Action "location/create" 958.33 ms (1)
+Oct 24 22:38:33 symfony [info] {sfWebDebugLogger} Database (Doctrine) 0.01 ms (2)
+Oct 24 22:38:33 symfony [info] {sfWebDebugLogger} View "Success" for "location/create" 174.11 ms (1)
+Oct 24 22:38:33 symfony [info] {sfWebResponse} Send content (11 o)
+Oct 25 13:44:36 symfony [info] {sfPatternRouting} Match route "default" (/:module/:action/*) for /collector/map with parameters array (  'module' => 'collector',  'action' => 'map',)
+Oct 25 13:44:36 symfony [info] {myUser} Automatic user logout due to timeout
+Oct 25 13:44:36 symfony [info] {myUser} User is not authenticated
+Oct 25 13:44:37 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Oct 25 13:44:37 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Oct 25 13:44:37 symfony [info] {collectorActions} Call "collectorActions->executeMap()"
+Oct 25 13:44:37 symfony [info] {sfPHPView} Render "Z:\home\HT\apps\frontend\modules/collector/templates/mapSuccess.php"
+Oct 25 13:44:37 symfony [info] {sfPartialView} Render "Z:\home\HT\apps\frontend\modules/collector/templates/_map.php"
+Oct 25 13:44:38 symfony [info] {main} Set slot "content_menu"
+Oct 25 13:44:38 symfony [info] {sfPHPView} Decorate content with "Z:\home\HT\apps\frontend\templates/layout.php"
+Oct 25 13:44:38 symfony [info] {sfPHPView} Render "Z:\home\HT\apps\frontend\templates/layout.php"
+Oct 25 13:44:38 symfony [info] {main} Call "user->executeMenu()"
+Oct 25 13:44:38 symfony [info] {sfPartialView} Render "Z:\home\HT\apps\frontend\modules/user/templates/_menu.php"
+Oct 25 13:44:38 symfony [info] {main} Call "collector->executeStats()"
+Oct 25 13:44:38 symfony [info] {sfPartialView} Render "Z:\home\HT\apps\frontend\modules/collector/templates/_stats.php"
+Oct 25 13:44:38 symfony [info] {main} Get slot "content_menu"
+Oct 25 13:44:38 symfony [info] {sfWebResponse} Send status "HTTP/1.1 200 OK"
+Oct 25 13:44:38 symfony [info] {sfWebResponse} Send header "Content-Type: text/html; charset=utf-8"
+Oct 25 13:44:38 symfony [info] {sfWebDebugLogger} Configuration 954.97 ms (13)
+Oct 25 13:44:38 symfony [info] {sfWebDebugLogger} Factories 2401.40 ms (1)
+Oct 25 13:44:38 symfony [info] {sfWebDebugLogger} Action "collector/map" 0.17 ms (1)
+Oct 25 13:44:38 symfony [info] {sfWebDebugLogger} View "Success" for "collector/map" 1405.30 ms (1)
+Oct 25 13:44:38 symfony [info] {sfWebDebugLogger} Partial "collector/_map" 1013.24 ms (1)
+Oct 25 13:44:38 symfony [info] {sfWebDebugLogger} Component "user/menu" 0.03 ms (1)
+Oct 25 13:44:38 symfony [info] {sfWebDebugLogger} Partial "user/_menu" 2.39 ms (1)
+Oct 25 13:44:38 symfony [info] {sfWebDebugLogger} Component "collector/stats" 0.02 ms (1)
+Oct 25 13:44:38 symfony [info] {sfWebDebugLogger} Partial "collector/_stats" 0.84 ms (1)
+Oct 25 13:44:38 symfony [info] {sfWebResponse} Send content (77295 o)
+Oct 25 13:52:43 symfony [info] {sfPatternRouting} Match route "default" (/:module/:action/*) for /collector/map with parameters array (  'module' => 'collector',  'action' => 'map',)
+Oct 25 13:52:43 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Oct 25 13:52:43 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Oct 25 13:52:43 symfony [info] {collectorActions} Call "collectorActions->executeMap()"
+Oct 25 13:52:43 symfony [info] {sfPHPView} Render "Z:\home\HT\apps\frontend\modules/collector/templates/mapSuccess.php"
+Oct 25 13:52:43 symfony [info] {sfPartialView} Render "Z:\home\HT\apps\frontend\modules/collector/templates/_map.php"
+Oct 25 13:52:43 symfony [info] {main} Set slot "content_menu"
+Oct 25 13:52:43 symfony [info] {sfPHPView} Decorate content with "Z:\home\HT\apps\frontend\templates/layout.php"
+Oct 25 13:52:43 symfony [info] {sfPHPView} Render "Z:\home\HT\apps\frontend\templates/layout.php"
+Oct 25 13:52:43 symfony [info] {main} Call "user->executeMenu()"
+Oct 25 13:52:43 symfony [info] {sfPartialView} Render "Z:\home\HT\apps\frontend\modules/user/templates/_menu.php"
+Oct 25 13:52:43 symfony [info] {main} Call "collector->executeStats()"
+Oct 25 13:52:43 symfony [info] {sfPartialView} Render "Z:\home\HT\apps\frontend\modules/collector/templates/_stats.php"
+Oct 25 13:52:43 symfony [info] {main} Get slot "content_menu"
+Oct 25 13:52:43 symfony [info] {sfWebResponse} Send status "HTTP/1.1 200 OK"
+Oct 25 13:52:43 symfony [info] {sfWebResponse} Send header "Content-Type: text/html; charset=utf-8"
+Oct 25 13:52:43 symfony [info] {sfWebDebugLogger} Configuration 137.70 ms (13)
+Oct 25 13:52:43 symfony [info] {sfWebDebugLogger} Factories 44.05 ms (1)
+Oct 25 13:52:43 symfony [info] {sfWebDebugLogger} Action "collector/map" 0.16 ms (1)
+Oct 25 13:52:43 symfony [info] {sfWebDebugLogger} View "Success" for "collector/map" 155.86 ms (1)
+Oct 25 13:52:43 symfony [info] {sfWebDebugLogger} Partial "collector/_map" 125.03 ms (1)
+Oct 25 13:52:43 symfony [info] {sfWebDebugLogger} Component "user/menu" 0.04 ms (1)
+Oct 25 13:52:43 symfony [info] {sfWebDebugLogger} Partial "user/_menu" 1.35 ms (1)
+Oct 25 13:52:43 symfony [info] {sfWebDebugLogger} Component "collector/stats" 0.02 ms (1)
+Oct 25 13:52:43 symfony [info] {sfWebDebugLogger} Partial "collector/_stats" 0.54 ms (1)
+Oct 25 13:52:43 symfony [info] {sfWebResponse} Send content (73892 o)
+Oct 25 13:53:10 symfony [info] {sfPatternRouting} Match route "default" (/:module/:action/*) for /collector/map with parameters array (  'module' => 'collector',  'action' => 'map',)
+Oct 25 13:53:10 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Oct 25 13:53:10 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Oct 25 13:53:10 symfony [info] {collectorActions} Call "collectorActions->executeMap()"
+Oct 25 13:53:10 symfony [info] {sfPHPView} Render "Z:\home\HT\apps\frontend\modules/collector/templates/mapSuccess.php"
+Oct 25 13:53:10 symfony [info] {sfPartialView} Render "Z:\home\HT\apps\frontend\modules/collector/templates/_map.php"
+Oct 25 13:53:10 symfony [info] {main} Set slot "content_menu"
+Oct 25 13:53:10 symfony [info] {sfPHPView} Decorate content with "Z:\home\HT\apps\frontend\templates/layout.php"
+Oct 25 13:53:10 symfony [info] {sfPHPView} Render "Z:\home\HT\apps\frontend\templates/layout.php"
+Oct 25 13:53:10 symfony [info] {main} Call "user->executeMenu()"
+Oct 25 13:53:10 symfony [info] {sfPartialView} Render "Z:\home\HT\apps\frontend\modules/user/templates/_menu.php"
+Oct 25 13:53:10 symfony [info] {main} Call "collector->executeStats()"
+Oct 25 13:53:10 symfony [info] {sfPartialView} Render "Z:\home\HT\apps\frontend\modules/collector/templates/_stats.php"
+Oct 25 13:53:10 symfony [info] {main} Get slot "content_menu"
+Oct 25 13:53:10 symfony [info] {sfWebResponse} Send status "HTTP/1.1 200 OK"
+Oct 25 13:53:10 symfony [info] {sfWebResponse} Send header "Content-Type: text/html; charset=utf-8"
+Oct 25 13:53:10 symfony [info] {sfWebDebugLogger} Configuration 135.59 ms (13)
+Oct 25 13:53:10 symfony [info] {sfWebDebugLogger} Factories 43.35 ms (1)
+Oct 25 13:53:10 symfony [info] {sfWebDebugLogger} Action "collector/map" 0.16 ms (1)
+Oct 25 13:53:10 symfony [info] {sfWebDebugLogger} View "Success" for "collector/map" 156.01 ms (1)
+Oct 25 13:53:10 symfony [info] {sfWebDebugLogger} Partial "collector/_map" 124.42 ms (1)
+Oct 25 13:53:10 symfony [info] {sfWebDebugLogger} Component "user/menu" 0.03 ms (1)
+Oct 25 13:53:10 symfony [info] {sfWebDebugLogger} Partial "user/_menu" 1.13 ms (1)
+Oct 25 13:53:10 symfony [info] {sfWebDebugLogger} Component "collector/stats" 0.02 ms (1)
+Oct 25 13:53:10 symfony [info] {sfWebDebugLogger} Partial "collector/_stats" 0.50 ms (1)
+Oct 25 13:53:10 symfony [info] {sfWebResponse} Send content (73892 o)
+Oct 25 13:56:27 symfony [info] {sfPatternRouting} Match route "default" (/:module/:action/*) for /collector/map with parameters array (  'module' => 'collector',  'action' => 'map',)
+Oct 25 13:56:27 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Oct 25 13:56:27 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Oct 25 13:56:27 symfony [info] {collectorActions} Call "collectorActions->executeMap()"
+Oct 25 13:56:27 symfony [info] {sfPHPView} Render "Z:\home\HT\apps\frontend\modules/collector/templates/mapSuccess.php"
+Oct 25 13:56:27 symfony [info] {sfPartialView} Render "Z:\home\HT\apps\frontend\modules/collector/templates/_map.php"
+Oct 25 13:56:27 symfony [info] {main} Set slot "content_menu"
+Oct 25 13:56:27 symfony [info] {sfPHPView} Decorate content with "Z:\home\HT\apps\frontend\templates/layout.php"
+Oct 25 13:56:27 symfony [info] {sfPHPView} Render "Z:\home\HT\apps\frontend\templates/layout.php"
+Oct 25 13:56:27 symfony [info] {main} Call "user->executeMenu()"
+Oct 25 13:56:27 symfony [info] {sfPartialView} Render "Z:\home\HT\apps\frontend\modules/user/templates/_menu.php"
+Oct 25 13:56:27 symfony [info] {main} Call "collector->executeStats()"
+Oct 25 13:56:27 symfony [info] {sfPartialView} Render "Z:\home\HT\apps\frontend\modules/collector/templates/_stats.php"
+Oct 25 13:56:27 symfony [info] {main} Get slot "content_menu"
+Oct 25 13:56:27 symfony [info] {sfWebResponse} Send status "HTTP/1.1 200 OK"
+Oct 25 13:56:27 symfony [info] {sfWebResponse} Send header "Content-Type: text/html; charset=utf-8"
+Oct 25 13:56:27 symfony [info] {sfWebDebugLogger} Configuration 138.83 ms (13)
+Oct 25 13:56:27 symfony [info] {sfWebDebugLogger} Factories 44.03 ms (1)
+Oct 25 13:56:27 symfony [info] {sfWebDebugLogger} Action "collector/map" 0.16 ms (1)
+Oct 25 13:56:27 symfony [info] {sfWebDebugLogger} View "Success" for "collector/map" 157.34 ms (1)
+Oct 25 13:56:27 symfony [info] {sfWebDebugLogger} Partial "collector/_map" 126.80 ms (1)
+Oct 25 13:56:27 symfony [info] {sfWebDebugLogger} Component "user/menu" 0.03 ms (1)
+Oct 25 13:56:27 symfony [info] {sfWebDebugLogger} Partial "user/_menu" 1.04 ms (1)
+Oct 25 13:56:27 symfony [info] {sfWebDebugLogger} Component "collector/stats" 0.02 ms (1)
+Oct 25 13:56:27 symfony [info] {sfWebDebugLogger} Partial "collector/_stats" 0.50 ms (1)
+Oct 25 13:56:27 symfony [info] {sfWebResponse} Send content (73597 o)
+Oct 25 13:56:28 symfony [info] {sfPatternRouting} Match route "default" (/:module/:action/*) for /collector/data with parameters array (  'module' => 'collector',  'action' => 'data',)
+Oct 25 13:56:28 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Oct 25 13:56:28 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Oct 25 13:56:28 symfony [info] {collectorActions} Call "collectorActions->executeData()"
+Oct 25 13:56:28 symfony [info] {Doctrine_Connection_Mysql} exec : SET NAMES 'UTF8' - ()
+Oct 25 13:56:28 symfony [info] {Doctrine_Connection_Mysql} query : SELECT l.id AS l__id, l.name AS l__name, l.description AS l__description, l.location_type_id AS l__location_type_id, l.latitude AS l__latitude, l.longitude AS l__longitude, l.created_at AS l__created_at, l.updated_at AS l__updated_at FROM location l - ()
+Oct 25 13:56:28 symfony [info] {sfPHPView} Render "Z:\home\HT\apps\frontend\modules/collector/templates/dataSuccess.php"
+Oct 25 13:56:28 symfony [info] {sfWebResponse} Send status "HTTP/1.1 200 OK"
+Oct 25 13:56:28 symfony [info] {sfWebResponse} Send header "Content-Type: text/html; charset=utf-8"
+Oct 25 13:56:28 symfony [info] {sfWebDebugLogger} Configuration 15.14 ms (9)
+Oct 25 13:56:28 symfony [info] {sfWebDebugLogger} Factories 47.79 ms (1)
+Oct 25 13:56:28 symfony [info] {sfWebDebugLogger} Action "collector/data" 283.38 ms (1)
+Oct 25 13:56:28 symfony [info] {sfWebDebugLogger} Database (Doctrine) 0.01 ms (2)
+Oct 25 13:56:28 symfony [info] {sfWebDebugLogger} View "Success" for "collector/data" 31.47 ms (1)
+Oct 25 13:56:28 symfony [info] {sfWebResponse} Send content (781 o)
+Oct 25 14:28:02 symfony [info] {sfPatternRouting} Match route "default" (/:module/:action/*) for /location/new with parameters array (  'module' => 'location',  'action' => 'new',)
+Oct 25 14:28:02 symfony [info] {myUser} Automatic user logout due to timeout
+Oct 25 14:28:02 symfony [info] {myUser} User is not authenticated
+Oct 25 14:28:02 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Oct 25 14:28:02 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Oct 25 14:28:02 symfony [info] {locationActions} Call "locationActions->executeNew()"
+Oct 25 14:28:02 symfony [info] {sfPHPView} Render "Z:\home\HT\apps\frontend\modules/location/templates/newSuccess.php"
+Oct 25 14:28:02 symfony [info] {sfPartialView} Render "Z:\home\HT\apps\frontend\modules/location/templates/_form.php"
+Oct 25 14:28:02 symfony [info] {Doctrine_Connection_Mysql} exec : SET NAMES 'UTF8' - ()
+Oct 25 14:28:02 symfony [info] {Doctrine_Connection_Mysql} query : SELECT l.id AS l__id, l.name AS l__name FROM location_type l - ()
+Oct 25 14:28:02 symfony [info] {sfWebResponse} Send status "HTTP/1.1 200 OK"
+Oct 25 14:28:02 symfony [info] {sfWebResponse} Send header "Content-Type: text/html; charset=utf-8"
+Oct 25 14:28:02 symfony [info] {sfWebDebugLogger} Configuration 13.96 ms (9)
+Oct 25 14:28:02 symfony [info] {sfWebDebugLogger} Factories 47.25 ms (1)
+Oct 25 14:28:02 symfony [info] {sfWebDebugLogger} Action "location/new" 107.97 ms (1)
+Oct 25 14:28:02 symfony [info] {sfWebDebugLogger} View "Success" for "location/new" 84.44 ms (1)
+Oct 25 14:28:02 symfony [info] {sfWebDebugLogger} Partial "location/_form" 62.65 ms (1)
+Oct 25 14:28:02 symfony [info] {sfWebDebugLogger} Database (Doctrine) 0.01 ms (2)
+Oct 25 14:28:02 symfony [info] {sfWebResponse} Send content (1759 o)
+Oct 25 14:28:06 symfony [info] {sfPatternRouting} Match route "default" (/:module/:action/*) for /location/create with parameters array (  'module' => 'location',  'action' => 'create',)
+Oct 25 14:28:06 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Oct 25 14:28:06 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Oct 25 14:28:06 symfony [info] {locationActions} Call "locationActions->executeCreate()"
+Oct 25 14:28:06 symfony [info] {locationActions} Change template to "CURRENT/new"
+Oct 25 14:28:06 symfony [info] {Doctrine_Connection_Mysql} exec : SET NAMES 'UTF8' - ()
+Oct 25 14:28:06 symfony [info] {Doctrine_Connection_Statement} execute : SELECT COUNT(*) AS num_results FROM location_type l WHERE l.id = ? - (1)
+Oct 25 14:28:06 symfony [info] {Doctrine_Connection_Statement} execute : INSERT INTO location (name, description, latitude, longitude, location_type_id, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?) - (nnn, nnnnnn, 55.6091867998, 36.7707089844, 1, 2009-10-25 14:28:06, 2009-10-25 14:28:06)
+Oct 25 14:28:06 symfony [info] {locationActions} Change template to "CURRENT/created"
+Oct 25 14:28:06 symfony [info] {sfPHPView} Render "Z:\home\HT\apps\frontend\modules/location/templates/createdSuccess.php"
+Oct 25 14:28:06 symfony [info] {sfWebResponse} Send status "HTTP/1.1 200 OK"
+Oct 25 14:28:06 symfony [info] {sfWebResponse} Send header "Content-Type: text/html; charset=utf-8"
+Oct 25 14:28:06 symfony [info] {sfWebDebugLogger} Configuration 14.12 ms (9)
+Oct 25 14:28:06 symfony [info] {sfWebDebugLogger} Factories 41.82 ms (1)
+Oct 25 14:28:06 symfony [info] {sfWebDebugLogger} Action "location/create" 201.22 ms (1)
+Oct 25 14:28:06 symfony [info] {sfWebDebugLogger} Database (Doctrine) 0.02 ms (3)
+Oct 25 14:28:06 symfony [info] {sfWebDebugLogger} View "Success" for "location/create" 14.51 ms (1)
+Oct 25 14:28:06 symfony [info] {sfWebResponse} Send content (6 o)

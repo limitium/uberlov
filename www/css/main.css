@@ -14,9 +14,6 @@ a.dashed:link, a.dashed:active, a.dashed:visited, a.dashed:hover {
 }
 
 /*layout*/
-div{
-    border: 1px solid red;
-}
 
 #header{
     height:60px;

@@ -46,8 +46,8 @@ markerModule.prototype.onMarkerClick = function(e,marker){
 }
 
 markerModule.prototype.showForm = function(form,marker,loader){
-    $('#location_lat', form).val(marker.getPosition().lat());
-    $('#location_lng', form).val(marker.getPosition().lng());
+    $('#location_latitude', form).val(marker.getPosition().lat());
+    $('#location_longitude', form).val(marker.getPosition().lng());
 
     this.mm.openInfo(marker,this.addSubmitHandler(form));
 

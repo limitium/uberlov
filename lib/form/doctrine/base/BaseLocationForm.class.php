@@ -15,10 +15,10 @@ class BaseLocationForm extends BaseFormDoctrine
     $this->setWidgets(array(
       'id'               => new sfWidgetFormInputHidden(),
       'name'             => new sfWidgetFormInputText(),
-      'description'      => new sfWidgetFormInputText(),
-      'location_type_id' => new sfWidgetFormInputText(),
-      'lat'              => new sfWidgetFormInputText(),
-      'lng'              => new sfWidgetFormInputText(),
+      'description'      => new sfWidgetFormTextarea(),
+      'location_type_id' => new sfWidgetFormDoctrineChoice(array('model' => 'LocationType', 'add_empty' => true)),
+      'latitude'         => new sfWidgetFormInputText(),
+      'longitude'        => new sfWidgetFormInputText(),
       'created_at'       => new sfWidgetFormDateTime(),
       'updated_at'       => new sfWidgetFormDateTime(),
     ));
@@ -26,12 +26,12 @@ class BaseLocationForm extends BaseFormDoctrine
     $this->setValidators(array(
       'id'               => new sfValidatorDoctrineChoice(array('model' => $this->getModelName(), 'column' => 'id', 'required' => false)),
       'name'             => new sfValidatorString(array('max_length' => 50, 'required' => false)),
-      'description'      => new sfValidatorString(array('max_length' => 255, 'required' => false)),
-      'location_type_id' => new sfValidatorInteger(array('required' => false)),
-      'lat'              => new sfValidatorNumber(array('required' => false)),
-      'lng'              => new sfValidatorNumber(array('required' => false)),
-      'created_at'       => new sfValidatorDateTime(array('required' => false)),
-      'updated_at'       => new sfValidatorDateTime(array('required' => false)),
+      'description'      => new sfValidatorString(array('required' => false)),
+      'location_type_id' => new sfValidatorDoctrineChoice(array('model' => 'LocationType', 'required' => false)),
+      'latitude'         => new sfValidatorNumber(array('required' => false)),
+      'longitude'        => new sfValidatorNumber(array('required' => false)),
+      'created_at'       => new sfValidatorDateTime(),
+      'updated_at'       => new sfValidatorDateTime(),
     ));
 
     $this->widgetSchema->setNameFormat('location[%s]');
