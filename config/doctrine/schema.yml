@@ -48,8 +48,7 @@ LocationType:
 Point:
   tableName: point
   actAs:
-    Geographical: ~
-    Timestampable: ~
+    Geographical: ~    
   columns:
     id:
       type: integer(4)
@@ -83,6 +82,7 @@ Route:
       notnull: true
   relations:
     Point:
+      alias: Points
       local: id
       foreign: route_id
       type: many

@@ -8,7 +8,7 @@
  * @property integer $id
  * @property string $name
  * @property string $description
- * @property Doctrine_Collection $Point
+ * @property Doctrine_Collection $Points
  * 
  * @package    ##PACKAGE##
  * @subpackage ##SUBPACKAGE##
@@ -45,7 +45,7 @@ abstract class BaseRoute extends sfDoctrineRecord
     public function setUp()
     {
         parent::setUp();
-    $this->hasMany('Point', array(
+    $this->hasMany('Point as Points', array(
              'local' => 'id',
              'foreign' => 'route_id'));
 

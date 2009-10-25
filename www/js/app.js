@@ -72,7 +72,7 @@ app = {
             success: function(data){
                 handler(data);
             },
-            error: function(request, error, exception){
+            error: function(request, error, exception){                
                 $.growlUI(request.statusText,request.status);
             }
         });

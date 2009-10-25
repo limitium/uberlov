@@ -54,13 +54,7 @@ abstract class BaseLocation extends sfDoctrineRecord
              'local' => 'location_type_id',
              'foreign' => 'id'));
 
-        $geographical0 = new Doctrine_Template_Geographical(array(
-             'fields' => 
-             array(
-              0 => 'lat',
-              1 => 'lng',
-             ),
-             ));
+        $geographical0 = new Doctrine_Template_Geographical();
         $timestampable0 = new Doctrine_Template_Timestampable();
         $this->actAs($geographical0);
         $this->actAs($timestampable0);

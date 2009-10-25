@@ -41,15 +41,7 @@ abstract class BasePoint extends sfDoctrineRecord
              'foreign' => 'id',
              'onDelete' => 'CASCADE'));
 
-        $geographical0 = new Doctrine_Template_Geographical(array(
-             'fields' => 
-             array(
-              0 => 'lat',
-              1 => 'lng',
-             ),
-             ));
-        $timestampable0 = new Doctrine_Template_Timestampable();
+        $geographical0 = new Doctrine_Template_Geographical();
         $this->actAs($geographical0);
-        $this->actAs($timestampable0);
     }
 }
