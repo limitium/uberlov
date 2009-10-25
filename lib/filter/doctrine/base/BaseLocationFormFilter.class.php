@@ -15,9 +15,9 @@ class BaseLocationFormFilter extends BaseFormFilterDoctrine
     $this->setWidgets(array(
       'name'             => new sfWidgetFormFilterInput(array('with_empty' => false)),
       'description'      => new sfWidgetFormFilterInput(array('with_empty' => false)),
-      'location_type_id' => new sfWidgetFormFilterInput(array('with_empty' => false)),
-      'lat'              => new sfWidgetFormFilterInput(array('with_empty' => false)),
-      'lng'              => new sfWidgetFormFilterInput(array('with_empty' => false)),
+      'location_type_id' => new sfWidgetFormDoctrineChoice(array('model' => 'LocationType', 'add_empty' => true)),
+      'latitude'         => new sfWidgetFormFilterInput(),
+      'longitude'        => new sfWidgetFormFilterInput(),
       'created_at'       => new sfWidgetFormFilterDate(array('from_date' => new sfWidgetFormDate(), 'to_date' => new sfWidgetFormDate(), 'with_empty' => false)),
       'updated_at'       => new sfWidgetFormFilterDate(array('from_date' => new sfWidgetFormDate(), 'to_date' => new sfWidgetFormDate(), 'with_empty' => false)),
     ));
@@ -25,9 +25,9 @@ class BaseLocationFormFilter extends BaseFormFilterDoctrine
     $this->setValidators(array(
       'name'             => new sfValidatorPass(array('required' => false)),
       'description'      => new sfValidatorPass(array('required' => false)),
-      'location_type_id' => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
-      'lat'              => new sfValidatorSchemaFilter('text', new sfValidatorNumber(array('required' => false))),
-      'lng'              => new sfValidatorSchemaFilter('text', new sfValidatorNumber(array('required' => false))),
+      'location_type_id' => new sfValidatorDoctrineChoice(array('required' => false, 'model' => 'LocationType', 'column' => 'id')),
+      'latitude'         => new sfValidatorSchemaFilter('text', new sfValidatorNumber(array('required' => false))),
+      'longitude'        => new sfValidatorSchemaFilter('text', new sfValidatorNumber(array('required' => false))),
       'created_at'       => new sfValidatorDateRange(array('required' => false, 'from_date' => new sfValidatorDateTime(array('required' => false, 'datetime_output' => 'Y-m-d 00:00:00')), 'to_date' => new sfValidatorDateTime(array('required' => false, 'datetime_output' => 'Y-m-d 23:59:59')))),
       'updated_at'       => new sfValidatorDateRange(array('required' => false, 'from_date' => new sfValidatorDateTime(array('required' => false, 'datetime_output' => 'Y-m-d 00:00:00')), 'to_date' => new sfValidatorDateTime(array('required' => false, 'datetime_output' => 'Y-m-d 23:59:59')))),
     ));
@@ -52,9 +52,9 @@ class BaseLocationFormFilter extends BaseFormFilterDoctrine
       'id'               => 'Number',
       'name'             => 'Text',
       'description'      => 'Text',
-      'location_type_id' => 'Number',
-      'lat'              => 'Number',
-      'lng'              => 'Number',
+      'location_type_id' => 'ForeignKey',
+      'latitude'         => 'Number',
+      'longitude'        => 'Number',
       'created_at'       => 'Date',
       'updated_at'       => 'Date',
     );

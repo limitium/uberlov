@@ -3,8 +3,8 @@
 {
 "id": "<?php echo $location->getId() ?>",
 "name": "<?php echo $location->getName() ?>",
-"lat": "<?php echo $location->getLat() ?>",
-"lng": "<?php echo $location->getLng() ?>"
+"lat": "<?php echo $location->getLatitude() ?>",
+"lng": "<?php echo $location->getLongitude() ?>"
 }<?php echo $nb == $i ? '' : ',' ?>
 <?php endforeach; ?>
 ]
