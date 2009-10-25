@@ -10,9 +10,8 @@ ModuleManager.add(lineModule);
 
 lineModule.prototype.initMenu = function(){
     $('#new_line').click(this.startEdit.delegate(this));
-    $('#save').click(this.startEdit.delegate(this));
+    $('#save').click(this.getForm.delegate(this));
 }
-
 lineModule.prototype.startEdit = function(){
     this.poly = this.mm.createPoly({
         path: new gm.MVCArray(),
@@ -217,3 +216,56 @@ lineModule.prototype.iconHead = new google.maps.MarkerImage('/images/line-head.p
     // The anchor for this image is the base of the flagpole at 0,32.
     new google.maps.Point(4, 4));
 
+lineModule.prototype.getForm = function(){
+    var point = this.poly.head;
+    var loader = this.mm.showLoader(point.getPosition(),'<img src="/images/loader-small.gif" />');
+    app.getForm('/route/new',this.showForm.delegate(this,point,loader));
+    return false;
+}
+lineModule.prototype.showForm = function(form,point,loader){
+    var points = [];
+    this.poly.getPath().forEach(function(p){
+        points[points.length] = p.lat()+";"+p.lng();
+    });
+    
+     $('#route_points', form).val(points.join('|'));
+    this.mm.openInfo(point,this.addSubmitHandler(form));
+    loader.remove();
+}
+lineModule.prototype.addSubmitHandler = function(form){
+    var self = this;
+
+    $('form', form).submit(function(){
+        $(form).block({
+            message: "<img src='/images/loader-small.gif'/>" ,
+            overlayCSS: {
+                backgroundColor: '#eee'
+            },
+            css: {
+                border:		'0px',
+                opacity:        '0.5',
+                backgroundColor:'#eee'
+            }
+        });
+
+        app.sendForm(form, function(newForm){
+            $(form).unblock();
+
+            var matches = newForm.match(/^(\d+)\|(.*)/)
+
+            if(matches && matches.length==3){
+                self.mm.createLocation({
+                    title:matches[2],
+                    id:matches[1],
+                    position:self.marker.getPosition()
+                });
+
+                self.mm.removeMarker(self.marker);
+            }else{
+                self.marker.infoWindow.setContent(self.addSubmitHandler(app.formatHtml(newForm)));
+            }
+        });
+        return false;
+    });
+    return form;
+}
