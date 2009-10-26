@@ -3,8 +3,8 @@ function lineModule(){
     this.listenerClick = null;
     this.poly = null;
     this.initMenu();
-
 }
+lineModule.name = 'lineModule';
 ModuleManager.add(lineModule);
 
 
@@ -15,7 +15,7 @@ lineModule.prototype.initMenu = function(){
 lineModule.prototype.startEdit = function(){
     this.poly = this.mm.createPoly({
         path: new gm.MVCArray(),
-        strokeColor: '#03f',
+        strokeColor: '#0033ff',
         strokeOpacity: 0.5,
         strokeWeight: 5
     });
@@ -237,7 +237,7 @@ lineModule.prototype.showForm = function(form,point,loader){
     });
     
     $('#route_points', form).val(points.join('|'));
-    this.mm.openInfo(point,this.addSubmitHandler(form));
+    this.mm.openInfo(point.getPosition(),this.addSubmitHandler(form),function(){});
     loader.remove();
 }
 lineModule.prototype.addSubmitHandler = function(form){
@@ -270,7 +270,7 @@ lineModule.prototype.addSubmitHandler = function(form){
                     strokeOpacity: 0.5,
                     strokeWeight: 2
                 });
-
+                self.mm.closeInfo();
                 self.removePoly();
             }else{
                 self.poly.points.getAt(self.poly.points.length-1).infoWindow.setContent(self.addSubmitHandler(app.formatHtml(newForm)));

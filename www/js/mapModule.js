@@ -1,9 +1,10 @@
 gm = google.maps;
 
 function mapModule(){
-
     this.initMap();
+    this.infoWindow = null;
 }
+mapModule.name = 'mapModule';
 ModuleManager.add(mapModule);
 
 mapModule.prototype.initMap = function(){
@@ -49,10 +50,10 @@ mapModule.prototype.createRoute = function(opt){
         opt.path[opt.path.length] = new gm.LatLng(parseFloat(point[0]),parseFloat(point[1]));
     });
     
-    opt.strokeColor = '#f30';
+    opt.strokeColor = '#ff3300';
     opt.strokeOpacity = 0.5;
-    opt.strokeWeight = 2;    
-    var route = new ht_route(this,opt);
+    opt.strokeWeight = 2;
+    new ht_route(this,opt);
 }
 
 mapModule.prototype.createPoly = function(opt){
@@ -76,6 +77,24 @@ mapModule.prototype.setCenter = function(point){
 
 mapModule.prototype.showLoader = function(point,html){    
     return new mapOverlay(point,html,this.map,'overlayImage');
+}
+mapModule.prototype.openInfo = function(point,html,closeHandler){
+    this.closeInfo();
+    
+    this.infoWindow = new gm.InfoWindow({
+        content: html,
+        position: point,
+        closeHandler:closeHandler
+    });
+    gm.event.addListener(this.infoWindow,'closeclick',this.closeInfo.delegate(this));
+    this.infoWindow.open(this.map);
+}
+mapModule.prototype.closeInfo = function(closeHandler){
+    if(this.infoWindow != null){
+        this.infoWindow.closeHandler();
+        this.infoWindow.close();
+        this.infoWindow = null;
+    }
 }
 
 
@@ -125,6 +144,7 @@ mapOverlay.prototype.remove = function(){
  */
 function ht_route(mm,opt){
     this.mm = mm;
+    this.overTime = null;
     this.poly = mm.createPoly(opt);
     this.initListeners();
 }
@@ -137,21 +157,24 @@ ht_route.prototype.addListenerClick = function(){
     this.listeners.click = gm.event.addListener(this.poly,'click',this.onClick.delegate(this));
 }
 ht_route.prototype.onMove = function(){
-    this.poly.setOptions({
-        strokeColor: '#39d',
-        strokeOpacity: 0.8,
-        strokeWeight: 8
-    });
-    this.poly.overTime = new Date();
+    if(this.overTime == null){
+        this.poly.setOptions({
+            strokeColor: '#3399dd',
+            strokeOpacity: 0.8,
+            strokeWeight: 8
+        });        
+    }
     setTimeout(this.onOut.delegate(this), 1000);
+    this.overTime = new Date();
 }
 ht_route.prototype.onOut = function(){
-    if(new Date()-this.poly.overTime > 900){
+    if(new Date()-this.overTime > 900){
         this.poly.setOptions({
-            strokeColor: '#f30',
+            strokeColor: '#ff3300',
             strokeOpacity: 0.5,
             strokeWeight: 2
         });
+        this.overTime = null;
     }
 }
 ht_route.prototype.onClick = function(e){
@@ -160,18 +183,9 @@ ht_route.prototype.onClick = function(e){
     app.getForm('/route/show/id/'+this.poly.id,this.showInfo.delegate(this,loader,e.latLng));
 }
 ht_route.prototype.showInfo =  function(html,loader,point){
-    this.openInfo(html,point);
+    this.mm.openInfo(point,html,this.addListenerClick.delegate(this));
     loader.remove();
 }
-ht_route.prototype.openInfo= function(html,position){
-    this.poly.infoWindow = new gm.InfoWindow({
-        content: html,
-        position: position
-    });
-    gm.event.addListener(this.poly.infoWindow,'closeclick',this.addListenerClick.delegate(this));
-    this.poly.infoWindow.open(this.mm.map);
-}
-
 
 /**
  * all about location here
@@ -195,13 +209,6 @@ ht_location.prototype.onClick = function(){
     app.getForm('/location/show/id/'+this.marker.id,this.showInfo.delegate(this,loader));
 }
 ht_location.prototype.showInfo =  function(html,loader){
-    this.openInfo(html);    
+    this.mm.openInfo(this.marker.getPosition(),html,this.addListenerClick.delegate(this));
     loader.remove();
-}
-ht_location.prototype.openInfo= function(html){
-    this.marker.infoWindow = new gm.InfoWindow({
-        content: html
-    });
-    gm.event.addListener(this.marker.infoWindow,'closeclick',this.addListenerClick.delegate(this));
-    this.marker.infoWindow.open(this.mm.map,this.marker);
 }
