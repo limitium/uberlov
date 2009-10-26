@@ -25,7 +25,7 @@ app = {
     formatHtml:function(html){
         var jForm = $(html);
 
-        var cont = jQuery('<div />');
+        var cont = jQuery('<div class="baloon" />');
         $.each(jForm,function(){
             cont.append(this);
         })

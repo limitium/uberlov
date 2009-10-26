@@ -1,10 +1,6 @@
 <table>
   <tbody>
     <tr>
-      <th>Id:</th>
-      <td><?php echo $route->getid() ?></td>
-    </tr>
-    <tr>
       <th>Name:</th>
       <td><?php echo $route->getname() ?></td>
     </tr>

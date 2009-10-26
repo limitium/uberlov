@@ -52,7 +52,7 @@ lineModule.prototype.createPoint = function(index,latLng){
     var point = this.mm.createMarker({
         index:index,
         position:latLng,
-        title:'new location',
+        title:'point',
         icon:this.iconPoint,
         draggable: true
     });
@@ -106,7 +106,15 @@ lineModule.prototype.createPoint = function(index,latLng){
         this.updateHead();
     }
 }
-
+lineModule.prototype.removePoly = function(){
+    var self = this;
+    this.poly.points.forEach(function(point){
+        point.midPoint && self.mm.removeMarker(point.midPoint);
+        self.mm.removeMarker(point);
+    })
+    this.poly.setMap(null);
+    this.poly =null;
+}
 lineModule.prototype.removeHead = function(){
     if(this.poly.head){
         this.poly.head.setIcon(this.iconPoint);
@@ -217,7 +225,7 @@ lineModule.prototype.iconHead = new google.maps.MarkerImage('/images/line-head.p
     new google.maps.Point(4, 4));
 
 lineModule.prototype.getForm = function(){
-    var point = this.poly.head;
+    var point = this.poly.points.getAt(this.poly.points.length-1);
     var loader = this.mm.showLoader(point.getPosition(),'<img src="/images/loader-small.gif" />');
     app.getForm('/route/new',this.showForm.delegate(this,point,loader));
     return false;
@@ -228,7 +236,7 @@ lineModule.prototype.showForm = function(form,point,loader){
         points[points.length] = p.lat()+";"+p.lng();
     });
     
-     $('#route_points', form).val(points.join('|'));
+    $('#route_points', form).val(points.join('|'));
     this.mm.openInfo(point,this.addSubmitHandler(form));
     loader.remove();
 }
@@ -254,15 +262,18 @@ lineModule.prototype.addSubmitHandler = function(form){
             var matches = newForm.match(/^(\d+)\|(.*)/)
 
             if(matches && matches.length==3){
-                self.mm.createLocation({
+                self.mm.createPoly({
+                    path: self.poly.getPath(),
                     title:matches[2],
                     id:matches[1],
-                    position:self.marker.getPosition()
+                    strokeColor: '#f30',
+                    strokeOpacity: 0.5,
+                    strokeWeight: 2
                 });
 
-                self.mm.removeMarker(self.marker);
+                self.removePoly();
             }else{
-                self.marker.infoWindow.setContent(self.addSubmitHandler(app.formatHtml(newForm)));
+                self.poly.points.getAt(self.poly.points.length-1).infoWindow.setContent(self.addSubmitHandler(app.formatHtml(newForm)));
             }
         });
         return false;

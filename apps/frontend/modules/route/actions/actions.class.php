@@ -66,7 +66,7 @@ class routeActions extends sfActions {
             foreach($form->getValue('points') as $point) {
                 $form->getObject()->Points->add($point);
             }
-            $form->save();
+            return $form->save();
         }
         return null;
     }
