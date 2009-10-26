@@ -4,6 +4,7 @@ function markerModule(){
     this.initMenu();
 
 }
+markerModule.name = 'markerModule';
 ModuleManager.add(markerModule);
 
 markerModule.prototype.initMenu = function(){    
@@ -49,9 +50,8 @@ markerModule.prototype.showForm = function(form,marker,loader){
     $('#location_latitude', form).val(marker.getPosition().lat());
     $('#location_longitude', form).val(marker.getPosition().lng());
 
-    this.mm.openInfo(marker,this.addSubmitHandler(form));
+    this.mm.openInfo(marker.getPosition(),this.addSubmitHandler(form),this.addMarkerListener.delegate(this,marker));
 
-    gm.event.addListener(marker.infoWindow,'closeclick',this.addMarkerListener.delegate(this,marker));
     loader.remove();
 }
 
@@ -84,6 +84,7 @@ markerModule.prototype.addSubmitHandler = function(form){
                 });
                 
                 self.mm.removeMarker(self.marker);
+                self.mm.closeInfo();
             }else{
                 self.marker.infoWindow.setContent(self.addSubmitHandler(app.formatHtml(newForm)));
             }

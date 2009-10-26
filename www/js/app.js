@@ -1,5 +1,11 @@
+if(typeof(console)!='undefined'){
+    fb =  console.log;
+}else{
+    fb = function(){
 
-fb =  console.log;
+        }
+}
+
 Function.prototype.delegate = function(){
     var arg = $.makeArray(arguments);
     var scope = arg.shift();
