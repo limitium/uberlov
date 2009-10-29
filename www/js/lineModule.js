@@ -13,6 +13,7 @@ lineModule.prototype.initMenu = function(){
     $('#save').click(this.getForm.delegate(this));
 }
 lineModule.prototype.startEdit = function(){
+    this.mm.updateBar('<img style="margin-bottom:-4px" src="/images/route.png"/><span>creating route</span></span><input class="button" type="button" value="save" disabled="disabled"/><input class="button" type="button" value="cancel"/>');
     this.poly = this.mm.createPoly({
         path: new gm.MVCArray(),
         strokeColor: '#0033ff',
@@ -200,7 +201,7 @@ lineModule.prototype.onMidPointDrugEnd = function(e,midPoint){
     midPoint.point.updateMidPoint(true);
 }
 
-lineModule.prototype.iconPoint = new google.maps.MarkerImage('/images/line-point.png',
+lineModule.prototype.iconPoint = new gm.MarkerImage('/images/line-point.png',
     // This marker is 20 pixels wide by 32 pixels tall.
     new google.maps.Size(8, 8),
     // The origin for this image is 0,0.
@@ -208,7 +209,7 @@ lineModule.prototype.iconPoint = new google.maps.MarkerImage('/images/line-point
     // The anchor for this image is the base of the flagpole at 0,32.
     new google.maps.Point(4, 4));
 
-lineModule.prototype.iconMidPoint = new google.maps.MarkerImage('/images/line-midpoint.png',
+lineModule.prototype.iconMidPoint = new gm.MarkerImage('/images/line-midpoint.png',
     // This marker is 20 pixels wide by 32 pixels tall.
     new google.maps.Size(8, 8),
     // The origin for this image is 0,0.
@@ -216,7 +217,7 @@ lineModule.prototype.iconMidPoint = new google.maps.MarkerImage('/images/line-mi
     // The anchor for this image is the base of the flagpole at 0,32.
     new google.maps.Point(4, 4));
 
-lineModule.prototype.iconHead = new google.maps.MarkerImage('/images/line-head.png',
+lineModule.prototype.iconHead = new gm.MarkerImage('/images/line-head.png',
     // This marker is 20 pixels wide by 32 pixels tall.
     new google.maps.Size(8, 8),
     // The origin for this image is 0,0.
