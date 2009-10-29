@@ -12,6 +12,7 @@ markerModule.prototype.initMenu = function(){
 }
 
 markerModule.prototype.startEdit = function(){
+    this.mm.updateBar('<img style="margin-bottom:-4px" src="/images/location.png"/><span>creating location</span></span><input class="button disabled" type="button" value="save"/><input class="button" type="button" value="cancel"/>');
     this.listenerClick = gm.event.addListener(this.mm.map,'click',this.onClickEdit.delegate(this));
     return false;
 }
@@ -22,6 +23,8 @@ markerModule.prototype.onClickEdit = function(e){
     var point = e.latLng;
 
     this.marker && this.mm.removeMarker(this.marker);
+    this.mm.closeInfo();
+
     this.addMarker(point);
     
     this.mm.setCenter(point);
