@@ -6,26 +6,33 @@ function mapModule(){
   this.initListeners();
   this.infoWindow = null;
   this.loadData();
-    
+  this.editor = null;
 }
 mapModule.name = 'mapModule';
 ModuleManager.add(mapModule);
 
 mapModule.prototype.initMap = function(){
-  var params = $.unparam(window.location.hash);
-  fb(params)
-  var latlng = new gm.LatLng(55.043561639001645, 36.627886718750005);
+  var params = $.unparam(window.location.hash.substr(1));
+
+  params.lat = parseFloat(params.lat) || 55.043561639001645;
+  params.lng = parseFloat(params.lng) || 36.627886718750005;
+  params.z= parseInt(params.z) || 8;
+  params.mt = this.idToType[parseFloat(params.mt)] || 'roadmap';
+
+  var latlng = new gm.LatLng(params.lat, params.lng);
   var opt = {
-    zoom: 8,
+    zoom: params.z,
     center: latlng,
     navigationControlOptions:{
       style:gm.NavigationControlStyle.SMALL
     },
     scaleControl: true,
     mapTypeControl: false,
-    mapTypeId: gm.MapTypeId.ROADMAP
+    mapTypeId: params.mt
   };
   this.map = new gm.Map($("#map_canvas").get(0), opt);
+  this.setType(params.mt);
+  
 }
 
 mapModule.prototype.initListeners = function(){
@@ -33,9 +40,9 @@ mapModule.prototype.initListeners = function(){
   this.listeners.dragend = gm.event.addListener(this.map,'dragend',this.updateUrl.delegate(this));
   this.listeners.click = gm.event.addListener(this.map,'click',this.updateUrl.delegate(this));
   this.listeners.zoom_changed = gm.event.addListener(this.map,'zoom_changed',this.updateUrl.delegate(this));
-  this.listeners.maptypeid_changed = gm.event.addListener(this.map,'maptypeid_changed',function(){fb(1)});
 }
 mapModule.prototype.initMenu = function(){
+  var self = this;
   var map = $('#map');
   this.bar = $('<div style="position: absolute;"></div>');
   this.bar.css({
@@ -46,46 +53,59 @@ mapModule.prototype.initMenu = function(){
   });
   map.append(this.bar);
 
-  this.edit = $('<div style="position: absolute;"><div style="padding:5px">wewqeqw</div></div>');
-  this.edit.css({
-    opacity:0.8,
-    color:'white',
-    backgroundColor:'black',
-    top:0,
-    left:100
-  });
-  map.append(this.edit);
-
-  this.mapType = $('<div style="position: absolute;"><div style="padding:5px 5px 5px 0px"><input class="button" type="button" value="roads"/><input class="button" type="button" value="map"/></div></div>');
+  this.mapType = $('<div style="position: absolute;"><div style="padding:5px 5px 5px 0px"><input class="button" type="button" value="map"/><input class="button" type="button" value="roads"/></div></div>');
   this.mapType.css({
     opacity:0.8,
     backgroundColor:'black',
     top:0,
     right:0
   });
+  $('input',this.mapType)
+  .eq(0)
+  .click(function(){
+    self.setType('hybrid')
+  })
+  .end()
+  .eq(1)
+  .click(function(){
+    self.setType('roadmap')
+  });
   map.append(this.mapType);
 }
-
+mapModule.prototype.addEditItem =  function(item){
+  if(!this.edit){
+    this.edit = $('<div style="position: absolute;"><div style="padding:5px 5px 5px 0px"></div></div>');
+    this.edit.css({
+      opacity:0.8,
+      color:'white',
+      backgroundColor:'black',
+      top:0,
+      right:110
+    });
+    $('#map').append(this.edit);
+  }
+  $('div',this.edit).append(item);
+  return this.edit;
+}
 mapModule.prototype.updateBar = function(html){
-  var map = $('#map');
   if(html){
     this.bar.html('<div style="padding:5px">'+html+'</div>');
+    this.centerBar();
   }else{
     this.bar.empty();
   }
-  this.bar.css('left',map.width()/2-this.bar.width()/2);
+  return this.bar;
+}
+mapModule.prototype.centerBar = function(){
+  this.bar.css('left',$('#map').width()/2-this.bar.width()/2);
 }
 
 mapModule.prototype.updateUrl = function(){
-  var MT = {
-    hybryd:0,
-    roadmap:1
-  };
   window.location.hash=$.param({
     lat:this.map.getCenter().lat(),
     lng:this.map.getCenter().lng(),
-    zoom:this.map.getZoom(),
-    mt:MT[this.map.getMapTypeId()]
+    z:this.map.getZoom(),
+    mt:this.typeToId[this.map.getMapTypeId()]
   });
 }
 
@@ -93,11 +113,11 @@ mapModule.prototype.loadData = function(){
   var self = this;
   app.getJSON('/collector/data', function(data){
     $.each(data.locations,function(){
-      new ht_location(self,{
-        title:this.name,
-        id:this.id,
-        position:new gm.LatLng(parseFloat(this.lat),parseFloat(this.lng))
-      });
+      self.createLocation({
+        id: this.id,
+        title: this.name,
+        position: new gm.LatLng(parseFloat(this.lat),parseFloat(this.lng))
+      })
     });
     $.each(data.routes,function(){
       self.createRoute({
@@ -109,6 +129,13 @@ mapModule.prototype.loadData = function(){
   });
 }
 
+mapModule.prototype.createLocation = function(opt){
+  new ht_location(this,{
+    title: opt.name,
+    id: opt.id,
+    position: opt.position
+  });
+}
 mapModule.prototype.createRoute = function(opt){
   var points = opt.points.split("|");
   delete opt.points;
@@ -119,7 +146,7 @@ mapModule.prototype.createRoute = function(opt){
     point = this.split(';')
     opt.path[opt.path.length] = new gm.LatLng(parseFloat(point[0]),parseFloat(point[1]));
   });
-    
+
   opt.strokeColor = '#ff3300';
   opt.strokeOpacity = 0.5;
   opt.strokeWeight = 2;
@@ -137,12 +164,35 @@ mapModule.prototype.createMarker = function(opt){
 }
 
 mapModule.prototype.removeMarker = function(marker){
-  marker.infoWindow && marker.infoWindow.close();
-  marker.setMap(null);
+  if(marker){
+    marker.infoWindow && marker.infoWindow.close();
+    marker.setMap(null);
+  }
 }
 
 mapModule.prototype.setCenter = function(point){
   this.map.setCenter(point);
+}
+
+mapModule.prototype.setType = function(type){
+  $('input',this.mapType)
+  .removeAttr('disabled')
+  .removeClass('disabled')
+  .eq(this.typeToId[type])
+  .attr('disabled','disabled')
+  .addClass('disabled');
+  this.map.setMapTypeId(type);
+}
+
+mapModule.prototype.setEditor = function(editor){
+  this.editor = editor;
+}
+mapModule.prototype.getEditor = function(){
+  return this.editor;
+}
+mapModule.prototype.cancelEdit= function(){
+  this.editor && this.editor.cancelEdit();
+  this.editor = null;
 }
 
 mapModule.prototype.showLoader = function(point,html){    
@@ -158,6 +208,7 @@ mapModule.prototype.openInfo = function(point,html,closeHandler){
   });
   gm.event.addListener(this.infoWindow,'closeclick',this.closeInfo.delegate(this));
   this.infoWindow.open(this.map);
+  return this.infoWindow;
 }
 mapModule.prototype.closeInfo = function(closeHandler){
   if(this.infoWindow != null){
@@ -166,7 +217,14 @@ mapModule.prototype.closeInfo = function(closeHandler){
     this.infoWindow = null;
   }
 }
-
+mapModule.prototype.typeToId = {
+  hybrid:0,
+  roadmap:1
+}
+mapModule.prototype.idToType = {
+  '0':'hybrid',
+  '1':'roadmap'
+}
 
 
 
