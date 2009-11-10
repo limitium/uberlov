@@ -165,7 +165,7 @@ ht_route_e.prototype.createPoint = function(index,latLng){
   this.mm.closeInfo();
 }
 ht_route_e.prototype.addPointListener = function(point){
-    gm.event.addListener(point,'click',this.onPointClick.delegate(this,point));
+  gm.event.addListener(point,'click',this.onPointClick.delegate(this,point));
   gm.event.addListener(point,'dragend',this.onPointDrugEnd.delegate(this,point));
 }
 
