@@ -9,3 +9,5 @@
 <a href="<?php echo url_for('location/edit?id='.$location->getId()) ?>">Edit</a>
 &nbsp;
 <a href="<?php echo url_for('location/index') ?>">List</a>
+&nbsp;
+<a href="<?php echo url_for('location/export?id='.$location->getId()); ?>">Save to OZI</a>
