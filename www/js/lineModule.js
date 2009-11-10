@@ -93,7 +93,6 @@ function ht_route_e(mm,opt){
     strokeWeight: 5
   });
   this.points = new gm.MVCArray();
-  this.head = null;
 
   this.onSaveChange = opt.onSaveChange;
 }
@@ -163,16 +162,10 @@ ht_route_e.prototype.createPoint = function(index,latLng){
 
   this.points.insertAt(index, point);
 
-  if(false){
-    this.updateHead();
-  }
-
   this.mm.closeInfo();
 }
 ht_route_e.prototype.addPointListener = function(point){
-  if(true){
     gm.event.addListener(point,'click',this.onPointClick.delegate(this,point));
-  }
   gm.event.addListener(point,'dragend',this.onPointDrugEnd.delegate(this,point));
 }
 
@@ -261,39 +254,6 @@ ht_route_e.prototype.remove = function(){
 ht_route_e.prototype.checkSave = function(){
   this.onSaveChange(this.points.length<2);
 }
-ht_route_e.prototype.removeHead = function(){
-  if(this.head){
-    this.head.setIcon(this.iconPoint);
-    gm.event.removeListener(this.head.listenerClick);
-  }
-}
-ht_route_e.prototype.createHead =  function(){
-  this.head = this.points.getAt(this.points.length-1);
-  this.head.setIcon(this.iconHead);
-  this.head.listenerClick = gm.event.addListener(this.head,'click',this.finishEdit.delegate(this));
-}
-ht_route_e.prototype.updateHead = function(){
-  this.removeHead();
-
-  if(this.points.length<2){
-    this.head = null;
-    return
-  }
-  this.createHead();
-}
-
-ht_route_e.prototype.finishEdit = function(){
-  var self = this;
-
-  this.disableEdit(true);
-  
-  this.removeHead();
-
-  this.points.forEach(function(point){
-    gm.event.addListener(point,'click',self.onPointClick.delegate(self,point));
-  });
-}
-
 ht_route_e.prototype.getForm = function(){
   var point = this.points.getAt(this.points.length-1);
   var loader = this.mm.showLoader(point.getPosition(),'<img src="/images/loader-small.gif" />');
@@ -358,11 +318,6 @@ ht_route_e.prototype.iconPoint = new gm.MarkerImage('/images/line-point.png',
   new google.maps.Point(4, 4));
 
 ht_route_e.prototype.iconMidPoint = new gm.MarkerImage('/images/line-midpoint.png',
-  new google.maps.Size(8, 8),
-  new google.maps.Point(0,0),
-  new google.maps.Point(4, 4));
-
-ht_route_e.prototype.iconHead = new gm.MarkerImage('/images/line-head.png',
   new google.maps.Size(8, 8),
   new google.maps.Point(0,0),
   new google.maps.Point(4, 4));
