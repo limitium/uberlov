@@ -86,3 +86,34 @@ Route:
       local: id
       foreign: route_id
       type: many
+
+Profile:
+  tableName: profile
+  actAs:
+    Timestampable: ~
+  columns:
+    id:
+      type: integer(4)
+      primary: true
+      autoincrement: true
+    nick_name:
+      type: string(50)
+      default: ''
+      notnull: true
+    first_name:
+      type: string(50)
+      default: ''
+    last_name:
+      type: string(50)
+      default: ''
+    description:
+      type: string()
+      default: ''
+      notnull: true
+  relations:
+    Point:
+      alias: Points
+      local: id
+      foreign: route_id
+      type: many
+

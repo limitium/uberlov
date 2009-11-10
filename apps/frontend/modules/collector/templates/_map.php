@@ -6,13 +6,3 @@
     <div id="map_canvas">
     </div>
 </div>
-
-<?php slot('content_menu') ?>
-<div>
-    <a id="new_location" class="dashed" href="">new ocation</a> |
-    <a id="new_line" class="dashed" href="">new line</a> |
-    <a id="save" class="dashed" href="">save</a>
-
-    <br /><br />
-</div>
-<?php end_slot(); ?>

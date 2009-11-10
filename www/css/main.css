@@ -12,8 +12,26 @@ a.dashed:link, a.dashed:active, a.dashed:visited, a.dashed:hover {
   border-bottom:1px dashed;
   text-decoration:none;
 }
+
+a.editItem:visited {
+  color:#0053E4;
+}
+a.editItem:link, a.editItem:active, a.editItem:visited {
+  border:0px;
+  background-color:black;
+  text-decoration:none;
+  margin-left:5px;
+}
+a.editItem:hover {
+  background-color:white;
+}
+
+.mapIcon {
+  border:0px;
+  margin-bottom:-4px;
+}
 .disabled {
-  opacity:0.5;
+  opacity:0.5;  
 }
 .button {
   margin-left:5px;
