@@ -13,6 +13,4 @@
 
 <hr />
 
-<a href="<?php echo url_for('route/edit?id='.$route->getId()) ?>">Edit</a>
-&nbsp;
-<a href="<?php echo url_for('route/index') ?>">List</a>
+<a href="<?php echo url_for('route/export?id='.$route->getId()) ?>">Save to OZI</a>
