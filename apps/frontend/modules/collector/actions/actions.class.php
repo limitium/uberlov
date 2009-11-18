@@ -32,4 +32,8 @@ class collectorActions extends sfActions {
             ->innerJoin('r.Points p')
             ->execute();
     }
+
+    public function executeImport(sfWebRequest $request){
+
+    }
 }
