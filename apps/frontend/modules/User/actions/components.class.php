@@ -20,6 +20,6 @@ class userComponents extends sfComponents {
         $this->menu[]=array('url'=>'@homepage','title'=>'my locations');
         $this->menu[]=array('url'=>'@homepage','title'=>'my routes');
         $this->menu[]=array('url'=>'@homepage','title'=>'my inboxes');
-        $this->menu[]=array('url'=>'@homepage','title'=>'my things');
+        $this->menu[]=array('url'=>'collector/import','title'=>'import');
     }
 }

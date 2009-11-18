@@ -15,6 +15,7 @@ class collectorComponents extends sfComponents {
  * @param sfRequest $request A request object
  */
     public function executeStats(sfWebRequest $request) {
-        $this->stats=array();
+        $this->stats=array('routes' => Doctrine::getTable('Route')->count(),
+        'locations' => Doctrine::getTable('Location')->count());
     }
 }
