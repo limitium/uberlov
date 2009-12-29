@@ -1,9 +1,7 @@
 if(typeof(console)!='undefined'){
     fb =  console.log;
 }else{
-    fb = function(){
-
-        }
+    fb = function(){}
 }
 
 Function.prototype.delegate = function(){
@@ -36,7 +34,9 @@ app = {
     modules: {},
     
     run: function(){
+        this.$ = $(this);
         ModuleManager.initModules();
+        this.$.trigger('inited');
     },
     getContentMenu:function(){
         return $('#content_menu').get(0);

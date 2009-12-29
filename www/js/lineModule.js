@@ -1,5 +1,4 @@
 function lineModule(){
-  this.mm = app.getModule('mapModule');
   this.menu = null;
   this.bar = null;
   this.route = null;
@@ -7,13 +6,16 @@ function lineModule(){
   this.cfg = {
     editableZoom: 12
   };
-
-  this.initMenu();
 }
 lineModule.name = 'lineModule';
 ModuleManager.add(lineModule);
 
 
+
+lineModule.prototype.afterInit = function(){
+  this.mm = app.getModule('mapModule');
+  this.initMenu();
+}
 lineModule.prototype.initMenu = function(){
   this.menu = {
     link: $('#new_route',this.mm.addEditItem('<a id="new_route" class="editItem" href=""><img class="mapIcon" src="/images/route.png"/>add route</a>'))

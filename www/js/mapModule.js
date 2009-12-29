@@ -1,12 +1,13 @@
 gm = google.maps;
 
 function mapModule(){
+  this.editor = null;
+  this.infoWindow = null;
+
   this.initMenu();
   this.initMap();
-  this.initListeners();
-  this.infoWindow = null;
-  this.loadData();
-  this.editor = null;
+  this.initListeners();  
+  this.loadData();  
 }
 mapModule.name = 'mapModule';
 ModuleManager.add(mapModule);
@@ -44,19 +45,14 @@ mapModule.prototype.initListeners = function(){
 mapModule.prototype.initMenu = function(){
   var self = this;
   var map = $('#map');
-  this.bar = $('<div style="position: absolute;"></div>');
-  this.bar.css({
-    opacity:0.8,
-    color:'white',
-    backgroundColor:'black',
+  this.bar = $('<div class="mapOverLay"></div>').css({
+    opacity:0.8,    
     bottom:0
   });
   map.append(this.bar);
 
-  this.mapType = $('<div style="position: absolute;"><div style="padding:5px 5px 5px 0px"><input class="button" type="button" value="map"/><input class="button" type="button" value="roads"/></div></div>');
-  this.mapType.css({
+  this.mapType = $('<div class="mapOverLay"><input class="button" type="button" value="map"/><input class="button" type="button" value="roads"/></div>').css({
     opacity:0.8,
-    backgroundColor:'black',
     top:0,
     right:0
   });
@@ -71,25 +67,80 @@ mapModule.prototype.initMenu = function(){
     self.setType('roadmap')
   });
   map.append(this.mapType);
+
+  this.mapList = $('<div class="mapOverLay"></div>').css({
+    width: 200,
+    height: map.height(),
+    opacity:0.6,
+    top:0,
+    right:0,
+    display:'none'
+  });
+  this.mapListHider=$('<div class="mapOverLay"><a id="list_hider" class="editItem" href="">>></a></div>').css({
+    opacity:0.6,
+    top:35,
+    right:0,
+    display:'none'
+  });  
+  map.append(this.mapList);
+  map.append(this.mapListHider);  
+}
+mapModule.prototype.showList = function(){
+  this.mapType.css({right: 200 + 10});
+  this.mapListHider.css({right: 200 + 5});
+  if(this.edit){
+    this.edit.css({right: 110 + 200 + 10});
+  }
+  this.mapList.show();
+  this.map.panBy(100,0);
+  $('#list_hider').html('>>');
+  return false;
+}
+mapModule.prototype.hideList = function(){
+  this.mapType.css({right: 0});
+  this.mapListHider.css({right: 0});
+  if(this.edit){
+    this.edit.css({right: 110});
+  }
+  this.mapList.hide();
+  this.map.panBy(-100,0);
+  $('#list_hider').html('<<');
+  return false;
+}
+mapModule.prototype.openList = function(items){
+  var html = '<ul class="mapList">';
+  $.each(items,function(){
+    html += '<li id="listItem_'+this.id+'"><span>'+this.name+'</span></li>';
+  });
+  html += '</ul>';
+  this.mapList.html(html);
+  
+  this.showList();
+  this.mapListHider.show();
+  
+  $('#list_hider').toggle(this.hideList.delegate(this),this.showList.delegate(this));
+  return this.mapList;
+}
+mapModule.prototype.closeList = function(){
+  this.hideList();
+  this.mapListHider.hide();
+  $('#list_hider').unbind('click');
 }
 mapModule.prototype.addEditItem =  function(item){
   if(!this.edit){
-    this.edit = $('<div style="position: absolute;"><div style="padding:5px 5px 5px 0px"></div></div>');
-    this.edit.css({
+    this.edit = $('<div class="mapOverLay"></div>').css({
       opacity:0.8,
-      color:'white',
-      backgroundColor:'black',
       top:0,
       right:110
     });
     $('#map').append(this.edit);
   }
-  $('div',this.edit).append(item);
+  this.edit.append(item);
   return this.edit;
 }
 mapModule.prototype.updateBar = function(html){
   if(html){
-    this.bar.html('<div style="padding:5px">'+html+'</div>');
+    this.bar.html(html);
     this.centerBar();
   }else{
     this.bar.empty();

@@ -1,5 +1,4 @@
 function markerModule(){
-  this.mm = app.getModule('mapModule');
   this.menu = null;
   this.bar = null;
   this.location = null;
@@ -7,12 +6,15 @@ function markerModule(){
   this.cfg = {
     editableZoom: 14
   };
-
-  this.initMenu();
 }
 markerModule.name = 'markerModule';
 ModuleManager.add(markerModule);
 
+
+markerModule.prototype.afterInit = function(){
+  this.mm = app.getModule('mapModule');
+  this.initMenu();
+}
 markerModule.prototype.initMenu = function(){
   this.menu = {
     link: $('#new_location',this.mm.addEditItem('<a id="new_location" class="editItem" href=""><img class="mapIcon" src="/images/location.png"/>add location</a>'))

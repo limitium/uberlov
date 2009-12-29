@@ -25,10 +25,25 @@ a.editItem:link, a.editItem:active, a.editItem:visited {
 a.editItem:hover {
   background-color:white;
 }
-
+a.delItem{
+  background-color:#222222
+}
 .mapIcon {
   border:0px;
   margin-bottom:-4px;
+  margin-left: 5px;
+}
+.mapOverLay {
+  position: absolute;
+  padding: 5px 5px 5px 0px;
+  background-color: black;
+  color: white;
+  overflow:auto;
+}
+.mapList {
+  margin:5px 5px 5px 20px;
+  color:#0053E4;
+  cursor:pointer;
 }
 .disabled {
   opacity:0.5;
@@ -44,6 +59,7 @@ a.editItem:hover {
   font-weight:bold;
   text-transform:lowercase;
 }
+
 /*layout*/
 
 #header{
