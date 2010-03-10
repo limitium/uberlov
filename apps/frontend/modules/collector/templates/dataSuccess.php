@@ -1,5 +1,4 @@
-{
-locations:[
+{"locations":[
 <?php $nb = count($locations); $i = 0; foreach ($locations as $location): ++$i ?>
 {
 "id": "<?php echo $location->getId() ?>",
@@ -9,7 +8,7 @@ locations:[
 }<?php echo $nb == $i ? '' : ',' ?>
 <?php endforeach; ?>
 ],
-routes:[
+"routes":[
 <?php $nb = count($routes); $i = 0; foreach ($routes as $route): ++$i ?>
 {
 "id": "<?php echo $route->getId() ?>",

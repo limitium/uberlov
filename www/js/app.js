@@ -27,7 +27,7 @@ $.extend({
             obj[key] = value;
         });
         return obj;
-   }
+    }
 });
 app = {
     baseUrl:'/frontend_dev.php',

@@ -13,7 +13,7 @@ class LocationForm extends BaseLocationForm {
         unset($this['created_at'],$this['updated_at']);
 
         $this->widgetSchema['description']         = new sfWidgetFormTextarea();
-        $this->widgetSchema['location_type_id']    = new sfWidgetFormDoctrineSelect(array('model'=>'LocationType'));
+        $this->widgetSchema['location_type_id']    = new sfWidgetFormDoctrineChoice(array('model'=>'LocationType'));
         $this->widgetSchema['latitude']            = new sfWidgetFormInputHidden();
         $this->widgetSchema['longitude']           = new sfWidgetFormInputHidden();
 
