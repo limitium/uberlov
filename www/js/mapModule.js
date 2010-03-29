@@ -175,30 +175,18 @@ mapModule.prototype.updateUrl = function(){
 mapModule.prototype.loadData = function(){
     var self = this;
     app.getJSON('/collector/data', function(data){
-        fb(data)
         $.each(data.locations,function(){
             self.createLocation({
                 id: this.id,
-                title: this.name,
+                name: this.name,
                 position: new gm.LatLng(parseFloat(this.lat),parseFloat(this.lng))
             })
-        });
-        $.each(data.routes,function(){
-            self.createRoute({
-                title:this.name,
-                id:this.id,
-                points:this.points
-            });
         });
     });
 }
 
 mapModule.prototype.createLocation = function(opt){
-    new ht_location(this,{
-        title: opt.name,
-        id: opt.id,
-        position: opt.position
-    });
+    new ht_location(this,opt);
 }
 mapModule.prototype.createRoute = function(opt){
     var points = opt.points.split("|");
@@ -259,9 +247,14 @@ mapModule.prototype.cancelEdit= function(){
     this.editor = null;
 }
 
-mapModule.prototype.showLoader = function(point,html){    
+mapModule.prototype.showLoader = function(point,html){
     return new mapOverlay(point,html,this.map,'overlayImage');
 }
+
+mapModule.prototype.showLocationName = function(point,html){
+    return new mapOverlay(point,html,this.map,'overlayMouseTarget');
+}
+
 mapModule.prototype.openInfo = function(point,html,closeHandler){
     this.closeInfo();
     
@@ -332,58 +325,11 @@ mapOverlay.prototype.remove = function(){
 
 
 /**
-* all about route here
-*/
-function ht_route(mm,opt){
-    this.mm = mm;
-    this.overTime = null;
-    this.poly = mm.createPoly(opt);
-    this.initListeners();
-}
-ht_route.prototype.initListeners = function(){
-    this.listeners = {};
-    this.addListenerClick();
-    this.listeners.move = gm.event.addListener(this.poly,'mousemove',this.onMove.delegate(this));
-}
-ht_route.prototype.addListenerClick = function(){
-    this.listeners.click = gm.event.addListener(this.poly,'click',this.onClick.delegate(this));
-}
-ht_route.prototype.onMove = function(){
-    if(this.overTime == null){
-        this.poly.setOptions({
-            strokeColor: '#3399dd',
-            strokeOpacity: 0.8,
-            strokeWeight: 8
-        });
-    }
-    setTimeout(this.onOut.delegate(this), 1000);
-    this.overTime = new Date();
-}
-ht_route.prototype.onOut = function(){
-    if(new Date()-this.overTime > 900){
-        this.poly.setOptions({
-            strokeColor: '#ff3300',
-            strokeOpacity: 0.5,
-            strokeWeight: 2
-        });
-        this.overTime = null;
-    }
-}
-ht_route.prototype.onClick = function(e){
-    var loader = this.mm.showLoader(e.latLng,'<img src="/images/loader-small.gif" />');
-    gm.event.removeListener(this.listeners.click);
-    app.getForm('/route/show/id/'+this.poly.id,this.showInfo.delegate(this,loader,e.latLng));
-}
-ht_route.prototype.showInfo =  function(html,loader,point){
-    this.mm.openInfo(point,html,this.addListenerClick.delegate(this));
-    loader.remove();
-}
-
-/**
 * all about location here
 */
 function ht_location(mm,opt){
     this.mm = mm;
+    this.name = opt.name;
     opt.icon = this.icon;
     this.marker = mm.createMarker(opt);
     this.initListeners();
@@ -392,14 +338,28 @@ function ht_location(mm,opt){
 ht_location.prototype.initListeners = function(){
     this.listeners = {};
     this.addListenerClick();
+    this.addListenerOver();
+    this.addListenerOut();
 }
 ht_location.prototype.addListenerClick = function(){
     this.listeners.click = gm.event.addListener(this.marker,'click',this.onClick.delegate(this));
+}
+ht_location.prototype.addListenerOver = function(){
+    this.listeners.over = gm.event.addListener(this.marker,'mouseover',this.onOver.delegate(this));
+}
+ht_location.prototype.addListenerOut = function(){
+    this.listeners.out = gm.event.addListener(this.marker,'mouseout',this.onOut.delegate(this));
 }
 ht_location.prototype.onClick = function(){
     var loader = this.mm.showLoader(this.marker.getPosition(),'<img src="/images/loader-small.gif" />');
     gm.event.removeListener(this.listeners.click);
     app.getForm('/location/show/id/'+this.marker.id,this.showInfo.delegate(this,loader));
+}
+ht_location.prototype.onOver = function(){
+    this.overName =  this.mm.showLocationName(this.marker.getPosition(), '<div class="markerOverName">'+this.name+'</div>');
+}
+ht_location.prototype.onOut = function(){
+    this.overName && this.overName.remove();
 }
 ht_location.prototype.showInfo =  function(html,loader){
     this.mm.openInfo(this.marker.getPosition(),html,this.addListenerClick.delegate(this));
