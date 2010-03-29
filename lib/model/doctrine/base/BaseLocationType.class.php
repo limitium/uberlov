@@ -9,10 +9,17 @@
  * @property string $name
  * @property Doctrine_Collection $Location
  * 
- * @package    ##PACKAGE##
- * @subpackage ##SUBPACKAGE##
- * @author     ##NAME## <##EMAIL##>
- * @version    SVN: $Id: Builder.php 6485 2009-10-12 18:41:59Z jwage $
+ * @method integer             getId()       Returns the current record's "id" value
+ * @method string              getName()     Returns the current record's "name" value
+ * @method Doctrine_Collection getLocation() Returns the current record's "Location" collection
+ * @method LocationType        setId()       Sets the current record's "id" value
+ * @method LocationType        setName()     Sets the current record's "name" value
+ * @method LocationType        setLocation() Sets the current record's "Location" collection
+ * 
+ * @package    HT
+ * @subpackage model
+ * @author     Your name here
+ * @version    SVN: $Id: Builder.php 6820 2009-11-30 17:27:49Z jwage $
  */
 abstract class BaseLocationType extends sfDoctrineRecord
 {
@@ -20,14 +27,14 @@ abstract class BaseLocationType extends sfDoctrineRecord
     {
         $this->setTableName('location_type');
         $this->hasColumn('id', 'integer', 4, array(
-             'type' => 'integer',
              'primary' => true,
+             'type' => 'integer',
              'autoincrement' => true,
              'length' => '4',
              ));
         $this->hasColumn('name', 'string', 50, array(
-             'type' => 'string',
              'default' => '',
+             'type' => 'string',
              'notnull' => true,
              'length' => '50',
              ));
@@ -38,7 +45,7 @@ abstract class BaseLocationType extends sfDoctrineRecord
     public function setUp()
     {
         parent::setUp();
-    $this->hasMany('Location', array(
+        $this->hasMany('Location', array(
              'local' => 'id',
              'foreign' => 'location_type_id'));
     }
