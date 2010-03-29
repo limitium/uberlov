@@ -10,11 +10,25 @@
  * @property string $description
  * @property integer $location_type_id
  * @property LocationType $LocationType
+ * @property Doctrine_Collection $Profit
  * 
- * @package    ##PACKAGE##
- * @subpackage ##SUBPACKAGE##
- * @author     ##NAME## <##EMAIL##>
- * @version    SVN: $Id: Builder.php 6485 2009-10-12 18:41:59Z jwage $
+ * @method integer             getId()               Returns the current record's "id" value
+ * @method string              getName()             Returns the current record's "name" value
+ * @method string              getDescription()      Returns the current record's "description" value
+ * @method integer             getLocationTypeId()   Returns the current record's "location_type_id" value
+ * @method LocationType        getLocationType()     Returns the current record's "LocationType" value
+ * @method Doctrine_Collection getProfit()           Returns the current record's "Profit" collection
+ * @method Location            setId()               Sets the current record's "id" value
+ * @method Location            setName()             Sets the current record's "name" value
+ * @method Location            setDescription()      Sets the current record's "description" value
+ * @method Location            setLocationTypeId()   Sets the current record's "location_type_id" value
+ * @method Location            setLocationType()     Sets the current record's "LocationType" value
+ * @method Location            setProfit()           Sets the current record's "Profit" collection
+ * 
+ * @package    HT
+ * @subpackage model
+ * @author     Your name here
+ * @version    SVN: $Id: Builder.php 6820 2009-11-30 17:27:49Z jwage $
  */
 abstract class BaseLocation extends sfDoctrineRecord
 {
@@ -22,22 +36,21 @@ abstract class BaseLocation extends sfDoctrineRecord
     {
         $this->setTableName('location');
         $this->hasColumn('id', 'integer', 4, array(
-             'type' => 'integer',
              'primary' => true,
+             'type' => 'integer',
              'autoincrement' => true,
              'length' => '4',
              ));
         $this->hasColumn('name', 'string', 50, array(
-             'type' => 'string',
              'default' => '',
+             'type' => 'string',
              'notnull' => true,
              'length' => '50',
              ));
         $this->hasColumn('description', 'string', null, array(
-             'type' => 'string',
              'default' => '',
+             'type' => 'string',
              'notnull' => true,
-             'length' => '',
              ));
         $this->hasColumn('location_type_id', 'integer', 4, array(
              'type' => 'integer',
@@ -50,13 +63,19 @@ abstract class BaseLocation extends sfDoctrineRecord
     public function setUp()
     {
         parent::setUp();
-    $this->hasOne('LocationType', array(
+        $this->hasOne('LocationType', array(
              'local' => 'location_type_id',
              'foreign' => 'id'));
 
-        $geographical0 = new Doctrine_Template_Geographical();
+        $this->hasMany('Profit', array(
+             'local' => 'id',
+             'foreign' => 'Location_id'));
+
         $timestampable0 = new Doctrine_Template_Timestampable();
-        $this->actAs($geographical0);
+        $sluggable0 = new Doctrine_Template_Sluggable();
+        $geographical0 = new Doctrine_Template_Geographical();
         $this->actAs($timestampable0);
+        $this->actAs($sluggable0);
+        $this->actAs($geographical0);
     }
 }
