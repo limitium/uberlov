@@ -1,3 +1,67 @@
+/**
+ public function getEncodedPoints() {
+        $encoded =  array();
+        foreach($this->getPoints() as $point) {
+            $encoded[]=$point->getLatitude().';'.$point->getLongitude();
+        }
+        return implode('|',$encoded);
+    }
+ *
+ *
+ */
+
+
+/**
+* all about route here
+*/
+function ht_route(mm,opt){
+    this.mm = mm;
+    this.overTime = null;
+    this.poly = mm.createPoly(opt);
+    this.initListeners();
+}
+ht_route.prototype.initListeners = function(){
+    this.listeners = {};
+    this.addListenerClick();
+    this.listeners.move = gm.event.addListener(this.poly,'mousemove',this.onMove.delegate(this));
+}
+ht_route.prototype.addListenerClick = function(){
+    this.listeners.click = gm.event.addListener(this.poly,'click',this.onClick.delegate(this));
+}
+ht_route.prototype.onMove = function(){
+    if(this.overTime == null){
+        this.poly.setOptions({
+            strokeColor: '#3399dd',
+            strokeOpacity: 0.8,
+            strokeWeight: 8
+        });
+    }
+    setTimeout(this.onOut.delegate(this), 1000);
+    this.overTime = new Date();
+}
+ht_route.prototype.onOut = function(){
+    if(new Date()-this.overTime > 900){
+        this.poly.setOptions({
+            strokeColor: '#ff3300',
+            strokeOpacity: 0.5,
+            strokeWeight: 2
+        });
+        this.overTime = null;
+    }
+}
+ht_route.prototype.onClick = function(e){
+    var loader = this.mm.showLoader(e.latLng,'<img src="/images/loader-small.gif" />');
+    gm.event.removeListener(this.listeners.click);
+    app.getForm('/route/show/id/'+this.poly.id,this.showInfo.delegate(this,loader,e.latLng));
+}
+ht_route.prototype.showInfo =  function(html,loader,point){
+    this.mm.openInfo(point,html,this.addListenerClick.delegate(this));
+    loader.remove();
+}
+
+/**
+ * line module
+ */
 function lineModule(){
   this.menu = null;
   this.bar = null;

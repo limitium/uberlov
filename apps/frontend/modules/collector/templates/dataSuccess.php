@@ -7,14 +7,4 @@
 "lng": "<?php echo $location->getLongitude() ?>"
 }<?php echo $nb == $i ? '' : ',' ?>
 <?php endforeach; ?>
-],
-"routes":[
-<?php $nb = count($routes); $i = 0; foreach ($routes as $route): ++$i ?>
-{
-"id": "<?php echo $route->getId() ?>",
-"name": "<?php echo $route->getName() ?>",
-"points": "<?php echo $route->getEncodedPoints() ?>",
-}<?php echo $nb == $i ? '' : ',' ?>
-<?php endforeach; ?>
-]
-}
+]}

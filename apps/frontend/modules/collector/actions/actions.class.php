@@ -27,10 +27,6 @@ class collectorActions extends sfActions {
     $this->locations = Doctrine::getTable('Location')
         ->createQuery('r')
         ->execute();
-    $this->routes = Doctrine::getTable('Route')
-        ->createQuery('r')
-        ->innerJoin('r.Points p')
-        ->execute();
   }
 
   public function executeImport(sfWebRequest $request) {
