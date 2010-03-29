@@ -1,0 +1,196 @@
+Location:
+  tableName: location
+  actAs:
+    Timestampable: 
+    Sluggable: 
+    Geographical: 
+  columns:
+    id:
+      primary: true
+      type: integer(4)
+      autoincrement: true
+    name:
+      default: ''
+      type: string(50)
+      notnull: true
+    description:
+      default: ''
+      type: string
+      notnull: true
+    location_type_id:
+      type: integer(4)
+  relations:
+    LocationType:
+      foreignType: many
+      type: one
+      local: location_type_id
+      foreign: id
+LocationType:
+  tableName: location_type
+  columns:
+    id:
+      primary: true
+      type: integer(4)
+      autoincrement: true
+    name:
+      default: ''
+      type: string(50)
+      notnull: true
+Profile:
+  tableName: profile
+  actAs:
+    Timestampable: 
+  columns:
+    id:
+      primary: true
+      type: integer
+      notnull: true
+      autoincrement: true
+    nick_name:
+      default: ''
+      type: string(50)
+      notnull: true
+    first_name:
+      default: ''
+      type: string(50)
+    last_name:
+      default: ''
+      type: string(50)
+    description:
+      default: ''
+      type: string
+      notnull: true
+Fish:
+  columns:
+    id:
+      primary: true
+      type: integer
+      notnull: true
+      autoincrement: true
+    name:
+      unique: true
+      type: string(100)
+      notnull: true
+  relations:
+    Profits:
+      class: Profit
+      refClass: ProfitFish
+      local: Fish_id
+      foreign: Profit_id
+Profit:
+  actAs:
+    Timestampable: 
+  columns:
+    id:
+      primary: true
+      type: integer
+      notnull: true
+      autoincrement: true
+    Location_id:
+      type: integer(4)
+    Profile_id:
+      type: integer
+    time:
+      type: time
+      notnull: true
+    description:
+      type: string
+  relations:
+    Location:
+      local: Location_id
+      foreign: id
+    Profile:
+      local: Profile_id
+      foreign: id
+    Fishes:
+      class: Fish
+      refClass: ProfitFish
+      local: Profit_id
+      foreign: Fish_id
+    Styles:
+      class: Style
+      refClass: ProfitSyle
+      local: Profit_id
+      foreign: Style_id
+ProfitFish:
+  columns:
+    ID:
+      primary: true
+      unique: true
+      type: integer
+      notnull: true
+    Fish_id:
+      type: integer
+      notnull: true
+    Profit_id:
+      type: integer
+      notnull: true
+    qty:
+      type: float
+      notnull: true
+  relations:
+    Fish:
+      local: Fish_id
+      foreign: id
+    Profit:
+      local: Profit_id
+      foreign: id
+Style:
+  columns:
+    id:
+      primary: true
+      type: integer
+      notnull: true
+      autoincrement: true
+    name:
+      unique: true
+      type: string(100)
+      notnull: true
+  relations:
+    Profits:
+      class: Profit
+      refClass: ProfitSyle
+      local: Style_id
+      foreign: Profit_id
+ProfitSyle:
+  columns:
+    ID:
+      primary: true
+      unique: true
+      type: integer
+      notnull: true
+    Style_id:
+      type: integer
+      notnull: true
+    Profit_id:
+      type: integer
+      notnull: true
+  relations:
+    Style:
+      local: Style_id
+      foreign: id
+    Profit:
+      local: Profit_id
+      foreign: id
+Friend:
+  columns:
+    ID:
+      primary: true
+      unique: true
+      type: integer
+      notnull: true
+    source_Profile_id:
+      type: integer
+      notnull: true
+    related_Profile_id:
+      type: integer
+      notnull: true
+  relations:
+    Profile:
+      local: source_Profile_id
+      foreign: id
+    Profile:
+      local: related_Profile_id
+      foreign: id
+options:
+  type: INNODB
