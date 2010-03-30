@@ -6,6 +6,29 @@
         }
         return implode('|',$encoded);
     }
+
+mapModule.prototype.createRoute = function(opt){
+    var points = opt.points.split("|");
+    delete opt.points;
+
+    opt.path = [];
+    var point;
+    $.each(points,function(){
+        point = this.split(';')
+        opt.path[opt.path.length] = new gm.LatLng(parseFloat(point[0]),parseFloat(point[1]));
+    });
+
+    opt.strokeColor = '#ff3300';
+    opt.strokeOpacity = 0.5;
+    opt.strokeWeight = 2;
+    new ht_route(this,opt);
+}
+
+mapModule.prototype.createPoly = function(opt){
+    opt.map = this.map;
+    return new gm.Polyline(opt);
+}
+
  *
  *
  */

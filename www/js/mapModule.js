@@ -2,11 +2,13 @@ gm = google.maps;
 
 function mapModule(){
     this.editor = null;
-    this.infoWindow = null;
+    this.infoWindow = new gm.InfoWindow();
 
     this.initMenu();
     this.initMap();
     this.initListeners();
+    this.initHandlers();
+    
     this.loadData();
 }
 mapModule.name = 'mapModule';
@@ -32,16 +34,36 @@ mapModule.prototype.initMap = function(){
         mapTypeId: params.mt
     };
     this.map = new gm.Map($("#map_canvas").get(0), opt);
-    this.setType(params.mt);
-  
+    this.setType(params.mt);  
 }
 
 mapModule.prototype.initListeners = function(){
-    this.listeners = {};
-    this.listeners.dragend = gm.event.addListener(this.map,'dragend',this.updateUrl.delegate(this));
-    this.listeners.click = gm.event.addListener(this.map,'click',this.updateUrl.delegate(this));
-    this.listeners.zoom_changed = gm.event.addListener(this.map,'zoom_changed',this.updateUrl.delegate(this));
+    this.listeners = {
+        dragend: gm.event.addListener(this.map,'dragend',this.updateUrl.delegate(this)),
+        click: gm.event.addListener(this.map,'click',this.updateUrl.delegate(this)),
+        zoom_changed: gm.event.addListener(this.map,'zoom_changed',this.updateUrl.delegate(this))
+    };
 }
+
+mapModule.prototype.initHandlers= function(){
+    this.handlers = {
+        onLocationClick: this.getOnLocationClick().delegate(this)
+    };
+}
+
+mapModule.prototype.getOnLocationClick = function(){
+    return function(location){
+        var loader = this.showLoader(location.marker.getPosition(),'<img src="/images/loader-small.gif" />');
+        app.getForm('/location/show/id/'+location.marker.id,this.onLocationInfoLoad.delegate(this, location, loader));
+    }
+}
+
+mapModule.prototype.onLocationInfoLoad = function(html, location, loader){
+    location.showInfo(html);
+    loader.remove();
+}
+
+
 mapModule.prototype.initMenu = function(){
     var self = this;
     var map = $('#map');
@@ -85,6 +107,7 @@ mapModule.prototype.initMenu = function(){
     map.append(this.mapList);
     map.append(this.mapListHider);
 }
+
 mapModule.prototype.showList = function(){
     this.mapType.css({
         right: 200 + 10
@@ -188,27 +211,6 @@ mapModule.prototype.loadData = function(){
 mapModule.prototype.createLocation = function(opt){
     new ht_location(this,opt);
 }
-mapModule.prototype.createRoute = function(opt){
-    var points = opt.points.split("|");
-    delete opt.points;
-
-    opt.path = [];
-    var point;
-    $.each(points,function(){
-        point = this.split(';')
-        opt.path[opt.path.length] = new gm.LatLng(parseFloat(point[0]),parseFloat(point[1]));
-    });
-
-    opt.strokeColor = '#ff3300';
-    opt.strokeOpacity = 0.5;
-    opt.strokeWeight = 2;
-    new ht_route(this,opt);
-}
-
-mapModule.prototype.createPoly = function(opt){
-    opt.map = this.map;
-    return new gm.Polyline(opt);
-}
 
 mapModule.prototype.createMarker = function(opt){
     opt.map = this.map;
@@ -257,22 +259,22 @@ mapModule.prototype.showLocationName = function(point,html){
 
 mapModule.prototype.openInfo = function(point,html,closeHandler){
     this.closeInfo();
-    
-    this.infoWindow = new gm.InfoWindow({
-        content: html,
-        position: point,
-        closeHandler:closeHandler
-    });
+
+    this.infoWindow.setContent(html);
+    this.infoWindow.setPosition(point);
+    this.infoWindow.closeHandler  = closeHandler;
+
     gm.event.addListener(this.infoWindow,'closeclick',this.closeInfo.delegate(this));
     this.infoWindow.open(this.map);
+
     return this.infoWindow;
 }
-mapModule.prototype.closeInfo = function(closeHandler){
-    if(this.infoWindow != null){
+mapModule.prototype.closeInfo = function(){
+    if(this.infoWindow.closeHandler){
         this.infoWindow.closeHandler();
-        this.infoWindow.close();
-        this.infoWindow = null;
+        this.infoWindow.closeHandler = null;
     }
+    this.infoWindow.close();
 }
 mapModule.prototype.typeToId = {
     hybrid:0,
@@ -351,24 +353,32 @@ ht_location.prototype.addListenerOut = function(){
     this.listeners.out = gm.event.addListener(this.marker,'mouseout',this.onOut.delegate(this));
 }
 ht_location.prototype.onClick = function(){
-    var loader = this.mm.showLoader(this.marker.getPosition(),'<img src="/images/loader-small.gif" />');
-    gm.event.removeListener(this.listeners.click);
-    app.getForm('/location/show/id/'+this.marker.id,this.showInfo.delegate(this,loader));
+    this.mm.handlers.onLocationClick(this);
 }
 ht_location.prototype.onOver = function(){
     this.overName =  this.mm.showLocationName(this.marker.getPosition(), '<div class="markerOverName">'+this.name+'</div>');
+    this.marker.setIcon(this.iconHover);
 }
 ht_location.prototype.onOut = function(){
     this.overName && this.overName.remove();
+    this.marker.setIcon(this.icon);
 }
-ht_location.prototype.showInfo =  function(html,loader){
-    this.mm.openInfo(this.marker.getPosition(),html,this.addListenerClick.delegate(this));
-    loader.remove();
+ht_location.prototype.showInfo =  function(html){
+    this.mm.openInfo(this.marker.getPosition(),html);
 }
+
 ht_location.prototype.icon = new gm.MarkerImage('/images/location.png',
     // This marker is 20 pixels wide by 32 pixels tall.
     new google.maps.Size(16, 16),
     // The origin for this image is 0,0.
     new google.maps.Point(0,0),
     // The anchor for this image is the base of the flagpole at 0,32.
+    new google.maps.Point(7, 7));
+ht_location.prototype.iconSelected = new gm.MarkerImage('/images/location_selected.png',
+    new google.maps.Size(16, 16),
+    new google.maps.Point(0,0),
+    new google.maps.Point(7, 7));
+ht_location.prototype.iconHover = new gm.MarkerImage('/images/location_hover.png',
+    new google.maps.Size(16, 16),
+    new google.maps.Point(0,0),
     new google.maps.Point(7, 7));
