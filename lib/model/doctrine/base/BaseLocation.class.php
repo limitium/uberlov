@@ -8,24 +8,45 @@
  * @property integer $id
  * @property string $name
  * @property string $description
- * @property integer $location_type_id
- * @property LocationType $LocationType
+ * @property float $depth
+ * @property integer $location_flow_id
+ * @property integer $location_fundus_id
+ * @property integer $location_relief_id
+ * @property LocationFlow $LocationFlow
+ * @property LocationFundus $LocationFundus
+ * @property LocationRelief $LocationRelief
+ * @property Doctrine_Collection $Seasons
  * @property Doctrine_Collection $Profit
+ * @property Doctrine_Collection $LocationSeason
  * 
- * @method integer             getId()               Returns the current record's "id" value
- * @method string              getName()             Returns the current record's "name" value
- * @method string              getDescription()      Returns the current record's "description" value
- * @method integer             getLocationTypeId()   Returns the current record's "location_type_id" value
- * @method LocationType        getLocationType()     Returns the current record's "LocationType" value
- * @method Doctrine_Collection getProfit()           Returns the current record's "Profit" collection
- * @method Location            setId()               Sets the current record's "id" value
- * @method Location            setName()             Sets the current record's "name" value
- * @method Location            setDescription()      Sets the current record's "description" value
- * @method Location            setLocationTypeId()   Sets the current record's "location_type_id" value
- * @method Location            setLocationType()     Sets the current record's "LocationType" value
- * @method Location            setProfit()           Sets the current record's "Profit" collection
+ * @method integer             getId()                 Returns the current record's "id" value
+ * @method string              getName()               Returns the current record's "name" value
+ * @method string              getDescription()        Returns the current record's "description" value
+ * @method float               getDepth()              Returns the current record's "depth" value
+ * @method integer             getLocationFlowId()     Returns the current record's "location_flow_id" value
+ * @method integer             getLocationFundusId()   Returns the current record's "location_fundus_id" value
+ * @method integer             getLocationReliefId()   Returns the current record's "location_relief_id" value
+ * @method LocationFlow        getLocationFlow()       Returns the current record's "LocationFlow" value
+ * @method LocationFundus      getLocationFundus()     Returns the current record's "LocationFundus" value
+ * @method LocationRelief      getLocationRelief()     Returns the current record's "LocationRelief" value
+ * @method Doctrine_Collection getSeasons()            Returns the current record's "Seasons" collection
+ * @method Doctrine_Collection getProfit()             Returns the current record's "Profit" collection
+ * @method Doctrine_Collection getLocationSeason()     Returns the current record's "LocationSeason" collection
+ * @method Location            setId()                 Sets the current record's "id" value
+ * @method Location            setName()               Sets the current record's "name" value
+ * @method Location            setDescription()        Sets the current record's "description" value
+ * @method Location            setDepth()              Sets the current record's "depth" value
+ * @method Location            setLocationFlowId()     Sets the current record's "location_flow_id" value
+ * @method Location            setLocationFundusId()   Sets the current record's "location_fundus_id" value
+ * @method Location            setLocationReliefId()   Sets the current record's "location_relief_id" value
+ * @method Location            setLocationFlow()       Sets the current record's "LocationFlow" value
+ * @method Location            setLocationFundus()     Sets the current record's "LocationFundus" value
+ * @method Location            setLocationRelief()     Sets the current record's "LocationRelief" value
+ * @method Location            setSeasons()            Sets the current record's "Seasons" collection
+ * @method Location            setProfit()             Sets the current record's "Profit" collection
+ * @method Location            setLocationSeason()     Sets the current record's "LocationSeason" collection
  * 
- * @package    HT
+ * @package    FISHERY
  * @subpackage model
  * @author     Your name here
  * @version    SVN: $Id: Builder.php 6820 2009-11-30 17:27:49Z jwage $
@@ -52,7 +73,18 @@ abstract class BaseLocation extends sfDoctrineRecord
              'type' => 'string',
              'notnull' => true,
              ));
-        $this->hasColumn('location_type_id', 'integer', 4, array(
+        $this->hasColumn('depth', 'float', null, array(
+             'type' => 'float',
+             ));
+        $this->hasColumn('location_flow_id', 'integer', 4, array(
+             'type' => 'integer',
+             'length' => '4',
+             ));
+        $this->hasColumn('location_fundus_id', 'integer', 4, array(
+             'type' => 'integer',
+             'length' => '4',
+             ));
+        $this->hasColumn('location_relief_id', 'integer', 4, array(
              'type' => 'integer',
              'length' => '4',
              ));
@@ -63,19 +95,42 @@ abstract class BaseLocation extends sfDoctrineRecord
     public function setUp()
     {
         parent::setUp();
-        $this->hasOne('LocationType', array(
-             'local' => 'location_type_id',
+        $this->hasOne('LocationFlow', array(
+             'local' => 'location_flow_id',
              'foreign' => 'id'));
+
+        $this->hasOne('LocationFundus', array(
+             'local' => 'location_fundus_id',
+             'foreign' => 'id'));
+
+        $this->hasOne('LocationRelief', array(
+             'local' => 'location_relief_id',
+             'foreign' => 'id'));
+
+        $this->hasMany('Season as Seasons', array(
+             'refClass' => 'LocationSeason',
+             'local' => 'location_id',
+             'foreign' => 'season_id'));
 
         $this->hasMany('Profit', array(
              'local' => 'id',
-             'foreign' => 'Location_id'));
+             'foreign' => 'location_id'));
 
-        $timestampable0 = new Doctrine_Template_Timestampable();
-        $sluggable0 = new Doctrine_Template_Sluggable();
+        $this->hasMany('LocationSeason', array(
+             'local' => 'id',
+             'foreign' => 'location_id'));
+
+        $blameable0 = new Doctrine_Template_Blameable(array(
+             'listener' => 'BlameableFishery',
+             ));
         $geographical0 = new Doctrine_Template_Geographical();
-        $this->actAs($timestampable0);
-        $this->actAs($sluggable0);
+        $sluggable0 = new Doctrine_Template_Sluggable();
+        $timestampable0 = new Doctrine_Template_Timestampable();
+        $versionable0 = new Doctrine_Template_Versionable();
+        $this->actAs($blameable0);
         $this->actAs($geographical0);
+        $this->actAs($sluggable0);
+        $this->actAs($timestampable0);
+        $this->actAs($versionable0);
     }
 }

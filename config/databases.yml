@@ -2,6 +2,7 @@ all:
   doctrine:
     class: sfDoctrineDatabase
     param:
-      dsn:      mysql:host=localhost;dbname=HT
+      dsn:      mysql:host=localhost;dbname=FISHERY
       username: root
-      password: 
+      password:
+      encoding:   utf8

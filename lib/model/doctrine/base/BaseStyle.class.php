@@ -7,19 +7,16 @@
  * 
  * @property integer $id
  * @property string $name
- * @property Doctrine_Collection $Profits
- * @property Doctrine_Collection $ProfitSyle
+ * @property Doctrine_Collection $ProfitDetail
  * 
- * @method integer             getId()         Returns the current record's "id" value
- * @method string              getName()       Returns the current record's "name" value
- * @method Doctrine_Collection getProfits()    Returns the current record's "Profits" collection
- * @method Doctrine_Collection getProfitSyle() Returns the current record's "ProfitSyle" collection
- * @method Style               setId()         Sets the current record's "id" value
- * @method Style               setName()       Sets the current record's "name" value
- * @method Style               setProfits()    Sets the current record's "Profits" collection
- * @method Style               setProfitSyle() Sets the current record's "ProfitSyle" collection
+ * @method integer             getId()           Returns the current record's "id" value
+ * @method string              getName()         Returns the current record's "name" value
+ * @method Doctrine_Collection getProfitDetail() Returns the current record's "ProfitDetail" collection
+ * @method Style               setId()           Sets the current record's "id" value
+ * @method Style               setName()         Sets the current record's "name" value
+ * @method Style               setProfitDetail() Sets the current record's "ProfitDetail" collection
  * 
- * @package    HT
+ * @package    FISHERY
  * @subpackage model
  * @author     Your name here
  * @version    SVN: $Id: Builder.php 6820 2009-11-30 17:27:49Z jwage $
@@ -47,13 +44,8 @@ abstract class BaseStyle extends sfDoctrineRecord
     public function setUp()
     {
         parent::setUp();
-        $this->hasMany('Profit as Profits', array(
-             'refClass' => 'ProfitSyle',
-             'local' => 'Style_id',
-             'foreign' => 'Profit_id'));
-
-        $this->hasMany('ProfitSyle', array(
+        $this->hasMany('ProfitDetail', array(
              'local' => 'id',
-             'foreign' => 'Style_id'));
+             'foreign' => 'style_id'));
     }
 }

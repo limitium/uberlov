@@ -7,19 +7,16 @@
  * 
  * @property integer $id
  * @property string $name
- * @property Doctrine_Collection $Profits
- * @property Doctrine_Collection $ProfitFish
+ * @property Doctrine_Collection $ProfitDetail
  * 
- * @method integer             getId()         Returns the current record's "id" value
- * @method string              getName()       Returns the current record's "name" value
- * @method Doctrine_Collection getProfits()    Returns the current record's "Profits" collection
- * @method Doctrine_Collection getProfitFish() Returns the current record's "ProfitFish" collection
- * @method Fish                setId()         Sets the current record's "id" value
- * @method Fish                setName()       Sets the current record's "name" value
- * @method Fish                setProfits()    Sets the current record's "Profits" collection
- * @method Fish                setProfitFish() Sets the current record's "ProfitFish" collection
+ * @method integer             getId()           Returns the current record's "id" value
+ * @method string              getName()         Returns the current record's "name" value
+ * @method Doctrine_Collection getProfitDetail() Returns the current record's "ProfitDetail" collection
+ * @method Fish                setId()           Sets the current record's "id" value
+ * @method Fish                setName()         Sets the current record's "name" value
+ * @method Fish                setProfitDetail() Sets the current record's "ProfitDetail" collection
  * 
- * @package    HT
+ * @package    FISHERY
  * @subpackage model
  * @author     Your name here
  * @version    SVN: $Id: Builder.php 6820 2009-11-30 17:27:49Z jwage $
@@ -47,13 +44,8 @@ abstract class BaseFish extends sfDoctrineRecord
     public function setUp()
     {
         parent::setUp();
-        $this->hasMany('Profit as Profits', array(
-             'refClass' => 'ProfitFish',
-             'local' => 'Fish_id',
-             'foreign' => 'Profit_id'));
-
-        $this->hasMany('ProfitFish', array(
+        $this->hasMany('ProfitDetail', array(
              'local' => 'id',
-             'foreign' => 'Fish_id'));
+             'foreign' => 'fish_id'));
     }
 }

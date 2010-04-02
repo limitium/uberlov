@@ -26,12 +26,33 @@
                 </td>
             </tr>
             <tr>
-                <th><?php echo $form['location_type_id']->renderLabel() ?></th>
+                <th><?php echo $form['depth']->renderLabel() ?></th>
                 <td>
-                    <?php echo $form['location_type_id']->renderError() ?>
-                    <?php echo $form['location_type_id'] ?>
+                    <?php echo $form['depth']->renderError() ?>
+                    <?php echo $form['depth'] ?>
                 </td>
             </tr>
+            <tr>
+                <th><?php echo $form['location_flow']->renderLabel() ?></th>
+                <td>
+                    <?php echo $form['location_flow']->renderError() ?>
+                    <?php echo $form['location_flow'] ?>
+                </td>
+            </tr>
+            <tr>
+                <th><?php echo $form['location_fundus']->renderLabel() ?></th>
+                <td>
+                    <?php echo $form['location_fundus']->renderError() ?>
+                    <?php echo $form['location_fundus'] ?>
+                </td>
+            </tr>
+            <tr>
+                <th><?php echo $form['location_relief']->renderLabel() ?></th>
+                <td>
+                    <?php echo $form['location_relief']->renderError() ?>
+                    <?php echo $form['location_relief'] ?>
+                </td>
+            </tr>       
             <tr>
                 <th><?php echo $form['description']->renderLabel() ?></th>
                 <td>

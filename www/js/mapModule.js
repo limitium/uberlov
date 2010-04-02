@@ -3,7 +3,8 @@ gm = google.maps;
 function mapModule(){
     this.editor = null;
     this.infoWindow = new gm.InfoWindow();
-
+    this.selected = [];
+    
     this.initMenu();
     this.initMap();
     this.initListeners();
@@ -63,6 +64,11 @@ mapModule.prototype.onLocationInfoLoad = function(html, location, loader){
     loader.remove();
 }
 
+mapModule.prototype.deselectAll = function(){
+    $.each(this.selected.concat(), function(){
+        this.setSelected(false);
+    });
+}
 
 mapModule.prototype.initMenu = function(){
     var self = this;
@@ -327,13 +333,14 @@ mapOverlay.prototype.remove = function(){
 
 
 /**
-* all about location here
-*/
+ * all about location here
+ */
 function ht_location(mm,opt){
     this.mm = mm;
     this.name = opt.name;
     opt.icon = this.icon;
     this.marker = mm.createMarker(opt);
+    this.selected = false;
     this.initListeners();
 }
 
@@ -361,10 +368,23 @@ ht_location.prototype.onOver = function(){
 }
 ht_location.prototype.onOut = function(){
     this.overName && this.overName.remove();
-    this.marker.setIcon(this.icon);
+    this.marker.setIcon(this.selected?this.iconSelected:this.icon);
 }
 ht_location.prototype.showInfo =  function(html){
     this.mm.openInfo(this.marker.getPosition(),html);
+}
+ht_location.prototype.setSelected = function(selected){
+    this.selected = selected;
+    if(selected){
+        this.marker.setIcon(this.iconSelected);
+        this.mm.selected.push(this);
+    }else{
+        var index;
+        if((index = $.inArray(this, this.mm.selected)) != -1){
+            this.mm.selected.splice(index, 1);
+        }
+        this.marker.setIcon(this.icon);        
+    }
 }
 
 ht_location.prototype.icon = new gm.MarkerImage('/images/location.png',

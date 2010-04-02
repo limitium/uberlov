@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" standalone="no" ?>
+<orm-designer version="1.3.1.332">
+
+  <include name="config\doctrine\schema.module.xml"/>
+
+  <include name="..\fisheryYAML.module.xml"/>
+
+  <project code-name="Fishery" name="fishery" orm="Doctrine" visSizeX="60" visSizeX2="929" visSizeY="39" visSizeY2="687">
+    <module-position name="ht" visPositionX="26" visPositionY="11"/>
+  </project>
+
+</orm-designer>

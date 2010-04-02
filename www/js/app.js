@@ -63,7 +63,16 @@ app = {
                 handler(app.formatHtml(form));
             },
             error: function(request, error, exception){
-                $.growlUI(request.statusText,request.status);
+                $.blockUI({
+                    message: request.responseText,
+                    centerY: 0,
+                    css: {
+                        top: '10px',
+                        left: '10px'
+                    }
+                });
+                $('.blockOverlay').click($.unblockUI);
+            //                $.growlUI(request.statusText,request.status);
             }
         });
     },

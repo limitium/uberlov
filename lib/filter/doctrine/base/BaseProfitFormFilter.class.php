@@ -3,7 +3,7 @@
 /**
  * Profit filter form base class.
  *
- * @package    HT
+ * @package    FISHERY
  * @subpackage filter
  * @author     Your name here
  * @version    SVN: $Id: sfDoctrineFormFilterGeneratedTemplate.php 24171 2009-11-19 16:37:50Z Kris.Wallsmith $
@@ -13,25 +13,33 @@ abstract class BaseProfitFormFilter extends BaseFormFilterDoctrine
   public function setup()
   {
     $this->setWidgets(array(
-      'Location_id' => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Location'), 'add_empty' => true)),
-      'Profile_id'  => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Profile'), 'add_empty' => true)),
-      'time'        => new sfWidgetFormFilterInput(array('with_empty' => false)),
-      'description' => new sfWidgetFormFilterInput(),
+      'location_id' => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Location'), 'add_empty' => true)),
+      'profile_id'  => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Profile'), 'add_empty' => true)),
+      'begin'       => new sfWidgetFormFilterDate(array('from_date' => new sfWidgetFormDate(), 'to_date' => new sfWidgetFormDate(), 'with_empty' => false)),
+      'water_state' => new sfWidgetFormFilterInput(),
+      'lure'        => new sfWidgetFormFilterInput(),
+      'bait'        => new sfWidgetFormFilterInput(),
+      'additive'    => new sfWidgetFormFilterInput(),
+      'weather'     => new sfWidgetFormFilterInput(),
+      'cordage'     => new sfWidgetFormFilterInput(),
+      'description' => new sfWidgetFormFilterInput(array('with_empty' => false)),
       'created_at'  => new sfWidgetFormFilterDate(array('from_date' => new sfWidgetFormDate(), 'to_date' => new sfWidgetFormDate(), 'with_empty' => false)),
       'updated_at'  => new sfWidgetFormFilterDate(array('from_date' => new sfWidgetFormDate(), 'to_date' => new sfWidgetFormDate(), 'with_empty' => false)),
-      'fishes_list' => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'Fish')),
-      'styles_list' => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'Style')),
     ));
 
     $this->setValidators(array(
-      'Location_id' => new sfValidatorDoctrineChoice(array('required' => false, 'model' => $this->getRelatedModelName('Location'), 'column' => 'id')),
-      'Profile_id'  => new sfValidatorDoctrineChoice(array('required' => false, 'model' => $this->getRelatedModelName('Profile'), 'column' => 'id')),
-      'time'        => new sfValidatorPass(array('required' => false)),
+      'location_id' => new sfValidatorDoctrineChoice(array('required' => false, 'model' => $this->getRelatedModelName('Location'), 'column' => 'id')),
+      'profile_id'  => new sfValidatorDoctrineChoice(array('required' => false, 'model' => $this->getRelatedModelName('Profile'), 'column' => 'id')),
+      'begin'       => new sfValidatorDateRange(array('required' => false, 'from_date' => new sfValidatorDateTime(array('required' => false, 'datetime_output' => 'Y-m-d 00:00:00')), 'to_date' => new sfValidatorDateTime(array('required' => false, 'datetime_output' => 'Y-m-d 23:59:59')))),
+      'water_state' => new sfValidatorPass(array('required' => false)),
+      'lure'        => new sfValidatorPass(array('required' => false)),
+      'bait'        => new sfValidatorPass(array('required' => false)),
+      'additive'    => new sfValidatorPass(array('required' => false)),
+      'weather'     => new sfValidatorPass(array('required' => false)),
+      'cordage'     => new sfValidatorPass(array('required' => false)),
       'description' => new sfValidatorPass(array('required' => false)),
       'created_at'  => new sfValidatorDateRange(array('required' => false, 'from_date' => new sfValidatorDateTime(array('required' => false, 'datetime_output' => 'Y-m-d 00:00:00')), 'to_date' => new sfValidatorDateTime(array('required' => false, 'datetime_output' => 'Y-m-d 23:59:59')))),
       'updated_at'  => new sfValidatorDateRange(array('required' => false, 'from_date' => new sfValidatorDateTime(array('required' => false, 'datetime_output' => 'Y-m-d 00:00:00')), 'to_date' => new sfValidatorDateTime(array('required' => false, 'datetime_output' => 'Y-m-d 23:59:59')))),
-      'fishes_list' => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'Fish', 'required' => false)),
-      'styles_list' => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'Style', 'required' => false)),
     ));
 
     $this->widgetSchema->setNameFormat('profit_filters[%s]');
@@ -43,38 +51,6 @@ abstract class BaseProfitFormFilter extends BaseFormFilterDoctrine
     parent::setup();
   }
 
-  public function addFishesListColumnQuery(Doctrine_Query $query, $field, $values)
-  {
-    if (!is_array($values))
-    {
-      $values = array($values);
-    }
-
-    if (!count($values))
-    {
-      return;
-    }
-
-    $query->leftJoin('r.ProfitFish ProfitFish')
-          ->andWhereIn('ProfitFish.Fish_id', $values);
-  }
-
-  public function addStylesListColumnQuery(Doctrine_Query $query, $field, $values)
-  {
-    if (!is_array($values))
-    {
-      $values = array($values);
-    }
-
-    if (!count($values))
-    {
-      return;
-    }
-
-    $query->leftJoin('r.ProfitSyle ProfitSyle')
-          ->andWhereIn('ProfitSyle.Style_id', $values);
-  }
-
   public function getModelName()
   {
     return 'Profit';
@@ -84,14 +60,18 @@ abstract class BaseProfitFormFilter extends BaseFormFilterDoctrine
   {
     return array(
       'id'          => 'Number',
-      'Location_id' => 'ForeignKey',
-      'Profile_id'  => 'ForeignKey',
-      'time'        => 'Text',
+      'location_id' => 'ForeignKey',
+      'profile_id'  => 'ForeignKey',
+      'begin'       => 'Date',
+      'water_state' => 'Text',
+      'lure'        => 'Text',
+      'bait'        => 'Text',
+      'additive'    => 'Text',
+      'weather'     => 'Text',
+      'cordage'     => 'Text',
       'description' => 'Text',
       'created_at'  => 'Date',
       'updated_at'  => 'Date',
-      'fishes_list' => 'ManyKey',
-      'styles_list' => 'ManyKey',
     );
   }
 }
