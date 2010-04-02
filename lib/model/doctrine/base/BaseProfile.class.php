@@ -28,7 +28,7 @@
  * @method Profile             setProfit()      Sets the current record's "Profit" collection
  * @method Profile             setFriend()      Sets the current record's "Friend" collection
  * 
- * @package    HT
+ * @package    FISHERY
  * @subpackage model
  * @author     Your name here
  * @version    SVN: $Id: Builder.php 6820 2009-11-30 17:27:49Z jwage $
@@ -73,11 +73,11 @@ abstract class BaseProfile extends sfDoctrineRecord
         parent::setUp();
         $this->hasMany('Profit', array(
              'local' => 'id',
-             'foreign' => 'Profile_id'));
+             'foreign' => 'profile_id'));
 
         $this->hasMany('Friend', array(
              'local' => 'id',
-             'foreign' => 'related_Profile_id'));
+             'foreign' => 'source_profile_id'));
 
         $timestampable0 = new Doctrine_Template_Timestampable();
         $this->actAs($timestampable0);

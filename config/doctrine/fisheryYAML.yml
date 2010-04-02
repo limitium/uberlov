@@ -1,9 +1,12 @@
 Location:
   tableName: location
   actAs:
-    Timestampable: 
-    Sluggable: 
+    Blameable:
+      listener: BlameableFishery
     Geographical: 
+    Sluggable: 
+    Timestampable: 
+    Versionable: 
   columns:
     id:
       primary: true
@@ -17,25 +20,29 @@ Location:
       default: ''
       type: string
       notnull: true
-    location_type_id:
+    depth:
+      type: float
+    location_flow_id:
+      type: integer(4)
+    location_fundus_id:
+      type: integer(4)
+    location_relief_id:
       type: integer(4)
   relations:
-    LocationType:
-      foreignType: many
-      type: one
-      local: location_type_id
+    LocationFlow:
+      local: location_flow_id
       foreign: id
-LocationType:
-  tableName: location_type
-  columns:
-    id:
-      primary: true
-      type: integer(4)
-      autoincrement: true
-    name:
-      default: ''
-      type: string(50)
-      notnull: true
+    LocationFundus:
+      local: location_fundus_id
+      foreign: id
+    LocationRelief:
+      local: location_relief_id
+      foreign: id
+    Seasons:
+      class: Season
+      refClass: LocationSeason
+      local: location_id
+      foreign: season_id
 Profile:
   tableName: profile
   actAs:
@@ -71,12 +78,6 @@ Fish:
       unique: true
       type: string(100)
       notnull: true
-  relations:
-    Profits:
-      class: Profit
-      refClass: ProfitFish
-      local: Fish_id
-      foreign: Profit_id
 Profit:
   actAs:
     Timestampable: 
@@ -86,54 +87,34 @@ Profit:
       type: integer
       notnull: true
       autoincrement: true
-    Location_id:
+    location_id:
       type: integer(4)
-    Profile_id:
+    profile_id:
       type: integer
-    time:
-      type: time
+    begin:
+      type: timestamp
       notnull: true
+    water_state:
+      type: string
+    lure:
+      type: string
+    bait:
+      type: string
+    additive:
+      type: string
+    weather:
+      type: string
+    cordage:
+      type: string
     description:
       type: string
+      notnull: true
   relations:
     Location:
-      local: Location_id
+      local: location_id
       foreign: id
     Profile:
-      local: Profile_id
-      foreign: id
-    Fishes:
-      class: Fish
-      refClass: ProfitFish
-      local: Profit_id
-      foreign: Fish_id
-    Styles:
-      class: Style
-      refClass: ProfitSyle
-      local: Profit_id
-      foreign: Style_id
-ProfitFish:
-  columns:
-    ID:
-      primary: true
-      unique: true
-      type: integer
-      notnull: true
-    Fish_id:
-      type: integer
-      notnull: true
-    Profit_id:
-      type: integer
-      notnull: true
-    qty:
-      type: float
-      notnull: true
-  relations:
-    Fish:
-      local: Fish_id
-      foreign: id
-    Profit:
-      local: Profit_id
+      local: profile_id
       foreign: id
 Style:
   columns:
@@ -146,51 +127,107 @@ Style:
       unique: true
       type: string(100)
       notnull: true
-  relations:
-    Profits:
-      class: Profit
-      refClass: ProfitSyle
-      local: Style_id
-      foreign: Profit_id
-ProfitSyle:
-  columns:
-    ID:
-      primary: true
-      unique: true
-      type: integer
-      notnull: true
-    Style_id:
-      type: integer
-      notnull: true
-    Profit_id:
-      type: integer
-      notnull: true
-  relations:
-    Style:
-      local: Style_id
-      foreign: id
-    Profit:
-      local: Profit_id
-      foreign: id
 Friend:
   columns:
-    ID:
+    id:
       primary: true
       unique: true
       type: integer
       notnull: true
-    source_Profile_id:
+    source_profile_id:
       type: integer
       notnull: true
-    related_Profile_id:
+    related_profile_id:
       type: integer
       notnull: true
   relations:
     Profile:
-      local: source_Profile_id
+      local: source_profile_id
       foreign: id
-    Profile:
-      local: related_Profile_id
+ProfitDetail:
+  columns:
+    time:
+      type: timestamp
+      notnull: true
+    profit_id:
+      type: integer
+    style_id:
+      type: integer
+    fish_id:
+      type: integer
+    qty:
+      type: float
+      notnull: true
+  indexes:
+    unique_fish_style_per_profit:
+      fields: [profit_id, style_id, fish_id]
+      type: unique
+  relations:
+    Profit:
+      local: profit_id
+      foreign: id
+    Style:
+      local: style_id
+      foreign: id
+    Fish:
+      local: fish_id
+      foreign: id
+LocationRelief:
+  columns:
+    id:
+      primary: true
+      type: integer(4)
+      autoincrement: true
+    name:
+      type: string(50)
+      notnull: true
+LocationFlow:
+  columns:
+    id:
+      primary: true
+      type: integer(4)
+      autoincrement: true
+    name:
+      type: string(50)
+      notnull: true
+LocationFundus:
+  columns:
+    id:
+      primary: true
+      type: integer(4)
+      autoincrement: true
+    name:
+      type: string(50)
+      notnull: true
+Season:
+  columns:
+    id:
+      primary: true
+      type: integer(4)
+      autoincrement: true
+    name:
+      type: string(50)
+      notnull: true
+  relations:
+    Locations:
+      class: Location
+      refClass: LocationSeason
+      local: season_id
+      foreign: location_id
+LocationSeason:
+  columns:
+    location_id:
+      type: integer(4)
+      notnull: true
+    season_id:
+      type: integer(4)
+      notnull: true
+  relations:
+    Location:
+      local: location_id
+      foreign: id
+    Season:
+      local: season_id
       foreign: id
 options:
   type: INNODB

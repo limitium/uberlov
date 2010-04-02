@@ -19,9 +19,8 @@
       <td><a href="<?php echo url_for('location/show?id='.$location->getId()) ?>"><?php echo $location->getId() ?></a></td>
       <td><?php echo $location->getName() ?></td>
       <td><?php echo $location->getDescription() ?></td>
-      <td><?php echo $location->getLocationTypeId() ?></td>
-      <td><?php echo $location->getLat() ?></td>
-      <td><?php echo $location->getLng() ?></td>
+      <td><?php echo $location->getLatitude() ?></td>
+      <td><?php echo $location->getLongitude() ?></td>
       <td><?php echo $location->getCreatedAt() ?></td>
       <td><?php echo $location->getUpdatedAt() ?></td>
     </tr>

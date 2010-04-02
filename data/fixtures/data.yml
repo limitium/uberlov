@@ -1,82 +1,67 @@
+Fish:
+  Fish_1:
+    name: karas
+  Fish_2:
+    name: okun
+  Fish_3:
+    name: plotva
 Location:
   Location_1:
     name: agrtwgare
     description: dfgwegr
-    LocationType: LocationType_1
-    latitude: '55.0561485290527'
-    longitude: '35.5951728820801'
-    created_at: '1970-01-01 00:00:00'
-    updated_at: '1970-01-01 00:00:00'
+    slug: agrtwgare
+    latitude: '55.06'
+    longitude: '35.60'
   Location_2:
     name: zxczxc23tgwe
     description: r32fwergt
-    LocationType: LocationType_1
-    latitude: '55.522214'
-    longitude: '35.600665'
-    created_at: '1970-01-01 00:00:00'
-    updated_at: '1970-01-01 00:00:00'
+    slug: zxczxc23tgwe
+    latitude: '55.52'
+    longitude: '35.60'
   Location_3:
     name: fsdgfthyj2er3t4g
     description: 5qdwfegrhtyjtrqwfegrh
-    LocationType: LocationType_1
-    latitude: '55.316444'
-    longitude: '36.155475'
-    created_at: '1970-01-01 00:00:00'
-    updated_at: '1970-01-01 00:00:00'
+    slug: fsdgfthyj2er3t4g
+    latitude: '55.32'
+    longitude: '36.16'
   Location_4:
     name: yahooo
     description: '1111111111111111'
-    LocationType: LocationType_1
-    latitude: '54.702206'
-    longitude: '36.94649'
-    created_at: '1970-01-01 00:00:00'
-    updated_at: '1970-01-01 00:00:00'
+    slug: yahooo
+    latitude: '54.70'
+    longitude: '36.95'
   Location_5:
     name: gdfdfgdfg
     description: dfhestnrnsfgn
-    LocationType: LocationType_1
-    latitude: '54.895364'
-    longitude: '35.952228'
-    created_at: '1970-01-01 00:00:00'
-    updated_at: '1970-01-01 00:00:00'
+    slug: gdfdfgdfg
+    latitude: '54.90'
+    longitude: '35.95'
   Location_6:
     name: drgsdfh
     description: srghsdthj
-    LocationType: LocationType_1
-    latitude: '55.184941'
-    longitude: '37.402423'
-    created_at: '1970-01-01 00:00:00'
-    updated_at: '1970-01-01 00:00:00'
+    slug: drgsdfh
+    latitude: '55.18'
+    longitude: '37.40'
   Location_7:
     name: asdftyui
     description: wertwertgaerh
-    LocationType: LocationType_1
-    latitude: '55.600459'
-    longitude: '38.481486'
-    created_at: '1970-01-01 00:00:00'
-    updated_at: '1970-01-01 00:00:00'
+    slug: asdftyui
+    latitude: '55.60'
+    longitude: '38.48'
   Location_8:
     name: etujtdy
     description: ertertery
-    LocationType: LocationType_1
-    latitude: '55.336592'
-    longitude: '36.366463'
-    created_at: '1970-01-01 00:00:00'
-    updated_at: '1970-01-01 00:00:00'
+    slug: etujtdy
+    latitude: '55.34'
+    longitude: '36.37'
   Location_9:
     name: 'Пляж на угре'
     description: 'Красивое место'
-    LocationType: LocationType_1
-    latitude: '54.829993'
-    longitude: '35.025137'
-    created_at: '1970-01-01 00:00:00'
-    updated_at: '1970-01-01 00:00:00'
-LocationType:
-  LocationType_1:
-    name: most
-  LocationType_2:
-    name: yama
-  LocationType_3:
-    name: derevo
-  LocationType_4:
-    name: stolb
+    slug: ''
+    latitude: '54.83'
+    longitude: '35.03'
+Style:
+  Style_2:
+    name: poplovok
+  Style_1:
+    name: spining

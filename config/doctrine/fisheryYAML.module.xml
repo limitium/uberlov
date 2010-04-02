@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8" standalone="no" ?>
+<orm-designer version="1.3.1.332">
+
+  <module import-format="DoctrineYml" import-path="fisheryYAML.yml" name="ht" visBkColor="16380923" visSizeX="59" visSizeX2="853" visSizeY="0" visSizeY2="663">
+    <table name="Location" visPositionX="218" visPositionY="240" visSizeX="0" visSizeX2="144" visSizeY="0" visSizeY2="129">
+      <column auto-increment="true" name="id" primary="true" size="4" type="integer"/>
+      <column default="''" name="name" required="true" size="50" type="string"/>
+      <column default="''" name="description" required="true" type="string"/>
+      <column name="depth" type="float"/>
+      <column description="Foreign key to Location_flow" name="location_flow_id" size="4" type="integer"/>
+      <column description="Foreign key to Location_fundus" name="location_fundus_id" size="4" type="integer"/>
+      <column description="Foreign key to Location_relief" name="location_relief_id" size="4" type="integer"/>
+      <orm-properties>
+        <attribute name="tableName">location</attribute>
+        <attribute name="actAs">
+          <attribute name="Blameable">
+            <attribute name="listener">BlameableFishery</attribute>
+          </attribute>
+          <attribute name="Geographical"/>
+          <attribute name="Sluggable"/>
+          <attribute name="Timestampable"/>
+          <attribute name="Versionable"/>
+        </attribute>
+      </orm-properties>
+    </table>
+    <table name="Profile" visPositionX="-41" visPositionY="111" visSizeX="0" visSizeX2="121" visSizeY="0" visSizeY2="87">
+      <column auto-increment="true" name="id" primary="true" required="true" type="integer"/>
+      <column default="''" name="nick_name" required="true" size="50" type="string"/>
+      <column default="''" name="first_name" size="50" type="string"/>
+      <column default="''" name="last_name" size="50" type="string"/>
+      <column default="''" name="description" required="true" type="string"/>
+      <orm-properties>
+        <attribute name="tableName">profile</attribute>
+        <attribute name="actAs">
+          <attribute name="Timestampable"/>
+        </attribute>
+      </orm-properties>
+    </table>
+    <table name="Fish" visPositionX="347" visPositionY="146" visSizeX="0" visSizeX2="104" visSizeY="0" visSizeY2="45">
+      <column auto-increment="true" name="id" primary="true" required="true" type="integer"/>
+      <column name="name" required="true" size="100" type="string" unique="true"/>
+    </table>
+    <table name="Profit" visPositionX="183" visPositionY="13" visSizeX="0" visSizeX2="120" visSizeY="0" visSizeY2="171">
+      <column auto-increment="true" name="id" primary="true" required="true" type="integer"/>
+      <column name="location_id" size="4" type="integer"/>
+      <column name="profile_id" type="integer"/>
+      <column name="begin" required="true" type="timestamp"/>
+      <column name="water_state" type="string"/>
+      <column name="lure" type="string"/>
+      <column name="bait" type="string"/>
+      <column name="additive" type="string"/>
+      <column name="weather" type="string"/>
+      <column name="cordage" type="string"/>
+      <column name="description" required="true" type="string"/>
+      <orm-properties>
+        <attribute name="actAs">
+          <attribute name="Timestampable"/>
+        </attribute>
+      </orm-properties>
+    </table>
+    <table name="Style" visPositionX="518" visPositionY="148" visSizeX="0" visSizeX2="104" visSizeY="0" visSizeY2="45">
+      <column auto-increment="true" name="id" primary="true" required="true" type="integer"/>
+      <column name="name" required="true" size="100" type="string" unique="true"/>
+    </table>
+    <table name="Friend" visPositionX="-22" visPositionY="8" visSizeX="0" visSizeX2="136" visSizeY="0" visSizeY2="59">
+      <column name="id" primary="true" required="true" type="integer" unique="true"/>
+      <column name="source_profile_id" required="true" type="integer"/>
+      <column name="related_profile_id" required="true" type="integer"/>
+    </table>
+    <table name="ProfitDetail" visPositionX="427" visPositionY="10" visSizeX="0" visSizeX2="99" visSizeY="0" visSizeY2="87">
+      <column name="time" required="true" type="timestamp"/>
+      <column name="profit_id" type="integer"/>
+      <column name="style_id" type="integer"/>
+      <column name="fish_id" type="integer"/>
+      <column name="qty" required="true" type="float"/>
+      <index name="unique_fish_style_per_profit" unique="true">
+        <index-column name="profit_id"/>
+        <index-column name="style_id"/>
+        <index-column name="fish_id"/>
+      </index>
+    </table>
+    <table name="LocationRelief" visPositionX="136" visPositionY="391" visSizeX="0" visSizeX2="83" visSizeY="0" visSizeY2="45">
+      <column auto-increment="true" name="id" primary="true" size="4" type="integer"/>
+      <column name="name" required="true" size="50" type="string"/>
+    </table>
+    <table name="LocationFlow" visPositionX="249" visPositionY="406" visSizeX="0" visSizeX2="83" visSizeY="0" visSizeY2="45">
+      <column auto-increment="true" name="id" primary="true" size="4" type="integer"/>
+      <column name="name" required="true" size="50" type="string"/>
+    </table>
+    <table name="LocationFundus" visPositionX="87" visPositionY="304" visSizeX="0" visSizeX2="99" visSizeY="0" visSizeY2="45">
+      <column auto-increment="true" name="id" primary="true" size="4" type="integer"/>
+      <column name="name" required="true" size="50" type="string"/>
+    </table>
+    <table name="Season" visPositionX="-49" visPositionY="362" visSizeX="0" visSizeX2="104" visSizeY="0" visSizeY2="45">
+      <column auto-increment="true" name="id" primary="true" size="4" type="integer"/>
+      <column name="name" required="true" size="50" type="string"/>
+    </table>
+    <table name="LocationSeason" visPositionX="-49" visPositionY="218" visSizeX="0" visSizeX2="120" visSizeY="0" visSizeY2="74">
+      <column name="location_id" required="true" size="4" type="integer"/>
+      <column name="season_id" required="true" size="4" type="integer"/>
+    </table>
+    <orm-properties>
+      <attribute name="options">
+        <attribute name="type">INNODB</attribute>
+      </attribute>
+    </orm-properties>
+    <foreign-key from="Location" name="FK_Location_Location_flow" to="LocationFlow">
+      <foreign-key-column from="location_flow_id" to="id"/>
+    </foreign-key>
+    <foreign-key from="Location" name="FK_Location_Location_fundus" to="LocationFundus">
+      <foreign-key-column from="location_fundus_id" to="id"/>
+    </foreign-key>
+    <foreign-key from="Location" name="FK_Location_Location_relief" to="LocationRelief">
+      <foreign-key-column from="location_relief_id" to="id"/>
+    </foreign-key>
+    <foreign-key from="Profit" name="FK_Profit_Location_id" to="Location">
+      <foreign-key-column from="location_id" to="id"/>
+    </foreign-key>
+    <foreign-key from="Profit" name="FK_Profit_Profile_id" to="Profile">
+      <foreign-key-column from="profile_id" to="id"/>
+    </foreign-key>
+    <foreign-key from="Friend" name="FK_Friend_Profile_id" to="Profile">
+      <foreign-key-column from="source_profile_id" to="id"/>
+    </foreign-key>
+    <foreign-key caption="Profit ProfitDetail" from="ProfitDetail" name="FK_ProfitDetail_Profit_id" to="Profit">
+      <foreign-key-column from="profit_id" to="id"/>
+    </foreign-key>
+    <foreign-key caption="Style ProfitDetail" from="ProfitDetail" name="FK_ProfitDetail_Style_id" to="Style">
+      <foreign-key-column from="style_id" to="id"/>
+    </foreign-key>
+    <foreign-key caption="Fish ProfitDetail" from="ProfitDetail" name="FK_ProfitDetail_Fish_id" to="Fish">
+      <foreign-key-column from="fish_id" to="id"/>
+    </foreign-key>
+    <foreign-key caption="Location LocationSeason" from="LocationSeason" name="FK_LocationSeason_Location_id" to="Location">
+      <foreign-key-column from="location_id" to="id"/>
+    </foreign-key>
+    <foreign-key caption="Season LocationSeason" from="LocationSeason" name="FK_LocationSeason_Season_id" to="Season">
+      <foreign-key-column from="season_id" to="id"/>
+    </foreign-key>
+    <many-to-many-relation mn-table="LocationSeason">
+      <many-to-many-foreign-key foreign-key="FK_LocationSeason_Location_id" relation-alias="Locations"/>
+      <many-to-many-foreign-key foreign-key="FK_LocationSeason_Season_id" relation-alias="Seasons"/>
+    </many-to-many-relation>
+  </module>
+
+</orm-designer>
