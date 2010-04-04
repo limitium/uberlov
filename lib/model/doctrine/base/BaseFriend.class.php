@@ -44,6 +44,8 @@ abstract class BaseFriend extends sfDoctrineRecord
              ));
 
         $this->option('type', 'INNODB');
+        $this->option('charset', 'utf8');
+        $this->option('collate', 'utf8_general_ci');
     }
 
     public function setUp()

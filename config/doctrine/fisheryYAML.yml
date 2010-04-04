@@ -38,11 +38,6 @@ Location:
     LocationRelief:
       local: location_relief_id
       foreign: id
-    Seasons:
-      class: Season
-      refClass: LocationSeason
-      local: location_id
-      foreign: season_id
 Profile:
   tableName: profile
   actAs:
@@ -81,6 +76,8 @@ Fish:
 Profit:
   actAs:
     Timestampable: 
+    Blameable:
+      listener: BlameableFishery
   columns:
     id:
       primary: true
@@ -89,8 +86,6 @@ Profit:
       autoincrement: true
     location_id:
       type: integer(4)
-    profile_id:
-      type: integer
     begin:
       type: timestamp
       notnull: true
@@ -112,9 +107,6 @@ Profit:
   relations:
     Location:
       local: location_id
-      foreign: id
-    Profile:
-      local: profile_id
       foreign: id
 Style:
   columns:
@@ -199,35 +191,48 @@ LocationFundus:
     name:
       type: string(50)
       notnull: true
-Season:
+Comment:
+  actAs:
+    NestedSet:
+      hasManyRoots: true
+    Timestampable: 
+    Blameable:
+      listener: BlameableFishery
   columns:
     id:
       primary: true
       type: integer(4)
       autoincrement: true
-    name:
-      type: string(50)
+    message:
+      type: string(1000)
       notnull: true
-  relations:
-    Locations:
-      class: Location
-      refClass: LocationSeason
-      local: season_id
-      foreign: location_id
-LocationSeason:
+CommentLocation:
+  inheritance:
+    extends: Comment
+    type: column_aggregation
+    keyField: toward
+    keyValue: location
   columns:
     location_id:
       type: integer(4)
-      notnull: true
-    season_id:
-      type: integer(4)
-      notnull: true
   relations:
     Location:
       local: location_id
       foreign: id
-    Season:
-      local: season_id
+CommentProfit:
+  inheritance:
+    extends: Comment
+    keyField: toward
+    keyValue: profit
+    type: column_aggregation
+  columns:
+    profit_id:
+      type: integer
+  relations:
+    Profit:
+      local: profit_id
       foreign: id
 options:
   type: INNODB
+  charset: utf8
+  collate: utf8_general_ci

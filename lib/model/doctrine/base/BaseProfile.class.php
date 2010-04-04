@@ -10,7 +10,6 @@
  * @property string $first_name
  * @property string $last_name
  * @property string $description
- * @property Doctrine_Collection $Profit
  * @property Doctrine_Collection $Friend
  * 
  * @method integer             getId()          Returns the current record's "id" value
@@ -18,14 +17,12 @@
  * @method string              getFirstName()   Returns the current record's "first_name" value
  * @method string              getLastName()    Returns the current record's "last_name" value
  * @method string              getDescription() Returns the current record's "description" value
- * @method Doctrine_Collection getProfit()      Returns the current record's "Profit" collection
  * @method Doctrine_Collection getFriend()      Returns the current record's "Friend" collection
  * @method Profile             setId()          Sets the current record's "id" value
  * @method Profile             setNickName()    Sets the current record's "nick_name" value
  * @method Profile             setFirstName()   Sets the current record's "first_name" value
  * @method Profile             setLastName()    Sets the current record's "last_name" value
  * @method Profile             setDescription() Sets the current record's "description" value
- * @method Profile             setProfit()      Sets the current record's "Profit" collection
  * @method Profile             setFriend()      Sets the current record's "Friend" collection
  * 
  * @package    FISHERY
@@ -66,15 +63,13 @@ abstract class BaseProfile extends sfDoctrineRecord
              ));
 
         $this->option('type', 'INNODB');
+        $this->option('charset', 'utf8');
+        $this->option('collate', 'utf8_general_ci');
     }
 
     public function setUp()
     {
         parent::setUp();
-        $this->hasMany('Profit', array(
-             'local' => 'id',
-             'foreign' => 'profile_id'));
-
         $this->hasMany('Friend', array(
              'local' => 'id',
              'foreign' => 'source_profile_id'));

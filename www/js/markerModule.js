@@ -122,6 +122,18 @@ ht_location_e.prototype.addListenerClick = function(){
     this.listeners.click = gm.event.addListener(this.marker,'click',this.onClick.delegate(this));
 }
 ht_location_e.prototype.onClick = function(){
+    this.mm.geocoder.geocode({'latLng': this.marker.getPosition(),'language':'ru'}, function(results, status) {
+        fb(arguments)
+        if (status == gm.GeocoderStatus.OK) {
+          if (results[1]) {
+          } else {
+            alert("No results found");
+          }
+        } else {
+          alert("Geocoder failed due to: " + status);
+        }
+      });
+
     this.onSaveChange(true);
     gm.event.removeListener(this.listeners.click);
 
@@ -159,7 +171,7 @@ ht_location_e.prototype.addSubmitHandler = function(form){
 
             if(matches && matches.length==3){
                 self.mm.createLocation({
-                    title:matches[2],
+                    name:matches[2],
                     id:matches[1],
                     position:self.marker.getPosition()
                 });

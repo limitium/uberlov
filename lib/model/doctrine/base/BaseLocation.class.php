@@ -15,9 +15,8 @@
  * @property LocationFlow $LocationFlow
  * @property LocationFundus $LocationFundus
  * @property LocationRelief $LocationRelief
- * @property Doctrine_Collection $Seasons
  * @property Doctrine_Collection $Profit
- * @property Doctrine_Collection $LocationSeason
+ * @property Doctrine_Collection $CommentLocation
  * 
  * @method integer             getId()                 Returns the current record's "id" value
  * @method string              getName()               Returns the current record's "name" value
@@ -29,9 +28,8 @@
  * @method LocationFlow        getLocationFlow()       Returns the current record's "LocationFlow" value
  * @method LocationFundus      getLocationFundus()     Returns the current record's "LocationFundus" value
  * @method LocationRelief      getLocationRelief()     Returns the current record's "LocationRelief" value
- * @method Doctrine_Collection getSeasons()            Returns the current record's "Seasons" collection
  * @method Doctrine_Collection getProfit()             Returns the current record's "Profit" collection
- * @method Doctrine_Collection getLocationSeason()     Returns the current record's "LocationSeason" collection
+ * @method Doctrine_Collection getCommentLocation()    Returns the current record's "CommentLocation" collection
  * @method Location            setId()                 Sets the current record's "id" value
  * @method Location            setName()               Sets the current record's "name" value
  * @method Location            setDescription()        Sets the current record's "description" value
@@ -42,9 +40,8 @@
  * @method Location            setLocationFlow()       Sets the current record's "LocationFlow" value
  * @method Location            setLocationFundus()     Sets the current record's "LocationFundus" value
  * @method Location            setLocationRelief()     Sets the current record's "LocationRelief" value
- * @method Location            setSeasons()            Sets the current record's "Seasons" collection
  * @method Location            setProfit()             Sets the current record's "Profit" collection
- * @method Location            setLocationSeason()     Sets the current record's "LocationSeason" collection
+ * @method Location            setCommentLocation()    Sets the current record's "CommentLocation" collection
  * 
  * @package    FISHERY
  * @subpackage model
@@ -90,6 +87,8 @@ abstract class BaseLocation extends sfDoctrineRecord
              ));
 
         $this->option('type', 'INNODB');
+        $this->option('charset', 'utf8');
+        $this->option('collate', 'utf8_general_ci');
     }
 
     public function setUp()
@@ -107,16 +106,11 @@ abstract class BaseLocation extends sfDoctrineRecord
              'local' => 'location_relief_id',
              'foreign' => 'id'));
 
-        $this->hasMany('Season as Seasons', array(
-             'refClass' => 'LocationSeason',
-             'local' => 'location_id',
-             'foreign' => 'season_id'));
-
         $this->hasMany('Profit', array(
              'local' => 'id',
              'foreign' => 'location_id'));
 
-        $this->hasMany('LocationSeason', array(
+        $this->hasMany('CommentLocation', array(
              'local' => 'id',
              'foreign' => 'location_id'));
 
