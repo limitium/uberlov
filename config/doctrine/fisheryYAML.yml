@@ -193,16 +193,18 @@ LocationFundus:
       notnull: true
 Comment:
   actAs:
-    NestedSet:
-      hasManyRoots: true
-    Timestampable: 
     Blameable:
       listener: BlameableFishery
+    Timestampable: 
+    NestedSet:
+      hasManyRoots: true
   columns:
     id:
       primary: true
       type: integer(4)
       autoincrement: true
+    parent:
+      type: integer(4)
     message:
       type: string(1000)
       notnull: true

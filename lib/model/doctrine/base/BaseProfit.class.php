@@ -113,7 +113,9 @@ abstract class BaseProfit extends sfDoctrineRecord
              'foreign' => 'profit_id'));
 
         $timestampable0 = new Doctrine_Template_Timestampable();
-        $blameable0 = new Doctrine_Template_Blameable();
+        $blameable0 = new Doctrine_Template_Blameable(array(
+             'listener' => 'BlameableFishery',
+             ));
         $this->actAs($timestampable0);
         $this->actAs($blameable0);
     }

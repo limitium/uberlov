@@ -10,32 +10,54 @@
  */
 class commentActions extends sfActions {
     public function executeLocation(sfWebRequest $request) {
-        $this->createComment($request, new CommentLocationForm());
+        $this->createComment($request, 'location');
     }
 
-    private function createComment(sfWebRequest $request, sfForm $form) {
+    private function createComment(sfWebRequest $request, $toward) {
         $this->forward404Unless($request->isMethod(sfRequest::POST));
-        if($this->comment = $this->processForm($request, $form)) {
+
+        if($this->comment = $this->processForm($request, $toward)) {
             $this->setTemplate('created');
         }
     }
 
-    protected function processForm(sfWebRequest $request, sfForm $form) {
+    protected function processForm(sfWebRequest $request, $toward) {
+        $modelName = 'Comment'.ucfirst($toward);
+        $formName = $modelName.'Form';
+        $form = new $formName();
+
         $data = $request->getParameter($form->getName());
-        $parent = $data['parent'];
+
+        $tree = Doctrine::getTable($modelName)->getTree();
+        $tree->setBaseQuery(Doctrine_Query::create()->from($modelName.' c')
+            ->where('c.'.$toward.'_id = ?', $data[$toward.'_id']));
+
 
         $form->bind($data, $request->getFiles($form->getName()));
 
         if ($form->isValid()) {
-            unset($data['parent']);
-            $comment = $form->save();
-            if($parent) {
-                $parentNode = Doctrine_Core::getTable('Comment')->find($parent);
-                $this->forward404Unless($parentNode);
-                $comment->getNode()->insertAsLastChildOf($parentNode);
-            }else {
-                Doctrine_Core::getTable('Comment')->getTree()->createRoot($comment);
+            $root = $tree->fetchRoots()->getFirst();
+            if(!$root) {
+                $root = new $modelName();
+                $root->message = 'root';
+                $root[$toward.'_id'] = $data[$toward.'_id'];
+                $root->parent = null;
+                $root->save();
+                $tree->createRoot($root);
             }
+
+            $parent = $root;
+            if($data['parent']) {
+                $parent = Doctrine_Core::getTable('Comment')->find($data['parent']);
+                $this->forward404Unless($parent);
+            }
+
+            $data['parent'] = $parent->getId();
+            $form->bind($data, $request->getFiles($form->getName()));
+
+            $comment = $form->save();
+            $comment->getNode()->insertAsLastChildOf($parent);
+
             return $comment;
         }
         return null;
