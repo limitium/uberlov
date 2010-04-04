@@ -5,4 +5,5 @@
 <div class="bottom">&nbsp;
 <div class="comments"><p class="comments_count"> 12 / <b>5</b></p></div>
 <div class="export"><a href="<?php echo url_for('location/export?id='.$location->getId()); ?>">Экспорт в...</a></div>
+<div class="export"><a href="<?php echo url_for('location/details?id='.$location->getId()); ?>"> детали</a></div>
 </div>

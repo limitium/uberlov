@@ -28,13 +28,6 @@
         </td>
       </tr>
       <tr>
-        <th><?php echo $form['profile_id']->renderLabel() ?></th>
-        <td>
-          <?php echo $form['profile_id']->renderError() ?>
-          <?php echo $form['profile_id'] ?>
-        </td>
-      </tr>
-      <tr>
         <th><?php echo $form['begin']->renderLabel() ?></th>
         <td>
           <?php echo $form['begin']->renderError() ?>

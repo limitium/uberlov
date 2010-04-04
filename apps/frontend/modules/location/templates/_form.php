@@ -33,24 +33,24 @@
                 </td>
             </tr>
             <tr>
-                <th><?php echo $form['location_flow']->renderLabel() ?></th>
+                <th><?php echo $form['location_flow_id']->renderLabel() ?></th>
                 <td>
-                    <?php echo $form['location_flow']->renderError() ?>
-                    <?php echo $form['location_flow'] ?>
+                    <?php echo $form['location_flow_id']->renderError() ?>
+                    <?php echo $form['location_flow_id'] ?>
                 </td>
             </tr>
             <tr>
-                <th><?php echo $form['location_fundus']->renderLabel() ?></th>
+                <th><?php echo $form['location_fundus_id']->renderLabel() ?></th>
                 <td>
-                    <?php echo $form['location_fundus']->renderError() ?>
-                    <?php echo $form['location_fundus'] ?>
+                    <?php echo $form['location_fundus_id']->renderError() ?>
+                    <?php echo $form['location_fundus_id'] ?>
                 </td>
             </tr>
             <tr>
-                <th><?php echo $form['location_relief']->renderLabel() ?></th>
+                <th><?php echo $form['location_relief_id']->renderLabel() ?></th>
                 <td>
-                    <?php echo $form['location_relief']->renderError() ?>
-                    <?php echo $form['location_relief'] ?>
+                    <?php echo $form['location_relief_id']->renderError() ?>
+                    <?php echo $form['location_relief_id'] ?>
                 </td>
             </tr>       
             <tr>
