@@ -142,14 +142,14 @@ a.delItem{
     border-bottom:1px solid #fff;
 }
 
-.comment_bar {
+.commentBar {
     color:#666666;
     font-size:0.8em;
     line-height:140%;
     position:relative;
     width:100%;
 }
-.comment_bar #newComment{
+.commentBar #newComment{
     margin-left: 30px;
     margin-top: 2em;
 }

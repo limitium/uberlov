@@ -47,6 +47,20 @@ function comment(){
         self.comment.child = false;
         return false;
     });
+    
+    $('.commentShowParent').live('click', function(){
+        var parent = $('#comment'+$(this).attr('replyTo'));
+        $('.commentShowFrom',parent).remove();
+        $('.commentBar', parent).append('<a class="commentShowFrom" href="" from="'+$(this).parent().parent().attr('id')+'">&darr;</a>');
+        $('html').scrollTop(parent.offset().top);
+        return false;
+    });
+    
+    $('.commentShowFrom').live('click', function(){
+        $('html').scrollTop($('#'+$(this).attr('from')).offset().top);
+        $(this).remove();
+        return false;
+    });
 }
 comment.name = 'comment';
 ModuleManager.add(comment);
