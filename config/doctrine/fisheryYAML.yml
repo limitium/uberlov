@@ -3,6 +3,22 @@ Location:
   actAs:
     Blameable:
       listener: BlameableFishery
+      relations:
+        updated:
+          class: Profile
+          disabled: false
+          foreign: id
+        created:
+          foreign: id
+          disabled: false
+          class: Profile
+      columns:
+        updated:
+          type: int
+          length: 4
+        created:
+          type: int
+          length: 4
     Geographical: 
     Sluggable: 
     Timestampable: 
@@ -45,7 +61,7 @@ Profile:
   columns:
     id:
       primary: true
-      type: integer
+      type: integer(4)
       notnull: true
       autoincrement: true
     nick_name:
@@ -78,10 +94,26 @@ Profit:
     Timestampable: 
     Blameable:
       listener: BlameableFishery
+      columns:
+        created:
+          length: 4
+          type: int
+        updated:
+          length: 4
+          type: int
+      relations:
+        created:
+          class: Profile
+          disabled: false
+          foreign: id
+        updated:
+          foreign: id
+          disabled: false
+          class: Profile
   columns:
     id:
       primary: true
-      type: integer
+      type: integer(4)
       notnull: true
       autoincrement: true
     location_id:
@@ -124,13 +156,13 @@ Friend:
     id:
       primary: true
       unique: true
-      type: integer
+      type: integer(4)
       notnull: true
     source_profile_id:
-      type: integer
+      type: integer(4)
       notnull: true
     related_profile_id:
-      type: integer
+      type: integer(4)
       notnull: true
   relations:
     Profile:
@@ -142,7 +174,7 @@ ProfitDetail:
       type: timestamp
       notnull: true
     profit_id:
-      type: integer
+      type: integer(4)
     style_id:
       type: integer
     fish_id:
@@ -195,6 +227,24 @@ Comment:
   actAs:
     Blameable:
       listener: BlameableFishery
+      relations:
+        created:
+          class: Profile
+          foreign: id
+          name: CommentBy
+          disabled: false
+        updated:
+          class: Profile
+          name: ChangedBy
+          foreign: id
+          disabled: false
+      columns:
+        created:
+          type: int
+          length: 4
+        updated:
+          length: 4
+          type: int
     Timestampable: 
     NestedSet:
       hasManyRoots: true
@@ -229,7 +279,7 @@ CommentProfit:
     type: column_aggregation
   columns:
     profit_id:
-      type: integer
+      type: integer(4)
   relations:
     Profit:
       local: profit_id

@@ -58,8 +58,9 @@ abstract class BaseComment extends sfDoctrineRecord
              'type' => 'integer',
              'length' => '4',
              ));
-        $this->hasColumn('profit_id', 'integer', null, array(
+        $this->hasColumn('profit_id', 'integer', 4, array(
              'type' => 'integer',
+             'length' => '4',
              ));
 
         $this->option('type', 'INNODB');
@@ -83,6 +84,36 @@ abstract class BaseComment extends sfDoctrineRecord
         parent::setUp();
         $blameable0 = new Doctrine_Template_Blameable(array(
              'listener' => 'BlameableFishery',
+             'relations' => 
+             array(
+              'created' => 
+              array(
+              'class' => 'Profile',
+              'foreign' => 'id',
+              'name' => 'CommentBy',
+              'disabled' => false,
+              ),
+              'updated' => 
+              array(
+              'class' => 'Profile',
+              'name' => 'ChangedBy',
+              'foreign' => 'id',
+              'disabled' => false,
+              ),
+             ),
+             'columns' => 
+             array(
+              'created' => 
+              array(
+              'type' => 'int',
+              'length' => 4,
+              ),
+              'updated' => 
+              array(
+              'length' => 4,
+              'type' => 'int',
+              ),
+             ),
              ));
         $timestampable0 = new Doctrine_Template_Timestampable();
         $nestedset0 = new Doctrine_Template_NestedSet(array(
