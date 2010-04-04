@@ -3,6 +3,8 @@ gm = google.maps;
 function mapModule(){
     this.editor = null;
     this.infoWindow = new gm.InfoWindow();
+    this.geocoder = new gm.Geocoder();
+
     this.selected = [];
     
     this.initMenu();
@@ -234,6 +236,14 @@ mapModule.prototype.setCenter = function(point){
     this.map.setCenter(point);
 }
 
+mapModule.prototype.setZoom = function(zoom){
+    this.map.setZoom(zoom);
+}
+
+mapModule.prototype.setOptions= function(opt){
+    this.map.setOptions(opt);
+}
+
 mapModule.prototype.setType = function(type){
     $('input',this.mapType)
     .removeAttr('disabled')
@@ -242,6 +252,7 @@ mapModule.prototype.setType = function(type){
     .attr('disabled','disabled')
     .addClass('disabled');
     this.map.setMapTypeId(type);
+    this.updateUrl();
 }
 
 mapModule.prototype.setEditor = function(editor){

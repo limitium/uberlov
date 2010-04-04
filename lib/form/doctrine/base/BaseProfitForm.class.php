@@ -17,7 +17,6 @@ abstract class BaseProfitForm extends BaseFormDoctrine
     $this->setWidgets(array(
       'id'          => new sfWidgetFormInputHidden(),
       'location_id' => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Location'), 'add_empty' => true)),
-      'profile_id'  => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Profile'), 'add_empty' => true)),
       'begin'       => new sfWidgetFormDateTime(),
       'water_state' => new sfWidgetFormTextarea(),
       'lure'        => new sfWidgetFormTextarea(),
@@ -28,12 +27,13 @@ abstract class BaseProfitForm extends BaseFormDoctrine
       'description' => new sfWidgetFormTextarea(),
       'created_at'  => new sfWidgetFormDateTime(),
       'updated_at'  => new sfWidgetFormDateTime(),
+      'created_by'  => new sfWidgetFormInputText(),
+      'updated_by'  => new sfWidgetFormInputText(),
     ));
 
     $this->setValidators(array(
       'id'          => new sfValidatorDoctrineChoice(array('model' => $this->getModelName(), 'column' => 'id', 'required' => false)),
       'location_id' => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Location'), 'required' => false)),
-      'profile_id'  => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Profile'), 'required' => false)),
       'begin'       => new sfValidatorDateTime(),
       'water_state' => new sfValidatorString(array('required' => false)),
       'lure'        => new sfValidatorString(array('required' => false)),
@@ -44,6 +44,8 @@ abstract class BaseProfitForm extends BaseFormDoctrine
       'description' => new sfValidatorString(),
       'created_at'  => new sfValidatorDateTime(),
       'updated_at'  => new sfValidatorDateTime(),
+      'created_by'  => new sfValidatorInteger(),
+      'updated_by'  => new sfValidatorInteger(),
     ));
 
     $this->widgetSchema->setNameFormat('profit[%s]');

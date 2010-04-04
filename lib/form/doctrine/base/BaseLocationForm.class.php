@@ -30,7 +30,6 @@ abstract class BaseLocationForm extends BaseFormDoctrine
       'created_at'         => new sfWidgetFormDateTime(),
       'updated_at'         => new sfWidgetFormDateTime(),
       'version'            => new sfWidgetFormInputText(),
-      'seasons_list'       => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'Season')),
     ));
 
     $this->setValidators(array(
@@ -49,7 +48,6 @@ abstract class BaseLocationForm extends BaseFormDoctrine
       'created_at'         => new sfValidatorDateTime(),
       'updated_at'         => new sfValidatorDateTime(),
       'version'            => new sfValidatorInteger(array('required' => false)),
-      'seasons_list'       => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'Season', 'required' => false)),
     ));
 
     $this->widgetSchema->setNameFormat('location[%s]');
@@ -64,62 +62,6 @@ abstract class BaseLocationForm extends BaseFormDoctrine
   public function getModelName()
   {
     return 'Location';
-  }
-
-  public function updateDefaultsFromObject()
-  {
-    parent::updateDefaultsFromObject();
-
-    if (isset($this->widgetSchema['seasons_list']))
-    {
-      $this->setDefault('seasons_list', $this->object->Seasons->getPrimaryKeys());
-    }
-
-  }
-
-  protected function doSave($con = null)
-  {
-    $this->saveSeasonsList($con);
-
-    parent::doSave($con);
-  }
-
-  public function saveSeasonsList($con = null)
-  {
-    if (!$this->isValid())
-    {
-      throw $this->getErrorSchema();
-    }
-
-    if (!isset($this->widgetSchema['seasons_list']))
-    {
-      // somebody has unset this widget
-      return;
-    }
-
-    if (null === $con)
-    {
-      $con = $this->getConnection();
-    }
-
-    $existing = $this->object->Seasons->getPrimaryKeys();
-    $values = $this->getValue('seasons_list');
-    if (!is_array($values))
-    {
-      $values = array();
-    }
-
-    $unlink = array_diff($existing, $values);
-    if (count($unlink))
-    {
-      $this->object->unlink('Seasons', array_values($unlink));
-    }
-
-    $link = array_diff($values, $existing);
-    if (count($link))
-    {
-      $this->object->link('Seasons', array_values($link));
-    }
   }
 
 }

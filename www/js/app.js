@@ -91,7 +91,16 @@ app = {
                 handler(form);
             },
             error: function(request, error, exception){
-                $.growlUI(request.statusText,request.status);
+                $.blockUI({
+                    message: request.responseText,
+                    centerY: 0,
+                    css: {
+                        top: '10px',
+                        left: '10px'
+                    }
+                });
+                $('.blockOverlay').click($.unblockUI);
+            //                $.growlUI(request.statusText,request.status);
             }
         });
     },
@@ -103,8 +112,17 @@ app = {
             success: function(data){
                 handler(data);
             },
-            error: function(request, error, exception){                
-                $.growlUI(request.statusText,request.status);
+            error: function(request, error, exception){
+                $.blockUI({
+                    message: request.responseText,
+                    centerY: 0,
+                    css: {
+                        top: '10px',
+                        left: '10px'
+                    }
+                });
+                $('.blockOverlay').click($.unblockUI);
+            //                $.growlUI(request.statusText,request.status);
             }
         });
     }

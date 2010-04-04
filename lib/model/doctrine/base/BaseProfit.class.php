@@ -7,7 +7,6 @@
  * 
  * @property integer $id
  * @property integer $location_id
- * @property integer $profile_id
  * @property timestamp $begin
  * @property string $water_state
  * @property string $lure
@@ -17,37 +16,35 @@
  * @property string $cordage
  * @property string $description
  * @property Location $Location
- * @property Profile $Profile
  * @property Doctrine_Collection $ProfitDetail
+ * @property Doctrine_Collection $CommentProfit
  * 
- * @method integer             getId()           Returns the current record's "id" value
- * @method integer             getLocationId()   Returns the current record's "location_id" value
- * @method integer             getProfileId()    Returns the current record's "profile_id" value
- * @method timestamp           getBegin()        Returns the current record's "begin" value
- * @method string              getWaterState()   Returns the current record's "water_state" value
- * @method string              getLure()         Returns the current record's "lure" value
- * @method string              getBait()         Returns the current record's "bait" value
- * @method string              getAdditive()     Returns the current record's "additive" value
- * @method string              getWeather()      Returns the current record's "weather" value
- * @method string              getCordage()      Returns the current record's "cordage" value
- * @method string              getDescription()  Returns the current record's "description" value
- * @method Location            getLocation()     Returns the current record's "Location" value
- * @method Profile             getProfile()      Returns the current record's "Profile" value
- * @method Doctrine_Collection getProfitDetail() Returns the current record's "ProfitDetail" collection
- * @method Profit              setId()           Sets the current record's "id" value
- * @method Profit              setLocationId()   Sets the current record's "location_id" value
- * @method Profit              setProfileId()    Sets the current record's "profile_id" value
- * @method Profit              setBegin()        Sets the current record's "begin" value
- * @method Profit              setWaterState()   Sets the current record's "water_state" value
- * @method Profit              setLure()         Sets the current record's "lure" value
- * @method Profit              setBait()         Sets the current record's "bait" value
- * @method Profit              setAdditive()     Sets the current record's "additive" value
- * @method Profit              setWeather()      Sets the current record's "weather" value
- * @method Profit              setCordage()      Sets the current record's "cordage" value
- * @method Profit              setDescription()  Sets the current record's "description" value
- * @method Profit              setLocation()     Sets the current record's "Location" value
- * @method Profit              setProfile()      Sets the current record's "Profile" value
- * @method Profit              setProfitDetail() Sets the current record's "ProfitDetail" collection
+ * @method integer             getId()            Returns the current record's "id" value
+ * @method integer             getLocationId()    Returns the current record's "location_id" value
+ * @method timestamp           getBegin()         Returns the current record's "begin" value
+ * @method string              getWaterState()    Returns the current record's "water_state" value
+ * @method string              getLure()          Returns the current record's "lure" value
+ * @method string              getBait()          Returns the current record's "bait" value
+ * @method string              getAdditive()      Returns the current record's "additive" value
+ * @method string              getWeather()       Returns the current record's "weather" value
+ * @method string              getCordage()       Returns the current record's "cordage" value
+ * @method string              getDescription()   Returns the current record's "description" value
+ * @method Location            getLocation()      Returns the current record's "Location" value
+ * @method Doctrine_Collection getProfitDetail()  Returns the current record's "ProfitDetail" collection
+ * @method Doctrine_Collection getCommentProfit() Returns the current record's "CommentProfit" collection
+ * @method Profit              setId()            Sets the current record's "id" value
+ * @method Profit              setLocationId()    Sets the current record's "location_id" value
+ * @method Profit              setBegin()         Sets the current record's "begin" value
+ * @method Profit              setWaterState()    Sets the current record's "water_state" value
+ * @method Profit              setLure()          Sets the current record's "lure" value
+ * @method Profit              setBait()          Sets the current record's "bait" value
+ * @method Profit              setAdditive()      Sets the current record's "additive" value
+ * @method Profit              setWeather()       Sets the current record's "weather" value
+ * @method Profit              setCordage()       Sets the current record's "cordage" value
+ * @method Profit              setDescription()   Sets the current record's "description" value
+ * @method Profit              setLocation()      Sets the current record's "Location" value
+ * @method Profit              setProfitDetail()  Sets the current record's "ProfitDetail" collection
+ * @method Profit              setCommentProfit() Sets the current record's "CommentProfit" collection
  * 
  * @package    FISHERY
  * @subpackage model
@@ -67,9 +64,6 @@ abstract class BaseProfit extends sfDoctrineRecord
         $this->hasColumn('location_id', 'integer', 4, array(
              'type' => 'integer',
              'length' => '4',
-             ));
-        $this->hasColumn('profile_id', 'integer', null, array(
-             'type' => 'integer',
              ));
         $this->hasColumn('begin', 'timestamp', null, array(
              'type' => 'timestamp',
@@ -99,6 +93,8 @@ abstract class BaseProfit extends sfDoctrineRecord
              ));
 
         $this->option('type', 'INNODB');
+        $this->option('charset', 'utf8');
+        $this->option('collate', 'utf8_general_ci');
     }
 
     public function setUp()
@@ -108,15 +104,17 @@ abstract class BaseProfit extends sfDoctrineRecord
              'local' => 'location_id',
              'foreign' => 'id'));
 
-        $this->hasOne('Profile', array(
-             'local' => 'profile_id',
-             'foreign' => 'id'));
-
         $this->hasMany('ProfitDetail', array(
              'local' => 'id',
              'foreign' => 'profit_id'));
 
+        $this->hasMany('CommentProfit', array(
+             'local' => 'id',
+             'foreign' => 'profit_id'));
+
         $timestampable0 = new Doctrine_Template_Timestampable();
+        $blameable0 = new Doctrine_Template_Blameable();
         $this->actAs($timestampable0);
+        $this->actAs($blameable0);
     }
 }
