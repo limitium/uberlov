@@ -19,7 +19,7 @@
 </div>
 <div class="tabPanel">
     <ul>
-        <li><span href="#" id="tabComments" class="selected">comments (10)</span></li>
+        <li><span href="#" id="tabComments" class="selected">comments (<i id="commentCounter"><?php echo sizeof($comments); ?></i>)</span></li>
         <li><span href="#" id="tabReports">reports (5)</span></li>
     </ul>
 </div>
