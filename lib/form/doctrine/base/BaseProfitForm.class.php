@@ -27,8 +27,8 @@ abstract class BaseProfitForm extends BaseFormDoctrine
       'description' => new sfWidgetFormTextarea(),
       'created_at'  => new sfWidgetFormDateTime(),
       'updated_at'  => new sfWidgetFormDateTime(),
-      'created_by'  => new sfWidgetFormInputText(),
-      'updated_by'  => new sfWidgetFormInputText(),
+      'created_by'  => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('CreatedBy'), 'add_empty' => false)),
+      'updated_by'  => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('UpdatedBy'), 'add_empty' => false)),
     ));
 
     $this->setValidators(array(
@@ -44,8 +44,8 @@ abstract class BaseProfitForm extends BaseFormDoctrine
       'description' => new sfValidatorString(),
       'created_at'  => new sfValidatorDateTime(),
       'updated_at'  => new sfValidatorDateTime(),
-      'created_by'  => new sfValidatorInteger(),
-      'updated_by'  => new sfValidatorInteger(),
+      'created_by'  => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('CreatedBy'))),
+      'updated_by'  => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('UpdatedBy'))),
     ));
 
     $this->widgetSchema->setNameFormat('profit[%s]');

@@ -45,8 +45,9 @@ abstract class BaseProfitDetail extends sfDoctrineRecord
              'type' => 'timestamp',
              'notnull' => true,
              ));
-        $this->hasColumn('profit_id', 'integer', null, array(
+        $this->hasColumn('profit_id', 'integer', 4, array(
              'type' => 'integer',
+             'length' => '4',
              ));
         $this->hasColumn('style_id', 'integer', null, array(
              'type' => 'integer',

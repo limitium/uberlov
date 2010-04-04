@@ -35,10 +35,11 @@ abstract class BaseProfile extends sfDoctrineRecord
     public function setTableDefinition()
     {
         $this->setTableName('profile');
-        $this->hasColumn('id', 'integer', null, array(
+        $this->hasColumn('id', 'integer', 4, array(
              'primary' => true,
              'type' => 'integer',
              'autoincrement' => true,
+             'length' => '4',
              ));
         $this->hasColumn('nick_name', 'string', 50, array(
              'default' => '',

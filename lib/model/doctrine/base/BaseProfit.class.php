@@ -56,10 +56,11 @@ abstract class BaseProfit extends sfDoctrineRecord
     public function setTableDefinition()
     {
         $this->setTableName('profit');
-        $this->hasColumn('id', 'integer', null, array(
+        $this->hasColumn('id', 'integer', 4, array(
              'primary' => true,
              'type' => 'integer',
              'autoincrement' => true,
+             'length' => '4',
              ));
         $this->hasColumn('location_id', 'integer', 4, array(
              'type' => 'integer',
@@ -115,6 +116,34 @@ abstract class BaseProfit extends sfDoctrineRecord
         $timestampable0 = new Doctrine_Template_Timestampable();
         $blameable0 = new Doctrine_Template_Blameable(array(
              'listener' => 'BlameableFishery',
+             'columns' => 
+             array(
+              'created' => 
+              array(
+              'length' => 4,
+              'type' => 'int',
+              ),
+              'updated' => 
+              array(
+              'length' => 4,
+              'type' => 'int',
+              ),
+             ),
+             'relations' => 
+             array(
+              'created' => 
+              array(
+              'class' => 'Profile',
+              'disabled' => false,
+              'foreign' => 'id',
+              ),
+              'updated' => 
+              array(
+              'foreign' => 'id',
+              'disabled' => false,
+              'class' => 'Profile',
+              ),
+             ),
              ));
         $this->actAs($timestampable0);
         $this->actAs($blameable0);

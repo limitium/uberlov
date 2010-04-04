@@ -29,18 +29,21 @@ abstract class BaseFriend extends sfDoctrineRecord
     public function setTableDefinition()
     {
         $this->setTableName('friend');
-        $this->hasColumn('id', 'integer', null, array(
+        $this->hasColumn('id', 'integer', 4, array(
              'primary' => true,
              'unique' => true,
              'type' => 'integer',
+             'length' => '4',
              ));
-        $this->hasColumn('source_profile_id', 'integer', null, array(
+        $this->hasColumn('source_profile_id', 'integer', 4, array(
              'type' => 'integer',
              'notnull' => true,
+             'length' => '4',
              ));
-        $this->hasColumn('related_profile_id', 'integer', null, array(
+        $this->hasColumn('related_profile_id', 'integer', 4, array(
              'type' => 'integer',
              'notnull' => true,
+             'length' => '4',
              ));
 
         $this->option('type', 'INNODB');

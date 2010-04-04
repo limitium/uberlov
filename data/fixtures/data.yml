@@ -1,3 +1,12 @@
+Profile:
+  Profile_1:
+    nick_name: lim
+    first_name: lim
+    last_name: lim
+    description: ddddddddddd
+    created_at: '0000-00-00 00:00:00'
+    updated_at: '0000-00-00 00:00:00'
+Comment: {  }
 Fish:
   Fish_1:
     name: karas
@@ -9,59 +18,209 @@ Location:
   Location_1:
     name: agrtwgare
     description: dfgwegr
-    slug: agrtwgare
+    depth: null
+    CreatedBy: Profile_1
+    UpdatedBy: Profile_1
     latitude: '55.06'
     longitude: '35.60'
+    slug: agrtwgare
+    created_at: '2010-04-01 14:16:53'
+    updated_at: '2010-04-01 14:16:53'
+    version: '1'
   Location_2:
     name: zxczxc23tgwe
     description: r32fwergt
-    slug: zxczxc23tgwe
+    depth: null
+    CreatedBy: Profile_1
+    UpdatedBy: Profile_1
     latitude: '55.52'
     longitude: '35.60'
+    slug: zxczxc23tgwe
+    created_at: '2010-04-01 14:16:53'
+    updated_at: '2010-04-01 14:16:53'
+    version: '1'
   Location_3:
     name: fsdgfthyj2er3t4g
     description: 5qdwfegrhtyjtrqwfegrh
-    slug: fsdgfthyj2er3t4g
+    depth: null
+    CreatedBy: Profile_1
+    UpdatedBy: Profile_1
     latitude: '55.32'
     longitude: '36.16'
+    slug: fsdgfthyj2er3t4g
+    created_at: '2010-04-01 14:16:53'
+    updated_at: '2010-04-01 14:16:53'
+    version: '1'
   Location_4:
     name: yahooo
     description: '1111111111111111'
-    slug: yahooo
+    depth: null
+    CreatedBy: Profile_1
+    UpdatedBy: Profile_1
     latitude: '54.70'
     longitude: '36.95'
+    slug: yahooo
+    created_at: '2010-04-01 14:16:53'
+    updated_at: '2010-04-01 14:16:53'
+    version: '1'
   Location_5:
     name: gdfdfgdfg
     description: dfhestnrnsfgn
-    slug: gdfdfgdfg
+    depth: null
+    CreatedBy: Profile_1
+    UpdatedBy: Profile_1
     latitude: '54.90'
     longitude: '35.95'
+    slug: gdfdfgdfg
+    created_at: '2010-04-01 14:16:53'
+    updated_at: '2010-04-01 14:16:53'
+    version: '1'
   Location_6:
     name: drgsdfh
     description: srghsdthj
-    slug: drgsdfh
+    depth: null
+    CreatedBy: Profile_1
+    UpdatedBy: Profile_1
     latitude: '55.18'
     longitude: '37.40'
+    slug: drgsdfh
+    created_at: '2010-04-01 14:16:53'
+    updated_at: '2010-04-01 14:16:53'
+    version: '1'
   Location_7:
     name: asdftyui
     description: wertwertgaerh
-    slug: asdftyui
+    depth: null
+    CreatedBy: Profile_1
+    UpdatedBy: Profile_1
     latitude: '55.60'
     longitude: '38.48'
+    slug: asdftyui
+    created_at: '2010-04-01 14:16:53'
+    updated_at: '2010-04-01 14:16:53'
+    version: '1'
   Location_8:
     name: etujtdy
     description: ertertery
-    slug: etujtdy
+    depth: null
+    CreatedBy: Profile_1
+    UpdatedBy: Profile_1
     latitude: '55.34'
     longitude: '36.37'
+    slug: etujtdy
+    created_at: '2010-04-01 14:16:53'
+    updated_at: '2010-04-01 14:16:53'
+    version: '1'
   Location_9:
     name: 'Пляж на угре'
     description: 'Красивое место'
-    slug: ''
+    depth: null
+    CreatedBy: Profile_1
+    UpdatedBy: Profile_1
     latitude: '54.83'
     longitude: '35.03'
-Style:
-  Style_2:
-    name: poplovok
-  Style_1:
-    name: spining
+    slug: ''
+    created_at: '2010-04-01 14:16:53'
+    updated_at: '2010-04-01 14:16:53'
+    version: '1'
+  Location_10:
+    name: '23432'
+    description: wrefrw4tegrbfdqwtegrdtg
+    depth: '423423424.00'
+    CreatedBy: Profile_1
+    UpdatedBy: Profile_1
+    latitude: '54.83'
+    longitude: '35.03'
+    slug: '23432'
+    created_at: '2010-04-02 20:01:54'
+    updated_at: '2010-04-02 20:01:54'
+    version: '1'
+  Location_11:
+    name: adddddddddddddddd2
+    description: efdsvfdbdgbdgndgn
+    depth: '2.00'
+    CreatedBy: Profile_1
+    UpdatedBy: Profile_1
+    latitude: '54.83'
+    longitude: '35.03'
+    slug: adddddddddddddddd2
+    created_at: '2010-04-02 20:02:34'
+    updated_at: '2010-04-02 20:02:34'
+    version: '1'
+  Location_12:
+    name: fffff
+    description: zzzzzzzzzzzzz
+    depth: '33.00'
+    CreatedBy: Profile_1
+    UpdatedBy: Profile_1
+    latitude: '54.83'
+    longitude: '35.03'
+    slug: fffff
+    created_at: '2010-04-02 20:11:02'
+    updated_at: '2010-04-02 20:11:02'
+    version: '1'
+  Location_13:
+    name: sdfsdfsd
+    description: efrgrgreg
+    depth: '24.00'
+    LocationFlow: LocationFlow_1
+    LocationFundus: LocationFundus_1
+    LocationRelief: LocationRelief_1
+    CreatedBy: Profile_1
+    UpdatedBy: Profile_1
+    latitude: '54.83'
+    longitude: '35.03'
+    slug: sdfsdfsd
+    created_at: '2010-04-02 20:23:44'
+    updated_at: '2010-04-02 20:23:44'
+    version: '1'
+LocationFlow:
+  LocationFlow_1:
+    name: asd
+  LocationFlow_2:
+    name: fg
+LocationFundus:
+  LocationFundus_1:
+    name: wer
+  LocationFundus_2:
+    name: sdf
+LocationRelief:
+  LocationRelief_1:
+    name: wer
+  LocationRelief_2:
+    name: cvxbdf
+sfGuardGroup:
+  sfGuardGroup_1:
+    name: admin
+    description: 'Administrator group'
+    created_at: '2010-04-03 22:59:54'
+    updated_at: '2010-04-03 22:59:54'
+sfGuardGroupPermission:
+  sfGuardGroupPermission_1_1:
+    sfGuardGroup: sfGuardGroup_1
+    sfGuardPermission: sfGuardPermission_1
+    created_at: '2010-04-03 22:59:54'
+    updated_at: '2010-04-03 22:59:54'
+sfGuardPermission:
+  sfGuardPermission_1:
+    name: admin
+    description: 'Administrator permission'
+    created_at: '2010-04-03 22:59:54'
+    updated_at: '2010-04-03 22:59:54'
+sfGuardUser:
+  sfGuardUser_1:
+    username: admin
+    algorithm: sha1
+    salt: 9af2fa906ff83ab10c16c74acfc33c5e
+    password: aca5146b97f54e511002a28bea6a13ffebfef9bd
+    is_active: true
+    is_super_admin: true
+    last_login: null
+    created_at: '2010-04-03 22:59:54'
+    updated_at: '2010-04-03 22:59:54'
+sfGuardUserGroup:
+  sfGuardUserGroup_1_1:
+    sfGuardUser: sfGuardUser_1
+    sfGuardGroup: sfGuardGroup_1
+    created_at: '2010-04-03 22:59:54'
+    updated_at: '2010-04-03 22:59:54'

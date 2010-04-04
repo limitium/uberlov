@@ -116,6 +116,34 @@ abstract class BaseLocation extends sfDoctrineRecord
 
         $blameable0 = new Doctrine_Template_Blameable(array(
              'listener' => 'BlameableFishery',
+             'relations' => 
+             array(
+              'updated' => 
+              array(
+              'class' => 'Profile',
+              'disabled' => false,
+              'foreign' => 'id',
+              ),
+              'created' => 
+              array(
+              'foreign' => 'id',
+              'disabled' => false,
+              'class' => 'Profile',
+              ),
+             ),
+             'columns' => 
+             array(
+              'updated' => 
+              array(
+              'type' => 'int',
+              'length' => 4,
+              ),
+              'created' => 
+              array(
+              'type' => 'int',
+              'length' => 4,
+              ),
+             ),
              ));
         $geographical0 = new Doctrine_Template_Geographical();
         $sluggable0 = new Doctrine_Template_Sluggable();
