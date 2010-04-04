@@ -24,27 +24,21 @@ class locationActions extends sfActions {
         $this->location = Doctrine::getTable('Location')->find($request->getParameter('id'));
         $this->forward404Unless($this->location);
 
-        $q = Doctrine_Query::create()->select('c.message, c.created_at, c.updated_at, c.created_by, c.updated_by')->from('CommentLocation c')
+        $q = Doctrine_Query::create()->select('c.message, c.parent, c.created_at, c.updated_at, c.created_by, c.updated_by')->from('CommentLocation c')
             ->where('c.location_id = ?', $this->location->getId());
 
         $treeObject = Doctrine::getTable('CommentLocation')->getTree();
         $treeObject->setBaseQuery($q);
+
         $comments = array();
-        foreach ($treeObject->fetchRoots() as $root) {
-        //            $comments = array_merge($comments, $treeObject->fetchTree(array(
-        //            'root_id' => $root->root_id
-        //            )));
-            foreach($treeObject->fetchTree(array(
-            'root_id' => $root->root_id
-            )) as $comment) {
+        $rootComment = $treeObject->fetchRoots()->getFirst();
+        if($rootComment) {
+            foreach($treeObject->fetchBranch($rootComment->root_id) as $comment) {
                 $comments[] = $comment;
-//                echo get_class($comment);
-//                echo str_repeat('&nbsp;', $comment['level']) . $comment->getMessage() . "<br>";
             }
         }
+        array_shift($comments);
         $this->comments = $comments;
-//        echo $this->comments;
-//        die();
     }
 
     public function executeNew(sfWebRequest $request) {
