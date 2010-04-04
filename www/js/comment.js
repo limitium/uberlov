@@ -1,6 +1,7 @@
 function comment(){
     var self = this;
     this.comment = $('#newComment');
+    this.comment.child = false;
     $('form',  this.comment).submit(function(){
         self.comment.block({
             message: "<img src='/images/loader-small.gif'/>" ,
@@ -16,6 +17,7 @@ function comment(){
         app.sendForm(self.comment, function(newComment){
             $(self.comment).unblock();
             $('textarea',self.comment).val('');
+            $('#commentCounter').html(parseInt($('#commentCounter').html())+1);
             if(self.comment.child){
                 self.comment.parent().parent().after(newComment);
                 $('#commentReplyDefault a').trigger('click');
