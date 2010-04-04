@@ -5,3 +5,8 @@ security:  ~
 
 cache:     ~
 execution: ~
+
+remember_me:
+  class: sfGuardRememberMeFilter
+
+security: ~
