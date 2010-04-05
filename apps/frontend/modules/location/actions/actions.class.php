@@ -24,7 +24,8 @@ class locationActions extends sfActions {
         $this->location = Doctrine::getTable('Location')->find($request->getParameter('id'));
         $this->forward404Unless($this->location);
 
-        $q = Doctrine_Query::create()->select('c.message, c.parent, c.created_at, c.updated_at, c.created_by, c.updated_by')->from('CommentLocation c')
+        $q = Doctrine_Query::create()->select('c.message, c.parent, c.created_at, c.updated_at, c.created_by, c.updated_by, p.*')->from('CommentLocation c')
+            ->leftJoin('c.CommentBy p')
             ->where('c.location_id = ?', $this->location->getId());
 
         $treeObject = Doctrine::getTable('CommentLocation')->getTree();
