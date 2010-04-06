@@ -15,10 +15,7 @@
                 <div id="logo">HT logo</div>
                 <div id="site_menu">
                     <ul>
-                        <li><a href="">routes</a></li>
-                        <li><a href="">locations</a></li>
-                        <li><a href="">search</a></li>
-                        <li><a href="">logout</a></li>
+                        <li><?php echo link_to('Места ловли','collector/map') ?></li>
                     </ul>
                 </div>
             </div>
