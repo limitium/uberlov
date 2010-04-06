@@ -11,20 +11,17 @@
  * @version    SVN: $Id: Builder.php 6485 2009-10-12 18:41:59Z jwage $
  */
 class Location extends BaseLocation {
+    public $plused = false;
+    public $minused = false;
+
     public function getLatitudeOZI() {
         return DDDMConverter::DDToDM($this->getLatitude());
     }
     public function getLongitudeOZI() {
         return DDDMConverter::DDToDM($this->getLongitude());
     }
+
     public function getRating() {
-        $rating = intval(Doctrine_Query::create()
-            ->select('SUM(v.value) as rating')
-            ->from('VoteLocation v')
-            ->where('v.location_id = ?',$this->getId())
-            ->execute()
-            ->getFirst()
-            ->getRating());
-        return $rating?$rating:0;
+        return Vote::getRating($this);
     }
 }

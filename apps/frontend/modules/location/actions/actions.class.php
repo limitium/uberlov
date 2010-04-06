@@ -10,9 +10,9 @@
  */
 class locationActions extends sfActions {
     public function executeIndex(sfWebRequest $request) {
-//        var_dump();
-//        echo 2;
-var_dump(sfContext::getInstance()->getUser()->getProfile()->getForce());
+    //        var_dump();
+    //        echo 2;
+        var_dump(sfContext::getInstance()->getUser()->getProfile()->getForce());
         $this->location_list = Doctrine::getTable('Location')
             ->createQuery('a')
             ->execute();
@@ -31,8 +31,9 @@ var_dump(sfContext::getInstance()->getUser()->getProfile()->getForce());
         $this->location = Doctrine::getTable('Location')->find($request->getParameter('id'));
         $this->forward404Unless($this->location);
 
-        $q = Doctrine_Query::create()->select('c.message, c.parent, c.created_at, c.updated_at, c.created_by, c.updated_by, p.*')->from('CommentLocation c')
+        $q = Doctrine_Query::create()->select('c.message, c.parent, c.created_at, c.updated_at, c.created_by, c.updated_by, p.*, v.*')->from('CommentLocation c')
             ->leftJoin('c.CommentBy p')
+            ->leftJoin('c.VoteComment v')
             ->where('c.location_id = ?', $this->location->getId());
 
         $treeObject = Doctrine::getTable('CommentLocation')->getTree();
@@ -41,7 +42,7 @@ var_dump(sfContext::getInstance()->getUser()->getProfile()->getForce());
         $comments = array();
         $rootComment = $treeObject->fetchRoots()->getFirst();
         if($rootComment) {
-            foreach($treeObject->fetchBranch($rootComment->root_id) as $comment) {
+            foreach($treeObject->fetchTree(array('root_id' => $rootComment->root_id)) as $comment) {
                 $comments[] = $comment;
             }
         }

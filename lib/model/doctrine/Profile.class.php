@@ -11,6 +11,8 @@
  * @version    SVN: $Id: Builder.php 6820 2009-11-30 17:27:49Z jwage $
  */
 class Profile extends BaseProfile {
+    public $plused = false;
+    public $minused = false;
 
     public function setTableDefinition() {
         parent:: setTableDefinition();
@@ -30,16 +32,9 @@ class Profile extends BaseProfile {
     }
 
     public function getRating() {
-        $rating = intval(Doctrine_Query::create()
-            ->select('SUM(v.value) as rating')
-            ->from('VoteProfile v')
-            ->where('v.profile_id = ?',$this->getId())
-            ->execute()
-            ->getFirst()
-            ->getRating());
-        return $rating?$rating:0;
+        return Vote::getRating($this);
     }
-
+    
     public function getForce($rating = null) {
         if($rating == null) {
             $rating = $this->getRating();

@@ -11,24 +11,36 @@
 class voteActions extends sfActions {
 
     public function executeLocation(sfWebRequest $request) {
+        $this->vote($request, 'location');
+    }
+
+    public function executeComment(sfWebRequest $request) {
+        $this->vote($request, 'comment');
+    }
+
+    private function vote(sfWebRequest $request, $type) {
+        $uType = ucfirst($type);
         $profile = sfContext::getInstance()->getUser()->getProfile();
-        $location = Doctrine::getTable('Location')->find($request->getParameter('id'));
+        $object = Doctrine::getTable($uType)->find($request->getParameter('id'));
+
+        $this->forward404Unless($profile);
+        $this->forward404Unless($object);
 
         Doctrine_Query::create()
             ->delete('Vote v')
-            ->where('v.voter = ? and location_id=?',array($profile->getId(),$location->getId()))
+            ->where('v.voter = ? and '.$type.'_id=?',array($profile->getId(),$object->getId()))
             ->execute();
 
-        $vl = new VoteLocation();
-        $vl->Location = $location;
+        $voteType  = 'Vote'.$uType;
+        $vl = new $voteType();
+        $vl->$uType = $object;
         $vl->Voter = $profile;
         $vl->value = ($request->getParameter('up')?1:-1) * $profile->getForce();
         $vl->save();
 
-        $this->rating = $location->getRating();
+        $this->rating = $object->getRating();
         $this->setTemplate('vote');
     }
-
     public function executeNew(sfWebRequest $request) {
         $this->form = new VoteForm();
     }
