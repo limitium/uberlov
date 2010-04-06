@@ -44,6 +44,10 @@ Location:
       type: integer(4)
     location_relief_id:
       type: integer(4)
+    location_type_id:
+      type: integer(4)
+    location_scope_id:
+      type: integer(4)
   relations:
     LocationFlow:
       local: location_flow_id
@@ -54,6 +58,17 @@ Location:
     LocationRelief:
       local: location_relief_id
       foreign: id
+    LocationType:
+      local: location_type_id
+      foreign: id
+    LocationScope:
+      local: location_scope_id
+      foreign: id
+    Wishers:
+      class: Profile
+      refClass: WishList
+      local: location_id
+      foreign: profile_id
 Profile:
   tableName: profile
   actAs:
@@ -74,10 +89,22 @@ Profile:
     last_name:
       default: ''
       type: string(50)
-    description:
-      default: ''
-      type: string
-      notnull: true
+  relations:
+    Wishes:
+      class: Location
+      refClass: WishList
+      local: profile_id
+      foreign: location_id
+    MyFirends:
+      class: Profile
+      refClass: Friend
+      local: related_profile_id
+      foreign: source_profile_id
+    MyFirends2:
+      class: Profile
+      refClass: Friend
+      local: source_profile_id
+      foreign: related_profile_id
 Fish:
   columns:
     id:
@@ -151,23 +178,6 @@ Style:
       unique: true
       type: string(100)
       notnull: true
-Friend:
-  columns:
-    id:
-      primary: true
-      unique: true
-      type: integer(4)
-      notnull: true
-    source_profile_id:
-      type: integer(4)
-      notnull: true
-    related_profile_id:
-      type: integer(4)
-      notnull: true
-  relations:
-    Profile:
-      local: source_profile_id
-      foreign: id
 ProfitDetail:
   columns:
     time:
@@ -283,6 +293,129 @@ CommentProfit:
   relations:
     Profit:
       local: profit_id
+      foreign: id
+LocationType:
+  columns:
+    id:
+      primary: true
+      type: integer(4)
+      autoincrement: true
+    name:
+      unique: true
+      type: string(50)
+      notnull: true
+WishList:
+  columns:
+    profile_id:
+      primary: true
+      type: integer(4)
+      notnull: true
+    location_id:
+      primary: true
+      type: integer(4)
+      notnull: true
+  relations:
+    Profile:
+      local: profile_id
+      foreign: id
+    Location:
+      local: location_id
+      foreign: id
+Friend:
+  columns:
+    source_profile_id:
+      primary: true
+      type: integer(4)
+      notnull: true
+    related_profile_id:
+      primary: true
+      type: integer(4)
+      notnull: true
+  relations:
+    Profile:
+      local: source_profile_id
+      foreign: id
+    Profile:
+      local: related_profile_id
+      foreign: id
+Vote:
+  columns:
+    value:
+      type: integer(4)
+      notnull: true
+    voter:
+      type: integer(4)
+  relations:
+    Voter:
+      class: Profile
+      foreignAlias: Votes
+      local: voter
+      foreign: id
+VoteLocation:
+  inheritance:
+    extends: Vote
+    keyField: toward
+    keyValue: location
+    type: column_aggregation
+  columns:
+    location_id:
+      type: integer(4)
+  relations:
+    Location:
+      local: location_id
+      foreign: id
+VoteComment:
+  inheritance:
+    type: column_aggregation
+    keyValue: comment
+    keyField: toward
+    extends: Vote
+  columns:
+    comment_id:
+      type: integer(4)
+  relations:
+    Comment:
+      local: comment_id
+      foreign: id
+VoteProfit:
+  inheritance:
+    type: column_aggregation
+    keyValue: profit
+    keyField: toward
+    extends: Vote
+  columns:
+    profit_id:
+      type: integer(4)
+  relations:
+    Profit:
+      local: profit_id
+      foreign: id
+LocationScope:
+  columns:
+    id:
+      primary: true
+      type: integer(4)
+      autoincrement: true
+    name:
+      unique: true
+      type: string(50)
+      notnull: true
+    slug:
+      unique: true
+      type: string(50)
+      notnull: true
+VoteProfile:
+  inheritance:
+    type: column_aggregation
+    keyValue: profile
+    keyField: toward
+    extends: Vote
+  columns:
+    profile_id:
+      type: integer(4)
+  relations:
+    Profile:
+      local: profile_id
       foreign: id
 options:
   type: INNODB

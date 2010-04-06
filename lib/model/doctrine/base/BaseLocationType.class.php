@@ -16,7 +16,7 @@
  * @method LocationType        setName()     Sets the current record's "name" value
  * @method LocationType        setLocation() Sets the current record's "Location" collection
  * 
- * @package    HT
+ * @package    FISHERY
  * @subpackage model
  * @author     Your name here
  * @version    SVN: $Id: Builder.php 6820 2009-11-30 17:27:49Z jwage $
@@ -33,13 +33,15 @@ abstract class BaseLocationType extends sfDoctrineRecord
              'length' => '4',
              ));
         $this->hasColumn('name', 'string', 50, array(
-             'default' => '',
+             'unique' => true,
              'type' => 'string',
              'notnull' => true,
              'length' => '50',
              ));
 
         $this->option('type', 'INNODB');
+        $this->option('charset', 'utf8');
+        $this->option('collate', 'utf8_general_ci');
     }
 
     public function setUp()

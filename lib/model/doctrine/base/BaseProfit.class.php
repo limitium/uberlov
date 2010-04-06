@@ -18,6 +18,7 @@
  * @property Location $Location
  * @property Doctrine_Collection $ProfitDetail
  * @property Doctrine_Collection $CommentProfit
+ * @property Doctrine_Collection $VoteProfit
  * 
  * @method integer             getId()            Returns the current record's "id" value
  * @method integer             getLocationId()    Returns the current record's "location_id" value
@@ -32,6 +33,7 @@
  * @method Location            getLocation()      Returns the current record's "Location" value
  * @method Doctrine_Collection getProfitDetail()  Returns the current record's "ProfitDetail" collection
  * @method Doctrine_Collection getCommentProfit() Returns the current record's "CommentProfit" collection
+ * @method Doctrine_Collection getVoteProfit()    Returns the current record's "VoteProfit" collection
  * @method Profit              setId()            Sets the current record's "id" value
  * @method Profit              setLocationId()    Sets the current record's "location_id" value
  * @method Profit              setBegin()         Sets the current record's "begin" value
@@ -45,6 +47,7 @@
  * @method Profit              setLocation()      Sets the current record's "Location" value
  * @method Profit              setProfitDetail()  Sets the current record's "ProfitDetail" collection
  * @method Profit              setCommentProfit() Sets the current record's "CommentProfit" collection
+ * @method Profit              setVoteProfit()    Sets the current record's "VoteProfit" collection
  * 
  * @package    FISHERY
  * @subpackage model
@@ -110,6 +113,10 @@ abstract class BaseProfit extends sfDoctrineRecord
              'foreign' => 'profit_id'));
 
         $this->hasMany('CommentProfit', array(
+             'local' => 'id',
+             'foreign' => 'profit_id'));
+
+        $this->hasMany('VoteProfit', array(
              'local' => 'id',
              'foreign' => 'profit_id'));
 

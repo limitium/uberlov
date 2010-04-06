@@ -76,6 +76,28 @@ app = {
             }
         });
     },
+    sendData: function(data){
+        $.ajax({
+            type: 'post',
+            url: data.url,
+            dataType: 'json',
+            data: data.data,
+            success: function(resp){
+                data.handler(resp);
+            },
+            error: function(request, error, exception){
+                $.blockUI({
+                    message: request.responseText,
+                    centerY: 0,
+                    css: {
+                        top: '10px',
+                        left: '10px'
+                    }
+                });
+                $('.blockOverlay').click($.unblockUI);
+            }
+        });
+    },
     sendForm:function(form,handler){
         var url=$('form', form).attr('action');
         var data = {};
