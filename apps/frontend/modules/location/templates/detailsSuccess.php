@@ -23,7 +23,7 @@
         <li><span href="#" id="tabReports">reports (5)</span></li>
     </ul>
 </div>
-<div class="rating"><img src="/images/plus.png"> [ 15 ] <img src="/images/minus.png"></div>
+<?php include_partial('vote/vote', array('obj' => $location,'objType' => 'location')); ?>
 
 <br />
 
