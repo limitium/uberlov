@@ -15,20 +15,14 @@ abstract class BaseFriendForm extends BaseFormDoctrine
   public function setup()
   {
     $this->setWidgets(array(
-      'id'                 => new sfWidgetFormInputHidden(),
-      'source_profile_id'  => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Profile'), 'add_empty' => false)),
-      'related_profile_id' => new sfWidgetFormInputText(),
+      'source_profile_id'  => new sfWidgetFormInputHidden(),
+      'related_profile_id' => new sfWidgetFormInputHidden(),
     ));
 
     $this->setValidators(array(
-      'id'                 => new sfValidatorDoctrineChoice(array('model' => $this->getModelName(), 'column' => 'id', 'required' => false)),
-      'source_profile_id'  => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Profile'))),
-      'related_profile_id' => new sfValidatorInteger(),
+      'source_profile_id'  => new sfValidatorDoctrineChoice(array('model' => $this->getModelName(), 'column' => 'source_profile_id', 'required' => false)),
+      'related_profile_id' => new sfValidatorDoctrineChoice(array('model' => $this->getModelName(), 'column' => 'related_profile_id', 'required' => false)),
     ));
-
-    $this->validatorSchema->setPostValidator(
-      new sfValidatorDoctrineUnique(array('model' => 'Friend', 'column' => array('id')))
-    );
 
     $this->widgetSchema->setNameFormat('friend[%s]');
 

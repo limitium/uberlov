@@ -197,7 +197,6 @@ a.delItem{
 
 
 .loc_discr{
-    font-family:Tahoma;
     font-size:8.5px;
     min-height:60px;
     max-height:60px;
@@ -206,7 +205,6 @@ a.delItem{
     border-bottom:#CCCCCC 1px solid;
 }
 .loc_name{
-    font-family:Tahoma;
     font-size:12px;
     font-weight:800;
 }
@@ -217,19 +215,37 @@ a.delItem{
     margin-top: 3px;
 }
 .comments_count{
-    font-family:Tahoma;
     font-size:9px;
     vertical-align:middle;
 }
 .rating{
     float:right;
-    font-family:Tahoma;
-    font-size:9px;
+    font-size:0.6em;
     clear:right;
+    width: 70px;
+    text-align: right;
 }
+.rating a img{
+    border:none;
+}
+.rating a {
+    display:none;
+}
+.rating.look a{
+    display:inline;
+}
+.rating.voting span{
+    background-color: #ccc;
+}
+.rating.voting a{
+    display:none;
+}
+.rating a.voted{
+    cursor:default !important
+}
+
 .export{
     margin-top: 3px;
-    font-family:Tahoma;
     font-size:9px;
     float:left;
     text-decoration:none;

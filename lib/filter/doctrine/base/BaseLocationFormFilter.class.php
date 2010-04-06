@@ -19,6 +19,8 @@ abstract class BaseLocationFormFilter extends BaseFormFilterDoctrine
       'location_flow_id'   => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('LocationFlow'), 'add_empty' => true)),
       'location_fundus_id' => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('LocationFundus'), 'add_empty' => true)),
       'location_relief_id' => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('LocationRelief'), 'add_empty' => true)),
+      'location_type_id'   => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('LocationType'), 'add_empty' => true)),
+      'location_scope_id'  => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('LocationScope'), 'add_empty' => true)),
       'created_by'         => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('CreatedBy'), 'add_empty' => true)),
       'updated_by'         => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('UpdatedBy'), 'add_empty' => true)),
       'latitude'           => new sfWidgetFormFilterInput(),
@@ -27,6 +29,7 @@ abstract class BaseLocationFormFilter extends BaseFormFilterDoctrine
       'created_at'         => new sfWidgetFormFilterDate(array('from_date' => new sfWidgetFormDate(), 'to_date' => new sfWidgetFormDate(), 'with_empty' => false)),
       'updated_at'         => new sfWidgetFormFilterDate(array('from_date' => new sfWidgetFormDate(), 'to_date' => new sfWidgetFormDate(), 'with_empty' => false)),
       'version'            => new sfWidgetFormFilterInput(),
+      'wishers_list'       => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'Profile')),
     ));
 
     $this->setValidators(array(
@@ -36,6 +39,8 @@ abstract class BaseLocationFormFilter extends BaseFormFilterDoctrine
       'location_flow_id'   => new sfValidatorDoctrineChoice(array('required' => false, 'model' => $this->getRelatedModelName('LocationFlow'), 'column' => 'id')),
       'location_fundus_id' => new sfValidatorDoctrineChoice(array('required' => false, 'model' => $this->getRelatedModelName('LocationFundus'), 'column' => 'id')),
       'location_relief_id' => new sfValidatorDoctrineChoice(array('required' => false, 'model' => $this->getRelatedModelName('LocationRelief'), 'column' => 'id')),
+      'location_type_id'   => new sfValidatorDoctrineChoice(array('required' => false, 'model' => $this->getRelatedModelName('LocationType'), 'column' => 'id')),
+      'location_scope_id'  => new sfValidatorDoctrineChoice(array('required' => false, 'model' => $this->getRelatedModelName('LocationScope'), 'column' => 'id')),
       'created_by'         => new sfValidatorDoctrineChoice(array('required' => false, 'model' => $this->getRelatedModelName('CreatedBy'), 'column' => 'id')),
       'updated_by'         => new sfValidatorDoctrineChoice(array('required' => false, 'model' => $this->getRelatedModelName('UpdatedBy'), 'column' => 'id')),
       'latitude'           => new sfValidatorPass(array('required' => false)),
@@ -44,6 +49,7 @@ abstract class BaseLocationFormFilter extends BaseFormFilterDoctrine
       'created_at'         => new sfValidatorDateRange(array('required' => false, 'from_date' => new sfValidatorDateTime(array('required' => false, 'datetime_output' => 'Y-m-d 00:00:00')), 'to_date' => new sfValidatorDateTime(array('required' => false, 'datetime_output' => 'Y-m-d 23:59:59')))),
       'updated_at'         => new sfValidatorDateRange(array('required' => false, 'from_date' => new sfValidatorDateTime(array('required' => false, 'datetime_output' => 'Y-m-d 00:00:00')), 'to_date' => new sfValidatorDateTime(array('required' => false, 'datetime_output' => 'Y-m-d 23:59:59')))),
       'version'            => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
+      'wishers_list'       => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'Profile', 'required' => false)),
     ));
 
     $this->widgetSchema->setNameFormat('location_filters[%s]');
@@ -53,6 +59,22 @@ abstract class BaseLocationFormFilter extends BaseFormFilterDoctrine
     $this->setupInheritance();
 
     parent::setup();
+  }
+
+  public function addWishersListColumnQuery(Doctrine_Query $query, $field, $values)
+  {
+    if (!is_array($values))
+    {
+      $values = array($values);
+    }
+
+    if (!count($values))
+    {
+      return;
+    }
+
+    $query->leftJoin('r.WishList WishList')
+          ->andWhereIn('WishList.profile_id', $values);
   }
 
   public function getModelName()
@@ -70,6 +92,8 @@ abstract class BaseLocationFormFilter extends BaseFormFilterDoctrine
       'location_flow_id'   => 'ForeignKey',
       'location_fundus_id' => 'ForeignKey',
       'location_relief_id' => 'ForeignKey',
+      'location_type_id'   => 'ForeignKey',
+      'location_scope_id'  => 'ForeignKey',
       'created_by'         => 'ForeignKey',
       'updated_by'         => 'ForeignKey',
       'latitude'           => 'Text',
@@ -78,6 +102,7 @@ abstract class BaseLocationFormFilter extends BaseFormFilterDoctrine
       'created_at'         => 'Date',
       'updated_at'         => 'Date',
       'version'            => 'Number',
+      'wishers_list'       => 'ManyKey',
     );
   }
 }

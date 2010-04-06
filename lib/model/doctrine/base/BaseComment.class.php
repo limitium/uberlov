@@ -11,19 +11,22 @@
  * @property string $toward
  * @property integer $location_id
  * @property integer $profit_id
+ * @property Doctrine_Collection $VoteComment
  * 
- * @method integer getId()          Returns the current record's "id" value
- * @method integer getParent()      Returns the current record's "parent" value
- * @method string  getMessage()     Returns the current record's "message" value
- * @method string  getToward()      Returns the current record's "toward" value
- * @method integer getLocationId()  Returns the current record's "location_id" value
- * @method integer getProfitId()    Returns the current record's "profit_id" value
- * @method Comment setId()          Sets the current record's "id" value
- * @method Comment setParent()      Sets the current record's "parent" value
- * @method Comment setMessage()     Sets the current record's "message" value
- * @method Comment setToward()      Sets the current record's "toward" value
- * @method Comment setLocationId()  Sets the current record's "location_id" value
- * @method Comment setProfitId()    Sets the current record's "profit_id" value
+ * @method integer             getId()          Returns the current record's "id" value
+ * @method integer             getParent()      Returns the current record's "parent" value
+ * @method string              getMessage()     Returns the current record's "message" value
+ * @method string              getToward()      Returns the current record's "toward" value
+ * @method integer             getLocationId()  Returns the current record's "location_id" value
+ * @method integer             getProfitId()    Returns the current record's "profit_id" value
+ * @method Doctrine_Collection getVoteComment() Returns the current record's "VoteComment" collection
+ * @method Comment             setId()          Sets the current record's "id" value
+ * @method Comment             setParent()      Sets the current record's "parent" value
+ * @method Comment             setMessage()     Sets the current record's "message" value
+ * @method Comment             setToward()      Sets the current record's "toward" value
+ * @method Comment             setLocationId()  Sets the current record's "location_id" value
+ * @method Comment             setProfitId()    Sets the current record's "profit_id" value
+ * @method Comment             setVoteComment() Sets the current record's "VoteComment" collection
  * 
  * @package    FISHERY
  * @subpackage model
@@ -82,6 +85,10 @@ abstract class BaseComment extends sfDoctrineRecord
     public function setUp()
     {
         parent::setUp();
+        $this->hasMany('VoteComment', array(
+             'local' => 'id',
+             'foreign' => 'comment_id'));
+
         $blameable0 = new Doctrine_Template_Blameable(array(
              'listener' => 'BlameableFishery',
              'relations' => 

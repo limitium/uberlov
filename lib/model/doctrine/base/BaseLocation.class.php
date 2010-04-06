@@ -12,11 +12,18 @@
  * @property integer $location_flow_id
  * @property integer $location_fundus_id
  * @property integer $location_relief_id
+ * @property integer $location_type_id
+ * @property integer $location_scope_id
  * @property LocationFlow $LocationFlow
  * @property LocationFundus $LocationFundus
  * @property LocationRelief $LocationRelief
+ * @property LocationType $LocationType
+ * @property LocationScope $LocationScope
+ * @property Doctrine_Collection $Wishers
  * @property Doctrine_Collection $Profit
  * @property Doctrine_Collection $CommentLocation
+ * @property Doctrine_Collection $WishList
+ * @property Doctrine_Collection $VoteLocation
  * 
  * @method integer             getId()                 Returns the current record's "id" value
  * @method string              getName()               Returns the current record's "name" value
@@ -25,11 +32,18 @@
  * @method integer             getLocationFlowId()     Returns the current record's "location_flow_id" value
  * @method integer             getLocationFundusId()   Returns the current record's "location_fundus_id" value
  * @method integer             getLocationReliefId()   Returns the current record's "location_relief_id" value
+ * @method integer             getLocationTypeId()     Returns the current record's "location_type_id" value
+ * @method integer             getLocationScopeId()    Returns the current record's "location_scope_id" value
  * @method LocationFlow        getLocationFlow()       Returns the current record's "LocationFlow" value
  * @method LocationFundus      getLocationFundus()     Returns the current record's "LocationFundus" value
  * @method LocationRelief      getLocationRelief()     Returns the current record's "LocationRelief" value
+ * @method LocationType        getLocationType()       Returns the current record's "LocationType" value
+ * @method LocationScope       getLocationScope()      Returns the current record's "LocationScope" value
+ * @method Doctrine_Collection getWishers()            Returns the current record's "Wishers" collection
  * @method Doctrine_Collection getProfit()             Returns the current record's "Profit" collection
  * @method Doctrine_Collection getCommentLocation()    Returns the current record's "CommentLocation" collection
+ * @method Doctrine_Collection getWishList()           Returns the current record's "WishList" collection
+ * @method Doctrine_Collection getVoteLocation()       Returns the current record's "VoteLocation" collection
  * @method Location            setId()                 Sets the current record's "id" value
  * @method Location            setName()               Sets the current record's "name" value
  * @method Location            setDescription()        Sets the current record's "description" value
@@ -37,11 +51,18 @@
  * @method Location            setLocationFlowId()     Sets the current record's "location_flow_id" value
  * @method Location            setLocationFundusId()   Sets the current record's "location_fundus_id" value
  * @method Location            setLocationReliefId()   Sets the current record's "location_relief_id" value
+ * @method Location            setLocationTypeId()     Sets the current record's "location_type_id" value
+ * @method Location            setLocationScopeId()    Sets the current record's "location_scope_id" value
  * @method Location            setLocationFlow()       Sets the current record's "LocationFlow" value
  * @method Location            setLocationFundus()     Sets the current record's "LocationFundus" value
  * @method Location            setLocationRelief()     Sets the current record's "LocationRelief" value
+ * @method Location            setLocationType()       Sets the current record's "LocationType" value
+ * @method Location            setLocationScope()      Sets the current record's "LocationScope" value
+ * @method Location            setWishers()            Sets the current record's "Wishers" collection
  * @method Location            setProfit()             Sets the current record's "Profit" collection
  * @method Location            setCommentLocation()    Sets the current record's "CommentLocation" collection
+ * @method Location            setWishList()           Sets the current record's "WishList" collection
+ * @method Location            setVoteLocation()       Sets the current record's "VoteLocation" collection
  * 
  * @package    FISHERY
  * @subpackage model
@@ -85,6 +106,14 @@ abstract class BaseLocation extends sfDoctrineRecord
              'type' => 'integer',
              'length' => '4',
              ));
+        $this->hasColumn('location_type_id', 'integer', 4, array(
+             'type' => 'integer',
+             'length' => '4',
+             ));
+        $this->hasColumn('location_scope_id', 'integer', 4, array(
+             'type' => 'integer',
+             'length' => '4',
+             ));
 
         $this->option('type', 'INNODB');
         $this->option('charset', 'utf8');
@@ -106,11 +135,32 @@ abstract class BaseLocation extends sfDoctrineRecord
              'local' => 'location_relief_id',
              'foreign' => 'id'));
 
+        $this->hasOne('LocationType', array(
+             'local' => 'location_type_id',
+             'foreign' => 'id'));
+
+        $this->hasOne('LocationScope', array(
+             'local' => 'location_scope_id',
+             'foreign' => 'id'));
+
+        $this->hasMany('Profile as Wishers', array(
+             'refClass' => 'WishList',
+             'local' => 'location_id',
+             'foreign' => 'profile_id'));
+
         $this->hasMany('Profit', array(
              'local' => 'id',
              'foreign' => 'location_id'));
 
         $this->hasMany('CommentLocation', array(
+             'local' => 'id',
+             'foreign' => 'location_id'));
+
+        $this->hasMany('WishList', array(
+             'local' => 'id',
+             'foreign' => 'location_id'));
+
+        $this->hasMany('VoteLocation', array(
              'local' => 'id',
              'foreign' => 'location_id'));
 
