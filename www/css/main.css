@@ -138,7 +138,7 @@ a.delItem{
     color: #fff;
     background-color: #369;
 }
-.selected {
+.tabPanel ul li span.selected {
     border-bottom:1px solid #fff;
 }
 
@@ -218,6 +218,7 @@ a.delItem{
     font-size:9px;
     vertical-align:middle;
 }
+
 .rating{
     float:right;
     font-size:0.6em;
@@ -242,6 +243,26 @@ a.delItem{
 }
 .rating a.voted{
     cursor:default !important
+}
+
+.profile .personal {
+}
+.profile .personal .userpic{
+    float:left;
+}
+.profile .personal .info{
+    float:left
+}
+.profile .personal .info p a img{
+    border: none;
+}
+.profile .personal .info ul{
+    list-style-type: none;
+    padding-left:10px;
+}
+
+.profile .achieves {
+    float:left
 }
 
 .export{

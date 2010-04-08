@@ -89,6 +89,14 @@ Profile:
     last_name:
       default: ''
       type: string(50)
+    birth_date:
+      type: date
+    userpic:
+      type: string(255)
+    sex:
+      default: 1
+      type: boolean
+      notnull: true
   relations:
     Wishes:
       class: Location
@@ -105,6 +113,16 @@ Profile:
       refClass: Friend
       local: source_profile_id
       foreign: related_profile_id
+    Fishes:
+      class: Fish
+      refClass: ProfileFish
+      local: profile_id
+      foreign: fish_id
+    Styles:
+      class: Style
+      refClass: ProfileStyle
+      local: profile_id
+      foreign: style_id
 Fish:
   columns:
     id:
@@ -116,6 +134,12 @@ Fish:
       unique: true
       type: string(100)
       notnull: true
+  relations:
+    Profiles:
+      class: Profile
+      refClass: ProfileFish
+      local: fish_id
+      foreign: profile_id
 Profit:
   actAs:
     Timestampable: 
@@ -178,6 +202,12 @@ Style:
       unique: true
       type: string(100)
       notnull: true
+  relations:
+    Profiles:
+      class: Profile
+      refClass: ProfileStyle
+      local: style_id
+      foreign: profile_id
 ProfitDetail:
   columns:
     time:
@@ -414,6 +444,36 @@ VoteProfile:
     profile_id:
       type: integer(4)
   relations:
+    Profile:
+      local: profile_id
+      foreign: id
+ProfileFish:
+  columns:
+    fish_id:
+      type: integer
+      notnull: true
+    profile_id:
+      type: integer(4)
+      notnull: true
+  relations:
+    Fish:
+      local: fish_id
+      foreign: id
+    Profile:
+      local: profile_id
+      foreign: id
+ProfileStyle:
+  columns:
+    style_id:
+      type: integer
+      notnull: true
+    profile_id:
+      type: integer(4)
+      notnull: true
+  relations:
+    Style:
+      local: style_id
+      foreign: id
     Profile:
       local: profile_id
       foreign: id

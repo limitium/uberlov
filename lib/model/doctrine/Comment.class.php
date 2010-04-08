@@ -11,8 +11,8 @@
  * @version    SVN: $Id: Builder.php 6820 2009-11-30 17:27:49Z jwage $
  */
 class Comment extends BaseComment {
-    public $plused;
-    public $minused;
+   public $plused = false;
+    public $minused = false;
 
     public function getRating() {
         return Vote::getRating($this,'Comment');

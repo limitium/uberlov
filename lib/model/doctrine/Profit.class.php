@@ -13,7 +13,7 @@
 class Profit extends BaseProfit {
     public $plused = false;
     public $minused = false;
-
+    
     public function getRating() {
         return Vote::getRating($this);
     }

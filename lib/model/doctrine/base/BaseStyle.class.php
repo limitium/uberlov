@@ -7,14 +7,20 @@
  * 
  * @property integer $id
  * @property string $name
+ * @property Doctrine_Collection $Profiles
  * @property Doctrine_Collection $ProfitDetail
+ * @property Doctrine_Collection $ProfileStyle
  * 
  * @method integer             getId()           Returns the current record's "id" value
  * @method string              getName()         Returns the current record's "name" value
+ * @method Doctrine_Collection getProfiles()     Returns the current record's "Profiles" collection
  * @method Doctrine_Collection getProfitDetail() Returns the current record's "ProfitDetail" collection
+ * @method Doctrine_Collection getProfileStyle() Returns the current record's "ProfileStyle" collection
  * @method Style               setId()           Sets the current record's "id" value
  * @method Style               setName()         Sets the current record's "name" value
+ * @method Style               setProfiles()     Sets the current record's "Profiles" collection
  * @method Style               setProfitDetail() Sets the current record's "ProfitDetail" collection
+ * @method Style               setProfileStyle() Sets the current record's "ProfileStyle" collection
  * 
  * @package    FISHERY
  * @subpackage model
@@ -46,7 +52,16 @@ abstract class BaseStyle extends sfDoctrineRecord
     public function setUp()
     {
         parent::setUp();
+        $this->hasMany('Profile as Profiles', array(
+             'refClass' => 'ProfileStyle',
+             'local' => 'style_id',
+             'foreign' => 'profile_id'));
+
         $this->hasMany('ProfitDetail', array(
+             'local' => 'id',
+             'foreign' => 'style_id'));
+
+        $this->hasMany('ProfileStyle', array(
              'local' => 'id',
              'foreign' => 'style_id'));
     }

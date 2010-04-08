@@ -7,7 +7,9 @@
       <th>Nick name</th>
       <th>First name</th>
       <th>Last name</th>
-      <th>Description</th>
+      <th>Birth date</th>
+      <th>Userpic</th>
+      <th>User</th>
       <th>Created at</th>
       <th>Updated at</th>
     </tr>
@@ -19,7 +21,9 @@
       <td><?php echo $profile->getNickName() ?></td>
       <td><?php echo $profile->getFirstName() ?></td>
       <td><?php echo $profile->getLastName() ?></td>
-      <td><?php echo $profile->getDescription() ?></td>
+      <td><?php echo $profile->getBirthDate() ?></td>
+      <td><?php echo $profile->getUserpic() ?></td>
+      <td><?php echo $profile->getUserId() ?></td>
       <td><?php echo $profile->getCreatedAt() ?></td>
       <td><?php echo $profile->getUpdatedAt() ?></td>
     </tr>

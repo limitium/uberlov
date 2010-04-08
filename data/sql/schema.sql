@@ -10,7 +10,9 @@ CREATE TABLE location_fundus (id INT AUTO_INCREMENT, name VARCHAR(50) NOT NULL, 
 CREATE TABLE location_relief (id INT AUTO_INCREMENT, name VARCHAR(50) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci ENGINE = INNODB;
 CREATE TABLE location_scope (id INT AUTO_INCREMENT, name VARCHAR(50) NOT NULL UNIQUE, slug VARCHAR(50) NOT NULL UNIQUE, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci ENGINE = INNODB;
 CREATE TABLE location_type (id INT AUTO_INCREMENT, name VARCHAR(50) NOT NULL UNIQUE, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci ENGINE = INNODB;
-CREATE TABLE profile (id INT AUTO_INCREMENT, nick_name VARCHAR(50) DEFAULT '' NOT NULL, first_name VARCHAR(50) DEFAULT NULL, last_name VARCHAR(50) DEFAULT NULL, user_id INT, created_at DATETIME NOT NULL, updated_at DATETIME NOT NULL, INDEX user_id_idx (user_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci ENGINE = INNODB;
+CREATE TABLE profile (id INT AUTO_INCREMENT, nick_name VARCHAR(50) DEFAULT '' NOT NULL, first_name VARCHAR(50) DEFAULT NULL, last_name VARCHAR(50) DEFAULT NULL, birth_date DATE, userpic VARCHAR(255), sex TINYINT(1) DEFAULT '1' NOT NULL, user_id INT, created_at DATETIME NOT NULL, updated_at DATETIME NOT NULL, INDEX user_id_idx (user_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci ENGINE = INNODB;
+CREATE TABLE profile_fish (id BIGINT AUTO_INCREMENT, fish_id BIGINT NOT NULL, profile_id INT NOT NULL, INDEX fish_id_idx (fish_id), INDEX profile_id_idx (profile_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci ENGINE = INNODB;
+CREATE TABLE profile_style (id BIGINT UNIQUE, style_id BIGINT NOT NULL, profile_id INT NOT NULL, INDEX style_id_idx (style_id), INDEX profile_id_idx (profile_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci ENGINE = INNODB;
 CREATE TABLE profit (id INT AUTO_INCREMENT, location_id INT, begin DATETIME NOT NULL, water_state TEXT, lure TEXT, bait TEXT, additive TEXT, weather TEXT, cordage TEXT, description TEXT NOT NULL, created_at DATETIME NOT NULL, updated_at DATETIME NOT NULL, created_by INT NOT NULL, updated_by INT NOT NULL, INDEX location_id_idx (location_id), INDEX created_by_idx (created_by), INDEX updated_by_idx (updated_by), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci ENGINE = INNODB;
 CREATE TABLE profit_detail (id BIGINT AUTO_INCREMENT, time DATETIME NOT NULL, profit_id INT, style_id BIGINT, fish_id BIGINT, qty FLOAT(18, 2) NOT NULL, UNIQUE INDEX unique_fish_style_per_profit_idx (profit_id, style_id, fish_id), INDEX profit_id_idx (profit_id), INDEX style_id_idx (style_id), INDEX fish_id_idx (fish_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci ENGINE = INNODB;
 CREATE TABLE style (id BIGINT AUTO_INCREMENT, name VARCHAR(100) NOT NULL UNIQUE, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci ENGINE = INNODB;
@@ -41,6 +43,10 @@ ALTER TABLE location ADD CONSTRAINT location_location_fundus_id_location_fundus_
 ALTER TABLE location ADD CONSTRAINT location_location_flow_id_location_flow_id FOREIGN KEY (location_flow_id) REFERENCES location_flow(id);
 ALTER TABLE location ADD CONSTRAINT location_created_by_profile_id FOREIGN KEY (created_by) REFERENCES profile(id);
 ALTER TABLE profile ADD CONSTRAINT profile_user_id_sf_guard_user_id FOREIGN KEY (user_id) REFERENCES sf_guard_user(id);
+ALTER TABLE profile_fish ADD CONSTRAINT profile_fish_profile_id_profile_id FOREIGN KEY (profile_id) REFERENCES profile(id);
+ALTER TABLE profile_fish ADD CONSTRAINT profile_fish_fish_id_fish_id FOREIGN KEY (fish_id) REFERENCES fish(id);
+ALTER TABLE profile_style ADD CONSTRAINT profile_style_style_id_style_id FOREIGN KEY (style_id) REFERENCES style(id);
+ALTER TABLE profile_style ADD CONSTRAINT profile_style_profile_id_profile_id FOREIGN KEY (profile_id) REFERENCES profile(id);
 ALTER TABLE profit ADD CONSTRAINT profit_updated_by_profile_id FOREIGN KEY (updated_by) REFERENCES profile(id);
 ALTER TABLE profit ADD CONSTRAINT profit_location_id_location_id FOREIGN KEY (location_id) REFERENCES location(id);
 ALTER TABLE profit ADD CONSTRAINT profit_created_by_profile_id FOREIGN KEY (created_by) REFERENCES profile(id);
