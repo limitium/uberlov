@@ -42,10 +42,24 @@
         </td>
       </tr>
       <tr>
-        <th><?php echo $form['description']->renderLabel() ?></th>
+        <th><?php echo $form['birth_date']->renderLabel() ?></th>
         <td>
-          <?php echo $form['description']->renderError() ?>
-          <?php echo $form['description'] ?>
+          <?php echo $form['birth_date']->renderError() ?>
+          <?php echo $form['birth_date'] ?>
+        </td>
+      </tr>
+      <tr>
+        <th><?php echo $form['userpic']->renderLabel() ?></th>
+        <td>
+          <?php echo $form['userpic']->renderError() ?>
+          <?php echo $form['userpic'] ?>
+        </td>
+      </tr>
+      <tr>
+        <th><?php echo $form['user_id']->renderLabel() ?></th>
+        <td>
+          <?php echo $form['user_id']->renderError() ?>
+          <?php echo $form['user_id'] ?>
         </td>
       </tr>
       <tr>
@@ -60,6 +74,41 @@
         <td>
           <?php echo $form['updated_at']->renderError() ?>
           <?php echo $form['updated_at'] ?>
+        </td>
+      </tr>
+      <tr>
+        <th><?php echo $form['wishes_list']->renderLabel() ?></th>
+        <td>
+          <?php echo $form['wishes_list']->renderError() ?>
+          <?php echo $form['wishes_list'] ?>
+        </td>
+      </tr>
+      <tr>
+        <th><?php echo $form['my_firends_list']->renderLabel() ?></th>
+        <td>
+          <?php echo $form['my_firends_list']->renderError() ?>
+          <?php echo $form['my_firends_list'] ?>
+        </td>
+      </tr>
+      <tr>
+        <th><?php echo $form['my_firends2_list']->renderLabel() ?></th>
+        <td>
+          <?php echo $form['my_firends2_list']->renderError() ?>
+          <?php echo $form['my_firends2_list'] ?>
+        </td>
+      </tr>
+      <tr>
+        <th><?php echo $form['fishes_list']->renderLabel() ?></th>
+        <td>
+          <?php echo $form['fishes_list']->renderError() ?>
+          <?php echo $form['fishes_list'] ?>
+        </td>
+      </tr>
+      <tr>
+        <th><?php echo $form['styles_list']->renderLabel() ?></th>
+        <td>
+          <?php echo $form['styles_list']->renderError() ?>
+          <?php echo $form['styles_list'] ?>
         </td>
       </tr>
     </tbody>

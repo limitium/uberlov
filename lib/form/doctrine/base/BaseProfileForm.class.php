@@ -19,12 +19,17 @@ abstract class BaseProfileForm extends BaseFormDoctrine
       'nick_name'        => new sfWidgetFormInputText(),
       'first_name'       => new sfWidgetFormInputText(),
       'last_name'        => new sfWidgetFormInputText(),
+      'birth_date'       => new sfWidgetFormDate(),
+      'userpic'          => new sfWidgetFormInputText(),
+      'sex'              => new sfWidgetFormInputCheckbox(),
       'user_id'          => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('sfGuardUser'), 'add_empty' => true)),
       'created_at'       => new sfWidgetFormDateTime(),
       'updated_at'       => new sfWidgetFormDateTime(),
       'wishes_list'      => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'Location')),
       'my_firends_list'  => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'Profile')),
       'my_firends2_list' => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'Profile')),
+      'fishes_list'      => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'Fish')),
+      'styles_list'      => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'Style')),
     ));
 
     $this->setValidators(array(
@@ -32,12 +37,17 @@ abstract class BaseProfileForm extends BaseFormDoctrine
       'nick_name'        => new sfValidatorString(array('max_length' => 50, 'required' => false)),
       'first_name'       => new sfValidatorString(array('max_length' => 50, 'required' => false)),
       'last_name'        => new sfValidatorString(array('max_length' => 50, 'required' => false)),
+      'birth_date'       => new sfValidatorDate(array('required' => false)),
+      'userpic'          => new sfValidatorString(array('max_length' => 255, 'required' => false)),
+      'sex'              => new sfValidatorBoolean(array('required' => false)),
       'user_id'          => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('sfGuardUser'), 'required' => false)),
       'created_at'       => new sfValidatorDateTime(),
       'updated_at'       => new sfValidatorDateTime(),
       'wishes_list'      => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'Location', 'required' => false)),
       'my_firends_list'  => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'Profile', 'required' => false)),
       'my_firends2_list' => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'Profile', 'required' => false)),
+      'fishes_list'      => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'Fish', 'required' => false)),
+      'styles_list'      => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'Style', 'required' => false)),
     ));
 
     $this->widgetSchema->setNameFormat('profile[%s]');
@@ -73,6 +83,16 @@ abstract class BaseProfileForm extends BaseFormDoctrine
       $this->setDefault('my_firends2_list', $this->object->MyFirends2->getPrimaryKeys());
     }
 
+    if (isset($this->widgetSchema['fishes_list']))
+    {
+      $this->setDefault('fishes_list', $this->object->Fishes->getPrimaryKeys());
+    }
+
+    if (isset($this->widgetSchema['styles_list']))
+    {
+      $this->setDefault('styles_list', $this->object->Styles->getPrimaryKeys());
+    }
+
   }
 
   protected function doSave($con = null)
@@ -80,6 +100,8 @@ abstract class BaseProfileForm extends BaseFormDoctrine
     $this->saveWishesList($con);
     $this->saveMyFirendsList($con);
     $this->saveMyFirends2List($con);
+    $this->saveFishesList($con);
+    $this->saveStylesList($con);
 
     parent::doSave($con);
   }
@@ -195,6 +217,82 @@ abstract class BaseProfileForm extends BaseFormDoctrine
     if (count($link))
     {
       $this->object->link('MyFirends2', array_values($link));
+    }
+  }
+
+  public function saveFishesList($con = null)
+  {
+    if (!$this->isValid())
+    {
+      throw $this->getErrorSchema();
+    }
+
+    if (!isset($this->widgetSchema['fishes_list']))
+    {
+      // somebody has unset this widget
+      return;
+    }
+
+    if (null === $con)
+    {
+      $con = $this->getConnection();
+    }
+
+    $existing = $this->object->Fishes->getPrimaryKeys();
+    $values = $this->getValue('fishes_list');
+    if (!is_array($values))
+    {
+      $values = array();
+    }
+
+    $unlink = array_diff($existing, $values);
+    if (count($unlink))
+    {
+      $this->object->unlink('Fishes', array_values($unlink));
+    }
+
+    $link = array_diff($values, $existing);
+    if (count($link))
+    {
+      $this->object->link('Fishes', array_values($link));
+    }
+  }
+
+  public function saveStylesList($con = null)
+  {
+    if (!$this->isValid())
+    {
+      throw $this->getErrorSchema();
+    }
+
+    if (!isset($this->widgetSchema['styles_list']))
+    {
+      // somebody has unset this widget
+      return;
+    }
+
+    if (null === $con)
+    {
+      $con = $this->getConnection();
+    }
+
+    $existing = $this->object->Styles->getPrimaryKeys();
+    $values = $this->getValue('styles_list');
+    if (!is_array($values))
+    {
+      $values = array();
+    }
+
+    $unlink = array_diff($existing, $values);
+    if (count($unlink))
+    {
+      $this->object->unlink('Styles', array_values($unlink));
+    }
+
+    $link = array_diff($values, $existing);
+    if (count($link))
+    {
+      $this->object->link('Styles', array_values($link));
     }
   }
 

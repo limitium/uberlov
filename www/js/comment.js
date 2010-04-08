@@ -52,12 +52,33 @@ function comment(){
         var parent = $('#comment'+$(this).attr('replyTo'));
         $('.commentShowFrom',parent).remove();
         $('.commentBar', parent).append('<a class="commentShowFrom" href="" from="'+$(this).parent().parent().attr('id')+'">&darr;</a>');
-        $('html').scrollTop(parent.offset().top);
+        $('html').animate({
+            scrollTop:parent.offset().top
+        }, 300, null,function(){
+            var msg = $('.commentMessage',parent);
+            msg.css({
+                backgroundColor:'#0075f6'
+            });
+            msg.animate({
+                backgroundColor:'#fff'
+            },200);
+        });
         return false;
     });
     
     $('.commentShowFrom').live('click', function(){
-        $('html').scrollTop($('#'+$(this).attr('from')).offset().top);
+        var from = $('#'+$(this).attr('from'));
+        $('html').animate({
+            scrollTop: from.offset().top
+        }, 300, null,function(){
+            var msg = $('.commentMessage',from);
+            msg.css({
+                backgroundColor:'#0075f6'
+            });
+            msg.animate({
+                backgroundColor:'#fff'
+            },200);
+        });
         $(this).remove();
         return false;
     });

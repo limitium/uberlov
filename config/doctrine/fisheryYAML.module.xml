@@ -47,11 +47,14 @@
         </attribute>
       </orm-properties>
     </table>
-    <table name="Profile" visPositionX="151" visPositionY="584" visSizeX="0" visSizeX2="121" visSizeY="0" visSizeY2="73">
+    <table name="Profile" visPositionX="151" visPositionY="583" visSizeX="0" visSizeX2="121" visSizeY="0" visSizeY2="101">
       <column auto-increment="true" name="id" primary="true" required="true" size="4" type="integer"/>
       <column default="''" name="nick_name" required="true" size="50" type="string"/>
       <column default="''" name="first_name" size="50" type="string"/>
       <column default="''" name="last_name" size="50" type="string"/>
+      <column name="birth_date" type="date"/>
+      <column name="userpic" size="255" type="string"/>
+      <column default="1" name="sex" required="true" type="boolean"/>
       <orm-properties>
         <attribute name="tableName">profile</attribute>
         <attribute name="actAs">
@@ -59,7 +62,7 @@
         </attribute>
       </orm-properties>
     </table>
-    <table name="Fish" visPositionX="536" visPositionY="497" visSizeX="0" visSizeX2="104" visSizeY="0" visSizeY2="45">
+    <table name="Fish" visPositionX="447" visPositionY="439" visSizeX="0" visSizeX2="104" visSizeY="0" visSizeY2="45">
       <column auto-increment="true" name="id" primary="true" required="true" type="integer"/>
       <column name="name" required="true" size="100" type="string" unique="true"/>
     </table>
@@ -105,7 +108,7 @@
         </attribute>
       </orm-properties>
     </table>
-    <table name="Style" visPositionX="535" visPositionY="214" visSizeX="0" visSizeX2="104" visSizeY="0" visSizeY2="45">
+    <table name="Style" visPositionX="570" visPositionY="419" visSizeX="0" visSizeX2="104" visSizeY="0" visSizeY2="45">
       <column auto-increment="true" name="id" primary="true" required="true" type="integer"/>
       <column name="name" required="true" size="100" type="string" unique="true"/>
     </table>
@@ -199,7 +202,7 @@
       <column auto-increment="true" name="id" primary="true" size="4" type="integer"/>
       <column name="name" required="true" size="50" type="string" unique="true"/>
     </table>
-    <table name="WishList" visPositionX="317" visPositionY="530" visSizeX="0" visSizeX2="120" visSizeY="0" visSizeY2="60">
+    <table name="WishList" visPositionX="304" visPositionY="509" visSizeX="0" visSizeX2="120" visSizeY="0" visSizeY2="60">
       <column name="profile_id" primary="true" required="true" size="4" type="integer"/>
       <column name="location_id" primary="true" required="true" size="4" type="integer"/>
     </table>
@@ -260,6 +263,14 @@
         </attribute>
       </orm-properties>
     </table>
+    <table name="ProfileFish" visPositionX="455" visPositionY="566" visSizeX="0" visSizeX2="114" visSizeY="0" visSizeY2="60">
+      <column name="fish_id" required="true" type="integer"/>
+      <column name="profile_id" required="true" size="4" type="integer"/>
+    </table>
+    <table name="ProfileStyle" visPositionX="576" visPositionY="614" visSizeX="0" visSizeX2="114" visSizeY="0" visSizeY2="74">
+      <column name="style_id" required="true" type="integer"/>
+      <column name="profile_id" required="true" size="4" type="integer"/>
+    </table>
     <orm-properties>
       <attribute name="options">
         <attribute name="type">INNODB</attribute>
@@ -270,7 +281,7 @@
     <foreign-key from="Location" name="FK_Location_Location_flow" to="LocationFlow" visCenterX="0" visCenterY="-1">
       <foreign-key-column from="location_flow_id" to="id"/>
     </foreign-key>
-    <foreign-key from="Location" name="FK_Location_Location_fundus" to="LocationFundus" visCenterX="0" visCenterY="13">
+    <foreign-key from="Location" name="FK_Location_Location_fundus" to="LocationFundus" visCenterX="0" visCenterY="-1">
       <foreign-key-column from="location_fundus_id" to="id"/>
     </foreign-key>
     <foreign-key from="Location" name="FK_Location_Location_relief" to="LocationRelief" visCenterX="-1" visCenterY="6">
@@ -331,6 +342,18 @@
     <foreign-key caption="Profile VoteProfile" from="VoteProfile" name="FK_VoteProfile_Profile_id" to="Profile" visShowCaption="0">
       <foreign-key-column from="profile_id" to="id"/>
     </foreign-key>
+    <foreign-key caption="Fish ProfileFish" from="ProfileFish" name="FK_ProfileFish_Fish_id" to="Fish" visCaption1X="-2" visCaption1Y="-1" visCenterX="0" visCenterY="0" visShowCaption="0">
+      <foreign-key-column from="fish_id" to="id"/>
+    </foreign-key>
+    <foreign-key caption="Profile ProfileFish" from="ProfileFish" name="FK_ProfileFish_Profile_id" to="Profile" visShowCaption="0">
+      <foreign-key-column from="profile_id" to="id"/>
+    </foreign-key>
+    <foreign-key caption="Style ProfileStyle" from="ProfileStyle" name="FK_ProfileStyle_Style_id" to="Style" visCaption1X="0" visCaption1Y="-1" visCenterX="0" visCenterY="0" visShowCaption="0">
+      <foreign-key-column from="style_id" to="id"/>
+    </foreign-key>
+    <foreign-key caption="Profile ProfileStyle" from="ProfileStyle" name="FK_ProfileStyle_Profile_id" to="Profile" visCaption1X="-1" visCaption1Y="-1" visCenterX="0" visCenterY="0" visShowCaption="0">
+      <foreign-key-column from="profile_id" to="id"/>
+    </foreign-key>
     <many-to-many-relation mn-table="WishList">
       <many-to-many-foreign-key foreign-key="FK_WishList_Profile_id" relation-alias="Wishers"/>
       <many-to-many-foreign-key foreign-key="FK_WishList_Location_id" relation-alias="Wishes"/>
@@ -338,6 +361,14 @@
     <many-to-many-relation mn-table="Friend">
       <many-to-many-foreign-key foreign-key="FK_Friends_Profile_id" relation-alias="MyFirends"/>
       <many-to-many-foreign-key foreign-key="FK_Friends_Profile_id2" relation-alias="MyFirends2"/>
+    </many-to-many-relation>
+    <many-to-many-relation mn-table="ProfileFish">
+      <many-to-many-foreign-key foreign-key="FK_ProfileFish_Fish_id" relation-alias="Fishes"/>
+      <many-to-many-foreign-key foreign-key="FK_ProfileFish_Profile_id" relation-alias="Profiles"/>
+    </many-to-many-relation>
+    <many-to-many-relation mn-table="ProfileStyle">
+      <many-to-many-foreign-key foreign-key="FK_ProfileStyle_Style_id" relation-alias="Styles"/>
+      <many-to-many-foreign-key foreign-key="FK_ProfileStyle_Profile_id" relation-alias="Profiles"/>
     </many-to-many-relation>
   </module>
 

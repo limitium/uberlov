@@ -18,19 +18,31 @@ class profileActions extends sfActions {
     public function executeShow(sfWebRequest $request) {
         $this->profile = Doctrine::getTable('Profile')->find(array($request->getParameter('id')));
         $this->forward404Unless($this->profile);
-
         $this->comments = Doctrine_Query::create()
             ->from('Comment c')
             ->where('c.created_by = ? and c.parent > 0', $this->profile->getId())
             ->count();
         $this->reports = Doctrine_Query::create()
-            ->from('Profit r')
-            ->where('r.created_by = ?', $this->profile->getId())
-            ->count();
+            ->from('Profit p')
+            ->leftJoin('p.ProfitDetail d')
+            ->where('p.created_by = ?', $this->profile->getId())
+            ->execute();
         $this->locations = Doctrine_Query::create()
             ->from('Location l')
             ->where('l.created_by = ?', $this->profile->getId())
             ->count();
+        $this->total = 0;
+        $this->best = array(
+            'name' => 'пустышка',
+            'qty' => 0);
+        foreach ($this->reports as $report) {
+            $this->best['name'] = $report->getFish();
+            $this->best['qty'] = $report->getQty();
+            foreach ($report->getProfitDetail() as $pd) {
+                $this->total+=$pd->getQty();
+            }
+        }
+        $this->reports = $this->reports->count();
     }
 
     public function executeNew(sfWebRequest $request) {

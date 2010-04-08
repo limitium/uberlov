@@ -6,6 +6,7 @@ function mapModule(){
     this.geocoder = new gm.Geocoder();
 
     this.selected = [];
+    this.locations = {};
     
     this.initMenu();
     this.initMap();
@@ -217,7 +218,9 @@ mapModule.prototype.loadData = function(){
 }
 
 mapModule.prototype.createLocation = function(opt){
-    new ht_location(this,opt);
+    if(!this.locations[opt.id]){
+        this.locations[opt.id] = new ht_location(this,opt);
+    }    
 }
 
 mapModule.prototype.createMarker = function(opt){
