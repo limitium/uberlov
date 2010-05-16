@@ -1,3 +1,3 @@
-<h3>New Location</h3>
+<h3>Новое место</h3>
 
 <?php include_partial('form', array('form' => $form)) ?>

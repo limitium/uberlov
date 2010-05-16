@@ -9,16 +9,20 @@
  * @property string $name
  * @property string $description
  * @property float $depth
+ * @property boolean $is_free
+ * @property string $price
  * @property integer $location_flow_id
  * @property integer $location_fundus_id
  * @property integer $location_relief_id
  * @property integer $location_type_id
  * @property integer $location_scope_id
+ * @property integer $address_id
  * @property LocationFlow $LocationFlow
  * @property LocationFundus $LocationFundus
  * @property LocationRelief $LocationRelief
  * @property LocationType $LocationType
  * @property LocationScope $LocationScope
+ * @property Address $Address
  * @property Doctrine_Collection $Wishers
  * @property Doctrine_Collection $Profit
  * @property Doctrine_Collection $CommentLocation
@@ -29,16 +33,20 @@
  * @method string              getName()               Returns the current record's "name" value
  * @method string              getDescription()        Returns the current record's "description" value
  * @method float               getDepth()              Returns the current record's "depth" value
+ * @method boolean             getIsFree()             Returns the current record's "is_free" value
+ * @method string              getPrice()              Returns the current record's "price" value
  * @method integer             getLocationFlowId()     Returns the current record's "location_flow_id" value
  * @method integer             getLocationFundusId()   Returns the current record's "location_fundus_id" value
  * @method integer             getLocationReliefId()   Returns the current record's "location_relief_id" value
  * @method integer             getLocationTypeId()     Returns the current record's "location_type_id" value
  * @method integer             getLocationScopeId()    Returns the current record's "location_scope_id" value
+ * @method integer             getAddressId()          Returns the current record's "address_id" value
  * @method LocationFlow        getLocationFlow()       Returns the current record's "LocationFlow" value
  * @method LocationFundus      getLocationFundus()     Returns the current record's "LocationFundus" value
  * @method LocationRelief      getLocationRelief()     Returns the current record's "LocationRelief" value
  * @method LocationType        getLocationType()       Returns the current record's "LocationType" value
  * @method LocationScope       getLocationScope()      Returns the current record's "LocationScope" value
+ * @method Address             getAddress()            Returns the current record's "Address" value
  * @method Doctrine_Collection getWishers()            Returns the current record's "Wishers" collection
  * @method Doctrine_Collection getProfit()             Returns the current record's "Profit" collection
  * @method Doctrine_Collection getCommentLocation()    Returns the current record's "CommentLocation" collection
@@ -48,16 +56,20 @@
  * @method Location            setName()               Sets the current record's "name" value
  * @method Location            setDescription()        Sets the current record's "description" value
  * @method Location            setDepth()              Sets the current record's "depth" value
+ * @method Location            setIsFree()             Sets the current record's "is_free" value
+ * @method Location            setPrice()              Sets the current record's "price" value
  * @method Location            setLocationFlowId()     Sets the current record's "location_flow_id" value
  * @method Location            setLocationFundusId()   Sets the current record's "location_fundus_id" value
  * @method Location            setLocationReliefId()   Sets the current record's "location_relief_id" value
  * @method Location            setLocationTypeId()     Sets the current record's "location_type_id" value
  * @method Location            setLocationScopeId()    Sets the current record's "location_scope_id" value
+ * @method Location            setAddressId()          Sets the current record's "address_id" value
  * @method Location            setLocationFlow()       Sets the current record's "LocationFlow" value
  * @method Location            setLocationFundus()     Sets the current record's "LocationFundus" value
  * @method Location            setLocationRelief()     Sets the current record's "LocationRelief" value
  * @method Location            setLocationType()       Sets the current record's "LocationType" value
  * @method Location            setLocationScope()      Sets the current record's "LocationScope" value
+ * @method Location            setAddress()            Sets the current record's "Address" value
  * @method Location            setWishers()            Sets the current record's "Wishers" collection
  * @method Location            setProfit()             Sets the current record's "Profit" collection
  * @method Location            setCommentLocation()    Sets the current record's "CommentLocation" collection
@@ -94,6 +106,12 @@ abstract class BaseLocation extends sfDoctrineRecord
         $this->hasColumn('depth', 'float', null, array(
              'type' => 'float',
              ));
+        $this->hasColumn('is_free', 'boolean', null, array(
+             'type' => 'boolean',
+             ));
+        $this->hasColumn('price', 'string', null, array(
+             'type' => 'string',
+             ));
         $this->hasColumn('location_flow_id', 'integer', 4, array(
              'type' => 'integer',
              'length' => '4',
@@ -111,6 +129,10 @@ abstract class BaseLocation extends sfDoctrineRecord
              'length' => '4',
              ));
         $this->hasColumn('location_scope_id', 'integer', 4, array(
+             'type' => 'integer',
+             'length' => '4',
+             ));
+        $this->hasColumn('address_id', 'integer', 4, array(
              'type' => 'integer',
              'length' => '4',
              ));
@@ -141,6 +163,10 @@ abstract class BaseLocation extends sfDoctrineRecord
 
         $this->hasOne('LocationScope', array(
              'local' => 'location_scope_id',
+             'foreign' => 'id'));
+
+        $this->hasOne('Address', array(
+             'local' => 'address_id',
              'foreign' => 'id'));
 
         $this->hasMany('Profile as Wishers', array(

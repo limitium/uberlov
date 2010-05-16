@@ -15,20 +15,16 @@ abstract class BaseProfileStyleForm extends BaseFormDoctrine
   public function setup()
   {
     $this->setWidgets(array(
-      'ID'         => new sfWidgetFormInputHidden(),
+      'id'         => new sfWidgetFormInputHidden(),
       'style_id'   => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Style'), 'add_empty' => false)),
       'profile_id' => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Profile'), 'add_empty' => false)),
     ));
 
     $this->setValidators(array(
-      'ID'         => new sfValidatorDoctrineChoice(array('model' => $this->getModelName(), 'column' => 'ID', 'required' => false)),
+      'id'         => new sfValidatorDoctrineChoice(array('model' => $this->getModelName(), 'column' => 'id', 'required' => false)),
       'style_id'   => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Style'))),
       'profile_id' => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Profile'))),
     ));
-
-    $this->validatorSchema->setPostValidator(
-      new sfValidatorDoctrineUnique(array('model' => 'ProfileStyle', 'column' => array('ID')))
-    );
 
     $this->widgetSchema->setNameFormat('profile_style[%s]');
 

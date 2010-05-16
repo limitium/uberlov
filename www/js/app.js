@@ -45,14 +45,7 @@ app = {
         return app.modules[module];
     },
     formatHtml:function(html){
-        var jForm = $(html);
-
-        var cont = jQuery('<div class="baloon" />');
-        $.each(jForm,function(){
-            cont.append(this);
-        })
-        
-        return cont.get(0)
+        return $('<div class="baloon">' + html + '</div>').get(0);
     },
     getForm:function(url,handler){
         $.ajax({

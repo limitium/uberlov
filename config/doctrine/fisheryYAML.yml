@@ -38,6 +38,10 @@ Location:
       notnull: true
     depth:
       type: float
+    is_free:
+      type: boolean
+    price:
+      type: string
     location_flow_id:
       type: integer(4)
     location_fundus_id:
@@ -47,6 +51,8 @@ Location:
     location_type_id:
       type: integer(4)
     location_scope_id:
+      type: integer(4)
+    address_id:
       type: integer(4)
   relations:
     LocationFlow:
@@ -63,6 +69,9 @@ Location:
       foreign: id
     LocationScope:
       local: location_scope_id
+      foreign: id
+    Address:
+      local: address_id
       foreign: id
     Wishers:
       class: Profile
@@ -430,10 +439,6 @@ LocationScope:
       unique: true
       type: string(50)
       notnull: true
-    slug:
-      unique: true
-      type: string(50)
-      notnull: true
 VoteProfile:
   inheritance:
     type: column_aggregation
@@ -477,6 +482,22 @@ ProfileStyle:
     Profile:
       local: profile_id
       foreign: id
+Address:
+  columns:
+    id:
+      primary: true
+      type: integer(4)
+      autoincrement: true
+    country:
+      type: string
+    administrative_area_level_1:
+      type: string
+    administrative_area_level_2:
+      type: string
+    administrative_area_level_3:
+      type: string
+    locality:
+      type: string
 options:
   type: INNODB
   charset: utf8

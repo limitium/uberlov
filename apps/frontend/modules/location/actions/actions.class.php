@@ -93,7 +93,18 @@ class locationActions extends sfActions {
     protected function processForm(sfWebRequest $request, sfForm $form) {
         $form->bind($request->getParameter($form->getName()));
         if ($form->isValid()) {
-            return $form->save();
+            fb(123123);
+            $addressData = (array) json_decode($form->getValue('address'));
+            fb($addressData);
+            $address = new Address();
+            $address->synchronizeWithArray($addressData);
+            fb($address->getCountry());
+            if(!$form->isNew()) {
+                $form->getObject()->getAddress()->delete();
+            }
+            $location = $form->save();
+            $location->setAddress($address);
+            return $location->save();
         }
         return null;
     }

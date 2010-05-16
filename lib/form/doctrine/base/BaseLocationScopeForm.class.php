@@ -17,20 +17,15 @@ abstract class BaseLocationScopeForm extends BaseFormDoctrine
     $this->setWidgets(array(
       'id'   => new sfWidgetFormInputHidden(),
       'name' => new sfWidgetFormInputText(),
-      'slug' => new sfWidgetFormInputText(),
     ));
 
     $this->setValidators(array(
       'id'   => new sfValidatorDoctrineChoice(array('model' => $this->getModelName(), 'column' => 'id', 'required' => false)),
       'name' => new sfValidatorString(array('max_length' => 50)),
-      'slug' => new sfValidatorString(array('max_length' => 50)),
     ));
 
     $this->validatorSchema->setPostValidator(
-      new sfValidatorAnd(array(
-        new sfValidatorDoctrineUnique(array('model' => 'LocationScope', 'column' => array('name'))),
-        new sfValidatorDoctrineUnique(array('model' => 'LocationScope', 'column' => array('slug'))),
-      ))
+      new sfValidatorDoctrineUnique(array('model' => 'LocationScope', 'column' => array('name')))
     );
 
     $this->widgetSchema->setNameFormat('location_scope[%s]');
