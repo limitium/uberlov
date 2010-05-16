@@ -3,10 +3,7 @@ Profile:
     nick_name: lim
     first_name: lim
     last_name: lim
-    sfGuardUser: sfGuardUser_1
-    created_at: '0000-00-00 00:00:00'
-    updated_at: '0000-00-00 00:00:00'
-Comment: {  }
+    sfGuardUser: sgu_admin
 Fish:
   Fish_1:
     name: karas
@@ -176,45 +173,36 @@ Location:
     version: '1'
 LocationFlow:
   LocationFlow_1:
-    name: asd
+    name: Отсутсвует
   LocationFlow_2:
-    name: fg
+    name: Медленное
+  LocationFlow_3:
+    name: Среднее
+  LocationFlow_4:
+    name: Быстрое
 LocationFundus:
   LocationFundus_1:
-    name: wer
+    name: Галька
   LocationFundus_2:
-    name: sdf
+    name: Песок
+  LocationFundus_3:
+    name: Глина
+  LocationFundus_4:
+    name: Ил
 LocationRelief:
   LocationRelief_1:
-    name: wer
+    name: Отмель
   LocationRelief_2:
-    name: cvxbdf
-sfGuardGroup:
-  sfGuardGroup_1:
-    name: admin
-    description: 'Administrator group'
-    created_at: '2010-04-03 22:59:54'
-    updated_at: '2010-04-03 22:59:54'
-sfGuardGroupPermission:
-  sfGuardGroupPermission_1_1:
-    sfGuardGroup: sfGuardGroup_1
-    sfGuardPermission: sfGuardPermission_1
-    created_at: '2010-04-03 22:59:54'
-    updated_at: '2010-04-03 22:59:54'
-sfGuardPermission:
-  sfGuardPermission_1:
-    name: admin
-    description: 'Administrator permission'
-    created_at: '2010-04-03 22:59:54'
-    updated_at: '2010-04-03 22:59:54'
-sfGuardUser:
-  sfGuardUser_1:
-    username: admin
-    password: admin
-    is_super_admin: true
-sfGuardUserGroup:
-  sfGuardUserGroup_1_1:
-    sfGuardUser: sfGuardUser_1
-    sfGuardGroup: sfGuardGroup_1
-    created_at: '2010-04-03 22:59:54'
-    updated_at: '2010-04-03 22:59:54'
+    name: Яма
+  LocationRelief_3:
+    name: Перекаты
+LocationScope:
+  LocationScope_1:
+    name: Все
+  LocationScope_2:
+    name: Друзья
+  LocationScope_3:
+    name: 'Только я'
+LocationType:
+  LocationType_1:
+    name: Пруд

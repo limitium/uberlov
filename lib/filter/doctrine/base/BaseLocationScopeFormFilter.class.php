@@ -14,12 +14,10 @@ abstract class BaseLocationScopeFormFilter extends BaseFormFilterDoctrine
   {
     $this->setWidgets(array(
       'name' => new sfWidgetFormFilterInput(array('with_empty' => false)),
-      'slug' => new sfWidgetFormFilterInput(array('with_empty' => false)),
     ));
 
     $this->setValidators(array(
       'name' => new sfValidatorPass(array('required' => false)),
-      'slug' => new sfValidatorPass(array('required' => false)),
     ));
 
     $this->widgetSchema->setNameFormat('location_scope_filters[%s]');
@@ -41,7 +39,6 @@ abstract class BaseLocationScopeFormFilter extends BaseFormFilterDoctrine
     return array(
       'id'   => 'Number',
       'name' => 'Text',
-      'slug' => 'Text',
     );
   }
 }

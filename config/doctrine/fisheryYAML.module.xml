@@ -7,11 +7,14 @@
       <column default="''" name="name" required="true" size="50" type="string"/>
       <column default="''" name="description" required="true" type="string"/>
       <column name="depth" type="float"/>
+      <column name="is_free" type="boolean"/>
+      <column name="price" type="string"/>
       <column description="Foreign key to Location_flow" name="location_flow_id" size="4" type="integer"/>
       <column description="Foreign key to Location_fundus" name="location_fundus_id" size="4" type="integer"/>
       <column description="Foreign key to Location_relief" name="location_relief_id" size="4" type="integer"/>
       <column description="Foreign key to LocationType" name="location_type_id" size="4" type="integer"/>
       <column name="location_scope_id" size="4" type="integer"/>
+      <column description="Foreign key to Address" name="address_id" size="4" type="integer"/>
       <orm-properties>
         <attribute name="tableName">location</attribute>
         <attribute name="actAs">
@@ -250,7 +253,6 @@
     <table name="LocationScope" visPositionX="434" visPositionY="133" visSizeX="0" visSizeX2="99" visSizeY="0" visSizeY2="59">
       <column auto-increment="true" name="id" primary="true" size="4" type="integer"/>
       <column name="name" required="true" size="50" type="string" unique="true"/>
-      <column name="slug" required="true" size="50" type="string" unique="true"/>
     </table>
     <table name="VoteProfile" visPositionX="35" visPositionY="502" visSizeX="0" visSizeX2="114" visSizeY="0" visSizeY2="31">
       <column name="profile_id" size="4" type="integer"/>
@@ -270,6 +272,14 @@
     <table name="ProfileStyle" visPositionX="576" visPositionY="614" visSizeX="0" visSizeX2="114" visSizeY="0" visSizeY2="74">
       <column name="style_id" required="true" type="integer"/>
       <column name="profile_id" required="true" size="4" type="integer"/>
+    </table>
+    <table name="Address" visPositionX="598" visPositionY="200" visSizeX="0" visSizeX2="177" visSizeY="0" visSizeY2="101">
+      <column auto-increment="true" name="id" primary="true" size="4" type="integer"/>
+      <column name="country" type="string"/>
+      <column name="administrative_area_level_1" type="string"/>
+      <column name="administrative_area_level_2" type="string"/>
+      <column name="administrative_area_level_3" type="string"/>
+      <column name="locality" type="string"/>
     </table>
     <orm-properties>
       <attribute name="options">
@@ -293,7 +303,10 @@
     <foreign-key caption="LocationScope Location" from="Location" name="FK_Location_LocationScope_id" to="LocationScope" visShowCaption="0">
       <foreign-key-column from="location_scope_id" to="id"/>
     </foreign-key>
-    <foreign-key from="Profit" name="FK_Profit_Location_id" to="Location" visCenterX="0" visCenterY="7">
+    <foreign-key from="Location" name="FK_Location_Address" to="Address">
+      <foreign-key-column from="address_id" to="id"/>
+    </foreign-key>
+    <foreign-key from="Profit" name="FK_Profit_Location_id" to="Location" visCenterX="0" visCenterY="-3">
       <foreign-key-column from="location_id" to="id"/>
     </foreign-key>
     <foreign-key caption="Profit ProfitDetail" from="ProfitDetail" name="FK_ProfitDetail_Profit_id" to="Profit" visShowCaption="0">

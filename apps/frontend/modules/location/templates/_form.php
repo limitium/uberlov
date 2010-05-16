@@ -9,10 +9,7 @@
             <tr>
                 <td colspan="2">
                     <?php echo $form->renderHiddenFields() ?>
-                    <?php if (!$form->getObject()->isNew()): ?>
-                    &nbsp;<?php echo link_to('Delete', 'location/delete?id='.$form->getObject()->getId(), array('method' => 'delete', 'confirm' => 'Are you sure?')) ?>
-                    <?php endif; ?>
-                    <input type="submit" class="button" value="Save" />
+                    <input type="submit" class="button" value="Сохранить" />
                 </td>
             </tr>
         </tfoot>
@@ -23,6 +20,13 @@
                 <td>
                     <?php echo $form['name']->renderError() ?>
                     <?php echo $form['name'] ?>
+                </td>
+            </tr>
+            <tr>
+                <th><?php echo $form['location_type_id']->renderLabel() ?></th>
+                <td>
+                    <?php echo $form['location_type_id']->renderError() ?>
+                    <?php echo $form['location_type_id'] ?>
                 </td>
             </tr>
             <tr>
@@ -52,7 +56,28 @@
                     <?php echo $form['location_relief_id']->renderError() ?>
                     <?php echo $form['location_relief_id'] ?>
                 </td>
-            </tr>       
+            </tr>
+            <tr>
+                <th><?php echo $form['location_scope_id']->renderLabel() ?></th>
+                <td>
+                    <?php echo $form['location_scope_id']->renderError() ?>
+                    <?php echo $form['location_scope_id'] ?>
+                </td>
+            </tr>
+            <tr>
+                <th><?php echo $form['is_free']->renderLabel() ?></th>
+                <td>
+                    <?php echo $form['is_free']->renderError() ?>
+                    <?php echo $form['is_free'] ?>
+                </td>
+            </tr>
+            <tr>
+                <th><?php echo $form['price']->renderLabel() ?></th>
+                <td>
+                    <?php echo $form['price']->renderError() ?>
+                    <?php echo $form['price'] ?>
+                </td>
+            </tr>  
             <tr>
                 <th><?php echo $form['description']->renderLabel() ?></th>
                 <td>

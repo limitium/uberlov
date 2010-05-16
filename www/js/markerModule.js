@@ -92,6 +92,12 @@ markerModule.prototype.checkZoom = function(){
 function ht_location_e(mm,opt){
     this.mm = mm;
     this.marker = null;
+    this.address = null;
+    this.form = null;
+    this.loading = {
+        form: false,
+        address: false
+    };
     this.listeners = {};
 
     this.onSaveChange = opt.onSaveChange;
@@ -121,28 +127,85 @@ ht_location_e.prototype.addListenerClick = function(){
     this.onSaveChange(false);
     this.listeners.click = gm.event.addListener(this.marker,'click',this.onClick.delegate(this));
 }
+
 ht_location_e.prototype.onClick = function(){
-    this.mm.geocoder.geocode({'latLng': this.marker.getPosition(),'language':'ru'}, function(results, status) {
-        fb(arguments)
-        if (status == gm.GeocoderStatus.OK) {
-          if (results[1]) {
-          } else {
-            alert("No results found");
-          }
-        } else {
-          alert("Geocoder failed due to: " + status);
-        }
-      });
 
     this.onSaveChange(true);
     gm.event.removeListener(this.listeners.click);
 
     var loader = this.mm.showLoader(this.marker.getPosition(),'<img src="/images/loader-small.gif" />');
-    app.getForm('/location/new',this.showForm.delegate(this,this.marker,loader));
+
+    this.getGeo(loader);
+    this.getForm(loader);
+    
 }
-ht_location_e.prototype.showForm = function(form,marker,loader){
+ht_location_e.prototype.getGeo = function(loader){
+    this.address = {
+        country:'',
+        administrative_area_level_1: '',
+        administrative_area_level_2: '',
+        administrative_area_level_3: '',
+        locality: ''
+    }
+    this.loading.address = true;
+
+    var self = this;
+
+    this.mm.geocoder.geocode({
+        'latLng': this.marker.getPosition(),
+        'language':'ru'
+    }, function(result, status) {
+        self.loading.address = false;
+        if (status == gm.GeocoderStatus.OK) {
+            var data = result[0];
+            if (data) {
+                $.each(data.address_components, function(){
+                    if(self.address[this.types[0]] == ''){
+                        self.address[this.types[0]] = this.long_name;
+                    }
+                });
+            } else {
+                alert("No results found");
+            }
+        } else {
+            alert("Geocoder failed due to: " + status);
+        }
+        self.showForm(loader);
+    });
+}
+
+ht_location_e.prototype.getForm = function(loader){
+    this.loading.form = true;
+    this.form = null;
+    var self = this;
+    
+    app.getForm('/location/new',function(form){
+        self.loading.form = false;
+        self.form = form;
+        self.showForm(loader);
+    });
+}
+ht_location_e.prototype.showForm = function(loader){
+    if(this.loading.address || this.loading.form){
+        fb('loading');
+        return ;
+    }
+    fb(this.address);
+    var marker = this.marker;
+    var form = this.form;
+    
     $('#location_latitude', form).val(marker.getPosition().lat());
     $('#location_longitude', form).val(marker.getPosition().lng());
+    $('#location_address', form).val(jQuery.JSON.encode((this.address)));
+
+    $('#location_is_free', form).change(function(){
+        var price = $('#location_price', form);
+        if($(this).attr('checked')){
+            price.attr('disabled', 'disabled');
+        }else{
+            price.attr('disabled', '');
+        }
+    });
 
     this.marker.infoWindow = this.mm.openInfo(marker.getPosition(),this.addSubmitHandler(form),this.addListenerClick.delegate(this,marker));
 
@@ -163,12 +226,10 @@ ht_location_e.prototype.addSubmitHandler = function(form){
                 backgroundColor:'#eee'
             }
         });
-
         app.sendForm(form, function(newForm){
             $(form).unblock();
 
             var matches = newForm.match(/^(\d+)\|(.*)/)
-
             if(matches && matches.length==3){
                 self.mm.createLocation({
                     name:matches[2],

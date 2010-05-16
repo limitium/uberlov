@@ -39,7 +39,7 @@ abstract class BaseProfileStyleFormFilter extends BaseFormFilterDoctrine
   public function getFields()
   {
     return array(
-      'ID'         => 'Number',
+      'id'         => 'Number',
       'style_id'   => 'ForeignKey',
       'profile_id' => 'ForeignKey',
     );

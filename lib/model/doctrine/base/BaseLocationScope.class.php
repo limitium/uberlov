@@ -7,16 +7,13 @@
  * 
  * @property integer $id
  * @property string $name
- * @property string $slug
  * @property Doctrine_Collection $Location
  * 
  * @method integer             getId()       Returns the current record's "id" value
  * @method string              getName()     Returns the current record's "name" value
- * @method string              getSlug()     Returns the current record's "slug" value
  * @method Doctrine_Collection getLocation() Returns the current record's "Location" collection
  * @method LocationScope       setId()       Sets the current record's "id" value
  * @method LocationScope       setName()     Sets the current record's "name" value
- * @method LocationScope       setSlug()     Sets the current record's "slug" value
  * @method LocationScope       setLocation() Sets the current record's "Location" collection
  * 
  * @package    FISHERY
@@ -36,12 +33,6 @@ abstract class BaseLocationScope extends sfDoctrineRecord
              'length' => '4',
              ));
         $this->hasColumn('name', 'string', 50, array(
-             'unique' => true,
-             'type' => 'string',
-             'notnull' => true,
-             'length' => '50',
-             ));
-        $this->hasColumn('slug', 'string', 50, array(
              'unique' => true,
              'type' => 'string',
              'notnull' => true,
