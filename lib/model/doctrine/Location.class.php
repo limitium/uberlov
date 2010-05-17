@@ -24,4 +24,39 @@ class Location extends BaseLocation {
     public function getRating() {
         return Vote::getRating($this);
     }
+
+    public function updateAddress($addressData) {
+        if(!$this->isNew()) {
+            $address = $this->getAddress();
+        }else {
+            $address = new Address();
+        }
+        fb($addressData);
+        foreach ($addressData  as $partName => $name) {
+            $part = $this->getAddressPart($addressData, $partName);
+            $uPartName = ucfirst($partName);
+
+            $address->$uPartName = $part ? $part : null;
+        }
+
+        $this->save();
+        return $this;
+    }
+
+    private function getAddressPart($addressData, $partName) {
+        $uPartName = ucfirst($partName);
+        $name = $addressData[$partName];
+
+        $part = Doctrine_Query::create()
+            ->from($uPartName)
+            ->where('name = ?', $name)
+            ->fetchOne();
+
+        if(!$part && $name) {
+            $part = new $uPartName();
+            $part->name = $name;
+            fb('new part');
+        }
+        return $part;
+    }
 }

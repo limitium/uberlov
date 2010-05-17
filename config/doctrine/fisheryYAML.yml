@@ -136,7 +136,7 @@ Fish:
   columns:
     id:
       primary: true
-      type: integer
+      type: integer(4)
       notnull: true
       autoincrement: true
     name:
@@ -204,7 +204,7 @@ Style:
   columns:
     id:
       primary: true
-      type: integer
+      type: integer(4)
       notnull: true
       autoincrement: true
     name:
@@ -225,9 +225,9 @@ ProfitDetail:
     profit_id:
       type: integer(4)
     style_id:
-      type: integer
+      type: integer(4)
     fish_id:
-      type: integer
+      type: integer(4)
     qty:
       type: float
       notnull: true
@@ -455,7 +455,7 @@ VoteProfile:
 ProfileFish:
   columns:
     fish_id:
-      type: integer
+      type: integer(4)
       notnull: true
     profile_id:
       type: integer(4)
@@ -470,7 +470,7 @@ ProfileFish:
 ProfileStyle:
   columns:
     style_id:
-      type: integer
+      type: integer(4)
       notnull: true
     profile_id:
       type: integer(4)
@@ -488,16 +488,85 @@ Address:
       primary: true
       type: integer(4)
       autoincrement: true
-    country:
-      type: string
-    administrative_area_level_1:
-      type: string
-    administrative_area_level_2:
-      type: string
-    administrative_area_level_3:
-      type: string
-    locality:
-      type: string
+    country_id:
+      type: integer(4)
+    area_low_id:
+      type: integer(4)
+    area_high_id:
+      type: integer(4)
+    locality_id:
+      type: integer(4)
+  relations:
+    Country:
+      local: country_id
+      foreign: id
+    AreaLow:
+      local: area_low_id
+      foreign: id
+    AreaHigh:
+      local: area_high_id
+      foreign: id
+    Locality:
+      local: locality_id
+      foreign: id
+Country:
+  columns:
+    id:
+      primary: true
+      type: integer(4)
+      autoincrement: true
+    name:
+      unique: true
+      type: string(255)
+      notnull: true
+Locality:
+  columns:
+    id:
+      primary: true
+      type: integer(4)
+      autoincrement: true
+    name:
+      unique: true
+      type: string(255)
+      notnull: true
+    area_high_id:
+      type: integer(4)
+  relations:
+    AreaHigh:
+      local: area_high_id
+      foreign: id
+AreaLow:
+  columns:
+    id:
+      primary: true
+      type: integer(4)
+      autoincrement: true
+    name:
+      unique: true
+      type: string(255)
+      notnull: true
+    country_id:
+      type: integer(4)
+  relations:
+    Country:
+      local: country_id
+      foreign: id
+AreaHigh:
+  columns:
+    id:
+      primary: true
+      type: integer(4)
+      autoincrement: true
+    name:
+      unique: true
+      type: string(255)
+      notnull: true
+    area_low_id:
+      type: integer(4)
+  relations:
+    AreaLow:
+      local: area_low_id
+      foreign: id
 options:
   type: INNODB
   charset: utf8

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="no" ?>
 <orm-designer version="1.3.1.332">
 
-  <module import-format="DoctrineYml" import-path="fisheryYAML.yml" name="ht" visBkColor="16380923" visSizeX="205" visSizeX2="853" visSizeY="51" visSizeY2="713">
+  <module import-format="DoctrineYml" import-path="fisheryYAML.yml" name="ht" visBkColor="16380923" visSizeX="205" visSizeX2="1059" visSizeY="51" visSizeY2="713">
     <table name="Location" visPositionX="206" visPositionY="117" visSizeX="0" visSizeX2="154" visSizeY="0" visSizeY2="129">
       <column auto-increment="true" name="id" primary="true" size="4" type="integer"/>
       <column default="''" name="name" required="true" size="50" type="string"/>
@@ -65,8 +65,8 @@
         </attribute>
       </orm-properties>
     </table>
-    <table name="Fish" visPositionX="447" visPositionY="439" visSizeX="0" visSizeX2="104" visSizeY="0" visSizeY2="45">
-      <column auto-increment="true" name="id" primary="true" required="true" type="integer"/>
+    <table name="Fish" visPositionX="447" visPositionY="438" visSizeX="0" visSizeX2="104" visSizeY="0" visSizeY2="45">
+      <column auto-increment="true" name="id" primary="true" required="true" size="4" type="integer"/>
       <column name="name" required="true" size="100" type="string" unique="true"/>
     </table>
     <table name="Profit" visPositionX="197" visPositionY="335" visSizeX="0" visSizeX2="120" visSizeY="0" visSizeY2="157">
@@ -112,14 +112,14 @@
       </orm-properties>
     </table>
     <table name="Style" visPositionX="570" visPositionY="419" visSizeX="0" visSizeX2="104" visSizeY="0" visSizeY2="45">
-      <column auto-increment="true" name="id" primary="true" required="true" type="integer"/>
+      <column auto-increment="true" name="id" primary="true" required="true" size="4" type="integer"/>
       <column name="name" required="true" size="100" type="string" unique="true"/>
     </table>
     <table name="ProfitDetail" visPositionX="412" visPositionY="313" visSizeX="0" visSizeX2="110" visSizeY="0" visSizeY2="87">
       <column name="time" required="true" type="timestamp"/>
       <column name="profit_id" size="4" type="integer"/>
-      <column name="style_id" type="integer"/>
-      <column name="fish_id" type="integer"/>
+      <column name="style_id" size="4" type="integer"/>
+      <column name="fish_id" size="4" type="integer"/>
       <column name="qty" required="true" type="float"/>
       <index name="unique_fish_style_per_profit" unique="true">
         <index-column name="profit_id"/>
@@ -266,20 +266,38 @@
       </orm-properties>
     </table>
     <table name="ProfileFish" visPositionX="455" visPositionY="566" visSizeX="0" visSizeX2="114" visSizeY="0" visSizeY2="60">
-      <column name="fish_id" required="true" type="integer"/>
+      <column name="fish_id" required="true" size="4" type="integer"/>
       <column name="profile_id" required="true" size="4" type="integer"/>
     </table>
-    <table name="ProfileStyle" visPositionX="576" visPositionY="614" visSizeX="0" visSizeX2="114" visSizeY="0" visSizeY2="74">
-      <column name="style_id" required="true" type="integer"/>
+    <table name="ProfileStyle" visPositionX="576" visPositionY="615" visSizeX="0" visSizeX2="114" visSizeY="0" visSizeY2="60">
+      <column name="style_id" required="true" size="4" type="integer"/>
       <column name="profile_id" required="true" size="4" type="integer"/>
     </table>
-    <table name="Address" visPositionX="598" visPositionY="200" visSizeX="0" visSizeX2="177" visSizeY="0" visSizeY2="101">
+    <table name="Address" visPositionX="582" visPositionY="206" visSizeX="0" visSizeX2="177" visSizeY="0" visSizeY2="101">
       <column auto-increment="true" name="id" primary="true" size="4" type="integer"/>
-      <column name="country" type="string"/>
-      <column name="administrative_area_level_1" type="string"/>
-      <column name="administrative_area_level_2" type="string"/>
-      <column name="administrative_area_level_3" type="string"/>
-      <column name="locality" type="string"/>
+      <column description="Foreign key to Country" name="country_id" size="4" type="integer"/>
+      <column description="Foreign key to AreaLow" name="area_low_id" size="4" type="integer"/>
+      <column description="Foreign key to AreaHigh" name="area_high_id" size="4" type="integer"/>
+      <column description="Foreign key to Locality" name="locality_id" size="4" type="integer"/>
+    </table>
+    <table name="Country" visPositionX="935" visPositionY="-31" visSizeX="0" visSizeX2="83" visSizeY="0" visSizeY2="45">
+      <column auto-increment="true" name="id" primary="true" size="4" type="integer"/>
+      <column name="name" required="true" size="255" type="string" unique="true"/>
+    </table>
+    <table name="Locality" visPositionX="919" visPositionY="267" visSizeX="0" visSizeX2="117" visSizeY="0" visSizeY2="59">
+      <column auto-increment="true" name="id" primary="true" size="4" type="integer"/>
+      <column name="name" required="true" size="255" type="string" unique="true"/>
+      <column description="Foreign key to AreaHigh" name="area_high_id" size="4" type="integer"/>
+    </table>
+    <table name="AreaLow" visPositionX="923" visPositionY="68" visSizeX="0" visSizeX2="109" visSizeY="0" visSizeY2="59">
+      <column auto-increment="true" name="id" primary="true" size="4" type="integer"/>
+      <column name="name" required="true" size="255" type="string" unique="true"/>
+      <column description="Foreign key to Country" name="country_id" size="4" type="integer"/>
+    </table>
+    <table name="AreaHigh" visPositionX="921" visPositionY="162" visSizeX="0" visSizeX2="113" visSizeY="0" visSizeY2="59">
+      <column auto-increment="true" name="id" primary="true" size="4" type="integer"/>
+      <column name="name" required="true" size="255" type="string" unique="true"/>
+      <column description="Foreign key to AreaLow" name="area_low_id" size="4" type="integer"/>
     </table>
     <orm-properties>
       <attribute name="options">
@@ -366,6 +384,27 @@
     </foreign-key>
     <foreign-key caption="Profile ProfileStyle" from="ProfileStyle" name="FK_ProfileStyle_Profile_id" to="Profile" visCaption1X="-1" visCaption1Y="-1" visCenterX="0" visCenterY="0" visShowCaption="0">
       <foreign-key-column from="profile_id" to="id"/>
+    </foreign-key>
+    <foreign-key from="Address" name="FK_Address_Country" to="Country">
+      <foreign-key-column from="country_id" to="id"/>
+    </foreign-key>
+    <foreign-key from="Address" name="FK_Address_AreaLow" to="AreaLow">
+      <foreign-key-column from="area_low_id" to="id"/>
+    </foreign-key>
+    <foreign-key from="Address" name="FK_Address_AreaHigh" to="AreaHigh">
+      <foreign-key-column from="area_high_id" to="id"/>
+    </foreign-key>
+    <foreign-key from="Address" name="FK_Address_Locality" to="Locality">
+      <foreign-key-column from="locality_id" to="id"/>
+    </foreign-key>
+    <foreign-key from="Locality" name="FK_Locality_AreaHigh" to="AreaHigh">
+      <foreign-key-column from="area_high_id" to="id"/>
+    </foreign-key>
+    <foreign-key from="AreaLow" name="FK_AreaLow_Country" to="Country">
+      <foreign-key-column from="country_id" to="id"/>
+    </foreign-key>
+    <foreign-key from="AreaHigh" name="FK_AreaHigh_AreaLow" to="AreaLow">
+      <foreign-key-column from="area_low_id" to="id"/>
     </foreign-key>
     <many-to-many-relation mn-table="WishList">
       <many-to-many-foreign-key foreign-key="FK_WishList_Profile_id" relation-alias="Wishers"/>
