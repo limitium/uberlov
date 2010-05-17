@@ -29,9 +29,10 @@ abstract class BaseProfileFish extends sfDoctrineRecord
     public function setTableDefinition()
     {
         $this->setTableName('profile_fish');
-        $this->hasColumn('fish_id', 'integer', null, array(
+        $this->hasColumn('fish_id', 'integer', 4, array(
              'type' => 'integer',
              'notnull' => true,
+             'length' => '4',
              ));
         $this->hasColumn('profile_id', 'integer', 4, array(
              'type' => 'integer',

@@ -42,7 +42,7 @@ class LocationForm extends BaseLocationForm {
         $this->validatorSchema['location_scope_id']  = new sfValidatorDoctrineChoice(array('model'=>'LocationScope','required' => true));
         $this->validatorSchema['is_free']            = new sfValidatorBoolean(array('required' => false));
         $this->validatorSchema['price']              = new sfValidatorString(array('required' => false));
-        $this->validatorSchema['depth']            = new sfValidatorNumber();
+        $this->validatorSchema['depth']            = new sfValidatorNumber(array('required' => false));
         $this->validatorSchema['latitude']         = new sfValidatorNumber(array('required' => true));
         $this->validatorSchema['longitude']        = new sfValidatorNumber(array('required' => true));
         $this->validatorSchema['address']        = new sfValidatorString(array('required' => true));

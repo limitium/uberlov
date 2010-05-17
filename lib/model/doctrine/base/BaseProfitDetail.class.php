@@ -49,11 +49,13 @@ abstract class BaseProfitDetail extends sfDoctrineRecord
              'type' => 'integer',
              'length' => '4',
              ));
-        $this->hasColumn('style_id', 'integer', null, array(
+        $this->hasColumn('style_id', 'integer', 4, array(
              'type' => 'integer',
+             'length' => '4',
              ));
-        $this->hasColumn('fish_id', 'integer', null, array(
+        $this->hasColumn('fish_id', 'integer', 4, array(
              'type' => 'integer',
+             'length' => '4',
              ));
         $this->hasColumn('qty', 'float', null, array(
              'type' => 'float',

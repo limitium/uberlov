@@ -32,10 +32,11 @@ abstract class BaseStyle extends sfDoctrineRecord
     public function setTableDefinition()
     {
         $this->setTableName('style');
-        $this->hasColumn('id', 'integer', null, array(
+        $this->hasColumn('id', 'integer', 4, array(
              'primary' => true,
              'type' => 'integer',
              'autoincrement' => true,
+             'length' => '4',
              ));
         $this->hasColumn('name', 'string', 100, array(
              'unique' => true,

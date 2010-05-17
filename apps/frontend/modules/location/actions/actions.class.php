@@ -94,15 +94,8 @@ class locationActions extends sfActions {
         $form->bind($request->getParameter($form->getName()));
         if ($form->isValid()) {
             $addressData = (array) json_decode($form->getValue('address'));
-            $address = new Address();
-            $address->synchronizeWithArray($addressData);
-            if(!$form->isNew()) {
-                $form->getObject()->getAddress()->delete();
-            }
-            $location = $form->save();
-            $location->setAddress($address);
-            $location->save();
-            return $location;
+
+            return $form->save()->updateAddress($addressData);
         }
         return null;
     }

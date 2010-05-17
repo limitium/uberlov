@@ -144,7 +144,6 @@ ht_location_e.prototype.getGeo = function(loader){
         country:'',
         administrative_area_level_1: '',
         administrative_area_level_2: '',
-        administrative_area_level_3: '',
         locality: ''
     }
     this.loading.address = true;
@@ -164,6 +163,11 @@ ht_location_e.prototype.getGeo = function(loader){
                         self.address[this.types[0]] = this.long_name;
                     }
                 });
+                
+                self.address.areaLow = self.address.administrative_area_level_1;
+                self.address.areaHigh = self.address.administrative_area_level_2;
+                delete(self.address.administrative_area_level_1);
+                delete(self.address.administrative_area_level_2);
             } else {
                 alert("No results found");
             }
