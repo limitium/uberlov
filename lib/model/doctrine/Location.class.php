@@ -30,33 +30,11 @@ class Location extends BaseLocation {
             $address = $this->getAddress();
         }else {
             $address = new Address();
+            $this->setAddress($address);
         }
-        fb($addressData);
-        foreach ($addressData  as $partName => $name) {
-            $part = $this->getAddressPart($addressData, $partName);
-            $uPartName = ucfirst($partName);
-
-            $address->$uPartName = $part ? $part : null;
-        }
-
+        $address->updateAddress($addressData);
+        
         $this->save();
         return $this;
-    }
-
-    private function getAddressPart($addressData, $partName) {
-        $uPartName = ucfirst($partName);
-        $name = $addressData[$partName];
-
-        $part = Doctrine_Query::create()
-            ->from($uPartName)
-            ->where('name = ?', $name)
-            ->fetchOne();
-
-        if(!$part && $name) {
-            $part = new $uPartName();
-            $part->name = $name;
-            fb('new part');
-        }
-        return $part;
     }
 }

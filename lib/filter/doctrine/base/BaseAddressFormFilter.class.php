@@ -13,19 +13,17 @@ abstract class BaseAddressFormFilter extends BaseFormFilterDoctrine
   public function setup()
   {
     $this->setWidgets(array(
-      'country'                     => new sfWidgetFormFilterInput(),
-      'administrative_area_level_1' => new sfWidgetFormFilterInput(),
-      'administrative_area_level_2' => new sfWidgetFormFilterInput(),
-      'administrative_area_level_3' => new sfWidgetFormFilterInput(),
-      'locality'                    => new sfWidgetFormFilterInput(),
+      'country_id'   => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Country'), 'add_empty' => true)),
+      'area_low_id'  => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('AreaLow'), 'add_empty' => true)),
+      'area_high_id' => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('AreaHigh'), 'add_empty' => true)),
+      'locality_id'  => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Locality'), 'add_empty' => true)),
     ));
 
     $this->setValidators(array(
-      'country'                     => new sfValidatorPass(array('required' => false)),
-      'administrative_area_level_1' => new sfValidatorPass(array('required' => false)),
-      'administrative_area_level_2' => new sfValidatorPass(array('required' => false)),
-      'administrative_area_level_3' => new sfValidatorPass(array('required' => false)),
-      'locality'                    => new sfValidatorPass(array('required' => false)),
+      'country_id'   => new sfValidatorDoctrineChoice(array('required' => false, 'model' => $this->getRelatedModelName('Country'), 'column' => 'id')),
+      'area_low_id'  => new sfValidatorDoctrineChoice(array('required' => false, 'model' => $this->getRelatedModelName('AreaLow'), 'column' => 'id')),
+      'area_high_id' => new sfValidatorDoctrineChoice(array('required' => false, 'model' => $this->getRelatedModelName('AreaHigh'), 'column' => 'id')),
+      'locality_id'  => new sfValidatorDoctrineChoice(array('required' => false, 'model' => $this->getRelatedModelName('Locality'), 'column' => 'id')),
     ));
 
     $this->widgetSchema->setNameFormat('address_filters[%s]');
@@ -45,12 +43,11 @@ abstract class BaseAddressFormFilter extends BaseFormFilterDoctrine
   public function getFields()
   {
     return array(
-      'id'                          => 'Number',
-      'country'                     => 'Text',
-      'administrative_area_level_1' => 'Text',
-      'administrative_area_level_2' => 'Text',
-      'administrative_area_level_3' => 'Text',
-      'locality'                    => 'Text',
+      'id'           => 'Number',
+      'country_id'   => 'ForeignKey',
+      'area_low_id'  => 'ForeignKey',
+      'area_high_id' => 'ForeignKey',
+      'locality_id'  => 'ForeignKey',
     );
   }
 }

@@ -15,21 +15,19 @@ abstract class BaseAddressForm extends BaseFormDoctrine
   public function setup()
   {
     $this->setWidgets(array(
-      'id'                          => new sfWidgetFormInputHidden(),
-      'country'                     => new sfWidgetFormTextarea(),
-      'administrative_area_level_1' => new sfWidgetFormTextarea(),
-      'administrative_area_level_2' => new sfWidgetFormTextarea(),
-      'administrative_area_level_3' => new sfWidgetFormTextarea(),
-      'locality'                    => new sfWidgetFormTextarea(),
+      'id'           => new sfWidgetFormInputHidden(),
+      'country_id'   => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Country'), 'add_empty' => true)),
+      'area_low_id'  => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('AreaLow'), 'add_empty' => true)),
+      'area_high_id' => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('AreaHigh'), 'add_empty' => true)),
+      'locality_id'  => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Locality'), 'add_empty' => true)),
     ));
 
     $this->setValidators(array(
-      'id'                          => new sfValidatorDoctrineChoice(array('model' => $this->getModelName(), 'column' => 'id', 'required' => false)),
-      'country'                     => new sfValidatorString(array('required' => false)),
-      'administrative_area_level_1' => new sfValidatorString(array('required' => false)),
-      'administrative_area_level_2' => new sfValidatorString(array('required' => false)),
-      'administrative_area_level_3' => new sfValidatorString(array('required' => false)),
-      'locality'                    => new sfValidatorString(array('required' => false)),
+      'id'           => new sfValidatorDoctrineChoice(array('model' => $this->getModelName(), 'column' => 'id', 'required' => false)),
+      'country_id'   => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Country'), 'required' => false)),
+      'area_low_id'  => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('AreaLow'), 'required' => false)),
+      'area_high_id' => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('AreaHigh'), 'required' => false)),
+      'locality_id'  => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Locality'), 'required' => false)),
     ));
 
     $this->widgetSchema->setNameFormat('address[%s]');
