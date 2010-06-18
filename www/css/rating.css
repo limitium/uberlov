@@ -1,0 +1,25 @@
+.rating{
+    float:right;
+    font-size:0.6em;
+    clear:right;
+    width: 70px;
+    text-align: right;
+}
+.rating a img{
+    border:none;
+}
+.rating a {
+    display:none;
+}
+.rating.look a{
+    display:inline;
+}
+.rating.voting span{
+    background-color: #ccc;
+}
+.rating.voting a{
+    display:none;
+}
+.rating a.voted{
+    cursor:default !important
+}

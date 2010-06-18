@@ -39,6 +39,7 @@ Location:
     depth:
       type: float
     is_free:
+      default: 1
       type: boolean
     price:
       type: string

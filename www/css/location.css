@@ -1,0 +1,26 @@
+.location select{
+    width: 100%;
+}
+.location input[type=text]{
+    width: 100%;
+}
+
+.location th{
+    width: 250px;
+}
+
+.location sub{
+    color:#777;
+}
+.location .description{
+    font-size:8.5px;
+    min-height:60px;
+    max-height:60px;
+    height:auto !important;
+    width: 200px;
+    border-bottom:#CCCCCC 1px solid;
+}
+.location .name{
+    font-size:12px;
+    font-weight:800;
+}

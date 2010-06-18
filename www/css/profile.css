@@ -1,0 +1,19 @@
+.profile .personal {
+}
+.profile .personal .userpic{
+    float:left;
+}
+.profile .personal .info{
+    float:left
+}
+.profile .personal .info p a img{
+    border: none;
+}
+.profile .personal .info ul{
+    list-style-type: none;
+    padding-left:10px;
+}
+
+.profile .achieves {
+    float:left
+}

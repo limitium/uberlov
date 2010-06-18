@@ -40,6 +40,11 @@
             </td>
         </tr>
     </table>
+    <?php if($location->getIsFree()): ?>
+        <div>Бесплатное</div>
+    <?php else: ?>
+        <div>Расценки: <?php echo $location->getPrice() ?></div>
+    <?php endif; ?>
     <div>description: <?php echo $location->getDescription(); ?></div>
     <div>added qweqwe, <?php echo $location->getDateTimeObject('created_at')->format('d.m.Y'); ?></div>    
 </div>
