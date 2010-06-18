@@ -7,7 +7,7 @@
       <column default="''" name="name" required="true" size="50" type="string"/>
       <column default="''" name="description" required="true" type="string"/>
       <column name="depth" type="float"/>
-      <column name="is_free" type="boolean"/>
+      <column default="1" name="is_free" type="boolean"/>
       <column name="price" type="string"/>
       <column description="Foreign key to Location_flow" name="location_flow_id" size="4" type="integer"/>
       <column description="Foreign key to Location_fundus" name="location_fundus_id" size="4" type="integer"/>
@@ -309,7 +309,7 @@
     <foreign-key from="Location" name="FK_Location_Location_flow" to="LocationFlow" visCenterX="0" visCenterY="-1">
       <foreign-key-column from="location_flow_id" to="id"/>
     </foreign-key>
-    <foreign-key from="Location" name="FK_Location_Location_fundus" to="LocationFundus" visCenterX="0" visCenterY="-1">
+    <foreign-key from="Location" name="FK_Location_Location_fundus" to="LocationFundus" visCenterX="0" visCenterY="1">
       <foreign-key-column from="location_fundus_id" to="id"/>
     </foreign-key>
     <foreign-key from="Location" name="FK_Location_Location_relief" to="LocationRelief" visCenterX="-1" visCenterY="6">
@@ -324,7 +324,7 @@
     <foreign-key from="Location" name="FK_Location_Address" to="Address">
       <foreign-key-column from="address_id" to="id"/>
     </foreign-key>
-    <foreign-key from="Profit" name="FK_Profit_Location_id" to="Location" visCenterX="0" visCenterY="-3">
+    <foreign-key from="Profit" name="FK_Profit_Location_id" to="Location" visCenterX="0" visCenterY="3">
       <foreign-key-column from="location_id" to="id"/>
     </foreign-key>
     <foreign-key caption="Profit ProfitDetail" from="ProfitDetail" name="FK_ProfitDetail_Profit_id" to="Profit" visShowCaption="0">

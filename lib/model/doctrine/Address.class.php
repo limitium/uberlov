@@ -19,7 +19,7 @@ class Address extends BaseAddress {
             $part = $this->getAddressPart($addressData, $partName, $parent);
 
             $parent = $part;
-            fb('part class name ' . get_class($part));
+            fb('part class name ' . $part);
 
             $uPartName = ucfirst($partName);
             $this->$uPartName = $part ? $part : null;

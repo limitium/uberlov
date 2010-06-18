@@ -107,6 +107,7 @@ abstract class BaseLocation extends sfDoctrineRecord
              'type' => 'float',
              ));
         $this->hasColumn('is_free', 'boolean', null, array(
+             'default' => 1,
              'type' => 'boolean',
              ));
         $this->hasColumn('price', 'string', null, array(

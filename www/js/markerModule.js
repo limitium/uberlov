@@ -197,21 +197,29 @@ ht_location_e.prototype.showForm = function(loader){
     fb(this.address);
     var marker = this.marker;
     var form = this.form;
+    var self = this;
     
     $('#location_latitude', form).val(marker.getPosition().lat());
     $('#location_longitude', form).val(marker.getPosition().lng());
     $('#location_address', form).val(jQuery.JSON.encode((this.address)));
 
-    $('#location_is_free', form).change(function(){
-        var price = $('#location_price', form);
-        if($(this).attr('checked')){
-            price.attr('disabled', 'disabled');
-        }else{
-            price.attr('disabled', '');
-        }
-    });
+    
+    
+    marker.infoWindow = this.mm.openInfo(marker.getPosition(),this.addSubmitHandler(form),this.addListenerClick.delegate(this,marker));
 
-    this.marker.infoWindow = this.mm.openInfo(marker.getPosition(),this.addSubmitHandler(form),this.addListenerClick.delegate(this,marker));
+    var price = $($('#location_price',form).parents()[1]);
+    $('#location_is_free', form).change(function(){
+        if($(this).attr('checked')){
+            price.hide();
+            $('#location_price',price).attr('disabled', 'disabled');
+            self.mm.map.panBy(0,85);
+        }else{
+            price.show();
+            $('#location_price',price).removeAttr('disabled');
+            self.mm.map.panBy(0,-85);
+        }
+        gm.event.trigger(marker.infoWindow, 'content_changed');
+    }).change();
 
     loader.remove();
 }
