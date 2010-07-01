@@ -14,8 +14,13 @@
     padding-bottom:3em;
 }
 
+
 .tree {
     margin-left:245px;
+}
+
+.comment .hightlited{
+    border: 1px solid red;
 }
 
 .commentMessage {

@@ -11,12 +11,14 @@
  * @version    SVN: $Id: Builder.php 6485 2009-10-12 18:41:59Z jwage $
  */
 class Location extends BaseLocation {
+
     public $plused = false;
     public $minused = false;
 
     public function getLatitudeOZI() {
         return DDDMConverter::DDToDM($this->getLatitude());
     }
+
     public function getLongitudeOZI() {
         return DDDMConverter::DDToDM($this->getLongitude());
     }
@@ -26,15 +28,24 @@ class Location extends BaseLocation {
     }
 
     public function updateAddress($addressData) {
-        if(!$this->isNew()) {
+        if (!$this->isNew()) {
             $address = $this->getAddress();
-        }else {
+        } else {
             $address = new Address();
             $this->setAddress($address);
         }
         $address->updateAddress($addressData);
-        
+
         $this->save();
         return $this;
     }
+
+    public function getTotalProfit() {
+        return 666;
+    }
+
+    public function getPhoto() {
+        return '';
+    }
+
 }

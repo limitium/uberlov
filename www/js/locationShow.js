@@ -17,7 +17,7 @@ locationShow.prototype.afterInit = function(){
 }
 
 locationShow.prototype.initListeners = function(){
-    $('#locationName').click(this.toLocation.delegate(this));
+    $('.location .name a').click(this.toLocation.delegate(this));
     $('#tabComments').click(this.showComments.delegate(this));
     $('#tabReports').click(this.showReports.delegate(this));
 }
