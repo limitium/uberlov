@@ -1,5 +1,4 @@
-<?php include_partial('collector/map') ?>
-<?php use_javascript('locationShow');  ?>
+<?php use_javascript('locationShow'); ?>
 <script>
     app.locationShow = {
         "id": "<?php echo $location->getId(); ?>",
@@ -8,67 +7,61 @@
     }
 </script>
 
-<div>
-    <h1><a class="dashed" href="" id="locationName"><?php echo $location->getName(); ?></a></h1>
-    <table>
-        <tr>
-            <td>
-                Глубина:
-            </td>
-            <td>
-                <?php echo $location->getDepth() ?>
-            </td>
-            <td>
-                Течение:
-            </td>
-            <td>
-                <?php echo $location->getLocationFlow() ?>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                Рельеф:
-            </td>
-            <td>
-                <?php echo $location->getLocationRelief() ?>
-            </td>
-            <td>
-                Дно:
-            </td>
-            <td>
-                <?php echo $location->getLocationFundus() ?>
-            </td>
-        </tr>
-    </table>
-    <?php if($location->getIsFree()): ?>
-        <div>Бесплатное</div>
-    <?php else: ?>
-        <div>Расценки: <?php echo $location->getPrice() ?></div>
-    <?php endif; ?>
-    <div>description: <?php echo $location->getDescription(); ?></div>
-    <div>added qweqwe, <?php echo $location->getDateTimeObject('created_at')->format('d.m.Y'); ?></div>    
-</div>
-<div class="tabPanel">
-    <ul>
-        <li><span href="#" id="tabComments" class="selected">comments (<i id="commentCounter"><?php echo sizeof($comments); ?></i>)</span></li>
-        <li><span href="#" id="tabReports">reports (5)</span></li>
-    </ul>
-</div>
-<?php use_javascript('voting');  ?>
-<?php include_partial('vote/vote', array('obj' => $location,'objType' => 'location')); ?>
+<div class="location">
+    <div class="name">
+        <a class="dashed" href=""><?php echo $location->getName(); ?></a>
+    </div>
+    <?php include_partial('collector/map') ?>
+    <div class="stat">
+        <table>
+            <tr><th>Глубина:</th><td><?php echo $location->getDepth() ?></td></tr>
+            <tr><th>Течение:</th><td><?php echo $location->getLocationFlow() ?></td></tr>
+            <tr><th>Рельеф:</th><td><?php echo $location->getLocationRelief() ?></td></tr>
+            <tr><th>Дно:</th><td><?php echo $location->getLocationFundus() ?></td></tr>
+            <tr><th>Наловили:</th><td><?php echo $location->getTotalProfit() ?></td></tr>
+        </table>
+        <?php if ($location->getIsFree()): ?>
+            <p>Бесплатное</p>
+        <?php else: ?>
+                <p><?php echo $location->getPrice() ?></p>
+        <?php endif; ?>
+            </div>
+            <div class="photo">
+                <img alt="" src="<?php echo $location->getPhoto() ? $location->getPhoto() : '/images/location/default.jpg' ?>" />
+            </div>
 
-<br />
+            <div class="description"><?php echo $location->getDescription(); ?></div>
+            <div class="created">
+        <?php use_javascript('voting'); ?>
+        <?php include_partial('vote/vote', array('obj' => $location, 'objType' => 'location')); ?>
+                <div>
+                    <a href="" id="goToReply">□</a> Добавил<?php echo $location->getCreatedBy()->getSex() ? '' : 'а' ?> <?php echo link_to($location->getCreatedBy()->getNickName(), 'profile/show?id=' . $location->getCreatedBy()->getId()); ?>,
+            <?php echo $location->getDateTimeObject('created_at')->format('d.m.Y'); ?> | <a href="">хочу туда!</a>
+                <a href="" class="commentShowAuthor" author="user<?php echo $location->getCreatedBy(); ?>">●</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="tabPanel">
+        <ul>
+            <li><span href="#" id="tabComments" class="selected">Комментарии (<i id="commentCounter"><?php echo sizeof($comments); ?></i>)</span></li>
+            <li><span href="#" id="tabReports">Отчеты (5)</span></li>
+        </ul>
+    </div>
+
+    <br />
 
 
-<?php use_javascript('comment');  ?>
-<div id="commentContainer">
-    <?php foreach ($comments as $comment):?>
-        <?php include_partial('comment/comment', array('comment' => $comment)); ?>
+<?php use_javascript('comment'); ?>
+                <div id="commentContainer">
+    <?php foreach ($comments as $comment): ?>
+    <?php include_partial('comment/comment', array('comment' => $comment)); ?>
     <?php endforeach; ?>
-    <?php $cl = new CommentLocation();$cl->setLocation($location->getRawValue())  ?>
-    <?php include_partial('comment/form', array('form' => new CommentLocationForm($cl),'toward' => 'location')) ?>
+    <?php $cl = new CommentLocation();
+                    $cl->setLocation($location->getRawValue()) ?>
+    <?php include_partial('comment/form', array('form' => new CommentLocationForm($cl), 'toward' => 'location')) ?>
 
 </div>
 <div id="commentReplyDefault" style="display:none">
-    <a href="">Reply</a>
+    <a href="">Написать</a>
 </div>

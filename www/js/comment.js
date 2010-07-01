@@ -82,6 +82,18 @@ function comment(){
         $(this).remove();
         return false;
     });
+
+    $('.commentShowAuthor').live('click', function(){
+        $('div[author$=user1]').toggleClass('hightlited');
+        return false;
+    });
+
+    $('#goToReply').click(function(){
+        $('html').animate({
+            scrollTop: $('#newComment').offset().top
+        }, 300);
+        return false;
+    });
 }
 comment.name = 'comment';
 ModuleManager.add(comment);

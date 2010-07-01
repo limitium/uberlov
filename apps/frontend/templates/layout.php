@@ -12,11 +12,11 @@
     <body>
         <div id="page">
             <div id="header">
-                <div id="logo">HT logo</div>
+                <div id="logo"><img height="200" alt="" src="/images/logo.jpg" /></div>
                 <div id="site_menu">
                     <ul>
-                        <li><?php echo link_to('Места ловли','collector/map') ?></li>
-                        <li><?php echo link_to('Вход','@sf_guard_signin') ?></li>
+                        <li><?php echo link_to('Места ловли', 'collector/map') ?></li>
+                        <li><?php echo link_to('Вход', '@sf_guard_signin') ?></li>
                     </ul>
                 </div>
             </div>
@@ -27,14 +27,14 @@
             </div>
 
             <div id="right_layout">
-                <div id="content_menu"><?php include_slot('content_menu')?></div>
+                <div id="content_menu"><?php include_slot('content_menu') ?></div>
 
                 <?php if ($sf_user->hasFlash('notice')): ?>
-                <div class="flash_notice"><?php echo $sf_user->getFlash('notice') ?></div>
+                    <div class="flash_notice"><?php echo $sf_user->getFlash('notice') ?></div>
                 <?php endif; ?>
 
                 <?php if ($sf_user->hasFlash('error')): ?>
-                <div class="flash_error"><?php echo $sf_user->getFlash('error') ?></div>
+                        <div class="flash_error"><?php echo $sf_user->getFlash('error') ?></div>
                 <?php endif; ?>
 
                 <?php echo $sf_content ?>

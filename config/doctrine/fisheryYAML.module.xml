@@ -69,7 +69,7 @@
       <column auto-increment="true" name="id" primary="true" required="true" size="4" type="integer"/>
       <column name="name" required="true" size="100" type="string" unique="true"/>
     </table>
-    <table name="Profit" visPositionX="197" visPositionY="335" visSizeX="0" visSizeX2="120" visSizeY="0" visSizeY2="157">
+    <table name="Profit" visPositionX="197" visPositionY="332" visSizeX="0" visSizeX2="120" visSizeY="0" visSizeY2="157">
       <column auto-increment="true" name="id" primary="true" required="true" size="4" type="integer"/>
       <column name="location_id" size="4" type="integer"/>
       <column name="begin" required="true" type="timestamp"/>
@@ -115,7 +115,7 @@
       <column auto-increment="true" name="id" primary="true" required="true" size="4" type="integer"/>
       <column name="name" required="true" size="100" type="string" unique="true"/>
     </table>
-    <table name="ProfitDetail" visPositionX="412" visPositionY="313" visSizeX="0" visSizeX2="110" visSizeY="0" visSizeY2="87">
+    <table name="ProfitDetail" visPositionX="412" visPositionY="311" visSizeX="0" visSizeX2="110" visSizeY="0" visSizeY2="87">
       <column name="time" required="true" type="timestamp"/>
       <column name="profit_id" size="4" type="integer"/>
       <column name="style_id" size="4" type="integer"/>
@@ -139,7 +139,7 @@
       <column auto-increment="true" name="id" primary="true" size="4" type="integer"/>
       <column name="name" required="true" size="50" type="string"/>
     </table>
-    <table name="Comment" visPositionX="-174" visPositionY="366" visSizeX="0" visSizeX2="124" visSizeY="0" visSizeY2="59">
+    <table name="Comment" visPositionX="-173" visPositionY="366" visSizeX="0" visSizeX2="124" visSizeY="0" visSizeY2="59">
       <column auto-increment="true" name="id" primary="true" size="4" type="integer"/>
       <column name="parent" size="4" type="integer"/>
       <column name="message" required="true" size="1000" type="string"/>
@@ -324,7 +324,7 @@
     <foreign-key from="Location" name="FK_Location_Address" to="Address">
       <foreign-key-column from="address_id" to="id"/>
     </foreign-key>
-    <foreign-key from="Profit" name="FK_Profit_Location_id" to="Location" visCenterX="0" visCenterY="3">
+    <foreign-key from="Profit" name="FK_Profit_Location_id" to="Location" visCenterX="0" visCenterY="-3">
       <foreign-key-column from="location_id" to="id"/>
     </foreign-key>
     <foreign-key caption="Profit ProfitDetail" from="ProfitDetail" name="FK_ProfitDetail_Profit_id" to="Profit" visShowCaption="0">

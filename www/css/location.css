@@ -1,3 +1,48 @@
+/*details*/
+.location .stat{
+    float:left;
+}
+
+.location .stat p{
+    line-height: 1.6em;
+}
+.location .stat table tr th{
+    width: 120px;
+    text-align: left;
+    line-height: 2em;
+}
+
+.location .name{
+    padding-bottom: 1em;
+}
+.location .name a{
+    font-size: 2em;
+}
+
+.location #map{
+    margin: 0 0 1em 0
+}
+.location .photo{
+    float:right;
+}
+.location img{
+    width: 400px;
+}
+.location .created{
+    clear:both;
+    padding: 1em 0 1em 0;
+}
+
+.location .description{
+    padding: 1em 0 0 1em;
+    clear:both;
+}
+.location .rating{
+    font-size: 1em;
+    font-weight: bold;
+}
+
+/*from*/
 .location select{
     width: 100%;
 }
@@ -5,20 +50,12 @@
     width: 100%;
 }
 
-.location th{
+.location table tbody tr th{
     width: 250px;
 }
 
 .location sub{
     color:#777;
-}
-.location .description{
-    font-size:8.5px;
-    min-height:60px;
-    max-height:60px;
-    height:auto !important;
-    width: 200px;
-    border-bottom:#CCCCCC 1px solid;
 }
 .location .name{
     font-size:12px;
