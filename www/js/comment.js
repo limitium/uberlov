@@ -100,4 +100,10 @@ ModuleManager.add(comment);
 
 
 comment.prototype.afterInit = function(){
+    var params = $.unparam(window.location.hash.substr(1));
+    if(params.comment){
+        $('html').animate({
+            scrollTop: $('#comment' + params.comment).offset().top
+        }, 100);
     }
+}
