@@ -196,12 +196,14 @@ mapModule.prototype.centerBar = function(){
 }
 
 mapModule.prototype.updateUrl = function(){
-    window.location.hash=$.param({
+    var params = window.location.hash.length ? $.unparam(window.location.hash.substr(1)) : {};
+    $.extend(params, {
         lat:this.map.getCenter().lat(),
         lng:this.map.getCenter().lng(),
         z:this.map.getZoom(),
         mt:this.typeToId[this.map.getMapTypeId()]
     });
+    window.location.hash=$.param(params);
 }
 
 mapModule.prototype.loadData = function(){
