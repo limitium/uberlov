@@ -23,5 +23,6 @@
     display:none;
 }
 .rating a.voted{
-    cursor:default !important
+    cursor:default !important;
+    display:inline;
 }
