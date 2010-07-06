@@ -8,17 +8,20 @@
  * @property integer $id
  * @property string $name
  * @property Doctrine_Collection $Profiles
+ * @property Doctrine_Collection $Profit
  * @property Doctrine_Collection $ProfitDetail
  * @property Doctrine_Collection $ProfileFish
  * 
  * @method integer             getId()           Returns the current record's "id" value
  * @method string              getName()         Returns the current record's "name" value
  * @method Doctrine_Collection getProfiles()     Returns the current record's "Profiles" collection
+ * @method Doctrine_Collection getProfit()       Returns the current record's "Profit" collection
  * @method Doctrine_Collection getProfitDetail() Returns the current record's "ProfitDetail" collection
  * @method Doctrine_Collection getProfileFish()  Returns the current record's "ProfileFish" collection
  * @method Fish                setId()           Sets the current record's "id" value
  * @method Fish                setName()         Sets the current record's "name" value
  * @method Fish                setProfiles()     Sets the current record's "Profiles" collection
+ * @method Fish                setProfit()       Sets the current record's "Profit" collection
  * @method Fish                setProfitDetail() Sets the current record's "ProfitDetail" collection
  * @method Fish                setProfileFish()  Sets the current record's "ProfileFish" collection
  * 
@@ -57,6 +60,10 @@ abstract class BaseFish extends sfDoctrineRecord
              'refClass' => 'ProfileFish',
              'local' => 'fish_id',
              'foreign' => 'profile_id'));
+
+        $this->hasMany('Profit', array(
+             'local' => 'id',
+             'foreign' => 'best_fish_id'));
 
         $this->hasMany('ProfitDetail', array(
              'local' => 'id',

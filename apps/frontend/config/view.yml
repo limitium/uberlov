@@ -9,9 +9,9 @@ default:
     language:     en
     robots:       index, follow
 
-  stylesheets:    [main,location,comment,profile,rating]
+  stylesheets:    [lib/datepicker,main,location,comment,profile,rating]
 
-  javascripts:    [lib/jquery-1.4.2.js,lib/jqueryBlockUI,lib/jqueryColor,lib/jqueryJSON,moduleManager]
+  javascripts:    [lib/jquery-1.4.2.js,lib/jqueryBlockUI,lib/jqueryColor,lib/jqueryJSON,lib/datepicker,moduleManager]
 
   has_layout:     true
   layout:         layout

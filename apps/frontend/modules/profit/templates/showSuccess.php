@@ -9,12 +9,12 @@
       <td><?php echo $profit->getLocationId() ?></td>
     </tr>
     <tr>
-      <th>Profile:</th>
-      <td><?php echo $profit->getProfileId() ?></td>
+      <th>Begin:</th>
+      <td><?php echo $profit->getDate() ?></td>
     </tr>
     <tr>
-      <th>Time:</th>
-      <td><?php echo $profit->getTime() ?></td>
+      <th>Cordage:</th>
+      <td><?php echo $profit->getCordage() ?></td>
     </tr>
     <tr>
       <th>Description:</th>
@@ -27,6 +27,14 @@
     <tr>
       <th>Updated at:</th>
       <td><?php echo $profit->getUpdatedAt() ?></td>
+    </tr>
+    <tr>
+      <th>Created by:</th>
+      <td><?php echo $profit->getCreatedBy() ?></td>
+    </tr>
+    <tr>
+      <th>Updated by:</th>
+      <td><?php echo $profit->getUpdatedBy() ?></td>
     </tr>
   </tbody>
 </table>

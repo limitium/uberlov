@@ -53,11 +53,21 @@ profitModule.prototype.getOnLocationClick =  function(){
     }
 }
 profitModule.prototype.showForm = function(form,marker,loader){
-    $('#location_latitude', form).val(marker.getPosition().lat());
-    $('#location_longitude', form).val(marker.getPosition().lng());
-
     this.mm.openInfo(marker.getPosition(),this.addSubmitHandler(form));
-
+    
+    var date = $('#profit_date');
+    date.DatePicker({
+        format:'m.d.Y',
+        date: date.val(),
+        current: date.val(),
+        starts: 1,
+        position: 'r',
+        onChange: function(formated, dates){
+            date.val(formated);
+            date.DatePickerHide();
+        }
+    });
+    
     loader.remove();
 }
 profitModule.prototype.addSubmitHandler = function(form){

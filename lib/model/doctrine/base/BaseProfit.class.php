@@ -7,44 +7,38 @@
  * 
  * @property integer $id
  * @property integer $location_id
- * @property timestamp $begin
- * @property string $water_state
- * @property string $lure
- * @property string $bait
- * @property string $additive
- * @property string $weather
+ * @property date $date
  * @property string $cordage
  * @property string $description
+ * @property float $best_weight
+ * @property integer $best_fish_id
  * @property Location $Location
+ * @property Fish $Fish
  * @property Doctrine_Collection $ProfitDetail
  * @property Doctrine_Collection $CommentProfit
  * @property Doctrine_Collection $VoteProfit
  * 
  * @method integer             getId()            Returns the current record's "id" value
  * @method integer             getLocationId()    Returns the current record's "location_id" value
- * @method timestamp           getBegin()         Returns the current record's "begin" value
- * @method string              getWaterState()    Returns the current record's "water_state" value
- * @method string              getLure()          Returns the current record's "lure" value
- * @method string              getBait()          Returns the current record's "bait" value
- * @method string              getAdditive()      Returns the current record's "additive" value
- * @method string              getWeather()       Returns the current record's "weather" value
+ * @method date                getDate()          Returns the current record's "date" value
  * @method string              getCordage()       Returns the current record's "cordage" value
  * @method string              getDescription()   Returns the current record's "description" value
+ * @method float               getBestWeight()    Returns the current record's "best_weight" value
+ * @method integer             getBestFishId()    Returns the current record's "best_fish_id" value
  * @method Location            getLocation()      Returns the current record's "Location" value
+ * @method Fish                getFish()          Returns the current record's "Fish" value
  * @method Doctrine_Collection getProfitDetail()  Returns the current record's "ProfitDetail" collection
  * @method Doctrine_Collection getCommentProfit() Returns the current record's "CommentProfit" collection
  * @method Doctrine_Collection getVoteProfit()    Returns the current record's "VoteProfit" collection
  * @method Profit              setId()            Sets the current record's "id" value
  * @method Profit              setLocationId()    Sets the current record's "location_id" value
- * @method Profit              setBegin()         Sets the current record's "begin" value
- * @method Profit              setWaterState()    Sets the current record's "water_state" value
- * @method Profit              setLure()          Sets the current record's "lure" value
- * @method Profit              setBait()          Sets the current record's "bait" value
- * @method Profit              setAdditive()      Sets the current record's "additive" value
- * @method Profit              setWeather()       Sets the current record's "weather" value
+ * @method Profit              setDate()          Sets the current record's "date" value
  * @method Profit              setCordage()       Sets the current record's "cordage" value
  * @method Profit              setDescription()   Sets the current record's "description" value
+ * @method Profit              setBestWeight()    Sets the current record's "best_weight" value
+ * @method Profit              setBestFishId()    Sets the current record's "best_fish_id" value
  * @method Profit              setLocation()      Sets the current record's "Location" value
+ * @method Profit              setFish()          Sets the current record's "Fish" value
  * @method Profit              setProfitDetail()  Sets the current record's "ProfitDetail" collection
  * @method Profit              setCommentProfit() Sets the current record's "CommentProfit" collection
  * @method Profit              setVoteProfit()    Sets the current record's "VoteProfit" collection
@@ -67,33 +61,30 @@ abstract class BaseProfit extends sfDoctrineRecord
              ));
         $this->hasColumn('location_id', 'integer', 4, array(
              'type' => 'integer',
+             'notnull' => true,
              'length' => '4',
              ));
-        $this->hasColumn('begin', 'timestamp', null, array(
-             'type' => 'timestamp',
+        $this->hasColumn('date', 'date', null, array(
+             'type' => 'date',
              'notnull' => true,
-             ));
-        $this->hasColumn('water_state', 'string', null, array(
-             'type' => 'string',
-             ));
-        $this->hasColumn('lure', 'string', null, array(
-             'type' => 'string',
-             ));
-        $this->hasColumn('bait', 'string', null, array(
-             'type' => 'string',
-             ));
-        $this->hasColumn('additive', 'string', null, array(
-             'type' => 'string',
-             ));
-        $this->hasColumn('weather', 'string', null, array(
-             'type' => 'string',
              ));
         $this->hasColumn('cordage', 'string', null, array(
              'type' => 'string',
+             'notnull' => true,
              ));
         $this->hasColumn('description', 'string', null, array(
              'type' => 'string',
              'notnull' => true,
+             ));
+        $this->hasColumn('best_weight', 'float', 10, array(
+             'type' => 'float',
+             'notnull' => true,
+             'length' => '10',
+             ));
+        $this->hasColumn('best_fish_id', 'integer', 4, array(
+             'type' => 'integer',
+             'notnull' => true,
+             'length' => '4',
              ));
 
         $this->option('type', 'INNODB');
@@ -106,6 +97,10 @@ abstract class BaseProfit extends sfDoctrineRecord
         parent::setUp();
         $this->hasOne('Location', array(
              'local' => 'location_id',
+             'foreign' => 'id'));
+
+        $this->hasOne('Fish', array(
+             'local' => 'best_fish_id',
              'foreign' => 'id'));
 
         $this->hasMany('ProfitDetail', array(
