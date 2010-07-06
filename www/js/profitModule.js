@@ -44,14 +44,11 @@ profitModule.prototype.cancelEdit = function(){
 
 profitModule.prototype.getOnLocationClick =  function(){
     return function(location){
-        //        this.mm.deselectAll();
-        //        location.setSelected(!location.selected);
-
         var loader = this.mm.showLoader(location.marker.getPosition(),'<img src="/images/loader-small.gif" />');
         app.getForm('/profit/new',this.showForm.delegate(this,location.marker,loader));
-
     }
 }
+
 profitModule.prototype.showForm = function(form,marker,loader){
     this.mm.openInfo(marker.getPosition(),this.addSubmitHandler(form));
     
@@ -67,9 +64,14 @@ profitModule.prototype.showForm = function(form,marker,loader){
             date.DatePickerHide();
         }
     });
-    
+
+    $('#addProfitDetail').click(function(){
+        return false;
+    });
+    var details = $('.profit div ul');
     loader.remove();
 }
+
 profitModule.prototype.addSubmitHandler = function(form){
     var self = this;
 
@@ -108,9 +110,11 @@ profitModule.prototype.addSubmitHandler = function(form){
     });
     return form;
 }
+
 profitModule.prototype.onSaveChange = function(disabled){
     this.barSaveDisabled(disabled);
 }
+
 profitModule.prototype.barCreate = function(){
     var bar = this.mm.updateBar('<img class="mapIcon" src="/images/profit.png"/><span id="bar_msg"></span></span><input id="bar_save" class="button disabled" type="button" value="save"/><input id="bar_cancel" class="button" type="button" value="cancel"/>');
     this.bar = {
