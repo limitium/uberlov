@@ -179,27 +179,28 @@ Profit:
       autoincrement: true
     location_id:
       type: integer(4)
-    begin:
-      type: timestamp
       notnull: true
-    water_state:
-      type: string
-    lure:
-      type: string
-    bait:
-      type: string
-    additive:
-      type: string
-    weather:
-      type: string
+    date:
+      type: date
+      notnull: true
     cordage:
       type: string
+      notnull: true
     description:
       type: string
+      notnull: true
+    best_weight:
+      type: float(10)
+      notnull: true
+    best_fish_id:
+      type: integer(4)
       notnull: true
   relations:
     Location:
       local: location_id
+      foreign: id
+    Fish:
+      local: best_fish_id
       foreign: id
 Style:
   columns:
@@ -220,9 +221,6 @@ Style:
       foreign: profile_id
 ProfitDetail:
   columns:
-    time:
-      type: timestamp
-      notnull: true
     profit_id:
       type: integer(4)
     style_id:

@@ -48,7 +48,6 @@ class LocationForm extends BaseLocationForm {
         $this->validatorSchema['address']        = new sfValidatorString(array('required' => true));
 
         $this->widgetSchema->setLabels(array(
-            'id'                 => '',
             'name'               => 'Название<br /><sub>желательно содержащее название водоема</sub>',
             'description'        => 'Описание',
             'depth'              => 'Глубина<br /><sub>в метрах</sub>',
@@ -59,12 +58,6 @@ class LocationForm extends BaseLocationForm {
             'location_relief_id' => 'Рельеф дна',
             'location_type_id'   => 'Тип',
             'location_scope_id'  => 'Видимость локации<br /><sub>кто может видеть на карте</sub>',
-            'created_by'         => '',
-            'updated_by'         => '',
-            'latitude'           => '',
-            'longitude'          => '',
-            'created_at'         => '',
-            'updated_at'         => '',
         ));
     }
 }

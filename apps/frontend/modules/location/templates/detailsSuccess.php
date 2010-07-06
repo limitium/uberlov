@@ -36,7 +36,7 @@
         <?php include_partial('vote/vote', array('obj' => $location, 'objType' => 'location')); ?>
                 <div>
                     <a href="" id="goToReply">□</a> Добавил<?php echo $location->getCreatedBy()->getSex() ? '' : 'а' ?> <?php echo link_to($location->getCreatedBy()->getNickName(), 'profile/show?id=' . $location->getCreatedBy()->getId()); ?>,
-            <?php echo $location->getDateTimeObject('created_at')->format('d.m.Y'); ?> | <a href="">хочу туда!</a>
+            <?php echo $location->getDateTimeObject('created_at')->format('d.m.Y'); ?> | <a href="">тут не так</a> | <a href="">в мои места</a>
                 <a href="" class="commentShowAuthor" author="user<?php echo $location->getCreatedBy(); ?>">●</a>
             </div>
         </div>
