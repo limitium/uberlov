@@ -43,12 +43,159 @@
                 </tbody>
             </table>
         </form>
-        <div>
-        <?php echo $form['styles'] ?>
-        <?php echo $form['fishes'] ?>
-        <?php echo $form['qty'] ?>
-        <a href="" id="addProfitDetail">Поймал</a>
-        <table>
+        <div class="tableContainer">
+            <table>
+                <thead>
+                    <tr>
+                        <th>
+                        <?php echo $form['fishes'] ?>
+                        </th>
+                        <th>
+                        <?php echo $form['styles'] ?>
+                        </th>
+                        <th>
+                        <?php echo $form['qty'] ?>
+                    </th>
+                    <th>
+                        <input type="button" value="&nbsp;+&nbsp;" class="button addProfitDetail">
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>12</td>
+                    <td>dsf</td>
+                    <td>fdhg</td>
+                    <td>-</td>
+                </tr><tr>
+                    <td>12</td>
+                    <td>dsf</td>
+                    <td>fdhg</td>
+                    <td>-</td>
+                </tr><tr>
+                    <td>12</td>
+                    <td>dsf</td>
+                    <td>fdhg</td>
+                    <td>-</td>
+                </tr><tr>
+                    <td>12</td>
+                    <td>dsf</td>
+                    <td>fdhg</td>
+                    <td>-</td>
+                </tr><tr>
+                    <td>12</td>
+                    <td>dsf</td>
+                    <td>fdhg</td>
+                    <td>-</td>
+                </tr><tr>
+                    <td>12</td>
+                    <td>dsf</td>
+                    <td>fdhg</td>
+                    <td>-</td>
+                </tr><tr>
+                    <td>12</td>
+                    <td>dsf</td>
+                    <td>fdhg</td>
+                    <td>-</td>
+                </tr><tr>
+                    <td>12</td>
+                    <td>dsf</td>
+                    <td>fdhg</td>
+                    <td>-</td>
+                </tr><tr>
+                    <td>12</td>
+                    <td>dsf</td>
+                    <td>fdhg</td>
+                    <td>-</td>
+                </tr><tr>
+                    <td>12</td>
+                    <td>dsf</td>
+                    <td>fdhg</td>
+                    <td>-</td>
+                </tr><tr>
+                    <td>12</td>
+                    <td>dsf</td>
+                    <td>fdhg</td>
+                    <td>-</td>
+                </tr><tr>
+                    <td>12</td>
+                    <td>dsf</td>
+                    <td>fdhg</td>
+                    <td>-</td>
+                </tr><tr>
+                    <td>12</td>
+                    <td>dsf</td>
+                    <td>fdhg</td>
+                    <td>-</td>
+                </tr><tr>
+                    <td>12</td>
+                    <td>dsf</td>
+                    <td>fdhg</td>
+                    <td>-</td>
+                </tr><tr>
+                    <td>12</td>
+                    <td>dsf</td>
+                    <td>fdhg</td>
+                    <td>-</td>
+                </tr><tr>
+                    <td>12</td>
+                    <td>dsf</td>
+                    <td>fdhg</td>
+                    <td>-</td>
+                </tr><tr>
+                    <td>12</td>
+                    <td>dsf</td>
+                    <td>fdhg</td>
+                    <td>-</td>
+                </tr><tr>
+                    <td>12</td>
+                    <td>dsf</td>
+                    <td>fdhg</td>
+                    <td>-</td>
+                </tr><tr>
+                    <td>12</td>
+                    <td>dsf</td>
+                    <td>fdhg</td>
+                    <td>-</td>
+                </tr><tr>
+                    <td>12</td>
+                    <td>dsf</td>
+                    <td>fdhg</td>
+                    <td>-</td>
+                </tr><tr>
+                    <td>12</td>
+                    <td>dsf</td>
+                    <td>fdhg</td>
+                    <td>-</td>
+                </tr><tr>
+                    <td>12</td>
+                    <td>dsf</td>
+                    <td>fdhg</td>
+                    <td>-</td>
+                </tr><tr>
+                    <td>12</td>
+                    <td>dsf</td>
+                    <td>fdhg</td>
+                    <td>-</td>
+                </tr><tr>
+                    <td>12</td>
+                    <td>dsf</td>
+                    <td>fdhg</td>
+                    <td>-</td>
+                </tr><tr>
+                    <td>dsf</td>
+                    <td>fdhg</td>
+                    <td>12</td>
+                    <td><input type="button" value="&nbsp;-&nbsp;" class="button removeProfitDetail"></td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="2">Всего:</td>
+                    <td>234</td>
+                    <td>кг</td>
+                </tr>
+            </tfoot>
         </table>
     </div>
 </div>

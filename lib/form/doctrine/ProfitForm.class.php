@@ -19,6 +19,7 @@ class ProfitForm extends BaseProfitForm {
         $this->widgetSchema['id'] = new sfWidgetFormInputHidden();
         $this->widgetSchema['details'] = new sfWidgetFormInputHidden();
         $this->widgetSchema['date'] = new sfWidgetFormInputText();
+        $this->widgetSchema['qty'] = new sfWidgetFormInputText();
         $this->widgetSchema['styles'] = new sfWidgetFormDoctrineChoice(array('model'=>'Style'));
         $this->widgetSchema['fishes'] = new sfWidgetFormDoctrineChoice(array('model'=>'Fish'));
 
@@ -27,9 +28,9 @@ class ProfitForm extends BaseProfitForm {
         $this->validatorSchema['details'] = new sfValidatorString(array('required' => true));
 
         $this->widgetSchema->setLabels(array(
-            'date' => 'Дата',
-            'cordage' => 'Снасти',
-            'description' => 'Описание<br /><sub>Не забудте о погоде,<br />состоянии воды</sub>'
+            'date' => 'Дата:',
+            'cordage' => 'Снасти:',
+            'description' => 'Описание:<br /><sub>Не забудте о погоде,<br />состоянии воды</sub>'
         ));
     }
 

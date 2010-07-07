@@ -1,3 +1,3 @@
-<h1>Новый улов</h1>
+<h2>Новый улов</h2>
 
 <?php include_partial('form', array('form' => $form)) ?>

@@ -1,0 +1,14 @@
+/*||||||||||||||||||||||||||||||||||||||||||||||||||
+styles for ie only
+Kemie Guaida | july 07
+Last modified Jan 14, 2008
+||||||||||||||||||||||||||||||||||||||||||||||||||||*/
+* html .clearfix{ height: 1%; overflow: visible; }
+.clearfix,.userselect, .sidelist li{ overflow: visible; zoom: 1; }
+
+.tableContainer thead{ background-color: #3dc0d3; }
+div.tableContainer { overflow: auto !important; overflow-x: hidden !important; width: 416px !important; }
+div.tableContainer table { float: left; margin: 0; width: 400px !important; }
+.tableContainer thead tr { position: relative; }
+.tableContainer tbody { height: auto !important; }
+
