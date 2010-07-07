@@ -1,0 +1,48 @@
+/*form*/
+.profit{
+    width: 70em;
+}
+.profit sub{
+    color:#777;
+    font-size: 0.5em;
+}
+.profit input[type=text]{
+    width: 99%;
+}
+.profit form table tbody tr th{
+    text-align: right;
+    vertical-align: top;
+}
+.profit form{
+    float: left;
+}
+/*||||||||||||||||||||||||||||||||||||||||||||||||||
+s styles for tables
+||||||||||||||||||||||||||||||||||||||||||||||||||||*/
+.profit div table{ border-collapse: collapse; clear: both; margin: 0 0 5px 0; }
+.profit div th{ background-color: #ebf6f8; border: 1px solid #8cdae5; font-size: 11px; font-weight: bold; padding: 2px 4px; text-align: left; }
+.profit div td{ border-bottom: 1px solid #dadada; border-right: 1px solid #f0f0f0; font-size: 11px; padding: 5px 4px; }
+/*-------------------- scrollable---------------------*/
+div.tableContainer { float: left; height: 225px; margin-bottom: 3px; overflow: hidden; width: 266px; }
+div.tableContainer table { width: 260px; }
+
+.tableContainer thead tr { display: block; }
+.tableContainer thead th{ display: table-cell; font-size: 11px; padding: 2px 4px !important; }
+.tableContainer td{ display: table-cell; padding: 4px; }
+html:not([dummy]) .tableContainer thead th { width: 190px; }
+html:not([dummy]) .tableContainer thead th + th { width: 58px; }
+.tableContainer tr > th:last-child{ }
+
+.tableContainer tbody { display: block; height: 160px; overflow: auto; }
+.tableContainer tbody td, [dummy="dummy"]{ width: 150px; }
+.tableContainer tbody td + td, [dummy="dummy"] { width: 38px; }
+.tableContainer tr > td:last-child{ white-space: nowrap; }
+
+.tableContainer tfoot tr { display: block; }
+.tableContainer tfoot td{ display: table-cell; font-size: 11px; padding: 2px 4px !important; }
+.tableContainer tfoot td, [dummy="dummy"]{ width: 152px; }
+.tableContainer tfoot td + td, [dummy="dummy"] { width: 38px; }
+
+.profit #profit_qty{
+    width: 2em;
+}

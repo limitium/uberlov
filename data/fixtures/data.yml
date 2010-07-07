@@ -6,11 +6,20 @@ Profile:
     sfGuardUser: sgu_admin
 Fish:
   Fish_1:
-    name: karas
+    name: Карась
   Fish_2:
-    name: okun
+    name: Окунь
   Fish_3:
-    name: plotva
+    name: Плотва
+  Fish_4:
+    name: Щука
+Style:
+  Style_1:
+    name: Троллинг
+  Style_2:
+    name: Фидер
+  Style_3:
+    name: Спининг
 Location:
   Location_1:
     name: agrtwgare

@@ -9,7 +9,7 @@ default:
     language:     en
     robots:       index, follow
 
-  stylesheets:    [lib/datepicker,main,location,comment,profile,rating]
+  stylesheets:    [lib/datepicker,main,location,comment,profile,rating,profit]
 
   javascripts:    [lib/jquery-1.4.2.js,lib/jqueryBlockUI,lib/jqueryColor,lib/jqueryJSON,lib/datepicker,moduleManager]
 
