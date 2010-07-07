@@ -14,7 +14,18 @@ ModuleManager.add(profitModule);
 profitModule.prototype.afterInit = function(){
     this.mm = app.getModule('mapModule');
     this.initMenu();
+    this.initListeners();
 }
+
+profitModule.prototype.initListeners = function(){
+    var self = this;
+    $('.removeProfitDetail').live('click', function(){
+        $($(this).parents()[1]).remove();
+        self.countDetailQty();
+        return false;
+    });
+}
+
 profitModule.prototype.initMenu = function(){
     this.menu = {
         link: $('#new_profit',this.mm.addEditItem('<a id="new_profit" class="editItem" href=""><img class="mapIcon" src="/images/profit.png"/>add profit</a>'))
@@ -42,6 +53,13 @@ profitModule.prototype.cancelEdit = function(){
     this.menu.link.removeClass('disabled');
 }
 
+profitModule.prototype.countDetailQty = function(){
+    var qty = 0;
+    $('.tableContainer tbody tr').each(function(){
+        qty += parseFloat(this.getAttribute('qty'));
+    });
+    $('#detailTotal').html(qty);
+}
 profitModule.prototype.getOnLocationClick =  function(){
     return function(location){
         var loader = this.mm.showLoader(location.marker.getPosition(),'<img src="/images/loader-small.gif" />');
@@ -64,8 +82,10 @@ profitModule.prototype.showForm = function(form,marker,loader){
             date.DatePickerHide();
         }
     });
-
+    var self = this;
     $('#addProfitDetail').click(function(){
+        $('.tableContainer tbody').append('<tr fish="'+$('#profit_fishes').val()+'" style="'+$('#profit_styles').val()+'" qty="'+$('#profit_qty').val()+'"><td>'+$('#profit_fishes option:selected').text()+'</td><td>'+ $('#profit_styles option:selected').text()+'</td><td>'+$('#profit_qty').val()+'</td><td><input type="button" value="&nbsp;-&nbsp;" class="button removeProfitDetail"></td></tr>');
+        self.countDetailQty();
         return false;
     });
     var details = $('.profit div ul');

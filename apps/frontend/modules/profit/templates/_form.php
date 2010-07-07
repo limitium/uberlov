@@ -57,142 +57,16 @@
                         <?php echo $form['qty'] ?>
                     </th>
                     <th>
-                        <input type="button" value="&nbsp;+&nbsp;" class="button addProfitDetail">
+                        <input type="button" value="&nbsp;+&nbsp;" id="addProfitDetail" class="button">
                     </th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>12</td>
-                    <td>dsf</td>
-                    <td>fdhg</td>
-                    <td>-</td>
-                </tr><tr>
-                    <td>12</td>
-                    <td>dsf</td>
-                    <td>fdhg</td>
-                    <td>-</td>
-                </tr><tr>
-                    <td>12</td>
-                    <td>dsf</td>
-                    <td>fdhg</td>
-                    <td>-</td>
-                </tr><tr>
-                    <td>12</td>
-                    <td>dsf</td>
-                    <td>fdhg</td>
-                    <td>-</td>
-                </tr><tr>
-                    <td>12</td>
-                    <td>dsf</td>
-                    <td>fdhg</td>
-                    <td>-</td>
-                </tr><tr>
-                    <td>12</td>
-                    <td>dsf</td>
-                    <td>fdhg</td>
-                    <td>-</td>
-                </tr><tr>
-                    <td>12</td>
-                    <td>dsf</td>
-                    <td>fdhg</td>
-                    <td>-</td>
-                </tr><tr>
-                    <td>12</td>
-                    <td>dsf</td>
-                    <td>fdhg</td>
-                    <td>-</td>
-                </tr><tr>
-                    <td>12</td>
-                    <td>dsf</td>
-                    <td>fdhg</td>
-                    <td>-</td>
-                </tr><tr>
-                    <td>12</td>
-                    <td>dsf</td>
-                    <td>fdhg</td>
-                    <td>-</td>
-                </tr><tr>
-                    <td>12</td>
-                    <td>dsf</td>
-                    <td>fdhg</td>
-                    <td>-</td>
-                </tr><tr>
-                    <td>12</td>
-                    <td>dsf</td>
-                    <td>fdhg</td>
-                    <td>-</td>
-                </tr><tr>
-                    <td>12</td>
-                    <td>dsf</td>
-                    <td>fdhg</td>
-                    <td>-</td>
-                </tr><tr>
-                    <td>12</td>
-                    <td>dsf</td>
-                    <td>fdhg</td>
-                    <td>-</td>
-                </tr><tr>
-                    <td>12</td>
-                    <td>dsf</td>
-                    <td>fdhg</td>
-                    <td>-</td>
-                </tr><tr>
-                    <td>12</td>
-                    <td>dsf</td>
-                    <td>fdhg</td>
-                    <td>-</td>
-                </tr><tr>
-                    <td>12</td>
-                    <td>dsf</td>
-                    <td>fdhg</td>
-                    <td>-</td>
-                </tr><tr>
-                    <td>12</td>
-                    <td>dsf</td>
-                    <td>fdhg</td>
-                    <td>-</td>
-                </tr><tr>
-                    <td>12</td>
-                    <td>dsf</td>
-                    <td>fdhg</td>
-                    <td>-</td>
-                </tr><tr>
-                    <td>12</td>
-                    <td>dsf</td>
-                    <td>fdhg</td>
-                    <td>-</td>
-                </tr><tr>
-                    <td>12</td>
-                    <td>dsf</td>
-                    <td>fdhg</td>
-                    <td>-</td>
-                </tr><tr>
-                    <td>12</td>
-                    <td>dsf</td>
-                    <td>fdhg</td>
-                    <td>-</td>
-                </tr><tr>
-                    <td>12</td>
-                    <td>dsf</td>
-                    <td>fdhg</td>
-                    <td>-</td>
-                </tr><tr>
-                    <td>12</td>
-                    <td>dsf</td>
-                    <td>fdhg</td>
-                    <td>-</td>
-                </tr><tr>
-                    <td>dsf</td>
-                    <td>fdhg</td>
-                    <td>12</td>
-                    <td><input type="button" value="&nbsp;-&nbsp;" class="button removeProfitDetail"></td>
-                </tr>
             </tbody>
             <tfoot>
                 <tr>
                     <td colspan="2">Всего:</td>
-                    <td>234</td>
+                    <td id="detailTotal">0</td>
                     <td>кг</td>
                 </tr>
             </tfoot>
