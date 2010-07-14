@@ -9,22 +9,21 @@
  * @version    SVN: $Id: actions.class.php 12474 2008-10-31 10:41:27Z fabien $
  */
 class locationActions extends sfActions {
+
     public function executeIndex(sfWebRequest $request) {
-    //        var_dump();
-    //        echo 2;
         var_dump(sfContext::getInstance()->getUser()->getProfile()->getForce());
         $this->location_list = Doctrine::getTable('Location')
-            ->createQuery('a')
-            ->execute();
+                        ->createQuery('a')
+                        ->execute();
     }
 
     public function executeShow(sfWebRequest $request) {
         $this->location = Doctrine::getTable('Location')->find($request->getParameter('id'));
         $this->forward404Unless($this->location);
         $this->comments = Doctrine_Query::create()
-            ->from('CommentLocation c')
-            ->where('c.location_id = ? and c.parent > 0', $this->location->getId())
-            ->count();
+                        ->from('CommentLocation c')
+                        ->where('c.location_id = ? and c.parent > 0', $this->location->getId())
+                        ->count();
     }
 
     public function executeDetails(sfWebRequest $request) {
@@ -32,17 +31,17 @@ class locationActions extends sfActions {
         $this->forward404Unless($this->location);
 
         $q = Doctrine_Query::create()->select('c.message, c.parent, c.created_at, c.updated_at, c.created_by, c.updated_by, p.*, v.*')->from('CommentLocation c')
-            ->leftJoin('c.CommentBy p')
-            ->leftJoin('c.VoteComment v')
-            ->where('c.location_id = ?', $this->location->getId());
+                        ->leftJoin('c.CommentBy p')
+                        ->leftJoin('c.VoteComment v')
+                        ->where('c.location_id = ?', $this->location->getId());
 
         $treeObject = Doctrine::getTable('CommentLocation')->getTree();
         $treeObject->setBaseQuery($q);
 
         $comments = array();
         $rootComment = $treeObject->fetchRoots()->getFirst();
-        if($rootComment) {
-            foreach($treeObject->fetchTree(array('root_id' => $rootComment->root_id)) as $comment) {
+        if ($rootComment) {
+            foreach ($treeObject->fetchTree(array('root_id' => $rootComment->root_id)) as $comment) {
                 $comments[] = $comment;
             }
         }
@@ -61,7 +60,7 @@ class locationActions extends sfActions {
 
         $this->setTemplate('new');
 
-        if($this->location = $this->processForm($request, $this->form)) {
+        if ($this->location = $this->processForm($request, $this->form)) {
             $this->setTemplate('created');
         }
     }
@@ -107,4 +106,5 @@ class locationActions extends sfActions {
         $this->getResponse()->addHttpMeta('content-disposition: ', 'attachment; filename="location.wpt"', true);
         $this->setLayout(false);
     }
+
 }

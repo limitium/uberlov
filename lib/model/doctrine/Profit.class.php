@@ -18,4 +18,21 @@ class Profit extends BaseProfit {
         return Vote::getRating($this);
     }
 
+    public function updateDetails($detailsData) {
+//        if (!$this->isNew()) {
+//            $address = $this->getAddress();
+//        } else {
+//            $address = new Address();
+//            $this->setAddress($address);
+//        }
+        foreach ($detailsData as $detailData){
+            $detail = new ProfitDetail();
+            $detail->fromArray($detailData);
+            $detail->Profit = $this;
+            $detail->save();
+        }
+
+        $this->save();
+        return $this;
+    }
 }

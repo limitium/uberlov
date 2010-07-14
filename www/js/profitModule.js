@@ -2,6 +2,7 @@ function profitModule(){
     this.menu = null;
     this.bar = null;
     this.profit = null;
+    this.location = null;
     this.infoWindow = null;
     this.listeners = {};
     this.cfg = {
@@ -56,7 +57,9 @@ profitModule.prototype.cancelEdit = function(){
 
 
 profitModule.prototype.getOnLocationClick =  function(){
+    var self  = this;
     return function(location){
+        self.location = location;
         var loader = this.mm.showLoader(location.marker.getPosition(),'<img src="/images/loader-small.gif" />');
         app.getForm('/profit/new',this.showForm.delegate(this,location.marker,loader));
     }
@@ -99,18 +102,21 @@ profitModule.prototype.countDetailQty = function(){
 profitModule.prototype.addSubmitHandler = function(form){
     var self = this;
 
-    var profitDetail = [];
-    $('.tableContainer tbody tr').each(function(){
-        profitDetail.push({
-            qty: parseFloat(this.getAttribute('qty')),
-            style: parseFloat(this.getAttribute('styles')),
-            fish: parseFloat(this.getAttribute('fish'))
-        });
-    });
-
-    $('#profit_details', form).val($.JSON.encode(profitDetail));
+    $('#profit_location_id', form).val(self.location.id);
     
     $('form', form).submit(function(){
+        var profitDetail = [];
+
+        $('.tableContainer tbody tr').each(function(){
+            profitDetail.push({
+                qty: parseFloat(this.getAttribute('qty')),
+                style: parseFloat(this.getAttribute('styles')),
+                fish: parseFloat(this.getAttribute('fish'))
+            });
+        });
+
+        $('#profit_details', form).val($.JSON.encode(profitDetail));
+    
         $(form).block({
             message: "<img src='/images/loader-small.gif'/>" ,
             overlayCSS: {
