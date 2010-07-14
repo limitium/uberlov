@@ -2,6 +2,7 @@ function profitModule(){
     this.menu = null;
     this.bar = null;
     this.profit = null;
+    this.infoWindow = null;
     this.listeners = {};
     this.cfg = {
         editableZoom: 14
@@ -53,13 +54,7 @@ profitModule.prototype.cancelEdit = function(){
     this.menu.link.removeClass('disabled');
 }
 
-profitModule.prototype.countDetailQty = function(){
-    var qty = 0;
-    $('.tableContainer tbody tr').each(function(){
-        qty += parseFloat(this.getAttribute('qty'));
-    });
-    $('#detailTotal').html(qty);
-}
+
 profitModule.prototype.getOnLocationClick =  function(){
     return function(location){
         var loader = this.mm.showLoader(location.marker.getPosition(),'<img src="/images/loader-small.gif" />');
@@ -68,11 +63,11 @@ profitModule.prototype.getOnLocationClick =  function(){
 }
 
 profitModule.prototype.showForm = function(form,marker,loader){
-    this.mm.openInfo(marker.getPosition(),this.addSubmitHandler(form));
+    this.infoWindow = this.mm.openInfo(marker.getPosition(),this.addSubmitHandler(form));
     
     var date = $('#profit_date');
     date.DatePicker({
-        format:'m.d.Y',
+        format:'d.m.Y',
         date: date.val(),
         current: date.val(),
         starts: 1,
@@ -82,19 +77,39 @@ profitModule.prototype.showForm = function(form,marker,loader){
             date.DatePickerHide();
         }
     });
+
     var self = this;
     $('#addProfitDetail').click(function(){
-        $('.tableContainer tbody').append('<tr fish="'+$('#profit_fishes').val()+'" style="'+$('#profit_styles').val()+'" qty="'+$('#profit_qty').val()+'"><td>'+$('#profit_fishes option:selected').text()+'</td><td>'+ $('#profit_styles option:selected').text()+'</td><td>'+$('#profit_qty').val()+'</td><td><input type="button" value="&nbsp;-&nbsp;" class="button removeProfitDetail"></td></tr>');
+        $('.tableContainer tbody').append('<tr fish="'+$('#profit_fishes').val()+'" styles="'+$('#profit_styles').val()+'" qty="'+$('#profit_qty').val()+'"><td>'+$('#profit_fishes option:selected').text()+'</td><td>'+ $('#profit_styles option:selected').text()+'</td><td>'+$('#profit_qty').val()+'</td><td><input type="button" value="&nbsp;-&nbsp;" class="button removeProfitDetail"></td></tr>');
         self.countDetailQty();
         return false;
     });
-    var details = $('.profit div ul');
+
     loader.remove();
+}
+
+profitModule.prototype.countDetailQty = function(){
+    var qty = 0;
+    $('.tableContainer tbody tr').each(function(){
+        qty += parseFloat(this.getAttribute('qty'));
+    });
+    $('#detailTotal').html(qty);
 }
 
 profitModule.prototype.addSubmitHandler = function(form){
     var self = this;
 
+    var profitDetail = [];
+    $('.tableContainer tbody tr').each(function(){
+        profitDetail.push({
+            qty: parseFloat(this.getAttribute('qty')),
+            style: parseFloat(this.getAttribute('styles')),
+            fish: parseFloat(this.getAttribute('fish'))
+        });
+    });
+
+    $('#profit_details', form).val($.JSON.encode(profitDetail));
+    
     $('form', form).submit(function(){
         $(form).block({
             message: "<img src='/images/loader-small.gif'/>" ,
@@ -114,16 +129,9 @@ profitModule.prototype.addSubmitHandler = function(form){
             var matches = newForm.match(/^(\d+)\|(.*)/)
 
             if(matches && matches.length==3){
-                self.mm.createLocation({
-                    title:matches[2],
-                    id:matches[1],
-                    position:self.marker.getPosition()
-                });
 
-                self.remove();
-                self.onSaveChange(true);
             }else{
-                self.marker.infoWindow.setContent(self.addSubmitHandler(app.formatHtml(newForm)));
+                self.infoWindow.setContent(self.addSubmitHandler(app.formatHtml(newForm)));
             }
         });
         return false;

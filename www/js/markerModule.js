@@ -201,7 +201,7 @@ ht_location_e.prototype.showForm = function(loader){
     
     $('#location_latitude', form).val(marker.getPosition().lat());
     $('#location_longitude', form).val(marker.getPosition().lng());
-    $('#location_address', form).val(jQuery.JSON.encode((this.address)));
+    $('#location_address', form).val($.JSON.encode((this.address)));
 
     
     
