@@ -354,6 +354,7 @@ mapOverlay.prototype.remove = function(){
 function ht_location(mm,opt){
     this.mm = mm;
     this.name = opt.name;
+    this.id = opt.id;
     opt.icon = this.icon;
     this.marker = mm.createMarker(opt);
     this.selected = false;
