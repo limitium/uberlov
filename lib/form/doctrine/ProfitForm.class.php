@@ -27,6 +27,10 @@ class ProfitForm extends BaseProfitForm {
         $this->validatorSchema['date'] = new sfValidatorDate(array('date_format' => 'd.m.Y', 'required' => true));
         $this->validatorSchema['details'] = new sfValidatorString(array('required' => true));
 
+        $this->validatorSchema['qty'] = new sfValidatorString();
+        $this->validatorSchema['styles'] = new sfValidatorString();
+        $this->validatorSchema['fishes'] = new sfValidatorString();
+
         $this->widgetSchema->setLabels(array(
             'date' => 'Дата:',
             'cordage' => 'Снасти:',
