@@ -22,7 +22,7 @@ class profileActions extends sfActions {
             ->from('Comment c')
             ->where('c.created_by = ? and c.parent > 0', $this->profile->getId())
             ->count();
-        $this->reports = Doctrine_Query::create()
+        $this->profits = Doctrine_Query::create()
             ->from('Profit p')
             ->leftJoin('p.ProfitDetail d')
             ->where('p.created_by = ?', $this->profile->getId())
@@ -35,14 +35,14 @@ class profileActions extends sfActions {
         $this->best = array(
             'name' => 'пустышка',
             'qty' => 0);
-        foreach ($this->reports as $report) {
-            $this->best['name'] = $report->getFish();
-            $this->best['qty'] = $report->getQty();
-            foreach ($report->getProfitDetail() as $pd) {
+        foreach ($this->profits as $profit) {
+            $this->best['name'] = $profit->getFish();
+            $this->best['qty'] = $profit->getQty();
+            foreach ($profit->getProfitDetail() as $pd) {
                 $this->total+=$pd->getQty();
             }
         }
-        $this->reports = $this->reports->count();
+        $this->profits = $this->profits->count();
     }
 
     public function executeNew(sfWebRequest $request) {

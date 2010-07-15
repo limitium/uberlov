@@ -45,23 +45,27 @@
     <div class="tabPanel">
         <ul>
             <li><span href="#" id="tabComments" class="selected">Комментарии (<i id="commentCounter"><?php echo sizeof($comments); ?></i>)</span></li>
-            <li><span href="#" id="tabReports">Отчеты (5)</span></li>
+            <li><span href="#" id="tabProfits">Отчеты (<i id="profitCounter"><?php echo sizeof($profits); ?></i>)</span></li>
         </ul>
     </div>
 
-    <br />
 
-
-<?php use_javascript('comment'); ?>
-                <div id="commentContainer">
+    <div id="commentContainer" class="selected">
+    <?php use_javascript('comment'); ?>
     <?php foreach ($comments as $comment): ?>
     <?php include_partial('comment/comment', array('comment' => $comment)); ?>
     <?php endforeach; ?>
     <?php $cl = new CommentLocation();
                     $cl->setLocation($location->getRawValue()) ?>
     <?php include_partial('comment/form', array('form' => new CommentLocationForm($cl), 'toward' => 'location')) ?>
+                    <div id="commentReplyDefault" style="display:none">
+                        <a href="">Написать</a>
+                    </div>
+                </div>
 
-</div>
-<div id="commentReplyDefault" style="display:none">
-    <a href="">Написать</a>
+                <div id="profitContainer">
+    <?php use_javascript('profit'); ?>
+    <?php foreach ($profits as $profit): ?>
+    <?php include_partial('profit/brief', array('profit' => $profit)); ?>
+    <?php endforeach; ?>
 </div>

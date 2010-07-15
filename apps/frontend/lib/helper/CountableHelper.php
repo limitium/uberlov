@@ -18,6 +18,6 @@ function comments2text($number){
 function locations2text($number){
     return declOfNum($number, array('место', 'места', 'мест'));;
 }
-function reports2text($number){
+function profits2text($number){
     return declOfNum($number, array('отчет', 'отчета', 'отчетов'));;
 }

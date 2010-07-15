@@ -19,7 +19,7 @@ locationShow.prototype.afterInit = function(){
 locationShow.prototype.initListeners = function(){
     $('.location .name a').click(this.toLocation.delegate(this));
     $('#tabComments').click(this.showComments.delegate(this));
-    $('#tabReports').click(this.showReports.delegate(this));
+    $('#tabProfits').click(this.showProfits.delegate(this));
 }
 locationShow.prototype.resizeMap= function(){
     this.mm = app.getModule('mapModule');
@@ -37,11 +37,17 @@ locationShow.prototype.toLocation = function(){
 }
 locationShow.prototype.showComments = function(){
     $('#tabComments').addClass('selected')
-    $('#tabReports').removeClass('selected')
+    $('#commentContainer').addClass('selected')
+    
+    $('#tabProfits').removeClass('selected')
+    $('#profitContainer').removeClass('selected')
     return false;
 }
-locationShow.prototype.showReports = function(){
-    $('#tabReports').addClass('selected')
+locationShow.prototype.showProfits = function(){
+    $('#tabProfits').addClass('selected')
+    $('#profitContainer').addClass('selected')
+
     $('#tabComments').removeClass('selected')
+    $('#commentContainer').removeClass('selected')
     return false;
 }

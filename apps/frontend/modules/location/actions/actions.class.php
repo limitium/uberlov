@@ -45,8 +45,15 @@ class locationActions extends sfActions {
                 $comments[] = $comment;
             }
         }
+
         array_shift($comments);
         $this->comments = $comments;
+
+        $this->profits = Doctrine_Query::create()->select()->from('Profit pf')
+                        ->leftJoin('pf.ProfitDetail d')
+                        ->leftJoin('pf.CreatedBy p')
+                        ->where('pf.location_id = ?', $this->location->getId())
+                        ->execute();
     }
 
     public function executeNew(sfWebRequest $request) {

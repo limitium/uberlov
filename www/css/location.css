@@ -62,3 +62,16 @@
     font-size:12px;
     font-weight:800;
 }
+
+#commentContainer {
+    display: none;
+}
+#commentContainer.selected{
+    display: block;
+}
+#profitContainer {
+    display: none;
+}
+#profitContainer.selected{
+    display: block;
+}
