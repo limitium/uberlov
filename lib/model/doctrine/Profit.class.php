@@ -27,7 +27,7 @@ class Profit extends BaseProfit {
 //        }
         foreach ($detailsData as $detailData){
             $detail = new ProfitDetail();
-            $detail->fromArray($detailData);
+            $detail->fromArray((array)$detailData);
             $detail->Profit = $this;
             $detail->save();
         }

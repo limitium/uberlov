@@ -34,13 +34,27 @@
                         </td>
                     </tr>
                     <tr>
+                        <th><?php echo $form['best_weight']->renderLabel() ?></th>
+                        <td>
+                        <?php echo $form['best_weight']->renderError() ?>
+                        <?php echo $form['best_weight'] ?>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th><?php echo $form['best_fish_id']->renderLabel() ?></th>
+                        <td>
+                        <?php echo $form['best_fish_id']->renderError() ?>
+                        <?php echo $form['best_fish_id'] ?>
+                        </td>
+                    </tr>
+                    <tr>
                         <th><?php echo $form['description']->renderLabel() ?></th>
                         <td>
                         <?php echo $form['description']->renderError() ?>
                         <?php echo $form['description'] ?>
                         </td>
                     </tr>
-                </tbody>
+                </tbody>    
             </table>
         </form>
         <div class="tableContainer">
