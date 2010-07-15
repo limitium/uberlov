@@ -41,7 +41,7 @@
             <p>С нами с <?php echo $profile->getDateTimeObject('created_at')->format('d.m.Y') ?>.</p>
             <p>Добавил<?php echo $profile->getSex()?'':'а' ?> <?php echo $locations ?> мест,
                 написал<?php echo $profile->getSex()?'':'а' ?> <?php echo comments2text($comments) ?> и
-                <?php echo reports2text($reports) ?>.</p>
+                <?php echo profitss2text($profits) ?>.</p>
             <p>Заработал<?php echo $profile->getSex()?'':'а' ?> карму <?php include_partial('vote/vote', array('obj' => $profile,'objType' => 'profile')); ?>
                 и имеет силу голоса <?php echo $profile->getForce(); ?>.</p>
             <p>Поймал <?php echo $total; ?>кг рыбы и самую большую <?php echo $best['name']; ?> на <?php echo $best['qty']; ?>кг поймал на "<?php echo link_to('Мега лунка','location/details'); ?>".</p>
