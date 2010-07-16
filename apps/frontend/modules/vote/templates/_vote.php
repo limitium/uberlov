@@ -1,5 +1,5 @@
 <?php $rating = $obj->getRating(); ?>
-<div class="rating" to="<?php echo $objType; ?>" id="rate<?php echo $obj->getId(); ?>">
+<div class="rating" to="<?php echo isset($objType) ? $objType :  strtolower(get_class($obj)); ?>" id="rate<?php echo $obj->getId(); ?>">
     <a class ="plus<?php echo $obj->plused?' voted':''; ?>" href="">
         <img src="/images/plus.png">
     </a>

@@ -1,5 +1,5 @@
 <?php use_javascript('voting');  ?>
-<?php include_partial('vote/vote', array('obj' => $location,'objType' => 'location')); ?>
+<?php include_partial('vote/vote', array('obj' => $location)); ?>
 <p class="locaction name"><?php echo $location->getName() ?></p>
 <div class="locaction description"><?php echo $location->getDescription() ?>
 </div>

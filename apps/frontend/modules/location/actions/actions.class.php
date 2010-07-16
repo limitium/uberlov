@@ -52,6 +52,7 @@ class locationActions extends sfActions {
         $this->profits = Doctrine_Query::create()->select()->from('Profit pf')
                         ->leftJoin('pf.ProfitDetail d')
                         ->leftJoin('pf.CreatedBy p')
+                        ->leftJoin('pf.VoteProfit v')
                         ->where('pf.location_id = ?', $this->location->getId())
                         ->execute();
     }

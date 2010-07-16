@@ -28,7 +28,7 @@
     border: 1px solid red;
 }
 
-.commentMessage {
+.comment .commentMessage {
     padding:5px 5px 0.5em;
     position:relative;
 }
