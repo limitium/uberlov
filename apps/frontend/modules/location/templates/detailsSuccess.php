@@ -33,7 +33,7 @@
             <div class="description"><?php echo $location->getDescription(); ?></div>
             <div class="created">
         <?php use_javascript('voting'); ?>
-        <?php include_partial('vote/vote', array('obj' => $location, 'objType' => 'location')); ?>
+        <?php include_partial('vote/vote', array('obj' => $location)); ?>
                 <div>
                     <a href="" id="goToReply">□</a> Добавил<?php echo $location->getCreatedBy()->getSex() ? '' : 'а' ?> <?php echo link_to($location->getCreatedBy()->getNickName(), 'profile/show?id=' . $location->getCreatedBy()->getId()); ?>,
             <?php echo $location->getDateTimeObject('created_at')->format('d.m.Y'); ?> | <a href="">тут не так</a> | <a href="">в мои места</a>

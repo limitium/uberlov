@@ -3,10 +3,10 @@ default:
     content-type: text/html
 
   metas:
-    title:        symfony project
-    description:  symfony project
-    keywords:     symfony, project
-    language:     en
+    title:        uberЛОВ
+    description:  uberЛОВ
+    keywords:     uber, ЛОВ
+    language:     ru
     robots:       index, follow
 
   stylesheets:    [lib/datepicker,main,location,comment,profile,rating,profit]

@@ -11,9 +11,10 @@
  * @version    SVN: $Id: Builder.php 6820 2009-11-30 17:27:49Z jwage $
  */
 class Profit extends BaseProfit {
+
     public $plused = false;
     public $minused = false;
-    
+
     public function getRating() {
         return Vote::getRating($this);
     }
@@ -25,9 +26,9 @@ class Profit extends BaseProfit {
 //            $address = new Address();
 //            $this->setAddress($address);
 //        }
-        foreach ($detailsData as $detailData){
+        foreach ($detailsData as $detailData) {
             $detail = new ProfitDetail();
-            $detail->fromArray((array)$detailData);
+            $detail->fromArray((array) $detailData);
             $detail->Profit = $this;
             $detail->save();
         }
@@ -35,4 +36,17 @@ class Profit extends BaseProfit {
         $this->save();
         return $this;
     }
+
+    public function getBriefDescription() {
+        return $this->getDescription();
+    }
+
+    public function getTotalProfit() {
+        $total = 0;
+        foreach ($this->getProfitDetail() as $det) {
+            $total += $det->qty;
+        }
+        return $total;
+    }
+
 }

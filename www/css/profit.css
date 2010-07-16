@@ -1,3 +1,29 @@
+/*location brief*/
+.profitBrief  {
+    padding-bottom:3em;
+}
+.profitBrief .profitMessage {
+    padding:5px 5px 0.5em;
+    position:relative;
+}
+.profitBrief .profitBar {
+    color:#666666;
+    font-size:0.8em;
+    line-height:140%;
+    position:relative;
+    width:100%;
+}
+.profitBrief .profitBar #newprofit{
+    margin-left: 30px;
+    margin-top: 2em;
+}
+
+.profitBrief .profitBar .rating{
+    font-size: 1em;
+    font-weight: bold;
+}
+
+
 /*form*/
 .profit{
     width: 70em;
