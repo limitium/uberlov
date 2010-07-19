@@ -110,8 +110,8 @@ profitModule.prototype.addSubmitHandler = function(form){
         $('.tableContainer tbody tr').each(function(){
             profitDetail.push({
                 qty: parseFloat(this.getAttribute('qty')),
-                style: parseFloat(this.getAttribute('styles')),
-                fish: parseFloat(this.getAttribute('fish'))
+                style_id: parseFloat(this.getAttribute('styles')),
+                fish_id: parseFloat(this.getAttribute('fish'))
             });
         });
 

@@ -19,6 +19,25 @@ class profitActions extends sfActions {
     public function executeShow(sfWebRequest $request) {
         $this->profit = Doctrine::getTable('Profit')->find(array($request->getParameter('id')));
         $this->forward404Unless($this->profit);
+
+        $q = Doctrine_Query::create()->select('c.message, c.parent, c.created_at, c.updated_at, c.created_by, c.updated_by, p.*, v.*')->from('CommentProfit c')
+                        ->leftJoin('c.CommentBy p')
+                        ->leftJoin('c.VoteComment v')
+                        ->where('c.profit_id = ?', $this->profit->getId());
+
+        $treeObject = Doctrine::getTable('CommentProfit')->getTree();
+        $treeObject->setBaseQuery($q);
+
+        $comments = array();
+        $rootComment = $treeObject->fetchRoots()->getFirst();
+        if ($rootComment) {
+            foreach ($treeObject->fetchTree(array('root_id' => $rootComment->root_id)) as $comment) {
+                $comments[] = $comment;
+            }
+        }
+
+        array_shift($comments);
+        $this->comments = $comments;
     }
 
     public function executeNew(sfWebRequest $request) {

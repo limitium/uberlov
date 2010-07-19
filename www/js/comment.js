@@ -2,6 +2,9 @@ function comment(){
     var self = this;
     this.comment = $('#newComment');
     this.comment.child = false;
+    this.container = $('#commentContainer');
+    this.type = $('#commentContainer').attr('type');
+    
     $('form',  this.comment).submit(function(){
         self.comment.block({
             message: "<img src='/images/loader-small.gif'/>" ,
@@ -32,7 +35,7 @@ function comment(){
         $('#commentReplyDefault').css({
             display: 'block'
         });
-        $('#comment_location_parent').val($(this).parent().parent().attr('id').substr(7));
+        $('#comment_'+self.type+'_parent').val($(this).parent().parent().attr('id').substr(7));
         self.comment.child = true;
         $('textarea',self.comment).focus();
         return false;
@@ -42,8 +45,9 @@ function comment(){
         $('#commentReplyDefault').css({
             display: 'none'
         });
-        $('#commentContainer').append(self.comment);
-        $('#comment_location_parent').val('');
+        self.container.append(self.comment);
+        
+        $('#comment_'+self.type+'_parent').val('');
         self.comment.child = false;
         return false;
     });

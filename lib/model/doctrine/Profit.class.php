@@ -49,4 +49,8 @@ class Profit extends BaseProfit {
         return $total;
     }
 
+    public function getName() {
+        return 'Profit ' . $this->getId() . ' name.';
+    }
+
 }

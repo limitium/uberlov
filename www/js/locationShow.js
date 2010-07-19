@@ -28,9 +28,10 @@ locationShow.prototype.resizeMap= function(){
 }
 
 locationShow.prototype.toLocation = function(){
+    var position = $('div.location').attr('position').split(';');
     this.mm.setOptions({
         zoom: this.cfg.baseZoom,
-        center: new gm.LatLng(parseFloat(app.locationShow.lat), parseFloat(app.locationShow.lng))
+        center: new gm.LatLng(parseFloat(position[0]), parseFloat(position[1]))
     });
     this.mm.setType(this.cfg.mapType);
     return false;

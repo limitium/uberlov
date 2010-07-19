@@ -28,16 +28,19 @@
 .location img{
     width: 400px;
 }
-.location .created{
-    clear:both;
-    padding: 2em 0 1em 0;
-}
+
 
 .location .description{
     padding: 2em 0 0 1em;
     clear:both;
 }
-.location .rating{
+
+.location .meta{
+    clear:both;
+    padding: 2em 0 1em 0;
+}
+
+.location .meta .rating{
     font-size: 1em;
     font-weight: bold;
 }

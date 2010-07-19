@@ -13,6 +13,10 @@ class commentActions extends sfActions {
         $this->createComment($request, 'location');
     }
 
+    public function executeProfit(sfWebRequest $request) {
+        $this->createComment($request, 'profit');
+    }
+
     private function createComment(sfWebRequest $request, $toward) {
         $this->forward404Unless($request->isMethod(sfRequest::POST));
 
@@ -57,7 +61,6 @@ class commentActions extends sfActions {
 
             $comment = $form->save();
             $comment->getNode()->insertAsLastChildOf($parent);
-
             return $comment;
         }
         return null;

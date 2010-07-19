@@ -119,6 +119,7 @@ a.delItem{
 
 .tabPanel{
     border-bottom:1px solid #0053E4;
+    margin-bottom: 0.5em;
 }
 .tabPanel ul{
     list-style-type: none;
@@ -136,9 +137,10 @@ a.delItem{
 
 .tabPanel ul li span:hover{
     color: #fff;
+    cursor: pointer;
     background-color: #369;
 }
-.tabPanel ul li span.selected {
+.tabPanel ul li span.selected{
     border-bottom:1px solid #fff;
 }
 
