@@ -1,28 +1,82 @@
-/*location brief*/
+/*profit brief*/
 .profitBrief  {
-    padding-bottom:3em;
+    padding-bottom:2em;
 }
-.profitBrief .profitMessage {
+.profitBrief .message {
     padding:5px 5px 0.5em;
     position:relative;
 }
-.profitBrief .profitBar {
+.profitBrief .bar {
     color:#666666;
     font-size:0.8em;
     line-height:140%;
     position:relative;
     width:100%;
 }
-.profitBrief .profitBar #newprofit{
+.profitBrief .bar #newprofit{
     margin-left: 30px;
     margin-top: 2em;
 }
 
-.profitBrief .profitBar .rating{
+.profitBrief .bar .rating{
     font-size: 1em;
     font-weight: bold;
 }
+.profitBrief .name{
+    padding-top: 1em;
+}
 
+/*profit full*/
+.profitFull .meta{
+    clear:both;
+    padding: 2em 0 1em 0;
+}
+.profitFull .meta .rating{
+    font-size: 1em;
+    font-weight: bold;
+}
+.profitFull .where{
+    text-align: right;
+}
+.profitFull table
+{
+    font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+    font-size: 12px;
+    width: 100%;
+    text-align: left;
+    border-collapse: collapse;
+}
+.profitFull table th
+{
+    font-size: 14px;
+    font-weight: normal;
+    padding: 10px 8px;
+    color: #039;
+    border-bottom: 2px solid #6678b1;
+}
+.profitFull table tfoot td
+{
+    font-size: 14px;
+    font-weight: normal;
+    padding: 10px 8px;
+    color: #039;
+    border-top: 1px dashed #6678b1;
+}
+.profitFull table td
+{
+    padding: 8px;
+    color: #669;
+}
+.profitFull table .odd
+{
+    background: #e8edff;
+}
+.profitFull  tr > td:last-child {
+    text-align: right
+}
+.profitFull  tr > th:last-child {
+    text-align: right
+}
 
 /*form*/
 .profit{

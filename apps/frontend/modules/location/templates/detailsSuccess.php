@@ -1,13 +1,6 @@
 <?php use_javascript('locationShow'); ?>
-<script>
-    app.locationShow = {
-        "id": "<?php echo $location->getId(); ?>",
-        "lat": "<?php echo $location->getLatitude(); ?>",
-        "lng": "<?php echo $location->getLongitude(); ?>"
-    }
-</script>
 
-<div class="location">
+<div class="location" position="<?php echo $location->getLatitude(); ?>;<?php echo $location->getLongitude(); ?>">
     <div class="name">
         <a class="dashed" href=""><?php echo $location->getName(); ?></a>
     </div>
@@ -31,7 +24,8 @@
             </div>
 
             <div class="description"><?php echo $location->getDescription(); ?></div>
-            <div class="created">
+
+            <div class="meta">
         <?php use_javascript('voting'); ?>
         <?php include_partial('vote/vote', array('obj' => $location)); ?>
                 <div>
@@ -41,7 +35,7 @@
             </div>
         </div>
     </div>
-
+    
     <div class="tabPanel">
         <ul>
             <li><span href="#" id="tabComments" class="selected">Комментарии (<i id="commentCounter"><?php echo sizeof($comments); ?></i>)</span></li>
@@ -50,7 +44,7 @@
     </div>
 
 
-    <div id="commentContainer" class="selected">
+    <div id="commentContainer" class="selected" type="location">
     <?php use_javascript('comment'); ?>
     <?php foreach ($comments as $comment): ?>
     <?php include_partial('comment/comment', array('comment' => $comment)); ?>
