@@ -135,10 +135,11 @@ html:not([dummy]) .tableContainer thead th + th { width: 58px; }
 }
 
 /* last block */
-.profitLast{
-    padding: 0.5em;
+#profitLast{
+    margin: 0.5em;
+    background-color: #E8EDFF;
 }
-.profitLast span{
+#profitLast span{
     display: block;
     font-size: x-small;
     text-align: right;

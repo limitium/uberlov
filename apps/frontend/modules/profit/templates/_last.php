@@ -1,4 +1,4 @@
-<div class="profitLast">
+<div id="profitLast">
     <h4>Новые отчеты:</h4>
     <ul>
         <?php foreach ($profits as $profit): ?>

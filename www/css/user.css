@@ -1,0 +1,7 @@
+/* menu block */
+#userMenu{
+    margin: 0.5em;
+}
+#userMenu ul li{
+    background-color: #E8EDFF;
+}
