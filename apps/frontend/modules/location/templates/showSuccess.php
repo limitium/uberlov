@@ -4,15 +4,18 @@
     <div class="name">
         <a class="dashed" href=""><?php echo $location->getName(); ?></a>
     </div>
+    <div class="address">
+        <?php echo htmlspecialchars_decode($location->getAddress()); ?>
+    </div>
     <?php include_partial('collector/map') ?>
-    <div class="stat">
-        <table>
-            <tr><th>Глубина:</th><td><?php echo $location->getDepth() ?></td></tr>
-            <tr><th>Течение:</th><td><?php echo $location->getLocationFlow() ?></td></tr>
-            <tr><th>Рельеф:</th><td><?php echo $location->getLocationRelief() ?></td></tr>
-            <tr><th>Дно:</th><td><?php echo $location->getLocationFundus() ?></td></tr>
-            <tr><th>Наловили:</th><td><?php echo $location->getTotalProfit() ?></td></tr>
-        </table>
+        <div class="stat">
+            <table>
+                <tr><th>Глубина:</th><td><?php echo $location->getDepth() ?></td></tr>
+                <tr><th>Течение:</th><td><?php echo $location->getLocationFlow() ?></td></tr>
+                <tr><th>Рельеф:</th><td><?php echo $location->getLocationRelief() ?></td></tr>
+                <tr><th>Дно:</th><td><?php echo $location->getLocationFundus() ?></td></tr>
+                <tr><th>Наловили:</th><td><?php echo $location->getTotalProfit() ?></td></tr>
+            </table>
         <?php if ($location->getIsFree()): ?>
             <p>Бесплатное</p>
         <?php else: ?>
@@ -35,7 +38,7 @@
             </div>
         </div>
     </div>
-    
+
     <div class="tabPanel">
         <ul>
             <li><span href="#" id="tabComments" class="selected">Комментарии (<i id="commentCounter"><?php echo sizeof($comments); ?></i>)</span></li>

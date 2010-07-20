@@ -12,7 +12,7 @@
     <body>
         <div id="page">
             <div id="header">
-                <div id="logo">uberLov</div>
+                <div id="logo">uberЛОВ</div>
                 <div id="site_menu">
                     <ul>
                         <li><?php echo link_to('Места ловли', 'collector/map') ?></li>
@@ -20,29 +20,29 @@
                     </ul>
                 </div>
             </div>
+            <div id="middle">
+                <div id="left_layout">
+                    <?php include_component('user', 'menu') ?>
+                    <?php include_component('location', 'last') ?>
+                    <?php include_component('profit', 'last') ?>
+                </div>
 
-            <div id="left_layout">
-                <?php include_component('user', 'menu') ?>
-                <?php include_component('location', 'last') ?>
-                <?php include_component('profit', 'last') ?>
+                <div id="right_layout">
+                    <div id="content_menu"><?php include_slot('content_menu') ?></div>
+
+                    <?php if ($sf_user->hasFlash('notice')): ?>
+                        <div class="flash_notice"><?php echo $sf_user->getFlash('notice') ?></div>
+                    <?php endif; ?>
+
+                    <?php if ($sf_user->hasFlash('error')): ?>
+                            <div class="flash_error"><?php echo $sf_user->getFlash('error') ?></div>
+                    <?php endif; ?>
+
+                    <?php echo $sf_content ?>
+                </div>
             </div>
-
-            <div id="right_layout">
-                <div id="content_menu"><?php include_slot('content_menu') ?></div>
-
-                <?php if ($sf_user->hasFlash('notice')): ?>
-                    <div class="flash_notice"><?php echo $sf_user->getFlash('notice') ?></div>
-                <?php endif; ?>
-
-                <?php if ($sf_user->hasFlash('error')): ?>
-                        <div class="flash_error"><?php echo $sf_user->getFlash('error') ?></div>
-                <?php endif; ?>
-
-                <?php echo $sf_content ?>
-            </div>
-
             <div id="footer">
-                copyrights
+                Какие-то слова в футере
             </div>
         </div>
     </body>

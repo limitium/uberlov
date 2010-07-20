@@ -123,16 +123,11 @@ Profile:
       refClass: Friend
       local: source_profile_id
       foreign: related_profile_id
-    Fishes:
-      class: Fish
-      refClass: ProfileFish
+    Inboxes:
+      class: Inbox
+      refClass: Inboxed
       local: profile_id
-      foreign: fish_id
-    Styles:
-      class: Style
-      refClass: ProfileStyle
-      local: profile_id
-      foreign: style_id
+      foreign: inbox_id
 Fish:
   columns:
     id:
@@ -144,12 +139,6 @@ Fish:
       unique: true
       type: string(100)
       notnull: true
-  relations:
-    Profiles:
-      class: Profile
-      refClass: ProfileFish
-      local: fish_id
-      foreign: profile_id
 Profit:
   actAs:
     Timestampable: 
@@ -179,28 +168,31 @@ Profit:
       autoincrement: true
     location_id:
       type: integer(4)
+    name:
+      type: string(50)
       notnull: true
-    date:
-      type: date
+    begin:
+      type: timestamp
       notnull: true
+    water_state:
+      type: string
+    lure:
+      type: string
+    bait:
+      type: string
+    additive:
+      type: string
+    weather:
+      type: string
     cordage:
       type: string
       notnull: true
     description:
       type: string
       notnull: true
-    best_weight:
-      type: float(10)
-      notnull: true
-    best_fish_id:
-      type: integer(4)
-      notnull: true
   relations:
     Location:
       local: location_id
-      foreign: id
-    Fish:
-      local: best_fish_id
       foreign: id
 Style:
   columns:
@@ -213,14 +205,11 @@ Style:
       unique: true
       type: string(100)
       notnull: true
-  relations:
-    Profiles:
-      class: Profile
-      refClass: ProfileStyle
-      local: style_id
-      foreign: profile_id
 ProfitDetail:
   columns:
+    time:
+      type: timestamp
+      notnull: true
     profit_id:
       type: integer(4)
     style_id:
@@ -451,36 +440,6 @@ VoteProfile:
     Profile:
       local: profile_id
       foreign: id
-ProfileFish:
-  columns:
-    fish_id:
-      type: integer(4)
-      notnull: true
-    profile_id:
-      type: integer(4)
-      notnull: true
-  relations:
-    Fish:
-      local: fish_id
-      foreign: id
-    Profile:
-      local: profile_id
-      foreign: id
-ProfileStyle:
-  columns:
-    style_id:
-      type: integer(4)
-      notnull: true
-    profile_id:
-      type: integer(4)
-      notnull: true
-  relations:
-    Style:
-      local: style_id
-      foreign: id
-    Profile:
-      local: profile_id
-      foreign: id
 Address:
   columns:
     id:
@@ -565,6 +524,45 @@ AreaHigh:
   relations:
     AreaLow:
       local: area_low_id
+      foreign: id
+Inbox:
+  columns:
+    id:
+      primary: true
+      type: integer(4)
+      notnull: true
+      autoincrement: true
+    name:
+      type: string(50)
+      notnull: true
+    message:
+      type: string
+      notnull: true
+    profile_id:
+      type: integer(4)
+  relations:
+    Profile:
+      local: profile_id
+      foreign: id
+    Inboxed:
+      class: Profile
+      refClass: Inboxed
+      local: inbox_id
+      foreign: profile_id
+Inboxed:
+  columns:
+    inbox_id:
+      type: integer(4)
+      notnull: true
+    profile_id:
+      type: integer(4)
+      notnull: true
+  relations:
+    Inbox:
+      local: inbox_id
+      foreign: id
+    Profile:
+      local: profile_id
       foreign: id
 options:
   type: INNODB
