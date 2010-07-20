@@ -78,6 +78,13 @@
     text-align: right
 }
 
+.profitFull .best{
+    padding: 0 0 10px 0px;
+}
+.profitFull .text{
+    padding: 10px 0 0 5px;
+}
+
 /*form*/
 .profit{
     width: 70em;
@@ -125,4 +132,14 @@ html:not([dummy]) .tableContainer thead th + th { width: 58px; }
 
 .profit #profit_qty{
     width: 2em;
+}
+
+/* last block */
+.profitLast{
+    padding: 0.5em;
+}
+.profitLast span{
+    display: block;
+    font-size: x-small;
+    text-align: right;
 }

@@ -23,7 +23,8 @@
 
             <div id="left_layout">
                 <?php include_component('user', 'menu') ?>
-                <?php include_component('collector', 'stats') ?>
+                <?php include_component('location', 'last') ?>
+                <?php include_component('profit', 'last') ?>
             </div>
 
             <div id="right_layout">

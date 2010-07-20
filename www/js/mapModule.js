@@ -58,7 +58,7 @@ mapModule.prototype.initHandlers= function(){
 mapModule.prototype.getOnLocationClick = function(){
     return function(location){
         var loader = this.showLoader(location.marker.getPosition(),'<img src="/images/loader-small.gif" />');
-        app.getForm('/location/show/id/'+location.marker.id,this.onLocationInfoLoad.delegate(this, location, loader));
+        app.getForm('/location/map/id/'+location.marker.id,this.onLocationInfoLoad.delegate(this, location, loader));
     }
 }
 

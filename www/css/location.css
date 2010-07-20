@@ -29,7 +29,6 @@
     width: 400px;
 }
 
-
 .location .description{
     padding: 2em 0 0 1em;
     clear:both;
@@ -77,4 +76,14 @@
 }
 #profitContainer.selected{
     display: block;
+}
+
+/* last block */
+.locationLast{
+    padding: 0.5em;
+}
+.locationLast span{
+    display: block;
+    font-size: x-small;
+    text-align: right;
 }
