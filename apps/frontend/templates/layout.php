@@ -12,7 +12,7 @@
     <body>
         <div id="page">
             <div id="header">
-                <div id="logo"><img height="200" alt="" src="/images/logo.jpg" /></div>
+                <div id="logo">uberLov</div>
                 <div id="site_menu">
                     <ul>
                         <li><?php echo link_to('Места ловли', 'collector/map') ?></li>

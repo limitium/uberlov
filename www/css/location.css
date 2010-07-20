@@ -79,10 +79,11 @@
 }
 
 /* last block */
-.locationLast{
-    padding: 0.5em;
+#locationLast{
+    margin: 0.5em;
+    background-color: #E8EDFF;
 }
-.locationLast span{
+#locationLast span{
     display: block;
     font-size: x-small;
     text-align: right;

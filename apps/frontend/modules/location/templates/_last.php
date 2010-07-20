@@ -1,4 +1,4 @@
-<div class="locationLast">
+<div id="locationLast">
     <h4>Новые места:</h4>
     <ul>
         <?php foreach ($locations as $location): ?>

@@ -81,11 +81,16 @@ a.delItem{
 }
 
 #logo{
-    width:150px;
-    float:left;
+    width:170px;
+    height:70px;
+    float: left;
+    padding-top: 30px;
+    padding-left: 30px;
 }
 #site_menu{
-    float:left;
+    width:800px;
+    height:100px;
+    float: left;
 }
 #site_menu li{
     display:inline;
@@ -104,6 +109,7 @@ a.delItem{
 
 #footer{
     clear:both;
+    text-align: center;
 }
 
 #map{
