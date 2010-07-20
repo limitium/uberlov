@@ -8,7 +8,7 @@
 </div>
 <div class="profitFull">
     <h2><?php echo $profit->getName(); ?></h2>
-    <div class="where">Ловили <?php echo $profit->getDateTimeObject('date')->format('d.m.Y'); ?> на <?php echo link_to($profit->getLocation()->getName(), 'location/details?id=' . $profit->getLocation()->getId()); ?></div>
+    <div class="where">Ловили <?php echo $profit->getDateTimeObject('date')->format('d.m.Y'); ?> на <?php echo link_to($profit->getLocation()->getName(), 'location/show?id=' . $profit->getLocation()->getId()); ?></div>
     <table>
         <thead>
             <tr>
@@ -36,8 +36,8 @@
                 </tr>
             </tfoot>
         </table>
-
-        <div class="text"><?php echo $profit->getCordage(); ?></div>
+        <div class="best">Самая большая: <?php echo $profit->getFish(); ?> на <?php echo $profit->getBestWeight(); ?> кг.</div>
+        <div>Использовались снасти: <?php echo $profit->getCordage(); ?></div>
         <div class="text"><?php echo $profit->getDescription(); ?></div>
         <div class="meta">
         <?php use_javascript('voting'); ?>

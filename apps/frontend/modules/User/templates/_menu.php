@@ -1,4 +1,4 @@
-<div id="user_menu">
+<div id="userMenu">
     <ul>
         <?php foreach ($menu as $menuItem): ?>
         <li>

@@ -17,7 +17,7 @@ class locationActions extends sfActions {
                         ->execute();
     }
 
-    public function executeShow(sfWebRequest $request) {
+    public function executeMap(sfWebRequest $request) {
         $this->location = Doctrine::getTable('Location')->find($request->getParameter('id'));
         $this->forward404Unless($this->location);
         $this->comments = Doctrine_Query::create()
@@ -26,7 +26,7 @@ class locationActions extends sfActions {
                         ->count();
     }
 
-    public function executeDetails(sfWebRequest $request) {
+    public function executeShow(sfWebRequest $request) {
         $this->location = Doctrine::getTable('Location')->find($request->getParameter('id'));
         $this->forward404Unless($this->location);
 

@@ -44,7 +44,7 @@
                 <?php echo profitss2text($profits) ?>.</p>
             <p>Заработал<?php echo $profile->getSex()?'':'а' ?> карму <?php include_partial('vote/vote', array('obj' => $profile,'objType' => 'profile')); ?>
                 и имеет силу голоса <?php echo $profile->getForce(); ?>.</p>
-            <p>Поймал <?php echo $total; ?>кг рыбы и самую большую <?php echo $best['name']; ?> на <?php echo $best['qty']; ?>кг поймал на "<?php echo link_to('Мега лунка','location/details'); ?>".</p>
+            <p>Поймал <?php echo $total; ?>кг рыбы и самую большую <?php echo $best['name']; ?> на <?php echo $best['qty']; ?>кг поймал на "<?php echo link_to('Мега лунка','location/show'); ?>".</p>
         </div>
     </div>
 </div>
