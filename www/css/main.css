@@ -76,41 +76,56 @@ a.delItem{
 }
 /*layout*/
 
+#page {
+    background-color: gainsboro;
+}
 #header{
-    height:60px;
-}
 
-#logo{
-    width:170px;
-    height:70px;
-    float: left;
-    padding-top: 30px;
-    padding-left: 30px;
 }
-#site_menu{
-    width:800px;
-    height:100px;
-    float: left;
-}
-#site_menu li{
-    display:inline;
-}
-
-#left_layout{
-    float:left;
-    width:200px;
-    height:600px;
-}
-
-#right_layout{
-    float:left;
-    width:800px;
-}
-
 #footer{
     clear:both;
     text-align: center;
 }
+#header, #footer{
+    min-width:998px;
+    background-color: lavender;
+}
+#logo{
+    position: absolute;
+    padding-top: 40px;
+    padding-left: 40px;
+}
+#site_menu{
+    position: relative;
+    height: 8em;
+    margin-left: 140px;
+}
+#site_menu ul{
+    padding: 6em 0 0 6em;
+}
+#site_menu li{
+    display:inline;
+}
+#left_layout{
+    float:left;
+    width: 20%
+}
+
+#right_layout{
+    float:left;
+    width: 80%
+}
+#middle  {
+    clear:both;
+
+}
+#middle {
+    margin:0 auto;
+    max-width:1620px;
+    min-width:980px;
+    width:90%;
+}
+
 
 #map{
     width: 100%;

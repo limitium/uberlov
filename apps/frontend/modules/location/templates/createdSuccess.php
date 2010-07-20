@@ -1,1 +1,1 @@
-<?php echo $profit->getId(); ?>
+<?php echo $location->getId(); ?>|<?php echo $location->getName(); ?>

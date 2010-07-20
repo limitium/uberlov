@@ -92,7 +92,7 @@ class profitActions extends sfActions {
 // Having determined the form object is Invalid
             foreach ($this->form->getFormFieldSchema() as $name => $formField) {
                 if ($formField->getError() != "") {
-                    echo "ActionClassName::methodName( ): Field Error for :" . $name . " : " . $formField->getError();
+//                    echo "ActionClassName::methodName( ): Field Error for :" . $name . " : " . $formField->getError();
                 }
             }
         }

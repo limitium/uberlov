@@ -15,7 +15,7 @@ class Address extends BaseAddress {
     public function updateAddress($addressData) {
         fb($addressData);
         $parent = null;
-        foreach (array('country', 'areaLow', 'areaHigh', 'locality')  as $partName) {
+        foreach (array('country', 'areaLow', 'areaHigh', 'locality') as $partName) {
             $part = $this->getAddressPart($addressData, $partName, $parent);
 
             $parent = $part;
@@ -26,30 +26,47 @@ class Address extends BaseAddress {
         }
     }
 
-
     private function getAddressPart($addressData, $partName, $parent) {
         $uPartName = ucfirst($partName);
         $name = $addressData[$partName];
 
         $part = Doctrine_Query::create()
-            ->from($uPartName)
-            ->where('name = ?', $name)
-            ->fetchOne();
+                        ->from($uPartName)
+                        ->where('name = ?', $name)
+                        ->fetchOne();
 
-        if(!$part && $name) {
+        if (!$part && $name) {
             $part = new $uPartName();
             $part->name = $name;
             fb('new part');
         }
 
-        if($parent && $part) {
+        if ($parent && $part) {
             $parentName = get_class($parent);
             fb('has parent ' . $parentName);
-            if($part->$parentName->isNew()) {
+            if ($part->$parentName->isNew()) {
                 fb('parent empty');
                 $part->$parentName = $parent;
             }
         }
         return $part;
     }
+
+    public function __toString() {
+        $address = link_to($this->getCountry()->getName(), 'address/country?id=' . $this->getCountry()->getId());
+        $low = $this->getAreaLow();
+        if (!$low->isNew()) {
+            $address .= ' → ' . link_to($low->getName(), 'address/low?id=' . $low->getId());
+        }
+        $high = $this->getAreaHigh();
+        if (!$high->isNew()) {
+            $address .= ' → ' . link_to($high->getName(), 'address/high?id=' . $high->getId());
+        }
+        $locality = $this->getLocality();
+        if (!$locality->isNew()) {
+            $address .= ' → ' . link_to($locality->getName(), 'address/locality?id=' . $locality->getId());
+        }
+        return $address;
+    }
+
 }
