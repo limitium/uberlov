@@ -11,6 +11,7 @@
  * @version    SVN: $Id: Builder.php 6820 2009-11-30 17:27:49Z jwage $
  */
 class Profile extends BaseProfile {
+
     public $plused = false;
     public $minused = false;
 
@@ -22,6 +23,7 @@ class Profile extends BaseProfile {
             'length' => '4',
         ));
     }
+
     public function setUp() {
         parent::setUp();
 
@@ -34,32 +36,59 @@ class Profile extends BaseProfile {
     public function getRating() {
         return Vote::getRating($this);
     }
-    
+
     public function getForce($rating = null) {
-        if($rating == null) {
+        if ($rating == null) {
             $rating = $this->getRating();
         }
-        if($rating < 99) {
+        if ($rating < 99) {
             return 1;
         }
-        if($rating<249) {
+        if ($rating < 249) {
             return 2;
         }
-        if($rating<499) {
+        if ($rating < 499) {
             return 3;
         }
-        if($rating<749) {
+        if ($rating < 749) {
             return 4;
         }
-        if($rating<999) {
+        if ($rating < 999) {
             return 5;
         }
-        if($rating<1499) {
+        if ($rating < 1499) {
             return 6;
         }
-        if($rating<1999) {
+        if ($rating < 1999) {
             return 7;
         }
         return 8;
     }
+
+    public function getFishes() {
+        return Doctrine_Query::create()
+                ->select('d.*,p.*,f.*,s.*,count(f.id) as fc')
+                ->from('ProfitDetail d')
+                ->leftJoin('d.Profit p')
+                ->leftJoin('d.Fish f')
+                ->leftJoin('d.Style s')
+                ->where('p.created_by = ?', $this->getId())
+                ->groupBy('f.id')
+                ->orderBy('fc DESC')
+                ->execute();
+    }
+
+    public function getStyles() {
+        return Doctrine_Query::create()
+                ->select('d.*,p.*,f.*,s.*,count(s.id) as sc')
+                ->from('ProfitDetail d')
+                ->leftJoin('d.Profit p')
+                ->leftJoin('d.Fish f')
+                ->leftJoin('d.Style s')
+                ->where('p.created_by = ?', $this->getId())
+                ->groupBy('s.id')
+                ->orderBy('sc DESC')
+                ->execute();
+    }
+
 }

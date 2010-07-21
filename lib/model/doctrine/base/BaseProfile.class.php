@@ -15,51 +15,48 @@
  * @property Doctrine_Collection $Wishes
  * @property Doctrine_Collection $MyFirends
  * @property Doctrine_Collection $MyFirends2
- * @property Doctrine_Collection $Fishes
- * @property Doctrine_Collection $Styles
+ * @property Doctrine_Collection $Inboxes
  * @property Doctrine_Collection $WishList
  * @property Doctrine_Collection $Friend
  * @property Doctrine_Collection $Votes
  * @property Doctrine_Collection $VoteProfile
- * @property Doctrine_Collection $ProfileFish
- * @property Doctrine_Collection $ProfileStyle
+ * @property Doctrine_Collection $Inbox
+ * @property Doctrine_Collection $Inboxed
  * 
- * @method integer             getId()           Returns the current record's "id" value
- * @method string              getNickName()     Returns the current record's "nick_name" value
- * @method string              getFirstName()    Returns the current record's "first_name" value
- * @method string              getLastName()     Returns the current record's "last_name" value
- * @method date                getBirthDate()    Returns the current record's "birth_date" value
- * @method string              getUserpic()      Returns the current record's "userpic" value
- * @method boolean             getSex()          Returns the current record's "sex" value
- * @method Doctrine_Collection getWishes()       Returns the current record's "Wishes" collection
- * @method Doctrine_Collection getMyFirends()    Returns the current record's "MyFirends" collection
- * @method Doctrine_Collection getMyFirends2()   Returns the current record's "MyFirends2" collection
- * @method Doctrine_Collection getFishes()       Returns the current record's "Fishes" collection
- * @method Doctrine_Collection getStyles()       Returns the current record's "Styles" collection
- * @method Doctrine_Collection getWishList()     Returns the current record's "WishList" collection
- * @method Doctrine_Collection getFriend()       Returns the current record's "Friend" collection
- * @method Doctrine_Collection getVotes()        Returns the current record's "Votes" collection
- * @method Doctrine_Collection getVoteProfile()  Returns the current record's "VoteProfile" collection
- * @method Doctrine_Collection getProfileFish()  Returns the current record's "ProfileFish" collection
- * @method Doctrine_Collection getProfileStyle() Returns the current record's "ProfileStyle" collection
- * @method Profile             setId()           Sets the current record's "id" value
- * @method Profile             setNickName()     Sets the current record's "nick_name" value
- * @method Profile             setFirstName()    Sets the current record's "first_name" value
- * @method Profile             setLastName()     Sets the current record's "last_name" value
- * @method Profile             setBirthDate()    Sets the current record's "birth_date" value
- * @method Profile             setUserpic()      Sets the current record's "userpic" value
- * @method Profile             setSex()          Sets the current record's "sex" value
- * @method Profile             setWishes()       Sets the current record's "Wishes" collection
- * @method Profile             setMyFirends()    Sets the current record's "MyFirends" collection
- * @method Profile             setMyFirends2()   Sets the current record's "MyFirends2" collection
- * @method Profile             setFishes()       Sets the current record's "Fishes" collection
- * @method Profile             setStyles()       Sets the current record's "Styles" collection
- * @method Profile             setWishList()     Sets the current record's "WishList" collection
- * @method Profile             setFriend()       Sets the current record's "Friend" collection
- * @method Profile             setVotes()        Sets the current record's "Votes" collection
- * @method Profile             setVoteProfile()  Sets the current record's "VoteProfile" collection
- * @method Profile             setProfileFish()  Sets the current record's "ProfileFish" collection
- * @method Profile             setProfileStyle() Sets the current record's "ProfileStyle" collection
+ * @method integer             getId()          Returns the current record's "id" value
+ * @method string              getNickName()    Returns the current record's "nick_name" value
+ * @method string              getFirstName()   Returns the current record's "first_name" value
+ * @method string              getLastName()    Returns the current record's "last_name" value
+ * @method date                getBirthDate()   Returns the current record's "birth_date" value
+ * @method string              getUserpic()     Returns the current record's "userpic" value
+ * @method boolean             getSex()         Returns the current record's "sex" value
+ * @method Doctrine_Collection getWishes()      Returns the current record's "Wishes" collection
+ * @method Doctrine_Collection getMyFirends()   Returns the current record's "MyFirends" collection
+ * @method Doctrine_Collection getMyFirends2()  Returns the current record's "MyFirends2" collection
+ * @method Doctrine_Collection getInboxes()     Returns the current record's "Inboxes" collection
+ * @method Doctrine_Collection getWishList()    Returns the current record's "WishList" collection
+ * @method Doctrine_Collection getFriend()      Returns the current record's "Friend" collection
+ * @method Doctrine_Collection getVotes()       Returns the current record's "Votes" collection
+ * @method Doctrine_Collection getVoteProfile() Returns the current record's "VoteProfile" collection
+ * @method Doctrine_Collection getInbox()       Returns the current record's "Inbox" collection
+ * @method Doctrine_Collection getInboxed()     Returns the current record's "Inboxed" collection
+ * @method Profile             setId()          Sets the current record's "id" value
+ * @method Profile             setNickName()    Sets the current record's "nick_name" value
+ * @method Profile             setFirstName()   Sets the current record's "first_name" value
+ * @method Profile             setLastName()    Sets the current record's "last_name" value
+ * @method Profile             setBirthDate()   Sets the current record's "birth_date" value
+ * @method Profile             setUserpic()     Sets the current record's "userpic" value
+ * @method Profile             setSex()         Sets the current record's "sex" value
+ * @method Profile             setWishes()      Sets the current record's "Wishes" collection
+ * @method Profile             setMyFirends()   Sets the current record's "MyFirends" collection
+ * @method Profile             setMyFirends2()  Sets the current record's "MyFirends2" collection
+ * @method Profile             setInboxes()     Sets the current record's "Inboxes" collection
+ * @method Profile             setWishList()    Sets the current record's "WishList" collection
+ * @method Profile             setFriend()      Sets the current record's "Friend" collection
+ * @method Profile             setVotes()       Sets the current record's "Votes" collection
+ * @method Profile             setVoteProfile() Sets the current record's "VoteProfile" collection
+ * @method Profile             setInbox()       Sets the current record's "Inbox" collection
+ * @method Profile             setInboxed()     Sets the current record's "Inboxed" collection
  * 
  * @package    FISHERY
  * @subpackage model
@@ -129,15 +126,10 @@ abstract class BaseProfile extends sfDoctrineRecord
              'local' => 'source_profile_id',
              'foreign' => 'related_profile_id'));
 
-        $this->hasMany('Fish as Fishes', array(
-             'refClass' => 'ProfileFish',
+        $this->hasMany('Inbox as Inboxes', array(
+             'refClass' => 'Inboxed',
              'local' => 'profile_id',
-             'foreign' => 'fish_id'));
-
-        $this->hasMany('Style as Styles', array(
-             'refClass' => 'ProfileStyle',
-             'local' => 'profile_id',
-             'foreign' => 'style_id'));
+             'foreign' => 'inbox_id'));
 
         $this->hasMany('WishList', array(
              'local' => 'id',
@@ -155,11 +147,11 @@ abstract class BaseProfile extends sfDoctrineRecord
              'local' => 'id',
              'foreign' => 'profile_id'));
 
-        $this->hasMany('ProfileFish', array(
+        $this->hasMany('Inbox', array(
              'local' => 'id',
              'foreign' => 'profile_id'));
 
-        $this->hasMany('ProfileStyle', array(
+        $this->hasMany('Inboxed', array(
              'local' => 'id',
              'foreign' => 'profile_id'));
 

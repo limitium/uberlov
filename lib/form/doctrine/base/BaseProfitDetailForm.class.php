@@ -16,6 +16,7 @@ abstract class BaseProfitDetailForm extends BaseFormDoctrine
   {
     $this->setWidgets(array(
       'id'        => new sfWidgetFormInputHidden(),
+      'time'      => new sfWidgetFormDateTime(),
       'profit_id' => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Profit'), 'add_empty' => true)),
       'style_id'  => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Style'), 'add_empty' => true)),
       'fish_id'   => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Fish'), 'add_empty' => true)),
@@ -24,6 +25,7 @@ abstract class BaseProfitDetailForm extends BaseFormDoctrine
 
     $this->setValidators(array(
       'id'        => new sfValidatorDoctrineChoice(array('model' => $this->getModelName(), 'column' => 'id', 'required' => false)),
+      'time'      => new sfValidatorDateTime(),
       'profit_id' => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Profit'), 'required' => false)),
       'style_id'  => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Style'), 'required' => false)),
       'fish_id'   => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Fish'), 'required' => false)),

@@ -141,6 +141,7 @@ a.delItem{
 .tabPanel{
     border-bottom:1px solid #0053E4;
     margin-bottom: 0.5em;
+    clear:both;
 }
 .tabPanel ul{
     list-style-type: none;
