@@ -53,9 +53,9 @@
                     </div>
                 </div>
 
-                <div id="profitContainer">                
+                <div id="profitContainer">
     <?php foreach ($profits as $profit): ?>
     <?php include_partial('profit/brief', array('profit' => $profit)); ?>
     <?php endforeach; ?>
-    <?php echo link_to('Написать', 'profit/new'); ?>
+    <?php echo link_to('Написать', 'profit/new?location=' . $profit->getLocation()->getId()); ?>
 </div>
