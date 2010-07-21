@@ -28,8 +28,7 @@ abstract class BaseProfileForm extends BaseFormDoctrine
       'wishes_list'      => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'Location')),
       'my_firends_list'  => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'Profile')),
       'my_firends2_list' => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'Profile')),
-      'fishes_list'      => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'Fish')),
-      'styles_list'      => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'Style')),
+      'inboxes_list'     => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'Inbox')),
     ));
 
     $this->setValidators(array(
@@ -46,8 +45,7 @@ abstract class BaseProfileForm extends BaseFormDoctrine
       'wishes_list'      => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'Location', 'required' => false)),
       'my_firends_list'  => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'Profile', 'required' => false)),
       'my_firends2_list' => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'Profile', 'required' => false)),
-      'fishes_list'      => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'Fish', 'required' => false)),
-      'styles_list'      => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'Style', 'required' => false)),
+      'inboxes_list'     => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'Inbox', 'required' => false)),
     ));
 
     $this->widgetSchema->setNameFormat('profile[%s]');
@@ -83,14 +81,9 @@ abstract class BaseProfileForm extends BaseFormDoctrine
       $this->setDefault('my_firends2_list', $this->object->MyFirends2->getPrimaryKeys());
     }
 
-    if (isset($this->widgetSchema['fishes_list']))
+    if (isset($this->widgetSchema['inboxes_list']))
     {
-      $this->setDefault('fishes_list', $this->object->Fishes->getPrimaryKeys());
-    }
-
-    if (isset($this->widgetSchema['styles_list']))
-    {
-      $this->setDefault('styles_list', $this->object->Styles->getPrimaryKeys());
+      $this->setDefault('inboxes_list', $this->object->Inboxes->getPrimaryKeys());
     }
 
   }
@@ -100,8 +93,7 @@ abstract class BaseProfileForm extends BaseFormDoctrine
     $this->saveWishesList($con);
     $this->saveMyFirendsList($con);
     $this->saveMyFirends2List($con);
-    $this->saveFishesList($con);
-    $this->saveStylesList($con);
+    $this->saveInboxesList($con);
 
     parent::doSave($con);
   }
@@ -220,14 +212,14 @@ abstract class BaseProfileForm extends BaseFormDoctrine
     }
   }
 
-  public function saveFishesList($con = null)
+  public function saveInboxesList($con = null)
   {
     if (!$this->isValid())
     {
       throw $this->getErrorSchema();
     }
 
-    if (!isset($this->widgetSchema['fishes_list']))
+    if (!isset($this->widgetSchema['inboxes_list']))
     {
       // somebody has unset this widget
       return;
@@ -238,8 +230,8 @@ abstract class BaseProfileForm extends BaseFormDoctrine
       $con = $this->getConnection();
     }
 
-    $existing = $this->object->Fishes->getPrimaryKeys();
-    $values = $this->getValue('fishes_list');
+    $existing = $this->object->Inboxes->getPrimaryKeys();
+    $values = $this->getValue('inboxes_list');
     if (!is_array($values))
     {
       $values = array();
@@ -248,51 +240,13 @@ abstract class BaseProfileForm extends BaseFormDoctrine
     $unlink = array_diff($existing, $values);
     if (count($unlink))
     {
-      $this->object->unlink('Fishes', array_values($unlink));
+      $this->object->unlink('Inboxes', array_values($unlink));
     }
 
     $link = array_diff($values, $existing);
     if (count($link))
     {
-      $this->object->link('Fishes', array_values($link));
-    }
-  }
-
-  public function saveStylesList($con = null)
-  {
-    if (!$this->isValid())
-    {
-      throw $this->getErrorSchema();
-    }
-
-    if (!isset($this->widgetSchema['styles_list']))
-    {
-      // somebody has unset this widget
-      return;
-    }
-
-    if (null === $con)
-    {
-      $con = $this->getConnection();
-    }
-
-    $existing = $this->object->Styles->getPrimaryKeys();
-    $values = $this->getValue('styles_list');
-    if (!is_array($values))
-    {
-      $values = array();
-    }
-
-    $unlink = array_diff($existing, $values);
-    if (count($unlink))
-    {
-      $this->object->unlink('Styles', array_values($unlink));
-    }
-
-    $link = array_diff($values, $existing);
-    if (count($link))
-    {
-      $this->object->link('Styles', array_values($link));
+      $this->object->link('Inboxes', array_values($link));
     }
   }
 

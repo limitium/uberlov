@@ -15,15 +15,13 @@ abstract class BaseStyleForm extends BaseFormDoctrine
   public function setup()
   {
     $this->setWidgets(array(
-      'id'            => new sfWidgetFormInputHidden(),
-      'name'          => new sfWidgetFormInputText(),
-      'profiles_list' => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'Profile')),
+      'id'   => new sfWidgetFormInputHidden(),
+      'name' => new sfWidgetFormInputText(),
     ));
 
     $this->setValidators(array(
-      'id'            => new sfValidatorDoctrineChoice(array('model' => $this->getModelName(), 'column' => 'id', 'required' => false)),
-      'name'          => new sfValidatorString(array('max_length' => 100)),
-      'profiles_list' => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'Profile', 'required' => false)),
+      'id'   => new sfValidatorDoctrineChoice(array('model' => $this->getModelName(), 'column' => 'id', 'required' => false)),
+      'name' => new sfValidatorString(array('max_length' => 100)),
     ));
 
     $this->validatorSchema->setPostValidator(
@@ -42,62 +40,6 @@ abstract class BaseStyleForm extends BaseFormDoctrine
   public function getModelName()
   {
     return 'Style';
-  }
-
-  public function updateDefaultsFromObject()
-  {
-    parent::updateDefaultsFromObject();
-
-    if (isset($this->widgetSchema['profiles_list']))
-    {
-      $this->setDefault('profiles_list', $this->object->Profiles->getPrimaryKeys());
-    }
-
-  }
-
-  protected function doSave($con = null)
-  {
-    $this->saveProfilesList($con);
-
-    parent::doSave($con);
-  }
-
-  public function saveProfilesList($con = null)
-  {
-    if (!$this->isValid())
-    {
-      throw $this->getErrorSchema();
-    }
-
-    if (!isset($this->widgetSchema['profiles_list']))
-    {
-      // somebody has unset this widget
-      return;
-    }
-
-    if (null === $con)
-    {
-      $con = $this->getConnection();
-    }
-
-    $existing = $this->object->Profiles->getPrimaryKeys();
-    $values = $this->getValue('profiles_list');
-    if (!is_array($values))
-    {
-      $values = array();
-    }
-
-    $unlink = array_diff($existing, $values);
-    if (count($unlink))
-    {
-      $this->object->unlink('Profiles', array_values($unlink));
-    }
-
-    $link = array_diff($values, $existing);
-    if (count($link))
-    {
-      $this->object->link('Profiles', array_values($link));
-    }
   }
 
 }

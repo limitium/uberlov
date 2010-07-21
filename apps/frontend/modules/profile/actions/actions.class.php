@@ -9,35 +9,42 @@
  * @version    SVN: $Id: actions.class.php 23810 2009-11-12 11:07:44Z Kris.Wallsmith $
  */
 class profileActions extends sfActions {
+
     public function executeIndex(sfWebRequest $request) {
         $this->profiles = Doctrine::getTable('Profile')
-            ->createQuery('a')
-            ->execute();
+                        ->createQuery('a')
+                        ->execute();
     }
 
     public function executeShow(sfWebRequest $request) {
         $this->profile = Doctrine::getTable('Profile')->find(array($request->getParameter('id')));
         $this->forward404Unless($this->profile);
         $this->comments = Doctrine_Query::create()
-            ->from('Comment c')
-            ->where('c.created_by = ? and c.parent > 0', $this->profile->getId())
-            ->count();
+                        ->from('Comment c')
+                        ->where('c.created_by = ? and c.parent > 0', $this->profile->getId())
+                        ->count();
         $this->profits = Doctrine_Query::create()
-            ->from('Profit p')
-            ->leftJoin('p.ProfitDetail d')
-            ->where('p.created_by = ?', $this->profile->getId())
-            ->execute();
+                        ->from('Profit p')
+                        ->leftJoin('p.ProfitDetail d')
+                        ->leftJoin('d.Fish f')
+                        ->leftJoin('d.Style s')
+                        ->where('p.created_by = ?', $this->profile->getId())
+                        ->execute();
         $this->locations = Doctrine_Query::create()
-            ->from('Location l')
-            ->where('l.created_by = ?', $this->profile->getId())
-            ->count();
+                        ->from('Location l')
+                        ->where('l.created_by = ?', $this->profile->getId())
+                        ->count();
         $this->total = 0;
         $this->best = array(
-            'name' => 'пустышка',
-            'qty' => 0);
+            'name' => 'фигавль',
+            'qty' => 0,
+            'location' => null);
         foreach ($this->profits as $profit) {
-            $this->best['name'] = $profit->getFish();
-            $this->best['qty'] = $profit->getQty();
+            if ($this->best['qty'] < $profit->getBestWeight()) {
+                $this->best['qty'] = $profit->getBestWeight();
+                $this->best['name'] = $profit->getFish();
+                $this->best['location'] = $profit->getLocation();
+            }
             foreach ($profit->getProfitDetail() as $pd) {
                 $this->total+=$pd->getQty();
             }
@@ -88,7 +95,8 @@ class profileActions extends sfActions {
         if ($form->isValid()) {
             $profile = $form->save();
 
-            $this->redirect('profile/edit?id='.$profile->getId());
+            $this->redirect('profile/edit?id=' . $profile->getId());
         }
     }
+
 }

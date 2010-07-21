@@ -25,8 +25,7 @@ abstract class BaseProfileFormFilter extends BaseFormFilterDoctrine
       'wishes_list'      => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'Location')),
       'my_firends_list'  => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'Profile')),
       'my_firends2_list' => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'Profile')),
-      'fishes_list'      => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'Fish')),
-      'styles_list'      => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'Style')),
+      'inboxes_list'     => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'Inbox')),
     ));
 
     $this->setValidators(array(
@@ -42,8 +41,7 @@ abstract class BaseProfileFormFilter extends BaseFormFilterDoctrine
       'wishes_list'      => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'Location', 'required' => false)),
       'my_firends_list'  => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'Profile', 'required' => false)),
       'my_firends2_list' => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'Profile', 'required' => false)),
-      'fishes_list'      => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'Fish', 'required' => false)),
-      'styles_list'      => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'Style', 'required' => false)),
+      'inboxes_list'     => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'Inbox', 'required' => false)),
     ));
 
     $this->widgetSchema->setNameFormat('profile_filters[%s]');
@@ -103,7 +101,7 @@ abstract class BaseProfileFormFilter extends BaseFormFilterDoctrine
           ->andWhereIn('Friend.related_profile_id', $values);
   }
 
-  public function addFishesListColumnQuery(Doctrine_Query $query, $field, $values)
+  public function addInboxesListColumnQuery(Doctrine_Query $query, $field, $values)
   {
     if (!is_array($values))
     {
@@ -115,24 +113,8 @@ abstract class BaseProfileFormFilter extends BaseFormFilterDoctrine
       return;
     }
 
-    $query->leftJoin('r.ProfileFish ProfileFish')
-          ->andWhereIn('ProfileFish.fish_id', $values);
-  }
-
-  public function addStylesListColumnQuery(Doctrine_Query $query, $field, $values)
-  {
-    if (!is_array($values))
-    {
-      $values = array($values);
-    }
-
-    if (!count($values))
-    {
-      return;
-    }
-
-    $query->leftJoin('r.ProfileStyle ProfileStyle')
-          ->andWhereIn('ProfileStyle.style_id', $values);
+    $query->leftJoin('r.Inboxed Inboxed')
+          ->andWhereIn('Inboxed.inbox_id', $values);
   }
 
   public function getModelName()
@@ -156,8 +138,7 @@ abstract class BaseProfileFormFilter extends BaseFormFilterDoctrine
       'wishes_list'      => 'ManyKey',
       'my_firends_list'  => 'ManyKey',
       'my_firends2_list' => 'ManyKey',
-      'fishes_list'      => 'ManyKey',
-      'styles_list'      => 'ManyKey',
+      'inboxes_list'     => 'ManyKey',
     );
   }
 }

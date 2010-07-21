@@ -166,33 +166,33 @@ Profit:
       type: integer(4)
       notnull: true
       autoincrement: true
-    location_id:
-      type: integer(4)
     name:
       type: string(50)
       notnull: true
+    location_id:
+      type: integer(4)
     begin:
       type: timestamp
       notnull: true
-    water_state:
-      type: string
-    lure:
-      type: string
-    bait:
-      type: string
-    additive:
-      type: string
-    weather:
-      type: string
     cordage:
       type: string
       notnull: true
     description:
       type: string
       notnull: true
+    fish_id:
+      type: integer(4)
+    style_id:
+      type: integer(4)
   relations:
     Location:
       local: location_id
+      foreign: id
+    Fish:
+      local: fish_id
+      foreign: id
+    Style:
+      local: style_id
       foreign: id
 Style:
   columns:
@@ -563,6 +563,19 @@ Inboxed:
       foreign: id
     Profile:
       local: profile_id
+      foreign: id
+CommentInbox:
+  inheritance:
+    type: column_aggregation
+    keyValue: Inbox
+    keyField: toward
+    extends: Comment
+  columns:
+    inbox_id:
+      type: integer(4)
+  relations:
+    Inbox:
+      local: inbox_id
       foreign: id
 options:
   type: INNODB

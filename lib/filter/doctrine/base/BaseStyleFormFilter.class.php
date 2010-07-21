@@ -13,13 +13,11 @@ abstract class BaseStyleFormFilter extends BaseFormFilterDoctrine
   public function setup()
   {
     $this->setWidgets(array(
-      'name'          => new sfWidgetFormFilterInput(array('with_empty' => false)),
-      'profiles_list' => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'Profile')),
+      'name' => new sfWidgetFormFilterInput(array('with_empty' => false)),
     ));
 
     $this->setValidators(array(
-      'name'          => new sfValidatorPass(array('required' => false)),
-      'profiles_list' => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'Profile', 'required' => false)),
+      'name' => new sfValidatorPass(array('required' => false)),
     ));
 
     $this->widgetSchema->setNameFormat('style_filters[%s]');
@@ -31,22 +29,6 @@ abstract class BaseStyleFormFilter extends BaseFormFilterDoctrine
     parent::setup();
   }
 
-  public function addProfilesListColumnQuery(Doctrine_Query $query, $field, $values)
-  {
-    if (!is_array($values))
-    {
-      $values = array($values);
-    }
-
-    if (!count($values))
-    {
-      return;
-    }
-
-    $query->leftJoin('r.ProfileStyle ProfileStyle')
-          ->andWhereIn('ProfileStyle.profile_id', $values);
-  }
-
   public function getModelName()
   {
     return 'Style';
@@ -55,9 +37,8 @@ abstract class BaseStyleFormFilter extends BaseFormFilterDoctrine
   public function getFields()
   {
     return array(
-      'id'            => 'Number',
-      'name'          => 'Text',
-      'profiles_list' => 'ManyKey',
+      'id'   => 'Number',
+      'name' => 'Text',
     );
   }
 }
