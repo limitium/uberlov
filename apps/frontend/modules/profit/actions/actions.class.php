@@ -41,6 +41,11 @@ class profitActions extends sfActions {
     }
 
     public function executeNew(sfWebRequest $request) {
+        $this->forward404Unless($this->location = Doctrine::getTable('Location')->find(array($request->getParameter('location'))), sprintf('Object profit does not exist (%s).', $request->getParameter('id')));
+        $this->form = new ProfitForm();
+    }
+
+    public function executeNewMap(sfWebRequest $request) {
         $this->form = new ProfitForm();
     }
 
