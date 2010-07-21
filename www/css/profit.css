@@ -26,6 +26,52 @@
     padding-top: 1em;
 }
 
+/*profit details table*/
+
+.profitDetails 
+{
+    font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+    font-size: 12px;
+    width: 100%;
+    text-align: left;
+    border-collapse: collapse;
+}
+.profitDetails  th
+{
+    font-size: 14px;
+    font-weight: normal;
+    padding: 10px 8px;
+    color: #039;
+    border-bottom: 2px solid #6678b1;
+}
+.profitDetails  tfoot td
+{
+    font-size: 14px;
+    font-weight: normal;
+    padding: 10px 8px;
+    color: #039;
+    border-top: 1px dashed #6678b1;
+}
+.profitDetails  td
+{
+    padding: 8px;
+    color: #669;
+}
+.profitDetails  .odd
+{
+    background: #e8edff;
+}
+.profitDetails  tr > td:last-child,th:last-child {
+    text-align: right
+}
+.profitNew #profit_qty{
+    width: 3em;
+}
+.profitNew #addProfitDetail{
+    width: 2em;
+}
+
+
 /*profit full*/
 .profitFull .meta{
     clear:both;
@@ -38,45 +84,6 @@
 .profitFull .where{
     text-align: right;
 }
-.profitFull table
-{
-    font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
-    font-size: 12px;
-    width: 100%;
-    text-align: left;
-    border-collapse: collapse;
-}
-.profitFull table th
-{
-    font-size: 14px;
-    font-weight: normal;
-    padding: 10px 8px;
-    color: #039;
-    border-bottom: 2px solid #6678b1;
-}
-.profitFull table tfoot td
-{
-    font-size: 14px;
-    font-weight: normal;
-    padding: 10px 8px;
-    color: #039;
-    border-top: 1px dashed #6678b1;
-}
-.profitFull table td
-{
-    padding: 8px;
-    color: #669;
-}
-.profitFull table .odd
-{
-    background: #e8edff;
-}
-.profitFull  tr > td:last-child {
-    text-align: right
-}
-.profitFull  tr > th:last-child {
-    text-align: right
-}
 
 .profitFull .best{
     padding: 0 0 10px 0px;
@@ -84,8 +91,26 @@
 .profitFull .text{
     padding: 10px 0 0 5px;
 }
-
-/*form*/
+/* form */
+.profitNew fieldset{
+    border: none;
+}
+.profitNew input, textarea{
+    width: 100%;
+}
+.profitNew #profit_best_weight{
+    width: 3em;
+}
+.profitNew #profit_date{
+    width: 5em;
+}
+.profitNew dl {
+    margin:0 0 1em;
+}
+.profitNew dl dt{
+    font-weight:bold;
+}
+/*formMap*/
 .profit{
     width: 70em;
 }
