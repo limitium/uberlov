@@ -1,7 +1,7 @@
 <?php use_stylesheets_for_form($form) ?>
 <?php use_javascripts_for_form($form) ?>
 
-<?php include_partial('location/location', array('location' => $location)) ?>
+<?php //include_partial('location/location', array('location' => $location)) ?>
 <div class="profitNew">
 
     <?php if ($form->hasGlobalErrors()): ?>
@@ -17,48 +17,66 @@
             <?php if (!$form->getObject()->isNew()): ?>
                 <input type="hidden" name="sf_medtod" value="put" />
             <?php endif; ?>
-
                 <dl>
-                    <dt><?php echo $form['date']->renderLabel() ?></dt>
+                    <dt>Название отчета:</dt>
                     <dd>
+                    <?php echo $form['name']->renderError() ?>
+                    <?php echo $form['name'] ?>
+                </dd>
+            </dl>
+            <dl>
+                <dt>Дата рыбалки:</dt>
+                <dd>
                     <?php echo $form['date']->renderError() ?>
                     <?php echo $form['date'] ?>
                 </dd>
             </dl>
             <dl>
-                <dt><?php echo $form['cordage']->renderLabel() ?></dt>
+                <dt>Используемые снасти:</dt>
                 <dd>
                     <?php echo $form['cordage']->renderError() ?>
                     <?php echo $form['cordage'] ?>
                 </dd>
             </dl>
             <dl>
-                <dt><?php echo $form['best_weight']->renderLabel() ?></dt>
                 <dd>
                     <?php echo $form['best_weight']->renderError() ?>
-                    <?php echo $form['best_weight'] ?>
-                </dd>
-            </dl>
-            <dl>
-                <dt><?php echo $form['best_fish_id']->renderLabel() ?></dt>
-                <dd>
                     <?php echo $form['best_fish_id']->renderError() ?>
-                    <?php echo $form['best_fish_id'] ?>
+                    Самая большая рыба <?php echo $form['best_fish_id'] ?> на <?php echo $form['best_weight'] ?> кг.
                 </dd>
             </dl>
             <dl>
-                <dt><?php echo $form['description']->renderLabel() ?></dt>
+                <dt>Сам текст:</dt>
                 <dd>
                     <?php echo $form['description']->renderError() ?>
                     <?php echo $form['description'] ?>
                 </dd>
+                <dd>
+                    Не забудте о погоде, состоянии воды и тд.
+                </dd>
             </dl>
-
+            <dl>
+                <dd>
+                    <table class="profitDetails">
+                        <thead>
+                            <tr>
+                                <th>Как: <?php echo $form['styles'] ?></th>
+                                <th>Кого: <?php echo $form['fishes'] ?></th>
+                                <th>Сколько: <?php echo $form['qty'] ?><input type="button" value="+" id="addProfitDetail" class="button"></th>
+                            </tr>
+                        </thead>
+                        <tfoot>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td>0</td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </dd>
+            </dl>
             <div>
                 <?php echo $form->renderHiddenFields(false) ?>
-                <?php if (!$form->getObject()->isNew()): ?>
-                        &nbsp;<?php echo link_to('Delete', 'profit/delete?id=' . $form->getObject()->getId(), array('medtod' => 'delete', 'confirm' => 'Are you sure?')) ?>
-                <?php endif; ?>
                 <input type="submit" value="Добавить" />
             </div>
         </fieldset>
