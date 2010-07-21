@@ -1,11 +1,5 @@
-<?php use_javascript('locationShow'); ?>
+<?php include_partial('location/location', array('location' => $profit->getLocation())) ?>
 
-<div class="location" position="<?php echo $profit->getLocation()->getLatitude(); ?>;<?php echo $profit->getLocation()->getLongitude(); ?>">
-    <div class="name">
-        <a class="dashed" href=""><?php echo $profit->getLocation()->getName(); ?></a>
-    </div>
-    <?php include_partial('collector/map') ?>
-</div>
 <div class="profitFull">
     <h2><?php echo $profit->getName(); ?></h2>
     <div class="where">Ловили <?php echo $profit->getDateTimeObject('date')->format('d.m.Y'); ?> на <?php echo link_to($profit->getLocation()->getName(), 'location/show?id=' . $profit->getLocation()->getId()); ?></div>
