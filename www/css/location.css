@@ -1,3 +1,15 @@
+/*map partial*/
+.locationMap .name{
+    padding-bottom: 1em;
+}
+.locationMap .name a{
+    font-size: 2em;
+}
+
+.locationMap #map{
+    margin: 0 0 1em 0
+}
+
 /*details*/
 .location .stat{
     float:left;
@@ -10,17 +22,6 @@
     width: 120px;
     text-align: left;
     line-height: 2em;
-}
-
-.location .name{
-    padding-bottom: 1em;
-}
-.location .name a{
-    font-size: 2em;
-}
-
-.location #map{
-    margin: 0 0 1em 0
 }
 .location .photo{
     float:right;

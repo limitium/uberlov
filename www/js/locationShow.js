@@ -17,7 +17,7 @@ locationShow.prototype.afterInit = function(){
 }
 
 locationShow.prototype.initListeners = function(){
-    $('.location .name a').click(this.toLocation.delegate(this));
+    $('.locationMap .name a').click(this.toLocation.delegate(this));
     $('#tabComments').click(this.showComments.delegate(this));
     $('#tabProfits').click(this.showProfits.delegate(this));
 }
@@ -28,7 +28,7 @@ locationShow.prototype.resizeMap= function(){
 }
 
 locationShow.prototype.toLocation = function(){
-    var position = $('div.location').attr('position').split(';');
+    var position = $('div.locationMap').attr('position').split(';');
     this.mm.setOptions({
         zoom: this.cfg.baseZoom,
         center: new gm.LatLng(parseFloat(position[0]), parseFloat(position[1]))

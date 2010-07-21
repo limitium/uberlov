@@ -212,10 +212,12 @@ ht_location_e.prototype.showForm = function(loader){
         if($(this).attr('checked')){
             price.hide();
             $('#location_price',price).attr('disabled', 'disabled');
+            $(this).val(1);
             self.mm.map.panBy(0,85);
         }else{
             price.show();
             $('#location_price',price).removeAttr('disabled');
+            $(this).val(0);
             self.mm.map.panBy(0,-85);
         }
         gm.event.trigger(marker.infoWindow, 'content_changed');
