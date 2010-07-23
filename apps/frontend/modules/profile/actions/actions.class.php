@@ -19,10 +19,16 @@ class profileActions extends sfActions {
     public function executeShow(sfWebRequest $request) {
         $this->profile = Doctrine::getTable('Profile')->find(array($request->getParameter('id')));
         $this->forward404Unless($this->profile);
+
+        $this->view = $request->getParameter('view');
+        if (!in_array($this->view, array('comments', 'profits','locations'))) {
+            $this->view = 'profile';
+        }
+
         $this->comments = Doctrine_Query::create()
                         ->from('Comment c')
                         ->where('c.created_by = ? and c.parent > 0', $this->profile->getId())
-                        ->count();
+                        ->execute();
         $this->profits = Doctrine_Query::create()
                         ->from('Profit p')
                         ->leftJoin('p.ProfitDetail d')
@@ -33,7 +39,8 @@ class profileActions extends sfActions {
         $this->locations = Doctrine_Query::create()
                         ->from('Location l')
                         ->where('l.created_by = ?', $this->profile->getId())
-                        ->count();
+                        ->execute();
+
         $this->total = 0;
         $this->best = array(
             'name' => 'фигавль',
@@ -49,7 +56,6 @@ class profileActions extends sfActions {
                 $this->total+=$pd->getQty();
             }
         }
-        $this->profits = $this->profits->count();
     }
 
     public function executeNew(sfWebRequest $request) {

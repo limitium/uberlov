@@ -1,7 +1,7 @@
 <?php use_stylesheets_for_form($form) ?>
 <?php use_javascripts_for_form($form) ?>
 
-<?php //include_partial('location/location', array('location' => $location)) ?>
+<?php include_partial('location/location', array('location' => $location)) ?>
 <div class="profitNew">
 
     <?php if ($form->hasGlobalErrors()): ?>
