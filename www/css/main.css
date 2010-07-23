@@ -163,7 +163,10 @@ a.delItem{
     background-color: #369;
 }
 .tabPanel ul li span.selected{
-    border-bottom:1px solid #fff;
+    border-bottom:1px solid gainsboro;
+}
+.tabPanel ul li a:link, a:active, a:visited, a:hover {
+    text-decoration:none;
 }
 
 

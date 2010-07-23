@@ -16,48 +16,19 @@
 
     <div class="tabPanel">
         <ul>
-            <li><span href="#" id="tabProfile" class="selected">Профаил</span></li>
-            <li><span href="#" id="tabComments">Комментарии (<i id="commentCounter"><?php echo $comments; ?></i>)</span></li>
-            <li><span href="#" id="tabProfits">Отчеты (<i id="profitCounter"><?php echo $profits; ?></i>)</span></li>
+            <li><?php echo link_to('<span href="#" id="tabProfile"' . ($view == 'profile' ? 'class="selected"' : '') . '>Профаил</span>', 'profile/show?id=' . $profile->getId()); ?></li>
+            <li><?php echo link_to('<span href="#" id="tabComments"' . ($view == 'comments' ? 'class="selected"' : '') . '>Комментарии (' . sizeof($comments) . ')</span>', 'profile/show?id=' . $profile->getId() . '&view=comments'); ?></li>
+            <li><?php echo link_to('<span href="#" id="tabLocations"' . ($view == 'locations' ? 'class="selected"' : '') . '>Места (' . sizeof($profits) . ')</span>', 'profile/show?id=' . $profile->getId() . '&view=locations'); ?></li>
+            <li><?php echo link_to('<span href="#" id="tabProfits"' . ($view == 'profits' ? 'class="selected"' : '') . '>Отчеты (' . sizeof($profits) . ')</span>', 'profile/show?id=' . $profile->getId() . '&view=profits'); ?></li>
         </ul>
     </div>
-
-    <div class="achieves">
-        <div>
-            <?php use_javascript('voting'); ?>
-                <p>
-                    Родил<?php echo $profile->getSex() ? 'ся' : 'ась' ?>: <?php echo $profile->getDateTimeObject('birth_date')->format('j F Y') ?>
-                </p>
-                <p>Добавил<?php echo $profile->getSex() ? '' : 'а' ?> <?php echo $locations ?> мест,
-                    написал<?php echo $profile->getSex() ? '' : 'а' ?> <?php echo comments2text($comments) ?> и
-                <?php echo profits2text($profits) ?>.</p>
-            <p>Заработал<?php echo $profile->getSex() ? '' : 'а' ?> карму <?php include_partial('vote/vote', array('obj' => $profile, 'objType' => 'profile')); ?>
-                и имеет силу голоса <?php echo $profile->getForce(); ?>.</p>
-            <p>Поймал <?php echo $total; ?>кг рыбы
-                <?php if ($best['qty'] > 0): ?>
-                    и самую большую <?php echo $best['name']; ?> на <?php echo $best['qty']; ?>кг поймал на "<?php echo link_to($best['location']->getName(), 'location/show?id=' . $best['location']->getId()); ?>"
-                <?php endif; ?>
-                    .</p>
-            <?php if ($profile->getFishes()->count()): ?>
-                        <p>
-                            Любимая рыба:
-                        </p>
-                        <ul>
-                <?php foreach ($profile->getFishes() as $fish): ?>
-                            <li><?php echo $fish; ?></li>
-                <?php endforeach; ?>
-                        </ul>
-            <?php endif; ?>
-            <?php if ($profile->getStyles()->count()): ?>
-                                <p>
-                                    Любимые стили:
-                                </p>
-                                <ul>
-                <?php foreach ($profile->getStyles() as $style): ?>
-                                    <li><?php echo $style; ?></li>
-                <?php endforeach; ?>
-                                </ul>
-            <?php endif; ?>
-        </div>
-    </div>
+    <?php if ($view == 'comments'): ?>
+    <?php include_partial('comments', array('comments' => $comments)); ?>
+    <?php elseif ($view == 'locations'): ?>
+    <?php include_partial('locations', array('locations' => $locations)); ?>
+    <?php elseif ($view == 'profits'): ?>
+    <?php include_partial('profits', array('profits' => $profits)); ?>
+    <?php else: ?>
+    <?php include_partial('achives', array('profile' => $profile, 'best' => $best, 'comments' => $comments, 'profits' => $profits, 'locations' => $locations, 'total' => $total)); ?>
+    <?php endif; ?>
 </div>
