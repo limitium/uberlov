@@ -17,7 +17,7 @@ class userComponents extends sfComponents {
        $this->menu=array();
        $this->menu[]=array('url'=>'@homepage','title'=>'Профаил');
        $this->menu[]=array('url'=>'@homepage','title'=>'Мои места');
-       $this->menu[]=array('url'=>'@homepage','title'=>'Инбоксы');
+       $this->menu[]=array('url'=>'inbox/list','title'=>'Инбоксы');
        $this->menu[]=array('url'=>'collector/import','title'=>'Импорт');
        $this->menu[]=array('url'=>'collector/import','title'=>'Экспорт');
    }
