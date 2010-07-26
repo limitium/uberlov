@@ -75,10 +75,10 @@
                     </table>
                 </dd>
             </dl>
-            <div>
-                <?php echo $form->renderHiddenFields(false) ?>
-                <input type="submit" value="Добавить" />
-            </div>
         </fieldset>
+        <div>
+            <?php echo $form->renderHiddenFields(false) ?>
+            <input type="submit" value="Добавить" />
+        </div>
     </form>
 </div>

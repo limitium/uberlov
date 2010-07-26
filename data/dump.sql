@@ -156,10 +156,11 @@ CREATE TABLE `inbox` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL,
   `message` text NOT NULL,
-  `profile_id` int(11) DEFAULT NULL,
+  `created_by` bigint(20) NOT NULL,
+  `updated_by` bigint(20) NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `profile_id_idx` (`profile_id`),
-  CONSTRAINT `inbox_profile_id_profile_id` FOREIGN KEY (`profile_id`) REFERENCES `profile` (`id`)
+  KEY `created_by_idx` (`created_by`),
+  KEY `updated_by_idx` (`updated_by`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `inbox` */
@@ -174,9 +175,7 @@ CREATE TABLE `inboxed` (
   `profile_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `inbox_id_idx` (`inbox_id`),
-  KEY `profile_id_idx` (`profile_id`),
-  CONSTRAINT `inboxed_inbox_id_inbox_id` FOREIGN KEY (`inbox_id`) REFERENCES `inbox` (`id`),
-  CONSTRAINT `inboxed_profile_id_profile_id` FOREIGN KEY (`profile_id`) REFERENCES `profile` (`id`)
+  KEY `profile_id_idx` (`profile_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `inboxed` */
@@ -191,8 +190,7 @@ CREATE TABLE `locality` (
   `area_high_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`),
-  KEY `area_high_id_idx` (`area_high_id`),
-  CONSTRAINT `locality_area_high_id_area_high_id` FOREIGN KEY (`area_high_id`) REFERENCES `area_high` (`id`)
+  KEY `area_high_id_idx` (`area_high_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `locality` */
@@ -230,20 +228,12 @@ CREATE TABLE `location` (
   KEY `location_scope_id_idx` (`location_scope_id`),
   KEY `address_id_idx` (`address_id`),
   KEY `created_by_idx` (`created_by`),
-  KEY `updated_by_idx` (`updated_by`),
-  CONSTRAINT `location_address_id_address_id` FOREIGN KEY (`address_id`) REFERENCES `address` (`id`),
-  CONSTRAINT `location_created_by_profile_id` FOREIGN KEY (`created_by`) REFERENCES `profile` (`id`),
-  CONSTRAINT `location_location_flow_id_location_flow_id` FOREIGN KEY (`location_flow_id`) REFERENCES `location_flow` (`id`),
-  CONSTRAINT `location_location_fundus_id_location_fundus_id` FOREIGN KEY (`location_fundus_id`) REFERENCES `location_fundus` (`id`),
-  CONSTRAINT `location_location_relief_id_location_relief_id` FOREIGN KEY (`location_relief_id`) REFERENCES `location_relief` (`id`),
-  CONSTRAINT `location_location_scope_id_location_scope_id` FOREIGN KEY (`location_scope_id`) REFERENCES `location_scope` (`id`),
-  CONSTRAINT `location_location_type_id_location_type_id` FOREIGN KEY (`location_type_id`) REFERENCES `location_type` (`id`),
-  CONSTRAINT `location_updated_by_profile_id` FOREIGN KEY (`updated_by`) REFERENCES `profile` (`id`)
+  KEY `updated_by_idx` (`updated_by`)
 ) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
 
 /*Data for the table `location` */
 
-insert  into `location`(`id`,`name`,`description`,`depth`,`is_free`,`price`,`location_flow_id`,`location_fundus_id`,`location_relief_id`,`location_type_id`,`location_scope_id`,`address_id`,`created_by`,`updated_by`,`latitude`,`longitude`,`slug`,`created_at`,`updated_at`,`version`) values (1,'agrtwgare','dfgwegr',1.00,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,1,55.06,35.60,'agrtwgare','2010-04-01 14:16:53','2010-04-01 14:16:53',1),(2,'zxczxc23tgwe','r32fwergt',1.00,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,1,55.52,35.60,'zxczxc23tgwe','2010-04-01 14:16:53','2010-04-01 14:16:53',1),(3,'fsdgfthyj2er3t4g','5qdwfegrhtyjtrqwfegrh',1.00,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,1,55.32,36.16,'fsdgfthyj2er3t4g','2010-04-01 14:16:53','2010-04-01 14:16:53',1),(4,'yahooo','1111111111111111',2.00,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,1,54.70,36.95,'yahooo','2010-04-01 14:16:53','2010-04-01 14:16:53',1),(5,'gdfdfgdfg','dfhestnrnsfgn',2.00,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,1,54.90,35.95,'gdfdfgdfg','2010-04-01 14:16:53','2010-04-01 14:16:53',1),(6,'drgsdfh','srghsdthj',3.00,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,1,55.18,37.40,'drgsdfh','2010-04-01 14:16:53','2010-04-01 14:16:53',1),(7,'asdftyui','wertwertgaerh',3.00,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,1,55.60,38.48,'asdftyui','2010-04-01 14:16:53','2010-04-01 14:16:53',1),(8,'etujtdy','ertertery',4.00,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,1,55.34,36.37,'etujtdy','2010-04-01 14:16:53','2010-04-01 14:16:53',1),(9,'Пляж на угре','Красивое место',4.00,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,1,54.83,35.03,'','2010-04-01 14:16:53','2010-04-01 14:16:53',1),(10,'23432','wrefrw4tegrbfdqwtegrdtg',4.00,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,1,54.83,35.03,'23432','2010-04-02 20:01:54','2010-04-02 20:01:54',1),(11,'adddddddddddddddd2','efdsvfdbdgbdgndgn',5.00,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,1,54.83,35.03,'adddddddddddddddd2','2010-04-02 20:02:34','2010-04-02 20:02:34',1),(12,'fffff','zzzzzzzzzzzzz',5.00,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,1,54.83,35.03,'fffff','2010-04-02 20:11:02','2010-04-02 20:11:02',1),(13,'sdfsdfsd','efrgrgreg',6.00,1,NULL,1,1,1,NULL,NULL,NULL,1,1,54.83,35.03,'sdfsdfsd','2010-04-02 20:23:44','2010-04-02 20:23:44',1);
+insert  into `location`(`id`,`name`,`description`,`depth`,`is_free`,`price`,`location_flow_id`,`location_fundus_id`,`location_relief_id`,`location_type_id`,`location_scope_id`,`address_id`,`created_by`,`updated_by`,`latitude`,`longitude`,`slug`,`created_at`,`updated_at`,`version`) values (1,'agrtwgare','dfgwegr',NULL,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,1,55.06,35.60,'agrtwgare','2010-04-01 14:16:53','2010-04-01 14:16:53',1),(2,'zxczxc23tgwe','r32fwergt',NULL,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,1,55.52,35.60,'zxczxc23tgwe','2010-04-01 14:16:53','2010-04-01 14:16:53',1),(3,'fsdgfthyj2er3t4g','5qdwfegrhtyjtrqwfegrh',NULL,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,1,55.32,36.16,'fsdgfthyj2er3t4g','2010-04-01 14:16:53','2010-04-01 14:16:53',1),(4,'yahooo','1111111111111111',NULL,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,1,54.70,36.95,'yahooo','2010-04-01 14:16:53','2010-04-01 14:16:53',1),(5,'gdfdfgdfg','dfhestnrnsfgn',NULL,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,1,54.90,35.95,'gdfdfgdfg','2010-04-01 14:16:53','2010-04-01 14:16:53',1),(6,'drgsdfh','srghsdthj',NULL,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,1,55.18,37.40,'drgsdfh','2010-04-01 14:16:53','2010-04-01 14:16:53',1),(7,'asdftyui','wertwertgaerh',NULL,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,1,55.60,38.48,'asdftyui','2010-04-01 14:16:53','2010-04-01 14:16:53',1),(8,'etujtdy','ertertery',NULL,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,1,55.34,36.37,'etujtdy','2010-04-01 14:16:53','2010-04-01 14:16:53',1),(9,'Пляж на угре','Красивое место',NULL,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,1,54.83,35.03,'','2010-04-01 14:16:53','2010-04-01 14:16:53',1),(10,'23432','wrefrw4tegrbfdqwtegrdtg',423423424.00,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,1,54.83,35.03,'23432','2010-04-02 20:01:54','2010-04-02 20:01:54',1),(11,'adddddddddddddddd2','efdsvfdbdgbdgndgn',2.00,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,1,54.83,35.03,'adddddddddddddddd2','2010-04-02 20:02:34','2010-04-02 20:02:34',1),(12,'fffff','zzzzzzzzzzzzz',33.00,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,1,54.83,35.03,'fffff','2010-04-02 20:11:02','2010-04-02 20:11:02',1),(13,'sdfsdfsd','efrgrgreg',24.00,1,NULL,1,1,1,NULL,NULL,NULL,1,1,54.83,35.03,'sdfsdfsd','2010-04-02 20:23:44','2010-04-02 20:23:44',1);
 
 /*Table structure for table `location_flow` */
 
@@ -342,8 +332,7 @@ CREATE TABLE `location_version` (
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL,
   `version` bigint(20) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`,`version`),
-  CONSTRAINT `location_version_id_location_id` FOREIGN KEY (`id`) REFERENCES `location` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+  PRIMARY KEY (`id`,`version`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `location_version` */
@@ -366,13 +355,12 @@ CREATE TABLE `profile` (
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `user_id_idx` (`user_id`),
-  CONSTRAINT `profile_user_id_sf_guard_user_id` FOREIGN KEY (`user_id`) REFERENCES `sf_guard_user` (`id`)
+  KEY `user_id_idx` (`user_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 /*Data for the table `profile` */
 
-insert  into `profile`(`id`,`nick_name`,`first_name`,`last_name`,`birth_date`,`userpic`,`sex`,`user_id`,`created_at`,`updated_at`) values (1,'lim','lim','lim',NULL,NULL,1,1,'2010-07-21 00:16:08','2010-07-21 00:16:08');
+insert  into `profile`(`id`,`nick_name`,`first_name`,`last_name`,`birth_date`,`userpic`,`sex`,`user_id`,`created_at`,`updated_at`) values (1,'lim','lim','lim',NULL,NULL,1,1,'2010-07-26 00:14:32','2010-07-26 00:14:32');
 
 /*Table structure for table `profile_fish` */
 
@@ -384,9 +372,7 @@ CREATE TABLE `profile_fish` (
   `profile_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `fish_id_idx` (`fish_id`),
-  KEY `profile_id_idx` (`profile_id`),
-  CONSTRAINT `profile_fish_fish_id_fish_id` FOREIGN KEY (`fish_id`) REFERENCES `fish` (`id`),
-  CONSTRAINT `profile_fish_profile_id_profile_id` FOREIGN KEY (`profile_id`) REFERENCES `profile` (`id`)
+  KEY `profile_id_idx` (`profile_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `profile_fish` */
@@ -401,9 +387,7 @@ CREATE TABLE `profile_style` (
   `profile_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `style_id_idx` (`style_id`),
-  KEY `profile_id_idx` (`profile_id`),
-  CONSTRAINT `profile_style_profile_id_profile_id` FOREIGN KEY (`profile_id`) REFERENCES `profile` (`id`),
-  CONSTRAINT `profile_style_style_id_style_id` FOREIGN KEY (`style_id`) REFERENCES `style` (`id`)
+  KEY `profile_id_idx` (`profile_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `profile_style` */
@@ -430,12 +414,7 @@ CREATE TABLE `profit` (
   KEY `fish_id_idx` (`fish_id`),
   KEY `style_id_idx` (`style_id`),
   KEY `created_by_idx` (`created_by`),
-  KEY `updated_by_idx` (`updated_by`),
-  CONSTRAINT `profit_created_by_profile_id` FOREIGN KEY (`created_by`) REFERENCES `profile` (`id`),
-  CONSTRAINT `profit_fish_id_fish_id` FOREIGN KEY (`fish_id`) REFERENCES `fish` (`id`),
-  CONSTRAINT `profit_location_id_location_id` FOREIGN KEY (`location_id`) REFERENCES `location` (`id`),
-  CONSTRAINT `profit_style_id_style_id` FOREIGN KEY (`style_id`) REFERENCES `style` (`id`),
-  CONSTRAINT `profit_updated_by_profile_id` FOREIGN KEY (`updated_by`) REFERENCES `profile` (`id`)
+  KEY `updated_by_idx` (`updated_by`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `profit` */
@@ -455,10 +434,7 @@ CREATE TABLE `profit_detail` (
   UNIQUE KEY `unique_fish_style_per_profit_idx` (`profit_id`,`style_id`,`fish_id`),
   KEY `profit_id_idx` (`profit_id`),
   KEY `style_id_idx` (`style_id`),
-  KEY `fish_id_idx` (`fish_id`),
-  CONSTRAINT `profit_detail_fish_id_fish_id` FOREIGN KEY (`fish_id`) REFERENCES `fish` (`id`),
-  CONSTRAINT `profit_detail_profit_id_profit_id` FOREIGN KEY (`profit_id`) REFERENCES `profit` (`id`),
-  CONSTRAINT `profit_detail_style_id_style_id` FOREIGN KEY (`style_id`) REFERENCES `style` (`id`)
+  KEY `fish_id_idx` (`fish_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `profit_detail` */
@@ -479,7 +455,7 @@ CREATE TABLE `sf_guard_group` (
 
 /*Data for the table `sf_guard_group` */
 
-insert  into `sf_guard_group`(`id`,`name`,`description`,`created_at`,`updated_at`) values (1,'admin','Administrator group','2010-07-21 00:16:08','2010-07-21 00:16:08');
+insert  into `sf_guard_group`(`id`,`name`,`description`,`created_at`,`updated_at`) values (1,'admin','Administrator group','2010-07-26 00:14:32','2010-07-26 00:14:32');
 
 /*Table structure for table `sf_guard_group_permission` */
 
@@ -498,7 +474,7 @@ CREATE TABLE `sf_guard_group_permission` (
 
 /*Data for the table `sf_guard_group_permission` */
 
-insert  into `sf_guard_group_permission`(`group_id`,`permission_id`,`created_at`,`updated_at`) values (1,1,'2010-07-21 00:16:11','2010-07-21 00:16:11');
+insert  into `sf_guard_group_permission`(`group_id`,`permission_id`,`created_at`,`updated_at`) values (1,1,'2010-07-26 00:14:33','2010-07-26 00:14:33');
 
 /*Table structure for table `sf_guard_permission` */
 
@@ -516,7 +492,7 @@ CREATE TABLE `sf_guard_permission` (
 
 /*Data for the table `sf_guard_permission` */
 
-insert  into `sf_guard_permission`(`id`,`name`,`description`,`created_at`,`updated_at`) values (1,'admin','Administrator permission','2010-07-21 00:16:08','2010-07-21 00:16:08');
+insert  into `sf_guard_permission`(`id`,`name`,`description`,`created_at`,`updated_at`) values (1,'admin','Administrator permission','2010-07-26 00:14:32','2010-07-26 00:14:32');
 
 /*Table structure for table `sf_guard_remember_key` */
 
@@ -558,7 +534,7 @@ CREATE TABLE `sf_guard_user` (
 
 /*Data for the table `sf_guard_user` */
 
-insert  into `sf_guard_user`(`id`,`username`,`algorithm`,`salt`,`password`,`is_active`,`is_super_admin`,`last_login`,`created_at`,`updated_at`) values (1,'admin','sha1','4d8c64e2e5b05dbf145867dc122310d9','380ebe52626279fea48388752e2b585f9060adbc',1,1,NULL,'2010-07-21 00:16:07','2010-07-21 00:16:07');
+insert  into `sf_guard_user`(`id`,`username`,`algorithm`,`salt`,`password`,`is_active`,`is_super_admin`,`last_login`,`created_at`,`updated_at`) values (1,'admin','sha1','bb4c8fa9aa66bc12a617a19d062f3162','5ff0ac1c7309a726f40b1f9d47148827c48ae419',1,1,'2010-07-26 00:14:40','2010-07-26 00:14:32','2010-07-26 00:14:40');
 
 /*Table structure for table `sf_guard_user_group` */
 
@@ -577,7 +553,7 @@ CREATE TABLE `sf_guard_user_group` (
 
 /*Data for the table `sf_guard_user_group` */
 
-insert  into `sf_guard_user_group`(`user_id`,`group_id`,`created_at`,`updated_at`) values (1,1,'2010-07-21 00:16:11','2010-07-21 00:16:11');
+insert  into `sf_guard_user_group`(`user_id`,`group_id`,`created_at`,`updated_at`) values (1,1,'2010-07-26 00:14:33','2010-07-26 00:14:33');
 
 /*Table structure for table `sf_guard_user_permission` */
 
@@ -627,14 +603,6 @@ CREATE TABLE `vote` (
   PRIMARY KEY (`id`),
   KEY `vote_toward_idx` (`toward`),
   KEY `voter_idx` (`voter`),
-  KEY `vote_comment_id_comment_id` (`comment_id`),
-  KEY `vote_location_id_location_id` (`location_id`),
-  KEY `vote_profile_id_profile_id` (`profile_id`),
-  KEY `vote_profit_id_profit_id` (`profit_id`),
-  CONSTRAINT `vote_profit_id_profit_id` FOREIGN KEY (`profit_id`) REFERENCES `profit` (`id`),
-  CONSTRAINT `vote_comment_id_comment_id` FOREIGN KEY (`comment_id`) REFERENCES `comment` (`id`),
-  CONSTRAINT `vote_location_id_location_id` FOREIGN KEY (`location_id`) REFERENCES `location` (`id`),
-  CONSTRAINT `vote_profile_id_profile_id` FOREIGN KEY (`profile_id`) REFERENCES `profile` (`id`),
   CONSTRAINT `vote_voter_profile_id` FOREIGN KEY (`voter`) REFERENCES `profile` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -647,10 +615,7 @@ DROP TABLE IF EXISTS `wish_list`;
 CREATE TABLE `wish_list` (
   `profile_id` int(11) NOT NULL DEFAULT '0',
   `location_id` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`profile_id`,`location_id`),
-  KEY `wish_list_location_id_location_id` (`location_id`),
-  CONSTRAINT `wish_list_location_id_location_id` FOREIGN KEY (`location_id`) REFERENCES `location` (`id`),
-  CONSTRAINT `wish_list_profile_id_profile_id` FOREIGN KEY (`profile_id`) REFERENCES `profile` (`id`)
+  PRIMARY KEY (`profile_id`,`location_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `wish_list` */

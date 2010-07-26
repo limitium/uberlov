@@ -26,8 +26,8 @@
             <dl>
                 <dt>Кому:<span>можно указать несколько получателей через запятую</span></dt>
                 <dd>
-                    <?php echo $form['ibnox_list']->renderError() ?>
-                    <?php echo $form['ibnox_list'] ?>
+                    <?php echo $form['inboxed_list']->renderError() ?>
+                    <?php echo $form['inboxed_list'] ?>
                 </dd>
             </dl>
             <dl>
@@ -37,10 +37,10 @@
                     <?php echo $form['message'] ?>
                 </dd>
             </dl>
-            <div>
-                <?php echo $form->renderHiddenFields(false) ?>
-                <input type="submit" value="Отправить" />
-            </div>
         </fieldset>
+        <div>
+            <?php echo $form->renderHiddenFields(false) ?>
+            <input type="submit" value="Создать" />
+        </div>
     </form>
 </div>
