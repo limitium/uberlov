@@ -8,23 +8,17 @@
  * @property integer $id
  * @property string $name
  * @property string $message
- * @property integer $profile_id
- * @property Profile $Profile
  * @property Doctrine_Collection $Inboxed
  * @property Doctrine_Collection $CommentInbox
  * 
  * @method integer             getId()           Returns the current record's "id" value
  * @method string              getName()         Returns the current record's "name" value
  * @method string              getMessage()      Returns the current record's "message" value
- * @method integer             getProfileId()    Returns the current record's "profile_id" value
- * @method Profile             getProfile()      Returns the current record's "Profile" value
  * @method Doctrine_Collection getInboxed()      Returns the current record's "Inboxed" collection
  * @method Doctrine_Collection getCommentInbox() Returns the current record's "CommentInbox" collection
  * @method Inbox               setId()           Sets the current record's "id" value
  * @method Inbox               setName()         Sets the current record's "name" value
  * @method Inbox               setMessage()      Sets the current record's "message" value
- * @method Inbox               setProfileId()    Sets the current record's "profile_id" value
- * @method Inbox               setProfile()      Sets the current record's "Profile" value
  * @method Inbox               setInboxed()      Sets the current record's "Inboxed" collection
  * @method Inbox               setCommentInbox() Sets the current record's "CommentInbox" collection
  * 
@@ -53,10 +47,6 @@ abstract class BaseInbox extends sfDoctrineRecord
              'type' => 'string',
              'notnull' => true,
              ));
-        $this->hasColumn('profile_id', 'integer', 4, array(
-             'type' => 'integer',
-             'length' => '4',
-             ));
 
         $this->option('type', 'INNODB');
         $this->option('charset', 'utf8');
@@ -66,10 +56,6 @@ abstract class BaseInbox extends sfDoctrineRecord
     public function setUp()
     {
         parent::setUp();
-        $this->hasOne('Profile', array(
-             'local' => 'profile_id',
-             'foreign' => 'id'));
-
         $this->hasMany('Profile as Inboxed', array(
              'refClass' => 'Inboxed',
              'local' => 'inbox_id',
@@ -78,5 +64,25 @@ abstract class BaseInbox extends sfDoctrineRecord
         $this->hasMany('CommentInbox', array(
              'local' => 'id',
              'foreign' => 'inbox_id'));
+
+        $blameable0 = new Doctrine_Template_Blameable(array(
+             'listener' => 'BlameableFishery',
+             'relations' => 
+             array(
+              'created' => 
+              array(
+              'class' => 'Profile',
+              'disabled' => false,
+              'foreign' => 'id',
+              ),
+              'updated' => 
+              array(
+              'class' => 'Profile',
+              'disabled' => false,
+              'foreign' => 'id',
+              ),
+             ),
+             ));
+        $this->actAs($blameable0);
     }
 }

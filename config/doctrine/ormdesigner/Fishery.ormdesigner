@@ -5,7 +5,7 @@
 
   <include name="..\fisheryYAML.module.xml"/>
 
-  <project code-name="Fishery" name="fishery" orm="Doctrine" visSizeX="229" visSizeX2="1282" visSizeY="90" visSizeY2="774">
+  <project code-name="Fishery" name="fishery" orm="Doctrine" visSizeX="229" visSizeX2="1282" visSizeY="90" visSizeY2="782">
     <module-position name="ht" visPositionX="26" visPositionY="11"/>
   </project>
 

@@ -15,14 +15,16 @@ abstract class BaseInboxFormFilter extends BaseFormFilterDoctrine
     $this->setWidgets(array(
       'name'         => new sfWidgetFormFilterInput(array('with_empty' => false)),
       'message'      => new sfWidgetFormFilterInput(array('with_empty' => false)),
-      'profile_id'   => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Profile'), 'add_empty' => true)),
+      'created_by'   => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('CreatedBy'), 'add_empty' => true)),
+      'updated_by'   => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('UpdatedBy'), 'add_empty' => true)),
       'inboxed_list' => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'Profile')),
     ));
 
     $this->setValidators(array(
       'name'         => new sfValidatorPass(array('required' => false)),
       'message'      => new sfValidatorPass(array('required' => false)),
-      'profile_id'   => new sfValidatorDoctrineChoice(array('required' => false, 'model' => $this->getRelatedModelName('Profile'), 'column' => 'id')),
+      'created_by'   => new sfValidatorDoctrineChoice(array('required' => false, 'model' => $this->getRelatedModelName('CreatedBy'), 'column' => 'id')),
+      'updated_by'   => new sfValidatorDoctrineChoice(array('required' => false, 'model' => $this->getRelatedModelName('UpdatedBy'), 'column' => 'id')),
       'inboxed_list' => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'Profile', 'required' => false)),
     ));
 
@@ -62,7 +64,8 @@ abstract class BaseInboxFormFilter extends BaseFormFilterDoctrine
       'id'           => 'Number',
       'name'         => 'Text',
       'message'      => 'Text',
-      'profile_id'   => 'ForeignKey',
+      'created_by'   => 'ForeignKey',
+      'updated_by'   => 'ForeignKey',
       'inboxed_list' => 'ManyKey',
     );
   }

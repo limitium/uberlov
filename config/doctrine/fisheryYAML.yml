@@ -526,6 +526,18 @@ AreaHigh:
       local: area_low_id
       foreign: id
 Inbox:
+  actAs:
+    Blameable:
+      listener: BlameableFishery
+      relations:
+        created:
+          class: Profile
+          disabled: false
+          foreign: id
+        updated:
+          class: Profile
+          disabled: false
+          foreign: id
   columns:
     id:
       primary: true
@@ -538,12 +550,7 @@ Inbox:
     message:
       type: string
       notnull: true
-    profile_id:
-      type: integer(4)
   relations:
-    Profile:
-      local: profile_id
-      foreign: id
     Inboxed:
       class: Profile
       refClass: Inboxed

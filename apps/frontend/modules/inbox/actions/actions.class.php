@@ -16,12 +16,15 @@ class inboxActions extends sfActions {
                         ->leftJoin('i.Inboxed id')
                         ->leftJoin('i.CommentInbox с')
                         ->where('i.created_by = ?', sfContext::getInstance()->getUser()->getProfile()->getId())
-                        ->andWhere('id.profile_id = ?', sfContext::getInstance()->getUser()->getProfile()->getId())
+                        ->andWhere('id.id = ?', sfContext::getInstance()->getUser()->getProfile()->getId())
                         ->execute();
     }
 
     public function executeNew(sfWebRequest $request) {
         $this->form = new InboxForm();
+        if (($whom = $request->getParameter('whom')) != null) {
+            $this->form->setDefault('inboxed_list', $whom);
+        }
     }
 
     public function executeCreate(sfWebRequest $request) {

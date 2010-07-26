@@ -20,7 +20,6 @@
  * @property Doctrine_Collection $Friend
  * @property Doctrine_Collection $Votes
  * @property Doctrine_Collection $VoteProfile
- * @property Doctrine_Collection $Inbox
  * @property Doctrine_Collection $Inboxed
  * 
  * @method integer             getId()          Returns the current record's "id" value
@@ -38,7 +37,6 @@
  * @method Doctrine_Collection getFriend()      Returns the current record's "Friend" collection
  * @method Doctrine_Collection getVotes()       Returns the current record's "Votes" collection
  * @method Doctrine_Collection getVoteProfile() Returns the current record's "VoteProfile" collection
- * @method Doctrine_Collection getInbox()       Returns the current record's "Inbox" collection
  * @method Doctrine_Collection getInboxed()     Returns the current record's "Inboxed" collection
  * @method Profile             setId()          Sets the current record's "id" value
  * @method Profile             setNickName()    Sets the current record's "nick_name" value
@@ -55,7 +53,6 @@
  * @method Profile             setFriend()      Sets the current record's "Friend" collection
  * @method Profile             setVotes()       Sets the current record's "Votes" collection
  * @method Profile             setVoteProfile() Sets the current record's "VoteProfile" collection
- * @method Profile             setInbox()       Sets the current record's "Inbox" collection
  * @method Profile             setInboxed()     Sets the current record's "Inboxed" collection
  * 
  * @package    FISHERY
@@ -144,10 +141,6 @@ abstract class BaseProfile extends sfDoctrineRecord
              'foreign' => 'voter'));
 
         $this->hasMany('VoteProfile', array(
-             'local' => 'id',
-             'foreign' => 'profile_id'));
-
-        $this->hasMany('Inbox', array(
              'local' => 'id',
              'foreign' => 'profile_id'));
 

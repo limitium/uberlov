@@ -289,17 +289,35 @@
       <column name="name" required="true" size="255" type="string" unique="true"/>
       <column description="Foreign key to AreaLow" name="area_low_id" size="4" type="integer"/>
     </table>
-    <table name="Inbox" visPositionX="445" visPositionY="642" visSizeX="0" visSizeX2="114" visSizeY="0" visSizeY2="73">
+    <table name="Inbox" visPositionX="488" visPositionY="588" visSizeX="0" visSizeX2="99" visSizeY="0" visSizeY2="59">
       <column auto-increment="true" name="id" primary="true" required="true" size="4" type="integer"/>
       <column name="name" required="true" size="50" type="string"/>
       <column name="message" required="true" type="string"/>
-      <column description="Foreign key to Profile" name="profile_id" size="4" type="integer"/>
+      <orm-properties>
+        <attribute name="actAs">
+          <attribute name="Blameable">
+            <attribute name="listener">BlameableFishery</attribute>
+            <attribute name="relations">
+              <attribute name="created">
+                <attribute name="class">Profile</attribute>
+                <attribute name="disabled">false</attribute>
+                <attribute name="foreign">id</attribute>
+              </attribute>
+              <attribute name="updated">
+                <attribute name="class">Profile</attribute>
+                <attribute name="disabled">false</attribute>
+                <attribute name="foreign">id</attribute>
+              </attribute>
+            </attribute>
+          </attribute>
+        </attribute>
+      </orm-properties>
     </table>
-    <table name="Inboxed" visPositionX="534" visPositionY="552" visSizeX="0" visSizeX2="114" visSizeY="0" visSizeY2="60">
+    <table name="Inboxed" visPositionX="327" visPositionY="604" visSizeX="0" visSizeX2="114" visSizeY="0" visSizeY2="60">
       <column name="inbox_id" required="true" size="4" type="integer"/>
       <column name="profile_id" required="true" size="4" type="integer"/>
     </table>
-    <table name="CommentInbox" visPositionX="609" visPositionY="675" visSizeX="0" visSizeX2="110" visSizeY="0" visSizeY2="31">
+    <table name="CommentInbox" visPositionX="615" visPositionY="532" visSizeX="0" visSizeX2="110" visSizeY="0" visSizeY2="31">
       <column description="Foreign key to Inbox" name="inbox_id" size="4" type="integer"/>
       <orm-properties>
         <attribute name="inheritance">
@@ -410,9 +428,6 @@
     </foreign-key>
     <foreign-key from="AreaHigh" name="FK_AreaHigh_AreaLow" to="AreaLow">
       <foreign-key-column from="area_low_id" to="id"/>
-    </foreign-key>
-    <foreign-key from="Inbox" name="FK_Inbox_Profile" to="Profile">
-      <foreign-key-column from="profile_id" to="id"/>
     </foreign-key>
     <foreign-key caption="Inbox Inboxed" from="Inboxed" name="FK_Inboxed_Inbox_id" to="Inbox" visShowCaption="0">
       <foreign-key-column from="inbox_id" to="id"/>
