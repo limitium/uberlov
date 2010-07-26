@@ -10,8 +10,6 @@ class BlameableFishery extends Doctrine_Template_Listener_Blameable
      */
     public function getUserIdentity()
     {
-        $ident = sfContext::getInstance()->getUser()->getGuardUser()->getId();
-
-        return $ident;
+        return sfContext::getInstance()->getUser()->getGuardUser()->getProfile()->getId();
     }
 }
