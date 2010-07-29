@@ -23,7 +23,7 @@ class InboxForm extends BaseInboxForm {
 
 
         $this->validatorSchema['name'] = new sfValidatorString(array('min_length' => 3, 'max_length' => 50, 'required' => true));
-        $this->validatorSchema['inboxed_list'] = new sfValidatorString(array('min_length' => 5, 'max_length' => 255, 'required' => true));
+        $this->validatorSchema['inboxed_list'] = new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'Profile', 'required' => true));
         $this->validatorSchema['message'] = new sfValidatorString(array('min_length' => 5, 'max_length' => 255, 'required' => true));
     }
 

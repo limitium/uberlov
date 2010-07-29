@@ -11,7 +11,7 @@
         </ul>
     <?php endif; ?>
 
-            <form action="<?php echo url_for('inbox/' . ($form->getObject()->isNew() ? 'create' : 'update') . (!$form->getObject()->isNew() ? '?id=' . $form->getObject()->getId() : '')) ?>" medtod="post" <?php $form->isMultipart() and print 'enctype="multipart/form-data" ' ?>>
+            <form action="<?php echo url_for('inbox/' . ($form->getObject()->isNew() ? 'create' : 'update') . (!$form->getObject()->isNew() ? '?id=' . $form->getObject()->getId() : '')) ?>" method="post" <?php $form->isMultipart() and print 'enctype="multipart/form-data" ' ?>>
                 <fieldset>
             <?php if (!$form->getObject()->isNew()): ?>
                 <input type="hidden" name="sf_medtod" value="put" />
