@@ -22,9 +22,7 @@ class inboxActions extends sfActions {
 
     public function executeNew(sfWebRequest $request) {
         $this->form = new InboxForm();
-        if (($whom = $request->getParameter('whom')) != null) {
-            $this->form->setDefault('inboxed_list', $whom);
-        }
+        $this->form->setDefault('inboxed_list', $request->getParameter('whom'));
     }
 
     public function executeCreate(sfWebRequest $request) {
@@ -62,12 +60,45 @@ class inboxActions extends sfActions {
     }
 
     protected function processForm(sfWebRequest $request, sfForm $form) {
-        $form->bind($request->getParameter($form->getName()), $request->getFiles($form->getName()));
+        $params = $request->getParameter($form->getName());
+        $inboxed = $params['inboxed_list'];
+
+
+        $params['inboxed_list'] = $this->getProfiles($inboxed);
+        
+        $form->bind($params, $request->getFiles($form->getName()));
         if ($form->isValid()) {
             $inbox = $form->save();
 
             $this->redirect('inbox/edit?id=' . $inbox->getId());
+        } else {
+            $params['inboxed_list'] = $inboxed;
+            $form->bind($params, $request->getFiles($form->getName()));
         }
+    }
+
+    private function getProfiles($inboxed) {
+        $ids = array();
+        $names = array();
+        foreach (explode(',', $inboxed) as $name) {
+            $name = trim($name);
+            if (is_int($name)) {
+                $ids[] = $name;
+            } else {
+                $names[] = $name;
+            }
+        }
+
+        $pids = array();
+        foreach (Doctrine_Query::create()->select()->from('Profile p')
+                ->select('p.id')
+                ->whereIn('p.id', $ids)
+                ->orWhereIn('p.nick_name', $names)
+                ->groupBy('p.id')
+                ->fetchArray() as $p) {
+            $pids[] = $p['id'];
+        }
+        return $pids;
     }
 
 }
