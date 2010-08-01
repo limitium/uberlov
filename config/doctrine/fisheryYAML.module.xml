@@ -304,12 +304,23 @@
                 <attribute name="foreign">id</attribute>
               </attribute>
               <attribute name="updated">
-                <attribute name="class">Profile</attribute>
                 <attribute name="disabled">false</attribute>
                 <attribute name="foreign">id</attribute>
+                <attribute name="class">Profile</attribute>
+              </attribute>
+            </attribute>
+            <attribute name="columns">
+              <attribute name="created">
+                <attribute name="length">4</attribute>
+                <attribute name="type">int</attribute>
+              </attribute>
+              <attribute name="updated">
+                <attribute name="length">4</attribute>
+                <attribute name="type">int</attribute>
               </attribute>
             </attribute>
           </attribute>
+          <attribute name="Timestampable"/>
         </attribute>
       </orm-properties>
     </table>
@@ -317,7 +328,7 @@
       <column name="inbox_id" required="true" size="4" type="integer"/>
       <column name="profile_id" required="true" size="4" type="integer"/>
     </table>
-    <table name="CommentInbox" visPositionX="615" visPositionY="532" visSizeX="0" visSizeX2="110" visSizeY="0" visSizeY2="31">
+    <table name="CommentInbox" visPositionX="614" visPositionY="531" visSizeX="0" visSizeX2="110" visSizeY="0" visSizeY2="31">
       <column description="Foreign key to Inbox" name="inbox_id" size="4" type="integer"/>
       <orm-properties>
         <attribute name="inheritance">
@@ -325,6 +336,58 @@
           <attribute name="keyValue">Inbox</attribute>
           <attribute name="keyField">toward</attribute>
           <attribute name="extends">Comment</attribute>
+        </attribute>
+      </orm-properties>
+    </table>
+    <table name="Talk" visPositionX="722" visPositionY="611" visSizeX="0" visSizeX2="138" visSizeY="0" visSizeY2="73">
+      <column auto-increment="true" name="id" primary="true" required="true" size="4" type="integer"/>
+      <column name="name" required="true" size="50" type="string"/>
+      <column name="message" required="true" type="string"/>
+      <column description="Foreign key to TalkSection" name="talk_section_id" size="4" type="integer"/>
+      <orm-properties>
+        <attribute name="actAs">
+          <attribute name="Blameable">
+            <attribute name="listener">BlameableFishery</attribute>
+            <attribute name="columns">
+              <attribute name="created">
+                <attribute name="length">4</attribute>
+                <attribute name="type">int</attribute>
+              </attribute>
+              <attribute name="updated">
+                <attribute name="length">4</attribute>
+                <attribute name="type">int</attribute>
+              </attribute>
+            </attribute>
+            <attribute name="relations">
+              <attribute name="created">
+                <attribute name="class">Profile</attribute>
+                <attribute name="disabled">false</attribute>
+                <attribute name="foreign">id</attribute>
+              </attribute>
+              <attribute name="updated">
+                <attribute name="class">Profile</attribute>
+                <attribute name="disabled">false</attribute>
+                <attribute name="foreign">id</attribute>
+              </attribute>
+            </attribute>
+          </attribute>
+          <attribute name="Timestampable"/>
+        </attribute>
+      </orm-properties>
+    </table>
+    <table name="TalkSection" visPositionX="844" visPositionY="497" visSizeX="0" visSizeX2="102" visSizeY="0" visSizeY2="59">
+      <column auto-increment="true" name="id" primary="true" required="true" size="4" type="integer"/>
+      <column name="name" required="true" size="50" type="string"/>
+      <column name="parent" size="4" type="integer"/>
+    </table>
+    <table name="CommentTalk" visPositionX="711" visPositionY="479" visSizeX="0" visSizeX2="103" visSizeY="0" visSizeY2="31">
+      <column description="Foreign key to Talk" name="talk_id" size="4" type="integer"/>
+      <orm-properties>
+        <attribute name="inheritance">
+          <attribute name="extends">Comment</attribute>
+          <attribute name="keyField">toward</attribute>
+          <attribute name="keyValue">talk</attribute>
+          <attribute name="type">column_aggregation</attribute>
         </attribute>
       </orm-properties>
     </table>
@@ -338,7 +401,7 @@
     <foreign-key from="Location" name="FK_Location_Location_flow" to="LocationFlow" visCenterX="0" visCenterY="-1">
       <foreign-key-column from="location_flow_id" to="id"/>
     </foreign-key>
-    <foreign-key from="Location" name="FK_Location_Location_fundus" to="LocationFundus" visCenterX="0" visCenterY="1">
+    <foreign-key from="Location" name="FK_Location_Location_fundus" to="LocationFundus" visCenterX="0" visCenterY="-1">
       <foreign-key-column from="location_fundus_id" to="id"/>
     </foreign-key>
     <foreign-key from="Location" name="FK_Location_Location_relief" to="LocationRelief" visCenterX="-1" visCenterY="6">
@@ -437,6 +500,12 @@
     </foreign-key>
     <foreign-key from="CommentInbox" name="FK_CommentInbox_Inbox" to="Inbox">
       <foreign-key-column from="inbox_id" to="id"/>
+    </foreign-key>
+    <foreign-key from="Talk" name="FK_Talk_TalkSection" to="TalkSection">
+      <foreign-key-column from="talk_section_id" to="id"/>
+    </foreign-key>
+    <foreign-key from="CommentTalk" name="FK_CommentTalk_Talk" to="Talk">
+      <foreign-key-column from="talk_id" to="id"/>
     </foreign-key>
     <many-to-many-relation mn-table="WishList">
       <many-to-many-foreign-key foreign-key="FK_WishList_Profile_id" relation-alias="Wishers"/>

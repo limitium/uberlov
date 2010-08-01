@@ -20,6 +20,8 @@ abstract class BaseInboxForm extends BaseFormDoctrine
       'message'      => new sfWidgetFormTextarea(),
       'created_by'   => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('CreatedBy'), 'add_empty' => false)),
       'updated_by'   => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('UpdatedBy'), 'add_empty' => false)),
+      'created_at'   => new sfWidgetFormDateTime(),
+      'updated_at'   => new sfWidgetFormDateTime(),
       'inboxed_list' => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'Profile')),
     ));
 
@@ -29,6 +31,8 @@ abstract class BaseInboxForm extends BaseFormDoctrine
       'message'      => new sfValidatorString(),
       'created_by'   => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('CreatedBy'))),
       'updated_by'   => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('UpdatedBy'))),
+      'created_at'   => new sfValidatorDateTime(),
+      'updated_at'   => new sfValidatorDateTime(),
       'inboxed_list' => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'Profile', 'required' => false)),
     ));
 

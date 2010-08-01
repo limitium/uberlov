@@ -77,12 +77,27 @@ abstract class BaseInbox extends sfDoctrineRecord
               ),
               'updated' => 
               array(
-              'class' => 'Profile',
               'disabled' => false,
               'foreign' => 'id',
+              'class' => 'Profile',
+              ),
+             ),
+             'columns' => 
+             array(
+              'created' => 
+              array(
+              'length' => 4,
+              'type' => 'int',
+              ),
+              'updated' => 
+              array(
+              'length' => 4,
+              'type' => 'int',
               ),
              ),
              ));
+        $timestampable0 = new Doctrine_Template_Timestampable();
         $this->actAs($blameable0);
+        $this->actAs($timestampable0);
     }
 }

@@ -12,6 +12,7 @@
  * @property integer $location_id
  * @property integer $profit_id
  * @property integer $inbox_id
+ * @property integer $talk_id
  * @property Doctrine_Collection $VoteComment
  * 
  * @method integer             getId()          Returns the current record's "id" value
@@ -21,6 +22,7 @@
  * @method integer             getLocationId()  Returns the current record's "location_id" value
  * @method integer             getProfitId()    Returns the current record's "profit_id" value
  * @method integer             getInboxId()     Returns the current record's "inbox_id" value
+ * @method integer             getTalkId()      Returns the current record's "talk_id" value
  * @method Doctrine_Collection getVoteComment() Returns the current record's "VoteComment" collection
  * @method Comment             setId()          Sets the current record's "id" value
  * @method Comment             setParent()      Sets the current record's "parent" value
@@ -29,6 +31,7 @@
  * @method Comment             setLocationId()  Sets the current record's "location_id" value
  * @method Comment             setProfitId()    Sets the current record's "profit_id" value
  * @method Comment             setInboxId()     Sets the current record's "inbox_id" value
+ * @method Comment             setTalkId()      Sets the current record's "talk_id" value
  * @method Comment             setVoteComment() Sets the current record's "VoteComment" collection
  * 
  * @package    FISHERY
@@ -72,6 +75,10 @@ abstract class BaseComment extends sfDoctrineRecord
              'type' => 'integer',
              'length' => '4',
              ));
+        $this->hasColumn('talk_id', 'integer', 4, array(
+             'type' => 'integer',
+             'length' => '4',
+             ));
 
         $this->option('type', 'INNODB');
         $this->option('charset', 'utf8');
@@ -89,6 +96,10 @@ abstract class BaseComment extends sfDoctrineRecord
              'CommentInbox' => 
              array(
               'toward' => 'Inbox',
+             ),
+             'CommentTalk' => 
+             array(
+              'toward' => 'talk',
              ),
              ));
     }
