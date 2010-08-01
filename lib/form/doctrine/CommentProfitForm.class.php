@@ -14,7 +14,6 @@ class CommentProfitForm extends BaseCommentProfitForm {
  */
     public function configure() {
         parent::configure();
-        unset($this['location_id']);
         
         $this->widgetSchema['profit_id']     = new sfWidgetFormInputHidden();
 

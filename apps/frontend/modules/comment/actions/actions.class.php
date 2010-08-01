@@ -14,6 +14,10 @@ class commentActions extends sfActions {
         $this->createComment($request, 'location');
     }
 
+    public function executeInbox(sfWebRequest $request) {
+        $this->createComment($request, 'inbox');
+    }
+
     public function executeProfit(sfWebRequest $request) {
         $this->createComment($request, 'profit');
     }
