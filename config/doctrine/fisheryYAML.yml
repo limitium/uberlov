@@ -535,9 +535,17 @@ Inbox:
           disabled: false
           foreign: id
         updated:
-          class: Profile
           disabled: false
           foreign: id
+          class: Profile
+      columns:
+        created:
+          length: 4
+          type: int
+        updated:
+          length: 4
+          type: int
+    Timestampable: 
   columns:
     id:
       primary: true
@@ -583,6 +591,70 @@ CommentInbox:
   relations:
     Inbox:
       local: inbox_id
+      foreign: id
+Talk:
+  actAs:
+    Blameable:
+      listener: BlameableFishery
+      columns:
+        created:
+          length: 4
+          type: int
+        updated:
+          length: 4
+          type: int
+      relations:
+        created:
+          class: Profile
+          disabled: false
+          foreign: id
+        updated:
+          class: Profile
+          disabled: false
+          foreign: id
+    Timestampable: 
+  columns:
+    id:
+      primary: true
+      type: integer(4)
+      notnull: true
+      autoincrement: true
+    name:
+      type: string(50)
+      notnull: true
+    message:
+      type: string
+      notnull: true
+    talk_section_id:
+      type: integer(4)
+  relations:
+    TalkSection:
+      local: talk_section_id
+      foreign: id
+TalkSection:
+  columns:
+    id:
+      primary: true
+      type: integer(4)
+      notnull: true
+      autoincrement: true
+    name:
+      type: string(50)
+      notnull: true
+    parent:
+      type: integer(4)
+CommentTalk:
+  inheritance:
+    extends: Comment
+    keyField: toward
+    keyValue: talk
+    type: column_aggregation
+  columns:
+    talk_id:
+      type: integer(4)
+  relations:
+    Talk:
+      local: talk_id
       foreign: id
 options:
   type: INNODB
