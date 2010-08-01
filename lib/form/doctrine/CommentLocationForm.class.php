@@ -14,7 +14,6 @@ class CommentLocationForm extends BaseCommentLocationForm {
  */
     public function configure() {
         parent::configure();
-        unset($this['profit_id']);
 
         $this->widgetSchema['location_id']     = new sfWidgetFormInputHidden();
 

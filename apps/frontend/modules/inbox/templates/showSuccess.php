@@ -14,7 +14,7 @@
         </ul>
     </div>
 
-    <div id="commentContainer" class="selected" type="location">
+    <div id="commentContainer" class="selected" type="inbox">
         <?php use_javascript('comment'); ?>
         <?php foreach ($comments as $comment): ?>
         <?php include_partial('comment/comment', array('comment' => $comment)); ?>
