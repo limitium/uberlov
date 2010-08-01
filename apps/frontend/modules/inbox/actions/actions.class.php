@@ -35,7 +35,7 @@ class inboxActions extends sfActions {
         $this->setTemplate('new');
     }
 
-    public function executeEdit(sfWebRequest $request) {
+    public function executShow(sfWebRequest $request) {
         $this->forward404Unless($inbox = Doctrine::getTable('Inbox')->find(array($request->getParameter('id'))), sprintf('Object inbox does not exist (%s).', $request->getParameter('id')));
         $this->form = new InboxForm($inbox);
     }
@@ -65,7 +65,7 @@ class inboxActions extends sfActions {
 
 
         $params['inboxed_list'] = $this->getProfiles($inboxed);
-        
+
         $form->bind($params, $request->getFiles($form->getName()));
         if ($form->isValid()) {
             $inbox = $form->save();
