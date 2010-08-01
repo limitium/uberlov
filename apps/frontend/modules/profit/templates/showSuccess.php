@@ -1,4 +1,4 @@
-<?php //include_partial('location/location', array('location' => $profit->getLocation()))   ?>
+<?php include_partial('location/location', array('location' => $profit->getLocation()))   ?>
 
 <div class="profitFull">
     <h2><?php echo $profit->getName(); ?></h2>

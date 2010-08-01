@@ -30,24 +30,7 @@ class locationActions extends sfActions {
         $this->location = Doctrine::getTable('Location')->find($request->getParameter('id'));
         $this->forward404Unless($this->location);
 
-        $q = Doctrine_Query::create()->select('c.message, c.parent, c.created_at, c.updated_at, c.created_by, c.updated_by, p.*, v.*')->from('CommentLocation c')
-                        ->leftJoin('c.CommentBy p')
-                        ->leftJoin('c.VoteComment v')
-                        ->where('c.location_id = ?', $this->location->getId());
-
-        $treeObject = Doctrine::getTable('CommentLocation')->getTree();
-        $treeObject->setBaseQuery($q);
-
-        $comments = array();
-        $rootComment = $treeObject->fetchRoots()->getFirst();
-        if ($rootComment) {
-            foreach ($treeObject->fetchTree(array('root_id' => $rootComment->root_id)) as $comment) {
-                $comments[] = $comment;
-            }
-        }
-
-        array_shift($comments);
-        $this->comments = $comments;
+        $this->comments = Comment::getFor($this->location);
 
         $this->profits = Doctrine_Query::create()->select()->from('Profit pf')
                         ->leftJoin('pf.ProfitDetail d')
