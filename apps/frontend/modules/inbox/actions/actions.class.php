@@ -35,9 +35,13 @@ class inboxActions extends sfActions {
         $this->setTemplate('new');
     }
 
-    public function executShow(sfWebRequest $request) {
-        $this->forward404Unless($inbox = Doctrine::getTable('Inbox')->find(array($request->getParameter('id'))), sprintf('Object inbox does not exist (%s).', $request->getParameter('id')));
-        $this->form = new InboxForm($inbox);
+    public function executeShow(sfWebRequest $request) {
+        $this->forward404Unless($this->inbox = Doctrine::getTable('Inbox')->find(array($request->getParameter('id'))), sprintf('Object inbox does not exist (%s).', $request->getParameter('id')));
+
+        $this->comments = Comment::getFor($this->inbox);
+
+        $this->commentForm = new CommentInboxForm();
+        $this->commentForm->setDefault('inbox_id', $this->inbox->getId());
     }
 
     public function executeUpdate(sfWebRequest $request) {
@@ -47,7 +51,7 @@ class inboxActions extends sfActions {
 
         $this->processForm($request, $this->form);
 
-        $this->setTemplate('edit');
+        $this->setTemplate('show');
     }
 
     public function executeDelete(sfWebRequest $request) {
@@ -70,7 +74,7 @@ class inboxActions extends sfActions {
         if ($form->isValid()) {
             $inbox = $form->save();
 
-            $this->redirect('inbox/edit?id=' . $inbox->getId());
+            $this->redirect('inbox/show?id=' . $inbox->getId());
         } else {
             $params['inboxed_list'] = $inboxed;
             $form->bind($params, $request->getFiles($form->getName()));
