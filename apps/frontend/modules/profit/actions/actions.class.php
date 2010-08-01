@@ -38,6 +38,9 @@ class profitActions extends sfActions {
 
         array_shift($comments);
         $this->comments = $comments;
+
+        $this->commentForm = new CommentProfitForm();
+        $this->commentForm->setDefault('profit_id', $this->profit->getId());
     }
 
     public function executeNew(sfWebRequest $request) {
@@ -91,15 +94,6 @@ class profitActions extends sfActions {
         if ($form->isValid()) {
             $detailsData = (array) json_decode($form->getValue('details'));
             return $form->save()->updateDetails($detailsData);
-        } else {
-            $log = sfContext::getInstance( )->getLogger();
-
-// Having determined the form object is Invalid
-            foreach ($this->form->getFormFieldSchema() as $name => $formField) {
-                if ($formField->getError() != "") {
-//                    echo "ActionClassName::methodName( ): Field Error for :" . $name . " : " . $formField->getError();
-                }
-            }
         }
         return null;
     }

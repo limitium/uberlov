@@ -55,6 +55,9 @@ class locationActions extends sfActions {
                         ->leftJoin('pf.VoteProfit v')
                         ->where('pf.location_id = ?', $this->location->getId())
                         ->execute();
+
+        $this->commentForm = new CommentLocationForm();
+        $this->commentForm->setDefault('location_id', $this->location->getId());
     }
 
     public function executeNew(sfWebRequest $request) {

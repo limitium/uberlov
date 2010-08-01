@@ -57,9 +57,7 @@
     <?php foreach ($comments as $comment): ?>
     <?php include_partial('comment/comment', array('comment' => $comment)); ?>
     <?php endforeach; ?>
-    <?php $cp = new CommentProfit();
-                    $cp->setProfit($profit->getRawValue()) ?>
-    <?php include_partial('comment/form', array('form' => new CommentProfitForm($cp), 'toward' => 'profit')) ?>
+    <?php include_partial('comment/form', array('form' => $commentForm, 'toward' => 'profit')) ?>
     <div id="commentReplyDefault" style="display:none">
         <a href="">Написать</a>
     </div>
