@@ -29,6 +29,7 @@ class profileActions extends sfActions {
                         ->from('Comment c')
                         ->where('c.created_by = ? and c.parent > 0', $this->profile->getId())
                         ->execute();
+
         $this->profits = Doctrine_Query::create()
                         ->from('Profit p')
                         ->leftJoin('p.ProfitDetail d')
