@@ -1,3 +1,7 @@
+<script type="text/javascript">
+    app.csrf.inbox = "<?php echo $csrf; ?>";
+</script>
+<?php use_javascript('inbox'); ?>
 <div class="inbox">
     <h2><?php echo $inbox->getName(); ?></h2>
     <p><?php echo $inbox->getMessage(); ?></p>
@@ -8,6 +12,7 @@
             <a href="" class="commentShowAuthor" author="user<?php echo $inbox->getCreatedBy(); ?>">●</a>
         </div>
     </div>
+    <a href="" class="inboxDelete" inbox="<?php echo $inbox->getId(); ?>">Удалить инбокс</a>
     <div class="tabPanel">
         <ul>
             <li><span href="#" id="tabComments" class="selected">Комментарии (<i id="commentCounter"><?php echo sizeof($comments); ?></i>)</span></li>

@@ -19,6 +19,7 @@ class voteActions extends sfActions {
     }
 
     private function vote(sfWebRequest $request, $type) {
+        //@todo csrf check add!!!!
         $uType = ucfirst($type);
         $profile = sfContext::getInstance()->getUser()->getProfile();
         $object = Doctrine::getTable($uType)->find($request->getParameter('id'));

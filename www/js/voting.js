@@ -30,7 +30,3 @@ function vote(){
 }
 vote.name = 'vote';
 ModuleManager.add(vote);
-
-
-vote.prototype.afterInit = function(){
-    }

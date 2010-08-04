@@ -16,11 +16,13 @@ class userComponents extends sfComponents {
      * @param sfRequest $request A request object
      */
     public function executeMenu(sfWebRequest $request) {
-        $myInboxCount = Doctrine::getTable('Inbox')->myInboxCount();
+        if (!$this->getUser()->isAnonymous()) {
+            $myInboxCount = Doctrine::getTable('Inbox')->myInboxCount();
+        }
         $this->menu = array();
         $this->menu[] = array('url' => '@homepage', 'title' => 'Профаил');
         $this->menu[] = array('url' => '@homepage', 'title' => 'Мои места');
-        $this->menu[] = array('url' => 'inbox/list', 'title' => 'Инбоксы (' . $myInboxCount . ')');
+        $this->menu[] = array('url' => 'inbox/list', 'title' => 'Инбоксы (<span id="myInboxCounter">' . $myInboxCount . '</span>)');
         $this->menu[] = array('url' => 'collector/import', 'title' => 'Импорт');
         $this->menu[] = array('url' => 'collector/import', 'title' => 'Экспорт');
     }
