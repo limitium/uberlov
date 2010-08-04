@@ -17,7 +17,7 @@
     <div id="commentContainer" class="selected" type="inbox">
         <?php use_javascript('comment'); ?>
         <?php foreach ($comments as $comment): ?>
-        <?php include_partial('comment/comment', array('comment' => $comment)); ?>
+        <?php include_partial('comment/commentNoVote', array('comment' => $comment)); ?>
         <?php endforeach; ?>
         <?php include_partial('comment/form', array('form' => $commentForm, 'toward' => 'inbox')) ?>
         <div id="commentReplyDefault" style="display:none">

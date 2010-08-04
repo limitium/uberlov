@@ -18,7 +18,7 @@
         <ul>
             <li><?php echo link_to('<span href="#" id="tabProfile"' . ($view == 'profile' ? 'class="selected"' : '') . '>Профаил</span>', 'profile/show?id=' . $profile->getId()); ?></li>
             <li><?php echo link_to('<span href="#" id="tabComments"' . ($view == 'comments' ? 'class="selected"' : '') . '>Комментарии (' . sizeof($comments) . ')</span>', 'profile/show?id=' . $profile->getId() . '&view=comments'); ?></li>
-            <li><?php echo link_to('<span href="#" id="tabLocations"' . ($view == 'locations' ? 'class="selected"' : '') . '>Места (' . sizeof($profits) . ')</span>', 'profile/show?id=' . $profile->getId() . '&view=locations'); ?></li>
+            <li><?php echo link_to('<span href="#" id="tabLocations"' . ($view == 'locations' ? 'class="selected"' : '') . '>Места (' . sizeof($locations) . ')</span>', 'profile/show?id=' . $profile->getId() . '&view=locations'); ?></li>
             <li><?php echo link_to('<span href="#" id="tabProfits"' . ($view == 'profits' ? 'class="selected"' : '') . '>Отчеты (' . sizeof($profits) . ')</span>', 'profile/show?id=' . $profile->getId() . '&view=profits'); ?></li>
         </ul>
     </div>
