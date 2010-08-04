@@ -31,6 +31,7 @@ $.extend({
 });
 app = {
     baseUrl:'/frontend_dev.php',
+    csrf: {},
     modules: {},
     
     run: function(){

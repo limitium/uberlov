@@ -18,57 +18,5 @@
         </td>
       </tr>
     </tfoot>
-    <tbody>
-      <?php echo $form->renderGlobalErrors() ?>
-      <tr>
-        <th><?php echo $form['profile_id']->renderLabel() ?></th>
-        <td>
-          <?php echo $form['profile_id']->renderError() ?>
-          <?php echo $form['profile_id'] ?>
-        </td>
-      </tr>
-      <tr>
-        <th><?php echo $form['value']->renderLabel() ?></th>
-        <td>
-          <?php echo $form['value']->renderError() ?>
-          <?php echo $form['value'] ?>
-        </td>
-      </tr>
-      <tr>
-        <th><?php echo $form['is_up']->renderLabel() ?></th>
-        <td>
-          <?php echo $form['is_up']->renderError() ?>
-          <?php echo $form['is_up'] ?>
-        </td>
-      </tr>
-      <tr>
-        <th><?php echo $form['toward']->renderLabel() ?></th>
-        <td>
-          <?php echo $form['toward']->renderError() ?>
-          <?php echo $form['toward'] ?>
-        </td>
-      </tr>
-      <tr>
-        <th><?php echo $form['location_id']->renderLabel() ?></th>
-        <td>
-          <?php echo $form['location_id']->renderError() ?>
-          <?php echo $form['location_id'] ?>
-        </td>
-      </tr>
-      <tr>
-        <th><?php echo $form['comment_id']->renderLabel() ?></th>
-        <td>
-          <?php echo $form['comment_id']->renderError() ?>
-          <?php echo $form['comment_id'] ?>
-        </td>
-      </tr>
-      <tr>
-        <th><?php echo $form['profit_id']->renderLabel() ?></th>
-        <td>
-          <?php echo $form['profit_id']->renderError() ?>
-          <?php echo $form['profit_id'] ?>
-        </td>
-      </tr>
-    </tbody>
   </table>
 </form>

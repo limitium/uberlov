@@ -18,6 +18,7 @@ class inboxActions extends sfActions {
                         ->where('i.created_by = ?', sfContext::getInstance()->getUser()->getProfile()->getId())
                         ->andWhere('id.id = ?', sfContext::getInstance()->getUser()->getProfile()->getId())
                         ->execute();
+        $this->csrf = $this->getCSRFToken();
     }
 
     public function executeNew(sfWebRequest $request) {
@@ -42,6 +43,8 @@ class inboxActions extends sfActions {
 
         $this->commentForm = new CommentInboxForm();
         $this->commentForm->setDefault('inbox_id', $this->inbox->getId());
+        
+        $this->csrf = $this->getCSRFToken();
     }
 
     public function executeUpdate(sfWebRequest $request) {
@@ -55,12 +58,31 @@ class inboxActions extends sfActions {
     }
 
     public function executeDelete(sfWebRequest $request) {
+
         $request->checkCSRFProtection();
 
         $this->forward404Unless($inbox = Doctrine::getTable('Inbox')->find(array($request->getParameter('id'))), sprintf('Object inbox does not exist (%s).', $request->getParameter('id')));
-        $inbox->delete();
 
-        $this->redirect('inbox/index');
+        if ($inbox->getCreatedBy() == $this->getUser()->getProfile()) {
+
+            Doctrine_Query::create()
+                    ->delete('CommentInbox')
+                    ->where('inbox_id = ?', $inbox->getId())
+                    ->execute();
+
+            Doctrine_Query::create()
+                    ->delete('Inboxed')
+                    ->where('inbox_id = ?', $inbox->getId())
+                    ->execute();
+
+            $inbox->delete();
+        } else {
+            Doctrine_Query::create()
+                    ->delete('Inboxed')
+                    ->where('profile_id = ?', $this->getUser()->getProfile()->getId())
+                    ->execute();
+        }
+
     }
 
     protected function processForm(sfWebRequest $request, sfForm $form) {
@@ -103,6 +125,15 @@ class inboxActions extends sfActions {
             $pids[] = $p['id'];
         }
         return $pids;
+    }
+
+    public function getCSRFToken() {
+        $form = new BaseForm();
+
+        if ($form->isCSRFProtected()) {
+            $formData = $form->getCSRFToken();
+        }
+        return $formData;
     }
 
 }
