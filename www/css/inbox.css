@@ -15,3 +15,19 @@
 .inboxContainer  ul li p{
     padding: 0.5em 0 0 0.5em;
 }
+#inbox {
+    float: left;
+    width: 80%;
+}
+#inboxControl{
+    border: 1px solid #eee;
+    float: left;
+    width: 19%;
+}
+#inboxControl ul{
+    list-style-type: none;
+}
+#inboxControl ul li{
+    padding-top: 1em;
+    padding: 0.5em 0 0 0.5em;
+}

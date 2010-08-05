@@ -15,8 +15,8 @@ class inboxActions extends sfActions {
                         ->createQuery('i')
                         ->leftJoin('i.Inboxed id')
                         ->leftJoin('i.CommentInbox с')
-                        ->where('i.created_by = ?', sfContext::getInstance()->getUser()->getProfile()->getId())
-                        ->andWhere('id.id = ?', sfContext::getInstance()->getUser()->getProfile()->getId())
+                        ->where('i.created_by = ?', $this->getUser()->getProfile()->getId())
+                        ->andWhere('id.id = ?', $this->getUser()->getProfile()->getId())
                         ->execute();
         $this->csrf = $this->getCSRFToken();
     }
@@ -43,7 +43,14 @@ class inboxActions extends sfActions {
 
         $this->commentForm = new CommentInboxForm();
         $this->commentForm->setDefault('inbox_id', $this->inbox->getId());
-        
+
+        $this->inboxed = Doctrine_Query::create()
+                        ->select()
+                        ->from('Profile p')
+                        ->leftJoin('p.Inboxed i')
+                        ->where('i.inbox_id = ?', $this->inbox->getId())
+                        ->execute();
+
         $this->csrf = $this->getCSRFToken();
     }
 
@@ -83,6 +90,53 @@ class inboxActions extends sfActions {
                     ->execute();
         }
 
+        return sfView::NONE;
+    }
+
+    public function executeRemove(sfWebRequest $request) {
+
+        $request->checkCSRFProtection();
+
+        $this->forward404Unless($inbox = Doctrine::getTable('Inbox')->find(array($request->getParameter('id'))), sprintf('Object inbox does not exist (%s).', $request->getParameter('id')));
+        $this->forward404Unless($profile = Doctrine::getTable('Profile')->find(array($request->getParameter('profile'))), sprintf('Object inbox does not exist (%s).', $request->getParameter('profile')));
+
+        if ($inbox->isOwner()) {
+
+            Doctrine_Query::create()
+                    ->delete('Inboxed')
+                    ->where('inbox_id = ?', $inbox->getId())
+                    ->andWhere('profile_id = ?', $profile->getId())
+                    ->execute();
+        }
+
+        return sfView::NONE;
+    }
+
+    public function executeAdd(sfWebRequest $request) {
+
+        $request->checkCSRFProtection();
+
+        $this->forward404Unless($inbox = Doctrine::getTable('Inbox')->find(array($request->getParameter('id'))), sprintf('Object inbox does not exist (%s).', $request->getParameter('id')));
+
+        if ($inbox->isOwner()) {
+            $this->added = array();
+            $pids = $this->getProfiles($request->getParameter('data'));
+
+            if ($pids) {
+                $this->added = Doctrine_Query::create()
+                                ->select()
+                                ->from('Profile p')
+                                ->whereIn('p.id', $pids)
+                                ->execute();
+                foreach ($this->added as $profile) {
+
+                    $inboxed = new Inboxed();
+                    $inboxed->profile_id = $profile->getId();
+                    $inboxed->inbox_id = $inbox->getId();
+                    $inboxed->save();
+                }
+            }
+        }
     }
 
     protected function processForm(sfWebRequest $request, sfForm $form) {
@@ -110,6 +164,7 @@ class inboxActions extends sfActions {
             $name = trim($name);
             if (is_int($name)) {
                 $ids[] = $name;
+                $names[] = $name;
             } else {
                 $names[] = $name;
             }
@@ -120,6 +175,7 @@ class inboxActions extends sfActions {
                 ->select('p.id')
                 ->whereIn('p.id', $ids)
                 ->orWhereIn('p.nick_name', $names)
+                ->andWhere('p.id != ?', $this->getUser()->getProfile()->getId())
                 ->groupBy('p.id')
                 ->fetchArray() as $p) {
             $pids[] = $p['id'];
