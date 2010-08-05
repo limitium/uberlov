@@ -11,7 +11,7 @@
 class locationActions extends sfActions {
 
     public function executeIndex(sfWebRequest $request) {
-        var_dump(sfContext::getInstance()->getUser()->getProfile()->getForce());
+        var_dump($this->getUser()->getProfile()->getForce());
         $this->location_list = Doctrine::getTable('Location')
                         ->createQuery('a')
                         ->execute();

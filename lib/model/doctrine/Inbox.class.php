@@ -10,7 +10,10 @@
  * @author     Your name here
  * @version    SVN: $Id: Builder.php 6820 2009-11-30 17:27:49Z jwage $
  */
-class Inbox extends BaseInbox
-{
+class Inbox extends BaseInbox {
+
+    public function isOwner() {
+        return $this->getCreatedBy() == sfContext::getInstance()->getUser()->getProfile();
+    }
 
 }
