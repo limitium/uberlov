@@ -30,13 +30,13 @@ abstract class BaseInboxed extends sfDoctrineRecord
     {
         $this->setTableName('inboxed');
         $this->hasColumn('inbox_id', 'integer', 4, array(
+             'primary' => true,
              'type' => 'integer',
-             'notnull' => true,
              'length' => '4',
              ));
         $this->hasColumn('profile_id', 'integer', 4, array(
+             'primary' => true,
              'type' => 'integer',
-             'notnull' => true,
              'length' => '4',
              ));
 

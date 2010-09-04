@@ -567,9 +567,11 @@ Inbox:
 Inboxed:
   columns:
     inbox_id:
+      primary: true
       type: integer(4)
       notnull: true
     profile_id:
+      primary: true
       type: integer(4)
       notnull: true
   relations:
