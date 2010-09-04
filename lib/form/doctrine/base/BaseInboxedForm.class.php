@@ -15,15 +15,13 @@ abstract class BaseInboxedForm extends BaseFormDoctrine
   public function setup()
   {
     $this->setWidgets(array(
-      'id'         => new sfWidgetFormInputHidden(),
-      'inbox_id'   => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Inbox'), 'add_empty' => false)),
-      'profile_id' => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Profile'), 'add_empty' => false)),
+      'inbox_id'   => new sfWidgetFormInputHidden(),
+      'profile_id' => new sfWidgetFormInputHidden(),
     ));
 
     $this->setValidators(array(
-      'id'         => new sfValidatorDoctrineChoice(array('model' => $this->getModelName(), 'column' => 'id', 'required' => false)),
-      'inbox_id'   => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Inbox'))),
-      'profile_id' => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Profile'))),
+      'inbox_id'   => new sfValidatorDoctrineChoice(array('model' => $this->getModelName(), 'column' => 'inbox_id', 'required' => false)),
+      'profile_id' => new sfValidatorDoctrineChoice(array('model' => $this->getModelName(), 'column' => 'profile_id', 'required' => false)),
     ));
 
     $this->widgetSchema->setNameFormat('inboxed[%s]');

@@ -137,7 +137,7 @@
       <column auto-increment="true" name="id" primary="true" size="4" type="integer"/>
       <column name="name" required="true" size="50" type="string"/>
     </table>
-    <table name="Comment" visPositionX="-189" visPositionY="728" visSizeX="0" visSizeX2="124" visSizeY="0" visSizeY2="59">
+    <table name="Comment" visPositionX="-184" visPositionY="634" visSizeX="0" visSizeX2="124" visSizeY="0" visSizeY2="59">
       <column auto-increment="true" name="id" primary="true" size="4" type="integer"/>
       <column name="parent" size="4" type="integer"/>
       <column name="message" required="true" size="1000" type="string"/>
@@ -226,7 +226,7 @@
         </attribute>
       </orm-properties>
     </table>
-    <table name="VoteComment" visPositionX="-128" visPositionY="641" visSizeX="0" visSizeX2="127" visSizeY="0" visSizeY2="31">
+    <table name="VoteComment" visPositionX="-186" visPositionY="554" visSizeX="0" visSizeX2="127" visSizeY="0" visSizeY2="31">
       <column name="comment_id" size="4" type="integer"/>
       <orm-properties>
         <attribute name="inheritance">
@@ -391,10 +391,6 @@
         </attribute>
       </orm-properties>
     </table>
-    <table name="Read" visPositionX="28" visPositionY="730" visSizeX="0" visSizeX2="127" visSizeY="0" visSizeY2="60">
-      <column name="profile_id" primary="true" required="true" size="4" type="integer"/>
-      <column name="comment_id" primary="true" required="true" size="4" type="integer"/>
-    </table>
     <orm-properties>
       <attribute name="options">
         <attribute name="type">INNODB</attribute>
@@ -511,12 +507,6 @@
     <foreign-key from="CommentTalk" name="FK_CommentTalk_Talk" to="Talk">
       <foreign-key-column from="talk_id" to="id"/>
     </foreign-key>
-    <foreign-key caption="Profile Read" from="Read" name="FK_Read_Profile_id" to="Profile" visShowCaption="0">
-      <foreign-key-column from="profile_id" to="id"/>
-    </foreign-key>
-    <foreign-key caption="Comment Read" from="Read" name="FK_Read_Comment_id" to="Comment" visCaption1X="-1" visCaption1Y="0" visCenterX="0" visCenterY="0" visShowCaption="0">
-      <foreign-key-column from="comment_id" to="id"/>
-    </foreign-key>
     <many-to-many-relation mn-table="WishList">
       <many-to-many-foreign-key foreign-key="FK_WishList_Profile_id" relation-alias="Wishers"/>
       <many-to-many-foreign-key foreign-key="FK_WishList_Location_id" relation-alias="Wishes"/>
@@ -528,10 +518,6 @@
     <many-to-many-relation mn-table="Inboxed">
       <many-to-many-foreign-key foreign-key="FK_Inboxed_Inbox_id" relation-alias="Inboxes"/>
       <many-to-many-foreign-key foreign-key="FK_Inboxed_Profile_id" relation-alias="Inboxed"/>
-    </many-to-many-relation>
-    <many-to-many-relation mn-table="Read">
-      <many-to-many-foreign-key foreign-key="FK_Read_Profile_id" relation-alias=""/>
-      <many-to-many-foreign-key foreign-key="FK_Read_Comment_id" relation-alias=""/>
     </many-to-many-relation>
   </module>
 
