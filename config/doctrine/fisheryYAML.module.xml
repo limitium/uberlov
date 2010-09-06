@@ -339,7 +339,7 @@
         </attribute>
       </orm-properties>
     </table>
-    <table name="Talk" visPositionX="722" visPositionY="611" visSizeX="0" visSizeX2="138" visSizeY="0" visSizeY2="73">
+    <table name="Talk" visPositionX="720" visPositionY="611" visSizeX="0" visSizeX2="138" visSizeY="0" visSizeY2="73">
       <column auto-increment="true" name="id" primary="true" required="true" size="4" type="integer"/>
       <column name="name" required="true" size="50" type="string"/>
       <column name="message" required="true" type="string"/>
@@ -372,6 +372,7 @@
             </attribute>
           </attribute>
           <attribute name="Timestampable"/>
+          <attribute name="Taggable"/>
         </attribute>
       </orm-properties>
     </table>
@@ -379,6 +380,13 @@
       <column auto-increment="true" name="id" primary="true" required="true" size="4" type="integer"/>
       <column name="name" required="true" size="50" type="string"/>
       <column name="parent" size="4" type="integer"/>
+      <orm-properties>
+        <attribute name="actAs">
+          <attribute name="NestedSet">
+            <attribute name="hasManyRoots">true</attribute>
+          </attribute>
+        </attribute>
+      </orm-properties>
     </table>
     <table name="CommentTalk" visPositionX="711" visPositionY="479" visSizeX="0" visSizeX2="103" visSizeY="0" visSizeY2="31">
       <column description="Foreign key to Talk" name="talk_id" size="4" type="integer"/>
@@ -390,6 +398,10 @@
           <attribute name="type">column_aggregation</attribute>
         </attribute>
       </orm-properties>
+    </table>
+    <table name="ReadComment" visPositionX="-2" visPositionY="720" visSizeX="0" visSizeX2="127" visSizeY="0" visSizeY2="74">
+      <column name="profile_id" primary="true" required="true" size="4" type="integer"/>
+      <column name="comment_id" primary="true" required="true" size="4" type="integer"/>
     </table>
     <orm-properties>
       <attribute name="options">
@@ -507,6 +519,12 @@
     <foreign-key from="CommentTalk" name="FK_CommentTalk_Talk" to="Talk">
       <foreign-key-column from="talk_id" to="id"/>
     </foreign-key>
+    <foreign-key caption="Profile Read" from="ReadComment" name="FK_Read_Profile_id" to="Profile" visCaption1X="0" visCaption1Y="-2" visCenterX="0" visCenterY="0" visShowCaption="0">
+      <foreign-key-column from="profile_id" to="id"/>
+    </foreign-key>
+    <foreign-key caption="Comment Read" from="ReadComment" name="FK_Read_Comment_id" to="Comment" visShowCaption="0">
+      <foreign-key-column from="comment_id" to="id"/>
+    </foreign-key>
     <many-to-many-relation mn-table="WishList">
       <many-to-many-foreign-key foreign-key="FK_WishList_Profile_id" relation-alias="Wishers"/>
       <many-to-many-foreign-key foreign-key="FK_WishList_Location_id" relation-alias="Wishes"/>
@@ -518,6 +536,10 @@
     <many-to-many-relation mn-table="Inboxed">
       <many-to-many-foreign-key foreign-key="FK_Inboxed_Inbox_id" relation-alias="Inboxes"/>
       <many-to-many-foreign-key foreign-key="FK_Inboxed_Profile_id" relation-alias="Inboxed"/>
+    </many-to-many-relation>
+    <many-to-many-relation mn-table="ReadComment">
+      <many-to-many-foreign-key foreign-key="FK_Read_Profile_id" relation-alias=""/>
+      <many-to-many-foreign-key foreign-key="FK_Read_Comment_id" relation-alias="ReadComment"/>
     </many-to-many-relation>
   </module>
 

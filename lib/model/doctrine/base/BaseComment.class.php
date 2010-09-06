@@ -13,7 +13,9 @@
  * @property integer $profit_id
  * @property integer $inbox_id
  * @property integer $talk_id
+ * @property Doctrine_Collection $Profile
  * @property Doctrine_Collection $VoteComment
+ * @property Doctrine_Collection $ReadComment
  * 
  * @method integer             getId()          Returns the current record's "id" value
  * @method integer             getParent()      Returns the current record's "parent" value
@@ -23,7 +25,9 @@
  * @method integer             getProfitId()    Returns the current record's "profit_id" value
  * @method integer             getInboxId()     Returns the current record's "inbox_id" value
  * @method integer             getTalkId()      Returns the current record's "talk_id" value
+ * @method Doctrine_Collection getProfile()     Returns the current record's "Profile" collection
  * @method Doctrine_Collection getVoteComment() Returns the current record's "VoteComment" collection
+ * @method Doctrine_Collection getReadComment() Returns the current record's "ReadComment" collection
  * @method Comment             setId()          Sets the current record's "id" value
  * @method Comment             setParent()      Sets the current record's "parent" value
  * @method Comment             setMessage()     Sets the current record's "message" value
@@ -32,7 +36,9 @@
  * @method Comment             setProfitId()    Sets the current record's "profit_id" value
  * @method Comment             setInboxId()     Sets the current record's "inbox_id" value
  * @method Comment             setTalkId()      Sets the current record's "talk_id" value
+ * @method Comment             setProfile()     Sets the current record's "Profile" collection
  * @method Comment             setVoteComment() Sets the current record's "VoteComment" collection
+ * @method Comment             setReadComment() Sets the current record's "ReadComment" collection
  * 
  * @package    FISHERY
  * @subpackage model
@@ -107,7 +113,16 @@ abstract class BaseComment extends sfDoctrineRecord
     public function setUp()
     {
         parent::setUp();
+        $this->hasMany('Profile', array(
+             'refClass' => 'ReadComment',
+             'local' => 'comment_id',
+             'foreign' => 'profile_id'));
+
         $this->hasMany('VoteComment', array(
+             'local' => 'id',
+             'foreign' => 'comment_id'));
+
+        $this->hasMany('ReadComment', array(
              'local' => 'id',
              'foreign' => 'comment_id'));
 

@@ -128,6 +128,11 @@ Profile:
       refClass: Inboxed
       local: profile_id
       foreign: inbox_id
+    ReadComment:
+      class: Comment
+      refClass: ReadComment
+      local: profile_id
+      foreign: comment_id
 Fish:
   columns:
     id:
@@ -615,6 +620,7 @@ Talk:
           disabled: false
           foreign: id
     Timestampable: 
+    Taggable: 
   columns:
     id:
       primary: true
@@ -657,6 +663,23 @@ CommentTalk:
   relations:
     Talk:
       local: talk_id
+      foreign: id
+ReadComment:
+  columns:
+    profile_id:
+      primary: true
+      type: integer(4)
+      notnull: true
+    comment_id:
+      primary: true
+      type: integer(4)
+      notnull: true
+  relations:
+    Profile:
+      local: profile_id
+      foreign: id
+    Comment:
+      local: comment_id
       foreign: id
 options:
   type: INNODB
