@@ -103,7 +103,9 @@ abstract class BaseTalk extends sfDoctrineRecord
              ),
              ));
         $timestampable0 = new Doctrine_Template_Timestampable();
+        $taggable0 = new Taggable();
         $this->actAs($blameable0);
         $this->actAs($timestampable0);
+        $this->actAs($taggable0);
     }
 }

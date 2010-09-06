@@ -215,3 +215,8 @@ LocationScope:
 LocationType:
   LocationType_1:
     name: Пруд
+Talk:
+  Talk_1:
+    name: talk 1 bla bla bla
+    message: qwedw34rft4 43tf wrg e4w53yg wserg er5g w35y g
+    tags: tag1, qwe, zxc,

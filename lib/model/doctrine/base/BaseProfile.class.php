@@ -16,6 +16,7 @@
  * @property Doctrine_Collection $MyFirends
  * @property Doctrine_Collection $MyFirends2
  * @property Doctrine_Collection $Inboxes
+ * @property Doctrine_Collection $ReadComment
  * @property Doctrine_Collection $WishList
  * @property Doctrine_Collection $Friend
  * @property Doctrine_Collection $Votes
@@ -33,6 +34,7 @@
  * @method Doctrine_Collection getMyFirends()   Returns the current record's "MyFirends" collection
  * @method Doctrine_Collection getMyFirends2()  Returns the current record's "MyFirends2" collection
  * @method Doctrine_Collection getInboxes()     Returns the current record's "Inboxes" collection
+ * @method Doctrine_Collection getReadComment() Returns the current record's "ReadComment" collection
  * @method Doctrine_Collection getWishList()    Returns the current record's "WishList" collection
  * @method Doctrine_Collection getFriend()      Returns the current record's "Friend" collection
  * @method Doctrine_Collection getVotes()       Returns the current record's "Votes" collection
@@ -49,6 +51,7 @@
  * @method Profile             setMyFirends()   Sets the current record's "MyFirends" collection
  * @method Profile             setMyFirends2()  Sets the current record's "MyFirends2" collection
  * @method Profile             setInboxes()     Sets the current record's "Inboxes" collection
+ * @method Profile             setReadComment() Sets the current record's "ReadComment" collection
  * @method Profile             setWishList()    Sets the current record's "WishList" collection
  * @method Profile             setFriend()      Sets the current record's "Friend" collection
  * @method Profile             setVotes()       Sets the current record's "Votes" collection
@@ -127,6 +130,11 @@ abstract class BaseProfile extends sfDoctrineRecord
              'refClass' => 'Inboxed',
              'local' => 'profile_id',
              'foreign' => 'inbox_id'));
+
+        $this->hasMany('Comment as ReadComment', array(
+             'refClass' => 'ReadComment',
+             'local' => 'profile_id',
+             'foreign' => 'comment_id'));
 
         $this->hasMany('WishList', array(
              'local' => 'id',
