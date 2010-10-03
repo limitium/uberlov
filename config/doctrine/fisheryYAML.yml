@@ -640,17 +640,20 @@ Talk:
       local: talk_section_id
       foreign: id
 TalkSection:
+  actAs:
+    NestedSet:
+      hasManyRoots: false
   columns:
     id:
       primary: true
       type: integer(4)
       notnull: true
       autoincrement: true
+    parent:
+      type: integer(4)
     name:
       type: string(50)
       notnull: true
-    parent:
-      type: integer(4)
 CommentTalk:
   inheritance:
     extends: Comment

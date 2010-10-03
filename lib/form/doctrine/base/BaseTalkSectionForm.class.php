@@ -16,14 +16,20 @@ abstract class BaseTalkSectionForm extends BaseFormDoctrine
   {
     $this->setWidgets(array(
       'id'     => new sfWidgetFormInputHidden(),
-      'name'   => new sfWidgetFormInputText(),
       'parent' => new sfWidgetFormInputText(),
+      'name'   => new sfWidgetFormInputText(),
+      'lft'    => new sfWidgetFormInputText(),
+      'rgt'    => new sfWidgetFormInputText(),
+      'level'  => new sfWidgetFormInputText(),
     ));
 
     $this->setValidators(array(
       'id'     => new sfValidatorDoctrineChoice(array('model' => $this->getModelName(), 'column' => 'id', 'required' => false)),
-      'name'   => new sfValidatorString(array('max_length' => 50)),
       'parent' => new sfValidatorInteger(array('required' => false)),
+      'name'   => new sfValidatorString(array('max_length' => 50)),
+      'lft'    => new sfValidatorInteger(array('required' => false)),
+      'rgt'    => new sfValidatorInteger(array('required' => false)),
+      'level'  => new sfValidatorInteger(array('required' => false)),
     ));
 
     $this->widgetSchema->setNameFormat('talk_section[%s]');

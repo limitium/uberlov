@@ -16,6 +16,7 @@
                 <div id="site_menu">
                     <ul>
                         <li><?php echo link_to('Места ловли', 'collector/map') ?></li>
+                        <li><?php echo link_to('Обсуждения', 'talk/list') ?></li>
                         <li><?php echo link_to('Вход', '@sf_guard_signin') ?></li>
                     </ul>
                 </div>

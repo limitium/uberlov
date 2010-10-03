@@ -1,6 +1,5 @@
 <?php
 
-class TalkSectionTable extends Doctrine_Table
-{
+class TalkSectionTable extends Doctrine_Table {
 
 }
