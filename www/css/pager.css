@@ -1,0 +1,28 @@
+.pager {
+    margin-top: 30px;
+}
+.pager span {
+    color:#D71C81;
+}
+.pager a,.pager a:hover,.pager a:visited {
+    color: #333333;
+    text-decoration: none;
+}
+
+.pager ul {
+    font-size:1.5em;
+    list-style:none outside none;
+    margin:8px 0 0;
+    overflow:hidden;
+    padding:0;
+}
+.pager ul li {
+    float:left;
+    padding-right:0.5em;
+}
+.pager .prevnext{
+    font-size:1.5em;
+}
+.pager .prevnext a{
+    margin-right: 1em;
+}

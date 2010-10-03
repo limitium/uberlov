@@ -1,0 +1,7 @@
+.sectionMenu ul {
+    list-style:none outside none;
+}
+.section {
+    margin-left:30px;
+    position:relative;
+}

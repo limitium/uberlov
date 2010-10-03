@@ -137,7 +137,7 @@
       <column auto-increment="true" name="id" primary="true" size="4" type="integer"/>
       <column name="name" required="true" size="50" type="string"/>
     </table>
-    <table name="Comment" visPositionX="-184" visPositionY="634" visSizeX="0" visSizeX2="124" visSizeY="0" visSizeY2="59">
+    <table name="Comment" visPositionX="-182" visPositionY="635" visSizeX="0" visSizeX2="124" visSizeY="0" visSizeY2="59">
       <column auto-increment="true" name="id" primary="true" size="4" type="integer"/>
       <column name="parent" size="4" type="integer"/>
       <column name="message" required="true" size="1000" type="string"/>
@@ -376,14 +376,14 @@
         </attribute>
       </orm-properties>
     </table>
-    <table name="TalkSection" visPositionX="844" visPositionY="497" visSizeX="0" visSizeX2="102" visSizeY="0" visSizeY2="59">
+    <table name="TalkSection" visPositionX="842" visPositionY="497" visSizeX="0" visSizeX2="102" visSizeY="0" visSizeY2="59">
       <column auto-increment="true" name="id" primary="true" required="true" size="4" type="integer"/>
-      <column name="name" required="true" size="50" type="string"/>
       <column name="parent" size="4" type="integer"/>
+      <column name="name" required="true" size="50" type="string"/>
       <orm-properties>
         <attribute name="actAs">
           <attribute name="NestedSet">
-            <attribute name="hasManyRoots">true</attribute>
+            <attribute name="hasManyRoots">false</attribute>
           </attribute>
         </attribute>
       </orm-properties>

@@ -215,8 +215,13 @@ LocationScope:
 LocationType:
   LocationType_1:
     name: Пруд
-Talk:
-  Talk_1:
-    name: talk 1 bla bla bla
-    message: qwedw34rft4 43tf wrg e4w53yg wserg er5g w35y g
-    tags: tag1, qwe, zxc,
+TalkSection:
+  TalkSection_1:
+    name: Снасти
+  TalkSection_4:
+    name: Сети
+    parent: TalkSection_1
+  TalkSection_2:
+    name: Наживки
+  TalkSection_3:
+    name: Приманки
