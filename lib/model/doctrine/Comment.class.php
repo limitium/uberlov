@@ -23,7 +23,7 @@ class Comment extends BaseComment {
         $tableName = $object->getTable()->getTableName();
 
         $q = Doctrine_Query::create()->select('c.message, c.parent, c.created_at, c.updated_at, c.created_by, c.updated_by, p.*, v.*')->from('Comment' . ucfirst($tableName) . ' c')
-                        ->leftJoin('c.CommentBy p')
+                        ->leftJoin('c.CreatedBy p')
                         ->leftJoin('c.VoteComment v')
                         ->where('c.' . $tableName . '_id = ?', $object->getId());
 

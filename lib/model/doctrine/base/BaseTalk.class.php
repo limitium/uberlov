@@ -11,6 +11,7 @@
  * @property integer $talk_section_id
  * @property TalkSection $TalkSection
  * @property Doctrine_Collection $CommentTalk
+ * @property Doctrine_Collection $VoteTalk
  * 
  * @method integer             getId()              Returns the current record's "id" value
  * @method string              getName()            Returns the current record's "name" value
@@ -18,12 +19,14 @@
  * @method integer             getTalkSectionId()   Returns the current record's "talk_section_id" value
  * @method TalkSection         getTalkSection()     Returns the current record's "TalkSection" value
  * @method Doctrine_Collection getCommentTalk()     Returns the current record's "CommentTalk" collection
+ * @method Doctrine_Collection getVoteTalk()        Returns the current record's "VoteTalk" collection
  * @method Talk                setId()              Sets the current record's "id" value
  * @method Talk                setName()            Sets the current record's "name" value
  * @method Talk                setMessage()         Sets the current record's "message" value
  * @method Talk                setTalkSectionId()   Sets the current record's "talk_section_id" value
  * @method Talk                setTalkSection()     Sets the current record's "TalkSection" value
  * @method Talk                setCommentTalk()     Sets the current record's "CommentTalk" collection
+ * @method Talk                setVoteTalk()        Sets the current record's "VoteTalk" collection
  * 
  * @package    FISHERY
  * @subpackage model
@@ -68,6 +71,10 @@ abstract class BaseTalk extends sfDoctrineRecord
              'foreign' => 'id'));
 
         $this->hasMany('CommentTalk', array(
+             'local' => 'id',
+             'foreign' => 'talk_id'));
+
+        $this->hasMany('VoteTalk', array(
              'local' => 'id',
              'foreign' => 'talk_id'));
 

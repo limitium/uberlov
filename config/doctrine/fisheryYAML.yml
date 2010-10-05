@@ -273,11 +273,9 @@ Comment:
         created:
           class: Profile
           foreign: id
-          name: CommentBy
           disabled: false
         updated:
           class: Profile
-          name: ChangedBy
           foreign: id
           disabled: false
       columns:
@@ -683,6 +681,19 @@ ReadComment:
       foreign: id
     Comment:
       local: comment_id
+      foreign: id
+VoteTalk:
+  inheritance:
+    extends: Vote
+    keyField: toward
+    type: column_aggregation
+    keyValue: talk
+  columns:
+    talk_id:
+      type: integer(4)
+  relations:
+    Talk:
+      local: talk_id
       foreign: id
 options:
   type: INNODB

@@ -38,6 +38,11 @@ class talkActions extends sfActions {
     public function executeShow(sfWebRequest $request) {
         $this->talk = Doctrine::getTable('Talk')->find(array($request->getParameter('id')));
         $this->forward404Unless($this->talk);
+
+        $this->comments = Comment::getFor($this->talk);
+
+        $this->form = new CommentTalkForm();
+        $this->form->setDefault('talk_id', $this->talk->getId());
     }
 
     public function executeNew(sfWebRequest $request) {

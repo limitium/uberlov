@@ -1,9 +1,9 @@
 .rating{
-    float:right;
+    float:left;
     font-size:0.6em;
-    clear:right;
     width: 70px;
     text-align: right;
+    margin: 0 5px 0 -25px;
 }
 .rating a img{
     border:none;

@@ -58,7 +58,7 @@ function inbox(){
                         var ul = $('#inboxControl ul');
                         
                         $.each(data.added, function() {
-                            ul.append('<li profile="'+this.id+'"><a href="/frontend_dev.php/profile/show/id/'+this.id+'">'+this.name+'</a><a class="delete" href=""> x </a></li>')
+                            ul.append('<li profile="'+this.id+'"><a href="'+app.baseUrl + '/profile/show/id/'+this.id+'">'+this.name+'</a><a class="delete" href=""> x </a></li>')
                         });
                     }else{
                         $.blockUI({

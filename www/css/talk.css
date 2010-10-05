@@ -5,3 +5,16 @@
     margin-left:30px;
     position:relative;
 }
+.talkBrief{
+    margin-top: 3em;
+}
+.talkBrief p{
+    margin: 0.5em;
+}
+.talkBrief .meta{
+    clear: both;
+    height: 20px;
+    margin-top: 10px;
+    font-size: 12pt;
+    color: #444;
+}

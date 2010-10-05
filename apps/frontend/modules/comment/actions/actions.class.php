@@ -14,6 +14,10 @@ class commentActions extends sfActions {
         $this->createComment($request, 'location');
     }
 
+    public function executeTalk(sfWebRequest $request) {
+        $this->createComment($request, 'talk');
+    }
+
     public function executeInbox(sfWebRequest $request) {
         $this->createComment($request, 'inbox');
     }
@@ -26,7 +30,7 @@ class commentActions extends sfActions {
         $this->forward404Unless($request->isMethod(sfRequest::POST));
 
         if ($this->comment = $this->processForm($request, $toward)) {
-            
+
         }
         $this->setTemplate('created');
     }

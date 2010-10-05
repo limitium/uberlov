@@ -20,6 +20,7 @@ abstract class BaseVoteFormFilter extends BaseFormFilterDoctrine
       'comment_id'  => new sfWidgetFormFilterInput(),
       'profit_id'   => new sfWidgetFormFilterInput(),
       'profile_id'  => new sfWidgetFormFilterInput(),
+      'talk_id'     => new sfWidgetFormFilterInput(),
     ));
 
     $this->setValidators(array(
@@ -30,6 +31,7 @@ abstract class BaseVoteFormFilter extends BaseFormFilterDoctrine
       'comment_id'  => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
       'profit_id'   => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
       'profile_id'  => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
+      'talk_id'     => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
     ));
 
     $this->widgetSchema->setNameFormat('vote_filters[%s]');
@@ -57,6 +59,7 @@ abstract class BaseVoteFormFilter extends BaseFormFilterDoctrine
       'comment_id'  => 'Number',
       'profit_id'   => 'Number',
       'profile_id'  => 'Number',
+      'talk_id'     => 'Number',
     );
   }
 }

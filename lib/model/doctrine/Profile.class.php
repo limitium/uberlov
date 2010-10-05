@@ -91,8 +91,4 @@ class Profile extends BaseProfile {
                 ->execute();
     }
 
-    public function renderCreator() {
-        echo 'Написал' . ($this->getSex() ? ' ' : 'а ') . link_to($this->getNickName(), 'profile/show?id=' . $this->getId());
-    }
-
 }

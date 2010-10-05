@@ -18,28 +18,19 @@
         </ul>
     </div>
 
-    <div id="commentContainer" class="selected" type="inbox">
-        <?php use_javascript('comment'); ?>
-        <?php foreach ($comments as $comment): ?>
-        <?php include_partial('comment/commentNoVote', array('comment' => $comment)); ?>
-        <?php endforeach; ?>
-        <?php include_partial('comment/form', array('form' => $commentForm, 'toward' => 'inbox')) ?>
-                <div id="commentReplyDefault" style="display:none">
-                    <a href="">Написать</a>
-                </div>
-            </div>
+    <?php include_partial('comment/comments', array('for' => 'inbox', 'form' => $form, 'comments' => $comments, 'noVote' => true)); ?>
         </div>
 
         <div id="inboxControl">
             <a href="" class="inboxDelete" inbox="<?php echo $inbox->getId(); ?>">Удалить инбокс</a>
     <?php if ($inbox->isOwner()): ?>
-                    Добавить
-                    <input id="inboxAdd" type="text" />
+                Добавить
+                <input id="inboxAdd" type="text" />
     <?php endif; ?>
-                    Подписчики:
-                    <ul>
+                Подписчики:
+                <ul>
         <?php foreach ($inboxed as $profile): ?>
-                        <li profile="<?php echo $profile->getId(); ?>"><?php echo link_to($profile->getNickName(), 'profile/show?id=' . $profile->getId()); ?><?php if ($inbox->isOwner()): ?><a href="" class="delete"> x </a><?php endif; ?></li>
+                    <li profile="<?php echo $profile->getId(); ?>"><?php echo link_to($profile->getNickName(), 'profile/show?id=' . $profile->getId()); ?><?php if ($inbox->isOwner()): ?><a href="" class="delete"> x </a><?php endif; ?></li>
         <?php endforeach; ?>
     </ul>
 </div>

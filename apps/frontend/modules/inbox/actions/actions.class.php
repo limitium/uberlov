@@ -41,8 +41,8 @@ class inboxActions extends sfActions {
 
         $this->comments = Comment::getFor($this->inbox);
 
-        $this->commentForm = new CommentInboxForm();
-        $this->commentForm->setDefault('inbox_id', $this->inbox->getId());
+        $this->form = new CommentInboxForm();
+        $this->form->setDefault('inbox_id', $this->inbox->getId());
 
         $this->inboxed = Doctrine_Query::create()
                         ->select()
