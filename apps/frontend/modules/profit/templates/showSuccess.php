@@ -1,4 +1,4 @@
-<?php include_partial('location/location', array('location' => $profit->getLocation()))   ?>
+<?php include_partial('location/location', array('location' => $profit->getLocation())) ?>
 
 <div class="profitFull">
     <h2><?php echo $profit->getName(); ?></h2>
@@ -52,14 +52,6 @@
         </ul>
     </div>
 
-    <div id="commentContainer" class="selected" type="profit">
-    <?php use_javascript('comment'); ?>
-    <?php foreach ($comments as $comment): ?>
-    <?php include_partial('comment/comment', array('comment' => $comment)); ?>
-    <?php endforeach; ?>
-    <?php include_partial('comment/form', array('form' => $commentForm, 'toward' => 'profit')) ?>
-    <div id="commentReplyDefault" style="display:none">
-        <a href="">Написать</a>
-    </div>
-</div>
+<?php include_partial('comment/comments', array('for' => 'profit', 'form' => $form, 'comments' => $comments)); ?>
+
 

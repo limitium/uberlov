@@ -1,9 +1,15 @@
+.commentMeta{
+    float: right;
+}
 .comment .commentBar {
     color:#666666;
     font-size:0.8em;
     line-height:140%;
     position:relative;
     width:100%;
+}
+.comment .commentBar .commentAnchor{
+    float:left;    
 }
 .comment .commentBar #newComment{
     margin-left: 30px;

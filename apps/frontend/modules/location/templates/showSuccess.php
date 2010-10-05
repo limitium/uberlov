@@ -43,18 +43,8 @@
             <li><span href="#" id="tabProfits">Отчеты (<i id="profitCounter"><?php echo sizeof($profits); ?></i>)</span></li>
         </ul>
     </div>
+<?php include_partial('comment/comments', array('for' => 'location', 'form' => $form, 'comments' => $comments)); ?>
 
-
-    <div id="commentContainer" class="selected" type="location">
-    <?php use_javascript('comment'); ?>
-    <?php foreach ($comments as $comment): ?>
-    <?php include_partial('comment/comment', array('comment' => $comment)); ?>
-    <?php endforeach; ?>
-    <?php include_partial('comment/form', array('form' => $commentForm, 'toward' => 'location')) ?>
-                    <div id="commentReplyDefault" style="display:none">
-                        <a href="">Написать</a>
-                    </div>
-                </div>
 
                 <div id="profitContainer">
     <?php foreach ($profits as $profit): ?>

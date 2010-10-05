@@ -22,8 +22,8 @@ class profitActions extends sfActions {
 
         $this->comments = Comment::getFor($this->profit);
 
-        $this->commentForm = new CommentProfitForm();
-        $this->commentForm->setDefault('profit_id', $this->profit->getId());
+        $this->form = new CommentProfitForm();
+        $this->form->setDefault('profit_id', $this->profit->getId());
     }
 
     public function executeNew(sfWebRequest $request) {

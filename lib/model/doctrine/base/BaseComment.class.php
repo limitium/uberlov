@@ -134,13 +134,11 @@ abstract class BaseComment extends sfDoctrineRecord
               array(
               'class' => 'Profile',
               'foreign' => 'id',
-              'name' => 'CommentBy',
               'disabled' => false,
               ),
               'updated' => 
               array(
               'class' => 'Profile',
-              'name' => 'ChangedBy',
               'foreign' => 'id',
               'disabled' => false,
               ),

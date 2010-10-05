@@ -1,42 +1,20 @@
-<table>
-  <tbody>
-    <tr>
-      <th>Id:</th>
-      <td><?php echo $talk->getId() ?></td>
-    </tr>
-    <tr>
-      <th>Name:</th>
-      <td><?php echo $talk->getName() ?></td>
-    </tr>
-    <tr>
-      <th>Message:</th>
-      <td><?php echo $talk->getMessage() ?></td>
-    </tr>
-    <tr>
-      <th>Talk section:</th>
-      <td><?php echo $talk->getTalkSectionId() ?></td>
-    </tr>
-    <tr>
-      <th>Created by:</th>
-      <td><?php echo $talk->getCreatedBy() ?></td>
-    </tr>
-    <tr>
-      <th>Updated by:</th>
-      <td><?php echo $talk->getUpdatedBy() ?></td>
-    </tr>
-    <tr>
-      <th>Created at:</th>
-      <td><?php echo $talk->getCreatedAt() ?></td>
-    </tr>
-    <tr>
-      <th>Updated at:</th>
-      <td><?php echo $talk->getUpdatedAt() ?></td>
-    </tr>
-  </tbody>
-</table>
+<div id="talk">
+    <h2><?php echo $talk->getName(); ?></h2>
+    <p><?php echo $talk->getMessage(); ?></p>
+    <div class="meta">
+        <div><?php use_javascript('voting'); ?>
+            <?php include_partial('vote/vote', array('obj' => $talk)); ?>
+            <a href="" id="goToReply">□</a> Написал<?php echo $talk->getCreatedBy()->getSex() ? '' : 'а' ?> <?php echo link_to($talk->getCreatedBy()->getNickName(), 'profile/show?id=' . $talk->getCreatedBy()->getId()); ?>,
+            <?php echo $talk->getDateTimeObject('created_at')->format('d.m.Y'); ?> |
+            <a href="" class="commentShowAuthor" author="user<?php echo $talk->getCreatedBy(); ?>">●</a>
+        </div>
+    </div>
+    <div class="tabPanel">
+        <ul>
+            <li><span href="#" id="tabComments" class="selected">Комментарии (<i id="commentCounter"><?php echo sizeof($comments); ?></i>)</span></li>
+        </ul>
+    </div>
 
-<hr />
+    <?php include_partial('comment/comments', array('for' => 'talk', 'form' => $form, 'comments' => $comments)); ?>
+</div>
 
-<a href="<?php echo url_for('talk/edit?id='.$talk->getId()) ?>">Edit</a>
-&nbsp;
-<a href="<?php echo url_for('talk/index') ?>">List</a>

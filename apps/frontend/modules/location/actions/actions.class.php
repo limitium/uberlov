@@ -39,8 +39,8 @@ class locationActions extends sfActions {
                         ->where('pf.location_id = ?', $this->location->getId())
                         ->execute();
 
-        $this->commentForm = new CommentLocationForm();
-        $this->commentForm->setDefault('location_id', $this->location->getId());
+        $this->form = new CommentLocationForm();
+        $this->form->setDefault('location_id', $this->location->getId());
     }
 
     public function executeNew(sfWebRequest $request) {

@@ -149,12 +149,10 @@
               <attribute name="created">
                 <attribute name="class">Profile</attribute>
                 <attribute name="foreign">id</attribute>
-                <attribute name="name">CommentBy</attribute>
                 <attribute name="disabled">false</attribute>
               </attribute>
               <attribute name="updated">
                 <attribute name="class">Profile</attribute>
-                <attribute name="name">ChangedBy</attribute>
                 <attribute name="foreign">id</attribute>
                 <attribute name="disabled">false</attribute>
               </attribute>
@@ -388,7 +386,7 @@
         </attribute>
       </orm-properties>
     </table>
-    <table name="CommentTalk" visPositionX="711" visPositionY="479" visSizeX="0" visSizeX2="103" visSizeY="0" visSizeY2="31">
+    <table name="CommentTalk" visPositionX="710" visPositionY="480" visSizeX="0" visSizeX2="103" visSizeY="0" visSizeY2="31">
       <column description="Foreign key to Talk" name="talk_id" size="4" type="integer"/>
       <orm-properties>
         <attribute name="inheritance">
@@ -403,6 +401,17 @@
       <column name="profile_id" primary="true" required="true" size="4" type="integer"/>
       <column name="comment_id" primary="true" required="true" size="4" type="integer"/>
     </table>
+    <table name="VoteTalk" visPositionX="950" visPositionY="639" visSizeX="0" visSizeX2="105" visSizeY="0" visSizeY2="31">
+      <column name="talk_id" size="4" type="integer"/>
+      <orm-properties>
+        <attribute name="inheritance">
+          <attribute name="extends">Vote</attribute>
+          <attribute name="keyField">toward</attribute>
+          <attribute name="type">column_aggregation</attribute>
+          <attribute name="keyValue">talk</attribute>
+        </attribute>
+      </orm-properties>
+    </table>
     <orm-properties>
       <attribute name="options">
         <attribute name="type">INNODB</attribute>
@@ -413,7 +422,7 @@
     <foreign-key from="Location" name="FK_Location_Location_flow" to="LocationFlow" visCenterX="0" visCenterY="-1">
       <foreign-key-column from="location_flow_id" to="id"/>
     </foreign-key>
-    <foreign-key from="Location" name="FK_Location_Location_fundus" to="LocationFundus" visCenterX="0" visCenterY="-1">
+    <foreign-key from="Location" name="FK_Location_Location_fundus" to="LocationFundus" visCenterX="0" visCenterY="1">
       <foreign-key-column from="location_fundus_id" to="id"/>
     </foreign-key>
     <foreign-key from="Location" name="FK_Location_Location_relief" to="LocationRelief" visCenterX="-1" visCenterY="6">
@@ -524,6 +533,9 @@
     </foreign-key>
     <foreign-key caption="Comment Read" from="ReadComment" name="FK_Read_Comment_id" to="Comment" visShowCaption="0">
       <foreign-key-column from="comment_id" to="id"/>
+    </foreign-key>
+    <foreign-key caption="Talk VoteTalk" from="VoteTalk" name="FK_VoteTalk_Talk_id" to="Talk" visShowCaption="0">
+      <foreign-key-column from="talk_id" to="id"/>
     </foreign-key>
     <many-to-many-relation mn-table="WishList">
       <many-to-many-foreign-key foreign-key="FK_WishList_Profile_id" relation-alias="Wishers"/>
