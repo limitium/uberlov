@@ -18,6 +18,9 @@ class talkActions extends sfActions {
         if ($this->curSection) {
             $this->curSection->modifyQuery($query);
             $url .= '&section={%section}';
+
+            $this->form = new TalkForm();
+            $this->form->setDefault('talk_section_id', $this->curSection->getId());
         }
 
         $this->pagerLayout = new htPagerLayout(
