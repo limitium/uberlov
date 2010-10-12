@@ -1,4 +1,4 @@
-<?
+<?php
 
 class htPagerLayout extends Doctrine_Pager_Layout {
 

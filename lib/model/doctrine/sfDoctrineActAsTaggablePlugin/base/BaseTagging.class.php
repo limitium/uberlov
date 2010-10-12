@@ -22,7 +22,7 @@
  * @package    FISHERY
  * @subpackage model
  * @author     Your name here
- * @version    SVN: $Id: Builder.php 6820 2009-11-30 17:27:49Z jwage $
+ * @version    SVN: $Id: Builder.php 7490 2010-03-29 19:53:27Z jwage $
  */
 abstract class BaseTagging extends sfDoctrineRecord
 {
@@ -35,7 +35,7 @@ abstract class BaseTagging extends sfDoctrineRecord
              ));
         $this->hasColumn('taggable_model', 'string', 30, array(
              'type' => 'string',
-             'length' => '30',
+             'length' => 30,
              ));
         $this->hasColumn('taggable_id', 'integer', null, array(
              'type' => 'integer',
