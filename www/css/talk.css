@@ -18,3 +18,13 @@
     font-size: 12pt;
     color: #444;
 }
+.assigned-tags ul {
+    list-style:none outside none;
+}
+.assigned-tags li {
+    display:inline;
+    color: #fff;
+    background-color: #aa1;
+    margin: 0px 2px;
+    font-size: 8pt;
+}

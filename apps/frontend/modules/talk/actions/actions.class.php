@@ -20,7 +20,9 @@ class talkActions extends sfActions {
         $query = Doctrine::getTable('Talk')
                         ->createQuery('a')
                         ->leftJoin('a.CommentTalk')
-                        ->leftJoin('a.CreatedBy');
+                        ->leftJoin('a.CreatedBy')
+                        ->leftJoin('a.Tagging t')
+                        ->leftJoin('t.Tag');
 
         $this->curSection = Doctrine::getTable('TalkSection')->find(array($request->getParameter('section')));
 
@@ -45,6 +47,8 @@ class talkActions extends sfActions {
                         )),
                         $url
         );
+        $this->talks = $this->pagerLayout->execute();
+
         $this->pagerLayout->setTemplate('{link_to}{%page}{/link_to}');
         $this->pagerLayout->setSelectedTemplate('<span>{%page}</span>');
     }
