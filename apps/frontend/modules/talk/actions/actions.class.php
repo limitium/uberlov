@@ -10,17 +10,28 @@
  */
 class talkActions extends sfActions {
 
+    public function executeSuggest(sfWebRequest $request) {
+        $this->forward('taggableComplete', 'complete');
+    }
+
     public function executeList(sfWebRequest $request) {
-        $query = Doctrine::getTable('Talk')
-                        ->createQuery('a');
-        $this->curSection = Doctrine::getTable('TalkSection')->find(array($request->getParameter('section')));
         $url = 'talk/list?page={%page_number}';
+
+        $query = Doctrine::getTable('Talk')
+                        ->createQuery('a')
+                        ->leftJoin('a.CommentTalk')
+                        ->leftJoin('a.CreatedBy');
+
+        $this->curSection = Doctrine::getTable('TalkSection')->find(array($request->getParameter('section')));
+
         if ($this->curSection) {
             $this->curSection->modifyQuery($query);
             $url .= '&section={%section}';
 
-            $this->form = new TalkForm();
-            $this->form->setDefault('talk_section_id', $this->curSection->getId());
+            if ($this->curSection->getNode()->isLeaf()) {
+                $this->form = new TalkForm();
+                $this->form->setDefault('talk_section_id', $this->curSection->getId());
+            }
         }
 
         $this->pagerLayout = new htPagerLayout(

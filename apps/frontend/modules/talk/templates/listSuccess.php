@@ -13,9 +13,4 @@
 
 <?php if (isset($form)): ?>
 <?php include_partial('form', array('form' => $form)) ?>
-<?php include_component('taggableComplete', 'tagWidget', array('object' => $form->getObject())) ?>
 <?php endif; ?>
-<?        include_javascripts_for_form($form) ?>
-<script>
-pkTagahead(<?php echo json_encode(url_for("taggableComplete/complete")) ?>);
-</script>
