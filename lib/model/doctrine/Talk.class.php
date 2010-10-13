@@ -19,4 +19,12 @@ class Talk extends BaseTalk {
         return Vote::getRating($this);
     }
 
+    public function setUp() {
+        parent::setUp();
+
+        $this->hasMany('Tagging', array(
+            'local' => 'id',
+            'foreign' => 'taggable_id'));
+    }
+
 }

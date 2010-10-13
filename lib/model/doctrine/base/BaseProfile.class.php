@@ -61,7 +61,7 @@
  * @package    FISHERY
  * @subpackage model
  * @author     Your name here
- * @version    SVN: $Id: Builder.php 7490 2010-03-29 19:53:27Z jwage $
+ * @version    SVN: $Id: Builder.php 6820 2009-11-30 17:27:49Z jwage $
  */
 abstract class BaseProfile extends sfDoctrineRecord
 {
@@ -72,30 +72,30 @@ abstract class BaseProfile extends sfDoctrineRecord
              'primary' => true,
              'type' => 'integer',
              'autoincrement' => true,
-             'length' => 4,
+             'length' => '4',
              ));
         $this->hasColumn('nick_name', 'string', 50, array(
              'default' => '',
              'type' => 'string',
              'notnull' => true,
-             'length' => 50,
+             'length' => '50',
              ));
         $this->hasColumn('first_name', 'string', 50, array(
              'default' => '',
              'type' => 'string',
-             'length' => 50,
+             'length' => '50',
              ));
         $this->hasColumn('last_name', 'string', 50, array(
              'default' => '',
              'type' => 'string',
-             'length' => 50,
+             'length' => '50',
              ));
         $this->hasColumn('birth_date', 'date', null, array(
              'type' => 'date',
              ));
         $this->hasColumn('userpic', 'string', 255, array(
              'type' => 'string',
-             'length' => 255,
+             'length' => '255',
              ));
         $this->hasColumn('sex', 'boolean', null, array(
              'default' => 1,

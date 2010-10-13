@@ -13,5 +13,5 @@
 </div>
 
 <div class="add-tags">
-    <input class="add-text tag-input" name="tags" type="text" />
+    <input class="add-text tag-input" name="talk[tags]" type="text" />
 </div>
