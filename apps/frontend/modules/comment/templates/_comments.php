@@ -1,3 +1,4 @@
+<?php use_helper('text'); ?>
 <div id="commentContainer" class="selected" type="<?php echo $for; ?>">
     <?php use_javascript('comment'); ?>
     <?php foreach ($comments as $comment): ?>

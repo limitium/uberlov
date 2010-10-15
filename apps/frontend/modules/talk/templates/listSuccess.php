@@ -5,7 +5,7 @@
     <div class="talkBrief">
     <?php echo link_to($talk->getName(), 'talk/show?id=' . $talk->getId()); ?>
     <p>
-        <?php echo truncate_text($talk->getMessage(), 100, '...', true); ?>
+        <?php echo simple_format_text(truncate_text($talk->getMessage(), 100, '...', true)); ?>
     </p>
     <div class="assigned-tags">
         <ul>

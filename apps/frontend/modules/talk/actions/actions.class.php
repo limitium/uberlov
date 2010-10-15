@@ -22,7 +22,8 @@ class talkActions extends sfActions {
                         ->leftJoin('a.CommentTalk')
                         ->leftJoin('a.CreatedBy')
                         ->leftJoin('a.Tagging t')
-                        ->leftJoin('t.Tag');
+                        ->leftJoin('t.Tag')
+                        ->orderBy('a.created_at desc');
 
         $this->curSection = Doctrine::getTable('TalkSection')->find(array($request->getParameter('section')));
 
@@ -106,7 +107,7 @@ class talkActions extends sfActions {
         if ($form->isValid()) {
             $talk = $form->save();
 
-            $this->redirect('talk/edit?id=' . $talk->getId());
+            $this->redirect('talk/show?id=' . $talk->getId());
         }
     }
 
