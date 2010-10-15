@@ -1,6 +1,7 @@
+<?php use_helper('text'); ?>
 <div id="talk">
     <h2><?php echo $talk->getName(); ?></h2>
-    <p><?php echo $talk->getMessage(); ?></p>
+    <?php echo simple_format_text($talk->getMessage()); ?>
     <div class="assigned-tags">
         <ul>
             <?php foreach ($talk->getTags() as $tag): ?>
