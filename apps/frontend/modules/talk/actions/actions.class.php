@@ -58,6 +58,14 @@ class talkActions extends sfActions {
         $this->talk = Doctrine::getTable('Talk')->find(array($request->getParameter('id')));
         $this->forward404Unless($this->talk);
 
+
+
+        $this->sections = array($this->talk->getTalkSection());
+        foreach ($this->talk->getTalkSection()->getNode()->getAncestors() as $section) {
+            $this->sections[] = $section;
+        }
+        $this->sections = array_reverse($this->sections);
+
         $this->comments = Comment::getFor($this->talk);
 
         $this->form = new CommentTalkForm();
