@@ -1,5 +1,12 @@
+
 .sectionMenu ul {
     list-style:none outside none;
+}
+.sectionMenuShow ul{
+    list-style:none outside none;
+}
+.sectionMenuShow ul li{
+    display:inline;
 }
 .section {
     margin-left:30px;

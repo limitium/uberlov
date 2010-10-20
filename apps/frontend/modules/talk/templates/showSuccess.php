@@ -1,9 +1,19 @@
 <?php use_helper('text'); ?>
-<div id="talk">
-    <h2><?php echo $talk->getName(); ?></h2>
+<div class="sectionMenuShow">
+    <ul>
+        <?php foreach ($sections as $section): ?>
+            <li>
+            <?php echo link_to($section, 'talk/list?section=' . $section->getId()); ?>
+        </li>        
+        <?php endforeach; ?>
+        </ul>
+    </div>
+
+    <div id="talk">
+        <h2><?php echo $talk->getName(); ?></h2>
     <?php echo simple_format_text($talk->getMessage()); ?>
-    <div class="assigned-tags">
-        <ul>
+            <div class="assigned-tags">
+                <ul>
             <?php foreach ($talk->getTags() as $tag): ?>
                 <li>
                     <span><?php echo $tag; ?></span>
