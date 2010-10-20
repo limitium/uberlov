@@ -4,10 +4,10 @@
     <?php
     $tree = Doctrine_Core::getTable('TalkSection')
                     ->createQuery('c')
-                    ->execute(array(), Doctrine_Core::HYDRATE_ARRAY_HIERARCHY); ?>
+                    ->execute(); ?>
     <?php $tree instanceof Doctrine_Tree_NestedSet; ?>
 
-    <?php foreach (Hierarchy::toArray($tree) as $section) : ?>
-    <?php include_partial('talk/section_node', array('node' => $section,'curSection' => $curSection)); ?>
+    <?php foreach ($tree->toHierarchy() as $section) : ?>
+    <?php include_partial('talk/section_node', array('node' => $section, 'curSection' => $curSection)); ?>
     <?php endforeach; ?>
 </div>

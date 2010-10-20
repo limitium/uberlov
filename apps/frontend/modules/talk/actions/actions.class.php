@@ -14,16 +14,14 @@ class talkActions extends sfActions {
         $this->forward('taggableComplete', 'complete');
     }
 
+    public function executeTag($request) {
+        
+    }
+
     public function executeList(sfWebRequest $request) {
         $url = 'talk/list?page={%page_number}';
 
-        $query = Doctrine::getTable('Talk')
-                        ->createQuery('a')
-                        ->leftJoin('a.CommentTalk')
-                        ->leftJoin('a.CreatedBy')
-                        ->leftJoin('a.Tagging t')
-                        ->leftJoin('t.Tag')
-                        ->orderBy('a.created_at desc');
+        $query = $this->getTagQuery();
 
         $this->curSection = Doctrine::getTable('TalkSection')->find(array($request->getParameter('section')));
 
@@ -37,34 +35,14 @@ class talkActions extends sfActions {
             }
         }
 
-        $this->pagerLayout = new htPagerLayout(
-                        new Doctrine_Pager(
-                                $query,
-                                $request->getParameter("page", 1),
-                                5
-                        ),
-                        new Doctrine_Pager_Range_Sliding(array(
-                            'chunk' => 10
-                        )),
-                        $url
-        );
-        $this->talks = $this->pagerLayout->execute();
+        $this->pagerLayout = $this->getPager($query, $url, $request->getParameter("page", 1));
 
-        $this->pagerLayout->setTemplate('{link_to}{%page}{/link_to}');
-        $this->pagerLayout->setSelectedTemplate('<span>{%page}</span>');
+        $this->talks = $this->pagerLayout->execute();
     }
 
     public function executeShow(sfWebRequest $request) {
         $this->talk = Doctrine::getTable('Talk')->find(array($request->getParameter('id')));
         $this->forward404Unless($this->talk);
-
-
-
-        $this->sections = array($this->talk->getTalkSection());
-        foreach ($this->talk->getTalkSection()->getNode()->getAncestors() as $section) {
-            $this->sections[] = $section;
-        }
-        $this->sections = array_reverse($this->sections);
 
         $this->comments = Comment::getFor($this->talk);
 
@@ -108,6 +86,34 @@ class talkActions extends sfActions {
         $talk->delete();
 
         $this->redirect('talk/index');
+    }
+
+    protected function getTagQuery() {
+        return Doctrine::getTable('Talk')
+                ->createQuery('a')
+                ->leftJoin('a.CommentTalk')
+                ->leftJoin('a.CreatedBy')
+                ->leftJoin('a.Tagging t')
+                ->leftJoin('t.Tag')
+                ->orderBy('a.created_at desc');
+    }
+
+    protected function getPager(Doctrine_Query $query, $url, $curPage = 1) {
+        $pagerLayout = new htPagerLayout(
+                        new Doctrine_Pager(
+                                $query,
+                                $curPage,
+                                5
+                        ),
+                        new Doctrine_Pager_Range_Sliding(array(
+                            'chunk' => 10
+                        )),
+                        $url
+        );
+
+        $pagerLayout->setTemplate('{link_to}{%page}{/link_to}');
+        $pagerLayout->setSelectedTemplate('<span>{%page}</span>');
+        return $pagerLayout;
     }
 
     protected function processForm(sfWebRequest $request, sfForm $form) {

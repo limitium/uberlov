@@ -1,7 +1,7 @@
 <?php use_helper('text'); ?>
 <div class="sectionMenuShow">
     <ul>
-        <?php foreach ($sections as $section): ?>
+        <?php foreach ($talk->getSections() as $section): ?>
             <li>
             <?php echo link_to($section, 'talk/list?section=' . $section->getId()); ?>
         </li>        

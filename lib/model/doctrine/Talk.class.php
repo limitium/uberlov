@@ -27,4 +27,14 @@ class Talk extends BaseTalk {
             'foreign' => 'taggable_id'));
     }
 
+    public function getSections() {
+        $sections = array($this->getTalkSection());
+        foreach ($this->getTalkSection()->getNode()->getAncestors() as $section) {
+            if (!$section->getNode()->isRoot()) {
+                $sections[] = $section;
+            }
+        }
+        return array_reverse($sections);
+    }
+
 }
