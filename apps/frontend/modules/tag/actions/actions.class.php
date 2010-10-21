@@ -26,8 +26,8 @@ class tagActions extends sfActions {
                         ->addWhere('t2.name =?', $this->tag->getName());
 
         $this->pagerLayout = Talk::getPager($query, $url, $request->getParameter("page", 1));
-
-        $this->talks = $this->pagerLayout->execute();
+        
+        $this->tags = TagTable::getAllTagNameWithCount();
     }
 
 }
