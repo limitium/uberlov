@@ -35,3 +35,30 @@
     margin: 0px 2px;
     font-size: 8pt;
 }
+
+.tagCounter div{
+    float:left;
+    color: #fff;
+    background-color: #aa1;
+    margin: 8px 5px;
+}
+.tagCounter {
+    float:left;
+}
+
+/* last block */
+#talkRelated{
+    margin: 0.5em;
+    background-color: #E8EDFF;
+}
+#talkRelated span{
+    display: block;
+    font-size: x-small;
+    text-align: right;
+}
+#talkRelated div {
+    margin-top:1em;
+}
+#talkRelated div p {
+    margin-top:0.5em;
+}

@@ -36,5 +36,22 @@
         </div>
 
     <?php include_partial('comment/comments', array('for' => 'talk', 'form' => $form, 'comments' => $comments)); ?>
-</div>
+            </div>
+<?php slot('extra'); ?>
+                <div id="talkRelated">
+                    <h4>Похожие обсуждения:</h4>
+    <?php foreach ($related as $relTalk): ?>
+    <?php if ($relTalk != $talk): ?>
 
+                        <div>
+        <?php echo link_to($relTalk->getName(), 'talk/show?id=' . $relTalk->getId()); ?>
+        <?php echo simple_format_text(truncate_text($relTalk->getMessage(), 50, '...', true)); ?>
+                        <div class="meta">
+                            <span>Написал<?php echo $relTalk->getCreatedBy()->getSex() ? '' : 'а' ?> <?php echo link_to($relTalk->getCreatedBy()->getNickName(), 'profile/show?id=' . $relTalk->getCreatedBy()->getId()); ?> <?php echo $relTalk->getDateTimeObject('created_at')->format('d.m.Y'); ?></span>
+                        </div>
+                    </div>
+                
+    <?php endif; ?>
+    <?php endforeach; ?>
+                    </div>
+<?php end_slot(); ?>

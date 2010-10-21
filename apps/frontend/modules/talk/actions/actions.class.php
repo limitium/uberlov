@@ -38,6 +38,8 @@ class talkActions extends sfActions {
 
         $this->form = new CommentTalkForm();
         $this->form->setDefault('talk_id', $this->talk->getId());
+
+        $this->related = TagTable::getObjectTaggedWith(array_keys($this->talk->getTags()), array('nb_common_tags' => 2, 'leftJoin' => 't.CreatedBy'));
     }
 
     public function executeNew(sfWebRequest $request) {

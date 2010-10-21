@@ -2,9 +2,7 @@
 <?php foreach ($pagerLayout->execute() as $talk): ?>
     <div class="talkBrief">
     <?php echo link_to($talk->getName(), 'talk/show?id=' . $talk->getId()); ?>
-    <p>
-        <?php echo simple_format_text(truncate_text($talk->getMessage(), 100, '...', true)); ?>
-    </p>
+    <?php echo simple_format_text(truncate_text($talk->getMessage(), 100, '...', true)); ?>
     <div class="assigned-tags">
         <ul>
             <?php foreach ($talk->getTagging() as $tagging): ?>
