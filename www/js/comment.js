@@ -98,6 +98,12 @@ function comment(){
         }, 300);
         return false;
     });
+    
+    $('.commentMessage p').hover(function(){
+        $(this).addClass('reading')
+    },function(){
+        $(this).removeClass('reading')
+    });
 }
 comment.name = 'comment';
 ModuleManager.add(comment);

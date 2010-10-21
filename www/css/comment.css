@@ -39,6 +39,10 @@
     position:relative;
 }
 
+.comment .commentMessage .reading{
+    background-color: #eee;
+}
+
 .indent_9 {
     margin-left:245px;
 }
