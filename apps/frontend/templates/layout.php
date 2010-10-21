@@ -26,17 +26,20 @@
                     <?php include_component('user', 'menu') ?>
                     <?php include_component('location', 'last') ?>
                     <?php include_component('profit', 'last') ?>
-                </div>
+                    <?php if (has_slot('extra')): ?>
+                    <?php include_slot('extra'); ?>
+                    <?php endif; ?>
+                    </div>
 
-                <div id="right_layout">
-                    <div id="content_menu"><?php include_slot('content_menu') ?></div>
+                    <div id="right_layout">
+                        <div id="content_menu"><?php include_slot('content_menu') ?></div>
 
                     <?php if ($sf_user->hasFlash('notice')): ?>
-                        <div class="flash_notice"><?php echo $sf_user->getFlash('notice') ?></div>
+                            <div class="flash_notice"><?php echo $sf_user->getFlash('notice') ?></div>
                     <?php endif; ?>
 
                     <?php if ($sf_user->hasFlash('error')): ?>
-                            <div class="flash_error"><?php echo $sf_user->getFlash('error') ?></div>
+                                <div class="flash_error"><?php echo $sf_user->getFlash('error') ?></div>
                     <?php endif; ?>
 
                     <?php echo $sf_content ?>
