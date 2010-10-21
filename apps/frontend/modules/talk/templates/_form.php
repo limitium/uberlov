@@ -42,5 +42,5 @@
 
 <?php use_javascript('../sfDoctrineActAsTaggablePlugin/js/pkTagahead'); ?>
                     <script>
-                        pkTagahead(<?php echo json_encode(url_for("talk/suggest")) ?>);
+                        pkTagahead(<?php echo json_encode(url_for("tag/suggest")) ?>);
 </script>

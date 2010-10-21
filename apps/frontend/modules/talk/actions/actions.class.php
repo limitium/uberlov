@@ -10,24 +10,16 @@
  */
 class talkActions extends sfActions {
 
-    public function executeSuggest(sfWebRequest $request) {
-        $this->forward('taggableComplete', 'complete');
-    }
-
-    public function executeTag($request) {
-        
-    }
-
     public function executeList(sfWebRequest $request) {
         $url = 'talk/list?page={%page_number}';
 
-        $query = $this->getTagQuery();
+        $query = Doctrine::getTable('Talk')->getTagQuery();
 
         $this->curSection = Doctrine::getTable('TalkSection')->find(array($request->getParameter('section')));
 
         if ($this->curSection) {
             $this->curSection->modifyQuery($query);
-            $url .= '&section={%section}';
+            $url .= '&section=' . $this->curSection->getId();
 
             if ($this->curSection->getNode()->isLeaf()) {
                 $this->form = new TalkForm();
@@ -35,9 +27,7 @@ class talkActions extends sfActions {
             }
         }
 
-        $this->pagerLayout = $this->getPager($query, $url, $request->getParameter("page", 1));
-
-        $this->talks = $this->pagerLayout->execute();
+        $this->pagerLayout = Talk::getPager($query, $url, $request->getParameter("page", 1));
     }
 
     public function executeShow(sfWebRequest $request) {
@@ -86,34 +76,6 @@ class talkActions extends sfActions {
         $talk->delete();
 
         $this->redirect('talk/index');
-    }
-
-    protected function getTagQuery() {
-        return Doctrine::getTable('Talk')
-                ->createQuery('a')
-                ->leftJoin('a.CommentTalk')
-                ->leftJoin('a.CreatedBy')
-                ->leftJoin('a.Tagging t')
-                ->leftJoin('t.Tag')
-                ->orderBy('a.created_at desc');
-    }
-
-    protected function getPager(Doctrine_Query $query, $url, $curPage = 1) {
-        $pagerLayout = new htPagerLayout(
-                        new Doctrine_Pager(
-                                $query,
-                                $curPage,
-                                5
-                        ),
-                        new Doctrine_Pager_Range_Sliding(array(
-                            'chunk' => 10
-                        )),
-                        $url
-        );
-
-        $pagerLayout->setTemplate('{link_to}{%page}{/link_to}');
-        $pagerLayout->setSelectedTemplate('<span>{%page}</span>');
-        return $pagerLayout;
     }
 
     protected function processForm(sfWebRequest $request, sfForm $form) {

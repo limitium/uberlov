@@ -1,0 +1,1 @@
+<?php include_partial('talk/talks', array('pagerLayout' => $pagerLayout)); ?>

@@ -16,7 +16,7 @@
                 <ul>
             <?php foreach ($talk->getTags() as $tag): ?>
                 <li>
-                    <span><?php echo $tag; ?></span>
+                    <span><?php echo link_to($tag, 'tag/word?word=' . $tag); ?></span>
                 </li>
             <?php endforeach ?>
             </ul>
