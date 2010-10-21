@@ -20,7 +20,7 @@ class TalkSection extends BaseTalkSection {
                 foreach ($nodes as $node) {
                     $sectionIds[] = $node->id;
                 }
-                $query->whereIn('a.talk_section_id', $sectionIds);
+                $query->whereIn('t.talk_section_id', $sectionIds);
             }
         }
     }
