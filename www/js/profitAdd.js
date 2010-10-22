@@ -30,7 +30,19 @@ profitAdd.prototype.initListeners = function(){
         var style = $('#profit_styles option:selected');
         var qty = parseFloat($('#profit_qty').val());
         var added = false;
-        
+
+        if(!fish.val()>0){
+            $.growlUI('Непонятно', 'Кого???');
+            return;
+        }
+        if(!style.val()>0){
+            $.growlUI('Непонятно', 'Как???');
+            return;
+        }
+        if(!qty>0){
+            $.growlUI('Непонятно', 'Сколько???');
+            return;
+        }
 
         $('.profitDetails tbody tr').each(function(){
             var tr = $(this);
