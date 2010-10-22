@@ -70,12 +70,20 @@ class profitActions extends sfActions {
 
     protected function processForm(sfWebRequest $request, sfForm $form) {
         $params = $request->getParameter($form->getName());
+
+        $this->forward404Unless($this->location = Doctrine::getTable('Location')->find(array($params['location_id'])), sprintf('Location does not exist (%s).', $params['location_id']));
+
         $form->bind($params);
-        $this->forward404Unless($this->location = Doctrine::getTable('Location')->find(array($request->getParameter('location'))), sprintf('Location does not exist (%s).', $params['location_id']));
 
         if ($form->isValid()) {
             $detailsData = (array) json_decode($form->getValue('details'));
             return $form->save()->updateDetails($detailsData);
+        }else{
+            foreach ($form->getFormFieldSchema() as $name => $formField) {
+                if ($formField->getError() != "") {
+                    echo "ActionClassName::methodName( ): Field Error for :" . $name . " : " . $formField->getError();
+                }
+            }
         }
         return null;
     }
