@@ -1,5 +1,6 @@
 <?php use_stylesheets_for_form($form) ?>
 <?php use_javascripts_for_form($form) ?>
+<?php use_javascript('profitAdd'); ?>
 
 <?php include_partial('location/location', array('location' => $location)) ?>
 <div class="profitNew">
@@ -65,11 +66,12 @@
                                 <th>Сколько: <?php echo $form['qty'] ?><input type="button" value="+" id="addProfitDetail" class="button"></th>
                             </tr>
                         </thead>
+                        <tbody></tbody>
                         <tfoot>
                             <tr>
                                 <td></td>
                                 <td></td>
-                                <td>0</td>
+                                <td id="detailTotal">0</td>
                             </tr>
                         </tfoot>
                     </table>

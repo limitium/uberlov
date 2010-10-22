@@ -31,10 +31,6 @@ class profitActions extends sfActions {
         $this->form = new ProfitForm();
     }
 
-    public function executeNewMap(sfWebRequest $request) {
-        $this->form = new ProfitForm();
-    }
-
     public function executeCreate(sfWebRequest $request) {
 
         $this->forward404Unless($request->isMethod(sfRequest::POST));
