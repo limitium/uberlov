@@ -27,12 +27,12 @@ class profitActions extends sfActions {
     }
 
     public function executeNew(sfWebRequest $request) {
-        $this->forward404Unless($this->location = Doctrine::getTable('Location')->find(array($request->getParameter('location'))), sprintf('Object profit does not exist (%s).', $request->getParameter('id')));
+        $this->forward404Unless($this->location = Doctrine::getTable('Location')->find(array($request->getParameter('location'))), sprintf('Location does not exist (%s).', $request->getParameter('id')));
         $this->form = new ProfitForm();
+        $this->form->setDefault('location_id', $this->location->getId());
     }
 
     public function executeCreate(sfWebRequest $request) {
-
         $this->forward404Unless($request->isMethod(sfRequest::POST));
 
         $this->form = new ProfitForm();
@@ -69,7 +69,10 @@ class profitActions extends sfActions {
     }
 
     protected function processForm(sfWebRequest $request, sfForm $form) {
-        $form->bind($request->getParameter($form->getName()));
+        $params = $request->getParameter($form->getName());
+        $form->bind($params);
+        $this->forward404Unless($this->location = Doctrine::getTable('Location')->find(array($request->getParameter('location'))), sprintf('Location does not exist (%s).', $params['location_id']));
+
         if ($form->isValid()) {
             $detailsData = (array) json_decode($form->getValue('details'));
             return $form->save()->updateDetails($detailsData);
