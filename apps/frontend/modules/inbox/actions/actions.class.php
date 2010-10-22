@@ -157,7 +157,7 @@ class inboxActions extends sfActions {
         }
     }
 
-    private function getProfiles($inboxed) {
+    private function getProfiles($inboxed) {        
         $ids = array();
         $names = array();
         foreach (explode(',', $inboxed) as $name) {

@@ -7,8 +7,8 @@
     <p><?php echo $inbox->getMessage(); ?></p>
     <div class="meta">
         <div>
-            <a href="" id="goToReply">□</a> Написал<?php echo $inbox->getCreatedBy()->getSex() ? '' : 'а' ?> <?php echo link_to($inbox->getCreatedBy()->getNickName(), 'profile/show?id=' . $inbox->getCreatedBy()->getId()); ?>,
-            <?php echo $inbox->getDateTimeObject('created_at')->format('d.m.Y'); ?> | 
+            <a href="" id="goToReply">□</a> 
+            <?php include_partial('profile/writeBy', array('written' => $inbox)); ?>
             <a href="" class="commentShowAuthor" author="user<?php echo $inbox->getCreatedBy(); ?>">●</a>
         </div>
     </div>
