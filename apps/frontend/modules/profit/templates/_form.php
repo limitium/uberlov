@@ -41,9 +41,9 @@
             </dl>
             <dl>
                 <dd>
-                    <?php echo $form['best_weight']->renderError() ?>
-                    <?php echo $form['best_fish_id']->renderError() ?>
-                    Самая большая рыба <?php echo $form['best_fish_id'] ?> на <?php echo $form['best_weight'] ?> кг.
+                    <?php echo $form['weight']->renderError() ?>
+                    <?php echo $form['fish_id']->renderError() ?>
+                    Самая большая рыба <?php echo $form['fish_id'] ?> на <?php echo $form['weight'] ?> кг.
                 </dd>
             </dl>
             <dl>

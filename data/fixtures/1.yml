@@ -1,0 +1,16 @@
+Fish:
+  Fish_1:
+    name: Карась
+  Fish_2:
+    name: Окунь
+  Fish_3:
+    name: Плотва
+  Fish_4:
+    name: Щука
+Style:
+  Style_3:
+    name: Спининг
+  Style_1:
+    name: Троллинг
+  Style_2:
+    name: Фидер

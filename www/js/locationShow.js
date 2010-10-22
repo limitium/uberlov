@@ -11,6 +11,7 @@ ModuleManager.add(locationShow);
 
 
 locationShow.prototype.afterInit = function(){
+    fb('initing... locationShow' )
     this.initListeners();
     this.resizeMap();
     this.toLocation();

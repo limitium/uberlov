@@ -6,6 +6,7 @@ ModuleManager.add(profitAdd);
 
 
 profitAdd.prototype.afterInit = function(){
+    fb('initing... profitAdd' )
     this.initDate();
     this.initListeners();
     this.loadDetails();
@@ -36,20 +37,23 @@ profitAdd.prototype.initListeners = function(){
 
 profitAdd.prototype.loadDetails = function(){
     var self = this;
-    $.each($.JSON.decode($('#profit_details').val()), function(){
-        self.addRow({
-            fish: {
-                val: this.fish_id,
-                text: $('#profit_fishes option[value='+this.fish_id+']').html()
-            },
-            style: {
-                val: this.style_id,
-                text: $('#profit_styles option[value='+this.style_id+']').html()
-            },
-            qty: this.qty
+    var details = $('#profit_details').val();
+    if(details){
+        $.each($.JSON.decode(details), function(){
+            self.addRow({
+                fish: {
+                    val: this.fish_id,
+                    text: $('#profit_fishes option[value='+this.fish_id+']').html()
+                },
+                style: {
+                    val: this.style_id,
+                    text: $('#profit_styles option[value='+this.style_id+']').html()
+                },
+                qty: this.qty
+            });
         });
-    });
-    this.countDetailQty();
+        this.countDetailQty();
+    }
 }
 
 profitAdd.prototype.onAdd = function(){

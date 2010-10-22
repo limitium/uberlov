@@ -8,14 +8,13 @@
  * @property integer $id
  * @property string $name
  * @property integer $location_id
- * @property timestamp $begin
+ * @property timestamp $date
  * @property string $cordage
  * @property string $description
  * @property integer $fish_id
- * @property integer $style_id
+ * @property float $weight
  * @property Location $Location
  * @property Fish $Fish
- * @property Style $Style
  * @property Doctrine_Collection $ProfitDetail
  * @property Doctrine_Collection $CommentProfit
  * @property Doctrine_Collection $VoteProfit
@@ -23,28 +22,26 @@
  * @method integer             getId()            Returns the current record's "id" value
  * @method string              getName()          Returns the current record's "name" value
  * @method integer             getLocationId()    Returns the current record's "location_id" value
- * @method timestamp           getBegin()         Returns the current record's "begin" value
+ * @method timestamp           getDate()          Returns the current record's "date" value
  * @method string              getCordage()       Returns the current record's "cordage" value
  * @method string              getDescription()   Returns the current record's "description" value
  * @method integer             getFishId()        Returns the current record's "fish_id" value
- * @method integer             getStyleId()       Returns the current record's "style_id" value
+ * @method float               getWeight()        Returns the current record's "weight" value
  * @method Location            getLocation()      Returns the current record's "Location" value
  * @method Fish                getFish()          Returns the current record's "Fish" value
- * @method Style               getStyle()         Returns the current record's "Style" value
  * @method Doctrine_Collection getProfitDetail()  Returns the current record's "ProfitDetail" collection
  * @method Doctrine_Collection getCommentProfit() Returns the current record's "CommentProfit" collection
  * @method Doctrine_Collection getVoteProfit()    Returns the current record's "VoteProfit" collection
  * @method Profit              setId()            Sets the current record's "id" value
  * @method Profit              setName()          Sets the current record's "name" value
  * @method Profit              setLocationId()    Sets the current record's "location_id" value
- * @method Profit              setBegin()         Sets the current record's "begin" value
+ * @method Profit              setDate()          Sets the current record's "date" value
  * @method Profit              setCordage()       Sets the current record's "cordage" value
  * @method Profit              setDescription()   Sets the current record's "description" value
  * @method Profit              setFishId()        Sets the current record's "fish_id" value
- * @method Profit              setStyleId()       Sets the current record's "style_id" value
+ * @method Profit              setWeight()        Sets the current record's "weight" value
  * @method Profit              setLocation()      Sets the current record's "Location" value
  * @method Profit              setFish()          Sets the current record's "Fish" value
- * @method Profit              setStyle()         Sets the current record's "Style" value
  * @method Profit              setProfitDetail()  Sets the current record's "ProfitDetail" collection
  * @method Profit              setCommentProfit() Sets the current record's "CommentProfit" collection
  * @method Profit              setVoteProfit()    Sets the current record's "VoteProfit" collection
@@ -74,7 +71,7 @@ abstract class BaseProfit extends sfDoctrineRecord
              'type' => 'integer',
              'length' => '4',
              ));
-        $this->hasColumn('begin', 'timestamp', null, array(
+        $this->hasColumn('date', 'timestamp', null, array(
              'type' => 'timestamp',
              'notnull' => true,
              ));
@@ -90,9 +87,8 @@ abstract class BaseProfit extends sfDoctrineRecord
              'type' => 'integer',
              'length' => '4',
              ));
-        $this->hasColumn('style_id', 'integer', 4, array(
-             'type' => 'integer',
-             'length' => '4',
+        $this->hasColumn('weight', 'float', null, array(
+             'type' => 'float',
              ));
 
         $this->option('type', 'INNODB');
@@ -109,10 +105,6 @@ abstract class BaseProfit extends sfDoctrineRecord
 
         $this->hasOne('Fish', array(
              'local' => 'fish_id',
-             'foreign' => 'id'));
-
-        $this->hasOne('Style', array(
-             'local' => 'style_id',
              'foreign' => 'id'));
 
         $this->hasMany('ProfitDetail', array(

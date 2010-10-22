@@ -176,7 +176,7 @@ Profit:
       notnull: true
     location_id:
       type: integer(4)
-    begin:
+    date:
       type: timestamp
       notnull: true
     cordage:
@@ -187,17 +187,14 @@ Profit:
       notnull: true
     fish_id:
       type: integer(4)
-    style_id:
-      type: integer(4)
+    weight:
+      type: float
   relations:
     Location:
       local: location_id
       foreign: id
     Fish:
       local: fish_id
-      foreign: id
-    Style:
-      local: style_id
       foreign: id
 Style:
   columns:
@@ -212,9 +209,6 @@ Style:
       notnull: true
 ProfitDetail:
   columns:
-    time:
-      type: timestamp
-      notnull: true
     profit_id:
       type: integer(4)
     style_id:

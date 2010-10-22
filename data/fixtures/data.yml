@@ -175,15 +175,6 @@ VoteComment:
     profit_id: null
     profile_id: null
     talk_id: null
-Fish:
-  Fish_1:
-    name: Карась
-  Fish_2:
-    name: Окунь
-  Fish_3:
-    name: Плотва
-  Fish_4:
-    name: Щука
 Location:
   Location_1:
     name: agrtwgare
@@ -413,7 +404,7 @@ Profile:
     birth_date: null
     userpic: null
     sex: true
-    sfGuardUser: sfGuardUser_1
+    sfGuardUser: sgu_admin
     created_at: '2010-10-02 16:40:16'
     updated_at: '2010-10-02 16:40:16'
 Tag:
@@ -592,56 +583,6 @@ Tagging:
     Tag: Tag_15
     taggable_model: Talk
     taggable_id: '188'
-sfGuardGroup:
-  sfGuardGroup_1:
-    name: admin
-    description: 'Administrator group'
-    created_at: '2010-10-02 16:40:16'
-    updated_at: '2010-10-02 16:40:16'
-sfGuardGroupPermission:
-  sfGuardGroupPermission_1_1:
-    sfGuardGroup: sfGuardGroup_1
-    sfGuardPermission: sfGuardPermission_1
-    created_at: '2010-10-02 16:40:17'
-    updated_at: '2010-10-02 16:40:17'
-sfGuardPermission:
-  sfGuardPermission_1:
-    name: admin
-    description: 'Administrator permission'
-    created_at: '2010-10-02 16:40:16'
-    updated_at: '2010-10-02 16:40:16'
-sfGuardRememberKey:
-  sfGuardRememberKey_6_127.0.0.1:
-    id: '6'
-    sfGuardUser: sfGuardUser_1
-    remember_key: 38f368c956595d210a6222c7e21998b7
-    ip_address: 127.0.0.1
-    created_at: '2010-10-21 23:20:52'
-    updated_at: '2010-10-21 23:20:52'
-sfGuardUser:
-  sfGuardUser_1:
-    username: admin
-    algorithm: 'PasswordKeeper::generate'
-    salt: 236b714fabd69d6ea8b97dd4f22de12e
-    password: 236b714fabd69d6ea8b97dd4f22de12eadmin
-    is_active: true
-    is_super_admin: true
-    last_login: '2010-10-22 21:03:23'
-    created_at: '2010-10-02 16:40:16'
-    updated_at: '2010-10-22 21:03:23'
-sfGuardUserGroup:
-  sfGuardUserGroup_1_1:
-    sfGuardUser: sfGuardUser_1
-    sfGuardGroup: sfGuardGroup_1
-    created_at: '2010-10-02 16:40:17'
-    updated_at: '2010-10-02 16:40:17'
-Style:
-  Style_3:
-    name: Спининг
-  Style_1:
-    name: Троллинг
-  Style_2:
-    name: Фидер
 Talk:
   Talk_1:
     name: цук
@@ -2141,7 +2082,7 @@ Talk:
     updated_at: '2010-10-13 23:41:59'
   Talk_188:
     name: executeTag
-    message: "<?php\r\n\r\n/**\r\n * tag actions.\r\n *\r\n * @package    FISHERY\r\n * @subpackage tag\r\n * @author     Your name here\r\n * @version    SVN: $Id: actions.class.php 23810 2009-11-12 11:07:44Z Kris.Wallsmith $\r\n */\r\nclass tagActions extends sfActions {\r\n\r\n    public function executeSuggest(sfWebRequest $request) {\r\n        $this->forward('taggableComplete', 'complete');\r\n    }\r\n\r\n    public function executeTag($request) {\r\n        \r\n    }\r\n\r\n}"
+    message: "@author     Your name here\r\n * @version    SVN: $Id: actions.class.php 23810 2009-11-12 11:07:44Z Kris.Wallsmith $\r\n */\r\nclass tagActions extends sfActions {\r\n\r\n    public function executeSuggest(sfWebRequest $request) {\r\n        $this->forward('taggableComplete', 'complete');\r\n    }\r\n\r\n    public function executeTag($request) {\r\n        \r\n    }\r\n\r\n}"
     TalkSection: TalkSection_4
     CreatedBy: Profile_1
     UpdatedBy: Profile_1

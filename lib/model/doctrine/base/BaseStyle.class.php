@@ -7,16 +7,13 @@
  * 
  * @property integer $id
  * @property string $name
- * @property Doctrine_Collection $Profit
  * @property Doctrine_Collection $ProfitDetail
  * 
  * @method integer             getId()           Returns the current record's "id" value
  * @method string              getName()         Returns the current record's "name" value
- * @method Doctrine_Collection getProfit()       Returns the current record's "Profit" collection
  * @method Doctrine_Collection getProfitDetail() Returns the current record's "ProfitDetail" collection
  * @method Style               setId()           Sets the current record's "id" value
  * @method Style               setName()         Sets the current record's "name" value
- * @method Style               setProfit()       Sets the current record's "Profit" collection
  * @method Style               setProfitDetail() Sets the current record's "ProfitDetail" collection
  * 
  * @package    FISHERY
@@ -50,10 +47,6 @@ abstract class BaseStyle extends sfDoctrineRecord
     public function setUp()
     {
         parent::setUp();
-        $this->hasMany('Profit', array(
-             'local' => 'id',
-             'foreign' => 'style_id'));
-
         $this->hasMany('ProfitDetail', array(
              'local' => 'id',
              'foreign' => 'style_id'));
