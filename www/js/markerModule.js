@@ -12,6 +12,7 @@ ModuleManager.add(markerModule);
 
 
 markerModule.prototype.afterInit = function(){
+    fb('initing... markerModule' )
     this.mm = app.getModule('mapModule');
     this.initMenu();
 }

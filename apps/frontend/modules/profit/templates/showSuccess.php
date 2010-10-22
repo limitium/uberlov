@@ -32,15 +32,14 @@
                 </tr>
             </tfoot>
         </table>
-        <div class="best">Самая большая: <?php echo $profit->getFish(); ?> на <?php echo $profit->getBestWeight(); ?> кг.</div>
+        <div class="best">Самая большая: <?php echo $profit->getFish(); ?> на <?php echo $profit->getWeight(); ?> кг.</div>
         <div>Использовались снасти: <?php echo $profit->getCordage(); ?></div>
         <div class="text"><?php echo $profit->getDescription(); ?></div>
         <div class="meta">
         <?php use_javascript('voting'); ?>
         <?php include_partial('vote/vote', array('obj' => $profit)); ?>
                 <div>
-                    <a href="" id="goToReply">□</a> Написал<?php echo $profit->getCreatedBy()->getSex() ? '' : 'а' ?> <?php echo link_to($profit->getCreatedBy()->getNickName(), 'profile/show?id=' . $profit->getCreatedBy()->getId()); ?>,
-            <?php echo $profit->getDateTimeObject('created_at')->format('d.m.Y'); ?> |
+                    <a href="" id="goToReply">□</a> <?php include_partial('profile/writeBy', array('written' => $profit)); ?> |
                 <a href="" class="commentShowAuthor" author="user<?php echo $profit->getCreatedBy(); ?>">●</a>
             </div>
         </div>

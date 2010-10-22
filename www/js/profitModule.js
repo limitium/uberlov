@@ -14,6 +14,7 @@ ModuleManager.add(profitModule);
 
 
 profitModule.prototype.afterInit = function(){
+    fb('initing... profitModule' )
     this.mm = app.getModule('mapModule');
     this.initMenu();
     this.initListeners();

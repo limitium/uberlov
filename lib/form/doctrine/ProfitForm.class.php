@@ -24,8 +24,8 @@ class ProfitForm extends BaseProfitForm {
         $this->widgetSchema['cordage'] = new sfWidgetFormTextarea();
         $this->widgetSchema['description'] = new sfWidgetFormTextarea();
         $this->widgetSchema['details'] = new sfWidgetFormInputHidden();
-        $this->widgetSchema['best_weight'] = new sfWidgetFormInputText();
-        $this->widgetSchema['best_fish_id'] = new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Fish'), 'add_empty' => true));
+        $this->widgetSchema['weight'] = new sfWidgetFormInputText();
+        $this->widgetSchema['fish_id'] = new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Fish'), 'add_empty' => true));
 
         $this->widgetSchema['qty'] = new sfWidgetFormInputText();
         $this->widgetSchema['styles'] = new sfWidgetFormDoctrineChoice(array('model' => 'Style', 'add_empty' => true));
@@ -37,8 +37,8 @@ class ProfitForm extends BaseProfitForm {
         $this->validatorSchema['cordage'] = new sfValidatorString(array('required' => true));
         $this->validatorSchema['description'] = new sfValidatorString(array('required' => true));
         $this->validatorSchema['details'] = new sfValidatorString(array('required' => true));
-        $this->validatorSchema['best_weight'] = new sfValidatorNumber();
-        $this->validatorSchema['best_fish_id'] = new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Fish')));
+        $this->validatorSchema['weight'] = new sfValidatorNumber();
+        $this->validatorSchema['fish_id'] = new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Fish')));
 
         $this->validatorSchema['qty'] = new sfValidatorString();
         $this->validatorSchema['styles'] = new sfValidatorString();

@@ -37,10 +37,6 @@ class Profit extends BaseProfit {
         return $this;
     }
 
-    public function getBriefDescription() {
-        return $this->getDescription();
-    }
-
     public function getTotalProfit() {
         $total = 0;
         foreach ($this->getProfitDetail() as $det) {

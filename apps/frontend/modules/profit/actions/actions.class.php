@@ -40,7 +40,7 @@ class profitActions extends sfActions {
         $this->setTemplate('new');
 
         if ($this->profit = $this->processForm($request, $this->form)) {
-            $this->setTemplate('created');
+            $this->setTemplate('show');
         }
     }
 

@@ -69,15 +69,15 @@
       <column auto-increment="true" name="id" primary="true" required="true" size="4" type="integer"/>
       <column name="name" required="true" size="100" type="string" unique="true"/>
     </table>
-    <table name="Profit" visPositionX="188" visPositionY="349" visSizeX="0" visSizeX2="120" visSizeY="0" visSizeY2="101">
+    <table name="Profit" visPositionX="188" visPositionY="348" visSizeX="0" visSizeX2="120" visSizeY="0" visSizeY2="115">
       <column auto-increment="true" name="id" primary="true" required="true" size="4" type="integer"/>
       <column name="name" required="true" size="50" type="string"/>
       <column name="location_id" size="4" type="integer"/>
-      <column name="begin" required="true" type="timestamp"/>
+      <column name="date" required="true" type="timestamp"/>
       <column name="cordage" required="true" type="string"/>
       <column name="description" required="true" type="string"/>
       <column description="Foreign key to Fish" name="fish_id" size="4" type="integer"/>
-      <column description="Foreign key to Style" name="style_id" size="4" type="integer"/>
+      <column name="weight" type="float"/>
       <orm-properties>
         <attribute name="actAs">
           <attribute name="Timestampable"/>
@@ -113,8 +113,7 @@
       <column auto-increment="true" name="id" primary="true" required="true" size="4" type="integer"/>
       <column name="name" required="true" size="100" type="string" unique="true"/>
     </table>
-    <table name="ProfitDetail" visPositionX="412" visPositionY="311" visSizeX="0" visSizeX2="110" visSizeY="0" visSizeY2="87">
-      <column name="time" required="true" type="timestamp"/>
+    <table name="ProfitDetail" visPositionX="424" visPositionY="296" visSizeX="0" visSizeX2="110" visSizeY="0" visSizeY2="87">
       <column name="profit_id" size="4" type="integer"/>
       <column name="style_id" size="4" type="integer"/>
       <column name="fish_id" size="4" type="integer"/>
@@ -442,9 +441,6 @@
     </foreign-key>
     <foreign-key from="Profit" name="FK_Profit_Fish" to="Fish">
       <foreign-key-column from="fish_id" to="id"/>
-    </foreign-key>
-    <foreign-key from="Profit" name="FK_Profit_Style" to="Style">
-      <foreign-key-column from="style_id" to="id"/>
     </foreign-key>
     <foreign-key caption="Profit ProfitDetail" from="ProfitDetail" name="FK_ProfitDetail_Profit_id" to="Profit" visCenterX="-3" visCenterY="0" visShowCaption="0">
       <foreign-key-column from="profit_id" to="id"/>

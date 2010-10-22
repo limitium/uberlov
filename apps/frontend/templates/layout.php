@@ -6,7 +6,6 @@
         <?php include_title() ?>
         <link rel="shortcut icon" href="/favicon.ico" />
         <?php include_stylesheets() ?>
-        <?php use_javascript('app') ?>
         <?php include_javascripts() ?>
     </head>
     <body>
@@ -15,7 +14,7 @@
                 <div id="logo">uberЛОВ</div>
                 <div id="site_menu">
                     <ul>
-                        <li><?php echo link_to('Места ловли', 'collector/map') ?></li>
+                        <li><?php echo link_to('Места', 'collector/map') ?></li>
                         <li><?php echo link_to('Обсуждения', 'talk/list') ?></li>
                         <li><?php echo link_to('Вход', '@sf_guard_signin') ?></li>
                     </ul>

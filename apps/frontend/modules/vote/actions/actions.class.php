@@ -10,6 +10,10 @@
  */
 class voteActions extends sfActions {
 
+    public function executeProfit(sfWebRequest $request) {
+        $this->vote($request, 'profit');
+    }
+
     public function executeTalk(sfWebRequest $request) {
         $this->vote($request, 'talk');
     }
