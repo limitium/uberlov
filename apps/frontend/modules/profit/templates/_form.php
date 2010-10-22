@@ -64,6 +64,7 @@
                                 <th>Как: <?php echo $form['styles'] ?></th>
                                 <th>Кого: <?php echo $form['fishes'] ?></th>
                                 <th>Сколько: <?php echo $form['qty'] ?><input type="button" value="+" id="addProfitDetail" class="button"></th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody></tbody>
@@ -72,6 +73,7 @@
                                 <td></td>
                                 <td></td>
                                 <td id="detailTotal">0</td>
+                                <td></td>
                             </tr>
                         </tfoot>
                     </table>
