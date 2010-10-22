@@ -24,8 +24,8 @@
         <div class="meta">
             <div><?php use_javascript('voting'); ?>
             <?php include_partial('vote/vote', array('obj' => $talk)); ?>
-                <a href="" id="goToReply">□</a> Написал<?php echo $talk->getCreatedBy()->getSex() ? '' : 'а' ?> <?php echo link_to($talk->getCreatedBy()->getNickName(), 'profile/show?id=' . $talk->getCreatedBy()->getId()); ?>,
-            <?php echo $talk->getDateTimeObject('created_at')->format('d.m.Y'); ?> |
+                <a href="" id="goToReply">□</a>     
+            <?php include_partial('profile/writeBy', array('written' => $talk)); ?>
                 <a href="" class="commentShowAuthor" author="user<?php echo $talk->getCreatedBy(); ?>">●</a>
             </div>
         </div>
@@ -50,7 +50,7 @@
                             <span>Написал<?php echo $relTalk->getCreatedBy()->getSex() ? '' : 'а' ?> <?php echo link_to($relTalk->getCreatedBy()->getNickName(), 'profile/show?id=' . $relTalk->getCreatedBy()->getId()); ?> <?php echo $relTalk->getDateTimeObject('created_at')->format('d.m.Y'); ?></span>
                         </div>
                     </div>
-                
+
     <?php endif; ?>
     <?php endforeach; ?>
                     </div>

@@ -5,8 +5,7 @@
     </div>
     <div class="meta">
         <div>
-            <a href="" id="goToReply">□</a> Написал<?php echo $inbox->getCreatedBy()->getSex() ? '' : 'а' ?> <?php echo link_to($inbox->getCreatedBy()->getNickName(), 'profile/show?id=' . $inbox->getCreatedBy()->getId()); ?>,
-            <?php echo $inbox->getDateTimeObject('created_at')->format('d.m.Y'); ?>
+            <a href="" id="goToReply">□</a> <?php include_partial('profile/writeBy', array('written' => $inbox)); ?>
             | <?php echo link_to('комментариев ' . ($inbox->getCommentInbox()->count() - 1), 'inbox/show?id=' . $inbox->getId()); ?> |
             <a href="" class="inboxDelete" inbox="<?php echo $inbox->getId(); ?>">Удалить инбокс</a>
         </div>
