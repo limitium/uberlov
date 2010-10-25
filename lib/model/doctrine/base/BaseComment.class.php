@@ -13,32 +13,35 @@
  * @property integer $profit_id
  * @property integer $inbox_id
  * @property integer $talk_id
+ * @property integer $FishEvent_id
  * @property Doctrine_Collection $Profile
  * @property Doctrine_Collection $VoteComment
  * @property Doctrine_Collection $ReadComment
  * 
- * @method integer             getId()          Returns the current record's "id" value
- * @method integer             getParent()      Returns the current record's "parent" value
- * @method string              getMessage()     Returns the current record's "message" value
- * @method string              getToward()      Returns the current record's "toward" value
- * @method integer             getLocationId()  Returns the current record's "location_id" value
- * @method integer             getProfitId()    Returns the current record's "profit_id" value
- * @method integer             getInboxId()     Returns the current record's "inbox_id" value
- * @method integer             getTalkId()      Returns the current record's "talk_id" value
- * @method Doctrine_Collection getProfile()     Returns the current record's "Profile" collection
- * @method Doctrine_Collection getVoteComment() Returns the current record's "VoteComment" collection
- * @method Doctrine_Collection getReadComment() Returns the current record's "ReadComment" collection
- * @method Comment             setId()          Sets the current record's "id" value
- * @method Comment             setParent()      Sets the current record's "parent" value
- * @method Comment             setMessage()     Sets the current record's "message" value
- * @method Comment             setToward()      Sets the current record's "toward" value
- * @method Comment             setLocationId()  Sets the current record's "location_id" value
- * @method Comment             setProfitId()    Sets the current record's "profit_id" value
- * @method Comment             setInboxId()     Sets the current record's "inbox_id" value
- * @method Comment             setTalkId()      Sets the current record's "talk_id" value
- * @method Comment             setProfile()     Sets the current record's "Profile" collection
- * @method Comment             setVoteComment() Sets the current record's "VoteComment" collection
- * @method Comment             setReadComment() Sets the current record's "ReadComment" collection
+ * @method integer             getId()           Returns the current record's "id" value
+ * @method integer             getParent()       Returns the current record's "parent" value
+ * @method string              getMessage()      Returns the current record's "message" value
+ * @method string              getToward()       Returns the current record's "toward" value
+ * @method integer             getLocationId()   Returns the current record's "location_id" value
+ * @method integer             getProfitId()     Returns the current record's "profit_id" value
+ * @method integer             getInboxId()      Returns the current record's "inbox_id" value
+ * @method integer             getTalkId()       Returns the current record's "talk_id" value
+ * @method integer             getFishEventId()  Returns the current record's "FishEvent_id" value
+ * @method Doctrine_Collection getProfile()      Returns the current record's "Profile" collection
+ * @method Doctrine_Collection getVoteComment()  Returns the current record's "VoteComment" collection
+ * @method Doctrine_Collection getReadComment()  Returns the current record's "ReadComment" collection
+ * @method Comment             setId()           Sets the current record's "id" value
+ * @method Comment             setParent()       Sets the current record's "parent" value
+ * @method Comment             setMessage()      Sets the current record's "message" value
+ * @method Comment             setToward()       Sets the current record's "toward" value
+ * @method Comment             setLocationId()   Sets the current record's "location_id" value
+ * @method Comment             setProfitId()     Sets the current record's "profit_id" value
+ * @method Comment             setInboxId()      Sets the current record's "inbox_id" value
+ * @method Comment             setTalkId()       Sets the current record's "talk_id" value
+ * @method Comment             setFishEventId()  Sets the current record's "FishEvent_id" value
+ * @method Comment             setProfile()      Sets the current record's "Profile" collection
+ * @method Comment             setVoteComment()  Sets the current record's "VoteComment" collection
+ * @method Comment             setReadComment()  Sets the current record's "ReadComment" collection
  * 
  * @package    FISHERY
  * @subpackage model
@@ -85,6 +88,10 @@ abstract class BaseComment extends sfDoctrineRecord
              'type' => 'integer',
              'length' => '4',
              ));
+        $this->hasColumn('FishEvent_id', 'integer', 4, array(
+             'type' => 'integer',
+             'length' => '4',
+             ));
 
         $this->option('type', 'INNODB');
         $this->option('charset', 'utf8');
@@ -106,6 +113,10 @@ abstract class BaseComment extends sfDoctrineRecord
              'CommentTalk' => 
              array(
               'toward' => 'talk',
+             ),
+             'CommentFishEvent' => 
+             array(
+              'toward' => 'fish_event',
              ),
              ));
     }

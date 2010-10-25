@@ -28,6 +28,7 @@
  * @property Doctrine_Collection $CommentLocation
  * @property Doctrine_Collection $WishList
  * @property Doctrine_Collection $VoteLocation
+ * @property Doctrine_Collection $FishEvent
  * 
  * @method integer             getId()                 Returns the current record's "id" value
  * @method string              getName()               Returns the current record's "name" value
@@ -52,6 +53,7 @@
  * @method Doctrine_Collection getCommentLocation()    Returns the current record's "CommentLocation" collection
  * @method Doctrine_Collection getWishList()           Returns the current record's "WishList" collection
  * @method Doctrine_Collection getVoteLocation()       Returns the current record's "VoteLocation" collection
+ * @method Doctrine_Collection getFishEvent()          Returns the current record's "FishEvent" collection
  * @method Location            setId()                 Sets the current record's "id" value
  * @method Location            setName()               Sets the current record's "name" value
  * @method Location            setDescription()        Sets the current record's "description" value
@@ -75,6 +77,7 @@
  * @method Location            setCommentLocation()    Sets the current record's "CommentLocation" collection
  * @method Location            setWishList()           Sets the current record's "WishList" collection
  * @method Location            setVoteLocation()       Sets the current record's "VoteLocation" collection
+ * @method Location            setFishEvent()          Sets the current record's "FishEvent" collection
  * 
  * @package    FISHERY
  * @subpackage model
@@ -188,6 +191,10 @@ abstract class BaseLocation extends sfDoctrineRecord
              'foreign' => 'location_id'));
 
         $this->hasMany('VoteLocation', array(
+             'local' => 'id',
+             'foreign' => 'location_id'));
+
+        $this->hasMany('FishEvent', array(
              'local' => 'id',
              'foreign' => 'location_id'));
 

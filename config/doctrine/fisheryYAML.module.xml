@@ -69,7 +69,7 @@
       <column auto-increment="true" name="id" primary="true" required="true" size="4" type="integer"/>
       <column name="name" required="true" size="100" type="string" unique="true"/>
     </table>
-    <table name="Profit" visPositionX="188" visPositionY="348" visSizeX="0" visSizeX2="120" visSizeY="0" visSizeY2="115">
+    <table name="Profit" visPositionX="189" visPositionY="348" visSizeX="0" visSizeX2="120" visSizeY="0" visSizeY2="129">
       <column auto-increment="true" name="id" primary="true" required="true" size="4" type="integer"/>
       <column name="name" required="true" size="50" type="string"/>
       <column name="location_id" size="4" type="integer"/>
@@ -128,11 +128,11 @@
       <column auto-increment="true" name="id" primary="true" size="4" type="integer"/>
       <column name="name" required="true" size="50" type="string"/>
     </table>
-    <table name="LocationFlow" visPositionX="-73" visPositionY="150" visSizeX="0" visSizeX2="99" visSizeY="0" visSizeY2="45">
+    <table name="LocationFlow" visPositionX="434" visPositionY="125" visSizeX="0" visSizeX2="99" visSizeY="0" visSizeY2="45">
       <column auto-increment="true" name="id" primary="true" size="4" type="integer"/>
       <column name="name" required="true" size="50" type="string"/>
     </table>
-    <table name="LocationFundus" visPositionX="353" visPositionY="60" visSizeX="0" visSizeX2="99" visSizeY="0" visSizeY2="45">
+    <table name="LocationFundus" visPositionX="281" visPositionY="-30" visSizeX="0" visSizeX2="99" visSizeY="0" visSizeY2="45">
       <column auto-increment="true" name="id" primary="true" size="4" type="integer"/>
       <column name="name" required="true" size="50" type="string"/>
     </table>
@@ -174,7 +174,7 @@
         </attribute>
       </orm-properties>
     </table>
-    <table name="CommentLocation" visPositionX="36" visPositionY="341" visSizeX="0" visSizeX2="120" visSizeY="0" visSizeY2="31">
+    <table name="CommentLocation" visPositionX="34" visPositionY="281" visSizeX="0" visSizeX2="120" visSizeY="0" visSizeY2="31">
       <column name="location_id" size="4" type="integer"/>
       <orm-properties>
         <attribute name="inheritance">
@@ -196,7 +196,7 @@
         </attribute>
       </orm-properties>
     </table>
-    <table name="LocationType" visPositionX="23" visPositionY="79" visSizeX="0" visSizeX2="99" visSizeY="0" visSizeY2="45">
+    <table name="LocationType" visPositionX="39" visPositionY="204" visSizeX="0" visSizeX2="99" visSizeY="0" visSizeY2="45">
       <column auto-increment="true" name="id" primary="true" size="4" type="integer"/>
       <column name="name" required="true" size="50" type="string" unique="true"/>
     </table>
@@ -212,7 +212,7 @@
       <column name="value" required="true" size="4" type="integer"/>
       <column description="Foreign key to Profile" name="voter" size="4" type="integer"/>
     </table>
-    <table name="VoteLocation" visPositionX="-91" visPositionY="303" visSizeX="0" visSizeX2="120" visSizeY="0" visSizeY2="31">
+    <table name="VoteLocation" visPositionX="410" visPositionY="192" visSizeX="0" visSizeX2="120" visSizeY="0" visSizeY2="31">
       <column name="location_id" size="4" type="integer"/>
       <orm-properties>
         <attribute name="inheritance">
@@ -245,7 +245,7 @@
         </attribute>
       </orm-properties>
     </table>
-    <table name="LocationScope" visPositionX="434" visPositionY="133" visSizeX="0" visSizeX2="99" visSizeY="0" visSizeY2="59">
+    <table name="LocationScope" visPositionX="356" visPositionY="53" visSizeX="0" visSizeX2="99" visSizeY="0" visSizeY2="45">
       <column auto-increment="true" name="id" primary="true" size="4" type="integer"/>
       <column name="name" required="true" size="50" type="string" unique="true"/>
     </table>
@@ -411,6 +411,34 @@
         </attribute>
       </orm-properties>
     </table>
+    <table name="FishEvent" visPositionX="24" visPositionY="78" visSizeX="0" visSizeX2="120" visSizeY="0" visSizeY2="73">
+      <column auto-increment="true" name="id" primary="true" required="true" size="4" type="integer"/>
+      <column name="name" required="true" size="50" type="string"/>
+      <column name="description" required="true" type="string"/>
+      <column name="location_id" size="4" type="integer"/>
+    </table>
+    <table name="VoteFishEvent" visPositionX="-24" visPositionY="-4" visSizeX="0" visSizeX2="133" visSizeY="0" visSizeY2="31">
+      <column name="fish_event_id" size="4" type="integer"/>
+      <orm-properties>
+        <attribute name="inheritance">
+          <attribute name="type">column_aggregation</attribute>
+          <attribute name="extends">Vote</attribute>
+          <attribute name="keyField">toward</attribute>
+          <attribute name="keyValue">fish_event</attribute>
+        </attribute>
+      </orm-properties>
+    </table>
+    <table name="CommentFishEvent" visPositionX="-103" visPositionY="170" visSizeX="0" visSizeX2="131" visSizeY="0" visSizeY2="31">
+      <column name="FishEvent_id" size="4" type="integer"/>
+      <orm-properties>
+        <attribute name="inheritance">
+          <attribute name="type">column_aggregation</attribute>
+          <attribute name="extends">Comment</attribute>
+          <attribute name="keyField">toward</attribute>
+          <attribute name="keyValue">fish_event</attribute>
+        </attribute>
+      </orm-properties>
+    </table>
     <orm-properties>
       <attribute name="options">
         <attribute name="type">INNODB</attribute>
@@ -532,6 +560,15 @@
     </foreign-key>
     <foreign-key caption="Talk VoteTalk" from="VoteTalk" name="FK_VoteTalk_Talk_id" to="Talk" visShowCaption="0">
       <foreign-key-column from="talk_id" to="id"/>
+    </foreign-key>
+    <foreign-key caption="Location FishEvent" from="FishEvent" name="FK_FishEvent_Location_id" to="Location" visCaption1X="0" visCaption1Y="0" visCenterX="0" visCenterY="0" visShowCaption="0">
+      <foreign-key-column from="location_id" to="id"/>
+    </foreign-key>
+    <foreign-key caption="FishEvent VoteFishEvent" from="VoteFishEvent" name="FK_VoteFishEvent_FishEvent_id" to="FishEvent" visShowCaption="0">
+      <foreign-key-column from="fish_event_id" to="id"/>
+    </foreign-key>
+    <foreign-key caption="FishEvent CommentFishEvent" from="CommentFishEvent" name="FK_CommentFishEvent_FishEvent_id" to="FishEvent" visShowCaption="0">
+      <foreign-key-column from="FishEvent_id" to="id"/>
     </foreign-key>
     <many-to-many-relation mn-table="WishList">
       <many-to-many-foreign-key foreign-key="FK_WishList_Profile_id" relation-alias="Wishers"/>
