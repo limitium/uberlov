@@ -83,6 +83,7 @@ CREATE TABLE `comment` (
   `profit_id` int(11) DEFAULT NULL,
   `inbox_id` int(11) DEFAULT NULL,
   `talk_id` int(11) DEFAULT NULL,
+  `fishevent_id` int(11) DEFAULT NULL,
   `created_by` int(11) NOT NULL,
   `updated_by` int(11) NOT NULL,
   `created_at` datetime NOT NULL,
@@ -95,21 +96,23 @@ CREATE TABLE `comment` (
   KEY `comment_toward_idx` (`toward`),
   KEY `created_by_idx` (`created_by`),
   KEY `updated_by_idx` (`updated_by`),
+  KEY `comment_fishevent_id_fish_event_id` (`fishevent_id`),
   KEY `comment_inbox_id_inbox_id` (`inbox_id`),
   KEY `comment_location_id_location_id` (`location_id`),
   KEY `comment_profit_id_profit_id` (`profit_id`),
   KEY `comment_talk_id_talk_id` (`talk_id`),
+  CONSTRAINT `comment_talk_id_talk_id` FOREIGN KEY (`talk_id`) REFERENCES `talk` (`id`),
   CONSTRAINT `comment_created_by_profile_id` FOREIGN KEY (`created_by`) REFERENCES `profile` (`id`),
+  CONSTRAINT `comment_fishevent_id_fish_event_id` FOREIGN KEY (`fishevent_id`) REFERENCES `fish_event` (`id`),
   CONSTRAINT `comment_inbox_id_inbox_id` FOREIGN KEY (`inbox_id`) REFERENCES `inbox` (`id`),
   CONSTRAINT `comment_location_id_location_id` FOREIGN KEY (`location_id`) REFERENCES `location` (`id`),
   CONSTRAINT `comment_profit_id_profit_id` FOREIGN KEY (`profit_id`) REFERENCES `profit` (`id`),
-  CONSTRAINT `comment_talk_id_talk_id` FOREIGN KEY (`talk_id`) REFERENCES `talk` (`id`),
   CONSTRAINT `comment_updated_by_profile_id` FOREIGN KEY (`updated_by`) REFERENCES `profile` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 /*Data for the table `comment` */
 
-insert  into `comment`(`id`,`parent`,`message`,`toward`,`location_id`,`profit_id`,`inbox_id`,`talk_id`,`created_by`,`updated_by`,`created_at`,`updated_at`,`root_id`,`lft`,`rgt`,`level`) values (1,NULL,'root','location',2,NULL,NULL,NULL,1,1,'2010-10-02 16:50:41','2010-10-02 16:50:42',1,1,8,0),(2,1,'wer','location',2,NULL,NULL,NULL,1,1,'2010-10-02 16:50:42','2010-10-02 16:50:42',1,2,5,1),(3,1,'sdf','location',2,NULL,NULL,NULL,1,1,'2010-10-02 16:50:44','2010-10-02 16:50:44',1,6,7,1),(4,2,'fdg','location',2,NULL,NULL,NULL,1,1,'2010-10-02 16:50:47','2010-10-02 16:50:47',1,3,4,2);
+insert  into `comment`(`id`,`parent`,`message`,`toward`,`location_id`,`profit_id`,`inbox_id`,`talk_id`,`fishevent_id`,`created_by`,`updated_by`,`created_at`,`updated_at`,`root_id`,`lft`,`rgt`,`level`) values (1,NULL,'root','profit',NULL,1,NULL,NULL,NULL,1,1,'2010-10-23 01:23:39','2010-10-23 01:23:39',10,1,4,0),(2,10,'zzz','profit',NULL,1,NULL,NULL,NULL,1,1,'2010-10-23 01:23:39','2010-10-23 01:23:39',10,2,3,1);
 
 /*Table structure for table `country` */
 
@@ -133,11 +136,27 @@ CREATE TABLE `fish` (
   `name` varchar(100) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 
 /*Data for the table `fish` */
 
-insert  into `fish`(`id`,`name`) values (1,'Карась'),(2,'Окунь'),(3,'Плотва'),(4,'Щука');
+insert  into `fish`(`id`,`name`) values (8,'Карась'),(9,'Окунь'),(10,'Плотва'),(11,'Щука');
+
+/*Table structure for table `fish_event` */
+
+DROP TABLE IF EXISTS `fish_event`;
+
+CREATE TABLE `fish_event` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) NOT NULL,
+  `description` text NOT NULL,
+  `location_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `location_id_idx` (`location_id`),
+  CONSTRAINT `fish_event_location_id_location_id` FOREIGN KEY (`location_id`) REFERENCES `location` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Data for the table `fish_event` */
 
 /*Table structure for table `friend` */
 
@@ -251,7 +270,7 @@ CREATE TABLE `location` (
 
 /*Data for the table `location` */
 
-insert  into `location`(`id`,`name`,`description`,`depth`,`is_free`,`price`,`location_flow_id`,`location_fundus_id`,`location_relief_id`,`location_type_id`,`location_scope_id`,`address_id`,`created_by`,`updated_by`,`latitude`,`longitude`,`slug`,`created_at`,`updated_at`,`version`) values (1,'agrtwgare','dfgwegr',NULL,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,1,55.06,35.60,'agrtwgare','2010-04-01 14:16:53','2010-04-01 14:16:53',1),(2,'zxczxc23tgwe','r32fwergt',NULL,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,1,55.52,35.60,'zxczxc23tgwe','2010-04-01 14:16:53','2010-04-01 14:16:53',1),(3,'fsdgfthyj2er3t4g','5qdwfegrhtyjtrqwfegrh',NULL,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,1,55.32,36.16,'fsdgfthyj2er3t4g','2010-04-01 14:16:53','2010-04-01 14:16:53',1),(4,'yahooo','1111111111111111',NULL,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,1,54.70,36.95,'yahooo','2010-04-01 14:16:53','2010-04-01 14:16:53',1),(5,'gdfdfgdfg','dfhestnrnsfgn',NULL,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,1,54.90,35.95,'gdfdfgdfg','2010-04-01 14:16:53','2010-04-01 14:16:53',1),(6,'drgsdfh','srghsdthj',NULL,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,1,55.18,37.40,'drgsdfh','2010-04-01 14:16:53','2010-04-01 14:16:53',1),(7,'asdftyui','wertwertgaerh',NULL,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,1,55.60,38.48,'asdftyui','2010-04-01 14:16:53','2010-04-01 14:16:53',1),(8,'etujtdy','ertertery',NULL,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,1,55.34,36.37,'etujtdy','2010-04-01 14:16:53','2010-04-01 14:16:53',1),(9,'Пляж на угре','Красивое место',NULL,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,1,54.83,35.03,'','2010-04-01 14:16:53','2010-04-01 14:16:53',1),(10,'23432','wrefrw4tegrbfdqwtegrdtg',423423424.00,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,1,54.83,35.03,'23432','2010-04-02 20:01:54','2010-04-02 20:01:54',1),(11,'adddddddddddddddd2','efdsvfdbdgbdgndgn',2.00,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,1,54.83,35.03,'adddddddddddddddd2','2010-04-02 20:02:34','2010-04-02 20:02:34',1),(12,'fffff','zzzzzzzzzzzzz',33.00,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,1,54.83,35.03,'fffff','2010-04-02 20:11:02','2010-04-02 20:11:02',1),(13,'sdfsdfsd','efrgrgreg',24.00,1,NULL,1,1,1,NULL,NULL,NULL,1,1,54.83,35.03,'sdfsdfsd','2010-04-02 20:23:44','2010-04-02 20:23:44',1);
+insert  into `location`(`id`,`name`,`description`,`depth`,`is_free`,`price`,`location_flow_id`,`location_fundus_id`,`location_relief_id`,`location_type_id`,`location_scope_id`,`address_id`,`created_by`,`updated_by`,`latitude`,`longitude`,`slug`,`created_at`,`updated_at`,`version`) values (1,'agrtwgare','dfgwegr',NULL,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,1,55.06,35.60,'agrtwgare','2010-04-01 14:16:53','2010-04-01 14:16:53',1),(2,'zxczxc23tgwe','r32fwergt',NULL,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,1,55.52,35.60,'zxczxc23tgwe','2010-04-01 14:16:53','2010-04-01 14:16:53',1),(3,'fsdgfthyj2er3t4g','5qdwfegrhtyjtrqwfegrh',NULL,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,1,55.32,36.16,'fsdgfthyj2er3t4g','2010-04-01 14:16:53','2010-04-01 14:16:53',1),(4,'yahooo','1111111111111111',NULL,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,1,54.70,36.95,'yahooo','2010-04-01 14:16:53','2010-04-01 14:16:53',1),(5,'gdfdfgdfg','dfhestnrnsfgn',NULL,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,1,54.90,35.95,'gdfdfgdfg','2010-04-01 14:16:53','2010-04-01 14:16:53',1),(6,'drgsdfh','srghsdthj',NULL,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,1,55.18,37.40,'drgsdfh','2010-04-01 14:16:53','2010-04-01 14:16:53',1),(7,'asdftyui','wertwertgaerh',NULL,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,1,55.60,38.48,'asdftyui','2010-04-01 14:16:53','2010-04-01 14:16:53',1),(8,'etujtdy','ertertery',NULL,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,1,55.34,36.37,'etujtdy','2010-04-01 14:16:53','2010-04-01 14:16:53',1),(9,'Пляж на угре','Красивое место',NULL,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,1,54.83,35.03,'','2010-04-01 14:16:53','2010-04-01 14:16:53',1),(10,'23432','wrefrw4tegrbfdqwtegrdtg',423423424.00,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,1,54.83,35.03,'23432','2010-04-02 20:01:54','2010-04-02 20:01:54',1),(11,'adddddddddddddddd2','efdsvfdbdgbdgndgn',2.00,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,1,54.83,35.03,'adddddddddddddddd2','2010-04-02 20:02:34','2010-04-02 20:02:34',1),(12,'fffff','zzzzzzzzzzzzz',33.00,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,1,54.83,35.03,'fffff','2010-04-02 20:11:02','2010-04-02 20:11:02',1),(13,'sdfsdfsd','efrgrgreg',24.00,1,NULL,5,5,4,NULL,NULL,NULL,1,1,54.83,35.03,'sdfsdfsd','2010-04-02 20:23:44','2010-04-02 20:23:44',1);
 
 /*Table structure for table `location_flow` */
 
@@ -261,11 +280,11 @@ CREATE TABLE `location_flow` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 
 /*Data for the table `location_flow` */
 
-insert  into `location_flow`(`id`,`name`) values (1,'Отсутсвует'),(2,'Медленное'),(3,'Среднее'),(4,'Быстрое');
+insert  into `location_flow`(`id`,`name`) values (5,'Отсутсвует'),(6,'Медленное'),(7,'Среднее'),(8,'Быстрое');
 
 /*Table structure for table `location_fundus` */
 
@@ -275,11 +294,11 @@ CREATE TABLE `location_fundus` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 
 /*Data for the table `location_fundus` */
 
-insert  into `location_fundus`(`id`,`name`) values (1,'Галька'),(2,'Песок'),(3,'Глина'),(4,'Ил');
+insert  into `location_fundus`(`id`,`name`) values (5,'Галька'),(6,'Песок'),(7,'Глина'),(8,'Ил');
 
 /*Table structure for table `location_relief` */
 
@@ -289,11 +308,11 @@ CREATE TABLE `location_relief` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 /*Data for the table `location_relief` */
 
-insert  into `location_relief`(`id`,`name`) values (1,'Отмель'),(2,'Яма'),(3,'Перекаты');
+insert  into `location_relief`(`id`,`name`) values (4,'Отмель'),(5,'Яма'),(6,'Перекаты');
 
 /*Table structure for table `location_scope` */
 
@@ -304,11 +323,11 @@ CREATE TABLE `location_scope` (
   `name` varchar(50) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 /*Data for the table `location_scope` */
 
-insert  into `location_scope`(`id`,`name`) values (1,'Все'),(2,'Друзья'),(3,'Только я');
+insert  into `location_scope`(`id`,`name`) values (4,'Все'),(5,'Друзья'),(6,'Только я');
 
 /*Table structure for table `location_type` */
 
@@ -319,11 +338,11 @@ CREATE TABLE `location_type` (
   `name` varchar(50) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 /*Data for the table `location_type` */
 
-insert  into `location_type`(`id`,`name`) values (1,'Пруд');
+insert  into `location_type`(`id`,`name`) values (2,'Пруд');
 
 /*Table structure for table `location_version` */
 
@@ -356,7 +375,7 @@ CREATE TABLE `location_version` (
 
 /*Data for the table `location_version` */
 
-insert  into `location_version`(`id`,`name`,`description`,`depth`,`is_free`,`price`,`location_flow_id`,`location_fundus_id`,`location_relief_id`,`location_type_id`,`location_scope_id`,`address_id`,`created_by`,`updated_by`,`latitude`,`longitude`,`slug`,`created_at`,`updated_at`,`version`) values (1,'agrtwgare','dfgwegr',NULL,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,1,55.06,35.60,'agrtwgare','2010-04-01 14:16:53','2010-04-01 14:16:53',1),(2,'zxczxc23tgwe','r32fwergt',NULL,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,1,55.52,35.60,'zxczxc23tgwe','2010-04-01 14:16:53','2010-04-01 14:16:53',1),(3,'fsdgfthyj2er3t4g','5qdwfegrhtyjtrqwfegrh',NULL,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,1,55.32,36.16,'fsdgfthyj2er3t4g','2010-04-01 14:16:53','2010-04-01 14:16:53',1),(4,'yahooo','1111111111111111',NULL,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,1,54.70,36.95,'yahooo','2010-04-01 14:16:53','2010-04-01 14:16:53',1),(5,'gdfdfgdfg','dfhestnrnsfgn',NULL,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,1,54.90,35.95,'gdfdfgdfg','2010-04-01 14:16:53','2010-04-01 14:16:53',1),(6,'drgsdfh','srghsdthj',NULL,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,1,55.18,37.40,'drgsdfh','2010-04-01 14:16:53','2010-04-01 14:16:53',1),(7,'asdftyui','wertwertgaerh',NULL,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,1,55.60,38.48,'asdftyui','2010-04-01 14:16:53','2010-04-01 14:16:53',1),(8,'etujtdy','ertertery',NULL,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,1,55.34,36.37,'etujtdy','2010-04-01 14:16:53','2010-04-01 14:16:53',1),(9,'Пляж на угре','Красивое место',NULL,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,1,54.83,35.03,'','2010-04-01 14:16:53','2010-04-01 14:16:53',1),(10,'23432','wrefrw4tegrbfdqwtegrdtg',423423424.00,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,1,54.83,35.03,'23432','2010-04-02 20:01:54','2010-04-02 20:01:54',1),(11,'adddddddddddddddd2','efdsvfdbdgbdgndgn',2.00,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,1,54.83,35.03,'adddddddddddddddd2','2010-04-02 20:02:34','2010-04-02 20:02:34',1),(12,'fffff','zzzzzzzzzzzzz',33.00,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,1,54.83,35.03,'fffff','2010-04-02 20:11:02','2010-04-02 20:11:02',1),(13,'sdfsdfsd','efrgrgreg',24.00,1,NULL,1,1,1,NULL,NULL,NULL,1,1,54.83,35.03,'sdfsdfsd','2010-04-02 20:23:44','2010-04-02 20:23:44',1);
+insert  into `location_version`(`id`,`name`,`description`,`depth`,`is_free`,`price`,`location_flow_id`,`location_fundus_id`,`location_relief_id`,`location_type_id`,`location_scope_id`,`address_id`,`created_by`,`updated_by`,`latitude`,`longitude`,`slug`,`created_at`,`updated_at`,`version`) values (1,'agrtwgare','dfgwegr',NULL,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,1,55.06,35.60,'agrtwgare','2010-04-01 14:16:53','2010-04-01 14:16:53',1),(2,'zxczxc23tgwe','r32fwergt',NULL,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,1,55.52,35.60,'zxczxc23tgwe','2010-04-01 14:16:53','2010-04-01 14:16:53',1),(3,'fsdgfthyj2er3t4g','5qdwfegrhtyjtrqwfegrh',NULL,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,1,55.32,36.16,'fsdgfthyj2er3t4g','2010-04-01 14:16:53','2010-04-01 14:16:53',1),(4,'yahooo','1111111111111111',NULL,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,1,54.70,36.95,'yahooo','2010-04-01 14:16:53','2010-04-01 14:16:53',1),(5,'gdfdfgdfg','dfhestnrnsfgn',NULL,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,1,54.90,35.95,'gdfdfgdfg','2010-04-01 14:16:53','2010-04-01 14:16:53',1),(6,'drgsdfh','srghsdthj',NULL,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,1,55.18,37.40,'drgsdfh','2010-04-01 14:16:53','2010-04-01 14:16:53',1),(7,'asdftyui','wertwertgaerh',NULL,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,1,55.60,38.48,'asdftyui','2010-04-01 14:16:53','2010-04-01 14:16:53',1),(8,'etujtdy','ertertery',NULL,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,1,55.34,36.37,'etujtdy','2010-04-01 14:16:53','2010-04-01 14:16:53',1),(9,'Пляж на угре','Красивое место',NULL,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,1,54.83,35.03,'','2010-04-01 14:16:53','2010-04-01 14:16:53',1),(10,'23432','wrefrw4tegrbfdqwtegrdtg',423423424.00,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,1,54.83,35.03,'23432','2010-04-02 20:01:54','2010-04-02 20:01:54',1),(11,'adddddddddddddddd2','efdsvfdbdgbdgndgn',2.00,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,1,54.83,35.03,'adddddddddddddddd2','2010-04-02 20:02:34','2010-04-02 20:02:34',1),(12,'fffff','zzzzzzzzzzzzz',33.00,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,1,54.83,35.03,'fffff','2010-04-02 20:11:02','2010-04-02 20:11:02',1),(13,'sdfsdfsd','efrgrgreg',24.00,1,NULL,5,5,4,NULL,NULL,NULL,1,1,54.83,35.03,'sdfsdfsd','2010-04-02 20:23:44','2010-04-02 20:23:44',1);
 
 /*Table structure for table `profile` */
 
@@ -424,11 +443,11 @@ CREATE TABLE `profit` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL,
   `location_id` int(11) DEFAULT NULL,
-  `begin` datetime NOT NULL,
+  `date` datetime NOT NULL,
   `cordage` text NOT NULL,
   `description` text NOT NULL,
   `fish_id` int(11) DEFAULT NULL,
-  `style_id` int(11) DEFAULT NULL,
+  `weight` float(18,2) DEFAULT NULL,
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL,
   `created_by` int(11) NOT NULL,
@@ -436,17 +455,17 @@ CREATE TABLE `profit` (
   PRIMARY KEY (`id`),
   KEY `location_id_idx` (`location_id`),
   KEY `fish_id_idx` (`fish_id`),
-  KEY `style_id_idx` (`style_id`),
   KEY `created_by_idx` (`created_by`),
   KEY `updated_by_idx` (`updated_by`),
   CONSTRAINT `profit_created_by_profile_id` FOREIGN KEY (`created_by`) REFERENCES `profile` (`id`),
   CONSTRAINT `profit_fish_id_fish_id` FOREIGN KEY (`fish_id`) REFERENCES `fish` (`id`),
   CONSTRAINT `profit_location_id_location_id` FOREIGN KEY (`location_id`) REFERENCES `location` (`id`),
-  CONSTRAINT `profit_style_id_style_id` FOREIGN KEY (`style_id`) REFERENCES `style` (`id`),
   CONSTRAINT `profit_updated_by_profile_id` FOREIGN KEY (`updated_by`) REFERENCES `profile` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 /*Data for the table `profit` */
+
+insert  into `profit`(`id`,`name`,`location_id`,`date`,`cordage`,`description`,`fish_id`,`weight`,`created_at`,`updated_at`,`created_by`,`updated_by`) values (1,'qqqqqqqqqqq',13,'2010-10-22 00:00:00','asdasdasdasd','asssss',8,123.00,'2010-10-22 23:45:44','2010-10-22 23:45:44',1,1);
 
 /*Table structure for table `profit_detail` */
 
@@ -454,7 +473,6 @@ DROP TABLE IF EXISTS `profit_detail`;
 
 CREATE TABLE `profit_detail` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `time` datetime NOT NULL,
   `profit_id` int(11) DEFAULT NULL,
   `style_id` int(11) DEFAULT NULL,
   `fish_id` int(11) DEFAULT NULL,
@@ -498,11 +516,11 @@ CREATE TABLE `sf_guard_group` (
   `updated_at` datetime NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=cp1251;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=cp1251;
 
 /*Data for the table `sf_guard_group` */
 
-insert  into `sf_guard_group`(`id`,`name`,`description`,`created_at`,`updated_at`) values (1,'admin','Administrator group','2010-10-02 16:40:16','2010-10-02 16:40:16');
+insert  into `sf_guard_group`(`id`,`name`,`description`,`created_at`,`updated_at`) values (1,'Array','Array','2010-10-22 22:57:04','2010-10-22 22:57:04'),(2,'admin','Administrator group','2010-10-25 22:47:55','2010-10-25 22:47:55');
 
 /*Table structure for table `sf_guard_group_permission` */
 
@@ -521,8 +539,6 @@ CREATE TABLE `sf_guard_group_permission` (
 
 /*Data for the table `sf_guard_group_permission` */
 
-insert  into `sf_guard_group_permission`(`group_id`,`permission_id`,`created_at`,`updated_at`) values (1,1,'2010-10-02 16:40:17','2010-10-02 16:40:17');
-
 /*Table structure for table `sf_guard_permission` */
 
 DROP TABLE IF EXISTS `sf_guard_permission`;
@@ -535,11 +551,11 @@ CREATE TABLE `sf_guard_permission` (
   `updated_at` datetime NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=cp1251;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=cp1251;
 
 /*Data for the table `sf_guard_permission` */
 
-insert  into `sf_guard_permission`(`id`,`name`,`description`,`created_at`,`updated_at`) values (1,'admin','Administrator permission','2010-10-02 16:40:16','2010-10-02 16:40:16');
+insert  into `sf_guard_permission`(`id`,`name`,`description`,`created_at`,`updated_at`) values (1,'Array','Array','2010-10-22 22:57:04','2010-10-22 22:57:04'),(2,'admin','Administrator permission','2010-10-25 22:47:55','2010-10-25 22:47:55');
 
 /*Table structure for table `sf_guard_remember_key` */
 
@@ -555,11 +571,9 @@ CREATE TABLE `sf_guard_remember_key` (
   PRIMARY KEY (`id`,`ip_address`),
   KEY `user_id_idx` (`user_id`),
   CONSTRAINT `sf_guard_remember_key_user_id_sf_guard_user_id` FOREIGN KEY (`user_id`) REFERENCES `sf_guard_user` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=cp1251;
+) ENGINE=InnoDB DEFAULT CHARSET=cp1251;
 
 /*Data for the table `sf_guard_remember_key` */
-
-insert  into `sf_guard_remember_key`(`id`,`user_id`,`remember_key`,`ip_address`,`created_at`,`updated_at`) values (4,1,'c2fa8108f7500b87c60c53d52fd4bedb','127.0.0.1','2010-10-13 23:20:06','2010-10-13 23:20:06');
 
 /*Table structure for table `sf_guard_user` */
 
@@ -579,11 +593,11 @@ CREATE TABLE `sf_guard_user` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`),
   KEY `is_active_idx_idx` (`is_active`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=cp1251;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=cp1251;
 
 /*Data for the table `sf_guard_user` */
 
-insert  into `sf_guard_user`(`id`,`username`,`algorithm`,`salt`,`password`,`is_active`,`is_super_admin`,`last_login`,`created_at`,`updated_at`) values (1,'admin','PasswordKeeper::generate','236b714fabd69d6ea8b97dd4f22de12e','236b714fabd69d6ea8b97dd4f22de12eadmin',1,1,'2010-10-13 23:20:06','2010-10-02 16:40:16','2010-10-13 23:20:06');
+insert  into `sf_guard_user`(`id`,`username`,`algorithm`,`salt`,`password`,`is_active`,`is_super_admin`,`last_login`,`created_at`,`updated_at`) values (1,'admin','PasswordKeeper::generate','2d91a3f4d339fefeed009e959ff3163c','2d91a3f4d339fefeed009e959ff3163c2d91a3f4d339fefeed009e959ff3163cadmin',1,0,'2010-10-23 01:23:28','2010-10-22 22:56:58','2010-10-23 01:23:28');
 
 /*Table structure for table `sf_guard_user_group` */
 
@@ -601,8 +615,6 @@ CREATE TABLE `sf_guard_user_group` (
 ) ENGINE=InnoDB DEFAULT CHARSET=cp1251;
 
 /*Data for the table `sf_guard_user_group` */
-
-insert  into `sf_guard_user_group`(`user_id`,`group_id`,`created_at`,`updated_at`) values (1,1,'2010-10-02 16:40:17','2010-10-02 16:40:17');
 
 /*Table structure for table `sf_guard_user_permission` */
 
@@ -634,7 +646,7 @@ CREATE TABLE `style` (
 
 /*Data for the table `style` */
 
-insert  into `style`(`id`,`name`) values (3,'Спининг'),(1,'Троллинг'),(2,'Фидер');
+insert  into `style`(`id`,`name`) values (1,'Спининг'),(2,'Троллинг'),(3,'Фидер');
 
 /*Table structure for table `tag` */
 
@@ -652,11 +664,9 @@ CREATE TABLE `tag` (
   KEY `triple1_idx` (`triple_namespace`),
   KEY `triple2_idx` (`triple_key`),
   KEY `triple3_idx` (`triple_value`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=cp1251;
+) ENGINE=InnoDB DEFAULT CHARSET=cp1251;
 
 /*Data for the table `tag` */
-
-insert  into `tag`(`id`,`name`,`is_triple`,`triple_namespace`,`triple_key`,`triple_value`) values (1,'qwe',0,NULL,NULL,NULL),(2,'asd',0,NULL,NULL,NULL),(3,'zxc',0,NULL,NULL,NULL),(4,'1111',0,NULL,NULL,NULL),(5,'2222',0,NULL,NULL,NULL),(6,'qqqqwe',0,NULL,NULL,NULL),(7,'aaasd',0,NULL,NULL,NULL),(8,'zxcxc',0,NULL,NULL,NULL),(9,'22222',0,NULL,NULL,NULL),(10,'qqqqq',0,NULL,NULL,NULL),(11,'aaaaa',0,NULL,NULL,NULL),(12,'zzzzz',0,NULL,NULL,NULL);
 
 /*Table structure for table `tagging` */
 
@@ -670,11 +680,9 @@ CREATE TABLE `tagging` (
   PRIMARY KEY (`id`),
   KEY `tag_idx` (`tag_id`),
   KEY `taggable_idx` (`taggable_model`,`taggable_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=cp1251;
+) ENGINE=InnoDB DEFAULT CHARSET=cp1251;
 
 /*Data for the table `tagging` */
-
-insert  into `tagging`(`id`,`tag_id`,`taggable_model`,`taggable_id`) values (1,1,'Talk',186),(2,2,'Talk',186),(3,3,'Talk',186),(4,4,'Talk',186),(5,5,'Talk',186),(6,6,'Talk',186),(7,7,'Talk',186),(8,8,'Talk',186),(9,6,'Talk',187),(10,2,'Talk',187),(11,4,'Talk',187),(12,9,'Talk',187),(13,10,'Talk',187),(14,11,'Talk',187),(15,12,'Talk',187);
 
 /*Table structure for table `talk` */
 
@@ -696,11 +704,9 @@ CREATE TABLE `talk` (
   CONSTRAINT `talk_created_by_profile_id` FOREIGN KEY (`created_by`) REFERENCES `profile` (`id`),
   CONSTRAINT `talk_talk_section_id_talk_section_id` FOREIGN KEY (`talk_section_id`) REFERENCES `talk_section` (`id`),
   CONSTRAINT `talk_updated_by_profile_id` FOREIGN KEY (`updated_by`) REFERENCES `profile` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=188 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `talk` */
-
-insert  into `talk`(`id`,`name`,`message`,`talk_section_id`,`created_by`,`updated_by`,`created_at`,`updated_at`) values (1,'цук','укеукеуке',2,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(2,'5куе','кецукецукеуке',2,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(3,'5ку4е','кецукецукеуке',2,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(4,'5к5у4е','кецукецукеуке',2,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(5,'5к5у4е','к5ецукецукеуке',2,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(6,'5к5у4е','к5ецукецукеуке',2,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(7,'5к5у4е','к5ец5уке5цук5еу5ке',2,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(8,'5к354у4е','к5ец54уке5цу4к5еу5ке',2,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(9,'53к3544у4е','к5ец54у4ке55цу4к55еу5ке',2,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(10,'534к355544у4е','к5ец54у4ке55цу4к55еу5ке',2,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(11,'534к355544у4е','к5е5ц54у45ке55ц5у4к55еу5ке',2,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(12,'534к355544у4е','к5е5ц54у45ке55ц5у4к455е4у5ке',2,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(13,'534к3555333344у4е','к5е5ц54у45ке55ц5у4к455е4у5ке',2,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(14,'534к3555333344у4е','к5е5ц54у45ке55ц5у4к455е4у5ке',2,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(15,'534к3555333344у4е','к5е5ц54у45ке55ц5у4к455е4у5ке',2,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(16,'534к3555333344у4е','к5е5ц54у45ке55ц5у4к455е4у5ке',2,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(17,'534к3555333344у4е','к5е5ц54у45ке55ц5у4к455е4у5ке',2,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(18,'534к3555333344у4е','к5е5ц54у45ке55ц5у4к455е4у5ке',2,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(19,'534к3555333344у4е','к5е5ц54у45ке55ц5у4к455е4у5ке',2,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(20,'534к3555333344у4е','к5е5ц54у45ке55ц5у4к455е4у5ке',2,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(21,'534к3555333344у4е','к5е5ц54у45ке55ц5у4к455е4у5ке',2,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(22,'534к3555333344у4е','к5е5ц54у45ке55ц5у4к455е4у5ке',2,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(23,'534к3555333344у4е','к5е5ц54у45ке55ц5у4к455е4у5ке',2,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(24,'534к3555333344у4е','к5е5ц54у45ке55ц5у4к455е4у5ке',2,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(25,'534к3555333344у4е','к5е5ц54у45ке55ц5у4к455е4у5ке',2,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(26,'534к3555333344у4е','к5е5ц54у45ке55ц5у4к455е4у5ке',2,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(27,'534к3555333344у4е','к5е5ц54у45ке55ц5у4к455е4у5ке',2,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(28,'534к3555333344у4е','к5е5ц54у45ке55ц5у4к455е4у5ке',2,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(29,'534к3555333344у4е','к5е5ц54у45ке55ц5у4к455е4у5ке',2,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(30,'534к3555333344у4е','к5е5ц54у45ке55ц5у4к455е4у5ке',2,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(31,'534к3555333344у4е','к5е5ц54у45ке55ц5у4к455е4у5ке',2,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(32,'534к3555333344у4е','к5е5ц54у45ке55ц5у4к455е4у5ке',2,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(33,'534к3555333344у4е','к5е5ц54у45ке55ц5у4к455е4у5ке',2,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(34,'534к3555333344у4е','к5е5ц54у45ке55ц5у4к455е4у5ке',2,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(35,'534к3555333344у4е','к5е5ц54у45ке55ц5у4к455е4у5ке',2,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(36,'534к3555333344у4е','к5е5ц54у45ке55ц5у4к455е4у5ке',2,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(37,'534к3555333344у4е','к5е5ц54у45ке55ц5у4к455е4у5ке',2,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(38,'534к3555333344у4е','к5е5ц54у45ке55ц5у4к455е4у5ке',2,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(39,'534к3555333344у4е','к5е5ц54у45ке55ц5у4к455е4у5ке',2,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(40,'534к3555333344у4е','к5е5ц54у45ке55ц5у4к455е4у5ке',2,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(41,'534к3555333344у4е','к5е5ц54у45ке55ц5у4к455е4у5ке',2,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(42,'534к3555333344у4е','к5е5ц54у45ке55ц5у4к455е4у5ке',2,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(43,'534к3555333344у4е','к5е5ц54у45ке55ц5у4к455е4у5ке',2,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(44,'534к3555333344у4е','к5е5ц54у45ке55ц5у4к455е4у5ке',2,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(45,'534к3555333344у4е','к5е5ц54у45ке55ц5у4к455е4у5ке',2,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(46,'534к3555333344у4е','к5е5ц54у45ке55ц5у4к455е4у5ке',2,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(47,'534к3555333344у4е','к5е5ц54у45ке55ц5у4к455е4у5ке',2,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(48,'534к3555333344у4е','к5е5ц54у45ке55ц5у4к455е4у5ке',2,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(49,'534к3555333344у4е','к5е5ц54у45ке55ц5у4к455е4у5ке',2,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(50,'534к3555333344у4е','к5е5ц54у45ке55ц5у4к455е4у5ке',2,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(51,'534к3555333344у4е','к5е5ц54у45ке55ц5у4к455е4у5ке',2,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(52,'534к3555333344у4е','к5е5ц54у45ке55ц5у4к455е4у5ке',2,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(53,'534к3555333344у4е','к5е5ц54у45ке55ц5у4к455е4у5ке',2,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(54,'534к3555333344у4е','к5е5ц54у45ке55ц5у4к455е4у5ке',2,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(55,'534к3555333344у4е','к5е5ц54у45ке55ц5у4к455е4у5ке',2,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(56,'534к3555333344у4е','к5е5ц54у45ке55ц5у4к455е4у5ке',2,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(57,'534к3555333344у4е','к5е5ц54у45ке55ц5у4к455е4у5ке',2,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(58,'534к3555333344у4е','к5е5ц54у45ке55ц5у4к455е4у5ке',2,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(59,'534к3555333344у4е','к5е5ц54у45ке55ц5у4к455е4у5ке',2,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(60,'534к3555333344у4е','к5е5ц54у45ке55ц5у4к455е4у5ке',2,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(61,'534к3555333344у4е','к5е5ц54у45ке55ц5у4к455е4у5ке',2,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(62,'534к3555333344у4е','к5е5ц54у45ке55ц5у4к455е4у5ке',2,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(63,'534к3555333344у4е','к5е5ц54у45ке55ц5у4к455е4у5ке',2,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(64,'534к3555333344у4е','к5е5ц54у45ке55ц5у4к455е4у5ке',2,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(65,'534к3555333344у4е','к5е5ц54у45ке55ц5у4к455е4у5ке',2,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(66,'534к3555333344у4е','к5е5ц54у45ке55ц5у4к455е4у5ке',2,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(67,'534к3555333344у4е','к5е5ц54у45ке55ц5у4к455е4у5ке',2,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(68,'534к3555333344у4е','к5е5ц54у45ке55ц5у4к455е4у5ке',2,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(69,'534к3555333344у4е','к5е5ц54у45ке55ц5у4к455е4у5ке',2,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(70,'534к3555333344у4е','к5е5ц54у45ке55ц5у4к455е4у5ке',2,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(71,'534к3555333344у4е','к5е5ц54у45ке55ц5у4к455е4у5ке',2,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(72,'534к3555333344у4е','к5е5ц54у45ке55ц5у4к455е4у5ке',2,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(73,'534к3555333344у4е','к5е5ц54у45ке55ц5у4к455е4у5ке',2,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(74,'534к3555333344у4е','к5е5ц54у45ке55ц5у4к455е4у5ке',2,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(75,'534к3555333344у4е','к5е5ц54у45ке55ц5у4к455е4у5ке',2,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(76,'534к3555333344у4е','к5е5ц54у45ке55ц5у4к455е4у5ке',2,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(77,'534к3555333344у4е','к5е5ц54у45ке55ц5у4к455е4у5ке',2,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(78,'534к3555333344у4е','к5е5ц54у45ке55ц5у4к455е4у5ке',2,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(79,'534к3555333344у4е','к5е5ц54у45ке55ц5у4к455е4у5ке',2,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(80,'534к3555333344у4е','к5е5ц54у45ке55ц5у4к455е4у5ке',2,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(81,'534к3555333344у4е','к5е5ц54у45ке55ц5у4к455е4у5ке',2,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(82,'534к3555333344у4е','к5е5ц54у45ке55ц5у4к455е4у5ке',2,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(83,'534к3555333344у4е','к5е5ц54у45ке55ц5у4к455е4у5ке',2,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(84,'534к3555333344у4е','к5е5ц54у45ке55ц5у4к455е4у5ке',2,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(85,'534к3555333344у4е','к5е5ц54у45ке55ц5у4к455е4у5ке',2,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(86,'534к3555333344у4е','к5е5ц54у45ке55ц5у4к455е4у5ке',2,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(87,'534к3555333344у4е','к5е5ц54у45ке55ц5у4к455е4у5ке',2,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(88,'534к3555333344у4е','к5е5ц54у45ке55ц5у4к455е4у5ке',2,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(89,'534к3555333344у4е','к5е5ц54у45ке55ц5у4к455е4у5ке',2,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(90,'534к3555333344у4е','к5е5ц54у45ке55ц5у4к455е4у5ке',2,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(91,'534к3555333344у4е','к5е5ц54у45ке55ц5у4к455е4у5ке',3,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(92,'534к3555333344у4е','к5е5ц54у45ке55ц5у4к455е4у5ке',3,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(93,'534к3555333344у4е','к5е5ц54у45ке55ц5у4к455е4у5ке',3,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(94,'534к3555333344у4е','к5е5ц54у45ке55ц5у4к455е4у5ке',3,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(95,'534к3555333344у4е','к5е5ц54у45ке55ц5у4к455е4у5ке',3,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(96,'534к3555333344у4е','к5е5ц54у45ке55ц5у4к455е4у5ке',3,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(97,'534к3555333344у4е','к5е5ц54у45ке55ц5у4к455е4у5ке',3,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(98,'534к3555333344у4е','к5е5ц54у45ке55ц5у4к455е4у5ке',3,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(99,'534к3555333344у4е','к5е5ц54у45ке55ц5у4к455е4у5ке',3,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(100,'534к3555333344у4е','к5е5ц54у45ке55ц5у4к455е4у5ке',3,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(101,'534к3555333344у4е','к5е5ц54у45ке55ц5у4к455е4у5ке',3,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(102,'534к3555333344у4е','к5е5ц54у45ке55ц5у4к455е4у5ке',3,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(103,'534к3555333344у4е','к5е5ц54у45ке55ц5у4к455е4у5ке',3,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(104,'534к3555333344у4е','к5е5ц54у45ке55ц5у4к455е4у5ке',3,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(105,'534к3555333344у4е','к5е5ц54у45ке55ц5у4к455е4у5ке',3,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(106,'534к3555333344у4е','к5е5ц54у45ке55ц5у4к455е4у5ке',3,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(107,'534к3555333344у4е','к5е5ц54у45ке55ц5у4к455е4у5ке',3,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(108,'534к3555333344у4е','к5е5ц54у45ке55ц5у4к455е4у5ке',3,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(109,'534к3555333344у4е','к5е5ц54у45ке55ц5у4к455е4у5ке',3,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(110,'534к3555333344у4е','к5е5ц54у45ке55ц5у4к455е4у5ке',3,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(111,'534к3555333344у4е','к5е5ц54у45ке55ц5у4к455е4у5ке',3,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(112,'534к3555333344у4е','к5е5ц54у45ке55ц5у4к455е4у5ке',3,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(113,'534к3555333344у4е','к5е5ц54у45ке55ц5у4к455е4у5ке',3,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(114,'534к3555333344у4е','к5е5ц54у45ке55ц5у4к455е4у5ке',3,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(115,'534к3555333344у4е','к5е5ц54у45ке55ц5у4к455е4у5ке',3,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(116,'534к3555333344у4е','к5е5ц54у45ке55ц5у4к455е4у5ке',3,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(117,'534к3555333344у4е','к5е5ц54у45ке55ц5у4к455е4у5ке',3,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(118,'534к3555333344у4е','к5е5ц54у45ке55ц5у4к455е4у5ке',3,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(119,'534к3555333344у4е','к5е5ц54у45ке55ц5у4к455е4у5ке',3,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(120,'534к3555333344у4е','к5е5ц54у45ке55ц5у4к455е4у5ке',3,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(121,'534к3555333344у4е','к5е5ц54у45ке55ц5у4к455е4у5ке',3,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(122,'534к3555333344у4е','к5е5ц54у45ке55ц5у4к455е4у5ке',3,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(123,'534к3555333344у4е','к5е5ц54у45ке55ц5у4к455е4у5ке',3,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(124,'534к3555333344у4е','к5е5ц54у45ке55ц5у4к455е4у5ке',3,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(125,'534к3555333344у4е','к5е5ц54у45ке55ц5у4к455е4у5ке',3,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(126,'534к3555333344у4е','к5е5ц54у45ке55ц5у4к455е4у5ке',3,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(127,'534к3555333344у4е','к5е5ц54у45ке55ц5у4к455е4у5ке',3,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(128,'534к3555333344у4е','к5е5ц54у45ке55ц5у4к455е4у5ке',3,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(129,'534к3555333344у4е','к5е5ц54у45ке55ц5у4к455е4у5ке',3,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(130,'534к3555333344у4е','к5е5ц54у45ке55ц5у4к455е4у5ке',3,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(131,'534к3555333344у4е','к5е5ц54у45ке55ц5у4к455е4у5ке',3,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(132,'534к3555333344у4е','к5е5ц54у45ке55ц5у4к455е4у5ке',3,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(133,'534к3555333344у4е','к5е5ц54у45ке55ц5у4к455е4у5ке',3,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(134,'534к3555333344у4е','к5е5ц54у45ке55ц5у4к455е4у5ке',3,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(135,'1','23',3,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(136,'1','23',3,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(137,'1','23',3,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(138,'1','23',3,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(139,'1','23',3,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(140,'1','23',3,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(141,'1','23',3,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(142,'1','23',3,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(143,'1','23',3,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(144,'1','23',3,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(145,'1','23',3,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(146,'1','23',3,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(147,'1','23',3,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(148,'1','23',3,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(149,'1','23',3,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(150,'1','23',3,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(151,'1','23',4,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(152,'1','23',4,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(153,'31','243',4,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(154,'31','243',4,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(155,'4','243',4,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(156,'5','243',4,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(157,'6','243',4,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(158,'7','243',4,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(159,'8','243',4,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(160,'31','243',4,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(161,'4','243',4,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(162,'31','243',4,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(163,'6','243',4,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(164,'31','243',4,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(165,'6','243',4,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(166,'31','243',4,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(167,'6','243',4,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(168,'31','243',4,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(169,'31','243',4,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(170,'31','243',4,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(171,'7','243',4,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(172,'6','243',4,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(173,'7','243',4,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(174,'8','243',4,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(175,'9','243',4,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(176,'0','243',4,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(177,'1','243',4,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(178,'2','243',4,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(179,'3','243',4,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(180,'4','243',4,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(181,'5','243',4,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(182,'6','243',4,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(183,'7','243',4,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(184,'8','243',4,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(185,'9','243',4,1,1,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(186,'qwe111','[0:15:39] endlessnamelessone: да хуйли ширка дело такое\r\n[0:15:57] endlessnamelessone: а чо еще маза писечка.джпг не открываеться\r\n[0:16:10] endlessnamelessone: это жопа.вирсы компьютер сломаешь\r\n[0:42:39] limitium: кто со мнйо дрочить на ночьбудет?',4,1,1,'2010-10-13 23:32:51','2010-10-13 23:32:51'),(187,'qweqweasdasd234234','[0:15:09] limitium: блять что ж ты за пидар\r\n[0:15:13] limitium: один тут хуже другого\r\n[0:15:16] limitium: тьфу блять\r\n[0:15:20] limitium: гнилой народ',4,1,1,'2010-10-13 23:41:59','2010-10-13 23:41:59');
 
 /*Table structure for table `talk_section` */
 
@@ -714,11 +720,9 @@ CREATE TABLE `talk_section` (
   `rgt` int(11) DEFAULT NULL,
   `level` smallint(6) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `talk_section` */
-
-insert  into `talk_section`(`id`,`parent`,`name`,`lft`,`rgt`,`level`) values (1,NULL,'Снасти',1,8,0),(2,1,'Сети',2,5,1),(3,1,'Наживки',6,7,1),(4,2,'Путанки',3,4,2);
 
 /*Table structure for table `vote` */
 
@@ -733,14 +737,20 @@ CREATE TABLE `vote` (
   `comment_id` int(11) DEFAULT NULL,
   `profit_id` int(11) DEFAULT NULL,
   `profile_id` int(11) DEFAULT NULL,
+  `talk_id` int(11) DEFAULT NULL,
+  `fish_event_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `vote_toward_idx` (`toward`),
   KEY `voter_idx` (`voter`),
   KEY `vote_comment_id_comment_id` (`comment_id`),
+  KEY `vote_fish_event_id_fish_event_id` (`fish_event_id`),
   KEY `vote_location_id_location_id` (`location_id`),
   KEY `vote_profile_id_profile_id` (`profile_id`),
   KEY `vote_profit_id_profit_id` (`profit_id`),
+  KEY `vote_talk_id_talk_id` (`talk_id`),
+  CONSTRAINT `vote_talk_id_talk_id` FOREIGN KEY (`talk_id`) REFERENCES `talk` (`id`),
   CONSTRAINT `vote_comment_id_comment_id` FOREIGN KEY (`comment_id`) REFERENCES `comment` (`id`),
+  CONSTRAINT `vote_fish_event_id_fish_event_id` FOREIGN KEY (`fish_event_id`) REFERENCES `fish_event` (`id`),
   CONSTRAINT `vote_location_id_location_id` FOREIGN KEY (`location_id`) REFERENCES `location` (`id`),
   CONSTRAINT `vote_profile_id_profile_id` FOREIGN KEY (`profile_id`) REFERENCES `profile` (`id`),
   CONSTRAINT `vote_profit_id_profit_id` FOREIGN KEY (`profit_id`) REFERENCES `profit` (`id`),
