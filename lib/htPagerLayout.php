@@ -4,6 +4,9 @@ class htPagerLayout extends Doctrine_Pager_Layout {
 
     public function __construct($pager, $pagerRange, $urlMask) {
         parent::__construct($pager, $pagerRange, $urlMask);
+        
+        $this->setTemplate('{link_to}{%page}{/link_to}');
+        $this->setSelectedTemplate('<span>{%page}</span>');
     }
 
     public function display($options = array(), $return = false) {

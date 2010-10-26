@@ -50,8 +50,6 @@ class Talk extends BaseTalk {
                         $url
         );
 
-        $pagerLayout->setTemplate('{link_to}{%page}{/link_to}');
-        $pagerLayout->setSelectedTemplate('<span>{%page}</span>');
         return $pagerLayout;
     }
 
