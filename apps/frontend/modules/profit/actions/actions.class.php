@@ -10,10 +10,27 @@
  */
 class profitActions extends sfActions {
 
-    public function executeIndex(sfWebRequest $request) {
-        $this->profits = Doctrine::getTable('Profit')
-                        ->createQuery('a')
-                        ->execute();
+    public function executeList(sfWebRequest $request) {
+        $url = 'profit/list?page={%page_number}';
+
+        $query = Doctrine::getTable('Profit')->createQuery('p')
+                        ->leftJoin('p.CommentProfit')
+                        ->leftJoin('p.CreatedBy')
+                        ->leftJoin('p.Location ')
+                        ->orderBy('p.created_at desc');
+
+
+        $this->pagerLayout = new htPagerLayout(
+                        new Doctrine_Pager(
+                                $query,
+                                $request->getParameter("page", 1),
+                                5
+                        ),
+                        new Doctrine_Pager_Range_Sliding(array(
+                            'chunk' => 10
+                        )),
+                        $url
+        );
     }
 
     public function executeShow(sfWebRequest $request) {
@@ -78,7 +95,7 @@ class profitActions extends sfActions {
         if ($form->isValid()) {
             $detailsData = (array) json_decode($form->getValue('details'));
             return $form->save()->updateDetails($detailsData);
-        }else{
+        } else {
             foreach ($form->getFormFieldSchema() as $name => $formField) {
                 if ($formField->getError() != "") {
                     echo "ActionClassName::methodName( ): Field Error for :" . $name . " : " . $formField->getError();

@@ -79,7 +79,7 @@ abstract class PluginsfGuardUser extends BasesfGuardUser
       return call_user_func_array($callable, array($this->getUsername(), $password, $this));
     }
     else
-    {
+    {        
       return $this->checkPasswordByGuard($password);
     }
   }
@@ -102,7 +102,7 @@ abstract class PluginsfGuardUser extends BasesfGuardUser
     {
       throw new sfException(sprintf('The algorithm callable "%s" is not callable.', $algorithm));
     }
-
+    
     return $this->getPassword() == call_user_func_array($algorithm, array($this->getSalt().$password));
   }
 
