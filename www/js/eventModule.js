@@ -1,4 +1,4 @@
-function profitModule(){
+function eventModule(){
     this.menu = null;
     this.bar = null;
     this.profit = null;
@@ -9,18 +9,18 @@ function profitModule(){
         editableZoom: 14
     };
 }
-profitModule.name = 'profitModule';
-ModuleManager.add(profitModule);
+eventModule.name = 'eventModule';
+ModuleManager.add(eventModule);
 
 
-profitModule.prototype.afterInit = function(){
-    fb('initing... profitModule' )
+eventModule.prototype.afterInit = function(){
+    fb('initing... eventModule' )
     this.mm = app.getModule('mapModule');
     this.initMenu();
     this.initListeners();
 }
 
-profitModule.prototype.initListeners = function(){
+eventModule.prototype.initListeners = function(){
     var self = this;
     $('.removeProfitDetail').live('click', function(){
         $($(this).parents()[1]).remove();
@@ -29,14 +29,14 @@ profitModule.prototype.initListeners = function(){
     });
 }
 
-profitModule.prototype.initMenu = function(){
+eventModule.prototype.initMenu = function(){
     this.menu = {
         link: $('#new_profit',this.mm.addEditItem('<a id="new_profit" class="editItem" href=""><img class="mapIcon" src="/images/profit.png"/>add profit</a>'))
         .click(this.startEdit.delegate(this))
     };
 }
 
-profitModule.prototype.startEdit = function(){
+eventModule.prototype.startEdit = function(){
     if(this.mm.getEditor() != this){
         this.mm.cancelEdit();
         this.mm.setEditor(this);
@@ -50,14 +50,14 @@ profitModule.prototype.startEdit = function(){
     return false;
 }
 
-profitModule.prototype.cancelEdit = function(){
+eventModule.prototype.cancelEdit = function(){
     this.mm.handlers.onLocationClick = this.mm.getOnLocationClick().delegate(this.mm)
     this.barRemove();
     this.menu.link.removeClass('disabled');
 }
 
 
-profitModule.prototype.getOnLocationClick =  function(){
+eventModule.prototype.getOnLocationClick =  function(){
     var self  = this;
     return function(location){
         self.location = location;
@@ -66,7 +66,7 @@ profitModule.prototype.getOnLocationClick =  function(){
     }
 }
 
-profitModule.prototype.showForm = function(form,marker,loader){
+eventModule.prototype.showForm = function(form,marker,loader){
     this.infoWindow = this.mm.openInfo(marker.getPosition(),this.addSubmitHandler(form));
     
     var date = $('#profit_date');
@@ -92,7 +92,7 @@ profitModule.prototype.showForm = function(form,marker,loader){
     loader.remove();
 }
 
-profitModule.prototype.countDetailQty = function(){
+eventModule.prototype.countDetailQty = function(){
     var qty = 0;
     $('.tableContainer tbody tr').each(function(){
         qty += parseFloat(this.getAttribute('qty'));
@@ -100,7 +100,7 @@ profitModule.prototype.countDetailQty = function(){
     $('#detailTotal').html(qty);
 }
 
-profitModule.prototype.addSubmitHandler = function(form){
+eventModule.prototype.addSubmitHandler = function(form){
     var self = this;
 
     $('#profit_location_id', form).val(self.location.id);
@@ -146,11 +146,11 @@ profitModule.prototype.addSubmitHandler = function(form){
     return form;
 }
 
-profitModule.prototype.onSaveChange = function(disabled){
+eventModule.prototype.onSaveChange = function(disabled){
     this.barSaveDisabled(disabled);
 }
 
-profitModule.prototype.barCreate = function(){
+eventModule.prototype.barCreate = function(){
     var bar = this.mm.updateBar('<img class="mapIcon" src="/images/profit.png"/><span id="bar_msg"></span></span><input id="bar_save" class="button disabled" type="button" value="save"/><input id="bar_cancel" class="button" type="button" value="cancel"/>');
     this.bar = {
         msg: $('#bar_msg',bar),
@@ -159,15 +159,15 @@ profitModule.prototype.barCreate = function(){
         .click(this.mm.cancelEdit.delegate(this.mm))
     };
 }
-profitModule.prototype.barRemove = function(){
+eventModule.prototype.barRemove = function(){
     this.bar = null;
     this.mm.updateBar();
 }
-profitModule.prototype.barSetMsg = function(text){
+eventModule.prototype.barSetMsg = function(text){
     this.bar.msg.text(text);
     this.mm.centerBar();
 }
-profitModule.prototype.barSaveDisabled = function(disabled){
+eventModule.prototype.barSaveDisabled = function(disabled){
     if(disabled){
         this.bar.save.addClass('disabled').unbind('click');
     }else{
