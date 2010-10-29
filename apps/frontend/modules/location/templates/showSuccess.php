@@ -41,12 +41,13 @@
         <ul>
             <li><span href="#" id="tabComments" class="selected">Комментарии (<i id="commentCounter"><?php echo sizeof($comments); ?></i>)</span></li>
             <li><span href="#" id="tabProfits">Отчеты (<i id="profitCounter"><?php echo sizeof($profits); ?></i>)</span></li>
+            <li><span href="#" id="tabEvents">События (<i id="eventCounter"><?php echo sizeof($events); ?></i>)</span></li>
         </ul>
     </div>
 <?php include_partial('comment/comments', array('for' => 'location', 'form' => $form, 'comments' => $comments)); ?>
 
 
-                <div id="profitContainer">                
+                <div id="profitContainer">
     <?php foreach ($profits as $profit): ?>
     <?php include_partial('profit/briefLocation', array('profit' => $profit)); ?>
     <?php endforeach; ?>
