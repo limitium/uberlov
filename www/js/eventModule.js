@@ -62,7 +62,7 @@ eventModule.prototype.getOnLocationClick =  function(){
     return function(location){
         self.location = location;
         var loader = this.mm.showLoader(location.marker.getPosition(),'<img src="/images/loader-small.gif" />');
-        app.getForm('/profit/newMap',this.showForm.delegate(this,location.marker,loader));
+        app.getForm('/event/new',this.showForm.delegate(this,location.marker,loader));
     }
 }
 
