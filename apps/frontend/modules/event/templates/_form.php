@@ -17,8 +17,15 @@
         <tbody>
             <?php echo $form->renderGlobalErrors() ?>
                     <tr>
-                        <th><?php echo $form['name']->renderLabel() ?></th>
+                        <th><?php echo $form['date']->renderLabel() ?></th>
                         <td>
+                    <?php echo $form['date']->renderError() ?>
+                    <?php echo $form['date'] ?>
+                </td>
+            </tr>
+            <tr>
+                <th><?php echo $form['name']->renderLabel() ?></th>
+                <td>
                     <?php echo $form['name']->renderError() ?>
                     <?php echo $form['name'] ?>
                 </td>

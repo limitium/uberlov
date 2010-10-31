@@ -690,12 +690,18 @@ VoteTalk:
       local: talk_id
       foreign: id
 FishEvent:
+  actAs:
+    Blameable: 
+    Timestampable: 
   columns:
     id:
       primary: true
       type: integer(4)
       notnull: true
       autoincrement: true
+    date:
+      type: date
+      notnull: true
     name:
       type: string(50)
       notnull: true
@@ -704,6 +710,7 @@ FishEvent:
       notnull: true
     location_id:
       type: integer(4)
+      notnull: true
   relations:
     Location:
       local: location_id

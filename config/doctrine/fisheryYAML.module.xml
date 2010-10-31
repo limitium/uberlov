@@ -411,11 +411,18 @@
         </attribute>
       </orm-properties>
     </table>
-    <table name="FishEvent" visPositionX="24" visPositionY="78" visSizeX="0" visSizeX2="120" visSizeY="0" visSizeY2="73">
+    <table name="FishEvent" visPositionX="26" visPositionY="78" visSizeX="0" visSizeX2="120" visSizeY="0" visSizeY2="87">
       <column auto-increment="true" name="id" primary="true" required="true" size="4" type="integer"/>
+      <column name="date" required="true" type="date"/>
       <column name="name" required="true" size="50" type="string"/>
       <column name="description" required="true" type="string"/>
-      <column name="location_id" size="4" type="integer"/>
+      <column name="location_id" required="true" size="4" type="integer"/>
+      <orm-properties>
+        <attribute name="actAs">
+          <attribute name="Blameable"/>
+          <attribute name="Timestampable"/>
+        </attribute>
+      </orm-properties>
     </table>
     <table name="VoteFishEvent" visPositionX="-24" visPositionY="-4" visSizeX="0" visSizeX2="133" visSizeY="0" visSizeY2="31">
       <column name="fish_event_id" size="4" type="integer"/>
@@ -428,7 +435,7 @@
         </attribute>
       </orm-properties>
     </table>
-    <table name="CommentFishEvent" visPositionX="-103" visPositionY="170" visSizeX="0" visSizeX2="131" visSizeY="0" visSizeY2="31">
+    <table name="CommentFishEvent" visPositionX="-108" visPositionY="216" visSizeX="0" visSizeX2="131" visSizeY="0" visSizeY2="31">
       <column name="FishEvent_id" size="4" type="integer"/>
       <orm-properties>
         <attribute name="inheritance">
