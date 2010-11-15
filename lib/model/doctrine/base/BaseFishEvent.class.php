@@ -87,6 +87,8 @@ abstract class BaseFishEvent extends sfDoctrineRecord
              'foreign' => 'FishEvent_id'));
 
         $blameable0 = new Doctrine_Template_Blameable();
+        $timestampable0 = new Doctrine_Template_Timestampable();
         $this->actAs($blameable0);
+        $this->actAs($timestampable0);
     }
 }
