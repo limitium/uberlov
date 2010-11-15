@@ -91,4 +91,25 @@ class Profile extends BaseProfile {
                 ->execute();
     }
 
+    public function getInbox() {
+        return Doctrine::getTable('Inbox')
+                ->createQuery('i')
+                ->leftJoin('i.Inboxed id')
+                ->leftJoin('i.CommentInbox с')
+                ->where('i.created_by = ?', $this->getId())
+                ->andWhere('id.id = ?', $this->getId())
+                ->execute();
+    }
+
+    public function getLocation() {
+        return Doctrine::getTable('Location')
+                ->createQuery('l')
+                ->where('l.created_by = ?', $this->getId())
+                ->execute();
+    }
+
+     public function getFriends() {
+        return parent::getFriend();
+    }
+
 }

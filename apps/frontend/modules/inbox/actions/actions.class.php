@@ -11,13 +11,7 @@
 class inboxActions extends sfActions {
 
     public function executeList(sfWebRequest $request) {
-        $this->inboxes = Doctrine::getTable('Inbox')
-                        ->createQuery('i')
-                        ->leftJoin('i.Inboxed id')
-                        ->leftJoin('i.CommentInbox с')
-                        ->where('i.created_by = ?', $this->getUser()->getProfile()->getId())
-                        ->andWhere('id.id = ?', $this->getUser()->getProfile()->getId())
-                        ->execute();
+        $this->inboxes = $this->getUser()->getProfile()->getInbox();
         $this->csrf = $this->getCSRFToken();
     }
 
@@ -157,7 +151,7 @@ class inboxActions extends sfActions {
         }
     }
 
-    private function getProfiles($inboxed) {        
+    private function getProfiles($inboxed) {
         $ids = array();
         $names = array();
         foreach (explode(',', $inboxed) as $name) {

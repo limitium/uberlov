@@ -31,7 +31,7 @@ eventModule.prototype.initListeners = function(){
 
 eventModule.prototype.initMenu = function(){
     this.menu = {
-        link: $('#new_profit',this.mm.addEditItem('<a id="new_profit" class="editItem" href=""><img class="mapIcon" src="/images/profit.png"/>add profit</a>'))
+        link: $('#new_profit',this.mm.addEditItem('<a id="new_profit" class="editItem" href=""><img class="mapIcon" src="/images/profit.png"/>add event</a>'))
         .click(this.startEdit.delegate(this))
     };
 }

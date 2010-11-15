@@ -16,15 +16,15 @@ class userComponents extends sfComponents {
      * @param sfRequest $request A request object
      */
     public function executeMenu(sfWebRequest $request) {
-        if (!$this->getUser()->isAnonymous()) {
-            $myInboxCount = Doctrine::getTable('Inbox')->myInboxCount();
-        }
         $this->menu = array();
-        $this->menu[] = array('url' => '@homepage', 'title' => 'Профаил');
-        $this->menu[] = array('url' => '@homepage', 'title' => 'Мои места');
-        $this->menu[] = array('url' => 'inbox/list', 'title' => 'Инбоксы (<span id="myInboxCounter">' . $myInboxCount . '</span>)');
-        $this->menu[] = array('url' => 'collector/import', 'title' => 'Импорт');
-        $this->menu[] = array('url' => 'collector/import', 'title' => 'Экспорт');
+        if (!$this->getUser()->isAnonymous()) {
+            $profile = $this->getUser()->getProfile();
+
+            $this->menu[] = array('url' => 'profile/edit?id=' . $profile->getId(), 'title' => 'Профаил ' . $profile->nick_name);
+            $this->menu[] = array('url' => 'profile/friends', 'title' => 'Друзья (<span id="myFriendCounter">' . sizeof($profile->getFriends()) . '</span>)');
+            $this->menu[] = array('url' => 'location/my', 'title' => 'Мои места (<span id="myLocationCounter">' . sizeof($profile->getLocation()) . '</span>)');
+            $this->menu[] = array('url' => 'inbox/list', 'title' => 'Инбоксы (<span id="myInboxCounter">' . sizeof($profile->getInbox()) . '</span>)');
+        }
     }
 
 }

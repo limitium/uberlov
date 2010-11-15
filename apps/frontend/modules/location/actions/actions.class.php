@@ -40,7 +40,7 @@ class locationActions extends sfActions {
                         ->execute();
 
         $this->events = Doctrine_Query::create()->select()->from('FishEvent e')
-//                        ->leftJoin('e.CreatedBy p')
+                        ->leftJoin('e.CreatedBy p')
                         ->leftJoin('e.VoteFishEvent v')
                         ->where('e.location_id = ?', $this->location->getId())
                         ->execute();
