@@ -741,6 +741,31 @@ CommentFishEvent:
     FishEvent:
       local: FishEvent_id
       foreign: id
+Photo:
+  actAs:
+    Blameable:
+      listener: BlameableFishery
+  columns:
+    id:
+      primary: true
+      type: integer(4)
+      autoincrement: true
+    name:
+      type: string(36)
+      notnull: true
+PhotoLocation:
+  inheritance:
+    type: column_aggregation
+    keyValue: location
+    keyField: toward
+    extends: Photo
+  columns:
+    location_id:
+      type: integer(4)
+  relations:
+    Location:
+      local: location_id
+      foreign: id
 options:
   type: INNODB
   charset: utf8

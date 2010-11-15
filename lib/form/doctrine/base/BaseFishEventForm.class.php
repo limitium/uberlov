@@ -22,6 +22,8 @@ abstract class BaseFishEventForm extends BaseFormDoctrine
       'location_id' => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Location'), 'add_empty' => false)),
       'created_by'  => new sfWidgetFormInputText(),
       'updated_by'  => new sfWidgetFormInputText(),
+      'created_at'  => new sfWidgetFormDateTime(),
+      'updated_at'  => new sfWidgetFormDateTime(),
     ));
 
     $this->setValidators(array(
@@ -32,6 +34,8 @@ abstract class BaseFishEventForm extends BaseFormDoctrine
       'location_id' => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Location'))),
       'created_by'  => new sfValidatorInteger(),
       'updated_by'  => new sfValidatorInteger(),
+      'created_at'  => new sfValidatorDateTime(),
+      'updated_at'  => new sfValidatorDateTime(),
     ));
 
     $this->widgetSchema->setNameFormat('fish_event[%s]');
