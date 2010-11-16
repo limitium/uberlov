@@ -12,6 +12,11 @@ class photoActions extends sfActions {
 
     public function executeUpload(sfWebRequest $request) {
 
+        $fileData = array_pop($request->getFiles());
+
+        move_uploaded_file($fileData["tmp_name"], sfConfig::get('sf_upload_dir') . DIRECTORY_SEPARATOR . $fileData['name']);
+
+        die("FILEID:" . $fileData['name']);
     }
 
 }
