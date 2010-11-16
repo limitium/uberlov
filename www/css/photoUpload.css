@@ -1,0 +1,15 @@
+.fileLoader {
+    border:1px solid #949DAD;
+    height:0.5em;
+    margin:2px 0;
+    overflow:hidden;
+    padding:1px;
+    width:300px;
+}
+
+.fileLoader div {
+    background:none repeat scroll 0 0 #D4E4FF;
+    font-size:0;
+    height:100%;
+    width:0;
+}

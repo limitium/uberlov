@@ -80,9 +80,10 @@
                 </dd>
             </dl>
         </fieldset>
-        <div>
+        <?php include_partial('photo') ?>
+                    <div>
             <?php echo $form->renderHiddenFields(false) ?>
             <input type="submit" value="Добавить" />
-        </div>
+        </div>        
     </form>
 </div>
