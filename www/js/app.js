@@ -30,7 +30,7 @@ $.extend({
     }
 });
 app = {
-    baseUrl:'/frontend_dev.php',
+    baseUrl:'',
     csrf: {},
     modules: {},
     
