@@ -61,26 +61,7 @@ function inbox(){
                             ul.append('<li profile="'+this.id+'"><a href="'+app.baseUrl + '/profile/show/id/'+this.id+'">'+this.name+'</a><a class="delete" href=""> x </a></li>')
                         });
                     }else{
-                        $.blockUI({
-                            message: 'Никто не найден.',
-                            fadeIn: 700,
-                            fadeOut: 700,
-                            timeout: 2000,
-                            showOverlay: false,
-                            css: {
-                                width: '350px',
-                                top: '10px',
-                                left: '',
-                                right: '10px',
-                                border: 'none',
-                                padding: '5px',
-                                backgroundColor: '#000',
-                                '-webkit-border-radius': '10px',
-                                '-moz-border-radius': '10px',
-                                opacity: .6,
-                                color: '#fff'
-                            }
-                        }); 
+                        app.popUp('Никто не найден');
                     }
                 }
             });

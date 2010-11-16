@@ -13,105 +13,223 @@ photoUpload.prototype.afterInit = function(){
 }
 
 photoUpload.prototype.initUploader = function(){
-    this.uploader = new plupload.Uploader({
-        runtimes : 'flash,gears,silverlight,browserplus,html5,html4',
-        //        runtimes : 'html5,html4',
-        max_file_size : '10mb',
-        unique_names : true,
-        multipart: true,
-        chunk_size: '10kb',
-        url : app.baseUrl + '/photo/upload',
-        browse_button : 'pickfiles',
-        container : 'container',
-        flash_swf_url : app.baseUrl + '/plupload/js/plupload.flash.swf',
-        silverlight_xap_url : app.baseUrl + '/plupload/js/plupload.silverlight.xap',
-        // Specify what files to browse for
-        filters : [{
-            title : "Image files",
-            extensions : "jpg,jpeg,gif,png"
-        }],
-        resize : {
-            width : 320,
-            height : 240,
-            quality : 90
-        }
-    });
+    this.uploader = new SWFUpload({
+        // Backend Settings
+        upload_url: app.baseUrl + '/photo/upload',
+        post_params: {
+            "PHPSESSID": "3kbal94vseio0c4h16nirutjp4"
+        },
 
-    this.uploader.bind('Init', this.onInit.delegate(this));
+        // File Upload Settings
+        file_size_limit : "5 MB",	// 2MB
+        file_types : "*.jpg;*.jpeg;",
+        file_types_description : "Images",
+        file_upload_limit : "0",
 
-    this.uploader.init();
+        // Event Handler Settings - these functions as defined in Handlers.js
+        //  The handlers are not part of SWFUpload but are part of my website and control how
+        //  my website reacts to the SWFUpload events.
+        file_queue_error_handler : this.onFileQueueError.delegate(this),
+        file_dialog_complete_handler : this.onFileDialogComplete.delegate(this),
+        file_queued_handler: this.onFileQueued.delegate(this),
+        upload_progress_handler : this.onUploadProgress.delegate(this),
+        upload_error_handler : this.onUploadError.delegate(this),
+        upload_success_handler : this.onUploadSuccess.delegate(this),
+        upload_complete_handler : this.onUploadComplete.delegate(this),
 
-    this.uploader.bind('FilesAdded',this.onAdd.delegate(this));
-    
-    this.uploader.bind('FilesRemoved',this.onRemove.delegate(this));
+        // Button Settings
+        button_image_url : "images/SmallSpyGlassWithTransperancy_17x18.png",
+        button_placeholder_id : "uploadButton",
+        button_width: 180,
+        button_height: 18,
+        button_text : '<span class="button">Добавить фото <span class="buttonSmall">(5 MB Max)</span></span>',
+        button_text_style : '.button { font-family: Helvetica, Arial, sans-serif; font-size: 12pt; } .buttonSmall { font-size: 10pt; }',
+        button_text_top_padding: 0,
+        button_text_left_padding: 18,
+        button_window_mode: SWFUpload.WINDOW_MODE.TRANSPARENT,
+        button_cursor: SWFUpload.CURSOR.HAND,
 
-    this.uploader.bind('UploadProgress', this.onProgress.delegate(this));
+        // Flash Settings
+        flash_url :  app.baseUrl + "/swfupload/swfupload.swf",
 
-    this.uploader.bind('Error', this.onError.delegate(this));
-
-    this.uploader.bind('FileUploaded', this.onUploaded.delegate(this));
+        // Debug Settings
+        debug: false
+    })
 }
-
-photoUpload.prototype.initListeners= function() {
+photoUpload.prototype.initListeners = function(){
     var self = this;
-    $('#uploadfiles').click(function(e) {
-        self.uploader.start();
-        e.preventDefault();
-    });
 
     $('#photoList a').live('click', function(){
-        var file = self.uploader.getFile($(this).attr('fileId'));
-        self.uploader.removeFile(file);
+        var fileId = $(this).attr('fileId');
+        self.uploader.cancelUpload(fileId, false);
+        $('#' + fileId).remove();
         return false;
     });
+
+}
+photoUpload.prototype.onFileQueueError = function (file, errorCode, message) {
+    app.popUp('Ошибка очреди ' + file.name + '<br/>' +message);
+
 }
 
-photoUpload.prototype.onInit = function(up, params) {
-    $('#photoList').html("<tr><td>Current runtime: " + params.runtime + "</td></tr>");
+photoUpload.prototype.onFileQueued =  function(file) {
+    fb(file);
+
+    $('#photoList').append(
+        '<tr id="' + file.id + '">' +
+        '<td>' +file.name +'</td><td>' +
+        '<td><div class="fileLoader"><div id="loader_' + file.id + '" style=""></div></div></td><td>' +
+        '<a href="" fileId = "' + file.id + '">x</a>' +
+        '</tr>');
+
+
+}
+photoUpload.prototype.onFileDialogComplete =  function(numFilesSelected, numFilesQueued) {
+    try {
+        if (numFilesQueued > 0) {
+    //            this.uploader.startUpload();
+    }
+    } catch (ex) {
+        fb(ex);
+    }
 }
 
-photoUpload.prototype.onAdd = function(up, files){
-    $.each(files, function(i, file) {
-        $('#photoList').append(
-            '<tr id="' + file.id + '">' +
-            '<td>' +file.name +'</td><td>' +
-            '<td><div class="fileLoader"><div id="loader_' + file.id + '" style=""></div></div></td><td>' +
-            '' + plupload.formatSize(file.size) + '</td><td>'+
-            '<a href="" fileId = "' + file.id + '">x</a>' +
-            '</tr>');
-    });
+photoUpload.prototype.onUploadProgress = function(file, bytesLoaded) {
 
-    up.refresh(); // Reposition Flash/Silverlight
+    var percent = Math.ceil((bytesLoaded / file.size) * 100);
+    fb('file ' + file.id + ' ' + percent);
+    var loader = $('#loader_'+file.id);
+    if (percent === 100) {
+        $(loader.parents()[1]).remove();
+    } else {
+        loader.width(percent + '%');
+            
+    }
 }
 
-photoUpload.prototype.onRemove = function(up, files){
-    $.each(files, function(i, file) {
-        $('#' + file.id).remove();
-    });
 
-    up.refresh(); // Reposition Flash/Silverlight
+photoUpload.prototype.onUploadSuccess = function(file, serverData) {
+
+    fb('uploaded ' + file.id);
+    //
+    if (serverData.substring(0, 7) === "FILEID:") {
+        //        addImage("thumbnail.php?id=" + serverData.substring(7));
+        //
+        //        progress.setStatus("Thumbnail Created.");
+        //        progress.toggleCancel(false);
+        app.popUp(file.name + '<br/>' + 'ok!!!!!!');
+        $($('#'+file.id).children()[1]).append('<img src="'+app.baseUrl+'/uploads/'+file.name + '"/>');
+
+    } else {
+        alert(serverData)
+        app.popUp('Ошибка загрузки ' + file.name + '<br/>' + serverData);
+    }
+
+
 }
 
-photoUpload.prototype.onProgress= function(up, file) {
-    $('#loader_' + file.id).width(file.percent + '%');
-    
-    fb('uploading ' + file.id)
-    fb('percent ' + file.percent)
-    fb( file);
+photoUpload.prototype.onUploadComplete = function(file) {
+    fb('uploaded complete' + file.id);
+    /*  I want the next upload to continue automatically so I'll call startUpload here */
+    if (this.uploader.getStats().files_queued > 0) {
+        this.uploader.startUpload();
+    }
 }
 
-photoUpload.prototype.onError= function(up, err) {
-    $('#photoList').append("<div>Error: " + err.code +
-        ", Message: " + err.message +
-        (err.file ? ", File: " + err.file.name : "") +
-        "</div>"
-        );
+photoUpload.prototype.onUploadError = function(file, errorCode, message) {
+    fb('error ' + file.id);
+    var imageName =  "error.gif";
+    var progress;
+    try {
+        switch (errorCode) {
+            case SWFUpload.UPLOAD_ERROR.FILE_CANCELLED:
+                try {
+                //                    progress = new FileProgress(file,  'loader_' + file.id);
+                //                    progress.setCancelled();
+                //                    progress.setStatus("Cancelled");
+                //                    progress.toggleCancel(false);
+                }
+                catch (ex1) {
+                    fb(ex1);
+                }
+                break;
+            case SWFUpload.UPLOAD_ERROR.UPLOAD_STOPPED:
+                try {
+                //                    progress = new FileProgress(file,  'loader_' + file.id);
+                //                    progress.setCancelled();
+                //                    progress.setStatus("Stopped");
+                //                    progress.toggleCancel(true);
+                }
+                catch (ex2) {
+                    fb(ex2);
+                }
+            case SWFUpload.UPLOAD_ERROR.UPLOAD_LIMIT_EXCEEDED:
+                imageName = "uploadlimit.gif";
+                break;
+            default:
+                alert(message);
+                break;
+        }
 
-    up.refresh(); // Reposition Flash/Silverlight
+        addImage("images/" + imageName);
+
+    } catch (ex3) {
+        fb(ex3);
+    }
+
 }
 
-photoUpload.prototype.onUploaded= function(up, file) {
-    $($('#loader_'+ file.id).parents()[1]).html('готово')
-    fb('uploaded ' )
-    fb( file);
+
+function addImage(src) {
+    var newImg = document.createElement("img");
+    newImg.style.margin = "5px";
+
+    document.getElementById("photoList").appendChild(newImg);
+    if (newImg.filters) {
+        try {
+            newImg.filters.item("DXImageTransform.Microsoft.Alpha").opacity = 0;
+        } catch (e) {
+            // If it is not set initially, the browser will throw an error.  This will set it if it is not set yet.
+            newImg.style.filter = 'progid:DXImageTransform.Microsoft.Alpha(opacity=' + 0 + ')';
+        }
+    } else {
+        newImg.style.opacity = 0;
+    }
+
+    newImg.onload = function () {
+        fadeIn(newImg, 0);
+    };
+    newImg.src = src;
 }
+
+function fadeIn(element, opacity) {
+    var reduceOpacityBy = 5;
+    var rate = 30;	// 15 fps
+
+
+    if (opacity < 100) {
+        opacity += reduceOpacityBy;
+        if (opacity > 100) {
+            opacity = 100;
+        }
+
+        if (element.filters) {
+            try {
+                element.filters.item("DXImageTransform.Microsoft.Alpha").opacity = opacity;
+            } catch (e) {
+                // If it is not set initially, the browser will throw an error.  This will set it if it is not set yet.
+                element.style.filter = 'progid:DXImageTransform.Microsoft.Alpha(opacity=' + opacity + ')';
+            }
+        } else {
+            element.style.opacity = opacity / 100;
+        }
+    }
+
+    if (opacity < 100) {
+        setTimeout(function () {
+            fadeIn(element, opacity);
+        }, rate);
+    }
+}
+
+
