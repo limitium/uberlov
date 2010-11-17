@@ -1,0 +1,58 @@
+.photos {
+    margin-bottom:1em;
+    border: 1px solid blue;
+}
+
+.photos {
+    position:relative;
+}
+
+.photos .image {
+    cursor:pointer;
+    height:341px;
+    line-height:341px;
+    vertical-align:bottom;
+    width:452px;
+}
+
+.photos .image {
+    overflow:hidden;
+    position:relative;
+    text-align:center;
+    vertical-align:middle;
+}
+
+.photos .thumbs {
+    list-style:none outside none;
+    margin:0 0 0 -2px;
+    overflow:hidden;
+    padding:2px 0 0 2px;
+    width:460px;
+}
+.photos .thumbs {
+    list-style:none outside none;
+}
+
+.photos .thumbs li {
+    float:left;
+    margin:0;
+    padding:0;
+    position:relative;
+}
+
+.photos .thumbs li a {
+    border:0 none;
+    display:block;
+    outline:0 none;
+}
+
+.photos .thumbs li a.loaded img {
+    filter:none;
+    opacity:1;
+}
+.photos .thumbs li a img {
+    display:block;
+    opacity:0.5;
+    width: 88px;
+    border:0 none;
+}
