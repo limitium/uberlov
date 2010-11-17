@@ -39,13 +39,14 @@ class ImageUploader extends ImageShackUploader {
         } else {
             throw new Exception("Authorization imageshack.us fail :'(");
         }
+        return $this;
     }
 
     public function upload($file) {
         if (!$this->cookie) {
             $this->login();
         }
-        $response = parent::upload($file, '1280x1280', true, '', true);
+        $response = parent::upload($file, '1280x1280', true, '', true,'image/jpeg');
         if (get_class($response) == 'SimpleXMLElement') {
             if (isset($response->links)) {
                 return (object) array('file' => $response->files->image->__toString(),

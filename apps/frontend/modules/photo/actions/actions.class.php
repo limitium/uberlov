@@ -11,12 +11,37 @@
 class photoActions extends sfActions {
 
     public function executeUpload(sfWebRequest $request) {
+        $text = 'Ошибка загрузки';
+        try {
+            $fileData = array_pop($request->getFiles());
 
-        $fileData = array_pop($request->getFiles());
+            $validator = new sfValidatorFile(array(
+                        'max_size' => 1024 * 1024,
+                        'mime_types' => array(
+                            'image/jpeg',
+                            'image/pjpeg',
+                            'image/png',
+                            'image/x-png',
+                            'image/gif',
+                            'application/octet-stream'
+                        )
+                    ));
 
-        move_uploaded_file($fileData["tmp_name"], sfConfig::get('sf_upload_dir') . DIRECTORY_SEPARATOR . $fileData['name']);
+            $file = $validator->clean($fileData);
+            $file instanceof sfValidatedFile;
 
-        die("FILEID:" . $fileData['name']);
+            $uploader = new ImageUploader();
+
+            $uploaded = $uploader->login()->upload($file->getTempName());
+
+            $text = json_encode(array(
+                        'id' => 1,
+                        'thumb' => $uploaded->thumb
+                    ));
+        } catch (Exception $e) {
+            $text = $e->getMessage();
+        }
+        return $this->renderText($text);
     }
 
 }
