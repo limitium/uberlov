@@ -4,11 +4,13 @@
     margin:2px 0;
     overflow:hidden;
     padding:1px;
-    width:300px;
+    width:100px;
 }
 
 .fileLoader div {
     background:none repeat scroll 0 0 #D4E4FF;
+    background-image:url("/images/progress_bar.gif");
+    background-repeat:repeat-x;
     font-size:0;
     height:100%;
     width:0;

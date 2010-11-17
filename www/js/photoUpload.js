@@ -32,7 +32,9 @@ photoUpload.prototype.initUploader = function(){
         file_queue_error_handler : this.onFileQueueError.delegate(this),
         file_dialog_complete_handler : this.onFileDialogComplete.delegate(this),
         file_queued_handler: this.onFileQueued.delegate(this),
-        upload_progress_handler : this.onUploadProgress.delegate(this),
+
+        //        суки не делают фикс!!!
+        //        upload_progress_handler : this.onUploadProgress.delegate(this),
         upload_error_handler : this.onUploadError.delegate(this),
         upload_success_handler : this.onUploadSuccess.delegate(this),
         upload_complete_handler : this.onUploadComplete.delegate(this),
@@ -62,11 +64,19 @@ photoUpload.prototype.initListeners = function(){
     $('#photoList a').live('click', function(){
         var fileId = $(this).attr('fileId');
         self.uploader.cancelUpload(fileId, false);
-        $('#' + fileId).remove();
+        self.removeFile(fileId);
         return false;
     });
 
 }
+
+
+photoUpload.prototype.removeFile = function (fileId) {
+    $('#' + fileId).fadeOut(function(){
+        $(this).remove();
+    });
+}
+
 photoUpload.prototype.onFileQueueError = function (file, errorCode, message) {
     app.popUp('Ошибка очреди ' + file.name + '<br/>' +message);
 
@@ -85,12 +95,8 @@ photoUpload.prototype.onFileQueued =  function(file) {
 
 }
 photoUpload.prototype.onFileDialogComplete =  function(numFilesSelected, numFilesQueued) {
-    try {
-        if (numFilesQueued > 0) {
-            this.uploadNext();
-        }
-    } catch (ex) {
-        fb(ex);
+    if (numFilesQueued > 0) {
+        this.uploadNext();
     }
 }
 
@@ -108,7 +114,16 @@ photoUpload.prototype.onUploadSuccess = function(file, serverData) {
 
     var resp = $.parseJSON(serverData);
     if (resp) {
-        $('.thumbs').append('<li><a href="'+resp.thumb+'"><img src="'+resp.thumb+'"/></a></li>')
+        
+        var row = $('<li><a href="'+resp.image+'"><img style="display:none" src="'+resp.thumb+'"/></a></li>');
+fb($('img',row))
+        $('img',row).load(function(){
+            $(this).fadeIn();
+        });
+
+        $('.thumbs').append(row);
+        
+        this.removeFile(file.id);
     } else {
         $($('#'+file.id).children()[1]).html(serverData);
         app.popUp('Ошибка загрузки ' + file.name + '<br/>' + serverData);
@@ -168,9 +183,10 @@ photoUpload.prototype.onUploadError = function(file, errorCode, message) {
 }
     
 photoUpload.prototype.uploadNext = function() {
-    fb('uploading ' + this.uploader.getQueueFile(0).id);
+    var file = this.uploader.getQueueFile(0);
+    fb('uploading ' + file.id);
 
-    this.uploader.startResizedUpload(this.uploader.getQueueFile(0).id, 800, 600, SWFUpload.RESIZE_ENCODING.JPEG, 95);
-    
+    this.uploader.startResizedUpload(file.id, 800, 600, SWFUpload.RESIZE_ENCODING.JPEG, 95);
+    this.onUploadProgress(file,file.size);
 //            this.uploader.startUpload();
 }
