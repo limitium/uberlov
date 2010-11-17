@@ -36,6 +36,7 @@ class photoActions extends sfActions {
 
             $text = json_encode(array(
                         'id' => 1,
+                        'image' => $uploaded->image,
                         'thumb' => $uploaded->thumb
                     ));
         } catch (Exception $e) {

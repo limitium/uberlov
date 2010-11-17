@@ -14,6 +14,14 @@
     vertical-align:bottom;
     width:452px;
 }
+.photos .image img{
+    width:452px;
+}
+
+.photos .image img.loading{
+    margin: 150px auto;
+    width:100px;
+}
 
 .photos .image {
     overflow:hidden;
