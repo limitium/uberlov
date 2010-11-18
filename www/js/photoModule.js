@@ -13,7 +13,13 @@ photoModule.prototype.afterInit = function(){
 
 photoModule.prototype.initListeners = function(){
     $('.thumbs a').live('click', function(){
+        fb('a click')
         var a = $(this);
+
+        if(a.attr('removing')){
+            return false;
+        }
+        
         a.addClass('loaded');
         var photos = $(this).parents()[2];
         var imageHolder = $('.image', photos);

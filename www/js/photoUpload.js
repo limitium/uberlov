@@ -60,7 +60,7 @@ photoUpload.prototype.initUploader = function(){
 }
 photoUpload.prototype.initListeners = function(){
     var self = this;
-
+    
     $('#photoList a').live('click', function(){
         var fileId = $(this).attr('fileId');
         self.uploader.cancelUpload(fileId, false);
@@ -68,11 +68,20 @@ photoUpload.prototype.initListeners = function(){
         return false;
     });
 
-    $('.thumbs a').live('hover', function(){
-        },function(){
-        
-        });
+    $('.thumbs a').live('mouseover',function(){
+        $('button',this).show();
+    });
 
+    $('.thumbs a').live('mouseout',function(){
+        $('button',this).hide();
+    });
+
+    $('.thumbs a button').live('click', function(){
+        var parents = $(this).parents();
+        
+        $(parents[0]).attr('removing', 1);
+        $(parents[1]).remove();
+    });
 }
 
 
@@ -120,7 +129,7 @@ photoUpload.prototype.onUploadSuccess = function(file, serverData) {
     var resp = $.parseJSON(serverData);
     if (resp.id) {
         
-        var row = $('<li><a href="'+resp.image+'"><img style="display:none" src="'+resp.thumb+'"/></a></li>');
+        var row = $('<li><a href="'+resp.image+'"><img style="display:none" src="'+resp.thumb+'"/><button>-</button></a></li>');
         
         $('img',row).load(function(){
             $(this).fadeIn();
