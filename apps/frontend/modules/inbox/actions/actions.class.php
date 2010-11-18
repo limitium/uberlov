@@ -12,7 +12,7 @@ class inboxActions extends sfActions {
 
     public function executeList(sfWebRequest $request) {
         $this->inboxes = $this->getUser()->getProfile()->getInbox();
-        $this->csrf = $this->getCSRFToken();
+        $this->csrf = CSRF::getToken();
     }
 
     public function executeNew(sfWebRequest $request) {
@@ -45,7 +45,7 @@ class inboxActions extends sfActions {
                         ->where('i.inbox_id = ?', $this->inbox->getId())
                         ->execute();
 
-        $this->csrf = $this->getCSRFToken();
+        $this->csrf = CSRF::getToken();
     }
 
     public function executeUpdate(sfWebRequest $request) {
@@ -175,15 +175,6 @@ class inboxActions extends sfActions {
             $pids[] = $p['id'];
         }
         return $pids;
-    }
-
-    public function getCSRFToken() {
-        $form = new BaseForm();
-
-        if ($form->isCSRFProtected()) {
-            $formData = $form->getCSRFToken();
-        }
-        return $formData;
     }
 
 }
