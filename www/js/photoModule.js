@@ -12,10 +12,6 @@ photoModule.prototype.afterInit = function(){
 }
 
 photoModule.prototype.initListeners = function(){
-    $('.thumbs a img').load(function(){
-        $(this).fadeIn();
-    });
-
     $('.thumbs a').live('click', function(){
         var a = $(this);
         a.addClass('loaded');

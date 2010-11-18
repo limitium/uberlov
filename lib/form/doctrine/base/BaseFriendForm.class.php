@@ -8,7 +8,7 @@
  * @package    FISHERY
  * @subpackage form
  * @author     Your name here
- * @version    SVN: $Id: sfDoctrineFormGeneratedTemplate.php 24171 2009-11-19 16:37:50Z Kris.Wallsmith $
+ * @version    SVN: $Id: sfDoctrineFormGeneratedTemplate.php 29553 2010-05-20 14:33:00Z Kris.Wallsmith $
  */
 abstract class BaseFriendForm extends BaseFormDoctrine
 {
@@ -20,8 +20,8 @@ abstract class BaseFriendForm extends BaseFormDoctrine
     ));
 
     $this->setValidators(array(
-      'source_profile_id'  => new sfValidatorDoctrineChoice(array('model' => $this->getModelName(), 'column' => 'source_profile_id', 'required' => false)),
-      'related_profile_id' => new sfValidatorDoctrineChoice(array('model' => $this->getModelName(), 'column' => 'related_profile_id', 'required' => false)),
+      'source_profile_id'  => new sfValidatorChoice(array('choices' => array($this->getObject()->get('source_profile_id')), 'empty_value' => $this->getObject()->get('source_profile_id'), 'required' => false)),
+      'related_profile_id' => new sfValidatorChoice(array('choices' => array($this->getObject()->get('related_profile_id')), 'empty_value' => $this->getObject()->get('related_profile_id'), 'required' => false)),
     ));
 
     $this->widgetSchema->setNameFormat('friend[%s]');

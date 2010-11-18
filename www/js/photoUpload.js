@@ -68,6 +68,11 @@ photoUpload.prototype.initListeners = function(){
         return false;
     });
 
+    $('.thumbs a').live('hover', function(){
+        },function(){
+        
+        });
+
 }
 
 
@@ -113,10 +118,10 @@ photoUpload.prototype.onUploadSuccess = function(file, serverData) {
     fb('uploaded ' + file.id);
 
     var resp = $.parseJSON(serverData);
-    if (resp) {
+    if (resp.id) {
         
         var row = $('<li><a href="'+resp.image+'"><img style="display:none" src="'+resp.thumb+'"/></a></li>');
-fb($('img',row))
+        
         $('img',row).load(function(){
             $(this).fadeIn();
         });

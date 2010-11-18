@@ -11,8 +11,15 @@
 class photoActions extends sfActions {
 
     public function executeUpload(sfWebRequest $request) {
-        $text = 'Ошибка загрузки';
+        $result = 'All broken :(';
         try {
+
+            //@todo: added CSRF check;
+
+            if ($this->getUser()->isAnonymous()) {
+                throw new Exception('Wazzap?');
+            }
+
             $fileData = array_pop($request->getFiles());
 
             $validator = new sfValidatorFile(array(
@@ -34,15 +41,15 @@ class photoActions extends sfActions {
 
             $uploaded = $uploader->login()->upload($file->getTempName());
 
-            $text = json_encode(array(
-                        'id' => 1,
-                        'image' => $uploaded->image,
-                        'thumb' => $uploaded->thumb
-                    ));
+            $result = array(
+                'id' => 1,
+                'image' => $uploaded->image,
+                'thumb' => $uploaded->thumb
+            );
         } catch (Exception $e) {
-            $text = $e->getMessage();
+            $result = $e->getMessage();
         }
-        return $this->renderText($text);
+        return $this->renderText(json_encode($result));
     }
 
 }
