@@ -29,3 +29,16 @@
     background-color: rgb(197, 217, 255);
     padding: 2px
 }
+
+
+.photos .thumbs li a button{
+    height:20px;
+    position:absolute;
+    right:0;
+    top:0;
+    display: none;
+}
+
+.photos .thumbs li a button.hover{
+    display: block;
+}
