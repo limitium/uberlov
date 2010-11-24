@@ -45,7 +45,10 @@ class locationActions extends sfActions {
                         ->where('e.location_id = ?', $this->location->getId())
                         ->execute();
 
+        $this->csrf = CSRF::getToken();
+        
         $this->form = new CommentLocationForm();
+        
         $this->form->setDefault('location_id', $this->location->getId());
     }
 
@@ -105,6 +108,37 @@ class locationActions extends sfActions {
         $this->getResponse()->setContentType('text/wpt');
         $this->getResponse()->addHttpMeta('content-disposition: ', 'attachment; filename="location.wpt"', true);
         $this->setLayout(false);
+    }
+
+    public function executeTomy(sfWebRequest $request) {
+        $request->checkCSRFProtection();
+        $this->forward404Unless($location = Doctrine::getTable('Location')->find(array($request->getParameter('id'))), sprintf('Object location does not exist (%s).', $request->getParameter('id')));
+
+        $this->getUser()->getProfile();
+        
+        if ($location->isOwner()) {
+            $this->added = array();
+            $pids = $this->getProfiles($request->getParameter('data'));
+
+            if ($pids) {
+                $this->added = Doctrine_Query::create()
+                                ->select()
+                                ->from('Profile p')
+                                ->whereIn('p.id', $pids)
+                                ->execute();
+                foreach ($this->added as $profile) {
+
+                    $inboxed = new Inboxed();
+                    $inboxed->profile_id = $profile->getId();
+                    $inboxed->inbox_id = $location->getId();
+                    $inboxed->save();
+                }
+            }
+        }
+    }
+
+    public function executeFrommy(sfWebRequest $request) {
+
     }
 
 }

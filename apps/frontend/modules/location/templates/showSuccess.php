@@ -31,7 +31,7 @@
         <?php include_partial('vote/vote', array('obj' => $location)); ?>
                 <div>
                     <a href="" id="goToReply">□</a> Добавил<?php echo $location->getCreatedBy()->getSex() ? '' : 'а' ?> <?php echo link_to($location->getCreatedBy()->getNickName(), 'profile/show?id=' . $location->getCreatedBy()->getId()); ?>,
-            <?php echo $location->getDateTimeObject('created_at')->format('d.m.Y'); ?> | <?php echo link_to('тут не так', 'location/edit?id=' . $location->getCreatedBy()->getId()); ?> | <a class="toWishes" location="<?php echo $location->getId(); ?>" href="">в мои места</a>
+            <?php echo $location->getDateTimeObject('created_at')->format('d.m.Y'); ?> | <?php echo link_to('тут не так', 'location/edit?id=' . $location->getCreatedBy()->getId()); ?> | <?php include_partial('wish', array('location' => $location)); ?>
                 <a href="" class="commentShowAuthor" author="user<?php echo $location->getCreatedBy(); ?>">●</a>
             </div>
         </div>

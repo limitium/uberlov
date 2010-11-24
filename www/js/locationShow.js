@@ -22,6 +22,7 @@ locationShow.prototype.initListeners = function(){
     $('#tabComments').click(this.showComments.delegate(this));
     $('#tabProfits').click(this.showProfits.delegate(this));
     $('.toWishes').live('click', this.addToWishList.delegate(this));
+    $('.fromWishes').live('click', this.removeToWishList.delegate(this));
 }
 
 locationShow.prototype.resizeMap= function(){
@@ -75,10 +76,13 @@ locationShow.prototype.addToWishList = function(a){
                 _csrf_token: app.csrf.wishlist
             },
             handler: function(){                
-                a.removeClass('toWish').addClass('fromWish');
+                a.removeClass('toWishes').addClass('fromWishes');
             }
         });
         
     }
+    return false;
+}
+locationShow.prototype.removeToWishList = function(a){
     return false;
 }
