@@ -65,6 +65,10 @@ class Profile extends BaseProfile {
         return 8;
     }
 
+    /**
+     *
+     * @return Doctrine_Collection
+     */
     public function getFishes() {
         return Doctrine_Query::create()
                 ->select('d.*,p.*,f.*,s.*,count(f.id) as fc')
@@ -78,6 +82,10 @@ class Profile extends BaseProfile {
                 ->execute();
     }
 
+    /**
+     *
+     * @return Doctrine_Collection
+     */
     public function getStyles() {
         return Doctrine_Query::create()
                 ->select('d.*,p.*,f.*,s.*,count(s.id) as sc')
@@ -91,6 +99,10 @@ class Profile extends BaseProfile {
                 ->execute();
     }
 
+    /**
+     *
+     * @return Doctrine_Collection
+     */
     public function getInbox() {
         return Doctrine::getTable('Inbox')
                 ->createQuery('i')
@@ -101,14 +113,28 @@ class Profile extends BaseProfile {
                 ->execute();
     }
 
+    /**
+     *
+     * @return Doctrine_Collection
+     */
     public function getLocation() {
+        //@todo: merge with wish list
         return Doctrine::getTable('Location')
                 ->createQuery('l')
                 ->where('l.created_by = ?', $this->getId())
                 ->execute();
     }
 
-     public function getFriends() {
+    /**
+     *
+     * @param int $location_id
+     * @return boolean
+     */
+    public function isWishes($location_id) {
+        return $this->getLocation()->search(Doctrine::getTable('Location')->find($location_id)) !== false;
+    }
+
+    public function getFriends() {
         return parent::getFriend();
     }
 
