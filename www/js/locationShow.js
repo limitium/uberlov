@@ -22,7 +22,7 @@ locationShow.prototype.initListeners = function(){
     $('#tabComments').click(this.showComments.delegate(this));
     $('#tabProfits').click(this.showProfits.delegate(this));
     $('.toWishes').live('click', this.addToWishList.delegate(this));
-    $('.fromWishes').live('click', this.removeToWishList.delegate(this));
+    $('.fromWishes').live('click', this.removeFromWishList.delegate(this));
 }
 
 locationShow.prototype.resizeMap= function(){
@@ -67,7 +67,7 @@ locationShow.prototype.addToWishList = function(a){
 
         var location_id = a.attr('location');
 
-        a.html('Добавляем');
+        a.html('добавляем');
 
         app.sendData({
             url:app.baseUrl + '/location/tomy',
@@ -75,14 +75,39 @@ locationShow.prototype.addToWishList = function(a){
                 id:location_id,
                 _csrf_token: app.csrf.wishlist
             },
-            handler: function(){                
-                a.removeClass('toWishes').addClass('fromWishes');
+            handler: function(response){
+                if(response.status == 'ok'){
+                    a.removeClass('toWishes').removeClass('adding').addClass('fromWishes').html('убрать');
+                }                                
             }
         });
         
     }
     return false;
 }
-locationShow.prototype.removeToWishList = function(a){
+locationShow.prototype.removeFromWishList = function(a){
+    var a = $(a.target);
+
+    if(!a.hasClass('removing')){
+        a.addClass('removing');
+
+        var location_id = a.attr('location');
+
+        a.html('убираем');
+
+        app.sendData({
+            url:app.baseUrl + '/location/frommy',
+            data:{
+                id:location_id,
+                _csrf_token: app.csrf.wishlist
+            },
+            handler: function(response){
+                if(response.status == 'ok'){
+                    a.removeClass('fromWishes').removeClass('removing').addClass('toWishes').html('в мои места');
+                }
+            }
+        });
+
+    }
     return false;
 }

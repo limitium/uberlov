@@ -48,4 +48,11 @@ class Location extends BaseLocation {
         return '';
     }
 
+    public function isOwner(Profile $profile = null) {
+        if (!$profile) {
+            $profile = sfContext::getInstance()->getUser()->getProfile();
+        }
+        return $this->getCreatedBy() == $profile;
+    }
+
 }
