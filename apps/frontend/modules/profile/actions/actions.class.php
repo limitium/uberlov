@@ -10,18 +10,12 @@
  */
 class profileActions extends sfActions {
 
-    public function executeIndex(sfWebRequest $request) {
-        $this->profiles = Doctrine::getTable('Profile')
-                        ->createQuery('a')
-                        ->execute();
-    }
-
     public function executeShow(sfWebRequest $request) {
         $this->profile = Doctrine::getTable('Profile')->find(array($request->getParameter('id')));
         $this->forward404Unless($this->profile);
 
         $this->view = $request->getParameter('view');
-        if (!in_array($this->view, array('comments', 'profits','locations'))) {
+        if (!in_array($this->view, array('comments', 'profits', 'locations'))) {
             $this->view = 'profile';
         }
 
@@ -47,9 +41,10 @@ class profileActions extends sfActions {
             'name' => 'фигавль',
             'qty' => 0,
             'location' => null);
+
         foreach ($this->profits as $profit) {
-            if ($this->best['qty'] < $profit->getBestWeight()) {
-                $this->best['qty'] = $profit->getBestWeight();
+            if ($this->best['qty'] < $profit->getWeight()) {
+                $this->best['qty'] = $profit->getWeight();
                 $this->best['name'] = $profit->getFish();
                 $this->best['location'] = $profit->getLocation();
             }
@@ -86,15 +81,6 @@ class profileActions extends sfActions {
         $this->processForm($request, $this->form);
 
         $this->setTemplate('edit');
-    }
-
-    public function executeDelete(sfWebRequest $request) {
-        $request->checkCSRFProtection();
-
-        $this->forward404Unless($profile = Doctrine::getTable('Profile')->find(array($request->getParameter('id'))), sprintf('Object profile does not exist (%s).', $request->getParameter('id')));
-        $profile->delete();
-
-        $this->redirect('profile/index');
     }
 
     protected function processForm(sfWebRequest $request, sfForm $form) {
