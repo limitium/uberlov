@@ -12,8 +12,11 @@
  */
 class Inbox extends BaseInbox {
 
-    public function isOwner() {
-        return $this->getCreatedBy() == sfContext::getInstance()->getUser()->getProfile();
+    public function isOwner(Profile $profile = null) {
+        if (!$profile) {
+            $profile = sfContext::getInstance()->getUser()->getProfile();
+        }
+        return $this->getCreatedBy() == $profile;
     }
 
 }

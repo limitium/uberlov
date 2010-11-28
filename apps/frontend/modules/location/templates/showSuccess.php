@@ -1,3 +1,6 @@
+<script type="text/javascript">
+    app.csrf.wishlist = "<?php echo $csrf; ?>";
+</script>
 <?php include_partial('location/location', array('location' => $location)) ?>
 <!-- AddThis Button BEGIN -->
 <script type="text/javascript">var addthis_config = {"data_track_clickback":true};</script>

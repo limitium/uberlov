@@ -46,9 +46,9 @@ class locationActions extends sfActions {
                         ->execute();
 
         $this->csrf = CSRF::getToken();
-        
+
         $this->form = new CommentLocationForm();
-        
+
         $this->form->setDefault('location_id', $this->location->getId());
     }
 
@@ -114,31 +114,21 @@ class locationActions extends sfActions {
         $request->checkCSRFProtection();
         $this->forward404Unless($location = Doctrine::getTable('Location')->find(array($request->getParameter('id'))), sprintf('Object location does not exist (%s).', $request->getParameter('id')));
 
-        $this->getUser()->getProfile();
-        
-        if ($location->isOwner()) {
-            $this->added = array();
-            $pids = $this->getProfiles($request->getParameter('data'));
 
-            if ($pids) {
-                $this->added = Doctrine_Query::create()
-                                ->select()
-                                ->from('Profile p')
-                                ->whereIn('p.id', $pids)
-                                ->execute();
-                foreach ($this->added as $profile) {
-
-                    $inboxed = new Inboxed();
-                    $inboxed->profile_id = $profile->getId();
-                    $inboxed->inbox_id = $location->getId();
-                    $inboxed->save();
-                }
-            }
+        if (!$location->isOwner()) {
+            $whish = new WishList();
+            $whish->profile_id = $this->getUser()->getProfile()->getId();
+            $whish->location_id = $location->getId();
+            $whish->save();
         }
     }
 
     public function executeFrommy(sfWebRequest $request) {
+        $request->checkCSRFProtection();
+        $this->forward404Unless($location = Doctrine::getTable('Location')->find(array($request->getParameter('id'))), sprintf('Object location does not exist (%s).', $request->getParameter('id')));
 
+        Doctrine_Query::create()->delete('WishList')->Where('location_id = ? and profile_id = ?', array($location->getId(), $this->getUser()->getProfile()->getId()))
+                ->execute();
     }
 
 }

@@ -1,6 +1,5 @@
 <?php if (!$sf_user->isAnonymous()): ?>
-    //@todo change to !=
-<?php if ($sf_user->getProfile() == $location->getCreatedBy()): ?>
+<?php if ($sf_user->getProfile() != $location->getCreatedBy()): ?>
 
 <?php if ($sf_user->getProfile()->isWishes($location->getId())): ?>
             <a class="fromWishes" location="<?php echo $location->getId(); ?>" href="">убрать</a>
