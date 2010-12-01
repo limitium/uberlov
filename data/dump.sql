@@ -416,6 +416,7 @@ CREATE TABLE `profile` (
   `user_id` int(11) DEFAULT NULL,
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL,
+  `description` text,
   PRIMARY KEY (`id`),
   KEY `user_id_idx` (`user_id`),
   CONSTRAINT `profile_user_id_sf_guard_user_id` FOREIGN KEY (`user_id`) REFERENCES `sf_guard_user` (`id`)
@@ -423,7 +424,7 @@ CREATE TABLE `profile` (
 
 /*Data for the table `profile` */
 
-insert  into `profile`(`id`,`nick_name`,`first_name`,`last_name`,`birth_date`,`userpic`,`sex`,`user_id`,`created_at`,`updated_at`) values (1,'lim','lim','lim',NULL,NULL,1,1,'2010-10-02 16:40:16','2010-10-02 16:40:16');
+insert  into `profile`(`id`,`nick_name`,`first_name`,`last_name`,`birth_date`,`userpic`,`sex`,`user_id`,`created_at`,`updated_at`,`description`) values (1,'lim','lim','lim',NULL,NULL,1,1,'2010-10-02 16:40:16','2010-10-02 16:40:16',NULL);
 
 /*Table structure for table `profile_fish` */
 
@@ -621,7 +622,7 @@ CREATE TABLE `sf_guard_user` (
 
 /*Data for the table `sf_guard_user` */
 
-insert  into `sf_guard_user`(`id`,`username`,`algorithm`,`salt`,`password`,`is_active`,`is_super_admin`,`last_login`,`created_at`,`updated_at`) values (1,'admin','PasswordKeeper::generate','2d91a3f4d339fefeed009e959ff3163c','2d91a3f4d339fefeed009e959ff3163c2d91a3f4d339fefeed009e959ff3163cadmin',1,0,'2010-10-23 01:23:28','2010-10-22 22:56:58','2010-10-23 01:23:28');
+insert  into `sf_guard_user`(`id`,`username`,`algorithm`,`salt`,`password`,`is_active`,`is_super_admin`,`last_login`,`created_at`,`updated_at`) values (1,'admin','PasswordKeeper::generate','2d91a3f4d339fefeed009e959ff3163c','2d91a3f4d339fefeed009e959ff3163cadmin',1,0,'2010-12-01 00:11:56','2010-10-22 22:56:58','2010-12-01 00:11:56');
 
 /*Table structure for table `sf_guard_user_group` */
 

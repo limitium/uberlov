@@ -1,66 +1,11 @@
-Comment: {  }
-CommentProfit:
-  CommentProfit_10:
-    parent: null
-    message: root
-    toward: profit
-    location_id: null
-    Profit: Profit_1
-    inbox_id: null
-    talk_id: null
-    CreatedBy: Profile_1
-    UpdatedBy: Profile_1
-    created_at: '2010-10-23 01:23:39'
-    updated_at: '2010-10-23 01:23:39'
-    root_id: '10'
-    lft: '1'
-    rgt: '4'
-    level: '0'
-  CommentProfit_11:
-    parent: '10'
-    message: zzz
-    toward: profit
-    location_id: null
-    Profit: Profit_1
-    inbox_id: null
-    talk_id: null
-    CreatedBy: Profile_1
-    UpdatedBy: Profile_1
-    created_at: '2010-10-23 01:23:39'
-    updated_at: '2010-10-23 01:23:39'
-    root_id: '10'
-    lft: '2'
-    rgt: '3'
-    level: '1'
-Vote: {  }
-VoteComment:
-  VoteComment_4:
-    value: '1'
-    Voter: Profile_1
-    toward: comment
-    location_id: null
-    Comment: CommentProfit_11
-    profit_id: null
-    profile_id: null
-    talk_id: null
-VoteProfit:
-  VoteProfit_5:
-    value: '1'
-    Voter: Profile_1
-    toward: profit
-    location_id: null
-    comment_id: null
-    Profit: Profit_1
-    profile_id: null
-    talk_id: null
 Fish:
-  Fish_13:
+  Fish_1:
     name: Карась
-  Fish_14:
+  Fish_2:
     name: Окунь
-  Fish_15:
+  Fish_3:
     name: Плотва
-  Fish_16:
+  Fish_4:
     name: Щука
 Location:
   Location_1:
@@ -286,56 +231,38 @@ LocationType:
 Profile:
   Profile_1:
     nick_name: lim
-    first_name: lim
-    last_name: lim
+    first_name: zzz
+    last_name: sdfs
     birth_date: null
-    userpic: null
+    userpic: ''
     sex: true
     sfGuardUser: sfGuardUser_1
     created_at: '2010-10-02 16:40:16'
-    updated_at: '2010-10-02 16:40:16'
+    updated_at: '2010-11-29 01:44:11'
 Profit:
   Profit_1:
-    name: qqqqqqqqqqq
-    Location: Location_13
-    date: '2010-10-22 00:00:00'
-    cordage: asdasdasdasd
-    description: asssss
-    Fish: Fish_13
-    weight: '123.00'
-    created_at: '2010-10-22 23:45:44'
-    updated_at: '2010-10-22 23:45:44'
+    name: qweqwe
+    Location: Location_11
+    date: '2010-11-28 00:00:00'
+    cordage: dfsdfsdfsdfsdf
+    description: qweqweqweedfsdfdsf
+    Fish: Fish_1
+    weight: '111.00'
+    created_at: '2010-11-28 23:51:59'
+    updated_at: '2010-11-28 23:51:59'
     CreatedBy: Profile_1
     UpdatedBy: Profile_1
 ProfitDetail:
   ProfitDetail_1:
     Profit: Profit_1
-    Style: Style_10
-    Fish: Fish_13
-    qty: '11.00'
+    Style: Style_5
+    Fish: Fish_1
+    qty: '6.00'
   ProfitDetail_2:
     Profit: Profit_1
-    Style: Style_10
-    Fish: Fish_15
-    qty: '14.00'
-sfGuardGroup:
-  sfGuardGroup_1:
-    name: Array
-    description: Array
-    created_at: '2010-10-22 22:57:04'
-    updated_at: '2010-10-22 22:57:04'
-sfGuardGroupPermission:
-  sfGuardGroupPermission_1_1:
-    sfGuardGroup: sfGuardGroup_1
-    sfGuardPermission: sfGuardPermission_1
-    created_at: '2010-10-22 22:57:04'
-    updated_at: '2010-10-22 22:57:04'
-sfGuardPermission:
-  sfGuardPermission_1:
-    name: Array
-    description: Array
-    created_at: '2010-10-22 22:57:04'
-    updated_at: '2010-10-22 22:57:04'
+    Style: Style_5
+    Fish: Fish_3
+    qty: '4.00'
 sfGuardUser:
   sfGuardUser_1:
     username: admin
@@ -344,21 +271,15 @@ sfGuardUser:
     password: 2d91a3f4d339fefeed009e959ff3163cadmin
     is_active: true
     is_super_admin: false
-    last_login: '2010-10-23 01:23:28'
+    last_login: '2010-11-29 01:24:47'
     created_at: '2010-10-22 22:56:58'
-    updated_at: '2010-10-23 01:23:28'
-sfGuardUserGroup:
-  sfGuardUserGroup_1_1:
-    sfGuardUser: sfGuardUser_1
-    sfGuardGroup: sfGuardGroup_1
-    created_at: '2010-10-22 22:57:04'
-    updated_at: '2010-10-22 22:57:04'
+    updated_at: '2010-11-29 01:24:47'
 Style:
-  Style_10:
+  Style_4:
     name: Спининг
-  Style_11:
+  Style_5:
     name: Троллинг
-  Style_12:
+  Style_6:
     name: Фидер
 LocationVersion:
   LocationVersion_1_1:

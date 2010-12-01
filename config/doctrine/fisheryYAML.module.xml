@@ -56,6 +56,7 @@
       <column default="''" name="first_name" size="50" type="string"/>
       <column default="''" name="last_name" size="50" type="string"/>
       <column name="birth_date" type="date"/>
+      <column name="description" type="string"/>
       <column name="userpic" size="255" type="string"/>
       <column default="1" name="sex" required="true" type="boolean"/>
       <orm-properties>

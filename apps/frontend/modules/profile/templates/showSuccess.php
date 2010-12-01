@@ -13,6 +13,7 @@
                 <?php endif; ?>
                 </p>
                 <p>Родил<?php echo $profile->getSex() ? 'ся' : 'ась' ?>: <?php echo $profile->getDateTimeObject('birth_date')->format('d.m.Y') ?></p>
+                <p><?php echo $profile->getDescription(); ?></p>
             </div>
         </div>
 
