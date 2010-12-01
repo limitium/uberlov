@@ -88,7 +88,7 @@ class profileActions extends sfActions {
         if ($form->isValid()) {
             $profile = $form->save();
 
-            $this->redirect('profile/edit?id=' . $profile->getId());
+            $this->redirect('profile/show?id=' . $profile->getId());
         }
     }
 

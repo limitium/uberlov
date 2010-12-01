@@ -8,7 +8,7 @@
  * @package    FISHERY
  * @subpackage form
  * @author     Your name here
- * @version    SVN: $Id: sfDoctrineFormGeneratedTemplate.php 29553 2010-05-20 14:33:00Z Kris.Wallsmith $
+ * @version    SVN: $Id: sfDoctrineFormGeneratedTemplate.php 24171 2009-11-19 16:37:50Z Kris.Wallsmith $
  */
 abstract class BaseProfileForm extends BaseFormDoctrine
 {
@@ -20,6 +20,7 @@ abstract class BaseProfileForm extends BaseFormDoctrine
       'first_name'        => new sfWidgetFormInputText(),
       'last_name'         => new sfWidgetFormInputText(),
       'birth_date'        => new sfWidgetFormDate(),
+      'description'       => new sfWidgetFormTextarea(),
       'userpic'           => new sfWidgetFormInputText(),
       'sex'               => new sfWidgetFormInputCheckbox(),
       'user_id'           => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('sfGuardUser'), 'add_empty' => true)),
@@ -33,11 +34,12 @@ abstract class BaseProfileForm extends BaseFormDoctrine
     ));
 
     $this->setValidators(array(
-      'id'                => new sfValidatorChoice(array('choices' => array($this->getObject()->get('id')), 'empty_value' => $this->getObject()->get('id'), 'required' => false)),
+      'id'                => new sfValidatorDoctrineChoice(array('model' => $this->getModelName(), 'column' => 'id', 'required' => false)),
       'nick_name'         => new sfValidatorString(array('max_length' => 50, 'required' => false)),
       'first_name'        => new sfValidatorString(array('max_length' => 50, 'required' => false)),
       'last_name'         => new sfValidatorString(array('max_length' => 50, 'required' => false)),
       'birth_date'        => new sfValidatorDate(array('required' => false)),
+      'description'       => new sfValidatorString(array('required' => false)),
       'userpic'           => new sfValidatorString(array('max_length' => 255, 'required' => false)),
       'sex'               => new sfValidatorBoolean(array('required' => false)),
       'user_id'           => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('sfGuardUser'), 'required' => false)),

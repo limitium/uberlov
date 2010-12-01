@@ -6,7 +6,7 @@
  * @package    FISHERY
  * @subpackage filter
  * @author     Your name here
- * @version    SVN: $Id: sfDoctrineFormFilterGeneratedTemplate.php 29570 2010-05-21 14:49:47Z Kris.Wallsmith $
+ * @version    SVN: $Id: sfDoctrineFormFilterGeneratedTemplate.php 24171 2009-11-19 16:37:50Z Kris.Wallsmith $
  */
 abstract class BaseProfileFormFilter extends BaseFormFilterDoctrine
 {
@@ -17,6 +17,7 @@ abstract class BaseProfileFormFilter extends BaseFormFilterDoctrine
       'first_name'        => new sfWidgetFormFilterInput(),
       'last_name'         => new sfWidgetFormFilterInput(),
       'birth_date'        => new sfWidgetFormFilterDate(array('from_date' => new sfWidgetFormDate(), 'to_date' => new sfWidgetFormDate())),
+      'description'       => new sfWidgetFormFilterInput(),
       'userpic'           => new sfWidgetFormFilterInput(),
       'sex'               => new sfWidgetFormChoice(array('choices' => array('' => 'yes or no', 1 => 'yes', 0 => 'no'))),
       'user_id'           => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('sfGuardUser'), 'add_empty' => true)),
@@ -34,6 +35,7 @@ abstract class BaseProfileFormFilter extends BaseFormFilterDoctrine
       'first_name'        => new sfValidatorPass(array('required' => false)),
       'last_name'         => new sfValidatorPass(array('required' => false)),
       'birth_date'        => new sfValidatorDateRange(array('required' => false, 'from_date' => new sfValidatorDate(array('required' => false)), 'to_date' => new sfValidatorDateTime(array('required' => false)))),
+      'description'       => new sfValidatorPass(array('required' => false)),
       'userpic'           => new sfValidatorPass(array('required' => false)),
       'sex'               => new sfValidatorChoice(array('required' => false, 'choices' => array('', 1, 0))),
       'user_id'           => new sfValidatorDoctrineChoice(array('required' => false, 'model' => $this->getRelatedModelName('sfGuardUser'), 'column' => 'id')),
@@ -67,10 +69,8 @@ abstract class BaseProfileFormFilter extends BaseFormFilterDoctrine
       return;
     }
 
-    $query
-      ->leftJoin($query->getRootAlias().'.WishList WishList')
-      ->andWhereIn('WishList.location_id', $values)
-    ;
+    $query->leftJoin('r.WishList WishList')
+          ->andWhereIn('WishList.location_id', $values);
   }
 
   public function addMyFirendsListColumnQuery(Doctrine_Query $query, $field, $values)
@@ -85,10 +85,8 @@ abstract class BaseProfileFormFilter extends BaseFormFilterDoctrine
       return;
     }
 
-    $query
-      ->leftJoin($query->getRootAlias().'.Friend Friend')
-      ->andWhereIn('Friend.source_profile_id', $values)
-    ;
+    $query->leftJoin('r.Friend Friend')
+          ->andWhereIn('Friend.source_profile_id', $values);
   }
 
   public function addMyFirends2ListColumnQuery(Doctrine_Query $query, $field, $values)
@@ -103,10 +101,8 @@ abstract class BaseProfileFormFilter extends BaseFormFilterDoctrine
       return;
     }
 
-    $query
-      ->leftJoin($query->getRootAlias().'.Friend Friend')
-      ->andWhereIn('Friend.related_profile_id', $values)
-    ;
+    $query->leftJoin('r.Friend Friend')
+          ->andWhereIn('Friend.related_profile_id', $values);
   }
 
   public function addInboxesListColumnQuery(Doctrine_Query $query, $field, $values)
@@ -121,10 +117,8 @@ abstract class BaseProfileFormFilter extends BaseFormFilterDoctrine
       return;
     }
 
-    $query
-      ->leftJoin($query->getRootAlias().'.Inboxed Inboxed')
-      ->andWhereIn('Inboxed.inbox_id', $values)
-    ;
+    $query->leftJoin('r.Inboxed Inboxed')
+          ->andWhereIn('Inboxed.inbox_id', $values);
   }
 
   public function addReadCommentListColumnQuery(Doctrine_Query $query, $field, $values)
@@ -139,10 +133,8 @@ abstract class BaseProfileFormFilter extends BaseFormFilterDoctrine
       return;
     }
 
-    $query
-      ->leftJoin($query->getRootAlias().'.ReadComment ReadComment')
-      ->andWhereIn('ReadComment.comment_id', $values)
-    ;
+    $query->leftJoin('r.ReadComment ReadComment')
+          ->andWhereIn('ReadComment.comment_id', $values);
   }
 
   public function getModelName()
@@ -158,6 +150,7 @@ abstract class BaseProfileFormFilter extends BaseFormFilterDoctrine
       'first_name'        => 'Text',
       'last_name'         => 'Text',
       'birth_date'        => 'Date',
+      'description'       => 'Text',
       'userpic'           => 'Text',
       'sex'               => 'Boolean',
       'user_id'           => 'ForeignKey',

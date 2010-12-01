@@ -10,6 +10,7 @@
  * @property string $first_name
  * @property string $last_name
  * @property date $birth_date
+ * @property string $description
  * @property string $userpic
  * @property boolean $sex
  * @property Doctrine_Collection $Wishes
@@ -28,6 +29,7 @@
  * @method string              getFirstName()   Returns the current record's "first_name" value
  * @method string              getLastName()    Returns the current record's "last_name" value
  * @method date                getBirthDate()   Returns the current record's "birth_date" value
+ * @method string              getDescription() Returns the current record's "description" value
  * @method string              getUserpic()     Returns the current record's "userpic" value
  * @method boolean             getSex()         Returns the current record's "sex" value
  * @method Doctrine_Collection getWishes()      Returns the current record's "Wishes" collection
@@ -45,6 +47,7 @@
  * @method Profile             setFirstName()   Sets the current record's "first_name" value
  * @method Profile             setLastName()    Sets the current record's "last_name" value
  * @method Profile             setBirthDate()   Sets the current record's "birth_date" value
+ * @method Profile             setDescription() Sets the current record's "description" value
  * @method Profile             setUserpic()     Sets the current record's "userpic" value
  * @method Profile             setSex()         Sets the current record's "sex" value
  * @method Profile             setWishes()      Sets the current record's "Wishes" collection
@@ -61,7 +64,7 @@
  * @package    FISHERY
  * @subpackage model
  * @author     Your name here
- * @version    SVN: $Id: Builder.php 7490 2010-03-29 19:53:27Z jwage $
+ * @version    SVN: $Id: Builder.php 6820 2009-11-30 17:27:49Z jwage $
  */
 abstract class BaseProfile extends sfDoctrineRecord
 {
@@ -72,30 +75,33 @@ abstract class BaseProfile extends sfDoctrineRecord
              'primary' => true,
              'type' => 'integer',
              'autoincrement' => true,
-             'length' => 4,
+             'length' => '4',
              ));
         $this->hasColumn('nick_name', 'string', 50, array(
              'default' => '',
              'type' => 'string',
              'notnull' => true,
-             'length' => 50,
+             'length' => '50',
              ));
         $this->hasColumn('first_name', 'string', 50, array(
              'default' => '',
              'type' => 'string',
-             'length' => 50,
+             'length' => '50',
              ));
         $this->hasColumn('last_name', 'string', 50, array(
              'default' => '',
              'type' => 'string',
-             'length' => 50,
+             'length' => '50',
              ));
         $this->hasColumn('birth_date', 'date', null, array(
              'type' => 'date',
              ));
+        $this->hasColumn('description', 'string', null, array(
+             'type' => 'string',
+             ));
         $this->hasColumn('userpic', 'string', 255, array(
              'type' => 'string',
-             'length' => 255,
+             'length' => '255',
              ));
         $this->hasColumn('sex', 'boolean', null, array(
              'default' => 1,

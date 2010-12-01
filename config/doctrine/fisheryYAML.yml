@@ -101,6 +101,8 @@ Profile:
       type: string(50)
     birth_date:
       type: date
+    description:
+      type: string
     userpic:
       type: string(255)
     sex:
