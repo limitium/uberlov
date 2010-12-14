@@ -138,4 +138,8 @@ class Profile extends BaseProfile {
         return parent::getFriend();
     }
 
+    public function getDate(){
+        return 123;
+    }
+
 }
