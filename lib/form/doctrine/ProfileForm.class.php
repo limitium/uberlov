@@ -24,7 +24,7 @@ class ProfileForm extends BaseProfileForm {
         $this->widgetSchema['first_name'] = new sfWidgetFormInputText();
         $this->widgetSchema['last_name'] = new sfWidgetFormInputText();
         $this->widgetSchema['birth_date'] = new sfWidgetFormInputText();
-        $this->widgetSchema['birth_date'] = new sfWidgetFormDate();
+        $this->widgetSchema['birth_date'] = new formInputDate();
         $this->widgetSchema['description'] = new sfWidgetFormTextarea();
         $this->widgetSchema['userpic'] = new sfWidgetFormInputText();
         $this->widgetSchema['sex'] = new sfWidgetFormInputCheckbox();
