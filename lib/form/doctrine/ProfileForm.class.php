@@ -11,22 +11,14 @@
 class ProfileForm extends BaseProfileForm {
 
     public function configure() {
-        unset($this['user_id'],
-                $this['nick_name'],
-                $this['created_at'],
-                $this['updated_at'],
-                $this['wishes_list'],
-                $this['my_firends_list'],
-                $this['my_firends2_list'],
-                $this['inboxes_list'],
-                $this['read_comment_list']);
+        unset($this['user_id'], $this['nick_name'], $this['created_at'], $this['updated_at'], $this['wishes_list'], $this['my_firends_list'], $this['my_firends2_list'], $this['inboxes_list'], $this['read_comment_list']);
 
         $this->widgetSchema['first_name'] = new sfWidgetFormInputText();
         $this->widgetSchema['last_name'] = new sfWidgetFormInputText();
         $this->widgetSchema['birth_date'] = new sfWidgetFormInputText();
         $this->widgetSchema['birth_date'] = new formInputDate();
         $this->widgetSchema['description'] = new sfWidgetFormTextarea();
-        $this->widgetSchema['userpic'] = new sfWidgetFormInputText();
+        $this->widgetSchema['userpic'] = new sfWidgetFormInputFile();
         $this->widgetSchema['sex'] = new sfWidgetFormInputCheckbox();
 
         $this->validatorSchema['first_name'] = new sfValidatorString(array('min_length' => 3, 'max_length' => 50, 'required' => true));
@@ -45,6 +37,16 @@ class ProfileForm extends BaseProfileForm {
             'sex' => 'Мужик',
             'description' => 'О себе',
         ));
+    }
+
+    public function getStylesheets() {
+        return array(
+            '/css/form.css' => 'all'
+        );
+    }
+
+    public function getJavaScripts() {
+        return array('/js/formShow.js');
     }
 
 }
