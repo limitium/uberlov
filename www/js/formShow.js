@@ -54,7 +54,8 @@ formShow.prototype.moveLabels= function(){
                 $(input.parents()[0]).append('<span>'+label.html()+'</span>');
             }else if(input.attr('type') == 'file'){
                 var td = input.parent();
-                td.html('<div class="blocker" /><input type="file" id="'+input.attr('id')+'" name="'+input.attr('name')+'" class="customFile" /><div class="fakeButton" >'+label.html()+'</div><div class="fileName" />');
+                input.remove();
+                td.append('<div class="blocker" /><input type="file" id="'+input.attr('id')+'" name="'+input.attr('name')+'" class="customFile" /><div class="fakeButton" >'+label.html()+'</div><div class="fileName" />');
                 
                 var newInput = $('input',td);
                 var fileName = $('.fileName',td);
