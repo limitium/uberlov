@@ -84,9 +84,18 @@ class profileActions extends sfActions {
     }
 
     protected function processForm(sfWebRequest $request, sfForm $form) {
-        $form->bind($request->getParameter($form->getName()), $request->getFiles($form->getName()));
+        $files = $request->getFiles($form->getName());
+        $form->bind($request->getParameter($form->getName()), $files);
         if ($form->isValid()) {
             $profile = $form->save();
+            if ($files['userpic']['name']) {
+                $userpic = new sfThumbnail(32, 32);
+                $userpic->loadFile($files['userpic']['tmp_name']);
+                $name = md5($profile->id . 'userpic fuck yea') . '.gif';
+                $userpic->save(sfConfig::get('sf_user_pic_dir') . $name, 'image/gif');
+                $profile->userpic = $name;
+                $profile->save();
+            }
 
             $this->redirect('profile/show?id=' . $profile->getId());
         }

@@ -26,7 +26,15 @@ class ProfileForm extends BaseProfileForm {
         $this->validatorSchema['description'] = new sfValidatorString(array('required' => false));
         $this->validatorSchema['date'] = new sfValidatorDate(array('date_format' => "/[0-2][0-9]\.[0-1][0-9]\.[0-9]{4}/", 'with_time' => false, 'date_format_error' => 'd.m.Y', 'required' => false));
         $this->validatorSchema['sex'] = new sfValidatorBoolean(array('required' => false));
-        $this->validatorSchema['userpic'] = new sfValidatorFile(array('required' => false));
+        $this->validatorSchema['userpic'] = new sfValidatorFile(array(
+                    'max_size' => 1024 * 1024,
+                    'required' => false,
+                    'mime_types' => array(
+                        'image/jpeg',
+                        'image/png',
+                        'image/gif'
+                    )
+                ));
 
 
         $this->widgetSchema->setLabels(array(
