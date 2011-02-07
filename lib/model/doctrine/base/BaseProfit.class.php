@@ -49,7 +49,7 @@
  * @package    FISHERY
  * @subpackage model
  * @author     Your name here
- * @version    SVN: $Id: Builder.php 6820 2009-11-30 17:27:49Z jwage $
+ * @version    SVN: $Id: Builder.php 7490 2010-03-29 19:53:27Z jwage $
  */
 abstract class BaseProfit extends sfDoctrineRecord
 {
@@ -60,16 +60,16 @@ abstract class BaseProfit extends sfDoctrineRecord
              'primary' => true,
              'type' => 'integer',
              'autoincrement' => true,
-             'length' => '4',
+             'length' => 4,
              ));
         $this->hasColumn('name', 'string', 50, array(
              'type' => 'string',
              'notnull' => true,
-             'length' => '50',
+             'length' => 50,
              ));
         $this->hasColumn('location_id', 'integer', 4, array(
              'type' => 'integer',
-             'length' => '4',
+             'length' => 4,
              ));
         $this->hasColumn('date', 'timestamp', null, array(
              'type' => 'timestamp',
@@ -85,7 +85,7 @@ abstract class BaseProfit extends sfDoctrineRecord
              ));
         $this->hasColumn('fish_id', 'integer', 4, array(
              'type' => 'integer',
-             'length' => '4',
+             'length' => 4,
              ));
         $this->hasColumn('weight', 'float', null, array(
              'type' => 'float',

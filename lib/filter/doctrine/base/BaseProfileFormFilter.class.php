@@ -6,7 +6,7 @@
  * @package    FISHERY
  * @subpackage filter
  * @author     Your name here
- * @version    SVN: $Id: sfDoctrineFormFilterGeneratedTemplate.php 24171 2009-11-19 16:37:50Z Kris.Wallsmith $
+ * @version    SVN: $Id: sfDoctrineFormFilterGeneratedTemplate.php 29570 2010-05-21 14:49:47Z Kris.Wallsmith $
  */
 abstract class BaseProfileFormFilter extends BaseFormFilterDoctrine
 {
@@ -69,8 +69,10 @@ abstract class BaseProfileFormFilter extends BaseFormFilterDoctrine
       return;
     }
 
-    $query->leftJoin('r.WishList WishList')
-          ->andWhereIn('WishList.location_id', $values);
+    $query
+      ->leftJoin($query->getRootAlias().'.WishList WishList')
+      ->andWhereIn('WishList.location_id', $values)
+    ;
   }
 
   public function addMyFirendsListColumnQuery(Doctrine_Query $query, $field, $values)
@@ -85,8 +87,10 @@ abstract class BaseProfileFormFilter extends BaseFormFilterDoctrine
       return;
     }
 
-    $query->leftJoin('r.Friend Friend')
-          ->andWhereIn('Friend.source_profile_id', $values);
+    $query
+      ->leftJoin($query->getRootAlias().'.Friend Friend')
+      ->andWhereIn('Friend.source_profile_id', $values)
+    ;
   }
 
   public function addMyFirends2ListColumnQuery(Doctrine_Query $query, $field, $values)
@@ -101,8 +105,10 @@ abstract class BaseProfileFormFilter extends BaseFormFilterDoctrine
       return;
     }
 
-    $query->leftJoin('r.Friend Friend')
-          ->andWhereIn('Friend.related_profile_id', $values);
+    $query
+      ->leftJoin($query->getRootAlias().'.Friend Friend')
+      ->andWhereIn('Friend.related_profile_id', $values)
+    ;
   }
 
   public function addInboxesListColumnQuery(Doctrine_Query $query, $field, $values)
@@ -117,8 +123,10 @@ abstract class BaseProfileFormFilter extends BaseFormFilterDoctrine
       return;
     }
 
-    $query->leftJoin('r.Inboxed Inboxed')
-          ->andWhereIn('Inboxed.inbox_id', $values);
+    $query
+      ->leftJoin($query->getRootAlias().'.Inboxed Inboxed')
+      ->andWhereIn('Inboxed.inbox_id', $values)
+    ;
   }
 
   public function addReadCommentListColumnQuery(Doctrine_Query $query, $field, $values)
@@ -133,8 +141,10 @@ abstract class BaseProfileFormFilter extends BaseFormFilterDoctrine
       return;
     }
 
-    $query->leftJoin('r.ReadComment ReadComment')
-          ->andWhereIn('ReadComment.comment_id', $values);
+    $query
+      ->leftJoin($query->getRootAlias().'.ReadComment ReadComment')
+      ->andWhereIn('ReadComment.comment_id', $values)
+    ;
   }
 
   public function getModelName()
