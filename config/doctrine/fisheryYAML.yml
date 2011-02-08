@@ -5,13 +5,13 @@ Location:
       listener: BlameableFishery
       relations:
         updated:
-          class: Profile
+          class: sfGuardUserProfile
           disabled: false
           foreign: id
         created:
           foreign: id
           disabled: false
-          class: Profile
+          class: sfGuardUserProfile
       columns:
         updated:
           type: int
@@ -75,12 +75,11 @@ Location:
       local: address_id
       foreign: id
     Wishers:
-      class: Profile
+      class: sfGuardUserProfile
       refClass: WishList
       local: location_id
       foreign: profile_id
-Profile:
-  tableName: profile
+sfGuardUserProfile:
   actAs:
     Timestampable: 
   columns:
@@ -109,6 +108,15 @@ Profile:
       default: 1
       type: boolean
       notnull: true
+    user_id:
+      unique: true
+      type: integer(4)
+    email:
+      type: string(255)
+    validate_at:
+      type: timestamp
+    validate:
+      type: string(33)
   relations:
     Wishes:
       class: Location
@@ -116,12 +124,12 @@ Profile:
       local: profile_id
       foreign: location_id
     MyFirends:
-      class: Profile
+      class: sfGuardUserProfile
       refClass: Friend
       local: related_profile_id
       foreign: source_profile_id
     MyFirends2:
-      class: Profile
+      class: sfGuardUserProfile
       refClass: Friend
       local: source_profile_id
       foreign: related_profile_id
@@ -160,13 +168,13 @@ Profit:
           type: int
       relations:
         created:
-          class: Profile
+          class: sfGuardUserProfile
           disabled: false
           foreign: id
         updated:
           foreign: id
           disabled: false
-          class: Profile
+          class: sfGuardUserProfile
   columns:
     id:
       primary: true
@@ -267,11 +275,11 @@ Comment:
       listener: BlameableFishery
       relations:
         created:
-          class: Profile
+          class: sfGuardUserProfile
           foreign: id
           disabled: false
         updated:
-          class: Profile
+          class: sfGuardUserProfile
           foreign: id
           disabled: false
       columns:
@@ -341,7 +349,7 @@ WishList:
       type: integer(4)
       notnull: true
   relations:
-    Profile:
+    sfGuardUserProfile:
       local: profile_id
       foreign: id
     Location:
@@ -358,10 +366,10 @@ Friend:
       type: integer(4)
       notnull: true
   relations:
-    Profile:
+    sfGuardUserProfile:
       local: source_profile_id
       foreign: id
-    Profile:
+    sfGuardUserProfile:
       local: related_profile_id
       foreign: id
 Vote:
@@ -373,7 +381,7 @@ Vote:
       type: integer(4)
   relations:
     Voter:
-      class: Profile
+      class: sfGuardUserProfile
       foreignAlias: Votes
       local: voter
       foreign: id
@@ -436,7 +444,7 @@ VoteProfile:
     profile_id:
       type: integer(4)
   relations:
-    Profile:
+    sfGuardUserProfile:
       local: profile_id
       foreign: id
 Address:
@@ -530,13 +538,13 @@ Inbox:
       listener: BlameableFishery
       relations:
         created:
-          class: Profile
+          class: sfGuardUserProfile
           disabled: false
           foreign: id
         updated:
           disabled: false
           foreign: id
-          class: Profile
+          class: sfGuardUserProfile
       columns:
         created:
           length: 4
@@ -559,7 +567,7 @@ Inbox:
       notnull: true
   relations:
     Inboxed:
-      class: Profile
+      class: sfGuardUserProfile
       refClass: Inboxed
       local: inbox_id
       foreign: profile_id
@@ -577,7 +585,7 @@ Inboxed:
     Inbox:
       local: inbox_id
       foreign: id
-    Profile:
+    sfGuardUserProfile:
       local: profile_id
       foreign: id
 CommentInbox:
@@ -606,11 +614,11 @@ Talk:
           type: int
       relations:
         created:
-          class: Profile
+          class: sfGuardUserProfile
           disabled: false
           foreign: id
         updated:
-          class: Profile
+          class: sfGuardUserProfile
           disabled: false
           foreign: id
     Timestampable: 
@@ -672,7 +680,7 @@ ReadComment:
       type: integer(4)
       notnull: true
   relations:
-    Profile:
+    sfGuardUserProfile:
       local: profile_id
       foreign: id
     Comment:
@@ -747,6 +755,22 @@ Photo:
   actAs:
     Blameable:
       listener: BlameableFishery
+      relations:
+        created:
+          class: sfGuardUserProfile
+          disabled: false
+          foreign: id
+        updated:
+          class: sfGuardUserProfile
+          foreign: id
+          disabled: false
+      columns:
+        created:
+          length: 4
+          type: int
+        updated:
+          type: int
+          length: 4
   columns:
     id:
       primary: true

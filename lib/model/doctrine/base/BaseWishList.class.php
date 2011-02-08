@@ -7,22 +7,22 @@
  * 
  * @property integer $profile_id
  * @property integer $location_id
- * @property Profile $Profile
+ * @property sfGuardUserProfile $sfGuardUserProfile
  * @property Location $Location
  * 
- * @method integer  getProfileId()   Returns the current record's "profile_id" value
- * @method integer  getLocationId()  Returns the current record's "location_id" value
- * @method Profile  getProfile()     Returns the current record's "Profile" value
- * @method Location getLocation()    Returns the current record's "Location" value
- * @method WishList setProfileId()   Sets the current record's "profile_id" value
- * @method WishList setLocationId()  Sets the current record's "location_id" value
- * @method WishList setProfile()     Sets the current record's "Profile" value
- * @method WishList setLocation()    Sets the current record's "Location" value
+ * @method integer            getProfileId()          Returns the current record's "profile_id" value
+ * @method integer            getLocationId()         Returns the current record's "location_id" value
+ * @method sfGuardUserProfile getSfGuardUserProfile() Returns the current record's "sfGuardUserProfile" value
+ * @method Location           getLocation()           Returns the current record's "Location" value
+ * @method WishList           setProfileId()          Sets the current record's "profile_id" value
+ * @method WishList           setLocationId()         Sets the current record's "location_id" value
+ * @method WishList           setSfGuardUserProfile() Sets the current record's "sfGuardUserProfile" value
+ * @method WishList           setLocation()           Sets the current record's "Location" value
  * 
  * @package    FISHERY
  * @subpackage model
  * @author     Your name here
- * @version    SVN: $Id: Builder.php 7490 2010-03-29 19:53:27Z jwage $
+ * @version    SVN: $Id: Builder.php 6820 2009-11-30 17:27:49Z jwage $
  */
 abstract class BaseWishList extends sfDoctrineRecord
 {
@@ -32,12 +32,12 @@ abstract class BaseWishList extends sfDoctrineRecord
         $this->hasColumn('profile_id', 'integer', 4, array(
              'primary' => true,
              'type' => 'integer',
-             'length' => 4,
+             'length' => '4',
              ));
         $this->hasColumn('location_id', 'integer', 4, array(
              'primary' => true,
              'type' => 'integer',
-             'length' => 4,
+             'length' => '4',
              ));
 
         $this->option('type', 'INNODB');
@@ -48,7 +48,7 @@ abstract class BaseWishList extends sfDoctrineRecord
     public function setUp()
     {
         parent::setUp();
-        $this->hasOne('Profile', array(
+        $this->hasOne('sfGuardUserProfile', array(
              'local' => 'profile_id',
              'foreign' => 'id'));
 

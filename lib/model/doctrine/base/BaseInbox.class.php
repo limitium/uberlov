@@ -25,7 +25,7 @@
  * @package    FISHERY
  * @subpackage model
  * @author     Your name here
- * @version    SVN: $Id: Builder.php 7490 2010-03-29 19:53:27Z jwage $
+ * @version    SVN: $Id: Builder.php 6820 2009-11-30 17:27:49Z jwage $
  */
 abstract class BaseInbox extends sfDoctrineRecord
 {
@@ -36,12 +36,12 @@ abstract class BaseInbox extends sfDoctrineRecord
              'primary' => true,
              'type' => 'integer',
              'autoincrement' => true,
-             'length' => 4,
+             'length' => '4',
              ));
         $this->hasColumn('name', 'string', 50, array(
              'type' => 'string',
              'notnull' => true,
-             'length' => 50,
+             'length' => '50',
              ));
         $this->hasColumn('message', 'string', null, array(
              'type' => 'string',
@@ -56,7 +56,7 @@ abstract class BaseInbox extends sfDoctrineRecord
     public function setUp()
     {
         parent::setUp();
-        $this->hasMany('Profile as Inboxed', array(
+        $this->hasMany('sfGuardUserProfile as Inboxed', array(
              'refClass' => 'Inboxed',
              'local' => 'inbox_id',
              'foreign' => 'profile_id'));
@@ -71,7 +71,7 @@ abstract class BaseInbox extends sfDoctrineRecord
              array(
               'created' => 
               array(
-              'class' => 'Profile',
+              'class' => 'sfGuardUserProfile',
               'disabled' => false,
               'foreign' => 'id',
               ),
@@ -79,7 +79,7 @@ abstract class BaseInbox extends sfDoctrineRecord
               array(
               'disabled' => false,
               'foreign' => 'id',
-              'class' => 'Profile',
+              'class' => 'sfGuardUserProfile',
               ),
              ),
              'columns' => 

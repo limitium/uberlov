@@ -14,33 +14,33 @@
  * @property integer $profile_id
  * @property integer $talk_id
  * @property integer $fish_event_id
- * @property Profile $Voter
+ * @property sfGuardUserProfile $Voter
  * 
- * @method integer getValue()         Returns the current record's "value" value
- * @method integer getVoter()         Returns the current record's "voter" value
- * @method string  getToward()        Returns the current record's "toward" value
- * @method integer getLocationId()    Returns the current record's "location_id" value
- * @method integer getCommentId()     Returns the current record's "comment_id" value
- * @method integer getProfitId()      Returns the current record's "profit_id" value
- * @method integer getProfileId()     Returns the current record's "profile_id" value
- * @method integer getTalkId()        Returns the current record's "talk_id" value
- * @method integer getFishEventId()   Returns the current record's "fish_event_id" value
- * @method Profile getVoter()         Returns the current record's "Voter" value
- * @method Vote    setValue()         Sets the current record's "value" value
- * @method Vote    setVoter()         Sets the current record's "voter" value
- * @method Vote    setToward()        Sets the current record's "toward" value
- * @method Vote    setLocationId()    Sets the current record's "location_id" value
- * @method Vote    setCommentId()     Sets the current record's "comment_id" value
- * @method Vote    setProfitId()      Sets the current record's "profit_id" value
- * @method Vote    setProfileId()     Sets the current record's "profile_id" value
- * @method Vote    setTalkId()        Sets the current record's "talk_id" value
- * @method Vote    setFishEventId()   Sets the current record's "fish_event_id" value
- * @method Vote    setVoter()         Sets the current record's "Voter" value
+ * @method integer            getValue()         Returns the current record's "value" value
+ * @method integer            getVoter()         Returns the current record's "voter" value
+ * @method string             getToward()        Returns the current record's "toward" value
+ * @method integer            getLocationId()    Returns the current record's "location_id" value
+ * @method integer            getCommentId()     Returns the current record's "comment_id" value
+ * @method integer            getProfitId()      Returns the current record's "profit_id" value
+ * @method integer            getProfileId()     Returns the current record's "profile_id" value
+ * @method integer            getTalkId()        Returns the current record's "talk_id" value
+ * @method integer            getFishEventId()   Returns the current record's "fish_event_id" value
+ * @method sfGuardUserProfile getVoter()         Returns the current record's "Voter" value
+ * @method Vote               setValue()         Sets the current record's "value" value
+ * @method Vote               setVoter()         Sets the current record's "voter" value
+ * @method Vote               setToward()        Sets the current record's "toward" value
+ * @method Vote               setLocationId()    Sets the current record's "location_id" value
+ * @method Vote               setCommentId()     Sets the current record's "comment_id" value
+ * @method Vote               setProfitId()      Sets the current record's "profit_id" value
+ * @method Vote               setProfileId()     Sets the current record's "profile_id" value
+ * @method Vote               setTalkId()        Sets the current record's "talk_id" value
+ * @method Vote               setFishEventId()   Sets the current record's "fish_event_id" value
+ * @method Vote               setVoter()         Sets the current record's "Voter" value
  * 
  * @package    FISHERY
  * @subpackage model
  * @author     Your name here
- * @version    SVN: $Id: Builder.php 7490 2010-03-29 19:53:27Z jwage $
+ * @version    SVN: $Id: Builder.php 6820 2009-11-30 17:27:49Z jwage $
  */
 abstract class BaseVote extends sfDoctrineRecord
 {
@@ -50,11 +50,11 @@ abstract class BaseVote extends sfDoctrineRecord
         $this->hasColumn('value', 'integer', 4, array(
              'type' => 'integer',
              'notnull' => true,
-             'length' => 4,
+             'length' => '4',
              ));
         $this->hasColumn('voter', 'integer', 4, array(
              'type' => 'integer',
-             'length' => 4,
+             'length' => '4',
              ));
         $this->hasColumn('toward', 'string', 255, array(
              'type' => 'string',
@@ -62,27 +62,27 @@ abstract class BaseVote extends sfDoctrineRecord
              ));
         $this->hasColumn('location_id', 'integer', 4, array(
              'type' => 'integer',
-             'length' => 4,
+             'length' => '4',
              ));
         $this->hasColumn('comment_id', 'integer', 4, array(
              'type' => 'integer',
-             'length' => 4,
+             'length' => '4',
              ));
         $this->hasColumn('profit_id', 'integer', 4, array(
              'type' => 'integer',
-             'length' => 4,
+             'length' => '4',
              ));
         $this->hasColumn('profile_id', 'integer', 4, array(
              'type' => 'integer',
-             'length' => 4,
+             'length' => '4',
              ));
         $this->hasColumn('talk_id', 'integer', 4, array(
              'type' => 'integer',
-             'length' => 4,
+             'length' => '4',
              ));
         $this->hasColumn('fish_event_id', 'integer', 4, array(
              'type' => 'integer',
-             'length' => 4,
+             'length' => '4',
              ));
 
         $this->option('type', 'INNODB');
@@ -120,7 +120,7 @@ abstract class BaseVote extends sfDoctrineRecord
     public function setUp()
     {
         parent::setUp();
-        $this->hasOne('Profile as Voter', array(
+        $this->hasOne('sfGuardUserProfile as Voter', array(
              'local' => 'voter',
              'foreign' => 'id'));
     }
