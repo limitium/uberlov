@@ -8,21 +8,21 @@
  * @property integer $inbox_id
  * @property integer $profile_id
  * @property Inbox $Inbox
- * @property Profile $Profile
+ * @property sfGuardUserProfile $sfGuardUserProfile
  * 
- * @method integer getInboxId()    Returns the current record's "inbox_id" value
- * @method integer getProfileId()  Returns the current record's "profile_id" value
- * @method Inbox   getInbox()      Returns the current record's "Inbox" value
- * @method Profile getProfile()    Returns the current record's "Profile" value
- * @method Inboxed setInboxId()    Sets the current record's "inbox_id" value
- * @method Inboxed setProfileId()  Sets the current record's "profile_id" value
- * @method Inboxed setInbox()      Sets the current record's "Inbox" value
- * @method Inboxed setProfile()    Sets the current record's "Profile" value
+ * @method integer            getInboxId()            Returns the current record's "inbox_id" value
+ * @method integer            getProfileId()          Returns the current record's "profile_id" value
+ * @method Inbox              getInbox()              Returns the current record's "Inbox" value
+ * @method sfGuardUserProfile getSfGuardUserProfile() Returns the current record's "sfGuardUserProfile" value
+ * @method Inboxed            setInboxId()            Sets the current record's "inbox_id" value
+ * @method Inboxed            setProfileId()          Sets the current record's "profile_id" value
+ * @method Inboxed            setInbox()              Sets the current record's "Inbox" value
+ * @method Inboxed            setSfGuardUserProfile() Sets the current record's "sfGuardUserProfile" value
  * 
  * @package    FISHERY
  * @subpackage model
  * @author     Your name here
- * @version    SVN: $Id: Builder.php 7490 2010-03-29 19:53:27Z jwage $
+ * @version    SVN: $Id: Builder.php 6820 2009-11-30 17:27:49Z jwage $
  */
 abstract class BaseInboxed extends sfDoctrineRecord
 {
@@ -32,12 +32,12 @@ abstract class BaseInboxed extends sfDoctrineRecord
         $this->hasColumn('inbox_id', 'integer', 4, array(
              'primary' => true,
              'type' => 'integer',
-             'length' => 4,
+             'length' => '4',
              ));
         $this->hasColumn('profile_id', 'integer', 4, array(
              'primary' => true,
              'type' => 'integer',
-             'length' => 4,
+             'length' => '4',
              ));
 
         $this->option('type', 'INNODB');
@@ -52,7 +52,7 @@ abstract class BaseInboxed extends sfDoctrineRecord
              'local' => 'inbox_id',
              'foreign' => 'id'));
 
-        $this->hasOne('Profile', array(
+        $this->hasOne('sfGuardUserProfile', array(
              'local' => 'profile_id',
              'foreign' => 'id'));
     }

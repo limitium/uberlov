@@ -7,22 +7,22 @@
  * 
  * @property integer $profile_id
  * @property integer $comment_id
- * @property Profile $Profile
+ * @property sfGuardUserProfile $sfGuardUserProfile
  * @property Comment $Comment
  * 
- * @method integer     getProfileId()  Returns the current record's "profile_id" value
- * @method integer     getCommentId()  Returns the current record's "comment_id" value
- * @method Profile     getProfile()    Returns the current record's "Profile" value
- * @method Comment     getComment()    Returns the current record's "Comment" value
- * @method ReadComment setProfileId()  Sets the current record's "profile_id" value
- * @method ReadComment setCommentId()  Sets the current record's "comment_id" value
- * @method ReadComment setProfile()    Sets the current record's "Profile" value
- * @method ReadComment setComment()    Sets the current record's "Comment" value
+ * @method integer            getProfileId()          Returns the current record's "profile_id" value
+ * @method integer            getCommentId()          Returns the current record's "comment_id" value
+ * @method sfGuardUserProfile getSfGuardUserProfile() Returns the current record's "sfGuardUserProfile" value
+ * @method Comment            getComment()            Returns the current record's "Comment" value
+ * @method ReadComment        setProfileId()          Sets the current record's "profile_id" value
+ * @method ReadComment        setCommentId()          Sets the current record's "comment_id" value
+ * @method ReadComment        setSfGuardUserProfile() Sets the current record's "sfGuardUserProfile" value
+ * @method ReadComment        setComment()            Sets the current record's "Comment" value
  * 
  * @package    FISHERY
  * @subpackage model
  * @author     Your name here
- * @version    SVN: $Id: Builder.php 7490 2010-03-29 19:53:27Z jwage $
+ * @version    SVN: $Id: Builder.php 6820 2009-11-30 17:27:49Z jwage $
  */
 abstract class BaseReadComment extends sfDoctrineRecord
 {
@@ -32,12 +32,12 @@ abstract class BaseReadComment extends sfDoctrineRecord
         $this->hasColumn('profile_id', 'integer', 4, array(
              'primary' => true,
              'type' => 'integer',
-             'length' => 4,
+             'length' => '4',
              ));
         $this->hasColumn('comment_id', 'integer', 4, array(
              'primary' => true,
              'type' => 'integer',
-             'length' => 4,
+             'length' => '4',
              ));
 
         $this->option('type', 'INNODB');
@@ -48,7 +48,7 @@ abstract class BaseReadComment extends sfDoctrineRecord
     public function setUp()
     {
         parent::setUp();
-        $this->hasOne('Profile', array(
+        $this->hasOne('sfGuardUserProfile', array(
              'local' => 'profile_id',
              'foreign' => 'id'));
 

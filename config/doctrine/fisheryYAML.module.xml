@@ -22,14 +22,14 @@
             <attribute name="listener">BlameableFishery</attribute>
             <attribute name="relations">
               <attribute name="updated">
-                <attribute name="class">Profile</attribute>
+                <attribute name="class">sfGuardUserProfile</attribute>
                 <attribute name="disabled">false</attribute>
                 <attribute name="foreign">id</attribute>
               </attribute>
               <attribute name="created">
                 <attribute name="foreign">id</attribute>
                 <attribute name="disabled">false</attribute>
-                <attribute name="class">Profile</attribute>
+                <attribute name="class">sfGuardUserProfile</attribute>
               </attribute>
             </attribute>
             <attribute name="columns">
@@ -50,7 +50,7 @@
         </attribute>
       </orm-properties>
     </table>
-    <table name="Profile" visPositionX="151" visPositionY="583" visSizeX="0" visSizeX2="121" visSizeY="0" visSizeY2="101">
+    <table name="sfGuardUserProfile" visPositionX="184" visPositionY="531" visSizeX="0" visSizeX2="127" visSizeY="0" visSizeY2="185">
       <column auto-increment="true" name="id" primary="true" required="true" size="4" type="integer"/>
       <column default="''" name="nick_name" required="true" size="50" type="string"/>
       <column default="''" name="first_name" size="50" type="string"/>
@@ -59,8 +59,11 @@
       <column name="description" type="string"/>
       <column name="userpic" size="255" type="string"/>
       <column default="1" name="sex" required="true" type="boolean"/>
+      <column name="user_id" size="4" type="integer" unique="true"/>
+      <column name="email" size="255" type="string"/>
+      <column name="validate_at" type="timestamp"/>
+      <column name="validate" size="33" type="string"/>
       <orm-properties>
-        <attribute name="tableName">profile</attribute>
         <attribute name="actAs">
           <attribute name="Timestampable"/>
         </attribute>
@@ -70,7 +73,7 @@
       <column auto-increment="true" name="id" primary="true" required="true" size="4" type="integer"/>
       <column name="name" required="true" size="100" type="string" unique="true"/>
     </table>
-    <table name="Profit" visPositionX="189" visPositionY="348" visSizeX="0" visSizeX2="120" visSizeY="0" visSizeY2="129">
+    <table name="Profit" visPositionX="188" visPositionY="348" visSizeX="0" visSizeX2="120" visSizeY="0" visSizeY2="129">
       <column auto-increment="true" name="id" primary="true" required="true" size="4" type="integer"/>
       <column name="name" required="true" size="50" type="string"/>
       <column name="location_id" size="4" type="integer"/>
@@ -96,14 +99,14 @@
             </attribute>
             <attribute name="relations">
               <attribute name="created">
-                <attribute name="class">Profile</attribute>
+                <attribute name="class">sfGuardUserProfile</attribute>
                 <attribute name="disabled">false</attribute>
                 <attribute name="foreign">id</attribute>
               </attribute>
               <attribute name="updated">
                 <attribute name="foreign">id</attribute>
                 <attribute name="disabled">false</attribute>
-                <attribute name="class">Profile</attribute>
+                <attribute name="class">sfGuardUserProfile</attribute>
               </attribute>
             </attribute>
           </attribute>
@@ -137,7 +140,7 @@
       <column auto-increment="true" name="id" primary="true" size="4" type="integer"/>
       <column name="name" required="true" size="50" type="string"/>
     </table>
-    <table name="Comment" visPositionX="-54" visPositionY="639" visSizeX="0" visSizeX2="124" visSizeY="0" visSizeY2="59">
+    <table name="Comment" visPositionX="-32" visPositionY="664" visSizeX="0" visSizeX2="124" visSizeY="0" visSizeY2="59">
       <column auto-increment="true" name="id" primary="true" size="4" type="integer"/>
       <column name="parent" size="4" type="integer"/>
       <column name="message" required="true" size="1000" type="string"/>
@@ -147,12 +150,12 @@
             <attribute name="listener">BlameableFishery</attribute>
             <attribute name="relations">
               <attribute name="created">
-                <attribute name="class">Profile</attribute>
+                <attribute name="class">sfGuardUserProfile</attribute>
                 <attribute name="foreign">id</attribute>
                 <attribute name="disabled">false</attribute>
               </attribute>
               <attribute name="updated">
-                <attribute name="class">Profile</attribute>
+                <attribute name="class">sfGuardUserProfile</attribute>
                 <attribute name="foreign">id</attribute>
                 <attribute name="disabled">false</attribute>
               </attribute>
@@ -205,11 +208,11 @@
       <column name="profile_id" primary="true" required="true" size="4" type="integer"/>
       <column name="location_id" primary="true" required="true" size="4" type="integer"/>
     </table>
-    <table name="Friend" visPositionX="98" visPositionY="740" visSizeX="0" visSizeX2="147" visSizeY="0" visSizeY2="60">
+    <table name="Friend" visPositionX="114" visPositionY="750" visSizeX="0" visSizeX2="212" visSizeY="0" visSizeY2="60">
       <column name="source_profile_id" primary="true" required="true" size="4" type="integer"/>
       <column name="related_profile_id" primary="true" required="true" size="4" type="integer"/>
     </table>
-    <table name="Vote" visPositionX="253" visPositionY="742" visSizeX="0" visSizeX2="99" visSizeY="0" visSizeY2="45">
+    <table name="Vote" visPositionX="375" visPositionY="752" visSizeX="0" visSizeX2="99" visSizeY="0" visSizeY2="45">
       <column name="value" required="true" size="4" type="integer"/>
       <column description="Foreign key to Profile" name="voter" size="4" type="integer"/>
     </table>
@@ -250,7 +253,7 @@
       <column auto-increment="true" name="id" primary="true" size="4" type="integer"/>
       <column name="name" required="true" size="50" type="string" unique="true"/>
     </table>
-    <table name="VoteProfile" visPositionX="35" visPositionY="502" visSizeX="0" visSizeX2="114" visSizeY="0" visSizeY2="31">
+    <table name="VoteProfile" visPositionX="9" visPositionY="507" visSizeX="0" visSizeX2="114" visSizeY="0" visSizeY2="31">
       <column name="profile_id" size="4" type="integer"/>
       <orm-properties>
         <attribute name="inheritance">
@@ -287,7 +290,7 @@
       <column name="name" required="true" size="255" type="string" unique="true"/>
       <column description="Foreign key to AreaLow" name="area_low_id" size="4" type="integer"/>
     </table>
-    <table name="Inbox" visPositionX="448" visPositionY="576" visSizeX="0" visSizeX2="99" visSizeY="0" visSizeY2="59">
+    <table name="Inbox" visPositionX="448" visPositionY="578" visSizeX="0" visSizeX2="99" visSizeY="0" visSizeY2="59">
       <column auto-increment="true" name="id" primary="true" required="true" size="4" type="integer"/>
       <column name="name" required="true" size="50" type="string"/>
       <column name="message" required="true" type="string"/>
@@ -297,14 +300,14 @@
             <attribute name="listener">BlameableFishery</attribute>
             <attribute name="relations">
               <attribute name="created">
-                <attribute name="class">Profile</attribute>
+                <attribute name="class">sfGuardUserProfile</attribute>
                 <attribute name="disabled">false</attribute>
                 <attribute name="foreign">id</attribute>
               </attribute>
               <attribute name="updated">
                 <attribute name="disabled">false</attribute>
                 <attribute name="foreign">id</attribute>
-                <attribute name="class">Profile</attribute>
+                <attribute name="class">sfGuardUserProfile</attribute>
               </attribute>
             </attribute>
             <attribute name="columns">
@@ -322,7 +325,7 @@
         </attribute>
       </orm-properties>
     </table>
-    <table name="Inboxed" visPositionX="304" visPositionY="575" visSizeX="0" visSizeX2="114" visSizeY="0" visSizeY2="60">
+    <table name="Inboxed" visPositionX="458" visPositionY="665" visSizeX="0" visSizeX2="154" visSizeY="0" visSizeY2="60">
       <column name="inbox_id" primary="true" required="true" size="4" type="integer"/>
       <column name="profile_id" primary="true" required="true" size="4" type="integer"/>
     </table>
@@ -358,12 +361,12 @@
             </attribute>
             <attribute name="relations">
               <attribute name="created">
-                <attribute name="class">Profile</attribute>
+                <attribute name="class">sfGuardUserProfile</attribute>
                 <attribute name="disabled">false</attribute>
                 <attribute name="foreign">id</attribute>
               </attribute>
               <attribute name="updated">
-                <attribute name="class">Profile</attribute>
+                <attribute name="class">sfGuardUserProfile</attribute>
                 <attribute name="disabled">false</attribute>
                 <attribute name="foreign">id</attribute>
               </attribute>
@@ -397,7 +400,7 @@
         </attribute>
       </orm-properties>
     </table>
-    <table name="ReadComment" visPositionX="-45" visPositionY="544" visSizeX="0" visSizeX2="127" visSizeY="0" visSizeY2="60">
+    <table name="ReadComment" visPositionX="-66" visPositionY="561" visSizeX="0" visSizeX2="172" visSizeY="0" visSizeY2="60">
       <column name="profile_id" primary="true" required="true" size="4" type="integer"/>
       <column name="comment_id" primary="true" required="true" size="4" type="integer"/>
     </table>
@@ -447,13 +450,35 @@
         </attribute>
       </orm-properties>
     </table>
-    <table name="Photo" visPositionX="-200" visPositionY="337" visSizeX="0" visSizeX2="99" visSizeY="0" visSizeY2="45">
+    <table name="Photo" visPositionX="-199" visPositionY="336" visSizeX="0" visSizeX2="99" visSizeY="0" visSizeY2="45">
       <column auto-increment="true" name="id" primary="true" size="4" type="integer"/>
       <column name="name" required="true" size="36" type="string"/>
       <orm-properties>
         <attribute name="actAs">
           <attribute name="Blameable">
             <attribute name="listener">BlameableFishery</attribute>
+            <attribute name="relations">
+              <attribute name="created">
+                <attribute name="class">sfGuardUserProfile</attribute>
+                <attribute name="disabled">false</attribute>
+                <attribute name="foreign">id</attribute>
+              </attribute>
+              <attribute name="updated">
+                <attribute name="class">sfGuardUserProfile</attribute>
+                <attribute name="foreign">id</attribute>
+                <attribute name="disabled">false</attribute>
+              </attribute>
+            </attribute>
+            <attribute name="columns">
+              <attribute name="created">
+                <attribute name="length">4</attribute>
+                <attribute name="type">int</attribute>
+              </attribute>
+              <attribute name="updated">
+                <attribute name="type">int</attribute>
+                <attribute name="length">4</attribute>
+              </attribute>
+            </attribute>
           </attribute>
         </attribute>
       </orm-properties>
@@ -515,19 +540,19 @@
     <foreign-key caption="Profit CommentProfit" from="CommentProfit" name="FK_CommentProfit_Profit_id" to="Profit" visCaption1X="0" visCaption1Y="0" visCenterX="0" visCenterY="0" visShowCaption="0">
       <foreign-key-column from="profit_id" to="id"/>
     </foreign-key>
-    <foreign-key caption="Profile WishList" from="WishList" name="FK_WishList_Profile_id" to="Profile" visCenterX="0" visCenterY="0" visShowCaption="0">
+    <foreign-key caption="Profile WishList" from="WishList" name="FK_WishList_Profile_id" to="sfGuardUserProfile" visCenterX="0" visCenterY="0" visShowCaption="0">
       <foreign-key-column from="profile_id" to="id"/>
     </foreign-key>
     <foreign-key caption="Location WishList" from="WishList" name="FK_WishList_Location_id" to="Location" visCenterX="0" visCenterY="3" visShowCaption="0">
       <foreign-key-column from="location_id" to="id"/>
     </foreign-key>
-    <foreign-key caption="Profile Friends" from="Friend" name="FK_Friends_Profile_id" to="Profile" visShowCaption="0">
+    <foreign-key caption="Profile Friends" from="Friend" name="FK_Friends_Profile_id" to="sfGuardUserProfile" visShowCaption="0">
       <foreign-key-column from="source_profile_id" to="id"/>
     </foreign-key>
-    <foreign-key caption="Profile Friends" from="Friend" name="FK_Friends_Profile_id2" to="Profile" visCaption1X="1" visCaption1Y="-2" visCenterX="0" visCenterY="0" visShowCaption="0">
+    <foreign-key caption="Profile Friends" from="Friend" name="FK_Friends_Profile_id2" to="sfGuardUserProfile" visCaption1X="1" visCaption1Y="-2" visCenterX="0" visCenterY="0" visShowCaption="0">
       <foreign-key-column from="related_profile_id" to="id"/>
     </foreign-key>
-    <foreign-key from="Vote" name="FK_Vote_Profile" to="Profile">
+    <foreign-key from="Vote" name="FK_Vote_Profile" to="sfGuardUserProfile">
       <foreign-key-column from="voter" to="id"/>
       <orm-properties>
         <attribute name="localAlias">Voter</attribute>
@@ -543,7 +568,7 @@
     <foreign-key caption="Profit VoteProfit" from="VoteProfit" name="FK_VoteProfit_Profit_id" to="Profit" visShowCaption="0">
       <foreign-key-column from="profit_id" to="id"/>
     </foreign-key>
-    <foreign-key caption="Profile VoteProfile" from="VoteProfile" name="FK_VoteProfile_Profile_id" to="Profile" visShowCaption="0">
+    <foreign-key caption="Profile VoteProfile" from="VoteProfile" name="FK_VoteProfile_Profile_id" to="sfGuardUserProfile" visShowCaption="0">
       <foreign-key-column from="profile_id" to="id"/>
     </foreign-key>
     <foreign-key from="Address" name="FK_Address_Country" to="Country">
@@ -570,7 +595,7 @@
     <foreign-key caption="Inbox Inboxed" from="Inboxed" name="FK_Inboxed_Inbox_id" to="Inbox" visShowCaption="0">
       <foreign-key-column from="inbox_id" to="id"/>
     </foreign-key>
-    <foreign-key caption="Profile Inboxed" from="Inboxed" name="FK_Inboxed_Profile_id" to="Profile" visShowCaption="0">
+    <foreign-key caption="Profile Inboxed" from="Inboxed" name="FK_Inboxed_Profile_id" to="sfGuardUserProfile" visShowCaption="0">
       <foreign-key-column from="profile_id" to="id"/>
     </foreign-key>
     <foreign-key from="CommentInbox" name="FK_CommentInbox_Inbox" to="Inbox">
@@ -582,7 +607,7 @@
     <foreign-key from="CommentTalk" name="FK_CommentTalk_Talk" to="Talk">
       <foreign-key-column from="talk_id" to="id"/>
     </foreign-key>
-    <foreign-key caption="Profile Read" from="ReadComment" name="FK_Read_Profile_id" to="Profile" visCaption1X="0" visCaption1Y="-2" visCenterX="0" visCenterY="0" visShowCaption="0">
+    <foreign-key caption="Profile Read" from="ReadComment" name="FK_Read_Profile_id" to="sfGuardUserProfile" visCaption1X="0" visCaption1Y="-2" visCenterX="0" visCenterY="0" visShowCaption="0">
       <foreign-key-column from="profile_id" to="id"/>
     </foreign-key>
     <foreign-key caption="Comment Read" from="ReadComment" name="FK_Read_Comment_id" to="Comment" visShowCaption="0">

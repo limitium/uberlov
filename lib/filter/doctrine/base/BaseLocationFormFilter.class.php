@@ -6,7 +6,7 @@
  * @package    FISHERY
  * @subpackage filter
  * @author     Your name here
- * @version    SVN: $Id: sfDoctrineFormFilterGeneratedTemplate.php 29570 2010-05-21 14:49:47Z Kris.Wallsmith $
+ * @version    SVN: $Id: sfDoctrineFormFilterGeneratedTemplate.php 24171 2009-11-19 16:37:50Z Kris.Wallsmith $
  */
 abstract class BaseLocationFormFilter extends BaseFormFilterDoctrine
 {
@@ -32,7 +32,7 @@ abstract class BaseLocationFormFilter extends BaseFormFilterDoctrine
       'created_at'         => new sfWidgetFormFilterDate(array('from_date' => new sfWidgetFormDate(), 'to_date' => new sfWidgetFormDate(), 'with_empty' => false)),
       'updated_at'         => new sfWidgetFormFilterDate(array('from_date' => new sfWidgetFormDate(), 'to_date' => new sfWidgetFormDate(), 'with_empty' => false)),
       'version'            => new sfWidgetFormFilterInput(),
-      'wishers_list'       => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'Profile')),
+      'wishers_list'       => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'sfGuardUserProfile')),
     ));
 
     $this->setValidators(array(
@@ -55,7 +55,7 @@ abstract class BaseLocationFormFilter extends BaseFormFilterDoctrine
       'created_at'         => new sfValidatorDateRange(array('required' => false, 'from_date' => new sfValidatorDateTime(array('required' => false, 'datetime_output' => 'Y-m-d 00:00:00')), 'to_date' => new sfValidatorDateTime(array('required' => false, 'datetime_output' => 'Y-m-d 23:59:59')))),
       'updated_at'         => new sfValidatorDateRange(array('required' => false, 'from_date' => new sfValidatorDateTime(array('required' => false, 'datetime_output' => 'Y-m-d 00:00:00')), 'to_date' => new sfValidatorDateTime(array('required' => false, 'datetime_output' => 'Y-m-d 23:59:59')))),
       'version'            => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
-      'wishers_list'       => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'Profile', 'required' => false)),
+      'wishers_list'       => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'sfGuardUserProfile', 'required' => false)),
     ));
 
     $this->widgetSchema->setNameFormat('location_filters[%s]');
@@ -79,10 +79,8 @@ abstract class BaseLocationFormFilter extends BaseFormFilterDoctrine
       return;
     }
 
-    $query
-      ->leftJoin($query->getRootAlias().'.WishList WishList')
-      ->andWhereIn('WishList.profile_id', $values)
-    ;
+    $query->leftJoin('r.WishList WishList')
+          ->andWhereIn('WishList.profile_id', $values);
   }
 
   public function getModelName()

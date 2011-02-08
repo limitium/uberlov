@@ -40,7 +40,7 @@
  * @package    FISHERY
  * @subpackage model
  * @author     Your name here
- * @version    SVN: $Id: Builder.php 7490 2010-03-29 19:53:27Z jwage $
+ * @version    SVN: $Id: Builder.php 6820 2009-11-30 17:27:49Z jwage $
  */
 abstract class BaseAddress extends sfDoctrineRecord
 {
@@ -51,23 +51,23 @@ abstract class BaseAddress extends sfDoctrineRecord
              'primary' => true,
              'type' => 'integer',
              'autoincrement' => true,
-             'length' => 4,
+             'length' => '4',
              ));
         $this->hasColumn('country_id', 'integer', 4, array(
              'type' => 'integer',
-             'length' => 4,
+             'length' => '4',
              ));
         $this->hasColumn('area_low_id', 'integer', 4, array(
              'type' => 'integer',
-             'length' => 4,
+             'length' => '4',
              ));
         $this->hasColumn('area_high_id', 'integer', 4, array(
              'type' => 'integer',
-             'length' => 4,
+             'length' => '4',
              ));
         $this->hasColumn('locality_id', 'integer', 4, array(
              'type' => 'integer',
-             'length' => 4,
+             'length' => '4',
              ));
 
         $this->option('type', 'INNODB');

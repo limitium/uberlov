@@ -14,39 +14,39 @@
  * @property integer $inbox_id
  * @property integer $talk_id
  * @property integer $FishEvent_id
- * @property Doctrine_Collection $Profile
+ * @property Doctrine_Collection $sfGuardUserProfile
  * @property Doctrine_Collection $VoteComment
  * @property Doctrine_Collection $ReadComment
  * 
- * @method integer             getId()           Returns the current record's "id" value
- * @method integer             getParent()       Returns the current record's "parent" value
- * @method string              getMessage()      Returns the current record's "message" value
- * @method string              getToward()       Returns the current record's "toward" value
- * @method integer             getLocationId()   Returns the current record's "location_id" value
- * @method integer             getProfitId()     Returns the current record's "profit_id" value
- * @method integer             getInboxId()      Returns the current record's "inbox_id" value
- * @method integer             getTalkId()       Returns the current record's "talk_id" value
- * @method integer             getFishEventId()  Returns the current record's "FishEvent_id" value
- * @method Doctrine_Collection getProfile()      Returns the current record's "Profile" collection
- * @method Doctrine_Collection getVoteComment()  Returns the current record's "VoteComment" collection
- * @method Doctrine_Collection getReadComment()  Returns the current record's "ReadComment" collection
- * @method Comment             setId()           Sets the current record's "id" value
- * @method Comment             setParent()       Sets the current record's "parent" value
- * @method Comment             setMessage()      Sets the current record's "message" value
- * @method Comment             setToward()       Sets the current record's "toward" value
- * @method Comment             setLocationId()   Sets the current record's "location_id" value
- * @method Comment             setProfitId()     Sets the current record's "profit_id" value
- * @method Comment             setInboxId()      Sets the current record's "inbox_id" value
- * @method Comment             setTalkId()       Sets the current record's "talk_id" value
- * @method Comment             setFishEventId()  Sets the current record's "FishEvent_id" value
- * @method Comment             setProfile()      Sets the current record's "Profile" collection
- * @method Comment             setVoteComment()  Sets the current record's "VoteComment" collection
- * @method Comment             setReadComment()  Sets the current record's "ReadComment" collection
+ * @method integer             getId()                 Returns the current record's "id" value
+ * @method integer             getParent()             Returns the current record's "parent" value
+ * @method string              getMessage()            Returns the current record's "message" value
+ * @method string              getToward()             Returns the current record's "toward" value
+ * @method integer             getLocationId()         Returns the current record's "location_id" value
+ * @method integer             getProfitId()           Returns the current record's "profit_id" value
+ * @method integer             getInboxId()            Returns the current record's "inbox_id" value
+ * @method integer             getTalkId()             Returns the current record's "talk_id" value
+ * @method integer             getFishEventId()        Returns the current record's "FishEvent_id" value
+ * @method Doctrine_Collection getSfGuardUserProfile() Returns the current record's "sfGuardUserProfile" collection
+ * @method Doctrine_Collection getVoteComment()        Returns the current record's "VoteComment" collection
+ * @method Doctrine_Collection getReadComment()        Returns the current record's "ReadComment" collection
+ * @method Comment             setId()                 Sets the current record's "id" value
+ * @method Comment             setParent()             Sets the current record's "parent" value
+ * @method Comment             setMessage()            Sets the current record's "message" value
+ * @method Comment             setToward()             Sets the current record's "toward" value
+ * @method Comment             setLocationId()         Sets the current record's "location_id" value
+ * @method Comment             setProfitId()           Sets the current record's "profit_id" value
+ * @method Comment             setInboxId()            Sets the current record's "inbox_id" value
+ * @method Comment             setTalkId()             Sets the current record's "talk_id" value
+ * @method Comment             setFishEventId()        Sets the current record's "FishEvent_id" value
+ * @method Comment             setSfGuardUserProfile() Sets the current record's "sfGuardUserProfile" collection
+ * @method Comment             setVoteComment()        Sets the current record's "VoteComment" collection
+ * @method Comment             setReadComment()        Sets the current record's "ReadComment" collection
  * 
  * @package    FISHERY
  * @subpackage model
  * @author     Your name here
- * @version    SVN: $Id: Builder.php 7490 2010-03-29 19:53:27Z jwage $
+ * @version    SVN: $Id: Builder.php 6820 2009-11-30 17:27:49Z jwage $
  */
 abstract class BaseComment extends sfDoctrineRecord
 {
@@ -57,16 +57,16 @@ abstract class BaseComment extends sfDoctrineRecord
              'primary' => true,
              'type' => 'integer',
              'autoincrement' => true,
-             'length' => 4,
+             'length' => '4',
              ));
         $this->hasColumn('parent', 'integer', 4, array(
              'type' => 'integer',
-             'length' => 4,
+             'length' => '4',
              ));
         $this->hasColumn('message', 'string', 1000, array(
              'type' => 'string',
              'notnull' => true,
-             'length' => 1000,
+             'length' => '1000',
              ));
         $this->hasColumn('toward', 'string', 255, array(
              'type' => 'string',
@@ -74,23 +74,23 @@ abstract class BaseComment extends sfDoctrineRecord
              ));
         $this->hasColumn('location_id', 'integer', 4, array(
              'type' => 'integer',
-             'length' => 4,
+             'length' => '4',
              ));
         $this->hasColumn('profit_id', 'integer', 4, array(
              'type' => 'integer',
-             'length' => 4,
+             'length' => '4',
              ));
         $this->hasColumn('inbox_id', 'integer', 4, array(
              'type' => 'integer',
-             'length' => 4,
+             'length' => '4',
              ));
         $this->hasColumn('talk_id', 'integer', 4, array(
              'type' => 'integer',
-             'length' => 4,
+             'length' => '4',
              ));
         $this->hasColumn('FishEvent_id', 'integer', 4, array(
              'type' => 'integer',
-             'length' => 4,
+             'length' => '4',
              ));
 
         $this->option('type', 'INNODB');
@@ -124,7 +124,7 @@ abstract class BaseComment extends sfDoctrineRecord
     public function setUp()
     {
         parent::setUp();
-        $this->hasMany('Profile', array(
+        $this->hasMany('sfGuardUserProfile', array(
              'refClass' => 'ReadComment',
              'local' => 'comment_id',
              'foreign' => 'profile_id'));
@@ -143,13 +143,13 @@ abstract class BaseComment extends sfDoctrineRecord
              array(
               'created' => 
               array(
-              'class' => 'Profile',
+              'class' => 'sfGuardUserProfile',
               'foreign' => 'id',
               'disabled' => false,
               ),
               'updated' => 
               array(
-              'class' => 'Profile',
+              'class' => 'sfGuardUserProfile',
               'foreign' => 'id',
               'disabled' => false,
               ),

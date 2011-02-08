@@ -228,7 +228,7 @@ LocationScope:
 LocationType:
   LocationType_1:
     name: Пруд
-Profile:
+sfGuardUserProfile:
   Profile_1:
     nick_name: lim
     first_name: zzz

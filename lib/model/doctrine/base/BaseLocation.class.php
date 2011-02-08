@@ -85,7 +85,7 @@
  * @package    FISHERY
  * @subpackage model
  * @author     Your name here
- * @version    SVN: $Id: Builder.php 7490 2010-03-29 19:53:27Z jwage $
+ * @version    SVN: $Id: Builder.php 6820 2009-11-30 17:27:49Z jwage $
  */
 abstract class BaseLocation extends sfDoctrineRecord
 {
@@ -96,13 +96,13 @@ abstract class BaseLocation extends sfDoctrineRecord
              'primary' => true,
              'type' => 'integer',
              'autoincrement' => true,
-             'length' => 4,
+             'length' => '4',
              ));
         $this->hasColumn('name', 'string', 50, array(
              'default' => '',
              'type' => 'string',
              'notnull' => true,
-             'length' => 50,
+             'length' => '50',
              ));
         $this->hasColumn('description', 'string', null, array(
              'default' => '',
@@ -121,27 +121,27 @@ abstract class BaseLocation extends sfDoctrineRecord
              ));
         $this->hasColumn('location_flow_id', 'integer', 4, array(
              'type' => 'integer',
-             'length' => 4,
+             'length' => '4',
              ));
         $this->hasColumn('location_fundus_id', 'integer', 4, array(
              'type' => 'integer',
-             'length' => 4,
+             'length' => '4',
              ));
         $this->hasColumn('location_relief_id', 'integer', 4, array(
              'type' => 'integer',
-             'length' => 4,
+             'length' => '4',
              ));
         $this->hasColumn('location_type_id', 'integer', 4, array(
              'type' => 'integer',
-             'length' => 4,
+             'length' => '4',
              ));
         $this->hasColumn('location_scope_id', 'integer', 4, array(
              'type' => 'integer',
-             'length' => 4,
+             'length' => '4',
              ));
         $this->hasColumn('address_id', 'integer', 4, array(
              'type' => 'integer',
-             'length' => 4,
+             'length' => '4',
              ));
 
         $this->option('type', 'INNODB');
@@ -176,7 +176,7 @@ abstract class BaseLocation extends sfDoctrineRecord
              'local' => 'address_id',
              'foreign' => 'id'));
 
-        $this->hasMany('Profile as Wishers', array(
+        $this->hasMany('sfGuardUserProfile as Wishers', array(
              'refClass' => 'WishList',
              'local' => 'location_id',
              'foreign' => 'profile_id'));
@@ -211,7 +211,7 @@ abstract class BaseLocation extends sfDoctrineRecord
              array(
               'updated' => 
               array(
-              'class' => 'Profile',
+              'class' => 'sfGuardUserProfile',
               'disabled' => false,
               'foreign' => 'id',
               ),
@@ -219,7 +219,7 @@ abstract class BaseLocation extends sfDoctrineRecord
               array(
               'foreign' => 'id',
               'disabled' => false,
-              'class' => 'Profile',
+              'class' => 'sfGuardUserProfile',
               ),
              ),
              'columns' => 

@@ -8,7 +8,7 @@
  * @package    FISHERY
  * @subpackage form
  * @author     Your name here
- * @version    SVN: $Id: sfDoctrineFormGeneratedTemplate.php 29553 2010-05-20 14:33:00Z Kris.Wallsmith $
+ * @version    SVN: $Id: sfDoctrineFormGeneratedTemplate.php 24171 2009-11-19 16:37:50Z Kris.Wallsmith $
  */
 abstract class BasePhotoForm extends BaseFormDoctrine
 {
@@ -19,17 +19,17 @@ abstract class BasePhotoForm extends BaseFormDoctrine
       'name'        => new sfWidgetFormInputText(),
       'toward'      => new sfWidgetFormInputText(),
       'location_id' => new sfWidgetFormInputText(),
-      'created_by'  => new sfWidgetFormInputText(),
-      'updated_by'  => new sfWidgetFormInputText(),
+      'created_by'  => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('CreatedBy'), 'add_empty' => false)),
+      'updated_by'  => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('UpdatedBy'), 'add_empty' => false)),
     ));
 
     $this->setValidators(array(
-      'id'          => new sfValidatorChoice(array('choices' => array($this->getObject()->get('id')), 'empty_value' => $this->getObject()->get('id'), 'required' => false)),
+      'id'          => new sfValidatorDoctrineChoice(array('model' => $this->getModelName(), 'column' => 'id', 'required' => false)),
       'name'        => new sfValidatorString(array('max_length' => 36)),
       'toward'      => new sfValidatorString(array('max_length' => 255, 'required' => false)),
       'location_id' => new sfValidatorInteger(array('required' => false)),
-      'created_by'  => new sfValidatorInteger(),
-      'updated_by'  => new sfValidatorInteger(),
+      'created_by'  => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('CreatedBy'))),
+      'updated_by'  => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('UpdatedBy'))),
     ));
 
     $this->widgetSchema->setNameFormat('photo[%s]');
