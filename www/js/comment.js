@@ -7,7 +7,7 @@ function comment(){
     
     $('form',  this.comment).submit(function(){
         self.comment.block({
-            message: "<img src='/images/loader-small.gif'/>" ,
+            message: "<img src='" + app.baseUrl + "/images/loader-small.gif'/>" ,
             overlayCSS: {
                 backgroundColor: '#ddd'
             },
