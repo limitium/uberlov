@@ -18,7 +18,7 @@ markerModule.prototype.afterInit = function(){
 }
 markerModule.prototype.initMenu = function(){
     this.menu = {
-        link: $('#new_location',this.mm.addEditItem('<a id="new_location" class="editItem" href=""><img class="mapIcon" src="/images/location.png"/>add location</a>'))
+        link: $('#new_location',this.mm.addEditItem('<a id="new_location" class="editItem" href=""><img class="mapIcon" src="' + app.baseUrl + '/images/location.png"/>add location</a>'))
         .click(this.startEdit.delegate(this))
     };
 }
@@ -51,7 +51,7 @@ markerModule.prototype.onSaveChange = function(disabled){
     this.barSaveDisabled(disabled);
 }
 markerModule.prototype.barCreate = function(){
-    var bar = this.mm.updateBar('<img class="mapIcon" src="/images/location.png"/><span id="bar_msg"></span></span><input id="bar_save" class="button disabled" type="button" value="save"/><input id="bar_cancel" class="button" type="button" value="cancel"/>');
+    var bar = this.mm.updateBar('<img class="mapIcon" src="' + app.baseUrl + '/images/location.png"/><span id="bar_msg"></span></span><input id="bar_save" class="button disabled" type="button" value="save"/><input id="bar_cancel" class="button" type="button" value="cancel"/>');
     this.bar = {
         msg: $('#bar_msg',bar),
         save: $('#bar_save',bar),
@@ -134,7 +134,7 @@ ht_location_e.prototype.onClick = function(){
     this.onSaveChange(true);
     gm.event.removeListener(this.listeners.click);
 
-    var loader = this.mm.showLoader(this.marker.getPosition(),'<img src="/images/loader-small.gif" />');
+    var loader = this.mm.showLoader(this.marker.getPosition(),'<img src="' + app.baseUrl + '/images/loader-small.gif" />');
 
     this.getGeo(loader);
     this.getForm(loader);
@@ -231,7 +231,7 @@ ht_location_e.prototype.addSubmitHandler = function(form){
 
     $('form', form).submit(function(){
         $(form).block({
-            message: "<img src='/images/loader-small.gif'/>" ,
+            message: "<img src='" + app.baseUrl + "/images/loader-small.gif'/>" ,
             overlayCSS: {
                 backgroundColor: '#eee'
             },

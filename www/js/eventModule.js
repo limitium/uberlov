@@ -31,7 +31,7 @@ eventModule.prototype.initListeners = function(){
 
 eventModule.prototype.initMenu = function(){
     this.menu = {
-        link: $('#new_profit',this.mm.addEditItem('<a id="new_profit" class="editItem" href=""><img class="mapIcon" src="/images/profit.png"/>add event</a>'))
+        link: $('#new_profit',this.mm.addEditItem('<a id="new_profit" class="editItem" href=""><img class="mapIcon" src="' + app.baseUrl + '/images/profit.png"/>add event</a>'))
         .click(this.startEdit.delegate(this))
     };
 }
@@ -61,7 +61,7 @@ eventModule.prototype.getOnLocationClick =  function(){
     var self  = this;
     return function(location){
         self.location = location;
-        var loader = this.mm.showLoader(location.marker.getPosition(),'<img src="/images/loader-small.gif" />');
+        var loader = this.mm.showLoader(location.marker.getPosition(),'<img src="' + app.baseUrl +  '/images/loader-small.gif" />');
         app.getForm('/event/new',this.showForm.delegate(this,location.marker,loader));
     }
 }
@@ -119,7 +119,7 @@ eventModule.prototype.addSubmitHandler = function(form){
         $('#profit_details', form).val($.JSON.encode(profitDetail));
     
         $(form).block({
-            message: "<img src='/images/loader-small.gif'/>" ,
+            message: "<img src='" + app.baseUrl + "/images/loader-small.gif'/>" ,
             overlayCSS: {
                 backgroundColor: '#eee'
             },
@@ -151,7 +151,7 @@ eventModule.prototype.onSaveChange = function(disabled){
 }
 
 eventModule.prototype.barCreate = function(){
-    var bar = this.mm.updateBar('<img class="mapIcon" src="/images/profit.png"/><span id="bar_msg"></span></span><input id="bar_save" class="button disabled" type="button" value="save"/><input id="bar_cancel" class="button" type="button" value="cancel"/>');
+    var bar = this.mm.updateBar('<img class="mapIcon" src="' + app.baseUrl + '/images/profit.png"/><span id="bar_msg"></span></span><input id="bar_save" class="button disabled" type="button" value="save"/><input id="bar_cancel" class="button" type="button" value="cancel"/>');
     this.bar = {
         msg: $('#bar_msg',bar),
         save: $('#bar_save',bar),

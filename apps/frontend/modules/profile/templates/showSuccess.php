@@ -4,13 +4,13 @@
     <div class="personal">
         <div class="info">
             <div class="userpic">
-                <img alt="" src="<?php echo $profile->getUserpic() ? '/images/userpic/' . $profile->getUserpic() : '/images/userpic/' . ($profile->getSex() ? 'male' : 'female') . '.png' ?>" />
+                <?php echo image_tag($profile->getUserpic() ? '/images/userpic/' . $profile->getUserpic() : '/images/userpic/' . ($profile->getSex() ? 'male' : 'female') . '.png') ?>
             </div>
             <p><?php echo $profile->getFirstName() ?>
                 <?php echo $profile->getNickName() ? '[' . $profile->getNickName() . ']' : '' ?>
                 <?php echo $profile->getLastName() ?>
                 <?php if ($sf_user->getProfile() == $profile): ?>
-                    <a href="<?php echo url_for('profile/edit?id=' . $profile->getId()) ?>"><img alt="" src="/images/ui/edit.png" /></a>
+                    <?php echo link_to(image_tag('/images/ui/edit.png'), 'profile/edit?id=' . $profile->getId()) ?>
                 <?php endif; ?>
             </p>
             <p>Родил<?php echo $profile->getSex() ? 'ся' : 'ась' ?>: <?php echo $profile->getDateTimeObject('birth_date')->format('d.m.Y') ?></p>

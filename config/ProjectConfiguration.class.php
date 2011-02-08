@@ -1,6 +1,6 @@
 <?php
 
-require_once 'd:\\WebServers\\symfony-1.4.3\\lib/autoload/sfCoreAutoload.class.php';
+require_once 'c:\\WebServers\\symfony-1.4.6\\lib/autoload/sfCoreAutoload.class.php';
 sfCoreAutoload::register();
 
 class ProjectConfiguration extends sfProjectConfiguration {
@@ -13,6 +13,7 @@ class ProjectConfiguration extends sfProjectConfiguration {
         $this->enablePlugins('sfDoctrineActAsTaggablePlugin');
         $this->enablePlugins('sfJqueryReloadedPlugin');
         $this->enablePlugins('sfThumbnailPlugin');
+        $this->enablePlugins('sfForkedDoctrineApplyPlugin');
     }
 
     public function setWebDir($webDir) {

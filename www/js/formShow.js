@@ -132,7 +132,7 @@ formShow.prototype.moveLabels= function(){
                         };
                         fileName.css({
                             display: 'block',
-                            background:'url(/images/form/icons.png) no-repeat 0 -'+pos+'px'
+                            background:'url(' + app.baseUrl + '/images/form/icons.png) no-repeat 0 -'+pos+'px'
                         });
                     }
                 });

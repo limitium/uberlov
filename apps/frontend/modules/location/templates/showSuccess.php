@@ -24,7 +24,8 @@
         <?php endif; ?>
             </div>
             <div class="photo">
-                <img alt="" src="<?php echo $location->getPhoto() ? $location->getPhoto() : '/images/location/default.jpg' ?>" />
+                <?php echo $location->getPhoto() ? $location->getPhoto() : '/images/location/default.jpg' ?>
+                <img alt="" src="" />
             </div>
 
             <div class="description"><?php echo $location->getDescription(); ?></div>
