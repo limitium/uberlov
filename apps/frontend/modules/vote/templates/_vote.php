@@ -1,10 +1,10 @@
 <?php $rating = $obj->getRating(); ?>
 <div class="rating" to="<?php echo isset($objType) ? $objType : strtolower($obj->getTable()->getTableName()); ?>" id="rate<?php echo $obj->getId(); ?>">
     <a class ="plus<?php echo $obj->plused ? ' voted' : ''; ?>" href="">
-        <img src="/images/plus.png">
+        <?php echo image_tag("/images/plus.png"); ?>
     </a>
     <a class="minus<?php echo $obj->minused ? ' voted' : ''; ?>" href="">
-        <img src="/images/minus.png">
+        <?php echo image_tag("/images/minus.png"); ?>
     </a>
     <span>[<?php echo $rating; ?>]</span>
 </div>
