@@ -14,7 +14,7 @@
         </div>
         <div class="meta">
         <?php include_partial('profile/writeBy', array('written' => $talk)); ?>
-        <?php include_partial('comment/commentMeta', array('commented' => $talk)); ?>
+        <?php include_partial('comment/meta', array('commented' => $talk)); ?>
             </div>
         </div>
 <?php endforeach; ?>
