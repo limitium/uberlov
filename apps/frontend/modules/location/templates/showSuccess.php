@@ -33,8 +33,7 @@
         <?php use_javascript('voting'); ?>
         <?php include_partial('vote/vote', array('obj' => $location)); ?>
                 <div>
-                    <a href="" id="goToReply">□</a> Добавил<?php echo $location->getCreatedBy()->getSex() ? '' : 'а' ?> <?php echo link_to($location->getCreatedBy()->getNickName(), 'profile/show?id=' . $location->getCreatedBy()->getId()); ?>,
-            <?php echo $location->getDateTimeObject('created_at')->format('d.m.Y'); ?> | <?php echo link_to('тут не так', 'location/edit?id=' . $location->getCreatedBy()->getId()); ?> | <?php include_partial('wish', array('location' => $location)); ?>
+                    <a href="" id="goToReply">□</a> <?php include_partial('profile/addBy', array('added' => $location)); ?> | <?php echo link_to('тут не так', 'location/edit?id=' . $location->getCreatedBy()->getId()); ?> | <?php include_partial('wish', array('location' => $location)); ?>
                 <a href="" class="commentShowAuthor" author="user<?php echo $location->getCreatedBy(); ?>">●</a>
             </div>
         </div>
@@ -47,7 +46,7 @@
             <li><span href="#" id="tabEvents">События (<i id="eventCounter"><?php echo sizeof($events); ?></i>)</span></li>
         </ul>
     </div>
-<?php include_partial('comment/comments', array('for' => 'location', 'form' => $form, 'comments' => $comments)); ?>
+<?php include_partial('comment/tree', array('for' => 'location', 'form' => $form, 'comments' => $comments)); ?>
 
 
                 <div id="profitContainer">

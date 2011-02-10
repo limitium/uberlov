@@ -51,6 +51,6 @@
         </ul>
     </div>
 
-<?php include_partial('comment/comments', array('for' => 'profit', 'form' => $form, 'comments' => $comments)); ?>
+<?php include_partial('comment/tree', array('for' => 'profit', 'form' => $form, 'comments' => $comments)); ?>
 
 

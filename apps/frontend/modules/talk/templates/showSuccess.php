@@ -35,7 +35,7 @@
             </ul>
         </div>
 
-    <?php include_partial('comment/comments', array('for' => 'talk', 'form' => $form, 'comments' => $comments)); ?>
+    <?php include_partial('comment/tree', array('for' => 'talk', 'form' => $form, 'comments' => $comments)); ?>
             </div>
 <?php slot('extra'); ?>
                 <div id="talkRelated">

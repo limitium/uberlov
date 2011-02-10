@@ -1,6 +1,3 @@
-<div id="commentContainer" class="selected" type="location">
-    <?php use_javascript('comment'); ?>
-    <?php foreach ($comments as $comment): ?>
-    <?php include_partial('comment/commentList', array('comment' => $comment)); ?>
-    <?php endforeach; ?>
+<div id="commentContainer" class="selected">
+    <?php include_partial('comment/list', array('comments' => $comments)); ?>
 </div>

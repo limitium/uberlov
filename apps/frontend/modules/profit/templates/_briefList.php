@@ -5,6 +5,6 @@
     <div class="bar">
         <?php include_partial('vote/vote', array('obj' => $profit)); ?>
         <?php include_partial('profile/writeBy', array('written' => $profit)); ?> | улов <?php echo $profit->getTotalProfit(); ?> кг.
-        <?php include_partial('comment/commentMeta', array('commented' => $profit)); ?>
+        <?php include_partial('comment/meta', array('commented' => $profit)); ?>
     </div>
 </div>
