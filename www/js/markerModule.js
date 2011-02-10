@@ -18,7 +18,7 @@ markerModule.prototype.afterInit = function(){
 }
 markerModule.prototype.initMenu = function(){
     this.menu = {
-        link: $('#new_location',this.mm.addEditItem('<a id="new_location" class="editItem" href=""><img class="mapIcon" src="' + app.baseUrl + '/images/location.png"/>add location</a>'))
+        link: $('#new_location',this.mm.addEditItem('<a id="new_location" class="editItem" href=""><img class="mapIcon" src="' + app.url('/images/location.png') + '"/>add location</a>'))
         .click(this.startEdit.delegate(this))
     };
 }
@@ -51,7 +51,7 @@ markerModule.prototype.onSaveChange = function(disabled){
     this.barSaveDisabled(disabled);
 }
 markerModule.prototype.barCreate = function(){
-    var bar = this.mm.updateBar('<img class="mapIcon" src="' + app.baseUrl + '/images/location.png"/><span id="bar_msg"></span></span><input id="bar_save" class="button disabled" type="button" value="save"/><input id="bar_cancel" class="button" type="button" value="cancel"/>');
+    var bar = this.mm.updateBar('<img class="mapIcon" src="' + app.base('/images/location.png') + '"/><span id="bar_msg"></span></span><input id="bar_save" class="button disabled" type="button" value="save"/><input id="bar_cancel" class="button" type="button" value="cancel"/>');
     this.bar = {
         msg: $('#bar_msg',bar),
         save: $('#bar_save',bar),
@@ -134,7 +134,7 @@ ht_location_e.prototype.onClick = function(){
     this.onSaveChange(true);
     gm.event.removeListener(this.listeners.click);
 
-    var loader = this.mm.showLoader(this.marker.getPosition(),'<img src="' + app.baseUrl + '/images/loader-small.gif" />');
+    var loader = this.mm.showLoader(this.marker.getPosition());
 
     this.getGeo(loader);
     this.getForm(loader);
@@ -228,22 +228,10 @@ ht_location_e.prototype.showForm = function(loader){
 }
 ht_location_e.prototype.addSubmitHandler = function(form){
     var self = this;
-
-    $('form', form).submit(function(){
-        $(form).block({
-            message: "<img src='" + app.baseUrl + "/images/loader-small.gif'/>" ,
-            overlayCSS: {
-                backgroundColor: '#eee'
-            },
-            css: {
-                border:		'0px',
-                opacity:        '0.5',
-                backgroundColor:'#eee'
-            }
-        });
-        app.sendForm(form, function(newForm){
-            $(form).unblock();
-
+    
+    app.formSubmiter({
+        form: form,
+        response: function(newForm){
             var matches = newForm.match(/^(\d+)\|(.*)/)
             if(matches && matches.length==3){
                 self.mm.createLocation({
@@ -257,8 +245,7 @@ ht_location_e.prototype.addSubmitHandler = function(form){
             }else{
                 self.marker.infoWindow.setContent(self.addSubmitHandler(app.formatHtml(newForm)));
             }
-        });
-        return false;
+        }
     });
     return form;
 }

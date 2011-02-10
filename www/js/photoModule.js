@@ -25,7 +25,7 @@ photoModule.prototype.initListeners = function(){
         var imageHolder = $('.image', photos);
         var oldImage = $('.image img', photos);
 
-        oldImage.attr('src', app.baseUrl+'/images/progress_bar.gif').addClass('loading');
+        oldImage.attr('src', app.url('/images/progress_bar.gif')).addClass('loading');
         
         var img = $(new Image());
         img.load(function () {

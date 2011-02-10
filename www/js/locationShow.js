@@ -70,7 +70,7 @@ locationShow.prototype.addToWishList = function(a){
         a.html('добавляем');
 
         app.sendData({
-            url:app.baseUrl + '/location/tomy',
+            url:app.url('/location/tomy'),
             data:{
                 id:location_id,
                 _csrf_token: app.csrf.wishlist
@@ -96,7 +96,7 @@ locationShow.prototype.removeFromWishList = function(a){
         a.html('убираем');
 
         app.sendData({
-            url:app.baseUrl + '/location/frommy',
+            url:app.url('/location/frommy'),
             data:{
                 id:location_id,
                 _csrf_token: app.csrf.wishlist

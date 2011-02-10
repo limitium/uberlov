@@ -31,7 +31,7 @@ eventModule.prototype.initListeners = function(){
 
 eventModule.prototype.initMenu = function(){
     this.menu = {
-        link: $('#new_profit',this.mm.addEditItem('<a id="new_profit" class="editItem" href=""><img class="mapIcon" src="' + app.baseUrl + '/images/profit.png"/>add event</a>'))
+        link: $('#new_profit',this.mm.addEditItem('<a id="new_profit" class="editItem" href=""><img class="mapIcon" src="' + app.url('/images/profit.png') + '"/>add event</a>'))
         .click(this.startEdit.delegate(this))
     };
 }
@@ -61,7 +61,7 @@ eventModule.prototype.getOnLocationClick =  function(){
     var self  = this;
     return function(location){
         self.location = location;
-        var loader = this.mm.showLoader(location.marker.getPosition(),'<img src="' + app.baseUrl +  '/images/loader-small.gif" />');
+        var loader = this.mm.showLoader(location.marker.getPosition());
         app.getForm('/event/new',this.showForm.delegate(this,location.marker,loader));
     }
 }
@@ -105,34 +105,22 @@ eventModule.prototype.addSubmitHandler = function(form){
 
     $('#profit_location_id', form).val(self.location.id);
     
-    $('form', form).submit(function(){
-        var profitDetail = [];
-
-        $('.tableContainer tbody tr').each(function(){
-            profitDetail.push({
-                qty: parseFloat(this.getAttribute('qty')),
-                style_id: parseFloat(this.getAttribute('styles')),
-                fish_id: parseFloat(this.getAttribute('fish'))
-            });
-        });
-
-        $('#profit_details', form).val($.JSON.encode(profitDetail));
-    
-        $(form).block({
-            message: "<img src='" + app.baseUrl + "/images/loader-small.gif'/>" ,
-            overlayCSS: {
-                backgroundColor: '#eee'
-            },
-            css: {
-                border:		'0px',
-                opacity:        '0.5',
-                backgroundColor:'#eee'
-            }
-        });
-
-        app.sendForm(form, function(newForm){
-            $(form).unblock();
-
+    app.formSubmiter({
+        form: form,
+//        preSubmit: function(){
+//            var profitDetail = [];
+//
+//            $('.tableContainer tbody tr').each(function(){
+//                profitDetail.push({
+//                    qty: parseFloat(this.getAttribute('qty')),
+//                    style_id: parseFloat(this.getAttribute('styles')),
+//                    fish_id: parseFloat(this.getAttribute('fish'))
+//                });
+//            });
+//
+//            $('#profit_details', form).val($.JSON.encode(profitDetail));
+//        },
+        response: function(newForm){
             var matches = newForm.match(/^(\d+)\|(.*)/)
 
             if(matches && matches.length==3){
@@ -140,9 +128,9 @@ eventModule.prototype.addSubmitHandler = function(form){
             }else{
                 self.infoWindow.setContent(self.addSubmitHandler(app.formatHtml(newForm)));
             }
-        });
-        return false;
+        }
     });
+    
     return form;
 }
 
@@ -151,7 +139,7 @@ eventModule.prototype.onSaveChange = function(disabled){
 }
 
 eventModule.prototype.barCreate = function(){
-    var bar = this.mm.updateBar('<img class="mapIcon" src="' + app.baseUrl + '/images/profit.png"/><span id="bar_msg"></span></span><input id="bar_save" class="button disabled" type="button" value="save"/><input id="bar_cancel" class="button" type="button" value="cancel"/>');
+    var bar = this.mm.updateBar('<img class="mapIcon" src="' + app.url('/images/profit.png') + '"/><span id="bar_msg"></span></span><input id="bar_save" class="button disabled" type="button" value="save"/><input id="bar_cancel" class="button" type="button" value="cancel"/>');
     this.bar = {
         msg: $('#bar_msg',bar),
         save: $('#bar_save',bar),
