@@ -4,21 +4,10 @@ function comment(){
     this.comment.child = false;
     this.container = $('#commentContainer');
     this.type = $('#commentContainer').attr('type');
-    
-    $('form',  this.comment).submit(function(){
-        self.comment.block({
-            message: "<img src='" + app.baseUrl + "/images/loader-small.gif'/>" ,
-            overlayCSS: {
-                backgroundColor: '#ddd'
-            },
-            css: {
-                border:		'0px',
-                opacity:        '0.5',
-                backgroundColor:'#eee'
-            }
-        });
-        app.sendForm(self.comment, function(newComment){
-            $(self.comment).unblock();
+        
+    app.formSubmiter({
+        form: this.comment,
+        response: function(newComment){
             $('textarea',self.comment).val('');
             $('#commentCounter').html(parseInt($('#commentCounter').html())+1);
             if(self.comment.child){
@@ -27,9 +16,9 @@ function comment(){
             }else{
                 self.comment.before(newComment);
             }
-        });
-        return false;
-    })
+        }
+    });
+    
     $('.commentReply').live('click', function(){
         $(this).parent().append(self.comment);
         $('#commentReplyDefault').css({

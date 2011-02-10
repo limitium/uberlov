@@ -139,7 +139,7 @@ ht_location_imp.prototype.addListenerClick = function(){
 ht_location_imp.prototype.onClick = function(){
   gm.event.removeListener(this.listeners.click);
 
-  var loader = this.mm.showLoader(this.marker.getPosition(),'<img src="' + app.baseUrl + '/images/loader-small.gif" />');
+  var loader = this.mm.showLoader(this.marker.getPosition());
   app.getForm('/location/new',this.showForm.delegate(this,this.marker,loader));
 }
 ht_location_imp.prototype.showForm = function(form,marker,loader){

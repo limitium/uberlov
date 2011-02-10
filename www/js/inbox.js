@@ -5,7 +5,7 @@ function inbox(){
         if(a.hasClass('confirm')){
             a.html('Удаляем');
             app.sendData({
-                url:app.baseUrl + '/inbox/delete',
+                url:app.url('/inbox/delete'),
                 data:{
                     id: a.attr('inbox'),
                     _csrf_token: app.csrf.inbox
@@ -15,7 +15,7 @@ function inbox(){
                     if(inbox.length){
                         app.$.trigger('inboxDelete',[inbox]);
                     }else{
-                        window.location = app.baseUrl + '/inbox/list';
+                        window.location = app.url('/inbox/list');
                     }
                 }
             });
@@ -31,7 +31,7 @@ function inbox(){
         var li  = $(a.parents()[0]);
         
         app.sendData({
-            url:app.baseUrl + '/inbox/remove',
+            url:app.url('/inbox/remove'),
             data:{
                 id: $('a.inboxDelete').attr('inbox'),
                 profile: li.attr('profile'),
@@ -47,7 +47,7 @@ function inbox(){
     $('#inboxAdd').keyup(function(e){
         if(e.keyCode == 13){
             app.sendData({
-                url:app.baseUrl + '/inbox/add',
+                url:app.url('/inbox/add'),
                 data:{
                     id: $('a.inboxDelete').attr('inbox'),
                     data: $(this).val(),
@@ -58,7 +58,7 @@ function inbox(){
                         var ul = $('#inboxControl ul');
                         
                         $.each(data.added, function() {
-                            ul.append('<li profile="'+this.id+'"><a href="'+app.baseUrl + '/profile/show/id/'+this.id+'">'+this.name+'</a><a class="delete" href=""> x </a></li>')
+                            ul.append('<li profile="'+this.id+'"><a href="' + app.url('/profile/show/id/' + this.id) +'">'+this.name+'</a><a class="delete" href=""> x </a></li>')
                         });
                     }else{
                         app.popUp('Никто не найден');

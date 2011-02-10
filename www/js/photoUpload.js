@@ -15,7 +15,7 @@ photoUpload.prototype.afterInit = function(){
 photoUpload.prototype.initUploader = function(){
     this.uploader = new SWFUpload({
         // Backend Settings
-        upload_url: app.baseUrl + '/photo/upload',
+        upload_url: app.url('/photo/upload'),
         post_params: {
             "PHPSESSID": "3kbal94vseio0c4h16nirutjp4"
         },
@@ -52,7 +52,7 @@ photoUpload.prototype.initUploader = function(){
         button_cursor: SWFUpload.CURSOR.HAND,
 
         // Flash Settings
-        flash_url :  app.baseUrl + "/swfupload/swfupload.swf",
+        flash_url :  app.url("/swfupload/swfupload.swf"),
 
         // Debug Settings
         debug: false
