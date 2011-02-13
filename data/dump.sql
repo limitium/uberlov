@@ -101,18 +101,16 @@ CREATE TABLE `comment` (
   KEY `comment_location_id_location_id` (`location_id`),
   KEY `comment_profit_id_profit_id` (`profit_id`),
   KEY `comment_talk_id_talk_id` (`talk_id`),
-  CONSTRAINT `comment_talk_id_talk_id` FOREIGN KEY (`talk_id`) REFERENCES `talk` (`id`),
-  CONSTRAINT `comment_created_by_profile_id` FOREIGN KEY (`created_by`) REFERENCES `profile` (`id`),
+  CONSTRAINT `comment_created_by_sf_guard_user_profile_id` FOREIGN KEY (`created_by`) REFERENCES `sf_guard_user_profile` (`id`),
   CONSTRAINT `comment_fishevent_id_fish_event_id` FOREIGN KEY (`fishevent_id`) REFERENCES `fish_event` (`id`),
   CONSTRAINT `comment_inbox_id_inbox_id` FOREIGN KEY (`inbox_id`) REFERENCES `inbox` (`id`),
   CONSTRAINT `comment_location_id_location_id` FOREIGN KEY (`location_id`) REFERENCES `location` (`id`),
   CONSTRAINT `comment_profit_id_profit_id` FOREIGN KEY (`profit_id`) REFERENCES `profit` (`id`),
-  CONSTRAINT `comment_updated_by_profile_id` FOREIGN KEY (`updated_by`) REFERENCES `profile` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+  CONSTRAINT `comment_talk_id_talk_id` FOREIGN KEY (`talk_id`) REFERENCES `talk` (`id`),
+  CONSTRAINT `comment_updated_by_sf_guard_user_profile_id` FOREIGN KEY (`updated_by`) REFERENCES `sf_guard_user_profile` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `comment` */
-
-insert  into `comment`(`id`,`parent`,`message`,`toward`,`location_id`,`profit_id`,`inbox_id`,`talk_id`,`fishevent_id`,`created_by`,`updated_by`,`created_at`,`updated_at`,`root_id`,`lft`,`rgt`,`level`) values (1,NULL,'root','profit',NULL,1,NULL,NULL,NULL,1,1,'2010-10-23 01:23:39','2010-10-23 01:23:39',10,1,4,0),(2,10,'zzz','profit',NULL,1,NULL,NULL,NULL,1,1,'2010-10-23 01:23:39','2010-10-23 01:23:39',10,2,3,1);
 
 /*Table structure for table `country` */
 
@@ -136,11 +134,9 @@ CREATE TABLE `fish` (
   `name` varchar(100) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `fish` */
-
-insert  into `fish`(`id`,`name`) values (1,'Карась'),(2,'Окунь'),(3,'Плотва'),(4,'Щука');
 
 /*Table structure for table `fish_event` */
 
@@ -171,8 +167,8 @@ CREATE TABLE `friend` (
   `source_profile_id` int(11) NOT NULL DEFAULT '0',
   `related_profile_id` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`source_profile_id`,`related_profile_id`),
-  KEY `friend_related_profile_id_profile_id` (`related_profile_id`),
-  CONSTRAINT `friend_related_profile_id_profile_id` FOREIGN KEY (`related_profile_id`) REFERENCES `profile` (`id`)
+  KEY `friend_related_profile_id_sf_guard_user_profile_id` (`related_profile_id`),
+  CONSTRAINT `friend_related_profile_id_sf_guard_user_profile_id` FOREIGN KEY (`related_profile_id`) REFERENCES `sf_guard_user_profile` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `friend` */
@@ -192,8 +188,8 @@ CREATE TABLE `inbox` (
   PRIMARY KEY (`id`),
   KEY `created_by_idx` (`created_by`),
   KEY `updated_by_idx` (`updated_by`),
-  CONSTRAINT `inbox_created_by_profile_id` FOREIGN KEY (`created_by`) REFERENCES `profile` (`id`),
-  CONSTRAINT `inbox_updated_by_profile_id` FOREIGN KEY (`updated_by`) REFERENCES `profile` (`id`)
+  CONSTRAINT `inbox_created_by_sf_guard_user_profile_id` FOREIGN KEY (`created_by`) REFERENCES `sf_guard_user_profile` (`id`),
+  CONSTRAINT `inbox_updated_by_sf_guard_user_profile_id` FOREIGN KEY (`updated_by`) REFERENCES `sf_guard_user_profile` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `inbox` */
@@ -206,9 +202,9 @@ CREATE TABLE `inboxed` (
   `inbox_id` int(11) NOT NULL DEFAULT '0',
   `profile_id` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`inbox_id`,`profile_id`),
-  KEY `inboxed_profile_id_profile_id` (`profile_id`),
+  KEY `inboxed_profile_id_sf_guard_user_profile_id` (`profile_id`),
   CONSTRAINT `inboxed_inbox_id_inbox_id` FOREIGN KEY (`inbox_id`) REFERENCES `inbox` (`id`),
-  CONSTRAINT `inboxed_profile_id_profile_id` FOREIGN KEY (`profile_id`) REFERENCES `profile` (`id`)
+  CONSTRAINT `inboxed_profile_id_sf_guard_user_profile_id` FOREIGN KEY (`profile_id`) REFERENCES `sf_guard_user_profile` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `inboxed` */
@@ -264,18 +260,16 @@ CREATE TABLE `location` (
   KEY `created_by_idx` (`created_by`),
   KEY `updated_by_idx` (`updated_by`),
   CONSTRAINT `location_address_id_address_id` FOREIGN KEY (`address_id`) REFERENCES `address` (`id`),
-  CONSTRAINT `location_created_by_profile_id` FOREIGN KEY (`created_by`) REFERENCES `profile` (`id`),
+  CONSTRAINT `location_created_by_sf_guard_user_profile_id` FOREIGN KEY (`created_by`) REFERENCES `sf_guard_user_profile` (`id`),
   CONSTRAINT `location_location_flow_id_location_flow_id` FOREIGN KEY (`location_flow_id`) REFERENCES `location_flow` (`id`),
   CONSTRAINT `location_location_fundus_id_location_fundus_id` FOREIGN KEY (`location_fundus_id`) REFERENCES `location_fundus` (`id`),
   CONSTRAINT `location_location_relief_id_location_relief_id` FOREIGN KEY (`location_relief_id`) REFERENCES `location_relief` (`id`),
   CONSTRAINT `location_location_scope_id_location_scope_id` FOREIGN KEY (`location_scope_id`) REFERENCES `location_scope` (`id`),
   CONSTRAINT `location_location_type_id_location_type_id` FOREIGN KEY (`location_type_id`) REFERENCES `location_type` (`id`),
-  CONSTRAINT `location_updated_by_profile_id` FOREIGN KEY (`updated_by`) REFERENCES `profile` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
+  CONSTRAINT `location_updated_by_sf_guard_user_profile_id` FOREIGN KEY (`updated_by`) REFERENCES `sf_guard_user_profile` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `location` */
-
-insert  into `location`(`id`,`name`,`description`,`depth`,`is_free`,`price`,`location_flow_id`,`location_fundus_id`,`location_relief_id`,`location_type_id`,`location_scope_id`,`address_id`,`created_by`,`updated_by`,`latitude`,`longitude`,`slug`,`created_at`,`updated_at`,`version`) values (1,'agrtwgare','dfgwegr',NULL,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,1,55.06,35.60,'agrtwgare','2010-04-01 14:16:53','2010-04-01 14:16:53',1),(2,'zxczxc23tgwe','r32fwergt',NULL,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,1,55.52,35.60,'zxczxc23tgwe','2010-04-01 14:16:53','2010-04-01 14:16:53',1),(3,'fsdgfthyj2er3t4g','5qdwfegrhtyjtrqwfegrh',NULL,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,1,55.32,36.16,'fsdgfthyj2er3t4g','2010-04-01 14:16:53','2010-04-01 14:16:53',1),(4,'yahooo','1111111111111111',NULL,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,1,54.70,36.95,'yahooo','2010-04-01 14:16:53','2010-04-01 14:16:53',1),(5,'gdfdfgdfg','dfhestnrnsfgn',NULL,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,1,54.90,35.95,'gdfdfgdfg','2010-04-01 14:16:53','2010-04-01 14:16:53',1),(6,'drgsdfh','srghsdthj',NULL,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,1,55.18,37.40,'drgsdfh','2010-04-01 14:16:53','2010-04-01 14:16:53',1),(7,'asdftyui','wertwertgaerh',NULL,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,1,55.60,38.48,'asdftyui','2010-04-01 14:16:53','2010-04-01 14:16:53',1),(8,'etujtdy','ertertery',NULL,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,1,55.34,36.37,'etujtdy','2010-04-01 14:16:53','2010-04-01 14:16:53',1),(9,'Пляж на угре','Красивое место',NULL,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,1,54.83,35.03,'','2010-04-01 14:16:53','2010-04-01 14:16:53',1),(10,'23432','wrefrw4tegrbfdqwtegrdtg',423423424.00,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,1,54.83,35.03,'23432','2010-04-02 20:01:54','2010-04-02 20:01:54',1),(11,'adddddddddddddddd2','efdsvfdbdgbdgndgn',2.00,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,1,54.83,35.03,'adddddddddddddddd2','2010-04-02 20:02:34','2010-04-02 20:02:34',1),(12,'fffff','zzzzzzzzzzzzz',33.00,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,1,54.83,35.03,'fffff','2010-04-02 20:11:02','2010-04-02 20:11:02',1),(13,'sdfsdfsd','efrgrgreg',24.00,1,NULL,1,1,1,NULL,NULL,NULL,1,1,54.83,35.03,'sdfsdfsd','2010-04-02 20:23:44','2010-04-02 20:23:44',1);
 
 /*Table structure for table `location_flow` */
 
@@ -285,11 +279,9 @@ CREATE TABLE `location_flow` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `location_flow` */
-
-insert  into `location_flow`(`id`,`name`) values (1,'Отсутсвует'),(2,'Медленное'),(3,'Среднее'),(4,'Быстрое');
 
 /*Table structure for table `location_fundus` */
 
@@ -299,11 +291,9 @@ CREATE TABLE `location_fundus` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `location_fundus` */
-
-insert  into `location_fundus`(`id`,`name`) values (1,'Галька'),(2,'Песок'),(3,'Глина'),(4,'Ил');
 
 /*Table structure for table `location_relief` */
 
@@ -313,11 +303,9 @@ CREATE TABLE `location_relief` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `location_relief` */
-
-insert  into `location_relief`(`id`,`name`) values (1,'Отмель'),(2,'Яма'),(3,'Перекаты');
 
 /*Table structure for table `location_scope` */
 
@@ -328,11 +316,9 @@ CREATE TABLE `location_scope` (
   `name` varchar(50) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `location_scope` */
-
-insert  into `location_scope`(`id`,`name`) values (1,'Все'),(2,'Друзья'),(3,'Только я');
 
 /*Table structure for table `location_type` */
 
@@ -343,11 +329,9 @@ CREATE TABLE `location_type` (
   `name` varchar(50) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `location_type` */
-
-insert  into `location_type`(`id`,`name`) values (1,'Пруд');
 
 /*Table structure for table `location_version` */
 
@@ -380,8 +364,6 @@ CREATE TABLE `location_version` (
 
 /*Data for the table `location_version` */
 
-insert  into `location_version`(`id`,`name`,`description`,`depth`,`is_free`,`price`,`location_flow_id`,`location_fundus_id`,`location_relief_id`,`location_type_id`,`location_scope_id`,`address_id`,`created_by`,`updated_by`,`latitude`,`longitude`,`slug`,`created_at`,`updated_at`,`version`) values (1,'agrtwgare','dfgwegr',NULL,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,1,55.06,35.60,'agrtwgare','2010-04-01 14:16:53','2010-04-01 14:16:53',1),(2,'zxczxc23tgwe','r32fwergt',NULL,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,1,55.52,35.60,'zxczxc23tgwe','2010-04-01 14:16:53','2010-04-01 14:16:53',1),(3,'fsdgfthyj2er3t4g','5qdwfegrhtyjtrqwfegrh',NULL,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,1,55.32,36.16,'fsdgfthyj2er3t4g','2010-04-01 14:16:53','2010-04-01 14:16:53',1),(4,'yahooo','1111111111111111',NULL,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,1,54.70,36.95,'yahooo','2010-04-01 14:16:53','2010-04-01 14:16:53',1),(5,'gdfdfgdfg','dfhestnrnsfgn',NULL,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,1,54.90,35.95,'gdfdfgdfg','2010-04-01 14:16:53','2010-04-01 14:16:53',1),(6,'drgsdfh','srghsdthj',NULL,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,1,55.18,37.40,'drgsdfh','2010-04-01 14:16:53','2010-04-01 14:16:53',1),(7,'asdftyui','wertwertgaerh',NULL,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,1,55.60,38.48,'asdftyui','2010-04-01 14:16:53','2010-04-01 14:16:53',1),(8,'etujtdy','ertertery',NULL,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,1,55.34,36.37,'etujtdy','2010-04-01 14:16:53','2010-04-01 14:16:53',1),(9,'Пляж на угре','Красивое место',NULL,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,1,54.83,35.03,'','2010-04-01 14:16:53','2010-04-01 14:16:53',1),(10,'23432','wrefrw4tegrbfdqwtegrdtg',423423424.00,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,1,54.83,35.03,'23432','2010-04-02 20:01:54','2010-04-02 20:01:54',1),(11,'adddddddddddddddd2','efdsvfdbdgbdgndgn',2.00,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,1,54.83,35.03,'adddddddddddddddd2','2010-04-02 20:02:34','2010-04-02 20:02:34',1),(12,'fffff','zzzzzzzzzzzzz',33.00,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,1,54.83,35.03,'fffff','2010-04-02 20:11:02','2010-04-02 20:11:02',1),(13,'sdfsdfsd','efrgrgreg',24.00,1,NULL,1,1,1,NULL,NULL,NULL,1,1,54.83,35.03,'sdfsdfsd','2010-04-02 20:23:44','2010-04-02 20:23:44',1);
-
 /*Table structure for table `photo` */
 
 DROP TABLE IF EXISTS `photo`;
@@ -391,74 +373,19 @@ CREATE TABLE `photo` (
   `name` varchar(36) NOT NULL,
   `toward` varchar(255) DEFAULT NULL,
   `location_id` int(11) DEFAULT NULL,
-  `created_by` bigint(20) NOT NULL,
-  `updated_by` bigint(20) NOT NULL,
+  `created_by` int(11) NOT NULL,
+  `updated_by` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `photo_toward_idx` (`toward`),
+  KEY `created_by_idx` (`created_by`),
+  KEY `updated_by_idx` (`updated_by`),
   KEY `photo_location_id_location_id` (`location_id`),
-  CONSTRAINT `photo_location_id_location_id` FOREIGN KEY (`location_id`) REFERENCES `location` (`id`)
+  CONSTRAINT `photo_created_by_sf_guard_user_profile_id` FOREIGN KEY (`created_by`) REFERENCES `sf_guard_user_profile` (`id`),
+  CONSTRAINT `photo_location_id_location_id` FOREIGN KEY (`location_id`) REFERENCES `location` (`id`),
+  CONSTRAINT `photo_updated_by_sf_guard_user_profile_id` FOREIGN KEY (`updated_by`) REFERENCES `sf_guard_user_profile` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `photo` */
-
-/*Table structure for table `profile` */
-
-DROP TABLE IF EXISTS `profile`;
-
-CREATE TABLE `profile` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `nick_name` varchar(50) NOT NULL DEFAULT '',
-  `first_name` varchar(50) DEFAULT NULL,
-  `last_name` varchar(50) DEFAULT NULL,
-  `birth_date` date DEFAULT NULL,
-  `userpic` varchar(255) DEFAULT NULL,
-  `sex` tinyint(1) NOT NULL DEFAULT '1',
-  `user_id` int(11) DEFAULT NULL,
-  `created_at` datetime NOT NULL,
-  `updated_at` datetime NOT NULL,
-  `description` text,
-  PRIMARY KEY (`id`),
-  KEY `user_id_idx` (`user_id`),
-  CONSTRAINT `profile_user_id_sf_guard_user_id` FOREIGN KEY (`user_id`) REFERENCES `sf_guard_user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
-
-/*Data for the table `profile` */
-
-insert  into `profile`(`id`,`nick_name`,`first_name`,`last_name`,`birth_date`,`userpic`,`sex`,`user_id`,`created_at`,`updated_at`,`description`) values (1,'lim','lim','lim',NULL,NULL,1,1,'2010-10-02 16:40:16','2010-10-02 16:40:16',NULL);
-
-/*Table structure for table `profile_fish` */
-
-DROP TABLE IF EXISTS `profile_fish`;
-
-CREATE TABLE `profile_fish` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `fish_id` int(11) NOT NULL,
-  `profile_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fish_id_idx` (`fish_id`),
-  KEY `profile_id_idx` (`profile_id`),
-  CONSTRAINT `profile_fish_fish_id_fish_id` FOREIGN KEY (`fish_id`) REFERENCES `fish` (`id`),
-  CONSTRAINT `profile_fish_profile_id_profile_id` FOREIGN KEY (`profile_id`) REFERENCES `profile` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-/*Data for the table `profile_fish` */
-
-/*Table structure for table `profile_style` */
-
-DROP TABLE IF EXISTS `profile_style`;
-
-CREATE TABLE `profile_style` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `style_id` int(11) NOT NULL,
-  `profile_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `style_id_idx` (`style_id`),
-  KEY `profile_id_idx` (`profile_id`),
-  CONSTRAINT `profile_style_profile_id_profile_id` FOREIGN KEY (`profile_id`) REFERENCES `profile` (`id`),
-  CONSTRAINT `profile_style_style_id_style_id` FOREIGN KEY (`style_id`) REFERENCES `style` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-/*Data for the table `profile_style` */
 
 /*Table structure for table `profit` */
 
@@ -482,15 +409,13 @@ CREATE TABLE `profit` (
   KEY `fish_id_idx` (`fish_id`),
   KEY `created_by_idx` (`created_by`),
   KEY `updated_by_idx` (`updated_by`),
-  CONSTRAINT `profit_created_by_profile_id` FOREIGN KEY (`created_by`) REFERENCES `profile` (`id`),
+  CONSTRAINT `profit_created_by_sf_guard_user_profile_id` FOREIGN KEY (`created_by`) REFERENCES `sf_guard_user_profile` (`id`),
   CONSTRAINT `profit_fish_id_fish_id` FOREIGN KEY (`fish_id`) REFERENCES `fish` (`id`),
   CONSTRAINT `profit_location_id_location_id` FOREIGN KEY (`location_id`) REFERENCES `location` (`id`),
-  CONSTRAINT `profit_updated_by_profile_id` FOREIGN KEY (`updated_by`) REFERENCES `profile` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+  CONSTRAINT `profit_updated_by_sf_guard_user_profile_id` FOREIGN KEY (`updated_by`) REFERENCES `sf_guard_user_profile` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `profit` */
-
-insert  into `profit`(`id`,`name`,`location_id`,`date`,`cordage`,`description`,`fish_id`,`weight`,`created_at`,`updated_at`,`created_by`,`updated_by`) values (1,'qqqqqqqqqqq',13,'2010-10-22 00:00:00','asdasdasdasd','asssss',1,123.00,'2010-10-22 23:45:44','2010-10-22 23:45:44',1,1);
 
 /*Table structure for table `profit_detail` */
 
@@ -524,7 +449,7 @@ CREATE TABLE `read_comment` (
   PRIMARY KEY (`profile_id`,`comment_id`),
   KEY `read_comment_comment_id_comment_id` (`comment_id`),
   CONSTRAINT `read_comment_comment_id_comment_id` FOREIGN KEY (`comment_id`) REFERENCES `comment` (`id`),
-  CONSTRAINT `read_comment_profile_id_profile_id` FOREIGN KEY (`profile_id`) REFERENCES `profile` (`id`)
+  CONSTRAINT `read_comment_profile_id_sf_guard_user_profile_id` FOREIGN KEY (`profile_id`) REFERENCES `sf_guard_user_profile` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `read_comment` */
@@ -541,11 +466,9 @@ CREATE TABLE `sf_guard_group` (
   `updated_at` datetime NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=cp1251;
+) ENGINE=InnoDB DEFAULT CHARSET=cp1251;
 
 /*Data for the table `sf_guard_group` */
-
-insert  into `sf_guard_group`(`id`,`name`,`description`,`created_at`,`updated_at`) values (1,'Array','Array','2010-10-22 22:57:04','2010-10-22 22:57:04'),(2,'admin','Administrator group','2010-11-16 01:47:16','2010-11-16 01:47:16');
 
 /*Table structure for table `sf_guard_group_permission` */
 
@@ -576,11 +499,9 @@ CREATE TABLE `sf_guard_permission` (
   `updated_at` datetime NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=cp1251;
+) ENGINE=InnoDB DEFAULT CHARSET=cp1251;
 
 /*Data for the table `sf_guard_permission` */
-
-insert  into `sf_guard_permission`(`id`,`name`,`description`,`created_at`,`updated_at`) values (1,'Array','Array','2010-10-22 22:57:04','2010-10-22 22:57:04'),(2,'admin','Administrator permission','2010-11-16 01:47:16','2010-11-16 01:47:16');
 
 /*Table structure for table `sf_guard_remember_key` */
 
@@ -618,11 +539,11 @@ CREATE TABLE `sf_guard_user` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`),
   KEY `is_active_idx_idx` (`is_active`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=cp1251;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=cp1251;
 
 /*Data for the table `sf_guard_user` */
 
-insert  into `sf_guard_user`(`id`,`username`,`algorithm`,`salt`,`password`,`is_active`,`is_super_admin`,`last_login`,`created_at`,`updated_at`) values (1,'admin','PasswordKeeper::generate','2d91a3f4d339fefeed009e959ff3163c','2d91a3f4d339fefeed009e959ff3163cadmin',1,0,'2010-12-01 00:11:56','2010-10-22 22:56:58','2010-12-01 00:11:56');
+insert  into `sf_guard_user`(`id`,`username`,`algorithm`,`salt`,`password`,`is_active`,`is_super_admin`,`last_login`,`created_at`,`updated_at`) values (1,'admin','PasswordKeeper::generate','2d91a3f4d339fefeed009e959ff3163c','2d91a3f4d339fefeed009e959ff3163c2d91a3f4d339fefeed009e959ff3163cadmin',1,0,'2010-11-29 01:24:47','2010-10-22 22:56:58','2010-11-29 01:24:47');
 
 /*Table structure for table `sf_guard_user_group` */
 
@@ -657,6 +578,37 @@ CREATE TABLE `sf_guard_user_permission` (
 ) ENGINE=InnoDB DEFAULT CHARSET=cp1251;
 
 /*Data for the table `sf_guard_user_permission` */
+
+/*Table structure for table `sf_guard_user_profile` */
+
+DROP TABLE IF EXISTS `sf_guard_user_profile`;
+
+CREATE TABLE `sf_guard_user_profile` (
+  `user_id` int(11) NOT NULL,
+  `email_new` varchar(255) DEFAULT NULL,
+  `firstname` varchar(255) DEFAULT NULL,
+  `lastname` varchar(255) DEFAULT NULL,
+  `validate_at` datetime DEFAULT NULL,
+  `validate` varchar(33) DEFAULT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nick_name` varchar(50) NOT NULL DEFAULT '',
+  `first_name` varchar(50) DEFAULT NULL,
+  `last_name` varchar(50) DEFAULT NULL,
+  `birth_date` date DEFAULT NULL,
+  `description` text,
+  `userpic` varchar(255) DEFAULT NULL,
+  `sex` tinyint(1) NOT NULL DEFAULT '1',
+  `email` varchar(255) DEFAULT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `user_id` (`user_id`),
+  UNIQUE KEY `user_id_unique_idx` (`user_id`),
+  UNIQUE KEY `email_new` (`email_new`),
+  CONSTRAINT `sf_guard_user_profile_user_id_sf_guard_user_id` FOREIGN KEY (`user_id`) REFERENCES `sf_guard_user` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Data for the table `sf_guard_user_profile` */
 
 /*Table structure for table `style` */
 
@@ -726,9 +678,9 @@ CREATE TABLE `talk` (
   KEY `talk_section_id_idx` (`talk_section_id`),
   KEY `created_by_idx` (`created_by`),
   KEY `updated_by_idx` (`updated_by`),
-  CONSTRAINT `talk_created_by_profile_id` FOREIGN KEY (`created_by`) REFERENCES `profile` (`id`),
+  CONSTRAINT `talk_created_by_sf_guard_user_profile_id` FOREIGN KEY (`created_by`) REFERENCES `sf_guard_user_profile` (`id`),
   CONSTRAINT `talk_talk_section_id_talk_section_id` FOREIGN KEY (`talk_section_id`) REFERENCES `talk_section` (`id`),
-  CONSTRAINT `talk_updated_by_profile_id` FOREIGN KEY (`updated_by`) REFERENCES `profile` (`id`)
+  CONSTRAINT `talk_updated_by_sf_guard_user_profile_id` FOREIGN KEY (`updated_by`) REFERENCES `sf_guard_user_profile` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `talk` */
@@ -770,16 +722,16 @@ CREATE TABLE `vote` (
   KEY `vote_comment_id_comment_id` (`comment_id`),
   KEY `vote_fish_event_id_fish_event_id` (`fish_event_id`),
   KEY `vote_location_id_location_id` (`location_id`),
-  KEY `vote_profile_id_profile_id` (`profile_id`),
+  KEY `vote_profile_id_sf_guard_user_profile_id` (`profile_id`),
   KEY `vote_profit_id_profit_id` (`profit_id`),
   KEY `vote_talk_id_talk_id` (`talk_id`),
-  CONSTRAINT `vote_talk_id_talk_id` FOREIGN KEY (`talk_id`) REFERENCES `talk` (`id`),
   CONSTRAINT `vote_comment_id_comment_id` FOREIGN KEY (`comment_id`) REFERENCES `comment` (`id`),
   CONSTRAINT `vote_fish_event_id_fish_event_id` FOREIGN KEY (`fish_event_id`) REFERENCES `fish_event` (`id`),
   CONSTRAINT `vote_location_id_location_id` FOREIGN KEY (`location_id`) REFERENCES `location` (`id`),
-  CONSTRAINT `vote_profile_id_profile_id` FOREIGN KEY (`profile_id`) REFERENCES `profile` (`id`),
+  CONSTRAINT `vote_profile_id_sf_guard_user_profile_id` FOREIGN KEY (`profile_id`) REFERENCES `sf_guard_user_profile` (`id`),
   CONSTRAINT `vote_profit_id_profit_id` FOREIGN KEY (`profit_id`) REFERENCES `profit` (`id`),
-  CONSTRAINT `vote_voter_profile_id` FOREIGN KEY (`voter`) REFERENCES `profile` (`id`)
+  CONSTRAINT `vote_talk_id_talk_id` FOREIGN KEY (`talk_id`) REFERENCES `talk` (`id`),
+  CONSTRAINT `vote_voter_sf_guard_user_profile_id` FOREIGN KEY (`voter`) REFERENCES `sf_guard_user_profile` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `vote` */
@@ -794,7 +746,7 @@ CREATE TABLE `wish_list` (
   PRIMARY KEY (`profile_id`,`location_id`),
   KEY `wish_list_location_id_location_id` (`location_id`),
   CONSTRAINT `wish_list_location_id_location_id` FOREIGN KEY (`location_id`) REFERENCES `location` (`id`),
-  CONSTRAINT `wish_list_profile_id_profile_id` FOREIGN KEY (`profile_id`) REFERENCES `profile` (`id`)
+  CONSTRAINT `wish_list_profile_id_sf_guard_user_profile_id` FOREIGN KEY (`profile_id`) REFERENCES `sf_guard_user_profile` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `wish_list` */
