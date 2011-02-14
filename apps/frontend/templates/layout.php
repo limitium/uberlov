@@ -18,7 +18,12 @@
                         <li><?php echo link_to('Отчеты', 'profit/list') ?></li>
                         <li><?php echo link_to('Обсуждения', 'talk/list') ?></li>
                         <li><?php echo link_to('События', 'collector/events') ?></li>
+                         <?php if ($sf_user->isAnonymous()): ?>
                         <li><?php echo link_to('Вход', '@sf_guard_signin') ?></li>
+                        <li><?php echo link_to('Регистрация', '@apply') ?></li>
+                        <?php else: ?>
+                        <li><?php echo link_to('Выход', '@sf_guard_signout') ?></li>
+                        <?php endif; ?>
                     </ul>
                 </div>
             </div>
