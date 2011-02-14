@@ -1,3 +1,16 @@
 all:
   sf_guard_plugin:
     algorithm_callable: [PasswordKeeper, generate]
+  sfApplyPlugin:
+    from:
+      mail_editable: false
+      email: "spamer@uberlov.ru"
+      fullname: "Важная информация с www.uberlov.ru"
+      routes:
+          apply: /user/new
+          reset: /user/password-reset
+          resetRequest: /user/reset-request
+          resetCancel: /user/reset-cancel
+          validate: /user/confirm/:validate
+          settings: /user/settings
+
