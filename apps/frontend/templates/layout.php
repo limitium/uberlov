@@ -18,11 +18,11 @@
                         <li><?php echo link_to('Отчеты', 'profit/list') ?></li>
                         <li><?php echo link_to('Обсуждения', 'talk/list') ?></li>
                         <li><?php echo link_to('События', 'collector/events') ?></li>
-                         <?php if ($sf_user->isAnonymous()): ?>
-                        <li><?php echo link_to('Вход', '@sf_guard_signin') ?></li>
-                        <li><?php echo link_to('Регистрация', '@apply') ?></li>
+                        <?php if ($sf_user->isAnonymous()): ?>
+                            <li><?php echo link_to('Вход', '@sf_guard_signin') ?></li>
+                            <li><?php echo link_to('Регистрация', '@apply') ?></li>
                         <?php else: ?>
-                        <li><?php echo link_to('Выход', '@sf_guard_signout') ?></li>
+                            <li><?php echo link_to('Выход', '@sf_guard_signout') ?></li>
                         <?php endif; ?>
                     </ul>
                 </div>
@@ -33,19 +33,21 @@
                     <?php include_component('location', 'last') ?>
                     <?php include_component('profit', 'last') ?>
                     <?php if (has_slot('extra')): ?>
-                    <?php include_slot('extra'); ?>
+                        <?php include_slot('extra'); ?>
                     <?php endif; ?>
+                </div>
+
+                <div id="right_layout">
+                    <div id="content_menu">
+                        <?php include_slot('content_menu') ?>
                     </div>
 
-                    <div id="right_layout">
-                        <div id="content_menu"><?php include_slot('content_menu') ?></div>
-
                     <?php if ($sf_user->hasFlash('notice')): ?>
-                            <div class="flash_notice"><?php echo $sf_user->getFlash('notice') ?></div>
+                        <div class="flash_notice"><?php echo $sf_user->getFlash('notice') ?></div>
                     <?php endif; ?>
 
                     <?php if ($sf_user->hasFlash('error')): ?>
-                                <div class="flash_error"><?php echo $sf_user->getFlash('error') ?></div>
+                        <div class="flash_error"><?php echo $sf_user->getFlash('error') ?></div>
                     <?php endif; ?>
 
                     <?php echo $sf_content ?>

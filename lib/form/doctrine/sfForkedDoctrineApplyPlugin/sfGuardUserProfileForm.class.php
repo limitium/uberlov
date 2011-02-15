@@ -46,7 +46,6 @@ class sfGuardUserProfileForm extends PluginsfGuardUserProfileForm {
             'description' => 'О себе',
         ));
     }
-
     public function getStylesheets() {
         return array(
             '/css/form.css' => 'all'
@@ -56,5 +55,4 @@ class sfGuardUserProfileForm extends PluginsfGuardUserProfileForm {
     public function getJavaScripts() {
         return array('/js/formShow.js');
     }
-
 }

@@ -14,7 +14,7 @@ class formInputDate extends sfWidgetFormInputText {
      */
     public function render($name, $value = null, $attributes = array(), $errors = array()) {
         $mathces = array();
-        preg_match('/^(\d{4})-(\d{2})-(\d{2})$/', $value, &$mathces);
+        preg_match('/^(\d{4})-(\d{2})-(\d{2})$/', $value, $mathces);
         if (sizeof($mathces)) {
             $value = $mathces[3] . '.' . $mathces[2] . '.' . $mathces[1];
         }

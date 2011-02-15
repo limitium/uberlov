@@ -30,7 +30,7 @@ $.extend({
     }
 });
 app = {
-    baseUrl:'',
+    baseUrl:'/ht/www',
     csrf: {},
     modules: {},
     
@@ -51,7 +51,7 @@ app = {
     getForm:function(url,handler){
         $.ajax({
             type: 'get',
-            url: this.baseUrl+url,
+            url: this.url(url),
             dataType: 'html',
             success: function(form){
                 handler(app.formatHtml(form));
@@ -73,7 +73,7 @@ app = {
     sendData: function(data){
         $.ajax({
             type: 'post',
-            url: data.url,
+            url: this.url(data.url),
             dataType: 'json',
             data: data.data,
             success: function(resp){
@@ -100,7 +100,7 @@ app = {
         })
         $.ajax({
             type: 'post',
-            url: url,
+            url: this.url(url),
             dataType: 'html',
             data: data,
             success: function(form){
@@ -120,10 +120,31 @@ app = {
             }
         });
     },
+    formSubmiter: function(opt){
+        $('form', opt.form).submit(function(){
+            $(opt.form).block({
+                message: app.loaderTag() ,
+                overlayCSS: {
+                    backgroundColor: '#eee'
+                },
+                css: {
+                    border:		'0px',
+                    opacity:        '0.5',
+                    backgroundColor:'#eee'
+                }
+            });
+            app.sendForm(opt.form, function(newForm){
+                $(opt.form).unblock();
+                
+                opt.response(newForm);                
+            });
+            return false;
+        });    
+    },
     getJSON:function(url,handler){
         $.ajax({
             type: 'get',
-            url: this.baseUrl+url,
+            url: this.url(url),
             dataType: 'json',
             success: function(data){
                 handler(data);
@@ -163,8 +184,14 @@ app = {
                 color: '#fff'
             }
         })
+    },
+    url: function(url){
+        return this.baseUrl+url;
+    },
+    loaderTag: function(){
+        return "<img src='" + this.url('/images/loader-small.gif') + "'/>";
     }
-
+    
 }
 
 
