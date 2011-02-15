@@ -25,7 +25,7 @@ formShow.prototype.moveLabels= function(){
     var self = this;
     $('table.form th label').each(function(){
         var label = $(this);
-
+        
         $('#'+label.attr('for')).each(function(){
             var input = $(this);
             self.inputs.push(input);

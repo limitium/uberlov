@@ -1,6 +1,7 @@
 all:
   sf_guard_plugin:
     algorithm_callable: [PasswordKeeper, generate]
+    signin_form: FloginForm
   sfApplyPlugin:
     from:
       mail_editable: false

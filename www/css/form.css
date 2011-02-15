@@ -46,3 +46,7 @@
     padding: 1px 0 0 19px;
     margin-top:-20px;    
 }
+.error_list {
+    background-color: red;
+    list-style-type: none;
+}
