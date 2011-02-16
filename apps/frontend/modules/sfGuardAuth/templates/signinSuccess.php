@@ -37,4 +37,4 @@
         </tbody>
     </table>
 </form>
-<a href="<?php echo url_for('@sf_guard_password') ?>"><?php echo 'Forgot your password?' ?></a>
+<a href="<?php echo url_for('@resetRequest') ?>"><?php echo 'Сбросить пароль' ?></a>|
