@@ -15,8 +15,6 @@ abstract class BasesfGuardUserProfileFormFilter extends BaseFormFilterDoctrine
     $this->setWidgets(array(
       'user_id'           => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('User'), 'add_empty' => true)),
       'email_new'         => new sfWidgetFormFilterInput(),
-      'firstname'         => new sfWidgetFormFilterInput(),
-      'lastname'          => new sfWidgetFormFilterInput(),
       'validate_at'       => new sfWidgetFormFilterDate(array('from_date' => new sfWidgetFormDate(), 'to_date' => new sfWidgetFormDate())),
       'validate'          => new sfWidgetFormFilterInput(),
       'sex'               => new sfWidgetFormChoice(array('choices' => array('' => 'yes or no', 1 => 'yes', 0 => 'no'))),
@@ -35,8 +33,6 @@ abstract class BasesfGuardUserProfileFormFilter extends BaseFormFilterDoctrine
     $this->setValidators(array(
       'user_id'           => new sfValidatorDoctrineChoice(array('required' => false, 'model' => $this->getRelatedModelName('User'), 'column' => 'id')),
       'email_new'         => new sfValidatorPass(array('required' => false)),
-      'firstname'         => new sfValidatorPass(array('required' => false)),
-      'lastname'          => new sfValidatorPass(array('required' => false)),
       'validate_at'       => new sfValidatorDateRange(array('required' => false, 'from_date' => new sfValidatorDateTime(array('required' => false, 'datetime_output' => 'Y-m-d 00:00:00')), 'to_date' => new sfValidatorDateTime(array('required' => false, 'datetime_output' => 'Y-m-d 23:59:59')))),
       'validate'          => new sfValidatorPass(array('required' => false)),
       'sex'               => new sfValidatorChoice(array('required' => false, 'choices' => array('', 1, 0))),
@@ -151,8 +147,6 @@ abstract class BasesfGuardUserProfileFormFilter extends BaseFormFilterDoctrine
     return array(
       'user_id'           => 'ForeignKey',
       'email_new'         => 'Text',
-      'firstname'         => 'Text',
-      'lastname'          => 'Text',
       'validate_at'       => 'Date',
       'validate'          => 'Text',
       'id'                => 'Number',

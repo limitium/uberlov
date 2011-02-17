@@ -561,11 +561,9 @@ CREATE TABLE `sf_guard_user` (
   UNIQUE KEY `email_address` (`email_address`),
   UNIQUE KEY `username` (`username`),
   KEY `is_active_idx_idx` (`is_active`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=cp1251;
+) ENGINE=InnoDB DEFAULT CHARSET=cp1251;
 
 /*Data for the table `sf_guard_user` */
-
-insert  into `sf_guard_user`(`id`,`first_name`,`last_name`,`email_address`,`username`,`algorithm`,`salt`,`password`,`is_active`,`is_super_admin`,`last_login`,`created_at`,`updated_at`) values (1,NULL,NULL,'limitium@gmail.com','qweqwe','PasswordKeeper::generate','7d6714ff1b819be7f69d3e70a4ca2b4e','7d6714ff1b819be7f69d3e70a4ca2b4eqweqwe',0,0,NULL,'2011-02-17 02:59:11','2011-02-17 02:59:11');
 
 /*Table structure for table `sf_guard_user_group` */
 
@@ -608,8 +606,6 @@ DROP TABLE IF EXISTS `sf_guard_user_profile`;
 CREATE TABLE `sf_guard_user_profile` (
   `user_id` bigint(20) NOT NULL,
   `email_new` varchar(255) DEFAULT NULL,
-  `firstname` varchar(255) DEFAULT NULL,
-  `lastname` varchar(255) DEFAULT NULL,
   `validate_at` datetime DEFAULT NULL,
   `validate` varchar(33) DEFAULT NULL,
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -624,11 +620,9 @@ CREATE TABLE `sf_guard_user_profile` (
   UNIQUE KEY `user_id_unique_idx` (`user_id`),
   UNIQUE KEY `email_new` (`email_new`),
   CONSTRAINT `sf_guard_user_profile_user_id_sf_guard_user_id` FOREIGN KEY (`user_id`) REFERENCES `sf_guard_user` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `sf_guard_user_profile` */
-
-insert  into `sf_guard_user_profile`(`user_id`,`email_new`,`firstname`,`lastname`,`validate_at`,`validate`,`id`,`sex`,`birth_date`,`userpic`,`description`,`created_at`,`updated_at`) values (1,NULL,'qweqwe','qweqwe','2011-02-17 02:59:11','n911fb7f19cf0f562e2a1a908f5fd6bab',1,1,NULL,NULL,'','2011-02-17 02:59:11','2011-02-17 02:59:11');
 
 /*Table structure for table `style` */
 
