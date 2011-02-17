@@ -20,7 +20,7 @@ class userComponents extends sfComponents {
         if (!$this->getUser()->isAnonymous()) {
             $profile = $this->getUser()->getProfile();
 
-            $this->menu[] = array('url' => 'profile/show?id=' . $profile->getId(), 'title' => 'Профаил ' . $profile->nick_name);
+            $this->menu[] = array('url' => 'profile/show?id=' . $profile->getId(), 'title' => 'Профаил ' . $this->getUser()->getUsername());
             $this->menu[] = array('url' => 'profile/friends', 'title' => 'Друзья (<span id="myFriendCounter">' . sizeof($profile->getFriends()) . '</span>)');
             $this->menu[] = array('url' => 'location/my', 'title' => 'Мои места (<span id="myLocationCounter">' . sizeof($profile->getLocation()) . '</span>)');
             $this->menu[] = array('url' => 'inbox/list', 'title' => 'Инбоксы (<span id="myInboxCounter">' . sizeof($profile->getInbox()) . '</span>)');

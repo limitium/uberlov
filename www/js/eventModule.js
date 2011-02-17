@@ -31,7 +31,7 @@ eventModule.prototype.initListeners = function(){
 
 eventModule.prototype.initMenu = function(){
     this.menu = {
-        link: $('#new_profit',this.mm.addEditItem('<a id="new_profit" class="editItem" href=""><img class="mapIcon" src="' + app.url('/images/profit.png') + '"/>add event</a>'))
+        link: $('#new_profit',this.mm.addEditItem('<a id="new_profit" class="editItem" href=""><img class="mapIcon" src="' + app.url('/images/profit.png') + '"/>Добавить событие</a>'))
         .click(this.startEdit.delegate(this))
     };
 }
@@ -45,7 +45,7 @@ eventModule.prototype.startEdit = function(){
         this.mm.handlers.onLocationClick = this.getOnLocationClick().delegate(this)
 
         this.barCreate();
-        this.barSetMsg('select location or create new');
+        this.barSetMsg('Выберите место или добавьте новое');
     }
     return false;
 }
@@ -139,7 +139,7 @@ eventModule.prototype.onSaveChange = function(disabled){
 }
 
 eventModule.prototype.barCreate = function(){
-    var bar = this.mm.updateBar('<img class="mapIcon" src="' + app.url('/images/profit.png') + '"/><span id="bar_msg"></span></span><input id="bar_save" class="button disabled" type="button" value="save"/><input id="bar_cancel" class="button" type="button" value="cancel"/>');
+    var bar = this.mm.updateBar('<img class="mapIcon" src="' + app.url('/images/profit.png') + '"/><span id="bar_msg"></span></span><input id="bar_save" class="button disabled" type="button" value="Сохранить"/><input id="bar_cancel" class="button" type="button" value="Отмена"/>');
     this.bar = {
         msg: $('#bar_msg',bar),
         save: $('#bar_save',bar),

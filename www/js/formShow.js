@@ -149,7 +149,7 @@ formShow.prototype.moveLabels= function(){
                 });
 
                 input.blur(function(){
-                    if(input.val() == ''){
+                    if(input.val() == '' || input.val() == input.label){
                         input.val(input.label);
                         input.addClass('labeled');
                     }

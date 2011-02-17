@@ -10,14 +10,5 @@
  */
 class BaseForm extends sfFormSymfony {
 
-    public function getStylesheets() {
-        return array(
-            '/css/form.css' => 'all'
-        );
-    }
-
-    public function getJavaScripts() {
-        return array('/js/formShow.js');
-    }
 
 }

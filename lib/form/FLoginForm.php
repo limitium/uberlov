@@ -24,20 +24,10 @@ class FloginForm extends BaseForm {
             'password' => 'Пароль',
             'remember' => 'Запомнить?',
         ));
-        
+
         $this->validatorSchema->setPostValidator(new sfGuardValidatorUser());
 
         $this->widgetSchema->setNameFormat('signin[%s]');
-    }
-
-    public function getStylesheets() {
-        return array(
-            '/css/form.css' => 'all'
-        );
-    }
-
-    public function getJavaScripts() {
-        return array('/js/formShow.js');
     }
 
 }

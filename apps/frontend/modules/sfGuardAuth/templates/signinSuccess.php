@@ -37,4 +37,4 @@
         </tbody>
     </table>
 </form>
-<a href="<?php echo url_for('@resetRequest') ?>"><?php echo 'Сбросить пароль' ?></a>|
+<a href="<?php echo url_for('@resetRequest') ?>"><?php echo 'Забыл?' ?></a>
