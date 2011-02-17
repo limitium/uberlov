@@ -101,12 +101,12 @@ CREATE TABLE `comment` (
   KEY `comment_location_id_location_id` (`location_id`),
   KEY `comment_profit_id_profit_id` (`profit_id`),
   KEY `comment_talk_id_talk_id` (`talk_id`),
+  CONSTRAINT `comment_talk_id_talk_id` FOREIGN KEY (`talk_id`) REFERENCES `talk` (`id`),
   CONSTRAINT `comment_created_by_sf_guard_user_profile_id` FOREIGN KEY (`created_by`) REFERENCES `sf_guard_user_profile` (`id`),
   CONSTRAINT `comment_fishevent_id_fish_event_id` FOREIGN KEY (`fishevent_id`) REFERENCES `fish_event` (`id`),
   CONSTRAINT `comment_inbox_id_inbox_id` FOREIGN KEY (`inbox_id`) REFERENCES `inbox` (`id`),
   CONSTRAINT `comment_location_id_location_id` FOREIGN KEY (`location_id`) REFERENCES `location` (`id`),
   CONSTRAINT `comment_profit_id_profit_id` FOREIGN KEY (`profit_id`) REFERENCES `profit` (`id`),
-  CONSTRAINT `comment_talk_id_talk_id` FOREIGN KEY (`talk_id`) REFERENCES `talk` (`id`),
   CONSTRAINT `comment_updated_by_sf_guard_user_profile_id` FOREIGN KEY (`updated_by`) REFERENCES `sf_guard_user_profile` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -380,8 +380,8 @@ CREATE TABLE `photo` (
   KEY `created_by_idx` (`created_by`),
   KEY `updated_by_idx` (`updated_by`),
   KEY `photo_location_id_location_id` (`location_id`),
-  CONSTRAINT `photo_created_by_sf_guard_user_profile_id` FOREIGN KEY (`created_by`) REFERENCES `sf_guard_user_profile` (`id`),
   CONSTRAINT `photo_location_id_location_id` FOREIGN KEY (`location_id`) REFERENCES `location` (`id`),
+  CONSTRAINT `photo_created_by_sf_guard_user_profile_id` FOREIGN KEY (`created_by`) REFERENCES `sf_guard_user_profile` (`id`),
   CONSTRAINT `photo_updated_by_sf_guard_user_profile_id` FOREIGN KEY (`updated_by`) REFERENCES `sf_guard_user_profile` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -454,12 +454,30 @@ CREATE TABLE `read_comment` (
 
 /*Data for the table `read_comment` */
 
+/*Table structure for table `sf_guard_forgot_password` */
+
+DROP TABLE IF EXISTS `sf_guard_forgot_password`;
+
+CREATE TABLE `sf_guard_forgot_password` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `user_id` bigint(20) NOT NULL,
+  `unique_key` varchar(255) DEFAULT NULL,
+  `expires_at` datetime NOT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `user_id_idx` (`user_id`),
+  CONSTRAINT `sf_guard_forgot_password_user_id_sf_guard_user_id` FOREIGN KEY (`user_id`) REFERENCES `sf_guard_user` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=cp1251;
+
+/*Data for the table `sf_guard_forgot_password` */
+
 /*Table structure for table `sf_guard_group` */
 
 DROP TABLE IF EXISTS `sf_guard_group`;
 
 CREATE TABLE `sf_guard_group` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) DEFAULT NULL,
   `description` text,
   `created_at` datetime NOT NULL,
@@ -475,8 +493,8 @@ CREATE TABLE `sf_guard_group` (
 DROP TABLE IF EXISTS `sf_guard_group_permission`;
 
 CREATE TABLE `sf_guard_group_permission` (
-  `group_id` int(11) NOT NULL DEFAULT '0',
-  `permission_id` int(11) NOT NULL DEFAULT '0',
+  `group_id` bigint(20) NOT NULL DEFAULT '0',
+  `permission_id` bigint(20) NOT NULL DEFAULT '0',
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL,
   PRIMARY KEY (`group_id`,`permission_id`),
@@ -492,7 +510,7 @@ CREATE TABLE `sf_guard_group_permission` (
 DROP TABLE IF EXISTS `sf_guard_permission`;
 
 CREATE TABLE `sf_guard_permission` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) DEFAULT NULL,
   `description` text,
   `created_at` datetime NOT NULL,
@@ -508,13 +526,13 @@ CREATE TABLE `sf_guard_permission` (
 DROP TABLE IF EXISTS `sf_guard_remember_key`;
 
 CREATE TABLE `sf_guard_remember_key` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `user_id` int(11) DEFAULT NULL,
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `user_id` bigint(20) DEFAULT NULL,
   `remember_key` varchar(32) DEFAULT NULL,
-  `ip_address` varchar(50) NOT NULL DEFAULT '',
+  `ip_address` varchar(50) DEFAULT NULL,
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL,
-  PRIMARY KEY (`id`,`ip_address`),
+  PRIMARY KEY (`id`),
   KEY `user_id_idx` (`user_id`),
   CONSTRAINT `sf_guard_remember_key_user_id_sf_guard_user_id` FOREIGN KEY (`user_id`) REFERENCES `sf_guard_user` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=cp1251;
@@ -526,7 +544,10 @@ CREATE TABLE `sf_guard_remember_key` (
 DROP TABLE IF EXISTS `sf_guard_user`;
 
 CREATE TABLE `sf_guard_user` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `first_name` varchar(255) DEFAULT NULL,
+  `last_name` varchar(255) DEFAULT NULL,
+  `email_address` varchar(255) NOT NULL,
   `username` varchar(128) NOT NULL,
   `algorithm` varchar(128) NOT NULL DEFAULT 'sha1',
   `salt` varchar(128) DEFAULT NULL,
@@ -537,21 +558,22 @@ CREATE TABLE `sf_guard_user` (
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL,
   PRIMARY KEY (`id`),
+  UNIQUE KEY `email_address` (`email_address`),
   UNIQUE KEY `username` (`username`),
   KEY `is_active_idx_idx` (`is_active`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=cp1251;
 
 /*Data for the table `sf_guard_user` */
 
-insert  into `sf_guard_user`(`id`,`username`,`algorithm`,`salt`,`password`,`is_active`,`is_super_admin`,`last_login`,`created_at`,`updated_at`) values (1,'admin','PasswordKeeper::generate','2d91a3f4d339fefeed009e959ff3163c','2d91a3f4d339fefeed009e959ff3163c2d91a3f4d339fefeed009e959ff3163cadmin',1,0,'2010-11-29 01:24:47','2010-10-22 22:56:58','2010-11-29 01:24:47');
+insert  into `sf_guard_user`(`id`,`first_name`,`last_name`,`email_address`,`username`,`algorithm`,`salt`,`password`,`is_active`,`is_super_admin`,`last_login`,`created_at`,`updated_at`) values (1,NULL,NULL,'limitium@gmail.com','qweqwe','PasswordKeeper::generate','7d6714ff1b819be7f69d3e70a4ca2b4e','7d6714ff1b819be7f69d3e70a4ca2b4eqweqwe',0,0,NULL,'2011-02-17 02:59:11','2011-02-17 02:59:11');
 
 /*Table structure for table `sf_guard_user_group` */
 
 DROP TABLE IF EXISTS `sf_guard_user_group`;
 
 CREATE TABLE `sf_guard_user_group` (
-  `user_id` int(11) NOT NULL DEFAULT '0',
-  `group_id` int(11) NOT NULL DEFAULT '0',
+  `user_id` bigint(20) NOT NULL DEFAULT '0',
+  `group_id` bigint(20) NOT NULL DEFAULT '0',
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL,
   PRIMARY KEY (`user_id`,`group_id`),
@@ -567,8 +589,8 @@ CREATE TABLE `sf_guard_user_group` (
 DROP TABLE IF EXISTS `sf_guard_user_permission`;
 
 CREATE TABLE `sf_guard_user_permission` (
-  `user_id` int(11) NOT NULL DEFAULT '0',
-  `permission_id` int(11) NOT NULL DEFAULT '0',
+  `user_id` bigint(20) NOT NULL DEFAULT '0',
+  `permission_id` bigint(20) NOT NULL DEFAULT '0',
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL,
   PRIMARY KEY (`user_id`,`permission_id`),
@@ -584,21 +606,17 @@ CREATE TABLE `sf_guard_user_permission` (
 DROP TABLE IF EXISTS `sf_guard_user_profile`;
 
 CREATE TABLE `sf_guard_user_profile` (
-  `user_id` int(11) NOT NULL,
+  `user_id` bigint(20) NOT NULL,
   `email_new` varchar(255) DEFAULT NULL,
   `firstname` varchar(255) DEFAULT NULL,
   `lastname` varchar(255) DEFAULT NULL,
   `validate_at` datetime DEFAULT NULL,
   `validate` varchar(33) DEFAULT NULL,
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `nick_name` varchar(50) NOT NULL DEFAULT '',
-  `first_name` varchar(50) DEFAULT NULL,
-  `last_name` varchar(50) DEFAULT NULL,
-  `birth_date` date DEFAULT NULL,
-  `description` text,
-  `userpic` varchar(255) DEFAULT NULL,
   `sex` tinyint(1) NOT NULL DEFAULT '1',
-  `email` varchar(255) DEFAULT NULL,
+  `birth_date` date DEFAULT NULL,
+  `userpic` varchar(255) DEFAULT NULL,
+  `description` text,
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL,
   PRIMARY KEY (`id`),
@@ -606,9 +624,11 @@ CREATE TABLE `sf_guard_user_profile` (
   UNIQUE KEY `user_id_unique_idx` (`user_id`),
   UNIQUE KEY `email_new` (`email_new`),
   CONSTRAINT `sf_guard_user_profile_user_id_sf_guard_user_id` FOREIGN KEY (`user_id`) REFERENCES `sf_guard_user` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 /*Data for the table `sf_guard_user_profile` */
+
+insert  into `sf_guard_user_profile`(`user_id`,`email_new`,`firstname`,`lastname`,`validate_at`,`validate`,`id`,`sex`,`birth_date`,`userpic`,`description`,`created_at`,`updated_at`) values (1,NULL,'qweqwe','qweqwe','2011-02-17 02:59:11','n911fb7f19cf0f562e2a1a908f5fd6bab',1,1,NULL,NULL,'','2011-02-17 02:59:11','2011-02-17 02:59:11');
 
 /*Table structure for table `style` */
 
@@ -619,11 +639,9 @@ CREATE TABLE `style` (
   `name` varchar(100) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `style` */
-
-insert  into `style`(`id`,`name`) values (1,'Спининг'),(2,'Троллинг'),(3,'Фидер');
 
 /*Table structure for table `tag` */
 
@@ -725,12 +743,12 @@ CREATE TABLE `vote` (
   KEY `vote_profile_id_sf_guard_user_profile_id` (`profile_id`),
   KEY `vote_profit_id_profit_id` (`profit_id`),
   KEY `vote_talk_id_talk_id` (`talk_id`),
+  CONSTRAINT `vote_talk_id_talk_id` FOREIGN KEY (`talk_id`) REFERENCES `talk` (`id`),
   CONSTRAINT `vote_comment_id_comment_id` FOREIGN KEY (`comment_id`) REFERENCES `comment` (`id`),
   CONSTRAINT `vote_fish_event_id_fish_event_id` FOREIGN KEY (`fish_event_id`) REFERENCES `fish_event` (`id`),
   CONSTRAINT `vote_location_id_location_id` FOREIGN KEY (`location_id`) REFERENCES `location` (`id`),
   CONSTRAINT `vote_profile_id_sf_guard_user_profile_id` FOREIGN KEY (`profile_id`) REFERENCES `sf_guard_user_profile` (`id`),
   CONSTRAINT `vote_profit_id_profit_id` FOREIGN KEY (`profit_id`) REFERENCES `profit` (`id`),
-  CONSTRAINT `vote_talk_id_talk_id` FOREIGN KEY (`talk_id`) REFERENCES `talk` (`id`),
   CONSTRAINT `vote_voter_sf_guard_user_profile_id` FOREIGN KEY (`voter`) REFERENCES `sf_guard_user_profile` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
