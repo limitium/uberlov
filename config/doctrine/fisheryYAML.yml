@@ -88,31 +88,19 @@ sfGuardUserProfile:
       type: integer(4)
       notnull: true
       autoincrement: true
-    nick_name:
-      default: ''
-      type: string(50)
-      notnull: true
-    first_name:
-      default: ''
-      type: string(50)
-    last_name:
-      default: ''
-      type: string(50)
-    birth_date:
-      type: date
-    description:
-      type: string
-    userpic:
-      type: string(255)
     sex:
       default: 1
       type: boolean
       notnull: true
+    birth_date:
+      type: date
+    userpic:
+      type: string(255)
+    description:
+      type: string
     user_id:
       unique: true
-      type: integer(4)
-    email:
-      type: string(255)
+      type: integer
     validate_at:
       type: timestamp
     validate:

@@ -12,14 +12,10 @@
  * @property timestamp $validate_at
  * @property string $validate
  * @property integer $id
- * @property string $nick_name
- * @property string $first_name
- * @property string $last_name
- * @property date $birth_date
- * @property string $description
- * @property string $userpic
  * @property boolean $sex
- * @property string $email
+ * @property date $birth_date
+ * @property string $userpic
+ * @property string $description
  * @property sfGuardUser $User
  * @property Doctrine_Collection $Wishes
  * @property Doctrine_Collection $MyFirends
@@ -39,14 +35,10 @@
  * @method timestamp           getValidateAt()  Returns the current record's "validate_at" value
  * @method string              getValidate()    Returns the current record's "validate" value
  * @method integer             getId()          Returns the current record's "id" value
- * @method string              getNickName()    Returns the current record's "nick_name" value
- * @method string              getFirstName()   Returns the current record's "first_name" value
- * @method string              getLastName()    Returns the current record's "last_name" value
- * @method date                getBirthDate()   Returns the current record's "birth_date" value
- * @method string              getDescription() Returns the current record's "description" value
- * @method string              getUserpic()     Returns the current record's "userpic" value
  * @method boolean             getSex()         Returns the current record's "sex" value
- * @method string              getEmail()       Returns the current record's "email" value
+ * @method date                getBirthDate()   Returns the current record's "birth_date" value
+ * @method string              getUserpic()     Returns the current record's "userpic" value
+ * @method string              getDescription() Returns the current record's "description" value
  * @method sfGuardUser         getUser()        Returns the current record's "User" value
  * @method Doctrine_Collection getWishes()      Returns the current record's "Wishes" collection
  * @method Doctrine_Collection getMyFirends()   Returns the current record's "MyFirends" collection
@@ -65,14 +57,10 @@
  * @method sfGuardUserProfile  setValidateAt()  Sets the current record's "validate_at" value
  * @method sfGuardUserProfile  setValidate()    Sets the current record's "validate" value
  * @method sfGuardUserProfile  setId()          Sets the current record's "id" value
- * @method sfGuardUserProfile  setNickName()    Sets the current record's "nick_name" value
- * @method sfGuardUserProfile  setFirstName()   Sets the current record's "first_name" value
- * @method sfGuardUserProfile  setLastName()    Sets the current record's "last_name" value
- * @method sfGuardUserProfile  setBirthDate()   Sets the current record's "birth_date" value
- * @method sfGuardUserProfile  setDescription() Sets the current record's "description" value
- * @method sfGuardUserProfile  setUserpic()     Sets the current record's "userpic" value
  * @method sfGuardUserProfile  setSex()         Sets the current record's "sex" value
- * @method sfGuardUserProfile  setEmail()       Sets the current record's "email" value
+ * @method sfGuardUserProfile  setBirthDate()   Sets the current record's "birth_date" value
+ * @method sfGuardUserProfile  setUserpic()     Sets the current record's "userpic" value
+ * @method sfGuardUserProfile  setDescription() Sets the current record's "description" value
  * @method sfGuardUserProfile  setUser()        Sets the current record's "User" value
  * @method sfGuardUserProfile  setWishes()      Sets the current record's "Wishes" collection
  * @method sfGuardUserProfile  setMyFirends()   Sets the current record's "MyFirends" collection
@@ -95,11 +83,10 @@ abstract class BasesfGuardUserProfile extends sfDoctrineRecord
     public function setTableDefinition()
     {
         $this->setTableName('sf_guard_user_profile');
-        $this->hasColumn('user_id', 'integer', 4, array(
+        $this->hasColumn('user_id', 'integer', null, array(
              'type' => 'integer',
              'notnull' => true,
              'unique' => true,
-             'length' => '4',
              ));
         $this->hasColumn('email_new', 'string', 255, array(
              'type' => 'string',
@@ -127,40 +114,20 @@ abstract class BasesfGuardUserProfile extends sfDoctrineRecord
              'autoincrement' => true,
              'length' => '4',
              ));
-        $this->hasColumn('nick_name', 'string', 50, array(
-             'default' => '',
-             'type' => 'string',
-             'notnull' => true,
-             'length' => '50',
-             ));
-        $this->hasColumn('first_name', 'string', 50, array(
-             'default' => '',
-             'type' => 'string',
-             'length' => '50',
-             ));
-        $this->hasColumn('last_name', 'string', 50, array(
-             'default' => '',
-             'type' => 'string',
-             'length' => '50',
-             ));
-        $this->hasColumn('birth_date', 'date', null, array(
-             'type' => 'date',
-             ));
-        $this->hasColumn('description', 'string', null, array(
-             'type' => 'string',
-             ));
-        $this->hasColumn('userpic', 'string', 255, array(
-             'type' => 'string',
-             'length' => '255',
-             ));
         $this->hasColumn('sex', 'boolean', null, array(
              'default' => 1,
              'type' => 'boolean',
              'notnull' => true,
              ));
-        $this->hasColumn('email', 'string', 255, array(
+        $this->hasColumn('birth_date', 'date', null, array(
+             'type' => 'date',
+             ));
+        $this->hasColumn('userpic', 'string', 255, array(
              'type' => 'string',
              'length' => '255',
+             ));
+        $this->hasColumn('description', 'string', null, array(
+             'type' => 'string',
              ));
 
 
