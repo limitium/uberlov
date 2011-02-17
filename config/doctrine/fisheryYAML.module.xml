@@ -50,17 +50,13 @@
         </attribute>
       </orm-properties>
     </table>
-    <table name="sfGuardUserProfile" visPositionX="184" visPositionY="531" visSizeX="0" visSizeX2="127" visSizeY="0" visSizeY2="185">
+    <table name="sfGuardUserProfile" visPositionX="184" visPositionY="531" visSizeX="0" visSizeX2="127" visSizeY="0" visSizeY2="157">
       <column auto-increment="true" name="id" primary="true" required="true" size="4" type="integer"/>
-      <column default="''" name="nick_name" required="true" size="50" type="string"/>
-      <column default="''" name="first_name" size="50" type="string"/>
-      <column default="''" name="last_name" size="50" type="string"/>
-      <column name="birth_date" type="date"/>
-      <column name="description" type="string"/>
-      <column name="userpic" size="255" type="string"/>
       <column default="1" name="sex" required="true" type="boolean"/>
-      <column name="user_id" size="4" type="integer" unique="true"/>
-      <column name="email" size="255" type="string"/>
+      <column name="birth_date" type="date"/>
+      <column name="userpic" size="255" type="string"/>
+      <column name="description" type="string"/>
+      <column name="user_id" type="integer" unique="true"/>
       <column name="validate_at" type="timestamp"/>
       <column name="validate" size="33" type="string"/>
       <orm-properties>

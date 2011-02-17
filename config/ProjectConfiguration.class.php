@@ -1,6 +1,6 @@
 <?php
 
-require_once 'c:\\WebServers\\symfony-1.4.6\\lib/autoload/sfCoreAutoload.class.php';
+require_once 'd:\\WebServers\\symfony-1.4.3\\lib/autoload/sfCoreAutoload.class.php';
 sfCoreAutoload::register();
 
 class ProjectConfiguration extends sfProjectConfiguration {
@@ -9,7 +9,7 @@ class ProjectConfiguration extends sfProjectConfiguration {
         require_once sfConfig::get('sf_lib_dir') . '/FirePHP/fb.php';
 
         $this->enablePlugins('sfDoctrinePlugin');
-        $this->enablePlugins('sfDoctrineGuardPlugin');
+//        $this->enablePlugins('sfDoctrineGuardPlugin');
         $this->enablePlugins('sfDoctrineActAsTaggablePlugin');
         $this->enablePlugins('sfJqueryReloadedPlugin');
         $this->enablePlugins('sfThumbnailPlugin');

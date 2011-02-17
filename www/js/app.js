@@ -31,6 +31,7 @@ $.extend({
 });
 app = {
     baseUrl:'/ht/www',
+    baseUrl:'',
     csrf: {},
     modules: {},
     
