@@ -9,7 +9,7 @@ class ProjectConfiguration extends sfProjectConfiguration {
         require_once sfConfig::get('sf_lib_dir') . '/FirePHP/fb.php';
 
         $this->enablePlugins('sfDoctrinePlugin');
-//        $this->enablePlugins('sfDoctrineGuardPlugin');
+        $this->enablePlugins('sfDoctrineGuardPlugin');
         $this->enablePlugins('sfDoctrineActAsTaggablePlugin');
         $this->enablePlugins('sfJqueryReloadedPlugin');
         $this->enablePlugins('sfThumbnailPlugin');
