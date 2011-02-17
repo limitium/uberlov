@@ -25,7 +25,7 @@ class sfGuardUserProfile extends PluginsfGuardUserProfile {
     }
 
     public function getRating() {
-        return Vote::getRating($this,'Profile');
+        return Vote::getRating($this, 'Profile');
     }
 
     public function getForce($rating = null) {
@@ -97,10 +97,10 @@ class sfGuardUserProfile extends PluginsfGuardUserProfile {
     public function getInbox() {
         return Doctrine::getTable('Inbox')
                 ->createQuery('i')
+                ->leftJoin('i.Inboxed id')
                 ->leftJoin('i.CommentInbox с')
-                ->leftJoin('i.Inboxed inb')
                 ->where('i.created_by = ?', $this->getId())
-                ->orWhere('inb.profile_id = ?', $this->getId())
+                ->orWhere('id.id = ?', $this->getId())
                 ->execute();
     }
 
@@ -133,13 +133,16 @@ class sfGuardUserProfile extends PluginsfGuardUserProfile {
         return 123;
     }
 
-    public function getNickName(){
+    public function getNickName() {
         return $this->getUser()->getUsername();
     }
-    public function getFirstName(){
+
+    public function getFirstName() {
         return $this->getUser()->getFirstName();
     }
-    public function getLastName(){
+
+    public function getLastName() {
         return $this->getUser()->getLastName();
     }
+
 }
