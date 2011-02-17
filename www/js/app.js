@@ -74,7 +74,7 @@ app = {
     sendData: function(data){
         $.ajax({
             type: 'post',
-            url: this.url(data.url),
+            url: data.url,
             dataType: 'json',
             data: data.data,
             success: function(resp){
