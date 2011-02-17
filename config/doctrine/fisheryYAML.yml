@@ -105,6 +105,9 @@ sfGuardUserProfile:
       type: timestamp
     validate:
       type: string(33)
+    email_new:
+      unique: true
+      type: string(255)
   relations:
     Wishes:
       class: Location

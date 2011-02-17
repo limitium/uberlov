@@ -59,6 +59,7 @@
       <column name="user_id" type="integer" unique="true"/>
       <column name="validate_at" type="timestamp"/>
       <column name="validate" size="33" type="string"/>
+      <column name="email_new" size="255" type="string" unique="true"/>
       <orm-properties>
         <attribute name="actAs">
           <attribute name="Timestampable"/>
