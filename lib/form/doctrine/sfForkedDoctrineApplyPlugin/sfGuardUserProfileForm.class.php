@@ -13,18 +13,17 @@ class sfGuardUserProfileForm extends PluginsfGuardUserProfileForm {
     public function configure() {
         unset($this['user_id'], $this['nick_name'], $this['created_at'], $this['updated_at'], $this['wishes_list'], $this['my_firends_list'], $this['my_firends2_list'], $this['inboxes_list'], $this['read_comment_list']);
 
-        $this->widgetSchema['first_name'] = new sfWidgetFormInputText();
-        $this->widgetSchema['last_name'] = new sfWidgetFormInputText();
-        $this->widgetSchema['birth_date'] = new sfWidgetFormInputText();
+        $this->widgetSchema['first_name'] = new sfWidgetFormInputText(array(), array('maxlength' => 30));
+        $this->widgetSchema['last_name'] = new sfWidgetFormInputText(array(), array('maxlength' => 70));
         $this->widgetSchema['birth_date'] = new formInputDate();
         $this->widgetSchema['description'] = new sfWidgetFormTextarea();
         $this->widgetSchema['userpic'] = new sfWidgetFormInputFile();
         $this->widgetSchema['sex'] = new sfWidgetFormInputCheckbox();
 
-        $this->validatorSchema['first_name'] = new sfValidatorString(array('min_length' => 3, 'max_length' => 50, 'required' => true));
-        $this->validatorSchema['last_name'] = new sfValidatorString(array('min_length' => 3, 'max_length' => 50, 'required' => true));
+        $this->validatorSchema['first_name'] = new sfValidatorApplyFirstname();
+        $this->validatorSchema['last_name'] = new sfValidatorApplyLastname();
         $this->validatorSchema['description'] = new sfValidatorString(array('required' => false));
-        $this->validatorSchema['date'] = new sfValidatorDate(array('date_format' => "/[0-2][0-9]\.[0-1][0-9]\.[0-9]{4}/", 'with_time' => false, 'date_format_error' => 'd.m.Y', 'required' => false));
+        $this->validatorSchema['birth_date'] = new sfValidatorDate(array('date_format' => "/[0-2][0-9]\.[0-1][0-9]\.[0-9]{4}/", 'with_time' => false, 'date_format_error' => 'd.m.Y', 'required' => false));
         $this->validatorSchema['sex'] = new sfValidatorBoolean(array('required' => false));
         $this->validatorSchema['userpic'] = new sfValidatorFile(array(
                     'max_size' => 1024 * 1024,
@@ -48,9 +47,9 @@ class sfGuardUserProfileForm extends PluginsfGuardUserProfileForm {
     }
     public function getStylesheets() {
         return array(
-            '/css/form.css' => 'all'
+            '/css/form.css' => 'screen'
         );
-    }
+}
 
     public function getJavaScripts() {
         return array('/js/formShow.js');

@@ -40,7 +40,7 @@ class inboxActions extends sfActions {
 
         $this->inboxed = Doctrine_Query::create()
                         ->select()
-                        ->from('Profile p')
+                        ->from('sfGuardUserProfile p')
                         ->leftJoin('p.Inboxed i')
                         ->where('i.inbox_id = ?', $this->inbox->getId())
                         ->execute();
@@ -92,7 +92,7 @@ class inboxActions extends sfActions {
         $request->checkCSRFProtection();
 
         $this->forward404Unless($inbox = Doctrine::getTable('Inbox')->find(array($request->getParameter('id'))), sprintf('Object inbox does not exist (%s).', $request->getParameter('id')));
-        $this->forward404Unless($profile = Doctrine::getTable('Profile')->find(array($request->getParameter('profile'))), sprintf('Object inbox does not exist (%s).', $request->getParameter('profile')));
+        $this->forward404Unless($profile = Doctrine::getTable('sfGuardUserProfile')->find(array($request->getParameter('profile'))), sprintf('Object inbox does not exist (%s).', $request->getParameter('profile')));
 
         if ($inbox->isOwner()) {
 
@@ -119,7 +119,7 @@ class inboxActions extends sfActions {
             if ($pids) {
                 $this->added = Doctrine_Query::create()
                                 ->select()
-                                ->from('Profile p')
+                                ->from('sfGuardUserProfile p')
                                 ->whereIn('p.id', $pids)
                                 ->execute();
                 foreach ($this->added as $profile) {
@@ -165,10 +165,11 @@ class inboxActions extends sfActions {
         }
 
         $pids = array();
-        foreach (Doctrine_Query::create()->select()->from('Profile p')
+        foreach (Doctrine_Query::create()->select()->from('sfGuardUserProfile p')
                 ->select('p.id')
                 ->whereIn('p.id', $ids)
-                ->orWhereIn('p.nick_name', $names)
+                ->leftJoin('p.User u')
+                ->orWhereIn('u.username', $names)
                 ->andWhere('p.id != ?', $this->getUser()->getProfile()->getId())
                 ->groupBy('p.id')
                 ->fetchArray() as $p) {

@@ -18,7 +18,7 @@ markerModule.prototype.afterInit = function(){
 }
 markerModule.prototype.initMenu = function(){
     this.menu = {
-        link: $('#new_location',this.mm.addEditItem('<a id="new_location" class="editItem" href=""><img class="mapIcon" src="' + app.url('/images/location.png') + '"/>add location</a>'))
+        link: $('#new_location',this.mm.addEditItem('<a id="new_location" class="editItem" href=""><img class="mapIcon" src="' + app.url('/images/location.png') + '"/>Добавить место</a>'))
         .click(this.startEdit.delegate(this))
     };
 }
@@ -51,7 +51,7 @@ markerModule.prototype.onSaveChange = function(disabled){
     this.barSaveDisabled(disabled);
 }
 markerModule.prototype.barCreate = function(){
-    var bar = this.mm.updateBar('<img class="mapIcon" src="' + app.base('/images/location.png') + '"/><span id="bar_msg"></span></span><input id="bar_save" class="button disabled" type="button" value="save"/><input id="bar_cancel" class="button" type="button" value="cancel"/>');
+    var bar = this.mm.updateBar('<img class="mapIcon" src="' + app.url('/images/location.png') + '"/><span id="bar_msg"></span></span><input id="bar_save" class="button disabled" type="button" value="Сохранить"/><input id="bar_cancel" class="button" type="button" value="Отменить"/>');
     this.bar = {
         msg: $('#bar_msg',bar),
         save: $('#bar_save',bar),
@@ -77,10 +77,10 @@ markerModule.prototype.checkZoom = function(){
     this.listeners.click && gm.event.removeListener(this.listeners.click);
   
     if(this.mm.map.getZoom() >= this.cfg.editableZoom){
-        this.barSetMsg('creating location');
+        this.barSetMsg('Добавление места');
         this.listeners.click = gm.event.addListener(this.mm.map,'click',this.location.moveTo.delegate(this.location));
     }else{
-        this.barSetMsg('creating location, increase zoom lvl');
+        this.barSetMsg('Добавление места, слишком  мелкий масштаб - промахнешься');
     }
 }
 

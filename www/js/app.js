@@ -31,7 +31,7 @@ $.extend({
 });
 app = {
     baseUrl:'/ht/www',
-    baseUrl:'',
+//    baseUrl:'',
     csrf: {},
     modules: {},
     
@@ -101,7 +101,7 @@ app = {
         })
         $.ajax({
             type: 'post',
-            url: this.url(url),
+            url: url,
             dataType: 'html',
             data: data,
             success: function(form){

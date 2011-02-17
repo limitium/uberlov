@@ -11,7 +11,7 @@
 class profileActions extends sfActions {
 
     public function executeShow(sfWebRequest $request) {
-        $this->profile = Doctrine::getTable('Profile')->find(array($request->getParameter('id')));
+        $this->profile = Doctrine::getTable('sfGuardUserProfile')->find(array($request->getParameter('id')));
         $this->forward404Unless($this->profile);
 
         $this->view = $request->getParameter('view');
@@ -55,13 +55,13 @@ class profileActions extends sfActions {
     }
 
     public function executeNew(sfWebRequest $request) {
-        $this->form = new ProfileForm();
+        $this->form = new sfGuardUserProfileForm();
     }
 
     public function executeCreate(sfWebRequest $request) {
         $this->forward404Unless($request->isMethod(sfRequest::POST));
 
-        $this->form = new ProfileForm();
+        $this->form = new sfGuardUserProfileForm();
 
         $this->processForm($request, $this->form);
 
@@ -69,14 +69,16 @@ class profileActions extends sfActions {
     }
 
     public function executeEdit(sfWebRequest $request) {
-        $this->forward404Unless($profile = Doctrine::getTable('Profile')->find(array($request->getParameter('id'))), sprintf('Object profile does not exist (%s).', $request->getParameter('id')));
-        $this->form = new ProfileForm($profile);
+        $this->forward404Unless($profile = Doctrine::getTable('sfGuardUserProfile')->find(array($request->getParameter('id'))), sprintf('Object profile does not exist (%s).', $request->getParameter('id')));
+        $this->form = new sfGuardUserProfileForm($profile);
+        $this->form->setDefault('first_name', $profile->getFirstName());
+        $this->form->setDefault('last_name', $profile->getLastName());
     }
 
     public function executeUpdate(sfWebRequest $request) {
         $this->forward404Unless($request->isMethod(sfRequest::POST) || $request->isMethod(sfRequest::PUT));
-        $this->forward404Unless($profile = Doctrine::getTable('Profile')->find(array($request->getParameter('id'))), sprintf('Object profile does not exist (%s).', $request->getParameter('id')));
-        $this->form = new ProfileForm($profile);
+        $this->forward404Unless($profile = Doctrine::getTable('sfGuardUserProfile')->find(array($request->getParameter('id'))), sprintf('Object profile does not exist (%s).', $request->getParameter('id')));
+        $this->form = new sfGuardUserProfileForm($profile);
 
         $this->processForm($request, $this->form);
 
@@ -88,6 +90,11 @@ class profileActions extends sfActions {
         $form->bind($request->getParameter($form->getName()), $files);
         if ($form->isValid()) {
             $profile = $form->save();
+
+            $profile->getUser()->first_name = $form->getValue('first_name');
+            $profile->getUser()->last_name = $form->getValue('last_name');
+            $profile->getUser()->save();
+
             if ($files['userpic']['name']) {
                 $userpic = new sfThumbnail(32, 32);
                 $userpic->loadFile($files['userpic']['tmp_name']);
