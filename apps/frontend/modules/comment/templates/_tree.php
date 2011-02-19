@@ -5,7 +5,7 @@
 
 
     <?php foreach ($comments as $comment): ?>
-        <?php include_partial('comment/types/' . isset($type) ? $type : 'full', array('comment' => $comment)); ?>
+        <?php include_partial('comment/comment_' . (isset($type) ? $type : 'full'), array('comment' => $comment)); ?>
     <?php endforeach; ?>
 
     <?php include_partial('comment/form', array('form' => $form, 'toward' => $for)) ?>

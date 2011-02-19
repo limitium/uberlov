@@ -30,8 +30,8 @@ $.extend({
     }
 });
 app = {
-//    baseUrl:'/ht/www',
-    baseUrl:'',
+    baseUrl:'/ht/www',
+//    baseUrl:'',
     csrf: {},
     modules: {},
     
