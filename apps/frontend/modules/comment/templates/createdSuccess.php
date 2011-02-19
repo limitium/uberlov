@@ -1,1 +1,1 @@
-<?php include_partial('comment/comment_full', array('comment' => $comment)); ?>
+<?php include_partial('comment/comment_' . (isset($noVote) && $noVote ? 'noVote' : 'full'), array('comment' => $comment)); ?>

@@ -17,8 +17,10 @@ class CommentInboxForm extends BaseCommentInboxForm {
         parent::configure();
 
         $this->widgetSchema['inbox_id'] = new sfWidgetFormInputHidden();
+        $this->widgetSchema['noVote'] = new sfWidgetFormInputHidden();
 
         $this->validatorSchema['inbox_id'] = new sfValidatorDoctrineChoice(array('model' => 'Inbox', 'required' => true));
+        $this->validatorSchema['noVote'] = new sfValidatorBoolean();
     }
 
 }

@@ -22,19 +22,19 @@
     </div>
 
     <?php include_partial('comment/tree', array('for' => 'inbox', 'form' => $form, 'comments' => $comments, 'type' => 'noVote')); ?>
-        </div>
+</div>
 
-        <div id="inboxControl">
-            <a href="" class="inboxDelete" inbox="<?php echo $inbox->getId(); ?>">Удалить инбокс</a>
+<div id="inboxControl">
+    <a href="" class="inboxDelete" inbox="<?php echo $inbox->getId(); ?>">Удалить инбокс</a>
     <?php if ($inbox->isOwner()): ?>
-                Добавить
-                <input id="inboxAdd" type="text" />
+        Добавить
+        <input id="inboxAdd" type="text" />
     <?php endif; ?>
-                Подписчики:
-                <ul>
+    Подписчики:
+    <ul>
         <?php foreach ($inboxed as $profile): ?>
-                    <li profile="<?php echo $profile->getId(); ?>"><?php echo link_to($profile->getNickName(), 'profile/show?id=' . $profile->getId()); ?><?php if ($inbox->isOwner()): ?><a href="" class="delete"> x </a><?php endif; ?></li>
-        <?php endforeach; ?>
+            <li profile="<?php echo $profile->getId(); ?>"><?php echo link_to($profile->getNickName(), 'profile/show?id=' . $profile->getId()); ?><?php if ($inbox->isOwner()): ?><a href="" class="delete"> x </a><?php endif; ?></li>
+            <?php endforeach; ?>
     </ul>
 </div>
 
