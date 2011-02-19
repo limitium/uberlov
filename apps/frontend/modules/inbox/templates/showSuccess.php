@@ -12,7 +12,7 @@
         <div>
             <a href="" id="goToReply">□</a> 
             <?php include_partial('profile/writeBy', array('written' => $inbox)); ?>
-            <a href="" class="commentShowAuthor" author="user<?php echo $inbox->getCreatedBy(); ?>">●</a>
+            <a href="" class="commentShowAuthor" author="user<?php echo $inbox->getCreatedBy()->getId(); ?>">●</a>
         </div>
     </div>
     <div class="tabPanel">
