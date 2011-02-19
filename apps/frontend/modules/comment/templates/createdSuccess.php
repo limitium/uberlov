@@ -1,1 +1,1 @@
-<?php include_partial('comment', array('comment' => $comment)); ?>
+<?php include_partial('comment/comment_full', array('comment' => $comment)); ?>

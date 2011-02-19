@@ -19,6 +19,11 @@
     float: left;
     width: 80%;
 }
+
+#inbox div.qweqwe {
+    padding: 5px 0 5px 20px;    
+}
+
 #inboxControl{
     border: 1px solid #eee;
     float: left;

@@ -1,10 +1,13 @@
+<?php use_helper('text'); ?>
+
 <script type="text/javascript">
     app.csrf.inbox = "<?php echo $csrf; ?>";
 </script>
 <?php use_javascript('inbox'); ?>
+
 <div id="inbox">
     <h2><?php echo $inbox->getName(); ?></h2>
-    <p><?php echo $inbox->getMessage(); ?></p>
+    <div class=qweqwe"><?php echo simple_format_text($inbox->getMessage()); ?></div>
     <div class="meta">
         <div>
             <a href="" id="goToReply">□</a> 

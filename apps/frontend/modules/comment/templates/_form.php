@@ -2,7 +2,7 @@
 <?php use_javascripts_for_form($form) ?>
 
 <div id="newComment">
-    <form action="<?php echo url_for('comment/'.$toward) ?>" method="post" <?php $form->isMultipart() and print 'enctype="multipart/form-data" ' ?>>
+    <form action="<?php echo url_for('comment/' . $toward) ?>" method="post" <?php $form->isMultipart() and print 'enctype="multipart/form-data" ' ?>>
         <table>
             <tfoot>
                 <tr>
