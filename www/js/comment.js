@@ -77,7 +77,7 @@ function comment(){
     });
 
     $('.commentShowAuthor').live('click', function(){
-        $('div[author$=user1]').toggleClass('hightlited');
+        $('div[author$='+$(this).attr('author')+']').toggleClass('hightlited');
         return false;
     });
 
