@@ -71,6 +71,8 @@ class commentActions extends sfActions {
 
             $comment = $form->save();
             $comment->getNode()->insertAsLastChildOf($parent);
+            
+            $this->noVote = $form->getValue('noVote', false);
             return $comment;
         } else {
             foreach ($form->getFormFieldSchema() as $name => $formField) {

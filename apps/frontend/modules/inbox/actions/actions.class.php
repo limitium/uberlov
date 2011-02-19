@@ -37,6 +37,7 @@ class inboxActions extends sfActions {
 
         $this->form = new CommentInboxForm();
         $this->form->setDefault('inbox_id', $this->inbox->getId());
+        $this->form->setDefault('noVote', 1);
 
         $this->inboxed = Doctrine_Query::create()
                         ->select()
