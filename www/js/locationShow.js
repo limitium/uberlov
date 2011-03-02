@@ -78,6 +78,8 @@ locationShow.prototype.addToWishList = function(a){
             handler: function(response){
                 if(response.status == 'ok'){
                     a.removeClass('toWishes').removeClass('adding').addClass('fromWishes').html('убрать');
+                    var counter = $('#myLocationCounter');
+                    counter.html(parseInt(counter.html())+1);
                 }                                
             }
         });
@@ -104,6 +106,8 @@ locationShow.prototype.removeFromWishList = function(a){
             handler: function(response){
                 if(response.status == 'ok'){
                     a.removeClass('fromWishes').removeClass('removing').addClass('toWishes').html('в мои места');
+                    var counter = $('#myLocationCounter');
+                    counter.html(parseInt(counter.html())-1);
                 }
             }
         });
