@@ -22,6 +22,7 @@ class profileActions extends sfActions {
         $this->comments = Doctrine_Query::create()
                         ->from('Comment c')
                         ->where('c.created_by = ? and c.parent > 0', $this->profile->getId())
+                        ->andWhere('c.inbox_id is null')
                         ->execute();
 
         $this->profits = Doctrine_Query::create()
