@@ -10,7 +10,7 @@
  */
 class eventActions extends sfActions
 {
-  public function executeIndex(sfWebRequest $request)
+  public function executeList(sfWebRequest $request)
   {
     $this->fish_events = Doctrine::getTable('FishEvent')
       ->createQuery('a')
