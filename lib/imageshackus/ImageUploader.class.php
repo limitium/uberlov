@@ -13,10 +13,10 @@ class ImageUploader extends ImageShackUploader {
 
     public function login() {
         $data = http_build_query(array(
-                    'format' => 'json',
-                    'username' => $this->username,
-                    'password' => $this->password,
-                    'stay_logged_in' => 'true'));
+            'format' => 'json',
+            'username' => $this->username,
+            'password' => $this->password,
+            'stay_logged_in' => 'true'));
 
         $ch = curl_init($this->authUrl);
 
@@ -31,8 +31,8 @@ class ImageUploader extends ImageShackUploader {
         $info = curl_getinfo($ch);
         curl_close($ch);
         $cookie;
-        if (($pos = strpos($cont, 'myimages:')) > 0) {
-            $cookie = substr($cont, $pos + 10, 32);
+        if (($pos = strpos($cont, '"myimages":')) > 0) {
+            $cookie = substr($cont, $pos + 12, 32);
         }
         if (strlen($cookie) == 32) {
             $this->cookie = $cookie;
@@ -46,12 +46,12 @@ class ImageUploader extends ImageShackUploader {
         if (!$this->cookie) {
             $this->login();
         }
-        $response = parent::upload($file, '1280x1280', true, '', true,'image/jpeg');
+        $response = parent::upload($file, '1280x1280', true, '', true, 'image/jpeg');
         if (get_class($response) == 'SimpleXMLElement') {
             if (isset($response->links)) {
                 return (object) array('file' => $response->files->image->__toString(),
-            'image' => $response->links->image_link->__toString(),
-            'thumb' => $response->links->thumb_link->__toString());
+                    'image' => $response->links->image_link->__toString(),
+                    'thumb' => $response->links->thumb_link->__toString());
             }
         }
         throw new Exception('Upload image fail');
