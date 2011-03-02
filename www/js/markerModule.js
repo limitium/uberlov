@@ -158,6 +158,7 @@ ht_location_e.prototype.getGeo = function(loader){
         self.loading.address = false;
         if (status == gm.GeocoderStatus.OK) {
             var data = result[0];
+            fb(data);
             if (data) {
                 $.each(data.address_components, function(){
                     if(self.address[this.types[0]] == ''){

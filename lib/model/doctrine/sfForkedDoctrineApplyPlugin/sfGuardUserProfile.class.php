@@ -109,10 +109,11 @@ class sfGuardUserProfile extends PluginsfGuardUserProfile {
      * @return Doctrine_Collection
      */
     public function getLocation() {
-        //@todo: merge with wish list
         return Doctrine::getTable('Location')
                 ->createQuery('l')
+                ->leftJoin('l.WishList w')
                 ->where('l.created_by = ?', $this->getId())
+                ->orWhere('w.profile_id = ?', $this->getId())
                 ->execute();
     }
 

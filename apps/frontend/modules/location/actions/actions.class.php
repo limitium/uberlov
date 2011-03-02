@@ -10,13 +10,6 @@
  */
 class locationActions extends sfActions {
 
-    public function executeIndex(sfWebRequest $request) {
-        var_dump($this->getUser()->getProfile()->getForce());
-        $this->location_list = Doctrine::getTable('Location')
-                        ->createQuery('a')
-                        ->execute();
-    }
-
     public function executeMap(sfWebRequest $request) {
         $this->location = Doctrine::getTable('Location')->find($request->getParameter('id'));
         $this->forward404Unless($this->location);
@@ -50,6 +43,10 @@ class locationActions extends sfActions {
         $this->form = new CommentLocationForm();
 
         $this->form->setDefault('location_id', $this->location->getId());
+    }
+
+    public function executeMy(sfWebRequest $request) {
+        $this->locations = $this->getUser()->getProfile()->getLocation();
     }
 
     public function executeNew(sfWebRequest $request) {
