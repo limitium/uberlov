@@ -1,4 +1,6 @@
 <?php use_helper('text'); ?>
+<?php use_javascript('voting'); ?>
+
 <div class="sectionMenuShow">
     <ul>
         <?php foreach ($talk->getSections() as $section): ?>
@@ -22,7 +24,7 @@
             </ul>
         </div>
         <div class="meta">
-            <div><?php use_javascript('voting'); ?>
+            <div>
             <?php include_partial('vote/vote', array('obj' => $talk)); ?>
                 <a href="" id="goToReply">□</a>
             <?php include_partial('profile/writeBy', array('written' => $talk)); ?>
