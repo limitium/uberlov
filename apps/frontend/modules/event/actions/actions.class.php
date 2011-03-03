@@ -19,8 +19,13 @@ class eventActions extends sfActions {
     }
 
     public function executeShow(sfWebRequest $request) {
-        $this->fish_event = Doctrine::getTable('FishEvent')->find(array($request->getParameter('id')));
-        $this->forward404Unless($this->fish_event);
+        $this->event = Doctrine::getTable('FishEvent')->find(array($request->getParameter('id')));
+        $this->forward404Unless($this->event);
+
+        $this->comments = Comment::getFor($this->event);
+
+        $this->form = new CommentFishEventForm();
+        $this->form->setDefault('fishevent_id', $this->event->getId());
     }
 
     public function executeNew(sfWebRequest $request) {
