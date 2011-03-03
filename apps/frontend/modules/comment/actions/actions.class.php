@@ -25,6 +25,10 @@ class commentActions extends sfActions {
     public function executeProfit(sfWebRequest $request) {
         $this->createComment($request, 'profit');
     }
+    
+    public function executeFishEvent(sfWebRequest $request) {
+        $this->createComment($request, 'fishEvent');
+    }
 
     private function createComment(sfWebRequest $request, $toward) {
         $this->forward404Unless($request->isMethod(sfRequest::POST));

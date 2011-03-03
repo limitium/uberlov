@@ -1,26 +1,36 @@
-<table>
-  <tbody>
-    <tr>
-      <th>Id:</th>
-      <td><?php echo $fish_event->getId() ?></td>
-    </tr>
-    <tr>
-      <th>Name:</th>
-      <td><?php echo $fish_event->getName() ?></td>
-    </tr>
-    <tr>
-      <th>Description:</th>
-      <td><?php echo $fish_event->getDescription() ?></td>
-    </tr>
-    <tr>
-      <th>Location:</th>
-      <td><?php echo $fish_event->getLocationId() ?></td>
-    </tr>
-  </tbody>
-</table>
+<?php use_helper('text'); ?>
 
-<hr />
 
-<a href="<?php echo url_for('event/edit?id='.$fish_event->getId()) ?>">Edit</a>
-&nbsp;
-<a href="<?php echo url_for('event/index') ?>">List</a>
+<?php include_partial('location/location', array('location' => $event->getLocation())) ?>
+<div class="eventFull">
+    <h2><?php echo $event->getDateTimeObject('date')->format('d.m.Y') ?> <?php echo link_to($event->getName(), 'event/show?id=' . $event->getId()); ?></h2>
+
+    <div class="desctiption">
+        <h3>Описание:</h3>
+        <?php echo simple_format_text($event->getDescription()); ?>
+    </div>
+    <div class="result">
+        <h3>Результаты:</h3>
+        <?php echo simple_format_text($event->getDescription()); ?>
+    </div> 
+    <div class="users">
+        <h3>Участники:</h3>
+        <?php echo simple_format_text($event->getDescription()); ?>
+    </div>    
+    <div class="rules">
+        <h3>Регламент:</h3>
+        <?php echo simple_format_text($event->getDescription()); ?>
+    </div>
+    <div class="meta">
+        <?php include_partial('vote/vote', array('obj' => $event)); ?>
+        <?php //include_partial('profile/addBy', array('added' => $event)); ?>
+    </div>
+</div>
+
+<div class="tabPanel">
+    <ul>
+        <li><span href="#" id="tabComments" class="selected">Комментарии (<i id="commentCounter"><?php echo sizeof($comments); ?></i>)</span></li>
+    </ul>
+</div>
+
+<?php include_partial('comment/tree', array('for' => 'fishEvent', 'form' => $form, 'comments' => $comments)); ?>
