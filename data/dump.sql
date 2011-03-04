@@ -147,14 +147,19 @@ CREATE TABLE `fish_event` (
   `date` date NOT NULL,
   `name` varchar(50) NOT NULL,
   `description` text NOT NULL,
+  `rules` text,
   `location_id` int(11) NOT NULL,
-  `created_by` bigint(20) NOT NULL,
-  `updated_by` bigint(20) NOT NULL,
+  `created_by` int(11) NOT NULL,
+  `updated_by` int(11) NOT NULL,
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL,
   PRIMARY KEY (`id`),
   KEY `location_id_idx` (`location_id`),
-  CONSTRAINT `fish_event_location_id_location_id` FOREIGN KEY (`location_id`) REFERENCES `location` (`id`)
+  KEY `created_by_idx` (`created_by`),
+  KEY `updated_by_idx` (`updated_by`),
+  CONSTRAINT `fish_event_created_by_sf_guard_user_profile_id` FOREIGN KEY (`created_by`) REFERENCES `sf_guard_user_profile` (`id`),
+  CONSTRAINT `fish_event_location_id_location_id` FOREIGN KEY (`location_id`) REFERENCES `location` (`id`),
+  CONSTRAINT `fish_event_updated_by_sf_guard_user_profile_id` FOREIGN KEY (`updated_by`) REFERENCES `sf_guard_user_profile` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `fish_event` */
@@ -164,11 +169,12 @@ CREATE TABLE `fish_event` (
 DROP TABLE IF EXISTS `friend`;
 
 CREATE TABLE `friend` (
-  `source_profile_id` int(11) NOT NULL DEFAULT '0',
-  `related_profile_id` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`source_profile_id`,`related_profile_id`),
-  KEY `friend_related_profile_id_sf_guard_user_profile_id` (`related_profile_id`),
-  CONSTRAINT `friend_related_profile_id_sf_guard_user_profile_id` FOREIGN KEY (`related_profile_id`) REFERENCES `sf_guard_user_profile` (`id`)
+  `requester_id` int(11) NOT NULL DEFAULT '0',
+  `accepter_id` int(11) NOT NULL DEFAULT '0',
+  `accepted` tinyint(1) DEFAULT NULL,
+  PRIMARY KEY (`requester_id`,`accepter_id`),
+  KEY `friend_accepter_id_sf_guard_user_profile_id` (`accepter_id`),
+  CONSTRAINT `friend_accepter_id_sf_guard_user_profile_id` FOREIGN KEY (`accepter_id`) REFERENCES `sf_guard_user_profile` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `friend` */

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="no" ?>
 <orm-designer version="1.3.1.332">
 
-  <module import-format="DoctrineYml" import-path="fisheryYAML.yml" name="ht" visBkColor="16380923" visSizeX="227" visSizeX2="1223" visSizeY="51" visSizeY2="836">
+  <module import-format="DoctrineYml" import-path="fisheryYAML.yml" name="ht" visBkColor="16380923" visSizeX="227" visSizeX2="1327" visSizeY="51" visSizeY2="836">
     <table name="Location" visPositionX="205" visPositionY="117" visSizeX="0" visSizeX2="154" visSizeY="0" visSizeY2="185">
       <column auto-increment="true" name="id" primary="true" size="4" type="integer"/>
       <column default="''" name="name" required="true" size="50" type="string"/>
@@ -175,7 +175,7 @@
         </attribute>
       </orm-properties>
     </table>
-    <table name="CommentLocation" visPositionX="33" visPositionY="218" visSizeX="0" visSizeX2="120" visSizeY="0" visSizeY2="31">
+    <table name="CommentLocation" visPositionX="34" visPositionY="228" visSizeX="0" visSizeX2="120" visSizeY="0" visSizeY2="31">
       <column name="location_id" size="4" type="integer"/>
       <orm-properties>
         <attribute name="inheritance">
@@ -204,10 +204,6 @@
     <table name="WishList" visPositionX="334" visPositionY="508" visSizeX="0" visSizeX2="120" visSizeY="0" visSizeY2="60">
       <column name="profile_id" primary="true" required="true" size="4" type="integer"/>
       <column name="location_id" primary="true" required="true" size="4" type="integer"/>
-    </table>
-    <table name="Friend" visPositionX="114" visPositionY="750" visSizeX="0" visSizeX2="212" visSizeY="0" visSizeY2="60">
-      <column name="source_profile_id" primary="true" required="true" size="4" type="integer"/>
-      <column name="related_profile_id" primary="true" required="true" size="4" type="integer"/>
     </table>
     <table name="Vote" visPositionX="375" visPositionY="752" visSizeX="0" visSizeX2="99" visSizeY="0" visSizeY2="45">
       <column name="value" required="true" size="4" type="integer"/>
@@ -412,15 +408,40 @@
         </attribute>
       </orm-properties>
     </table>
-    <table name="FishEvent" visPositionX="26" visPositionY="78" visSizeX="0" visSizeX2="120" visSizeY="0" visSizeY2="87">
+    <table name="FishEvent" visPositionX="-8" visPositionY="47" visSizeX="0" visSizeX2="120" visSizeY="0" visSizeY2="101">
       <column auto-increment="true" name="id" primary="true" required="true" size="4" type="integer"/>
       <column name="date" required="true" type="date"/>
       <column name="name" required="true" size="50" type="string"/>
       <column name="description" required="true" type="string"/>
+      <column name="rules" type="string"/>
       <column name="location_id" required="true" size="4" type="integer"/>
       <orm-properties>
         <attribute name="actAs">
-          <attribute name="Blameable"/>
+          <attribute name="Blameable">
+            <attribute name="listener">BlameableFishery</attribute>
+            <attribute name="relations">
+              <attribute name="created">
+                <attribute name="class">sfGuardUserProfile</attribute>
+                <attribute name="disabled">false</attribute>
+                <attribute name="foreign">id</attribute>
+              </attribute>
+              <attribute name="updated">
+                <attribute name="class">sfGuardUserProfile</attribute>
+                <attribute name="disabled">false</attribute>
+                <attribute name="foreign">id</attribute>
+              </attribute>
+            </attribute>
+            <attribute name="columns">
+              <attribute name="created">
+                <attribute name="length">4</attribute>
+                <attribute name="type">int</attribute>
+              </attribute>
+              <attribute name="updated">
+                <attribute name="length">4</attribute>
+                <attribute name="type">int</attribute>
+              </attribute>
+            </attribute>
+          </attribute>
           <attribute name="Timestampable"/>
         </attribute>
       </orm-properties>
@@ -436,7 +457,7 @@
         </attribute>
       </orm-properties>
     </table>
-    <table name="CommentFishEvent" visPositionX="-108" visPositionY="216" visSizeX="0" visSizeX2="131" visSizeY="0" visSizeY2="31">
+    <table name="CommentFishEvent" visPositionX="-109" visPositionY="213" visSizeX="0" visSizeX2="131" visSizeY="0" visSizeY2="31">
       <column name="FishEvent_id" size="4" type="integer"/>
       <orm-properties>
         <attribute name="inheritance">
@@ -491,6 +512,11 @@
         </attribute>
       </orm-properties>
     </table>
+    <table name="Friend" visPositionX="130" visPositionY="744" visSizeX="0" visSizeX2="212" visSizeY="0" visSizeY2="74">
+      <column name="requester_id" primary="true" required="true" size="4" type="integer"/>
+      <column name="accepter_id" primary="true" required="true" size="4" type="integer"/>
+      <column name="accepted" type="boolean"/>
+    </table>
     <orm-properties>
       <attribute name="options">
         <attribute name="type">INNODB</attribute>
@@ -542,12 +568,6 @@
     </foreign-key>
     <foreign-key caption="Location WishList" from="WishList" name="FK_WishList_Location_id" to="Location" visCenterX="0" visCenterY="3" visShowCaption="0">
       <foreign-key-column from="location_id" to="id"/>
-    </foreign-key>
-    <foreign-key caption="Profile Friends" from="Friend" name="FK_Friends_Profile_id" to="sfGuardUserProfile" visShowCaption="0">
-      <foreign-key-column from="source_profile_id" to="id"/>
-    </foreign-key>
-    <foreign-key caption="Profile Friends" from="Friend" name="FK_Friends_Profile_id2" to="sfGuardUserProfile" visCaption1X="1" visCaption1Y="-2" visCenterX="0" visCenterY="0" visShowCaption="0">
-      <foreign-key-column from="related_profile_id" to="id"/>
     </foreign-key>
     <foreign-key from="Vote" name="FK_Vote_Profile" to="sfGuardUserProfile">
       <foreign-key-column from="voter" to="id"/>
@@ -625,13 +645,15 @@
     <foreign-key caption="Location PhotoLocation" from="PhotoLocation" name="FK_PhotoLocation_Location_id" to="Location" visShowCaption="0">
       <foreign-key-column from="location_id" to="id"/>
     </foreign-key>
+    <foreign-key caption="sfGuardUserProfile Friend" from="Friend" name="FK_Friend_sfGuardUserProfile_id" to="sfGuardUserProfile" visCaption1X="-2" visCaption1Y="0" visCenterX="0" visCenterY="0" visShowCaption="0">
+      <foreign-key-column from="requester_id" to="id"/>
+    </foreign-key>
+    <foreign-key caption="sfGuardUserProfile Friend" from="Friend" name="FK_Friend_sfGuardUserProfile_id2" to="sfGuardUserProfile" visCaption1X="0" visCaption1Y="-1" visCenterX="0" visCenterY="0" visShowCaption="0">
+      <foreign-key-column from="accepter_id" to="id"/>
+    </foreign-key>
     <many-to-many-relation mn-table="WishList">
       <many-to-many-foreign-key foreign-key="FK_WishList_Profile_id" relation-alias="Wishers"/>
       <many-to-many-foreign-key foreign-key="FK_WishList_Location_id" relation-alias="Wishes"/>
-    </many-to-many-relation>
-    <many-to-many-relation mn-table="Friend">
-      <many-to-many-foreign-key foreign-key="FK_Friends_Profile_id" relation-alias="MyFirends"/>
-      <many-to-many-foreign-key foreign-key="FK_Friends_Profile_id2" relation-alias="MyFirends2"/>
     </many-to-many-relation>
     <many-to-many-relation mn-table="Inboxed">
       <many-to-many-foreign-key foreign-key="FK_Inboxed_Inbox_id" relation-alias="Inboxes"/>
@@ -640,6 +662,10 @@
     <many-to-many-relation mn-table="ReadComment">
       <many-to-many-foreign-key foreign-key="FK_Read_Profile_id" relation-alias=""/>
       <many-to-many-foreign-key foreign-key="FK_Read_Comment_id" relation-alias="ReadComment"/>
+    </many-to-many-relation>
+    <many-to-many-relation mn-table="Friend">
+      <many-to-many-foreign-key foreign-key="FK_Friend_sfGuardUserProfile_id" relation-alias="Requester"/>
+      <many-to-many-foreign-key foreign-key="FK_Friend_sfGuardUserProfile_id2" relation-alias="Accepter"/>
     </many-to-many-relation>
   </module>
 
