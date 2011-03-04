@@ -13,9 +13,11 @@ abstract class BaseFriendFormFilter extends BaseFormFilterDoctrine
   public function setup()
   {
     $this->setWidgets(array(
+      'accepted'     => new sfWidgetFormChoice(array('choices' => array('' => 'yes or no', 1 => 'yes', 0 => 'no'))),
     ));
 
     $this->setValidators(array(
+      'accepted'     => new sfValidatorChoice(array('required' => false, 'choices' => array('', 1, 0))),
     ));
 
     $this->widgetSchema->setNameFormat('friend_filters[%s]');
@@ -35,8 +37,9 @@ abstract class BaseFriendFormFilter extends BaseFormFilterDoctrine
   public function getFields()
   {
     return array(
-      'source_profile_id'  => 'Number',
-      'related_profile_id' => 'Number',
+      'requester_id' => 'Number',
+      'accepter_id'  => 'Number',
+      'accepted'     => 'Boolean',
     );
   }
 }

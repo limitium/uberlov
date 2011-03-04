@@ -16,15 +16,15 @@
  * @property string $description
  * @property sfGuardUser $User
  * @property Doctrine_Collection $Wishes
- * @property Doctrine_Collection $MyFirends
- * @property Doctrine_Collection $MyFirends2
  * @property Doctrine_Collection $Inboxes
  * @property Doctrine_Collection $ReadComment
+ * @property Doctrine_Collection $Requester
+ * @property Doctrine_Collection $Accepter
  * @property Doctrine_Collection $WishList
- * @property Doctrine_Collection $Friend
  * @property Doctrine_Collection $Votes
  * @property Doctrine_Collection $VoteProfile
  * @property Doctrine_Collection $Inboxed
+ * @property Doctrine_Collection $Friend
  * 
  * @method integer             getUserId()      Returns the current record's "user_id" value
  * @method string              getEmailNew()    Returns the current record's "email_new" value
@@ -37,15 +37,15 @@
  * @method string              getDescription() Returns the current record's "description" value
  * @method sfGuardUser         getUser()        Returns the current record's "User" value
  * @method Doctrine_Collection getWishes()      Returns the current record's "Wishes" collection
- * @method Doctrine_Collection getMyFirends()   Returns the current record's "MyFirends" collection
- * @method Doctrine_Collection getMyFirends2()  Returns the current record's "MyFirends2" collection
  * @method Doctrine_Collection getInboxes()     Returns the current record's "Inboxes" collection
  * @method Doctrine_Collection getReadComment() Returns the current record's "ReadComment" collection
+ * @method Doctrine_Collection getRequester()   Returns the current record's "Requester" collection
+ * @method Doctrine_Collection getAccepter()    Returns the current record's "Accepter" collection
  * @method Doctrine_Collection getWishList()    Returns the current record's "WishList" collection
- * @method Doctrine_Collection getFriend()      Returns the current record's "Friend" collection
  * @method Doctrine_Collection getVotes()       Returns the current record's "Votes" collection
  * @method Doctrine_Collection getVoteProfile() Returns the current record's "VoteProfile" collection
  * @method Doctrine_Collection getInboxed()     Returns the current record's "Inboxed" collection
+ * @method Doctrine_Collection getFriend()      Returns the current record's "Friend" collection
  * @method sfGuardUserProfile  setUserId()      Sets the current record's "user_id" value
  * @method sfGuardUserProfile  setEmailNew()    Sets the current record's "email_new" value
  * @method sfGuardUserProfile  setValidateAt()  Sets the current record's "validate_at" value
@@ -57,15 +57,15 @@
  * @method sfGuardUserProfile  setDescription() Sets the current record's "description" value
  * @method sfGuardUserProfile  setUser()        Sets the current record's "User" value
  * @method sfGuardUserProfile  setWishes()      Sets the current record's "Wishes" collection
- * @method sfGuardUserProfile  setMyFirends()   Sets the current record's "MyFirends" collection
- * @method sfGuardUserProfile  setMyFirends2()  Sets the current record's "MyFirends2" collection
  * @method sfGuardUserProfile  setInboxes()     Sets the current record's "Inboxes" collection
  * @method sfGuardUserProfile  setReadComment() Sets the current record's "ReadComment" collection
+ * @method sfGuardUserProfile  setRequester()   Sets the current record's "Requester" collection
+ * @method sfGuardUserProfile  setAccepter()    Sets the current record's "Accepter" collection
  * @method sfGuardUserProfile  setWishList()    Sets the current record's "WishList" collection
- * @method sfGuardUserProfile  setFriend()      Sets the current record's "Friend" collection
  * @method sfGuardUserProfile  setVotes()       Sets the current record's "Votes" collection
  * @method sfGuardUserProfile  setVoteProfile() Sets the current record's "VoteProfile" collection
  * @method sfGuardUserProfile  setInboxed()     Sets the current record's "Inboxed" collection
+ * @method sfGuardUserProfile  setFriend()      Sets the current record's "Friend" collection
  * 
  * @package    FISHERY
  * @subpackage model
@@ -142,16 +142,6 @@ abstract class BasesfGuardUserProfile extends sfDoctrineRecord
              'local' => 'profile_id',
              'foreign' => 'location_id'));
 
-        $this->hasMany('sfGuardUserProfile as MyFirends', array(
-             'refClass' => 'Friend',
-             'local' => 'related_profile_id',
-             'foreign' => 'source_profile_id'));
-
-        $this->hasMany('sfGuardUserProfile as MyFirends2', array(
-             'refClass' => 'Friend',
-             'local' => 'source_profile_id',
-             'foreign' => 'related_profile_id'));
-
         $this->hasMany('Inbox as Inboxes', array(
              'refClass' => 'Inboxed',
              'local' => 'profile_id',
@@ -162,13 +152,19 @@ abstract class BasesfGuardUserProfile extends sfDoctrineRecord
              'local' => 'profile_id',
              'foreign' => 'comment_id'));
 
+        $this->hasMany('sfGuardUserProfile as Requester', array(
+             'refClass' => 'Friend',
+             'local' => 'accepter_id',
+             'foreign' => 'requester_id'));
+
+        $this->hasMany('sfGuardUserProfile as Accepter', array(
+             'refClass' => 'Friend',
+             'local' => 'requester_id',
+             'foreign' => 'accepter_id'));
+
         $this->hasMany('WishList', array(
              'local' => 'id',
              'foreign' => 'profile_id'));
-
-        $this->hasMany('Friend', array(
-             'local' => 'id',
-             'foreign' => 'related_profile_id'));
 
         $this->hasMany('Vote as Votes', array(
              'local' => 'id',
@@ -181,6 +177,10 @@ abstract class BasesfGuardUserProfile extends sfDoctrineRecord
         $this->hasMany('Inboxed', array(
              'local' => 'id',
              'foreign' => 'profile_id'));
+
+        $this->hasMany('Friend', array(
+             'local' => 'id',
+             'foreign' => 'accepter_id'));
 
         $timestampable0 = new Doctrine_Template_Timestampable();
         $this->actAs($timestampable0);

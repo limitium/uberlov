@@ -9,8 +9,8 @@ CREATE TABLE comment (id INT AUTO_INCREMENT, parent INT, message TEXT NOT NULL, 
 CREATE TABLE comment (id INT AUTO_INCREMENT, parent INT, message TEXT NOT NULL, toward VARCHAR(255), location_id INT, profit_id INT, inbox_id INT, talk_id INT, fishevent_id INT, created_by INT NOT NULL, updated_by INT NOT NULL, created_at DATETIME NOT NULL, updated_at DATETIME NOT NULL, root_id BIGINT, lft INT, rgt INT, level SMALLINT, INDEX created_by_idx (created_by), INDEX updated_by_idx (updated_by), INDEX talk_id_idx (talk_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci ENGINE = INNODB;
 CREATE TABLE country (id INT AUTO_INCREMENT, name VARCHAR(255) NOT NULL UNIQUE, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci ENGINE = INNODB;
 CREATE TABLE fish (id INT AUTO_INCREMENT, name VARCHAR(100) NOT NULL UNIQUE, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci ENGINE = INNODB;
-CREATE TABLE fish_event (id INT AUTO_INCREMENT, date DATE NOT NULL, name VARCHAR(50) NOT NULL, description TEXT NOT NULL, location_id INT NOT NULL, created_by BIGINT NOT NULL, updated_by BIGINT NOT NULL, created_at DATETIME NOT NULL, updated_at DATETIME NOT NULL, INDEX location_id_idx (location_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci ENGINE = INNODB;
-CREATE TABLE friend (source_profile_id INT, related_profile_id INT, PRIMARY KEY(source_profile_id, related_profile_id)) DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci ENGINE = INNODB;
+CREATE TABLE fish_event (id INT AUTO_INCREMENT, date DATE NOT NULL, name VARCHAR(50) NOT NULL, description TEXT NOT NULL, rules TEXT, location_id INT NOT NULL, created_by INT NOT NULL, updated_by INT NOT NULL, created_at DATETIME NOT NULL, updated_at DATETIME NOT NULL, INDEX location_id_idx (location_id), INDEX created_by_idx (created_by), INDEX updated_by_idx (updated_by), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci ENGINE = INNODB;
+CREATE TABLE friend (requester_id INT, accepter_id INT, accepted TINYINT(1), PRIMARY KEY(requester_id, accepter_id)) DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci ENGINE = INNODB;
 CREATE TABLE inbox (id INT AUTO_INCREMENT, name VARCHAR(50) NOT NULL, message TEXT NOT NULL, created_by INT NOT NULL, updated_by INT NOT NULL, created_at DATETIME NOT NULL, updated_at DATETIME NOT NULL, INDEX created_by_idx (created_by), INDEX updated_by_idx (updated_by), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci ENGINE = INNODB;
 CREATE TABLE inboxed (inbox_id INT, profile_id INT, PRIMARY KEY(inbox_id, profile_id)) DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci ENGINE = INNODB;
 CREATE TABLE locality (id INT AUTO_INCREMENT, name VARCHAR(255) NOT NULL UNIQUE, area_high_id INT, INDEX area_high_id_idx (area_high_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci ENGINE = INNODB;
@@ -61,8 +61,10 @@ ALTER TABLE comment ADD CONSTRAINT comment_inbox_id_inbox_id FOREIGN KEY (inbox_
 ALTER TABLE comment ADD CONSTRAINT comment_location_id_location_id FOREIGN KEY (location_id) REFERENCES location(id);
 ALTER TABLE comment ADD CONSTRAINT comment_profit_id_profit_id FOREIGN KEY (profit_id) REFERENCES profit(id);
 ALTER TABLE comment ADD CONSTRAINT comment_talk_id_talk_id FOREIGN KEY (talk_id) REFERENCES talk(id);
+ALTER TABLE fish_event ADD CONSTRAINT fish_event_updated_by_sf_guard_user_profile_id FOREIGN KEY (updated_by) REFERENCES sf_guard_user_profile(id);
 ALTER TABLE fish_event ADD CONSTRAINT fish_event_location_id_location_id FOREIGN KEY (location_id) REFERENCES location(id);
-ALTER TABLE friend ADD CONSTRAINT friend_related_profile_id_sf_guard_user_profile_id FOREIGN KEY (related_profile_id) REFERENCES sf_guard_user_profile(id);
+ALTER TABLE fish_event ADD CONSTRAINT fish_event_created_by_sf_guard_user_profile_id FOREIGN KEY (created_by) REFERENCES sf_guard_user_profile(id);
+ALTER TABLE friend ADD CONSTRAINT friend_accepter_id_sf_guard_user_profile_id FOREIGN KEY (accepter_id) REFERENCES sf_guard_user_profile(id);
 ALTER TABLE inbox ADD CONSTRAINT inbox_updated_by_sf_guard_user_profile_id FOREIGN KEY (updated_by) REFERENCES sf_guard_user_profile(id);
 ALTER TABLE inbox ADD CONSTRAINT inbox_created_by_sf_guard_user_profile_id FOREIGN KEY (created_by) REFERENCES sf_guard_user_profile(id);
 ALTER TABLE inboxed ADD CONSTRAINT inboxed_profile_id_sf_guard_user_profile_id FOREIGN KEY (profile_id) REFERENCES sf_guard_user_profile(id);

@@ -114,16 +114,6 @@ sfGuardUserProfile:
       refClass: WishList
       local: profile_id
       foreign: location_id
-    MyFirends:
-      class: sfGuardUserProfile
-      refClass: Friend
-      local: related_profile_id
-      foreign: source_profile_id
-    MyFirends2:
-      class: sfGuardUserProfile
-      refClass: Friend
-      local: source_profile_id
-      foreign: related_profile_id
     Inboxes:
       class: Inbox
       refClass: Inboxed
@@ -134,6 +124,16 @@ sfGuardUserProfile:
       refClass: ReadComment
       local: profile_id
       foreign: comment_id
+    Requester:
+      class: sfGuardUserProfile
+      refClass: Friend
+      local: accepter_id
+      foreign: requester_id
+    Accepter:
+      class: sfGuardUserProfile
+      refClass: Friend
+      local: requester_id
+      foreign: accepter_id
 Fish:
   columns:
     id:
@@ -345,23 +345,6 @@ WishList:
       foreign: id
     Location:
       local: location_id
-      foreign: id
-Friend:
-  columns:
-    source_profile_id:
-      primary: true
-      type: integer(4)
-      notnull: true
-    related_profile_id:
-      primary: true
-      type: integer(4)
-      notnull: true
-  relations:
-    sfGuardUserProfile:
-      local: source_profile_id
-      foreign: id
-    sfGuardUserProfile:
-      local: related_profile_id
       foreign: id
 Vote:
   columns:
@@ -692,7 +675,24 @@ VoteTalk:
       foreign: id
 FishEvent:
   actAs:
-    Blameable: 
+    Blameable:
+      listener: BlameableFishery
+      relations:
+        created:
+          class: sfGuardUserProfile
+          disabled: false
+          foreign: id
+        updated:
+          class: sfGuardUserProfile
+          disabled: false
+          foreign: id
+      columns:
+        created:
+          length: 4
+          type: int
+        updated:
+          length: 4
+          type: int
     Timestampable: 
   columns:
     id:
@@ -709,6 +709,8 @@ FishEvent:
     description:
       type: string
       notnull: true
+    rules:
+      type: string
     location_id:
       type: integer(4)
       notnull: true
@@ -782,6 +784,25 @@ PhotoLocation:
   relations:
     Location:
       local: location_id
+      foreign: id
+Friend:
+  columns:
+    requester_id:
+      primary: true
+      type: integer(4)
+      notnull: true
+    accepter_id:
+      primary: true
+      type: integer(4)
+      notnull: true
+    accepted:
+      type: boolean
+  relations:
+    sfGuardUserProfile:
+      local: requester_id
+      foreign: id
+    sfGuardUserProfile:
+      local: accepter_id
       foreign: id
 options:
   type: INNODB

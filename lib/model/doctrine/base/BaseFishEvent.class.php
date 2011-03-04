@@ -9,6 +9,7 @@
  * @property date $date
  * @property string $name
  * @property string $description
+ * @property string $rules
  * @property integer $location_id
  * @property Location $Location
  * @property Doctrine_Collection $VoteFishEvent
@@ -18,6 +19,7 @@
  * @method date                getDate()             Returns the current record's "date" value
  * @method string              getName()             Returns the current record's "name" value
  * @method string              getDescription()      Returns the current record's "description" value
+ * @method string              getRules()            Returns the current record's "rules" value
  * @method integer             getLocationId()       Returns the current record's "location_id" value
  * @method Location            getLocation()         Returns the current record's "Location" value
  * @method Doctrine_Collection getVoteFishEvent()    Returns the current record's "VoteFishEvent" collection
@@ -26,6 +28,7 @@
  * @method FishEvent           setDate()             Sets the current record's "date" value
  * @method FishEvent           setName()             Sets the current record's "name" value
  * @method FishEvent           setDescription()      Sets the current record's "description" value
+ * @method FishEvent           setRules()            Sets the current record's "rules" value
  * @method FishEvent           setLocationId()       Sets the current record's "location_id" value
  * @method FishEvent           setLocation()         Sets the current record's "Location" value
  * @method FishEvent           setVoteFishEvent()    Sets the current record's "VoteFishEvent" collection
@@ -60,6 +63,9 @@ abstract class BaseFishEvent extends sfDoctrineRecord
              'type' => 'string',
              'notnull' => true,
              ));
+        $this->hasColumn('rules', 'string', null, array(
+             'type' => 'string',
+             ));
         $this->hasColumn('location_id', 'integer', 4, array(
              'type' => 'integer',
              'notnull' => true,
@@ -86,7 +92,37 @@ abstract class BaseFishEvent extends sfDoctrineRecord
              'local' => 'id',
              'foreign' => 'FishEvent_id'));
 
-        $blameable0 = new Doctrine_Template_Blameable();
+        $blameable0 = new Doctrine_Template_Blameable(array(
+             'listener' => 'BlameableFishery',
+             'relations' => 
+             array(
+              'created' => 
+              array(
+              'class' => 'sfGuardUserProfile',
+              'disabled' => false,
+              'foreign' => 'id',
+              ),
+              'updated' => 
+              array(
+              'class' => 'sfGuardUserProfile',
+              'disabled' => false,
+              'foreign' => 'id',
+              ),
+             ),
+             'columns' => 
+             array(
+              'created' => 
+              array(
+              'length' => 4,
+              'type' => 'int',
+              ),
+              'updated' => 
+              array(
+              'length' => 4,
+              'type' => 'int',
+              ),
+             ),
+             ));
         $timestampable0 = new Doctrine_Template_Timestampable();
         $this->actAs($blameable0);
         $this->actAs($timestampable0);
