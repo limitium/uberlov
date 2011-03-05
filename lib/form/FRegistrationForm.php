@@ -109,7 +109,7 @@ class FRegistrationForm extends sfApplyApplyForm {
         // also doesn't get to modify the validate field which
         // is part of how their account is verified by email.
 
-        unset($this['user_id'], $this['validate'], $this['validate_at'], $this['created_at'], $this['updated_at'], $this['birth_date'], $this['first_name'], $this['firstname'], $this['last_name'], $this['lastname'], $this['wishes_list'], $this['my_firends_list'], $this['my_firends2_list'], $this['inboxes_list'], $this['email_new'], $this['sex'], $this['userpic'], $this['description'], $this['read_comment_list']
+        unset($this['requester_list'], $this['accepter_list'], $this['user_id'], $this['validate'], $this['validate_at'], $this['created_at'], $this['updated_at'], $this['birth_date'], $this['first_name'], $this['firstname'], $this['last_name'], $this['lastname'], $this['wishes_list'], $this['my_firends_list'], $this['my_firends2_list'], $this['inboxes_list'], $this['email_new'], $this['sex'], $this['userpic'], $this['description'], $this['read_comment_list']
         );
     }
 
