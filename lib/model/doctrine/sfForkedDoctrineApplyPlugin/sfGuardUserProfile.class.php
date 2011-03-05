@@ -146,4 +146,10 @@ class sfGuardUserProfile extends PluginsfGuardUserProfile {
         return $this->getUser()->getLastName();
     }
 
+    private function getAllFriends() {
+        $this->getTable()->createQuery('p')
+                ->leftJoin('p.')
+                ->execute();
+    }
+
 }

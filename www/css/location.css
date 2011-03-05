@@ -78,6 +78,12 @@
 #profitContainer.selected{
     display: block;
 }
+#eventContainer {
+    display: none;
+}
+#eventContainer.selected{
+    display: block;
+}
 
 /* last block */
 #locationLast{
