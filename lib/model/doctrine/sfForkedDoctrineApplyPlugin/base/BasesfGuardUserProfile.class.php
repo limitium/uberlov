@@ -24,7 +24,8 @@
  * @property Doctrine_Collection $Votes
  * @property Doctrine_Collection $VoteProfile
  * @property Doctrine_Collection $Inboxed
- * @property Doctrine_Collection $Friend
+ * @property Doctrine_Collection $Requesters
+ * @property Doctrine_Collection $Accepters
  * 
  * @method integer             getUserId()      Returns the current record's "user_id" value
  * @method string              getEmailNew()    Returns the current record's "email_new" value
@@ -45,7 +46,8 @@
  * @method Doctrine_Collection getVotes()       Returns the current record's "Votes" collection
  * @method Doctrine_Collection getVoteProfile() Returns the current record's "VoteProfile" collection
  * @method Doctrine_Collection getInboxed()     Returns the current record's "Inboxed" collection
- * @method Doctrine_Collection getFriend()      Returns the current record's "Friend" collection
+ * @method Doctrine_Collection getRequesters()  Returns the current record's "Requesters" collection
+ * @method Doctrine_Collection getAccepters()   Returns the current record's "Accepters" collection
  * @method sfGuardUserProfile  setUserId()      Sets the current record's "user_id" value
  * @method sfGuardUserProfile  setEmailNew()    Sets the current record's "email_new" value
  * @method sfGuardUserProfile  setValidateAt()  Sets the current record's "validate_at" value
@@ -65,7 +67,8 @@
  * @method sfGuardUserProfile  setVotes()       Sets the current record's "Votes" collection
  * @method sfGuardUserProfile  setVoteProfile() Sets the current record's "VoteProfile" collection
  * @method sfGuardUserProfile  setInboxed()     Sets the current record's "Inboxed" collection
- * @method sfGuardUserProfile  setFriend()      Sets the current record's "Friend" collection
+ * @method sfGuardUserProfile  setRequesters()  Sets the current record's "Requesters" collection
+ * @method sfGuardUserProfile  setAccepters()   Sets the current record's "Accepters" collection
  * 
  * @package    FISHERY
  * @subpackage model
@@ -178,7 +181,11 @@ abstract class BasesfGuardUserProfile extends sfDoctrineRecord
              'local' => 'id',
              'foreign' => 'profile_id'));
 
-        $this->hasMany('Friend', array(
+        $this->hasMany('Friend as Requesters', array(
+             'local' => 'id',
+             'foreign' => 'requester_id'));
+
+        $this->hasMany('Friend as Accepters', array(
              'local' => 'id',
              'foreign' => 'accepter_id'));
 

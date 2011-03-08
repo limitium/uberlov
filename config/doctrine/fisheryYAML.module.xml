@@ -205,7 +205,7 @@
       <column name="profile_id" primary="true" required="true" size="4" type="integer"/>
       <column name="location_id" primary="true" required="true" size="4" type="integer"/>
     </table>
-    <table name="Vote" visPositionX="375" visPositionY="752" visSizeX="0" visSizeX2="99" visSizeY="0" visSizeY2="45">
+    <table name="Vote" visPositionX="475" visPositionY="754" visSizeX="0" visSizeX2="158" visSizeY="0" visSizeY2="73">
       <column name="value" required="true" size="4" type="integer"/>
       <column description="Foreign key to Profile" name="voter" size="4" type="integer"/>
     </table>
@@ -512,7 +512,7 @@
         </attribute>
       </orm-properties>
     </table>
-    <table name="Friend" visPositionX="130" visPositionY="744" visSizeX="0" visSizeX2="212" visSizeY="0" visSizeY2="74">
+    <table name="Friend" visPositionX="126" visPositionY="745" visSizeX="0" visSizeX2="212" visSizeY="0" visSizeY2="74">
       <column name="requester_id" primary="true" required="true" size="4" type="integer"/>
       <column name="accepter_id" primary="true" required="true" size="4" type="integer"/>
       <column name="accepted" type="boolean"/>
@@ -647,9 +647,21 @@
     </foreign-key>
     <foreign-key caption="sfGuardUserProfile Friend" from="Friend" name="FK_Friend_sfGuardUserProfile_id" to="sfGuardUserProfile" visCaption1X="-2" visCaption1Y="0" visCenterX="0" visCenterY="0" visShowCaption="0">
       <foreign-key-column from="requester_id" to="id"/>
+      <orm-properties>
+        <attribute name="foreignAlias">Requesters</attribute>
+        <attribute name="localAlias">Requester</attribute>
+        <attribute name="type">one</attribute>
+        <attribute name="foreignType">many</attribute>
+      </orm-properties>
     </foreign-key>
     <foreign-key caption="sfGuardUserProfile Friend" from="Friend" name="FK_Friend_sfGuardUserProfile_id2" to="sfGuardUserProfile" visCaption1X="0" visCaption1Y="-1" visCenterX="0" visCenterY="0" visShowCaption="0">
       <foreign-key-column from="accepter_id" to="id"/>
+      <orm-properties>
+        <attribute name="foreignAlias">Accepters</attribute>
+        <attribute name="localAlias">Accepter</attribute>
+        <attribute name="type">one</attribute>
+        <attribute name="foreignType">many</attribute>
+      </orm-properties>
     </foreign-key>
     <many-to-many-relation mn-table="WishList">
       <many-to-many-foreign-key foreign-key="FK_WishList_Profile_id" relation-alias="Wishers"/>
