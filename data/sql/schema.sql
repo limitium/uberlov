@@ -64,6 +64,7 @@ ALTER TABLE comment ADD CONSTRAINT comment_talk_id_talk_id FOREIGN KEY (talk_id)
 ALTER TABLE fish_event ADD CONSTRAINT fish_event_updated_by_sf_guard_user_profile_id FOREIGN KEY (updated_by) REFERENCES sf_guard_user_profile(id);
 ALTER TABLE fish_event ADD CONSTRAINT fish_event_location_id_location_id FOREIGN KEY (location_id) REFERENCES location(id);
 ALTER TABLE fish_event ADD CONSTRAINT fish_event_created_by_sf_guard_user_profile_id FOREIGN KEY (created_by) REFERENCES sf_guard_user_profile(id);
+ALTER TABLE friend ADD CONSTRAINT friend_requester_id_sf_guard_user_profile_id FOREIGN KEY (requester_id) REFERENCES sf_guard_user_profile(id);
 ALTER TABLE friend ADD CONSTRAINT friend_accepter_id_sf_guard_user_profile_id FOREIGN KEY (accepter_id) REFERENCES sf_guard_user_profile(id);
 ALTER TABLE inbox ADD CONSTRAINT inbox_updated_by_sf_guard_user_profile_id FOREIGN KEY (updated_by) REFERENCES sf_guard_user_profile(id);
 ALTER TABLE inbox ADD CONSTRAINT inbox_created_by_sf_guard_user_profile_id FOREIGN KEY (created_by) REFERENCES sf_guard_user_profile(id);

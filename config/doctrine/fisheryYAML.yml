@@ -798,10 +798,18 @@ Friend:
     accepted:
       type: boolean
   relations:
-    sfGuardUserProfile:
+    Requester:
+      class: sfGuardUserProfile
+      foreignAlias: Requesters
+      foreignType: many
+      type: one
       local: requester_id
       foreign: id
-    sfGuardUserProfile:
+    Accepter:
+      class: sfGuardUserProfile
+      foreignAlias: Accepters
+      foreignType: many
+      type: one
       local: accepter_id
       foreign: id
 options:

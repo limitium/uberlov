@@ -8,16 +8,19 @@
  * @property integer $requester_id
  * @property integer $accepter_id
  * @property boolean $accepted
- * @property sfGuardUserProfile $sfGuardUserProfile
+ * @property sfGuardUserProfile $Requester
+ * @property sfGuardUserProfile $Accepter
  * 
- * @method integer            getRequesterId()        Returns the current record's "requester_id" value
- * @method integer            getAccepterId()         Returns the current record's "accepter_id" value
- * @method boolean            getAccepted()           Returns the current record's "accepted" value
- * @method sfGuardUserProfile getSfGuardUserProfile() Returns the current record's "sfGuardUserProfile" value
- * @method Friend             setRequesterId()        Sets the current record's "requester_id" value
- * @method Friend             setAccepterId()         Sets the current record's "accepter_id" value
- * @method Friend             setAccepted()           Sets the current record's "accepted" value
- * @method Friend             setSfGuardUserProfile() Sets the current record's "sfGuardUserProfile" value
+ * @method integer            getRequesterId()  Returns the current record's "requester_id" value
+ * @method integer            getAccepterId()   Returns the current record's "accepter_id" value
+ * @method boolean            getAccepted()     Returns the current record's "accepted" value
+ * @method sfGuardUserProfile getRequester()    Returns the current record's "Requester" value
+ * @method sfGuardUserProfile getAccepter()     Returns the current record's "Accepter" value
+ * @method Friend             setRequesterId()  Sets the current record's "requester_id" value
+ * @method Friend             setAccepterId()   Sets the current record's "accepter_id" value
+ * @method Friend             setAccepted()     Sets the current record's "accepted" value
+ * @method Friend             setRequester()    Sets the current record's "Requester" value
+ * @method Friend             setAccepter()     Sets the current record's "Accepter" value
  * 
  * @package    FISHERY
  * @subpackage model
@@ -51,7 +54,11 @@ abstract class BaseFriend extends sfDoctrineRecord
     public function setUp()
     {
         parent::setUp();
-        $this->hasOne('sfGuardUserProfile', array(
+        $this->hasOne('sfGuardUserProfile as Requester', array(
+             'local' => 'requester_id',
+             'foreign' => 'id'));
+
+        $this->hasOne('sfGuardUserProfile as Accepter', array(
              'local' => 'accepter_id',
              'foreign' => 'id'));
     }
