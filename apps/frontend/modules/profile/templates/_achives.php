@@ -1,3 +1,5 @@
+<?php use_javascript('profileShow'); ?>
+
 <div class="achieves">
     <div>
         <?php use_javascript('voting'); ?>
@@ -38,10 +40,13 @@
             </ul>
         <?php endif; ?>
     </div>
+
     <?php if (!$sf_user->isAnonymous()): ?>
         <?php if ($sf_user->getProfile() != $profile): ?>
             <?php echo link_to('Написать инбокс', 'inbox/new?whom=' . $profile->getNickName()); ?>        
         <?php endif; ?>
     <?php endif; ?>
-    <?php include_partial('friends', array('profile' => $profile)); ?>
+
+
+    <?php include_partial('friends', array('profile' => $profile, 'csrf' => $csrf)); ?>
 </div>

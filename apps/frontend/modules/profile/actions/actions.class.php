@@ -10,6 +10,24 @@
  */
 class profileActions extends sfActions {
 
+    public function executeAdd(sfWebRequest $request) {
+        $request->checkCSRFProtection();
+
+        $this->profile = Doctrine::getTable('sfGuardUserProfile')->find(array($request->getParameter('id')));
+        $this->forward404Unless($this->profile);
+
+        $this->getUser()->getProfile()->addFriend($this->profile);
+    }
+
+    public function executeRemove(sfWebRequest $request) {
+        $request->checkCSRFProtection();
+
+        $this->profile = Doctrine::getTable('sfGuardUserProfile')->find(array($request->getParameter('id')));
+        $this->forward404Unless($this->profile);
+
+        $this->getUser()->getProfile()->removeFriend($this->profile);
+    }
+
     public function executeShow(sfWebRequest $request) {
         $this->profile = Doctrine::getTable('sfGuardUserProfile')->find(array($request->getParameter('id')));
         $this->forward404Unless($this->profile);
@@ -53,6 +71,8 @@ class profileActions extends sfActions {
                 $this->total+=$pd->getQty();
             }
         }
+
+        $this->csrf = CSRF::getToken();
     }
 
     public function executeNew(sfWebRequest $request) {
