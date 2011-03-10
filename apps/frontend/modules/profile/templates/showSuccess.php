@@ -33,6 +33,6 @@
     <?php elseif ($view == 'profits'): ?>
         <?php include_partial('profits', array('profits' => $profits)); ?>
     <?php else: ?>
-        <?php include_partial('achives', array('profile' => $profile, 'best' => $best, 'comments' => $comments, 'profits' => $profits, 'locations' => $locations, 'total' => $total)); ?>
+        <?php include_partial('achives', array('profile' => $profile, 'best' => $best, 'comments' => $comments, 'profits' => $profits, 'locations' => $locations, 'total' => $total, 'csrf' => $csrf)); ?>
     <?php endif; ?>
 </div>

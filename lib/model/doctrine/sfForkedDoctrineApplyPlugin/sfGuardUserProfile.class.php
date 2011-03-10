@@ -126,10 +126,6 @@ class sfGuardUserProfile extends PluginsfGuardUserProfile {
         return $this->getLocation()->search(Doctrine::getTable('Location')->find($location_id)) !== false;
     }
 
-    public function getFriends() {
-        return parent::getFriend();
-    }
-
     public function getDate() {
         return 123;
     }
@@ -146,9 +142,59 @@ class sfGuardUserProfile extends PluginsfGuardUserProfile {
         return $this->getUser()->getLastName();
     }
 
-    private function getAllFriends() {
-        $this->getTable()->createQuery('p')
-                ->leftJoin('p.')
+    public function isFriend($profile) {
+        return Doctrine_Query::create()
+                ->from('Friend f')
+                ->where('f.requester_id  = ? and f.accepter_id = ?', array($profile->id, $this->id))
+                ->orWhere('f.accepter_id = ? and f.requester_id = ?', array($profile->id, $this->id))
+                ->count() > 0;
+    }
+
+    public function removeFriend($profile) {
+        return Doctrine_Query::create()
+                ->delete('Friend f')
+                ->where('f.requester_id  = ? and f.accepter_id = ?', array($profile->id, $this->id))
+                ->orWhere('f.accepter_id = ? and f.requester_id = ?', array($profile->id, $this->id))
+                ->execute();
+    }
+
+    public function addFriend($profile) {
+        if ($this->isFriend($profile)) {
+            $friend = Doctrine_Query::create()
+                            ->from('Friend f')
+                            ->where('f.requester_id  = ? and f.accepter_id = ?', array($profile->id, $this->id))
+                            ->orWhere('f.accepter_id = ? and f.requester_id = ?', array($profile->id, $this->id))
+                            ->fetchOne();
+            $friend->accepted = true;
+        } else {
+            $friend = new Friend();
+            $friend->requester_id = $this->id;
+            $friend->accepter_id = $profile->id;
+            $friend->accepted = false;
+        }
+        $friend->save();
+    }
+
+    public function getFriends() {
+        return $this->getTable()->createQuery('p')
+                ->leftJoin('p.Requesters r')
+                ->leftJoin('p.Accepters a')
+                ->where('r.accepted = true and r.accepter_id = ?', $this->id)
+                ->orWhere('a.accepted = true and a.requester_id = ?', $this->id)
+                ->execute();
+    }
+
+    public function getRequesters() {
+        return $this->getTable()->createQuery('p')
+                ->leftJoin('p.Requesters r')
+                ->where('r.accepted != true and r.accepter_id = ?', $this->id)
+                ->execute();
+    }
+
+    public function getAccepters() {
+        return $this->getTable()->createQuery('p')
+                ->leftJoin('p.Accepters a')
+                ->where('a.accepted != true and a.requester_id = ?', $this->id)
                 ->execute();
     }
 
