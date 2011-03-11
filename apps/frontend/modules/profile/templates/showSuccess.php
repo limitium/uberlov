@@ -7,7 +7,7 @@
                 <?php echo image_tag($profile->getUserpic() ? '/images/userpic/' . $profile->getUserpic() : '/images/userpic/' . ($profile->getSex() ? 'male' : 'female') . '.png') ?>
             </div>
             <p><?php echo $profile->getFirstName() ?>
-                <?php echo $profile->getNickName() ? '[' . $profile->getNickName() . ']' : '' ?>
+                <?php echo $profile->getNickName() ?>
                 <?php echo $profile->getLastName() ?>
                 <?php if ($sf_user->getProfile() == $profile): ?>
                     <?php echo link_to(image_tag('/images/ui/edit.png'), 'profile/edit?id=' . $profile->getId()) ?>

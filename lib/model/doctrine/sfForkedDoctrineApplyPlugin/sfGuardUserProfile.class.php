@@ -177,16 +177,20 @@ class sfGuardUserProfile extends PluginsfGuardUserProfile {
 
     public function getFriends() {
         return $this->getTable()->createQuery('p')
+                ->leftJoin('p.User u')
                 ->leftJoin('p.Requesters r')
-                ->leftJoin('p.Accepters a')
                 ->where('r.accepted = true and r.accepter_id = ?', $this->id)
-                ->orWhere('a.accepted = true and a.requester_id = ?', $this->id)
-                ->execute();
+                ->execute()->merge($this->getTable()->createQuery('p')
+                        ->leftJoin('p.User u')
+                        ->leftJoin('p.Accepters a')
+                        ->where('a.accepted = true and a.requester_id = ?', $this->id)
+                        ->execute());
     }
 
     public function getRequesters() {
         return $this->getTable()->createQuery('p')
                 ->leftJoin('p.Requesters r')
+                ->leftJoin('p.User u')
                 ->where('r.accepted != true and r.accepter_id = ?', $this->id)
                 ->execute();
     }
@@ -194,6 +198,7 @@ class sfGuardUserProfile extends PluginsfGuardUserProfile {
     public function getAccepters() {
         return $this->getTable()->createQuery('p')
                 ->leftJoin('p.Accepters a')
+                ->leftJoin('p.User u')
                 ->where('a.accepted != true and a.requester_id = ?', $this->id)
                 ->execute();
     }

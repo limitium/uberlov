@@ -108,7 +108,12 @@ sfGuardUserProfile:
     email_new:
       unique: true
       type: string(255)
+    city_id:
+      type: integer(4)
   relations:
+    City:
+      local: city_id
+      foreign: id
     Wishes:
       class: Location
       refClass: WishList
@@ -796,6 +801,7 @@ Friend:
       type: integer(4)
       notnull: true
     accepted:
+      default: 0
       type: boolean
   relations:
     Requester:
@@ -812,6 +818,16 @@ Friend:
       type: one
       local: accepter_id
       foreign: id
+City:
+  columns:
+    id:
+      primary: true
+      type: integer(4)
+      notnull: true
+      autoincrement: true
+    name:
+      type: string(30)
+      notnull: true
 options:
   type: INNODB
   charset: utf8
