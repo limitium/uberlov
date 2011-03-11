@@ -1,5 +1,3 @@
-<?php use_javascript('profileShow'); ?>
-
 <div class="achieves">
     <div>
         <?php use_javascript('voting'); ?>
