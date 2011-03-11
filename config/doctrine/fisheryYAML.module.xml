@@ -50,7 +50,7 @@
         </attribute>
       </orm-properties>
     </table>
-    <table name="sfGuardUserProfile" visPositionX="184" visPositionY="531" visSizeX="0" visSizeX2="127" visSizeY="0" visSizeY2="157">
+    <table name="sfGuardUserProfile" visPositionX="184" visPositionY="529" visSizeX="0" visSizeX2="127" visSizeY="0" visSizeY2="157">
       <column auto-increment="true" name="id" primary="true" required="true" size="4" type="integer"/>
       <column default="1" name="sex" required="true" type="boolean"/>
       <column name="birth_date" type="date"/>
@@ -60,6 +60,7 @@
       <column name="validate_at" type="timestamp"/>
       <column name="validate" size="33" type="string"/>
       <column name="email_new" size="255" type="string" unique="true"/>
+      <column name="city_id" size="4" type="integer"/>
       <orm-properties>
         <attribute name="actAs">
           <attribute name="Timestampable"/>
@@ -246,7 +247,7 @@
       <column auto-increment="true" name="id" primary="true" size="4" type="integer"/>
       <column name="name" required="true" size="50" type="string" unique="true"/>
     </table>
-    <table name="VoteProfile" visPositionX="9" visPositionY="507" visSizeX="0" visSizeX2="114" visSizeY="0" visSizeY2="31">
+    <table name="VoteProfile" visPositionX="-68" visPositionY="517" visSizeX="0" visSizeX2="114" visSizeY="0" visSizeY2="31">
       <column name="profile_id" size="4" type="integer"/>
       <orm-properties>
         <attribute name="inheritance">
@@ -515,7 +516,11 @@
     <table name="Friend" visPositionX="126" visPositionY="745" visSizeX="0" visSizeX2="212" visSizeY="0" visSizeY2="74">
       <column name="requester_id" primary="true" required="true" size="4" type="integer"/>
       <column name="accepter_id" primary="true" required="true" size="4" type="integer"/>
-      <column name="accepted" type="boolean"/>
+      <column default="0" name="accepted" type="boolean"/>
+    </table>
+    <table name="City" visPositionX="-91" visPositionY="465" visSizeX="0" visSizeX2="99" visSizeY="0" visSizeY2="45">
+      <column auto-increment="true" name="id" primary="true" required="true" size="4" type="integer"/>
+      <column name="name" required="true" size="30" type="string"/>
     </table>
     <orm-properties>
       <attribute name="options">
@@ -541,6 +546,9 @@
     </foreign-key>
     <foreign-key from="Location" name="FK_Location_Address" to="Address">
       <foreign-key-column from="address_id" to="id"/>
+    </foreign-key>
+    <foreign-key caption="City sfGuardUserProfile" from="sfGuardUserProfile" name="FK_sfGuardUserProfile_City_id" to="City" visShowCaption="0">
+      <foreign-key-column from="city_id" to="id"/>
     </foreign-key>
     <foreign-key from="Profit" name="FK_Profit_Location_id" to="Location" visCenterX="0" visCenterY="0">
       <foreign-key-column from="location_id" to="id"/>
