@@ -14,7 +14,9 @@
  * @property date $birth_date
  * @property string $userpic
  * @property string $description
+ * @property integer $city_id
  * @property sfGuardUser $User
+ * @property City $City
  * @property Doctrine_Collection $Wishes
  * @property Doctrine_Collection $Inboxes
  * @property Doctrine_Collection $ReadComment
@@ -36,7 +38,9 @@
  * @method date                getBirthDate()   Returns the current record's "birth_date" value
  * @method string              getUserpic()     Returns the current record's "userpic" value
  * @method string              getDescription() Returns the current record's "description" value
+ * @method integer             getCityId()      Returns the current record's "city_id" value
  * @method sfGuardUser         getUser()        Returns the current record's "User" value
+ * @method City                getCity()        Returns the current record's "City" value
  * @method Doctrine_Collection getWishes()      Returns the current record's "Wishes" collection
  * @method Doctrine_Collection getInboxes()     Returns the current record's "Inboxes" collection
  * @method Doctrine_Collection getReadComment() Returns the current record's "ReadComment" collection
@@ -57,7 +61,9 @@
  * @method sfGuardUserProfile  setBirthDate()   Sets the current record's "birth_date" value
  * @method sfGuardUserProfile  setUserpic()     Sets the current record's "userpic" value
  * @method sfGuardUserProfile  setDescription() Sets the current record's "description" value
+ * @method sfGuardUserProfile  setCityId()      Sets the current record's "city_id" value
  * @method sfGuardUserProfile  setUser()        Sets the current record's "User" value
+ * @method sfGuardUserProfile  setCity()        Sets the current record's "City" value
  * @method sfGuardUserProfile  setWishes()      Sets the current record's "Wishes" collection
  * @method sfGuardUserProfile  setInboxes()     Sets the current record's "Inboxes" collection
  * @method sfGuardUserProfile  setReadComment() Sets the current record's "ReadComment" collection
@@ -118,6 +124,10 @@ abstract class BasesfGuardUserProfile extends sfDoctrineRecord
         $this->hasColumn('description', 'string', null, array(
              'type' => 'string',
              ));
+        $this->hasColumn('city_id', 'integer', 4, array(
+             'type' => 'integer',
+             'length' => '4',
+             ));
 
 
         $this->index('user_id_unique', array(
@@ -139,6 +149,10 @@ abstract class BasesfGuardUserProfile extends sfDoctrineRecord
              'local' => 'user_id',
              'foreign' => 'id',
              'onDelete' => 'cascade'));
+
+        $this->hasOne('City', array(
+             'local' => 'city_id',
+             'foreign' => 'id'));
 
         $this->hasMany('Location as Wishes', array(
              'refClass' => 'WishList',

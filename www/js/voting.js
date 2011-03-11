@@ -13,10 +13,11 @@ function vote(){
         link.parent().addClass('voting');
         
         app.sendData({
-            url:'/vote/'+link.parent().attr('to'),
+            url: app.url('/vote/for'),
             data:{
-                up:link.hasClass('plus')+0,
-                id:link.parent().attr('id').substr(4)
+                subj: link.parent().attr('to'),
+                up: link.hasClass('plus')+0,
+                id: link.parent().attr('id').substr(4)
             },
             handler: function(rating){
                 $('span',link.parent()).html('['+rating+']');

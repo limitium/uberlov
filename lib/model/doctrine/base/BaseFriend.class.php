@@ -43,6 +43,7 @@ abstract class BaseFriend extends sfDoctrineRecord
              'length' => '4',
              ));
         $this->hasColumn('accepted', 'boolean', null, array(
+             'default' => 0,
              'type' => 'boolean',
              ));
 

@@ -423,7 +423,11 @@ VoteProfile:
     profile_id:
       type: integer(4)
   relations:
-    sfGuardUserProfile:
+    Profile:
+      class: sfGuardUserProfile
+      foreignAlias: VoteProfile
+      foreignType: many
+      type: one
       local: profile_id
       foreign: id
 Address:

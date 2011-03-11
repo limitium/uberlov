@@ -7,8 +7,7 @@
         <p>Добавил<?php echo $profile->getSex() ? '' : 'а' ?> <?php echo sizeof($locations) ?> мест,
             написал<?php echo $profile->getSex() ? '' : 'а' ?> <?php echo comments2text(sizeof($comments)) ?> и
             <?php echo profits2text(sizeof($profits)) ?>.</p>
-        <p>Заработал<?php echo $profile->getSex() ? '' : 'а' ?> карму <?php include_partial('vote/vote', array('obj' => $profile, 'objType' => 'profile')); ?>
-            и имеет силу голоса <?php echo $profile->getForce(); ?>.</p>
+        <p>Имеет силу голоса <?php echo $profile->getForce(); ?>.</p>
         <br />
         <br />
         <p>Поймал <?php echo $total; ?>кг рыбы

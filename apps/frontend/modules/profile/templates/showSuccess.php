@@ -3,6 +3,7 @@
 <div class="profile">
     <div class="personal">
         <div class="info">
+            <?php include_partial('vote/vote', array('obj' => $profile, 'objType' => 'profile')); ?>
             <div class="userpic">
                 <?php echo image_tag($profile->getUserpic() ? '/images/userpic/' . $profile->getUserpic() : '/images/userpic/' . ($profile->getSex() ? 'male' : 'female') . '.png') ?>
             </div>
