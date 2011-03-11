@@ -247,7 +247,7 @@
       <column auto-increment="true" name="id" primary="true" size="4" type="integer"/>
       <column name="name" required="true" size="50" type="string" unique="true"/>
     </table>
-    <table name="VoteProfile" visPositionX="-68" visPositionY="517" visSizeX="0" visSizeX2="114" visSizeY="0" visSizeY2="31">
+    <table name="VoteProfile" visPositionX="-67" visPositionY="518" visSizeX="0" visSizeX2="114" visSizeY="0" visSizeY2="31">
       <column name="profile_id" size="4" type="integer"/>
       <orm-properties>
         <attribute name="inheritance">
@@ -595,6 +595,12 @@
     </foreign-key>
     <foreign-key caption="Profile VoteProfile" from="VoteProfile" name="FK_VoteProfile_Profile_id" to="sfGuardUserProfile" visShowCaption="0">
       <foreign-key-column from="profile_id" to="id"/>
+      <orm-properties>
+        <attribute name="localAlias">Profile</attribute>
+        <attribute name="foreignAlias">VoteProfile</attribute>
+        <attribute name="foreignType">many</attribute>
+        <attribute name="type">one</attribute>
+      </orm-properties>
     </foreign-key>
     <foreign-key from="Address" name="FK_Address_Country" to="Country">
       <foreign-key-column from="country_id" to="id"/>
