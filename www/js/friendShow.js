@@ -1,22 +1,22 @@
-function profileShow(){
+function friendShow(){
     this.location = null;
     this.listeners = {};
 }
-profileShow.name = 'profileShow';
-ModuleManager.add(profileShow);
+friendShow.name = 'friendShow';
+ModuleManager.add(friendShow);
 
 
-profileShow.prototype.afterInit = function(){
-    fb('initing... profileShow' )
+friendShow.prototype.afterInit = function(){
+    fb('initing... friendShow' )
     this.initListeners();
 }
 
-profileShow.prototype.initListeners = function(){
+friendShow.prototype.initListeners = function(){
     $('.addFriend').live('click', this.addFriend.delegate(this));
     $('.removeFriend').live('click', this.removeFriend.delegate(this));
 }
 
-profileShow.prototype.addFriend = function(a){
+friendShow.prototype.addFriend = function(a){
     var a = $(a.target);
 
     if(!a.hasClass('adding')){
@@ -53,7 +53,7 @@ profileShow.prototype.addFriend = function(a){
     }
     return false;
 }
-profileShow.prototype.removeFriend = function(a){
+friendShow.prototype.removeFriend = function(a){
     var a = $(a.target);
 
     if(!a.hasClass('removing')){

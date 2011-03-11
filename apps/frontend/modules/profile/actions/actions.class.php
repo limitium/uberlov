@@ -10,6 +10,10 @@
  */
 class profileActions extends sfActions {
 
+    public function executeFriends(sfWebRequest $request) {
+        $this->csrf = CSRF::getToken();
+    }
+
     public function executeAdd(sfWebRequest $request) {
         $request->checkCSRFProtection();
 
