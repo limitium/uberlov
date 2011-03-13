@@ -25,5 +25,5 @@ class Vote extends BaseVote {
         }
         return $rating;
     }
-
+    
 }

@@ -26,7 +26,7 @@
 .location .photo{
     float:right;
 }
-.location img{
+.location .photo img{
     width: 400px;
 }
 

@@ -77,7 +77,7 @@ a.delItem{
 /*layout*/
 
 #page {
-    background-color: gainsboro;
+/*    background-color: gainsboro;*/
 }
 #header{
 
@@ -163,7 +163,7 @@ a.delItem{
     background-color: #369;
 }
 .tabPanel ul li span.selected{
-    border-bottom:1px solid gainsboro;
+    border-bottom:1px solid white;
 }
 .tabPanel ul li a:link, a:active, a:visited, a:hover {
     text-decoration:none;
