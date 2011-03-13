@@ -12,7 +12,7 @@
         Дружит с:
         <ul>
             <?php foreach ($profile->getFriends() as $friend): ?>
-                <li><?php echo link_to($friend->getNickName(), 'profile/show?id=' . $friend->getId()); ?>
+                <li><?php include_partial('profile/picnick', array('profile' => $friend)); ?>
                     <?php if (!$sf_user->isAnonymous() && $profile == $sf_user->getProfile()): ?>
                         <?php echo link_to('-', 'profile/remove?id=' . $friend->getId(), array('class' => 'removeFriend', 'user' => $friend->getId())); ?>        
                     <?php endif; ?>
@@ -24,7 +24,7 @@
         Хочет дружить с:
         <ul>
             <?php foreach ($profile->getAccepters() as $friend): ?>
-                <li><?php echo link_to($friend->getNickName(), 'profile/show?id=' . $friend->getId()); ?>
+                <li><?php include_partial('profile/picnick', array('profile' => $friend)); ?>
                     <?php if (!$sf_user->isAnonymous() && $profile == $sf_user->getProfile()): ?>
                         <?php echo link_to('-', 'profile/remove?id=' . $friend->getId(), array('class' => 'removeFriend', 'user' => $friend->getId())); ?>        
                     <?php endif; ?>
@@ -36,7 +36,7 @@
         Хотят дружить:
         <ul>
             <?php foreach ($profile->getRequesters() as $friend): ?>
-                <li><?php echo link_to($friend->getNickName(), 'profile/show?id=' . $friend->getId()); ?>
+                <li><?php include_partial('profile/picnick', array('profile' => $friend)); ?>
                     <?php if (!$sf_user->isAnonymous() && $profile == $sf_user->getProfile()): ?>
                         <?php echo link_to('+', 'profile/add?id=' . $friend->getId(), array('class' => 'addFriend', 'user' => $friend->getId())); ?>        
                     <?php endif; ?>

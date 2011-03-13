@@ -1,3 +1,3 @@
-<div class="createdBy">Написал<?php echo $written->getCreatedBy()->getSex() ? '' : 'а' ?> <?php echo link_to($written->getCreatedBy()->getNickName(), 'profile/show?id=' . $written->getCreatedBy()->getId()); ?>,
+<div class="createdBy">Написал<?php echo $written->getCreatedBy()->getSex() ? '' : 'а' ?>  <?php include_partial('profile/picnick', array('profile' => $written->getCreatedBy())); ?>,
     <?php echo $written->getDateTimeObject('created_at')->format('d.m.Y') ?> в <?php echo $written->getDateTimeObject('created_at')->format('H.i') ?>
 </div>
