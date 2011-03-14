@@ -18,9 +18,13 @@ locationShow.prototype.afterInit = function(){
 }
 
 locationShow.prototype.initListeners = function(){
-    $('.locationMap .name a').click(this.toLocation.delegate(this));
-    
+    $('.locationMap .name a').click(this.toLocation.delegate(this));    
     $('.tabPanel span').click(this.onTabClick.delegate(this));
+    
+    var mapListeners = app.getModule('mapModule').listeners;
+    gm.event.removeListener(mapListeners.dragend);
+    gm.event.removeListener(mapListeners.zoom_changed);
+    gm.event.removeListener(mapListeners.click);
 }
 
 locationShow.prototype.resizeMap= function(){
