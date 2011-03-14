@@ -1,6 +1,8 @@
 gm = google.maps;
 
 function mapModule(){
+    this.defaultZoom = 8;
+    this.defaultMapType = 'roadmap'
     this.editor = null;
     this.infoWindow = new gm.InfoWindow();
     this.geocoder = new gm.Geocoder();
@@ -10,23 +12,41 @@ function mapModule(){
     
     this.initMenu();
     this.initMap();
-    this.initListeners();
-    this.initHandlers();
-    
-    this.loadData();
 }
+
 mapModule.name = 'mapModule';
 ModuleManager.add(mapModule);
 
 mapModule.prototype.initMap = function(){
-    var params = $.unparam(window.location.hash.substr(1));
+    var params = {}; 
+    if(window.location.hash.length){
+        params = $.unparam(window.location.hash.substr(1));    
+    }
+    params.z = parseInt(params.z) || this.defaultZoom;
+    params.mt = this.idToType[parseFloat(params.mt)] || this.defaultMapType;
+    
+    if(parseFloat(params.lat) && parseFloat(params.lng)){
+        this.startMap(params);
+    }else{
+        var self = this;
+        $.ajax({
+            type: "GET",
+            url: "http://j.maxmind.com/app/geoip.js",
+            success: function () {
+                params.lat =  geoip_latitude();
+                params.lng = geoip_longitude();
+                self.startMap.call(self,params);
+            },
+            error : function () {
+                alert('maxmind.com жопят данные :\'(');
+            },
+            dataType: "script"
+        });
+    }
+}
 
-    params.lat = parseFloat(params.lat) || 55.043561639001645;
-    params.lng = parseFloat(params.lng) || 36.627886718750005;
-    params.z= parseInt(params.z) || 8;
-    params.mt = this.idToType[parseFloat(params.mt)] || 'roadmap';
-
-    var latlng = new gm.LatLng(params.lat, params.lng);
+mapModule.prototype.startMap = function(params){
+    var latlng = new gm.LatLng(parseFloat(params.lat), parseFloat(params.lng));
     var opt = {
         zoom: params.z,
         center: latlng,
@@ -38,7 +58,11 @@ mapModule.prototype.initMap = function(){
         mapTypeId: params.mt
     };
     this.map = new gm.Map($("#map_canvas").get(0), opt);
-    this.setType(params.mt);  
+    this.setType(params.mt); 
+    
+    this.initListeners();
+    this.initHandlers();    
+    this.loadData();
 }
 
 mapModule.prototype.initListeners = function(){
