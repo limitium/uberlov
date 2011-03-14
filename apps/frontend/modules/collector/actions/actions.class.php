@@ -16,7 +16,7 @@ class collectorActions extends sfActions {
      * @param sfRequest $request A request object
      */
     public function executeLocations(sfWebRequest $request) {
-        //echo sfConfig::get('app_map_key');
+         $this->ip = $request->getRemoteAddress();
     }
 
     /**
@@ -35,8 +35,7 @@ class collectorActions extends sfActions {
 
         if ($request->isMethod(sfRequest::POST)) {
             $form->bind(
-                    $request->getParameter($form->getName()),
-                    $request->getFiles($form->getName())
+                    $request->getParameter($form->getName()), $request->getFiles($form->getName())
             );
             if ($form->isValid()) {
                 $file = $form->getValue('file');
