@@ -19,8 +19,6 @@ locationShow.prototype.afterInit = function(){
 
 locationShow.prototype.initListeners = function(){
     $('.locationMap .name a').click(this.toLocation.delegate(this));
-    $('.toWishes').live('click', this.addToWishList.delegate(this));
-    $('.fromWishes').live('click', this.removeFromWishList.delegate(this));
     
     $('.tabPanel span').click(this.onTabClick.delegate(this));
 }
@@ -53,61 +51,4 @@ locationShow.prototype.onTabClick= function(click){
     
     $(click.currentTarget).addClass('selected');
     $('#'+containerId).addClass('selected');
-}
-
-locationShow.prototype.addToWishList = function(a){
-    var a = $(a.target);
-
-    if(!a.hasClass('adding')){
-        a.addClass('adding');
-
-        var location_id = a.attr('location');
-
-        a.html('добавляем');
-
-        app.sendData({
-            url:app.url('/location/tomy'),
-            data:{
-                id:location_id,
-                _csrf_token: app.csrf.wishlist
-            },
-            handler: function(response){
-                if(response.status == 'ok'){
-                    a.removeClass('toWishes').removeClass('adding').addClass('fromWishes').html('убрать');
-                    var counter = $('#myLocationCounter');
-                    counter.html(parseInt(counter.html())+1);
-                }                                
-            }
-        });
-        
-    }
-    return false;
-}
-locationShow.prototype.removeFromWishList = function(a){
-    var a = $(a.target);
-
-    if(!a.hasClass('removing')){
-        a.addClass('removing');
-
-        var location_id = a.attr('location');
-
-        a.html('убираем');
-
-        app.sendData({
-            url:app.url('/location/frommy'),
-            data:{
-                id:location_id,
-                _csrf_token: app.csrf.wishlist
-            },
-            handler: function(response){
-                if(response.status == 'ok'){
-                    a.removeClass('fromWishes').removeClass('removing').addClass('toWishes').html('в мои места');
-                    var counter = $('#myLocationCounter');
-                    counter.html(parseInt(counter.html())-1);
-                }
-            }
-        });
-
-    }
-    return false;
 }

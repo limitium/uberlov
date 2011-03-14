@@ -1,6 +1,8 @@
 <script type="text/javascript">
     app.csrf.wishlist = "<?php echo $csrf; ?>";
 </script>
+<?php use_javascript('wishes'); ?>
+
 <?php include_partial('location/location', array('location' => $location)) ?>
 <!-- AddThis Button BEGIN -->
 <script type="text/javascript">var addthis_config = {"data_track_clickback":true};</script>
@@ -33,8 +35,8 @@
         <?php use_javascript('voting'); ?>
         <?php include_partial('vote/vote', array('obj' => $location)); ?>
         <div>
-            <a href="" id="goToReply">□</a> <?php include_partial('profile/addBy', array('added' => $location)); ?> | <?php echo link_to('тут не так', 'location/edit?id=' . $location->getCreatedBy()->getId()); ?> | <?php include_partial('wish', array('location' => $location)); ?>
-            <a href="" class="commentShowAuthor" author="user<?php echo $location->getCreatedBy(); ?>">●</a>
+            <a href="" id="goToReply">□</a> <?php include_partial('profile/addBy', array('added' => $location)); ?> | <?php echo link_to('тут не так', 'location/edit?id=' . $location->getCreatedBy()->getId()); ?> <?php include_partial('wish', array('location' => $location)); ?>
+            | <a href="" class="commentShowAuthor" author="user<?php echo $location->getCreatedBy(); ?>">●</a>
         </div>
     </div>
 </div>
