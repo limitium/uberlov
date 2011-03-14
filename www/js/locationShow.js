@@ -19,10 +19,10 @@ locationShow.prototype.afterInit = function(){
 
 locationShow.prototype.initListeners = function(){
     $('.locationMap .name a').click(this.toLocation.delegate(this));
-    $('#tabComments').click(this.showComments.delegate(this));
-    $('#tabProfits').click(this.showProfits.delegate(this));
     $('.toWishes').live('click', this.addToWishList.delegate(this));
     $('.fromWishes').live('click', this.removeFromWishList.delegate(this));
+    
+    $('.tabPanel span').click(this.onTabClick.delegate(this));
 }
 
 locationShow.prototype.resizeMap= function(){
@@ -41,22 +41,18 @@ locationShow.prototype.toLocation = function(){
     return false;
 }
 
-locationShow.prototype.showComments = function(){
-    $('#tabComments').addClass('selected')
-    $('#commentContainer').addClass('selected')
+locationShow.prototype.onTabClick= function(click){
+    var tabId = click.currentTarget.id;
+    var containerId = tabId.substr(0,tabId.length-3) + 'Container';
+    $('.tabPanel span').each(function(){
+        if(this.id != tabId){
+            $(this).removeClass('selected');
+            $('#'+this.id.substr(0,this.id.length-3) + 'Container').removeClass('selected');
+        }
+    });
     
-    $('#tabProfits').removeClass('selected')
-    $('#profitContainer').removeClass('selected')
-    return false;
-}
-
-locationShow.prototype.showProfits = function(){
-    $('#tabProfits').addClass('selected')
-    $('#profitContainer').addClass('selected')
-
-    $('#tabComments').removeClass('selected')
-    $('#commentContainer').removeClass('selected')
-    return false;
+    $(click.currentTarget).addClass('selected');
+    $('#'+containerId).addClass('selected');
 }
 
 locationShow.prototype.addToWishList = function(a){
