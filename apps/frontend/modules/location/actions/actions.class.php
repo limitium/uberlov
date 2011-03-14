@@ -46,6 +46,7 @@ class locationActions extends sfActions {
     }
 
     public function executeMy(sfWebRequest $request) {
+        $this->csrf = CSRF::getToken();
         $this->locations = $this->getUser()->getProfile()->getLocation();
     }
 
