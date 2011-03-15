@@ -39,6 +39,9 @@ mapModule.prototype.initMap = function(){
             },
             error : function () {
                 alert('maxmind.com жопят данные :\'(');
+                params.lat =  55.043561639001645;
+                params.lng = 36.627886718750005;
+                self.startMap.call(self,params);
             },
             dataType: "script"
         });
@@ -60,6 +63,7 @@ mapModule.prototype.startMap = function(params){
     this.map = new gm.Map($("#map_canvas").get(0), opt);
     this.setType(params.mt); 
     
+    $(this).trigger('startMap');
     this.initListeners();
     this.initHandlers();    
     this.loadData();
