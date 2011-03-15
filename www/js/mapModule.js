@@ -1,6 +1,7 @@
 gm = google.maps;
 
 function mapModule(){
+    this.$ = $(this);
     this.defaultZoom = 8;
     this.defaultMapType = 'roadmap'
     this.editor = null;
@@ -10,13 +11,16 @@ function mapModule(){
     this.selected = [];
     this.locations = {};
     
-    this.initMenu();
-    this.initMap();
 }
 
 mapModule.name = 'mapModule';
 ModuleManager.add(mapModule);
 
+mapModule.prototype.afterInit = function(){
+    this.initMenu();
+    this.initMap();
+    
+}
 mapModule.prototype.initMap = function(){
     var params = {}; 
     if(window.location.hash.length){
@@ -63,18 +67,10 @@ mapModule.prototype.startMap = function(params){
     this.map = new gm.Map($("#map_canvas").get(0), opt);
     this.setType(params.mt); 
     
-    $(this).trigger('startMap');
-    this.initListeners();
+    this.$.trigger('startMap');
+    
     this.initHandlers();    
     this.loadData();
-}
-
-mapModule.prototype.initListeners = function(){
-    this.listeners = {
-        dragend: gm.event.addListener(this.map,'dragend',this.updateUrl.delegate(this)),
-        click: gm.event.addListener(this.map,'click',this.updateUrl.delegate(this)),
-        zoom_changed: gm.event.addListener(this.map,'zoom_changed',this.updateUrl.delegate(this))
-    };
 }
 
 mapModule.prototype.initHandlers= function(){
@@ -223,17 +219,6 @@ mapModule.prototype.centerBar = function(){
     this.bar.css('left',$('#map').width()/2-this.bar.width()/2);
 }
 
-mapModule.prototype.updateUrl = function(){
-    var params = window.location.hash.length ? $.unparam(window.location.hash.substr(1)) : {};
-    $.extend(params, {
-        lat:this.map.getCenter().lat(),
-        lng:this.map.getCenter().lng(),
-        z:this.map.getZoom(),
-        mt:this.typeToId[this.map.getMapTypeId()]
-    });
-    window.location.hash=$.param(params);
-}
-
 mapModule.prototype.loadData = function(){
     var self = this;
     app.getJSON('/collector/data', function(data){
@@ -285,7 +270,7 @@ mapModule.prototype.setType = function(type){
     .attr('disabled','disabled')
     .addClass('disabled');
     this.map.setMapTypeId(type);
-    this.updateUrl();
+    this.$.trigger('changeMapType',type);
 }
 
 mapModule.prototype.setEditor = function(editor){

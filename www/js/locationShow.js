@@ -13,18 +13,19 @@ ModuleManager.add(locationShow);
 locationShow.prototype.afterInit = function(){
     fb('initing... locationShow' )
     this.initListeners();
+    this.mm = app.getModule('mapModule');
+    this.mm.$.bind('startMap',this.onStartMap.delegate(this));
+}
+
+locationShow.prototype.onStartMap = function(){
     this.resizeMap();
     this.toLocation();
 }
 
+
 locationShow.prototype.initListeners = function(){
     $('.locationMap .name a').click(this.toLocation.delegate(this));    
     $('.tabPanel span').click(this.onTabClick.delegate(this));
-    
-    var mapListeners = app.getModule('mapModule').listeners;
-    gm.event.removeListener(mapListeners.dragend);
-    gm.event.removeListener(mapListeners.zoom_changed);
-    gm.event.removeListener(mapListeners.click);
 }
 
 locationShow.prototype.resizeMap= function(){
