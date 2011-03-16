@@ -3,6 +3,8 @@ gm = google.maps;
 function mapModule(){
     this.$ = $(this);
     this.defaultZoom = 8;
+    this.defaultLat = 55.043561639001645;
+    this.defaultLng = 36.627886718750005;
     this.defaultMapType = 'roadmap'
     this.editor = null;
     this.infoWindow = new gm.InfoWindow();
@@ -28,11 +30,17 @@ mapModule.prototype.initMap = function(){
     }
     params.z = parseInt(params.z) || this.defaultZoom;
     params.mt = this.idToType[parseFloat(params.mt)] || this.defaultMapType;
-    
-    if(parseFloat(params.lat) && parseFloat(params.lng)){
+    if(app.startLat && app.startLng){
+        params.lat = parseFloat(app.startLat);
+        params.lng = parseFloat(app.startLng);
+        fb('has start location...');
+        this.startMap(params);
+    }else if(parseFloat(params.lat) && parseFloat(params.lng)){
+        fb('from hash...');
         this.startMap(params);
     }else{
         var self = this;
+        fb('getting maxmind data...');
         $.ajax({
             type: "GET",
             url: "http://j.maxmind.com/app/geoip.js",
@@ -40,11 +48,12 @@ mapModule.prototype.initMap = function(){
                 params.lat =  geoip_latitude();
                 params.lng = geoip_longitude();
                 self.startMap.call(self,params);
+                fb('recived');
             },
             error : function () {
                 alert('maxmind.com жопят данные :\'(');
-                params.lat =  55.043561639001645;
-                params.lng = 36.627886718750005;
+                params.lat =  self.defaultLat;
+                params.lng = self.defaultLng;
                 self.startMap.call(self,params);
             },
             dataType: "script"

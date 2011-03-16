@@ -5,9 +5,6 @@ function locationShow(){
         baseZoom: 17,
         mapType: 'hybrid'
     };
-    this.position = $('div.locationMap').attr('position').split(';');
-    app.startLat =parseFloat(this.position[0]);
-    app.startLng =parseFloat(this.position[1]);
 }
 locationShow.name = 'locationShow';
 ModuleManager.add(locationShow);
@@ -16,19 +13,18 @@ ModuleManager.add(locationShow);
 locationShow.prototype.afterInit = function(){
     fb('initing... locationShow' )
     this.initListeners();
-    this.mm = app.getModule('mapModule');
-    this.mm.$.bind('startMap',this.onStartMap.delegate(this));
-}
-
-locationShow.prototype.onStartMap = function(){
     this.resizeMap();
     this.toLocation();
 }
 
-
 locationShow.prototype.initListeners = function(){
     $('.locationMap .name a').click(this.toLocation.delegate(this));    
     $('.tabPanel span').click(this.onTabClick.delegate(this));
+    
+    var mapListeners = app.getModule('mapModule').listeners;
+    gm.event.removeListener(mapListeners.dragend);
+    gm.event.removeListener(mapListeners.zoom_changed);
+    gm.event.removeListener(mapListeners.click);
 }
 
 locationShow.prototype.resizeMap= function(){
@@ -38,9 +34,10 @@ locationShow.prototype.resizeMap= function(){
 }
 
 locationShow.prototype.toLocation = function(){
+    var position = $('div.locationMap').attr('position').split(';');
     this.mm.setOptions({
         zoom: this.cfg.baseZoom,
-        center: new gm.LatLng(parseFloat(this.position[0]), parseFloat(this.position[1]))
+        center: new gm.LatLng(parseFloat(position[0]), parseFloat(position[1]))
     });
     this.mm.setType(this.cfg.mapType);
     return false;
