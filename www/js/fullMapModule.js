@@ -1,58 +1,34 @@
-function locationShow(){
-    this.location = null;
-    this.listeners = {};
-    this.cfg = {
-        baseZoom: 17,
-        mapType: 'hybrid'
+function fullMapModule(){
+}
+
+fullMapModule.name = 'fullMapModule';
+ModuleManager.add(fullMapModule);
+
+fullMapModule.prototype.afterInit = function(){
+    this.mm = app.getModule('mapModule');
+    this.mm.$.bind('startMap',this.onStartMap.delegate(this));
+}
+
+fullMapModule.prototype.onStartMap = function(){
+    this.initListeners();
+}
+
+fullMapModule.prototype.initListeners = function(){
+    this.listeners = {
+        dragend: gm.event.addListener(this.mm.map,'dragend',this.updateUrl.delegate(this)),
+        click: gm.event.addListener(this.mm.map,'click',this.updateUrl.delegate(this)),
+        maptypeid_changed: gm.event.addListener(this.mm.map,'maptypeid_changed',this.updateUrl.delegate(this)),
+        zoom_changed: gm.event.addListener(this.mm.map,'zoom_changed',this.updateUrl.delegate(this))
     };
 }
-locationShow.name = 'locationShow';
-ModuleManager.add(locationShow);
 
-
-locationShow.prototype.afterInit = function(){
-    fb('initing... locationShow' )
-    this.initListeners();
-    this.resizeMap();
-    this.toLocation();
-}
-
-locationShow.prototype.initListeners = function(){
-    $('.locationMap .name a').click(this.toLocation.delegate(this));    
-    $('.tabPanel span').click(this.onTabClick.delegate(this));
-    
-    var mapListeners = app.getModule('mapModule').listeners;
-    gm.event.removeListener(mapListeners.dragend);
-    gm.event.removeListener(mapListeners.zoom_changed);
-    gm.event.removeListener(mapListeners.click);
-}
-
-locationShow.prototype.resizeMap= function(){
-    this.mm = app.getModule('mapModule');
-    $('#map_canvas,#map').height(300)
-    gm.event.trigger(this.mm.map, 'resize');
-}
-
-locationShow.prototype.toLocation = function(){
-    var position = $('div.locationMap').attr('position').split(';');
-    this.mm.setOptions({
-        zoom: this.cfg.baseZoom,
-        center: new gm.LatLng(parseFloat(position[0]), parseFloat(position[1]))
+fullMapModule.prototype.updateUrl = function(){
+    var params = window.location.hash.length ? $.unparam(window.location.hash.substr(1)) : {};
+    $.extend(params, {
+        lat:this.mm.map.getCenter().lat(),
+        lng:this.mm.map.getCenter().lng(),
+        z:this.mm.map.getZoom(),
+        mt:this.mm.typeToId[this.mm.map.getMapTypeId()]
     });
-    this.mm.setType(this.cfg.mapType);
-    return false;
-}
-
-locationShow.prototype.onTabClick= function(click){
-    var tabId = click.currentTarget.id;
-    var containerId = tabId.substr(0,tabId.length-3) + 'Container';
-    $('.tabPanel span').each(function(){
-        if(this.id != tabId){
-            $(this).removeClass('selected');
-            $('#'+this.id.substr(0,this.id.length-3) + 'Container').removeClass('selected');
-        }
-    });
-    
-    $(click.currentTarget).addClass('selected');
-    $('#'+containerId).addClass('selected');
+    window.location.hash=$.param(params);
 }
