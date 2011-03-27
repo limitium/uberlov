@@ -3,7 +3,7 @@
 <div class="profile">
     <div class="personal">
         <div class="info">
-            <?php include_partial('vote/vote', array('obj' => $profile, 'objType' => 'profile')); ?>
+            <?php include_partial('vote/vote', array('obj' => $profile, 'objType' => 'Profile')); ?>
             <div class="userpic">
                 <?php echo image_tag($profile->getUserpic() ? '/images/userpic/' . $profile->getUserpic() : '/images/userpic/' . ($profile->getSex() ? 'male' : 'female') . '.png') ?>
             </div>
@@ -30,7 +30,7 @@
     <?php if ($view == 'comments'): ?>
         <?php include_partial('comments', array('comments' => $comments)); ?>
     <?php elseif ($view == 'locations'): ?>
-        <?php include_partial('locations', array('locations' => $locations)); ?>
+        <?php include_partial('location/location_list', array('locations' => $locations)); ?>
     <?php elseif ($view == 'profits'): ?>
         <?php include_partial('profits', array('profits' => $profits)); ?>
     <?php else: ?>

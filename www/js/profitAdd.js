@@ -28,7 +28,6 @@ profitAdd.prototype.initDate= function(){
 }
 
 profitAdd.prototype.initListeners = function(){
-
     $('#addProfitDetail').click(this.onAdd.delegate(this));
     $('.removeProfitDetail').live('click',this.onRemove.delegate(this));
     $('.profitNew form').submit(this.onSubmit.delegate(this));

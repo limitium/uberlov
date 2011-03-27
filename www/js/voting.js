@@ -19,11 +19,15 @@ function vote(){
                 up: link.hasClass('plus')+0,
                 id: link.parent().attr('id').substr(4)
             },
-            handler: function(rating){
-                $('span',link.parent()).html('['+rating+']');
-                $('a',link.parent()).removeClass('voted');
+            handler: function(response){
+                $('span',link.parent()).html('['+response.rating+']');
                 link.parent().removeClass('voting');
-                link.addClass('voted');
+                if(response.status=='ok'){
+                    $('a',link.parent()).removeClass('voted');
+                    link.addClass('voted');
+                }else{
+                    app.popUp('Голосуешь за себя!?<br />Сгоришь в аду!');
+                }
             }
         })
         return false;

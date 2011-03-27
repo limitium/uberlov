@@ -1,4 +1,3 @@
-gm = google.maps;
 
 function mapModule(){
     this.$ = $(this);
@@ -330,7 +329,7 @@ mapModule.prototype.idToType = {
 }
 
 
-
+window.gm = google.maps;
 function mapOverlay(point,html,map,overlay){
     this.point = point;
     this.html = html;
