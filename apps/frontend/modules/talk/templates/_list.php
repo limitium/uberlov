@@ -1,5 +1,5 @@
 <?php use_helper('text'); ?>
-<?php foreach ($pagerLayout->execute() as $talk): ?>
+<?php foreach ($pager->execute() as $talk): ?>
     <div class="talkBrief">
     <?php echo link_to($talk->getName(), 'talk/show?id=' . $talk->getId()); ?>
     <?php echo simple_format_text(truncate_text($talk->getMessage(), 100, '...', true)); ?>
@@ -18,4 +18,4 @@
             </div>
         </div>
 <?php endforeach; ?>
-<?php $pagerLayout->display(); ?>
+<?php $pager->display(); ?>
