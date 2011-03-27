@@ -1,0 +1,29 @@
+.address {
+    clear: both;
+}
+.addressParts ul li{
+    list-style-type: none;
+}
+.addressParts{
+    float:left;
+}
+.locationList{
+    float:left;
+}
+
+.locationList ul li{
+    clear: both;
+    list-style-type: none;
+}
+.locationList ul li a{
+    clear:both;
+}
+.locationList ul li div.createdBy{
+    clear:both;
+    float: none;
+}
+.pager{
+    clear: both;
+}
+
+

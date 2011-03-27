@@ -5,7 +5,7 @@
     <?php if (!$form->getObject()->isNew()): ?>
         <input type="hidden" name="sf_method" value="put" />
     <?php endif; ?>
-        <table>
+        <table class="form">
             <tfoot>
                 <tr>
                     <td colspan="2">
@@ -42,5 +42,5 @@
 
 <?php use_javascript('../sfDoctrineActAsTaggablePlugin/js/pkTagahead'); ?>
                     <script>
-                        pkTagahead(<?php echo json_encode(url_for("tag/suggest")) ?>);
+                        pkTagahead(<?php echo json_encode(url_for("talk/suggest")) ?>);
 </script>

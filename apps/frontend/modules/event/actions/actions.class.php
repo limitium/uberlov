@@ -11,11 +11,12 @@
 class eventActions extends sfActions {
 
     public function executeList(sfWebRequest $request) {
-        $this->events = Doctrine::getTable('FishEvent')
-                        ->createQuery('f')
-                        ->where('f.date > ?', array(date('Y-m-d', time())))
-                        ->orderBy('f.date ASC')
-                        ->execute();
+        $this->pager = htPagerLayout::create(Doctrine::getTable('FishEvent')
+                                ->createQuery('f')
+                                ->where('f.date >= ?', array(date('Y-m-d', time())))
+                                ->orderBy('f.date ASC'),
+                        'event/list?page={%page_number}',
+                        $request->getParameter('page', 1));
     }
 
     public function executeShow(sfWebRequest $request) {
@@ -24,12 +25,15 @@ class eventActions extends sfActions {
 
         $this->comments = Comment::getFor($this->event);
 
+        //@todo: check out where location id
         $this->form = new CommentFishEventForm();
-        $this->form->setDefault('fishevent_id', $this->event->getId());
+        $this->form->setCommented($this->event);
     }
 
     public function executeNew(sfWebRequest $request) {
+        $this->forward404Unless($this->location = Doctrine::getTable('Location')->find(array($request->getParameter('location'))), sprintf('Location does not exist (%s).', $request->getParameter('id')));
         $this->form = new FishEventForm();
+        $this->form->setDefault('location_id', $this->location->getId());
     }
 
     public function executeCreate(sfWebRequest $request) {
@@ -71,7 +75,7 @@ class eventActions extends sfActions {
         if ($form->isValid()) {
             $fish_event = $form->save();
 
-            $this->redirect('event/edit?id=' . $fish_event->getId());
+            $this->redirect('event/show?id=' . $fish_event->getId());
         }
     }
 

@@ -1,15 +1,14 @@
 function formShow(){
     this.inputs = [];
+    this.initListeners();
+    this.moveLabels();
 }
 formShow.name = 'formShow';
 ModuleManager.add(formShow);
 
 
 formShow.prototype.afterInit = function(){
-    fb('initing... formShow' )
-    this.initListeners();
-    this.moveLabels();
-}
+    }
 
 formShow.prototype.initListeners = function(){
     var self = this;

@@ -13,8 +13,22 @@ ModuleManager.add = function(module){
 }
 ModuleManager.initModules = function(){
     for(module in ModuleManager.modules){
-        app.modules[module] = new ModuleManager.modules[module]();
-        fb('created module ' + module);
-        app.$.bind('inited',app.modules[module].afterInit.delegate(app.modules[module]));
+        try{
+            app.modules[module] = new ModuleManager.modules[module]();
+            fb('created module ' + module);
+            app.$.bind('inited',function(module){
+                return function(){
+                    try{
+                        app.modules[module].afterInit();
+                    }catch (e){
+                        fb('error while initing ' + module);
+                        fb(e);
+                    }
+                }
+            }(module));
+        }catch(e){
+            fb('error while creating module ' + module);
+            fb(e)
+        }
     }
 }

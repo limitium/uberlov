@@ -1,9 +1,14 @@
-<h1>Редактирование <?php echo $form->getObject()->getNickName(); ?></h1>
+<h2>Редактирование <?php echo $form->getObject()->getNickName(); ?></h2>
+<?php use_javascript('tabPanel'); ?>
 <div class="tabPanel">
     <ul>
-        <li><span href="#" id="tabComments" class="selected">Профаил</span></li>
-        <li><span href="#" id="tabProfits">Смена пароля</span></li>
-        <li><span href="#" id="tabEvents">Смена ящика</span></li>
+        <li><span href="#" id="profileTab" class="selected">Профаил</span></li>
+        <li><span href="#" id="settingsTab">Настройки</span></li>
+        <li><span href="#" id="passwordTab">Смена пароля</span></li>
+        <li><span href="#" id="mailTab">Смена ящика</span></li>
     </ul>
 </div>
-<?php include_partial('form', array('form' => $form)) ?>
+<?php include_partial('editProfileTab', array('form' => $form)); ?>
+<?php include_partial('editSettingsTab', array()); ?>
+<?php include_partial('editPasswordTab', array()); ?>
+<?php include_partial('editMailTab', array('form' => $mailForm, 'profile' => $form->getObject())); ?>

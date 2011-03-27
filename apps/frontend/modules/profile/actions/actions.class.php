@@ -58,7 +58,7 @@ class profileActions extends sfActions {
                         ->from('Location l')
                         ->where('l.created_by = ?', $this->profile->getId())
                         ->execute();
-
+//@todo: add events
         $this->total = 0;
         $this->best = array(
             'name' => 'фигавль',
@@ -98,6 +98,19 @@ class profileActions extends sfActions {
         $this->form = new sfGuardUserProfileForm($profile);
         $this->form->setDefault('first_name', $profile->getFirstName());
         $this->form->setDefault('last_name', $profile->getLastName());
+
+
+        $this->forward404Unless(sfConfig::get('app_sfForkedApply_mail_editable'));
+        $formClass = sfConfig::get('app_sfForkedApply_editEmailForm');
+        if (!( ($this->mailForm = new $formClass() ) instanceof sfApplyEditEmailForm)) {
+            // if the form isn't instance of sfApplySettingsForm, we don't accept it
+            throw new InvalidArgumentException(sfContext::getInstance()->
+                            getI18N()->
+                            __('The custom %action% form should be instance of %form%',
+                                    array('%action%' => 'editEmail',
+                                        '%form%' => 'sfApplyEditEmailForm'), 'sfForkedApply')
+            );
+        }
     }
 
     public function executeUpdate(sfWebRequest $request) {
@@ -131,6 +144,10 @@ class profileActions extends sfActions {
 
             $this->redirect('profile/show?id=' . $profile->getId());
         }
+    }
+
+    public function executeEditEmail() {
+        $this->forward('sfApply', 'editEmail');
     }
 
 }

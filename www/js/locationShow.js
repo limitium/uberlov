@@ -28,7 +28,6 @@ locationShow.prototype.onStartMap = function(){
 
 locationShow.prototype.initListeners = function(){
     $('.locationMap .name a').click(this.toLocation.delegate(this));    
-    $('.tabPanel span').click(this.onTabClick.delegate(this));
 }
 
 locationShow.prototype.resizeMap= function(){
@@ -44,18 +43,4 @@ locationShow.prototype.toLocation = function(){
     });
     this.mm.setType(this.cfg.mapType);
     return false;
-}
-
-locationShow.prototype.onTabClick= function(click){
-    var tabId = click.currentTarget.id;
-    var containerId = tabId.substr(0,tabId.length-3) + 'Container';
-    $('.tabPanel span').each(function(){
-        if(this.id != tabId){
-            $(this).removeClass('selected');
-            $('#'+this.id.substr(0,this.id.length-3) + 'Container').removeClass('selected');
-        }
-    });
-    
-    $(click.currentTarget).addClass('selected');
-    $('#'+containerId).addClass('selected');
 }

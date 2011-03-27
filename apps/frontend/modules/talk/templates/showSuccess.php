@@ -18,7 +18,7 @@
                 <ul>
             <?php foreach ($talk->getTags() as $tag): ?>
                 <li>
-                    <span><?php echo link_to($tag, 'tag/word?word=' . $tag); ?></span>
+                    <span><?php echo link_to($tag, 'talk/tag?tag=' . $tag); ?></span>
                 </li>
             <?php endforeach ?>
             </ul>
@@ -37,7 +37,7 @@
             </ul>
         </div>
 
-    <?php include_partial('comment/tree', array('for' => 'talk', 'form' => $form, 'comments' => $comments)); ?>
+    <?php include_partial('comment/tree', array('form' => $form, 'comments' => $comments)); ?>
             </div>
 <?php slot('extra'); ?>
                 <div id="talkRelated">

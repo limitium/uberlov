@@ -21,3 +21,29 @@
     float: left;
     margin:0px 5px;
 }
+
+
+#profileContainer {
+    display: none;
+}
+#profileContainer.selected{
+    display: block;
+}
+#settingsContainer {
+    display: none;
+}
+#settingsContainer.selected{
+    display: block;
+}
+#passwordContainer {
+    display: none;
+}
+#passwordContainer.selected{
+    display: block;
+}
+#mailContainer {
+    display: none;
+}
+#mailContainer.selected{
+    display: block;
+}
