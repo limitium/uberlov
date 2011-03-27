@@ -11,7 +11,11 @@
 class inboxActions extends sfActions {
 
     public function executeList(sfWebRequest $request) {
-        $this->inboxes = $this->getUser()->getProfile()->getInbox();
+        $this->pager = htPagerLayout::create(Doctrine::getTable('Inbox')
+                                ->getInboxQuery($this->getUser()->getProfile()),
+                        'inbox/list?page={%page_number}',
+                        $request->getParameter('page', 1));
+
         $this->csrf = CSRF::getToken();
     }
 
@@ -36,7 +40,7 @@ class inboxActions extends sfActions {
         $this->comments = Comment::getFor($this->inbox);
 
         $this->form = new CommentInboxForm();
-        $this->form->setDefault('inbox_id', $this->inbox->getId());
+        $this->form->setCommented($this->inbox);
         $this->form->setDefault('noVote', 1);
 
         $this->inboxed = Doctrine_Query::create()

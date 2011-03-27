@@ -8,12 +8,12 @@
  * @property integer $id
  * @property integer $parent
  * @property string $message
- * @property string $toward
+ * @property  $toward
  * @property integer $location_id
  * @property integer $profit_id
  * @property integer $inbox_id
  * @property integer $talk_id
- * @property integer $FishEvent_id
+ * @property integer $fish_event_id
  * @property Doctrine_Collection $sfGuardUserProfile
  * @property Doctrine_Collection $VoteComment
  * @property Doctrine_Collection $ReadComment
@@ -21,24 +21,22 @@
  * @method integer             getId()                 Returns the current record's "id" value
  * @method integer             getParent()             Returns the current record's "parent" value
  * @method string              getMessage()            Returns the current record's "message" value
- * @method string              getToward()             Returns the current record's "toward" value
  * @method integer             getLocationId()         Returns the current record's "location_id" value
  * @method integer             getProfitId()           Returns the current record's "profit_id" value
  * @method integer             getInboxId()            Returns the current record's "inbox_id" value
  * @method integer             getTalkId()             Returns the current record's "talk_id" value
- * @method integer             getFishEventId()        Returns the current record's "FishEvent_id" value
+ * @method integer             getFishEventId()        Returns the current record's "fish_event_id" value
  * @method Doctrine_Collection getSfGuardUserProfile() Returns the current record's "sfGuardUserProfile" collection
  * @method Doctrine_Collection getVoteComment()        Returns the current record's "VoteComment" collection
  * @method Doctrine_Collection getReadComment()        Returns the current record's "ReadComment" collection
  * @method Comment             setId()                 Sets the current record's "id" value
  * @method Comment             setParent()             Sets the current record's "parent" value
  * @method Comment             setMessage()            Sets the current record's "message" value
- * @method Comment             setToward()             Sets the current record's "toward" value
  * @method Comment             setLocationId()         Sets the current record's "location_id" value
  * @method Comment             setProfitId()           Sets the current record's "profit_id" value
  * @method Comment             setInboxId()            Sets the current record's "inbox_id" value
  * @method Comment             setTalkId()             Sets the current record's "talk_id" value
- * @method Comment             setFishEventId()        Sets the current record's "FishEvent_id" value
+ * @method Comment             setFishEventId()        Sets the current record's "fish_event_id" value
  * @method Comment             setSfGuardUserProfile() Sets the current record's "sfGuardUserProfile" collection
  * @method Comment             setVoteComment()        Sets the current record's "VoteComment" collection
  * @method Comment             setReadComment()        Sets the current record's "ReadComment" collection
@@ -68,10 +66,7 @@ abstract class BaseComment extends sfDoctrineRecord
              'notnull' => true,
              'length' => '1000',
              ));
-        $this->hasColumn('toward', 'string', 255, array(
-             'type' => 'string',
-             'length' => 255,
-             ));
+        $this->hasColumn('toward', '', null);
         $this->hasColumn('location_id', 'integer', 4, array(
              'type' => 'integer',
              'length' => '4',
@@ -88,14 +83,14 @@ abstract class BaseComment extends sfDoctrineRecord
              'type' => 'integer',
              'length' => '4',
              ));
-        $this->hasColumn('FishEvent_id', 'integer', 4, array(
+        $this->hasColumn('fish_event_id', 'integer', 4, array(
              'type' => 'integer',
              'length' => '4',
              ));
 
-        $this->option('type', 'INNODB');
         $this->option('charset', 'utf8');
         $this->option('collate', 'utf8_general_ci');
+        $this->option('type', 'INNODB');
 
         $this->setSubClasses(array(
              'CommentLocation' => 
@@ -137,23 +132,12 @@ abstract class BaseComment extends sfDoctrineRecord
              'local' => 'id',
              'foreign' => 'comment_id'));
 
+        $timestampable0 = new Doctrine_Template_Timestampable();
+        $nestedset0 = new Doctrine_Template_NestedSet(array(
+             'hasManyRoots' => true,
+             ));
         $blameable0 = new Doctrine_Template_Blameable(array(
              'listener' => 'BlameableFishery',
-             'relations' => 
-             array(
-              'created' => 
-              array(
-              'class' => 'sfGuardUserProfile',
-              'foreign' => 'id',
-              'disabled' => false,
-              ),
-              'updated' => 
-              array(
-              'class' => 'sfGuardUserProfile',
-              'foreign' => 'id',
-              'disabled' => false,
-              ),
-             ),
              'columns' => 
              array(
               'created' => 
@@ -163,17 +147,28 @@ abstract class BaseComment extends sfDoctrineRecord
               ),
               'updated' => 
               array(
-              'length' => 4,
               'type' => 'int',
+              'length' => 4,
+              ),
+             ),
+             'relations' => 
+             array(
+              'created' => 
+              array(
+              'disabled' => false,
+              'class' => 'sfGuardUserProfile',
+              'foreign' => 'id',
+              ),
+              'updated' => 
+              array(
+              'disabled' => false,
+              'class' => 'sfGuardUserProfile',
+              'foreign' => 'id',
               ),
              ),
              ));
-        $timestampable0 = new Doctrine_Template_Timestampable();
-        $nestedset0 = new Doctrine_Template_NestedSet(array(
-             'hasManyRoots' => true,
-             ));
-        $this->actAs($blameable0);
         $this->actAs($timestampable0);
         $this->actAs($nestedset0);
+        $this->actAs($blameable0);
     }
 }

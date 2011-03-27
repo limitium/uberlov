@@ -15,7 +15,7 @@
                 <div id="site_menu">
                     <ul>
                         <li><?php echo link_to('Места', 'collector/locations') ?></li>
-                        <li><?php echo link_to('Отчеты', 'profit/list') ?></li>
+                        <li><?php echo link_to('Отчёты', 'profit/list') ?></li>
                         <li><?php echo link_to('Обсуждения', 'talk/list') ?></li>
                         <li><?php echo link_to('События', 'event/list') ?></li>
                         <?php if ($sf_user->isAnonymous()): ?>
@@ -30,6 +30,7 @@
             <div id="middle">
                 <div id="left_layout">
                     <?php include_component('user', 'menu') ?>
+                    <?php include_component('event', 'last') ?>
                     <?php include_component('location', 'last') ?>
                     <?php include_component('profit', 'last') ?>
                     <?php if (has_slot('extra')): ?>

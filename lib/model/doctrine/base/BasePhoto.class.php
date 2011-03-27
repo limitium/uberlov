@@ -7,16 +7,14 @@
  * 
  * @property integer $id
  * @property string $name
- * @property string $toward
+ * @property  $toward
  * @property integer $location_id
  * 
  * @method integer getId()          Returns the current record's "id" value
  * @method string  getName()        Returns the current record's "name" value
- * @method string  getToward()      Returns the current record's "toward" value
  * @method integer getLocationId()  Returns the current record's "location_id" value
  * @method Photo   setId()          Sets the current record's "id" value
  * @method Photo   setName()        Sets the current record's "name" value
- * @method Photo   setToward()      Sets the current record's "toward" value
  * @method Photo   setLocationId()  Sets the current record's "location_id" value
  * 
  * @package    FISHERY
@@ -40,18 +38,15 @@ abstract class BasePhoto extends sfDoctrineRecord
              'notnull' => true,
              'length' => '36',
              ));
-        $this->hasColumn('toward', 'string', 255, array(
-             'type' => 'string',
-             'length' => 255,
-             ));
+        $this->hasColumn('toward', '', null);
         $this->hasColumn('location_id', 'integer', 4, array(
              'type' => 'integer',
              'length' => '4',
              ));
 
-        $this->option('type', 'INNODB');
         $this->option('charset', 'utf8');
         $this->option('collate', 'utf8_general_ci');
+        $this->option('type', 'INNODB');
 
         $this->setSubClasses(array(
              'PhotoLocation' => 
@@ -66,32 +61,32 @@ abstract class BasePhoto extends sfDoctrineRecord
         parent::setUp();
         $blameable0 = new Doctrine_Template_Blameable(array(
              'listener' => 'BlameableFishery',
-             'relations' => 
-             array(
-              'created' => 
-              array(
-              'class' => 'sfGuardUserProfile',
-              'disabled' => false,
-              'foreign' => 'id',
-              ),
-              'updated' => 
-              array(
-              'class' => 'sfGuardUserProfile',
-              'foreign' => 'id',
-              'disabled' => false,
-              ),
-             ),
              'columns' => 
              array(
               'created' => 
               array(
-              'length' => 4,
               'type' => 'int',
+              'length' => 4,
               ),
               'updated' => 
               array(
               'type' => 'int',
               'length' => 4,
+              ),
+             ),
+             'relations' => 
+             array(
+              'created' => 
+              array(
+              'disabled' => false,
+              'class' => 'sfGuardUserProfile',
+              'foreign' => 'id',
+              ),
+              'updated' => 
+              array(
+              'disabled' => false,
+              'class' => 'sfGuardUserProfile',
+              'foreign' => 'id',
               ),
              ),
              ));

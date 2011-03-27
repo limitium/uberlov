@@ -21,6 +21,7 @@ class addressActions extends sfActions {
         $this->lows = Doctrine_Query::create()->from('AreaLow l')
                         ->where('l.country_id = ?', $this->country->getId())
                         ->execute();
+        $this->pager = $this->getLocationPager($request, $this->country, 'country');
     }
 
     public function executeLow(sfWebRequest $request) {
@@ -29,6 +30,7 @@ class addressActions extends sfActions {
         $this->highs = Doctrine_Query::create()->from('AreaHigh h')
                         ->where('h.area_low_id = ?', $this->low->getId())
                         ->execute();
+        $this->pager = $this->getLocationPager($request, $this->low, 'low');
     }
 
     public function executeHigh(sfWebRequest $request) {
@@ -37,18 +39,25 @@ class addressActions extends sfActions {
         $this->localities = Doctrine_Query::create()->from('Locality l')
                         ->where('l.area_high_id = ?', $this->high->getId())
                         ->execute();
+
+        $this->pager = $this->getLocationPager($request, $this->high, 'high');
     }
 
     public function executeLocality(sfWebRequest $request) {
         $this->forward404Unless($locality = Doctrine::getTable('Locality')->find($request->getParameter('id')), sprintf('Object low does not exist (%s).', $request->getParameter('id')));
         $this->locality = $locality;
-        $this->locations = Doctrine_Query::create()->from('Location l')
+        $this->pager = $this->getLocationPager($request, $this->locality, 'locality');
+    }
+
+    private function getLocationPager(sfWebRequest $request, sfDoctrineRecord $part, $partUrl) {
+        return htPagerLayout::create(Doctrine_Query::create()->from('Location l')
                         ->leftJoin('l.Address a')
-                        ->leftJoin('a.Locality lo')
+                        ->leftJoin('a.' . $part->getTable()->getComponentName() . ' part')
                         ->leftJoin('l.CreatedBy p')
                         ->leftJoin('l.VoteLocation v')
-                        ->where('lo.id = ?', $this->locality->getId())
-                        ->execute();
+                        ->where('part.id = ?', $part->getId()),
+                'address/' . $partUrl . '?id=' . $part->getId() . '&page={%page_number}',
+                $request->getParameter('page', 1));
     }
 
 }

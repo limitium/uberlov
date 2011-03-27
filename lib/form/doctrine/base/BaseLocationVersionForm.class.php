@@ -27,13 +27,6 @@ abstract class BaseLocationVersionForm extends BaseFormDoctrine
       'location_type_id'   => new sfWidgetFormInputText(),
       'location_scope_id'  => new sfWidgetFormInputText(),
       'address_id'         => new sfWidgetFormInputText(),
-      'created_by'         => new sfWidgetFormInputText(),
-      'updated_by'         => new sfWidgetFormInputText(),
-      'latitude'           => new sfWidgetFormInputText(),
-      'longitude'          => new sfWidgetFormInputText(),
-      'slug'               => new sfWidgetFormInputText(),
-      'created_at'         => new sfWidgetFormDateTime(),
-      'updated_at'         => new sfWidgetFormDateTime(),
       'version'            => new sfWidgetFormInputHidden(),
     ));
 
@@ -50,13 +43,6 @@ abstract class BaseLocationVersionForm extends BaseFormDoctrine
       'location_type_id'   => new sfValidatorInteger(array('required' => false)),
       'location_scope_id'  => new sfValidatorInteger(array('required' => false)),
       'address_id'         => new sfValidatorInteger(array('required' => false)),
-      'created_by'         => new sfValidatorPass(),
-      'updated_by'         => new sfValidatorPass(),
-      'latitude'           => new sfValidatorPass(array('required' => false)),
-      'longitude'          => new sfValidatorPass(array('required' => false)),
-      'slug'               => new sfValidatorString(array('max_length' => 255, 'required' => false)),
-      'created_at'         => new sfValidatorDateTime(),
-      'updated_at'         => new sfValidatorDateTime(),
       'version'            => new sfValidatorDoctrineChoice(array('model' => $this->getModelName(), 'column' => 'version', 'required' => false)),
     ));
 

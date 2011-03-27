@@ -22,33 +22,34 @@
         <?php if ($location->getIsFree()): ?>
             <p>Бесплатное</p>
         <?php else: ?>
-            <p><?php echo $location->getPrice() ?></p>
+                <p><?php echo $location->getPrice() ?></p>
         <?php endif; ?>
-    </div>
-    <div class="photo">
+            </div>
+            <div class="photo">
         <?php echo image_tag($location->getPhoto() ? $location->getPhoto() : '/images/location/default.jpg'); ?>
-    </div>
+            </div>
 
-    <div class="description"><?php echo $location->getDescription(); ?></div>
+            <div class="description"><?php echo $location->getDescription(); ?></div>
 
-    <div class="meta">
+            <div class="meta">
         <?php use_javascript('voting'); ?>
         <?php include_partial('vote/vote', array('obj' => $location)); ?>
-        <div>
-            <a href="" id="goToReply">□</a> <?php include_partial('profile/addBy', array('added' => $location)); ?> | <?php echo link_to('тут не так', 'location/edit?id=' . $location->getCreatedBy()->getId()); ?> <?php include_partial('wish', array('location' => $location)); ?>
-            | <a href="" class="commentShowAuthor" author="user<?php echo $location->getCreatedBy(); ?>">●</a>
+                <div>
+                    <a href="" id="goToReply">□</a> <?php include_partial('profile/addBy', array('added' => $location)); ?> | <?php echo link_to('тут не так', 'location/edit?id=' . $location->getCreatedBy()->getId()); ?> <?php include_partial('wish', array('location' => $location)); ?>
+                    | <a href="" class="commentShowAuthor" author="user<?php echo $location->getCreatedBy(); ?>">●</a>
+                </div>
+            </div>
         </div>
-    </div>
-</div>
 
 
-<div class="tabPanel">
-    <ul>
-        <li><span href="#" id="commentTab" class="selected">Комментарии (<i id="commentCounter"><?php echo sizeof($comments); ?></i>)</span></li>
-        <li><span href="#" id="profitTab">Отчеты (<i id="profitCounter"><?php echo sizeof($profits); ?></i>)</span></li>
-        <li><span href="#" id="eventTab">События (<i id="eventCounter"><?php echo sizeof($events); ?></i>)</span></li>
-    </ul>
-</div>
+<?php use_javascript('tabPanel'); ?>
+                <div class="tabPanel">
+                    <ul>
+                        <li><span href="#" id="commentTab" class="selected">Комментарии (<i id="commentCounter"><?php echo sizeof($comments); ?></i>)</span></li>
+                        <li><span href="#" id="profitTab">Отчеты (<i id="profitCounter"><?php echo sizeof($profits); ?></i>)</span></li>
+                        <li><span href="#" id="eventTab">События (<i id="eventCounter"><?php echo sizeof($events); ?></i>)</span></li>
+                    </ul>
+                </div>
 
 <?php include_partial('commentTab', array('form' => $form, 'comments' => $comments)); ?>
 <?php include_partial('profitTab', array('profits' => $profits, 'location' => $location)); ?>

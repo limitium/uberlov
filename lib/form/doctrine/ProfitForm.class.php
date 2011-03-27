@@ -20,7 +20,7 @@ class ProfitForm extends BaseProfitForm {
         $this->widgetSchema['location_id'] = new sfWidgetFormInputHidden();
         $this->widgetSchema['id'] = new sfWidgetFormInputHidden();
         $this->widgetSchema['name'] = new sfWidgetFormInputText();
-        $this->widgetSchema['date'] = new sfWidgetFormInputText();
+        $this->widgetSchema['date'] = new formInputDate();
         $this->widgetSchema['cordage'] = new sfWidgetFormTextarea();
         $this->widgetSchema['description'] = new sfWidgetFormTextarea();
         $this->widgetSchema['details'] = new sfWidgetFormInputHidden();
@@ -37,8 +37,8 @@ class ProfitForm extends BaseProfitForm {
         $this->validatorSchema['cordage'] = new sfValidatorString(array('required' => true));
         $this->validatorSchema['description'] = new sfValidatorString(array('required' => true));
         $this->validatorSchema['details'] = new sfValidatorString(array('required' => true));
-        $this->validatorSchema['weight'] = new sfValidatorNumber();
-        $this->validatorSchema['fish_id'] = new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Fish')));
+        $this->validatorSchema['weight'] = new sfValidatorNumber(array('required' => false));
+        $this->validatorSchema['fish_id'] = new sfValidatorDoctrineChoice(array('required' => false, 'model' => $this->getRelatedModelName('Fish')));
 
         $this->validatorSchema['qty'] = new sfValidatorString();
         $this->validatorSchema['styles'] = new sfValidatorString();

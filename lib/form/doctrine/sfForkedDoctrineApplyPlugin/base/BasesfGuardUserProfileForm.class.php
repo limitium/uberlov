@@ -28,10 +28,10 @@ abstract class BasesfGuardUserProfileForm extends BaseFormDoctrine
       'created_at'        => new sfWidgetFormDateTime(),
       'updated_at'        => new sfWidgetFormDateTime(),
       'wishes_list'       => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'Location')),
-      'inboxes_list'      => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'Inbox')),
-      'read_comment_list' => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'Comment')),
       'requester_list'    => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'sfGuardUserProfile')),
       'accepter_list'     => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'sfGuardUserProfile')),
+      'read_comment_list' => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'Comment')),
+      'inboxes_list'      => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'Inbox')),
     ));
 
     $this->setValidators(array(
@@ -48,10 +48,10 @@ abstract class BasesfGuardUserProfileForm extends BaseFormDoctrine
       'created_at'        => new sfValidatorDateTime(),
       'updated_at'        => new sfValidatorDateTime(),
       'wishes_list'       => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'Location', 'required' => false)),
-      'inboxes_list'      => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'Inbox', 'required' => false)),
-      'read_comment_list' => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'Comment', 'required' => false)),
       'requester_list'    => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'sfGuardUserProfile', 'required' => false)),
       'accepter_list'     => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'sfGuardUserProfile', 'required' => false)),
+      'read_comment_list' => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'Comment', 'required' => false)),
+      'inboxes_list'      => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'Inbox', 'required' => false)),
     ));
 
     $this->validatorSchema->setPostValidator(
@@ -85,16 +85,6 @@ abstract class BasesfGuardUserProfileForm extends BaseFormDoctrine
       $this->setDefault('wishes_list', $this->object->Wishes->getPrimaryKeys());
     }
 
-    if (isset($this->widgetSchema['inboxes_list']))
-    {
-      $this->setDefault('inboxes_list', $this->object->Inboxes->getPrimaryKeys());
-    }
-
-    if (isset($this->widgetSchema['read_comment_list']))
-    {
-      $this->setDefault('read_comment_list', $this->object->ReadComment->getPrimaryKeys());
-    }
-
     if (isset($this->widgetSchema['requester_list']))
     {
       $this->setDefault('requester_list', $this->object->Requester->getPrimaryKeys());
@@ -105,15 +95,25 @@ abstract class BasesfGuardUserProfileForm extends BaseFormDoctrine
       $this->setDefault('accepter_list', $this->object->Accepter->getPrimaryKeys());
     }
 
+    if (isset($this->widgetSchema['read_comment_list']))
+    {
+      $this->setDefault('read_comment_list', $this->object->ReadComment->getPrimaryKeys());
+    }
+
+    if (isset($this->widgetSchema['inboxes_list']))
+    {
+      $this->setDefault('inboxes_list', $this->object->Inboxes->getPrimaryKeys());
+    }
+
   }
 
   protected function doSave($con = null)
   {
     $this->saveWishesList($con);
-    $this->saveInboxesList($con);
-    $this->saveReadCommentList($con);
     $this->saveRequesterList($con);
     $this->saveAccepterList($con);
+    $this->saveReadCommentList($con);
+    $this->saveInboxesList($con);
 
     parent::doSave($con);
   }
@@ -153,82 +153,6 @@ abstract class BasesfGuardUserProfileForm extends BaseFormDoctrine
     if (count($link))
     {
       $this->object->link('Wishes', array_values($link));
-    }
-  }
-
-  public function saveInboxesList($con = null)
-  {
-    if (!$this->isValid())
-    {
-      throw $this->getErrorSchema();
-    }
-
-    if (!isset($this->widgetSchema['inboxes_list']))
-    {
-      // somebody has unset this widget
-      return;
-    }
-
-    if (null === $con)
-    {
-      $con = $this->getConnection();
-    }
-
-    $existing = $this->object->Inboxes->getPrimaryKeys();
-    $values = $this->getValue('inboxes_list');
-    if (!is_array($values))
-    {
-      $values = array();
-    }
-
-    $unlink = array_diff($existing, $values);
-    if (count($unlink))
-    {
-      $this->object->unlink('Inboxes', array_values($unlink));
-    }
-
-    $link = array_diff($values, $existing);
-    if (count($link))
-    {
-      $this->object->link('Inboxes', array_values($link));
-    }
-  }
-
-  public function saveReadCommentList($con = null)
-  {
-    if (!$this->isValid())
-    {
-      throw $this->getErrorSchema();
-    }
-
-    if (!isset($this->widgetSchema['read_comment_list']))
-    {
-      // somebody has unset this widget
-      return;
-    }
-
-    if (null === $con)
-    {
-      $con = $this->getConnection();
-    }
-
-    $existing = $this->object->ReadComment->getPrimaryKeys();
-    $values = $this->getValue('read_comment_list');
-    if (!is_array($values))
-    {
-      $values = array();
-    }
-
-    $unlink = array_diff($existing, $values);
-    if (count($unlink))
-    {
-      $this->object->unlink('ReadComment', array_values($unlink));
-    }
-
-    $link = array_diff($values, $existing);
-    if (count($link))
-    {
-      $this->object->link('ReadComment', array_values($link));
     }
   }
 
@@ -305,6 +229,82 @@ abstract class BasesfGuardUserProfileForm extends BaseFormDoctrine
     if (count($link))
     {
       $this->object->link('Accepter', array_values($link));
+    }
+  }
+
+  public function saveReadCommentList($con = null)
+  {
+    if (!$this->isValid())
+    {
+      throw $this->getErrorSchema();
+    }
+
+    if (!isset($this->widgetSchema['read_comment_list']))
+    {
+      // somebody has unset this widget
+      return;
+    }
+
+    if (null === $con)
+    {
+      $con = $this->getConnection();
+    }
+
+    $existing = $this->object->ReadComment->getPrimaryKeys();
+    $values = $this->getValue('read_comment_list');
+    if (!is_array($values))
+    {
+      $values = array();
+    }
+
+    $unlink = array_diff($existing, $values);
+    if (count($unlink))
+    {
+      $this->object->unlink('ReadComment', array_values($unlink));
+    }
+
+    $link = array_diff($values, $existing);
+    if (count($link))
+    {
+      $this->object->link('ReadComment', array_values($link));
+    }
+  }
+
+  public function saveInboxesList($con = null)
+  {
+    if (!$this->isValid())
+    {
+      throw $this->getErrorSchema();
+    }
+
+    if (!isset($this->widgetSchema['inboxes_list']))
+    {
+      // somebody has unset this widget
+      return;
+    }
+
+    if (null === $con)
+    {
+      $con = $this->getConnection();
+    }
+
+    $existing = $this->object->Inboxes->getPrimaryKeys();
+    $values = $this->getValue('inboxes_list');
+    if (!is_array($values))
+    {
+      $values = array();
+    }
+
+    $unlink = array_diff($existing, $values);
+    if (count($unlink))
+    {
+      $this->object->unlink('Inboxes', array_values($unlink));
+    }
+
+    $link = array_diff($values, $existing);
+    if (count($link))
+    {
+      $this->object->link('Inboxes', array_values($link));
     }
   }
 

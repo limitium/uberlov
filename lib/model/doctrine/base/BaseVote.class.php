@@ -7,7 +7,7 @@
  * 
  * @property integer $value
  * @property integer $voter
- * @property string $toward
+ * @property  $toward
  * @property integer $location_id
  * @property integer $comment_id
  * @property integer $profit_id
@@ -18,7 +18,6 @@
  * 
  * @method integer            getValue()         Returns the current record's "value" value
  * @method integer            getVoter()         Returns the current record's "voter" value
- * @method string             getToward()        Returns the current record's "toward" value
  * @method integer            getLocationId()    Returns the current record's "location_id" value
  * @method integer            getCommentId()     Returns the current record's "comment_id" value
  * @method integer            getProfitId()      Returns the current record's "profit_id" value
@@ -28,7 +27,6 @@
  * @method sfGuardUserProfile getVoter()         Returns the current record's "Voter" value
  * @method Vote               setValue()         Sets the current record's "value" value
  * @method Vote               setVoter()         Sets the current record's "voter" value
- * @method Vote               setToward()        Sets the current record's "toward" value
  * @method Vote               setLocationId()    Sets the current record's "location_id" value
  * @method Vote               setCommentId()     Sets the current record's "comment_id" value
  * @method Vote               setProfitId()      Sets the current record's "profit_id" value
@@ -56,10 +54,7 @@ abstract class BaseVote extends sfDoctrineRecord
              'type' => 'integer',
              'length' => '4',
              ));
-        $this->hasColumn('toward', 'string', 255, array(
-             'type' => 'string',
-             'length' => 255,
-             ));
+        $this->hasColumn('toward', '', null);
         $this->hasColumn('location_id', 'integer', 4, array(
              'type' => 'integer',
              'length' => '4',
@@ -85,9 +80,9 @@ abstract class BaseVote extends sfDoctrineRecord
              'length' => '4',
              ));
 
-        $this->option('type', 'INNODB');
         $this->option('charset', 'utf8');
         $this->option('collate', 'utf8_general_ci');
+        $this->option('type', 'INNODB');
 
         $this->setSubClasses(array(
              'VoteLocation' => 

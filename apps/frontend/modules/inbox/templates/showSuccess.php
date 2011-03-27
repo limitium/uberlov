@@ -21,7 +21,7 @@
         </ul>
     </div>
 
-    <?php include_partial('comment/tree', array('for' => 'inbox', 'form' => $form, 'comments' => $comments, 'type' => 'noVote')); ?>
+    <?php include_partial('comment/tree', array('form' => $form, 'comments' => $comments, 'type' => 'noVote')); ?>
 </div>
 
 <div id="inboxControl">

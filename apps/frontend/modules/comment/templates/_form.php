@@ -2,7 +2,7 @@
 <?php use_javascripts_for_form($form) ?>
 
 <div id="newComment">
-    <form action="<?php echo url_for('comment/' . $toward) ?>" method="post" <?php $form->isMultipart() and print 'enctype="multipart/form-data" ' ?>>
+    <form action="<?php echo url_for('comment/for?component=' . $form->getCommentedName()  ) ?>" method="post" <?php $form->isMultipart() and print 'enctype="multipart/form-data" ' ?>>
         <table>
             <tfoot>
                 <tr>
@@ -14,8 +14,8 @@
             </tfoot>
             <tbody>
                 <?php echo $form->renderGlobalErrors() ?>
-                <tr>
-                    <td>
+                        <tr>
+                            <td>
                         <?php echo $form['message']->renderError() ?>
                         <?php echo $form['message'] ?>
                     </td>

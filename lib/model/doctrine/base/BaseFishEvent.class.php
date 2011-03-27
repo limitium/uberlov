@@ -72,9 +72,9 @@ abstract class BaseFishEvent extends sfDoctrineRecord
              'length' => '4',
              ));
 
-        $this->option('type', 'INNODB');
         $this->option('charset', 'utf8');
         $this->option('collate', 'utf8_general_ci');
+        $this->option('type', 'INNODB');
     }
 
     public function setUp()
@@ -90,41 +90,41 @@ abstract class BaseFishEvent extends sfDoctrineRecord
 
         $this->hasMany('CommentFishEvent', array(
              'local' => 'id',
-             'foreign' => 'FishEvent_id'));
+             'foreign' => 'fish_event_id'));
 
+        $timestampable0 = new Doctrine_Template_Timestampable();
         $blameable0 = new Doctrine_Template_Blameable(array(
              'listener' => 'BlameableFishery',
-             'relations' => 
-             array(
-              'created' => 
-              array(
-              'class' => 'sfGuardUserProfile',
-              'disabled' => false,
-              'foreign' => 'id',
-              ),
-              'updated' => 
-              array(
-              'class' => 'sfGuardUserProfile',
-              'disabled' => false,
-              'foreign' => 'id',
-              ),
-             ),
              'columns' => 
              array(
               'created' => 
               array(
-              'length' => 4,
               'type' => 'int',
+              'length' => 4,
               ),
               'updated' => 
               array(
-              'length' => 4,
               'type' => 'int',
+              'length' => 4,
+              ),
+             ),
+             'relations' => 
+             array(
+              'created' => 
+              array(
+              'disabled' => false,
+              'class' => 'sfGuardUserProfile',
+              'foreign' => 'id',
+              ),
+              'updated' => 
+              array(
+              'disabled' => false,
+              'class' => 'sfGuardUserProfile',
+              'foreign' => 'id',
               ),
              ),
              ));
-        $timestampable0 = new Doctrine_Template_Timestampable();
-        $this->actAs($blameable0);
         $this->actAs($timestampable0);
+        $this->actAs($blameable0);
     }
 }

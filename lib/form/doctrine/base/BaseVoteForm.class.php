@@ -31,7 +31,7 @@ abstract class BaseVoteForm extends BaseFormDoctrine
       'id'            => new sfValidatorDoctrineChoice(array('model' => $this->getModelName(), 'column' => 'id', 'required' => false)),
       'value'         => new sfValidatorInteger(),
       'voter'         => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Voter'), 'required' => false)),
-      'toward'        => new sfValidatorString(array('max_length' => 255, 'required' => false)),
+      'toward'        => new sfValidatorPass(array('required' => false)),
       'location_id'   => new sfValidatorInteger(array('required' => false)),
       'comment_id'    => new sfValidatorInteger(array('required' => false)),
       'profit_id'     => new sfValidatorInteger(array('required' => false)),

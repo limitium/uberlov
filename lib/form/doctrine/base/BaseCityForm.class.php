@@ -15,13 +15,15 @@ abstract class BaseCityForm extends BaseFormDoctrine
   public function setup()
   {
     $this->setWidgets(array(
-      'id'   => new sfWidgetFormInputHidden(),
-      'name' => new sfWidgetFormInputText(),
+      'id'         => new sfWidgetFormInputHidden(),
+      'name'       => new sfWidgetFormInputText(),
+      'country_id' => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Country'), 'add_empty' => true)),
     ));
 
     $this->setValidators(array(
-      'id'   => new sfValidatorDoctrineChoice(array('model' => $this->getModelName(), 'column' => 'id', 'required' => false)),
-      'name' => new sfValidatorString(array('max_length' => 30)),
+      'id'         => new sfValidatorDoctrineChoice(array('model' => $this->getModelName(), 'column' => 'id', 'required' => false)),
+      'name'       => new sfValidatorString(array('max_length' => 30)),
+      'country_id' => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Country'), 'required' => false)),
     ));
 
     $this->widgetSchema->setNameFormat('city[%s]');

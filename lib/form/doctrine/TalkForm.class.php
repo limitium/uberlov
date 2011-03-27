@@ -30,4 +30,14 @@ class TalkForm extends BaseTalkForm {
         ));
     }
 
+    public function getStylesheets() {
+        return array(
+            '/css/form.css' => 'screen'
+        );
+    }
+
+    public function getJavaScripts() {
+        return array('/js/formShow.js');
+    }
+
 }

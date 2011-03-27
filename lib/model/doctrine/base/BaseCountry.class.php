@@ -9,15 +9,18 @@
  * @property string $name
  * @property Doctrine_Collection $Address
  * @property Doctrine_Collection $AreaLow
+ * @property Doctrine_Collection $City
  * 
  * @method integer             getId()      Returns the current record's "id" value
  * @method string              getName()    Returns the current record's "name" value
  * @method Doctrine_Collection getAddress() Returns the current record's "Address" collection
  * @method Doctrine_Collection getAreaLow() Returns the current record's "AreaLow" collection
+ * @method Doctrine_Collection getCity()    Returns the current record's "City" collection
  * @method Country             setId()      Sets the current record's "id" value
  * @method Country             setName()    Sets the current record's "name" value
  * @method Country             setAddress() Sets the current record's "Address" collection
  * @method Country             setAreaLow() Sets the current record's "AreaLow" collection
+ * @method Country             setCity()    Sets the current record's "City" collection
  * 
  * @package    FISHERY
  * @subpackage model
@@ -42,9 +45,9 @@ abstract class BaseCountry extends sfDoctrineRecord
              'length' => '255',
              ));
 
-        $this->option('type', 'INNODB');
         $this->option('charset', 'utf8');
         $this->option('collate', 'utf8_general_ci');
+        $this->option('type', 'INNODB');
     }
 
     public function setUp()
@@ -55,6 +58,10 @@ abstract class BaseCountry extends sfDoctrineRecord
              'foreign' => 'country_id'));
 
         $this->hasMany('AreaLow', array(
+             'local' => 'id',
+             'foreign' => 'country_id'));
+
+        $this->hasMany('City', array(
              'local' => 'id',
              'foreign' => 'country_id'));
     }

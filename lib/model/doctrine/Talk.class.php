@@ -37,20 +37,4 @@ class Talk extends BaseTalk {
         return array_reverse($sections);
     }
 
-    public static function getPager(Doctrine_Query $query, $url, $curPage = 1) {
-        $pagerLayout = new htPagerLayout(
-                        new Doctrine_Pager(
-                                $query,
-                                $curPage,
-                                5
-                        ),
-                        new Doctrine_Pager_Range_Sliding(array(
-                            'chunk' => 10
-                        )),
-                        $url
-        );
-
-        return $pagerLayout;
-    }
-
 }

@@ -17,7 +17,7 @@ class FishEventForm extends BaseFishEventForm {
                 $this['updated_by']
         );
         $this->widgetSchema['location_id'] = new sfWidgetFormInputHidden();
-        $this->widgetSchema['date'] = new sfWidgetFormInputText();
+        $this->widgetSchema['date'] = new formInputDate();
 
         $this->validatorSchema['location_id'] = new sfValidatorDoctrineChoice(array('model' => 'Location', 'required' => true));
         $this->validatorSchema['date'] = new sfValidatorDate(array('date_format' => "/[0-2][0-9]\.[0-1][0-9]\.[0-9]{4}/", 'with_time' => false, 'required' => true, 'date_format_error' => 'd.m.Y'));
@@ -27,6 +27,16 @@ class FishEventForm extends BaseFishEventForm {
             'description' => 'Описание',
             'date' => 'Дата начала',
         ));
+    }
+
+    public function getStylesheets() {
+        return array(
+            '/css/form.css' => 'screen'
+        );
+    }
+
+    public function getJavaScripts() {
+        return array('/js/formShow.js');
     }
 
 }

@@ -2,14 +2,23 @@
     app.csrf.inbox = "<?php echo $csrf; ?>";
 </script>
 <?php use_javascript('inbox'); ?>
-<h2>Инбоксы</h2>
+<?php use_helper('text'); ?>
+<?php $inboxes = $pager->execute(); ?>
+<h2>Последние отчёты</h2>
+
 <div class="inboxContainer">
-    <a href="<?php echo url_for('inbox/new') ?>">Написать</a>
-    <ul>
+    <?php if (count($inboxes)) : ?>
+        <a href="<?php echo url_for('inbox/new') ?>">Написать</a>
+        <ul>
         <?php foreach ($inboxes as $inbox): ?>
             <li>
             <?php include_partial('brief', array('inbox' => $inbox)) ?>
         </li>
         <?php endforeach; ?>
-    </ul>
+        </ul>
+    <?php else: ?>
+                Инбоксов нет.
+    <?php endif; ?>
+    <?php $pager->display(); ?>
 </div>
+

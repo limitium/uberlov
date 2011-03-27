@@ -25,10 +25,10 @@ abstract class BasesfGuardUserProfileFormFilter extends BaseFormFilterDoctrine
       'created_at'        => new sfWidgetFormFilterDate(array('from_date' => new sfWidgetFormDate(), 'to_date' => new sfWidgetFormDate(), 'with_empty' => false)),
       'updated_at'        => new sfWidgetFormFilterDate(array('from_date' => new sfWidgetFormDate(), 'to_date' => new sfWidgetFormDate(), 'with_empty' => false)),
       'wishes_list'       => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'Location')),
-      'inboxes_list'      => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'Inbox')),
-      'read_comment_list' => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'Comment')),
       'requester_list'    => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'sfGuardUserProfile')),
       'accepter_list'     => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'sfGuardUserProfile')),
+      'read_comment_list' => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'Comment')),
+      'inboxes_list'      => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'Inbox')),
     ));
 
     $this->setValidators(array(
@@ -44,10 +44,10 @@ abstract class BasesfGuardUserProfileFormFilter extends BaseFormFilterDoctrine
       'created_at'        => new sfValidatorDateRange(array('required' => false, 'from_date' => new sfValidatorDateTime(array('required' => false, 'datetime_output' => 'Y-m-d 00:00:00')), 'to_date' => new sfValidatorDateTime(array('required' => false, 'datetime_output' => 'Y-m-d 23:59:59')))),
       'updated_at'        => new sfValidatorDateRange(array('required' => false, 'from_date' => new sfValidatorDateTime(array('required' => false, 'datetime_output' => 'Y-m-d 00:00:00')), 'to_date' => new sfValidatorDateTime(array('required' => false, 'datetime_output' => 'Y-m-d 23:59:59')))),
       'wishes_list'       => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'Location', 'required' => false)),
-      'inboxes_list'      => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'Inbox', 'required' => false)),
-      'read_comment_list' => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'Comment', 'required' => false)),
       'requester_list'    => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'sfGuardUserProfile', 'required' => false)),
       'accepter_list'     => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'sfGuardUserProfile', 'required' => false)),
+      'read_comment_list' => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'Comment', 'required' => false)),
+      'inboxes_list'      => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'Inbox', 'required' => false)),
     ));
 
     $this->widgetSchema->setNameFormat('sf_guard_user_profile_filters[%s]');
@@ -73,38 +73,6 @@ abstract class BasesfGuardUserProfileFormFilter extends BaseFormFilterDoctrine
 
     $query->leftJoin('r.WishList WishList')
           ->andWhereIn('WishList.location_id', $values);
-  }
-
-  public function addInboxesListColumnQuery(Doctrine_Query $query, $field, $values)
-  {
-    if (!is_array($values))
-    {
-      $values = array($values);
-    }
-
-    if (!count($values))
-    {
-      return;
-    }
-
-    $query->leftJoin('r.Inboxed Inboxed')
-          ->andWhereIn('Inboxed.inbox_id', $values);
-  }
-
-  public function addReadCommentListColumnQuery(Doctrine_Query $query, $field, $values)
-  {
-    if (!is_array($values))
-    {
-      $values = array($values);
-    }
-
-    if (!count($values))
-    {
-      return;
-    }
-
-    $query->leftJoin('r.ReadComment ReadComment')
-          ->andWhereIn('ReadComment.comment_id', $values);
   }
 
   public function addRequesterListColumnQuery(Doctrine_Query $query, $field, $values)
@@ -139,6 +107,38 @@ abstract class BasesfGuardUserProfileFormFilter extends BaseFormFilterDoctrine
           ->andWhereIn('Friend.accepter_id', $values);
   }
 
+  public function addReadCommentListColumnQuery(Doctrine_Query $query, $field, $values)
+  {
+    if (!is_array($values))
+    {
+      $values = array($values);
+    }
+
+    if (!count($values))
+    {
+      return;
+    }
+
+    $query->leftJoin('r.ReadComment ReadComment')
+          ->andWhereIn('ReadComment.comment_id', $values);
+  }
+
+  public function addInboxesListColumnQuery(Doctrine_Query $query, $field, $values)
+  {
+    if (!is_array($values))
+    {
+      $values = array($values);
+    }
+
+    if (!count($values))
+    {
+      return;
+    }
+
+    $query->leftJoin('r.Inboxed Inboxed')
+          ->andWhereIn('Inboxed.inbox_id', $values);
+  }
+
   public function getModelName()
   {
     return 'sfGuardUserProfile';
@@ -160,10 +160,10 @@ abstract class BasesfGuardUserProfileFormFilter extends BaseFormFilterDoctrine
       'created_at'        => 'Date',
       'updated_at'        => 'Date',
       'wishes_list'       => 'ManyKey',
-      'inboxes_list'      => 'ManyKey',
-      'read_comment_list' => 'ManyKey',
       'requester_list'    => 'ManyKey',
       'accepter_list'     => 'ManyKey',
+      'read_comment_list' => 'ManyKey',
+      'inboxes_list'      => 'ManyKey',
     );
   }
 }

@@ -2,9 +2,23 @@
 
 class htPagerLayout extends Doctrine_Pager_Layout {
 
+    public static function create(Doctrine_Query $query, $url, $page = 1, $perPage = 10) {
+        return new self(
+                new Doctrine_Pager(
+                        $query,
+                        $page,
+                        $perPage
+                ),
+                new Doctrine_Pager_Range_Sliding(array(
+                    'chunk' => 10
+                )),
+                $url
+        );
+    }
+
     public function __construct($pager, $pagerRange, $urlMask) {
         parent::__construct($pager, $pagerRange, $urlMask);
-        
+
         $this->setTemplate('{link_to}{%page}{/link_to}');
         $this->setSelectedTemplate('<span>{%page}</span>');
     }
@@ -30,7 +44,7 @@ class htPagerLayout extends Doctrine_Pager_Layout {
 
         $str .= '<ul>';
         // First page
-        if ($pager->getPage() > $this->getPagerRange()->getOption('chunk') - 4) {
+        if ($pager->getPage() > $this->getPagerRange()->getOption('chunk') - floor($this->getPagerRange()->getOption('chunk') / 2)) {
             $str .= '<li>';
             $options['page_number'] = $pager->getFirstPage();
             $this->removeMaskReplacement('page');
@@ -40,15 +54,16 @@ class htPagerLayout extends Doctrine_Pager_Layout {
 
 
         // Pages listing
-        $str .= '<li>';
-        $this->removeMaskReplacement('page');
-        $this->setSeparatorTemplate('</li><li>');
-        $str .= parent::display($options, true);
-        $this->setSeparatorTemplate('');
-        $str .= '</li>';
-
+        if ($this->getPager()->haveToPaginate()) {
+            $str .= '<li>';
+            $this->removeMaskReplacement('page');
+            $this->setSeparatorTemplate('</li><li>');
+            $str .= parent::display($options, true);
+            $this->setSeparatorTemplate('');
+            $str .= '</li>';
+        }
         // Last page
-        if ($pager->getPage() < $pager->getLastPage() - $this->getPagerRange()->getOption('chunk') + 6) {
+        if ($pager->getPage() < $pager->getLastPage() - floor($this->getPagerRange()->getOption('chunk') / 2)) {
             $str .= '<li>';
             $options['page_number'] = $pager->getLastPage();
             $str .= '...' . $this->processPage($options);
