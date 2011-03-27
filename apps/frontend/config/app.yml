@@ -4,9 +4,9 @@ all:
     signin_form: FloginForm
   sfForkedApply:
     applyForm: FRegistrationForm
+    mail_editable: true
   sfApplyPlugin:
     from:
-      mail_editable: false
       email: "spamer@uberlov.ru"
       fullname: "Важная информация с www.uberlov.ru"
       routes:

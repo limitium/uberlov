@@ -21,7 +21,7 @@ abstract class BaseCommentFishEvent extends Comment
     {
         parent::setUp();
         $this->hasOne('FishEvent', array(
-             'local' => 'FishEvent_id',
+             'local' => 'fish_event_id',
              'foreign' => 'id'));
     }
 }

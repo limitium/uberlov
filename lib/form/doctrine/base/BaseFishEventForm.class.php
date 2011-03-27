@@ -21,10 +21,10 @@ abstract class BaseFishEventForm extends BaseFormDoctrine
       'description' => new sfWidgetFormTextarea(),
       'rules'       => new sfWidgetFormTextarea(),
       'location_id' => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Location'), 'add_empty' => false)),
-      'created_by'  => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('CreatedBy'), 'add_empty' => false)),
-      'updated_by'  => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('UpdatedBy'), 'add_empty' => false)),
       'created_at'  => new sfWidgetFormDateTime(),
       'updated_at'  => new sfWidgetFormDateTime(),
+      'created_by'  => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('CreatedBy'), 'add_empty' => false)),
+      'updated_by'  => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('UpdatedBy'), 'add_empty' => false)),
     ));
 
     $this->setValidators(array(
@@ -34,10 +34,10 @@ abstract class BaseFishEventForm extends BaseFormDoctrine
       'description' => new sfValidatorString(),
       'rules'       => new sfValidatorString(array('required' => false)),
       'location_id' => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Location'))),
-      'created_by'  => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('CreatedBy'))),
-      'updated_by'  => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('UpdatedBy'))),
       'created_at'  => new sfValidatorDateTime(),
       'updated_at'  => new sfValidatorDateTime(),
+      'created_by'  => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('CreatedBy'))),
+      'updated_by'  => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('UpdatedBy'))),
     ));
 
     $this->widgetSchema->setNameFormat('fish_event[%s]');

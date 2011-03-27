@@ -1,0 +1,1 @@
+{"rating":"<?php echo $rating; ?>","status":"<?php echo isset($status) ? $status : "ok"; ?>"}

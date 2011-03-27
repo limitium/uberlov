@@ -19,10 +19,10 @@ abstract class BaseTalkForm extends BaseFormDoctrine
       'name'            => new sfWidgetFormInputText(),
       'message'         => new sfWidgetFormTextarea(),
       'talk_section_id' => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('TalkSection'), 'add_empty' => true)),
-      'created_by'      => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('CreatedBy'), 'add_empty' => false)),
-      'updated_by'      => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('UpdatedBy'), 'add_empty' => false)),
       'created_at'      => new sfWidgetFormDateTime(),
       'updated_at'      => new sfWidgetFormDateTime(),
+      'created_by'      => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('CreatedBy'), 'add_empty' => false)),
+      'updated_by'      => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('UpdatedBy'), 'add_empty' => false)),
     ));
 
     $this->setValidators(array(
@@ -30,10 +30,10 @@ abstract class BaseTalkForm extends BaseFormDoctrine
       'name'            => new sfValidatorString(array('max_length' => 50)),
       'message'         => new sfValidatorString(),
       'talk_section_id' => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('TalkSection'), 'required' => false)),
-      'created_by'      => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('CreatedBy'))),
-      'updated_by'      => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('UpdatedBy'))),
       'created_at'      => new sfValidatorDateTime(),
       'updated_at'      => new sfValidatorDateTime(),
+      'created_by'      => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('CreatedBy'))),
+      'updated_by'      => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('UpdatedBy'))),
     ));
 
     $this->widgetSchema->setNameFormat('talk[%s]');

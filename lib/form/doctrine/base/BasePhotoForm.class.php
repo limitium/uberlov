@@ -26,7 +26,7 @@ abstract class BasePhotoForm extends BaseFormDoctrine
     $this->setValidators(array(
       'id'          => new sfValidatorDoctrineChoice(array('model' => $this->getModelName(), 'column' => 'id', 'required' => false)),
       'name'        => new sfValidatorString(array('max_length' => 36)),
-      'toward'      => new sfValidatorString(array('max_length' => 255, 'required' => false)),
+      'toward'      => new sfValidatorPass(array('required' => false)),
       'location_id' => new sfValidatorInteger(array('required' => false)),
       'created_by'  => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('CreatedBy'))),
       'updated_by'  => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('UpdatedBy'))),

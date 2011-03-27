@@ -58,9 +58,9 @@ abstract class BaseTalk extends sfDoctrineRecord
              'length' => '4',
              ));
 
-        $this->option('type', 'INNODB');
         $this->option('charset', 'utf8');
         $this->option('collate', 'utf8_general_ci');
+        $this->option('type', 'INNODB');
     }
 
     public function setUp()
@@ -78,41 +78,41 @@ abstract class BaseTalk extends sfDoctrineRecord
              'local' => 'id',
              'foreign' => 'talk_id'));
 
+        $timestampable0 = new Doctrine_Template_Timestampable();
         $blameable0 = new Doctrine_Template_Blameable(array(
              'listener' => 'BlameableFishery',
              'columns' => 
              array(
               'created' => 
               array(
-              'length' => 4,
               'type' => 'int',
+              'length' => 4,
               ),
               'updated' => 
               array(
-              'length' => 4,
               'type' => 'int',
+              'length' => 4,
               ),
              ),
              'relations' => 
              array(
               'created' => 
               array(
-              'class' => 'sfGuardUserProfile',
               'disabled' => false,
+              'class' => 'sfGuardUserProfile',
               'foreign' => 'id',
               ),
               'updated' => 
               array(
-              'class' => 'sfGuardUserProfile',
               'disabled' => false,
+              'class' => 'sfGuardUserProfile',
               'foreign' => 'id',
               ),
              ),
              ));
-        $timestampable0 = new Doctrine_Template_Timestampable();
         $taggable0 = new Taggable();
-        $this->actAs($blameable0);
         $this->actAs($timestampable0);
+        $this->actAs($blameable0);
         $this->actAs($taggable0);
     }
 }

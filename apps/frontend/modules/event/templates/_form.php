@@ -5,12 +5,12 @@
     <?php if (!$form->getObject()->isNew()): ?>
         <input type="hidden" name="sf_method" value="put" />
     <?php endif; ?>
-        <table>
+        <table  class="form">
             <tfoot>
                 <tr>
                     <td colspan="2">
                     <?php echo $form->renderHiddenFields(false) ?>
-                    <input type="submit" value="Добавить" />
+                    <input type="submit" value="<?php echo $form->getObject()->isNew() ? 'Добавить' : 'Сохранить'; ?>" />
                 </td>
             </tr>
         </tfoot>

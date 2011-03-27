@@ -3,7 +3,9 @@
     <?php echo link_to($high->getAreaLow()->getName(), 'address/low?id=' . $high->getAreaLow()->getId()); ?> &rarr;
     <?php echo $high->getName(); ?>
 </div>
-<div>
+<?php $locations = $pager->execute(); ?>
+<?php include_partial('location/location_list', array('locations' => $locations)); ?>
+<div class="addressParts">
     <ul>
         <?php foreach ($localities as $locality): ?>
             <li>
@@ -12,3 +14,4 @@
         <?php endforeach; ?>
     </ul>
 </div>
+<?php $pager->display(); ?>

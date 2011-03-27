@@ -96,11 +96,7 @@ class sfGuardUserProfile extends PluginsfGuardUserProfile {
      */
     public function getInbox() {
         return Doctrine::getTable('Inbox')
-                ->createQuery('i')
-                ->leftJoin('i.Inboxed id')
-                ->leftJoin('i.CommentInbox с')
-                ->where('i.created_by = ?', $this->getId())
-                ->orWhere('id.id = ?', $this->getId())
+                ->getInboxQuery($this)
                 ->execute();
     }
 

@@ -1,7 +1,10 @@
-<?php
-
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-?>
+<div class="locationList">
+    <ul>
+        <?php foreach ($locations as $location): ?>
+            <li>
+            <?php echo link_to($location->getName(), 'location/show?id=' . $location->getId()); ?>
+            <?php include_partial('profile/addBy', array('added' => $location)); ?>
+        </li>
+        <?php endforeach; ?>
+    </ul>
+</div>

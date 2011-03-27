@@ -91,9 +91,9 @@ abstract class BaseProfit extends sfDoctrineRecord
              'type' => 'float',
              ));
 
-        $this->option('type', 'INNODB');
         $this->option('charset', 'utf8');
         $this->option('collate', 'utf8_general_ci');
+        $this->option('type', 'INNODB');
     }
 
     public function setUp()
@@ -126,28 +126,28 @@ abstract class BaseProfit extends sfDoctrineRecord
              array(
               'created' => 
               array(
-              'length' => 4,
               'type' => 'int',
+              'length' => 4,
               ),
               'updated' => 
               array(
-              'length' => 4,
               'type' => 'int',
+              'length' => 4,
               ),
              ),
              'relations' => 
              array(
               'created' => 
               array(
-              'class' => 'sfGuardUserProfile',
               'disabled' => false,
+              'class' => 'sfGuardUserProfile',
               'foreign' => 'id',
               ),
               'updated' => 
               array(
-              'foreign' => 'id',
               'disabled' => false,
               'class' => 'sfGuardUserProfile',
+              'foreign' => 'id',
               ),
              ),
              ));

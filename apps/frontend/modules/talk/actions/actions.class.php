@@ -10,6 +10,26 @@
  */
 class talkActions extends sfActions {
 
+    public function executeSuggest(sfWebRequest $request) {
+        $this->forward('taggableComplete', 'complete');
+    }
+
+    public function executeTag($request) {
+        $this->tag = Doctrine::getTable('Tag')->findBy('name', array($request->getParameter('word')))->getFirst();
+        $this->forward404Unless($this->tag);
+
+        $url = 'talk/tag?&tag=' . $this->tag->getName() . 'page={%page_number}';
+
+        $query = Doctrine::getTable('Talk')->getTagQuery()
+                        ->leftJoin('t.Tagging t1')
+                        ->leftJoin('t1.Tag t2')
+                        ->addWhere('t2.name =?', $this->tag->getName());
+
+        $this->pager = htPagerLayout::create($query, $url, $request->getParameter("page", 1));
+
+        $this->tags = TagTable::getAllTagNameWithCount();
+    }
+
     public function executeList(sfWebRequest $request) {
         $url = 'talk/list?page={%page_number}';
 
@@ -27,7 +47,7 @@ class talkActions extends sfActions {
             }
         }
 
-        $this->pagerLayout = Talk::getPager($query, $url, $request->getParameter("page", 1));
+        $this->pager = htPagerLayout::create($query, $url, $request->getParameter("page", 1));
     }
 
     public function executeShow(sfWebRequest $request) {
@@ -77,7 +97,7 @@ class talkActions extends sfActions {
         $this->forward404Unless($talk = Doctrine::getTable('Talk')->find(array($request->getParameter('id'))), sprintf('Object talk does not exist (%s).', $request->getParameter('id')));
         $talk->delete();
 
-        $this->redirect('talk/index');
+        $this->redirect('talk/list');
     }
 
     protected function processForm(sfWebRequest $request, sfForm $form) {
@@ -86,6 +106,40 @@ class talkActions extends sfActions {
             $talk = $form->save();
 
             $this->redirect('talk/show?id=' . $talk->getId());
+        }
+    }
+
+    public function executeSection(sfWebRequest $request) {
+        $this->curSection = Doctrine::getTable('TalkSection')->find(array($request->getParameter('parent')));
+
+        $this->form = new TalkSectionForm();
+        if ($this->curSection) {
+            $this->form->setDefault('parent', $this->curSection->getId());
+        }
+
+        if ($request->isMethod(sfRequest::POST)) {
+            $tree = Doctrine::getTable('TalkSection')->getTree();
+            $root = $tree->fetchRoots()->getFirst();
+            if (!$root) {
+                $root = new TalkSection();
+                $root->name = 'root';
+                $root->parent = null;
+                $root->save();
+                $tree->createRoot($root);
+            }
+
+            $data = $request->getParameter($this->form->getName());
+            if (!$data['parent']) {
+                $data['parent'] = $root->getId();
+            }
+            $this->form->bind($data, $request->getFiles($this->form->getName()));
+
+            if ($this->form->isValid()) {
+                $section = $this->form->save();
+                $parent = Doctrine_Core::getTable('TalkSection')->find($section->parent);
+                $section->getNode()->insertAsLastChildOf($parent);
+                $this->redirect('talk/list?section=' . $section->getId());
+            }
         }
     }
 

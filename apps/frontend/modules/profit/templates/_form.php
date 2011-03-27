@@ -2,7 +2,6 @@
 <?php use_javascripts_for_form($form) ?>
 <?php use_javascript('profitAdd'); ?>
 
-<?php include_partial('location/location', array('location' => $location)) ?>
 <div class="profitNew">
 
     <?php if ($form->hasGlobalErrors()): ?>

@@ -1,12 +1,15 @@
 <div class="address">
     <?php echo $country->getName(); ?>
 </div>
-<div>
-    <ul>
+<?php $locations = $pager->execute(); ?>
+<?php include_partial('location/location_list', array('locations' => $locations)); ?>
+    <div class="addressParts">
+        <ul>    
         <?php foreach ($lows as $low): ?>
-            <li>
+            <li>    
             <?php echo link_to($low->getName(), 'address/low?id=' . $low->getId()); ?>
         </li>
         <?php endforeach; ?>
-    </ul>
-</div>
+        </ul>    
+    </div>
+<?php $pager->display(); ?>

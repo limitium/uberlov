@@ -1,14 +1,17 @@
+<?php use_helper('text'); ?>
+<?php use_javascript('voting'); ?>
+<?php $events = $pager->execute(); ?>
 <div class="eventList">
     <h2>Ближайшие события</h2>
-    <?php if ($events->count()): ?>
+
+    <?php if (count($events)) : ?>
         <ul>
-            <?php foreach ($events as $event): ?>
-                <li>
-                    <?php include_partial('event/list', array('event' => $event)); ?>
-                </li>
-            <?php endforeach; ?>
+        <?php foreach ($events as $event): ?>
+        <?php include_partial('event/listItem', array('event' => $event)); ?>
+        <?php endforeach; ?>
         </ul>
     <?php else: ?>
-        Событий нет.
+                Событий нет.
     <?php endif; ?>
+    <?php $pager->display(); ?>
 </div>

@@ -18,10 +18,10 @@
  * @property sfGuardUser $User
  * @property City $City
  * @property Doctrine_Collection $Wishes
- * @property Doctrine_Collection $Inboxes
- * @property Doctrine_Collection $ReadComment
  * @property Doctrine_Collection $Requester
  * @property Doctrine_Collection $Accepter
+ * @property Doctrine_Collection $ReadComment
+ * @property Doctrine_Collection $Inboxes
  * @property Doctrine_Collection $WishList
  * @property Doctrine_Collection $Votes
  * @property Doctrine_Collection $VoteProfile
@@ -42,10 +42,10 @@
  * @method sfGuardUser         getUser()        Returns the current record's "User" value
  * @method City                getCity()        Returns the current record's "City" value
  * @method Doctrine_Collection getWishes()      Returns the current record's "Wishes" collection
- * @method Doctrine_Collection getInboxes()     Returns the current record's "Inboxes" collection
- * @method Doctrine_Collection getReadComment() Returns the current record's "ReadComment" collection
  * @method Doctrine_Collection getRequester()   Returns the current record's "Requester" collection
  * @method Doctrine_Collection getAccepter()    Returns the current record's "Accepter" collection
+ * @method Doctrine_Collection getReadComment() Returns the current record's "ReadComment" collection
+ * @method Doctrine_Collection getInboxes()     Returns the current record's "Inboxes" collection
  * @method Doctrine_Collection getWishList()    Returns the current record's "WishList" collection
  * @method Doctrine_Collection getVotes()       Returns the current record's "Votes" collection
  * @method Doctrine_Collection getVoteProfile() Returns the current record's "VoteProfile" collection
@@ -65,10 +65,10 @@
  * @method sfGuardUserProfile  setUser()        Sets the current record's "User" value
  * @method sfGuardUserProfile  setCity()        Sets the current record's "City" value
  * @method sfGuardUserProfile  setWishes()      Sets the current record's "Wishes" collection
- * @method sfGuardUserProfile  setInboxes()     Sets the current record's "Inboxes" collection
- * @method sfGuardUserProfile  setReadComment() Sets the current record's "ReadComment" collection
  * @method sfGuardUserProfile  setRequester()   Sets the current record's "Requester" collection
  * @method sfGuardUserProfile  setAccepter()    Sets the current record's "Accepter" collection
+ * @method sfGuardUserProfile  setReadComment() Sets the current record's "ReadComment" collection
+ * @method sfGuardUserProfile  setInboxes()     Sets the current record's "Inboxes" collection
  * @method sfGuardUserProfile  setWishList()    Sets the current record's "WishList" collection
  * @method sfGuardUserProfile  setVotes()       Sets the current record's "Votes" collection
  * @method sfGuardUserProfile  setVoteProfile() Sets the current record's "VoteProfile" collection
@@ -137,9 +137,9 @@ abstract class BasesfGuardUserProfile extends sfDoctrineRecord
              ),
              'type' => 'unique',
              ));
-        $this->option('type', 'INNODB');
         $this->option('charset', 'utf8');
         $this->option('collate', 'utf8_general_ci');
+        $this->option('type', 'INNODB');
     }
 
     public function setUp()
@@ -159,16 +159,6 @@ abstract class BasesfGuardUserProfile extends sfDoctrineRecord
              'local' => 'profile_id',
              'foreign' => 'location_id'));
 
-        $this->hasMany('Inbox as Inboxes', array(
-             'refClass' => 'Inboxed',
-             'local' => 'profile_id',
-             'foreign' => 'inbox_id'));
-
-        $this->hasMany('Comment as ReadComment', array(
-             'refClass' => 'ReadComment',
-             'local' => 'profile_id',
-             'foreign' => 'comment_id'));
-
         $this->hasMany('sfGuardUserProfile as Requester', array(
              'refClass' => 'Friend',
              'local' => 'accepter_id',
@@ -178,6 +168,16 @@ abstract class BasesfGuardUserProfile extends sfDoctrineRecord
              'refClass' => 'Friend',
              'local' => 'requester_id',
              'foreign' => 'accepter_id'));
+
+        $this->hasMany('Comment as ReadComment', array(
+             'refClass' => 'ReadComment',
+             'local' => 'profile_id',
+             'foreign' => 'comment_id'));
+
+        $this->hasMany('Inbox as Inboxes', array(
+             'refClass' => 'Inboxed',
+             'local' => 'profile_id',
+             'foreign' => 'inbox_id'));
 
         $this->hasMany('WishList', array(
              'local' => 'id',

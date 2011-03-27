@@ -20,17 +20,7 @@ class profitActions extends sfActions {
                         ->orderBy('p.created_at desc');
 
 
-        $this->pagerLayout = new htPagerLayout(
-                        new Doctrine_Pager(
-                                $query,
-                                $request->getParameter("page", 1),
-                                5
-                        ),
-                        new Doctrine_Pager_Range_Sliding(array(
-                            'chunk' => 10
-                        )),
-                        $url
-        );
+        $this->pager = htPagerLayout::create($query, $url, $request->getParameter('page', 1));
     }
 
     public function executeShow(sfWebRequest $request) {
@@ -40,7 +30,7 @@ class profitActions extends sfActions {
         $this->comments = Comment::getFor($this->profit);
 
         $this->form = new CommentProfitForm();
-        $this->form->setDefault('profit_id', $this->profit->getId());
+        $this->form->setCommented($this->profit);
     }
 
     public function executeNew(sfWebRequest $request) {
@@ -57,7 +47,7 @@ class profitActions extends sfActions {
         $this->setTemplate('new');
 
         if ($this->profit = $this->processForm($request, $this->form)) {
-            $this->setTemplate('show');
+            $this->redirect('profit/show?id=' . $this->profit->getId());
         }
     }
 
@@ -96,11 +86,11 @@ class profitActions extends sfActions {
             $detailsData = (array) json_decode($form->getValue('details'));
             return $form->save()->updateDetails($detailsData);
         } else {
-            foreach ($form->getFormFieldSchema() as $name => $formField) {
-                if ($formField->getError() != "") {
-                    echo "ActionClassName::methodName( ): Field Error for :" . $name . " : " . $formField->getError();
-                }
-            }
+//            foreach ($form->getFormFieldSchema() as $name => $formField) {
+//                if ($formField->getError() != "") {
+//                    echo "ActionClassName::methodName( ): Field Error for :" . $name . " : " . $formField->getError();
+//                }
+//            }
         }
         return null;
     }

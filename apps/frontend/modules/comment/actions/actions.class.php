@@ -10,44 +10,21 @@
  */
 class commentActions extends sfActions {
 
-    public function executeLocation(sfWebRequest $request) {
-        $this->createComment($request, 'location');
-    }
+    public function executeFor(sfWebRequest $request) {
 
-    public function executeTalk(sfWebRequest $request) {
-        $this->createComment($request, 'talk');
-    }
-
-    public function executeInbox(sfWebRequest $request) {
-        $this->createComment($request, 'inbox');
-    }
-
-    public function executeProfit(sfWebRequest $request) {
-        $this->createComment($request, 'profit');
-    }
-    
-    public function executeFishEvent(sfWebRequest $request) {
-        $this->createComment($request, 'fishEvent');
-    }
-
-    private function createComment(sfWebRequest $request, $toward) {
         $this->forward404Unless($request->isMethod(sfRequest::POST));
 
-        if ($this->comment = $this->processForm($request, $toward)) {
-
-        }
-        $this->setTemplate('created');
-    }
-
-    protected function processForm(sfWebRequest $request, $toward) {
-        $modelName = 'Comment' . ucfirst($toward);
-        $formName = $modelName . 'Form';
+        //@todo: check component name input
+        $componentName = $request->getParameter('component');
+        $commentName = 'Comment' . $componentName;
+        $formName = $commentName . 'Form';
         $form = new $formName();
+        $toward = $form->getToward();
 
         $data = $request->getParameter($form->getName());
 
-        $tree = Doctrine::getTable($modelName)->getTree();
-        $tree->setBaseQuery(Doctrine_Query::create()->from($modelName . ' c')
+        $tree = Doctrine::getTable($commentName)->getTree();
+        $tree->setBaseQuery(Doctrine_Query::create()->from($commentName . ' c')
                         ->where('c.' . $toward . '_id = ?', $data[$toward . '_id']));
 
 
@@ -56,7 +33,7 @@ class commentActions extends sfActions {
         if ($form->isValid()) {
             $root = $tree->fetchRoots()->getFirst();
             if (!$root) {
-                $root = new $modelName();
+                $root = new $commentName();
                 $root->message = 'root';
                 $root[$toward . '_id'] = $data[$toward . '_id'];
                 $root->parent = null;
@@ -67,17 +44,16 @@ class commentActions extends sfActions {
             $parent = $root;
             if ($data['parent']) {
                 $parent = Doctrine_Core::getTable('Comment')->find($data['parent']);
-                $this->forward404Unless($parent);
             }
 
             $data['parent'] = $parent->getId();
             $form->bind($data, $request->getFiles($form->getName()));
 
-            $comment = $form->save();
-            $comment->getNode()->insertAsLastChildOf($parent);
-            
+            $this->comment = $form->save();
+            $this->comment->getNode()->insertAsLastChildOf($parent);
+
             $this->noVote = $form->getValue('noVote', false);
-            return $comment;
+            $this->setTemplate('created');
         } else {
             foreach ($form->getFormFieldSchema() as $name => $formField) {
                 if ($formField->getError() != "") {
@@ -85,8 +61,6 @@ class commentActions extends sfActions {
                 }
             }
         }
-
-        return null;
     }
 
 }

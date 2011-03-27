@@ -19,15 +19,15 @@ class Comment extends BaseComment {
         return Vote::getRating($this, 'Comment');
     }
 
-    public static function getFor($object) {
-        $tableName = $object->getTable()->getComponentName();
-
-        $q = Doctrine_Query::create()->select('c.message, c.parent, c.created_at, c.updated_at, c.created_by, c.updated_by, p.*, v.*')->from('Comment' . ucfirst($tableName) . ' c')
+    public static function getFor(Doctrine_Record $object) {
+        $tableName = $object->getTable()->getTableName();
+        $componentName = $object->getTable()->getComponentName();
+        $q = Doctrine_Query::create()->select('c.message, c.parent, c.created_at, c.updated_at, c.created_by, c.updated_by, p.*, v.*')->from('Comment' . $componentName . ' c')
                         ->leftJoin('c.CreatedBy p')
                         ->leftJoin('c.VoteComment v')
                         ->where('c.' . $tableName . '_id = ?', $object->getId());
 
-        $treeObject = Doctrine::getTable('Comment' . $tableName)->getTree();
+        $treeObject = Doctrine::getTable('Comment' . $componentName)->getTree();
         $treeObject->setBaseQuery($q);
 
         $comments = array();

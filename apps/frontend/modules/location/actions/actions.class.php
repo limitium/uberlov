@@ -37,12 +37,11 @@ class locationActions extends sfActions {
                         ->leftJoin('e.VoteFishEvent v')
                         ->where('e.location_id = ?', $this->location->getId())
                         ->execute();
-
+                        
         $this->csrf = CSRF::getToken();
 
         $this->form = new CommentLocationForm();
-
-        $this->form->setDefault('location_id', $this->location->getId());
+        $this->form->setCommented($this->location);
     }
 
     public function executeMy(sfWebRequest $request) {

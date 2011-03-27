@@ -7,13 +7,19 @@
  * 
  * @property integer $id
  * @property string $name
+ * @property integer $country_id
+ * @property Country $Country
  * @property Doctrine_Collection $sfGuardUserProfile
  * 
  * @method integer             getId()                 Returns the current record's "id" value
  * @method string              getName()               Returns the current record's "name" value
+ * @method integer             getCountryId()          Returns the current record's "country_id" value
+ * @method Country             getCountry()            Returns the current record's "Country" value
  * @method Doctrine_Collection getSfGuardUserProfile() Returns the current record's "sfGuardUserProfile" collection
  * @method City                setId()                 Sets the current record's "id" value
  * @method City                setName()               Sets the current record's "name" value
+ * @method City                setCountryId()          Sets the current record's "country_id" value
+ * @method City                setCountry()            Sets the current record's "Country" value
  * @method City                setSfGuardUserProfile() Sets the current record's "sfGuardUserProfile" collection
  * 
  * @package    FISHERY
@@ -37,15 +43,23 @@ abstract class BaseCity extends sfDoctrineRecord
              'notnull' => true,
              'length' => '30',
              ));
+        $this->hasColumn('country_id', 'integer', 4, array(
+             'type' => 'integer',
+             'length' => '4',
+             ));
 
-        $this->option('type', 'INNODB');
         $this->option('charset', 'utf8');
         $this->option('collate', 'utf8_general_ci');
+        $this->option('type', 'INNODB');
     }
 
     public function setUp()
     {
         parent::setUp();
+        $this->hasOne('Country', array(
+             'local' => 'country_id',
+             'foreign' => 'id'));
+
         $this->hasMany('sfGuardUserProfile', array(
              'local' => 'id',
              'foreign' => 'city_id'));
