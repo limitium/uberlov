@@ -12,7 +12,7 @@
  * 
  * @package    FISHERY
  * @subpackage model
- * @author     Your name here
+ * @author     Sergei Belov <limitium@gmail.com>
  * @version    SVN: $Id: Builder.php 6820 2009-11-30 17:27:49Z jwage $
  */
 abstract class BaseCommentInbox extends Comment

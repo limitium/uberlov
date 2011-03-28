@@ -48,7 +48,7 @@
  * 
  * @package    FISHERY
  * @subpackage model
- * @author     Your name here
+ * @author     Sergei Belov <limitium@gmail.com>
  * @version    SVN: $Id: Builder.php 6820 2009-11-30 17:27:49Z jwage $
  */
 abstract class BaseProfit extends sfDoctrineRecord
@@ -91,9 +91,9 @@ abstract class BaseProfit extends sfDoctrineRecord
              'type' => 'float',
              ));
 
+        $this->option('type', 'INNODB');
         $this->option('charset', 'utf8');
         $this->option('collate', 'utf8_general_ci');
-        $this->option('type', 'INNODB');
     }
 
     public function setUp()
@@ -126,28 +126,28 @@ abstract class BaseProfit extends sfDoctrineRecord
              array(
               'created' => 
               array(
-              'type' => 'int',
               'length' => 4,
+              'type' => 'int',
               ),
               'updated' => 
               array(
-              'type' => 'int',
               'length' => 4,
+              'type' => 'int',
               ),
              ),
              'relations' => 
              array(
               'created' => 
               array(
-              'disabled' => false,
               'class' => 'sfGuardUserProfile',
+              'disabled' => false,
               'foreign' => 'id',
               ),
               'updated' => 
               array(
+              'foreign' => 'id',
               'disabled' => false,
               'class' => 'sfGuardUserProfile',
-              'foreign' => 'id',
               ),
              ),
              ));

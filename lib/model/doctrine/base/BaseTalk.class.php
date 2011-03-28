@@ -30,7 +30,7 @@
  * 
  * @package    FISHERY
  * @subpackage model
- * @author     Your name here
+ * @author     Sergei Belov <limitium@gmail.com>
  * @version    SVN: $Id: Builder.php 6820 2009-11-30 17:27:49Z jwage $
  */
 abstract class BaseTalk extends sfDoctrineRecord
@@ -58,9 +58,9 @@ abstract class BaseTalk extends sfDoctrineRecord
              'length' => '4',
              ));
 
+        $this->option('type', 'INNODB');
         $this->option('charset', 'utf8');
         $this->option('collate', 'utf8_general_ci');
-        $this->option('type', 'INNODB');
     }
 
     public function setUp()
@@ -78,41 +78,41 @@ abstract class BaseTalk extends sfDoctrineRecord
              'local' => 'id',
              'foreign' => 'talk_id'));
 
-        $timestampable0 = new Doctrine_Template_Timestampable();
         $blameable0 = new Doctrine_Template_Blameable(array(
              'listener' => 'BlameableFishery',
              'columns' => 
              array(
               'created' => 
               array(
-              'type' => 'int',
               'length' => 4,
+              'type' => 'int',
               ),
               'updated' => 
               array(
-              'type' => 'int',
               'length' => 4,
+              'type' => 'int',
               ),
              ),
              'relations' => 
              array(
               'created' => 
               array(
-              'disabled' => false,
               'class' => 'sfGuardUserProfile',
+              'disabled' => false,
               'foreign' => 'id',
               ),
               'updated' => 
               array(
-              'disabled' => false,
               'class' => 'sfGuardUserProfile',
+              'disabled' => false,
               'foreign' => 'id',
               ),
              ),
              ));
+        $timestampable0 = new Doctrine_Template_Timestampable();
         $taggable0 = new Taggable();
-        $this->actAs($timestampable0);
         $this->actAs($blameable0);
+        $this->actAs($timestampable0);
         $this->actAs($taggable0);
     }
 }

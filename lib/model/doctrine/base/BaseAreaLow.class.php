@@ -27,7 +27,7 @@
  * 
  * @package    FISHERY
  * @subpackage model
- * @author     Your name here
+ * @author     Sergei Belov <limitium@gmail.com>
  * @version    SVN: $Id: Builder.php 6820 2009-11-30 17:27:49Z jwage $
  */
 abstract class BaseAreaLow extends sfDoctrineRecord
@@ -52,9 +52,9 @@ abstract class BaseAreaLow extends sfDoctrineRecord
              'length' => '4',
              ));
 
+        $this->option('type', 'INNODB');
         $this->option('charset', 'utf8');
         $this->option('collate', 'utf8_general_ci');
-        $this->option('type', 'INNODB');
     }
 
     public function setUp()
