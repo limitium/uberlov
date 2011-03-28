@@ -84,7 +84,7 @@
  * 
  * @package    FISHERY
  * @subpackage model
- * @author     Your name here
+ * @author     Sergei Belov <limitium@gmail.com>
  * @version    SVN: $Id: Builder.php 6820 2009-11-30 17:27:49Z jwage $
  */
 abstract class BaseLocation extends sfDoctrineRecord
@@ -144,9 +144,9 @@ abstract class BaseLocation extends sfDoctrineRecord
              'length' => '4',
              ));
 
+        $this->option('type', 'INNODB');
         $this->option('charset', 'utf8');
         $this->option('collate', 'utf8_general_ci');
-        $this->option('type', 'INNODB');
     }
 
     public function setUp()
@@ -205,45 +205,45 @@ abstract class BaseLocation extends sfDoctrineRecord
              'local' => 'id',
              'foreign' => 'location_id'));
 
-        $versionable0 = new Doctrine_Template_Versionable();
-        $timestampable0 = new Doctrine_Template_Timestampable();
-        $sluggable0 = new Doctrine_Template_Sluggable();
-        $geographical0 = new Doctrine_Template_Geographical();
         $blameable0 = new Doctrine_Template_Blameable(array(
              'listener' => 'BlameableFishery',
-             'columns' => 
-             array(
-              'created' => 
-              array(
-              'type' => 'int',
-              'length' => 4,
-              ),
-              'updated' => 
-              array(
-              'type' => 'int',
-              'length' => 4,
-              ),
-             ),
              'relations' => 
              array(
-              'created' => 
-              array(
-              'disabled' => false,
-              'class' => 'sfGuardUserProfile',
-              'foreign' => 'id',
-              ),
               'updated' => 
               array(
+              'class' => 'sfGuardUserProfile',
+              'disabled' => false,
+              'foreign' => 'id',
+              ),
+              'created' => 
+              array(
+              'foreign' => 'id',
               'disabled' => false,
               'class' => 'sfGuardUserProfile',
-              'foreign' => 'id',
+              ),
+             ),
+             'columns' => 
+             array(
+              'updated' => 
+              array(
+              'type' => 'int',
+              'length' => 4,
+              ),
+              'created' => 
+              array(
+              'type' => 'int',
+              'length' => 4,
               ),
              ),
              ));
-        $this->actAs($versionable0);
-        $this->actAs($timestampable0);
-        $this->actAs($sluggable0);
-        $this->actAs($geographical0);
+        $geographical0 = new Doctrine_Template_Geographical();
+        $sluggable0 = new Doctrine_Template_Sluggable();
+        $timestampable0 = new Doctrine_Template_Timestampable();
+        $versionable0 = new Doctrine_Template_Versionable();
         $this->actAs($blameable0);
+        $this->actAs($geographical0);
+        $this->actAs($sluggable0);
+        $this->actAs($timestampable0);
+        $this->actAs($versionable0);
     }
 }

@@ -680,25 +680,25 @@ VoteTalk:
       foreign: id
 FishEvent:
   actAs:
+    Timestampable: 
     Blameable:
       listener: BlameableFishery
       relations:
-        created:
+        updated:
           class: sfGuardUserProfile
           disabled: false
           foreign: id
-        updated:
+        created:
           class: sfGuardUserProfile
           disabled: false
           foreign: id
       columns:
-        created:
-          length: 4
-          type: int
         updated:
           length: 4
           type: int
-    Timestampable: 
+        created:
+          length: 4
+          type: int
   columns:
     id:
       primary: true
