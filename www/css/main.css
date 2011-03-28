@@ -77,7 +77,7 @@ a.delItem{
 /*layout*/
 
 #page {
-/*    background-color: gainsboro;*/
+    /*    background-color: gainsboro;*/
 }
 #header{
 
@@ -92,8 +92,11 @@ a.delItem{
 }
 #logo{
     position: absolute;
-    padding-top: 40px;
-    padding-left: 40px;
+    padding-top: 10px;
+    padding-left: 20px;
+}
+#logo a img{
+    border:0;
 }
 #site_menu{
     position: relative;
