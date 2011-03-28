@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8" standalone="no" ?>
-<orm-designer version="1.4.3.457">
+<orm-designer version="1.3.1.332">
 
   <include name="config\doctrine\schema.module.xml"/>
 
   <include name="..\fisheryYAML.module.xml"/>
 
-  <project code-name="Fishery" name="fishery" orm="Doctrine" visSizeX="251" visSizeX2="1282" visSizeY="90" visSizeY2="870">
+  <project code-name="Fishery" name="fishery" orm="Doctrine" visSizeX="229" visSizeX2="1282" visSizeY="90" visSizeY2="796">
     <module-position name="ht" visPositionX="26" visPositionY="11"/>
   </project>
 

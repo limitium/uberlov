@@ -1,28 +1,28 @@
 Location:
+  tableName: location
   actAs:
-    Versionable: 
-    Timestampable: 
-    Sluggable: 
-    Geographical: 
     Blameable:
       listener: BlameableFishery
-      columns:
-        created:
-          type: int
-          length: 4
-        updated:
-          type: int
-          length: 4
       relations:
-        created:
-          disabled: false
-          class: sfGuardUserProfile
-          foreign: id
         updated:
+          class: sfGuardUserProfile
+          disabled: false
+          foreign: id
+        created:
+          foreign: id
           disabled: false
           class: sfGuardUserProfile
-          foreign: id
-  tableName: location
+      columns:
+        updated:
+          type: int
+          length: 4
+        created:
+          type: int
+          length: 4
+    Geographical: 
+    Sluggable: 
+    Timestampable: 
+    Versionable: 
   columns:
     id:
       primary: true
@@ -119,6 +119,16 @@ sfGuardUserProfile:
       refClass: WishList
       local: profile_id
       foreign: location_id
+    Inboxes:
+      class: Inbox
+      refClass: Inboxed
+      local: profile_id
+      foreign: inbox_id
+    ReadComment:
+      class: Comment
+      refClass: ReadComment
+      local: profile_id
+      foreign: comment_id
     Requester:
       class: sfGuardUserProfile
       refClass: Friend
@@ -129,16 +139,6 @@ sfGuardUserProfile:
       refClass: Friend
       local: requester_id
       foreign: accepter_id
-    ReadComment:
-      class: Comment
-      refClass: ReadComment
-      local: profile_id
-      foreign: comment_id
-    Inboxes:
-      class: Inbox
-      refClass: Inboxed
-      local: profile_id
-      foreign: inbox_id
 Fish:
   columns:
     id:
@@ -157,20 +157,20 @@ Profit:
       listener: BlameableFishery
       columns:
         created:
-          type: int
           length: 4
+          type: int
         updated:
-          type: int
           length: 4
+          type: int
       relations:
         created:
-          disabled: false
           class: sfGuardUserProfile
+          disabled: false
           foreign: id
         updated:
+          foreign: id
           disabled: false
           class: sfGuardUserProfile
-          foreign: id
   columns:
     id:
       primary: true
@@ -267,27 +267,27 @@ LocationFundus:
       notnull: true
 Comment:
   actAs:
-    Timestampable: 
-    NestedSet:
-      hasManyRoots: true
     Blameable:
       listener: BlameableFishery
+      relations:
+        created:
+          class: sfGuardUserProfile
+          foreign: id
+          disabled: false
+        updated:
+          class: sfGuardUserProfile
+          foreign: id
+          disabled: false
       columns:
         created:
           type: int
           length: 4
         updated:
-          type: int
           length: 4
-      relations:
-        created:
-          disabled: false
-          class: sfGuardUserProfile
-          foreign: id
-        updated:
-          disabled: false
-          class: sfGuardUserProfile
-          foreign: id
+          type: int
+    Timestampable: 
+    NestedSet:
+      hasManyRoots: true
   columns:
     id:
       primary: true
@@ -298,29 +298,28 @@ Comment:
     message:
       type: string(1000)
       notnull: true
-    toward: 
 CommentLocation:
-  columns:
-    location_id:
-      type: integer(4)
   inheritance:
     extends: Comment
     type: column_aggregation
     keyField: toward
     keyValue: location
+  columns:
+    location_id:
+      type: integer(4)
   relations:
     Location:
       local: location_id
       foreign: id
 CommentProfit:
+  inheritance:
+    extends: Comment
+    keyField: toward
+    keyValue: profit
+    type: column_aggregation
   columns:
     profit_id:
       type: integer(4)
-  inheritance:
-    extends: Comment
-    type: column_aggregation
-    keyField: toward
-    keyValue: profit
   relations:
     Profit:
       local: profit_id
@@ -359,7 +358,6 @@ Vote:
       notnull: true
     voter:
       type: integer(4)
-    toward: 
   relations:
     Voter:
       class: sfGuardUserProfile
@@ -367,40 +365,40 @@ Vote:
       local: voter
       foreign: id
 VoteLocation:
+  inheritance:
+    extends: Vote
+    keyField: toward
+    keyValue: location
+    type: column_aggregation
   columns:
     location_id:
       type: integer(4)
-  inheritance:
-    extends: Vote
-    type: column_aggregation
-    keyField: toward
-    keyValue: location
   relations:
     Location:
       local: location_id
       foreign: id
 VoteComment:
+  inheritance:
+    type: column_aggregation
+    keyValue: comment
+    keyField: toward
+    extends: Vote
   columns:
     comment_id:
       type: integer(4)
-  inheritance:
-    extends: Vote
-    type: column_aggregation
-    keyField: toward
-    keyValue: comment
   relations:
     Comment:
       local: comment_id
       foreign: id
 VoteProfit:
+  inheritance:
+    type: column_aggregation
+    keyValue: profit
+    keyField: toward
+    extends: Vote
   columns:
     profit_id:
       type: integer(4)
-  inheritance:
-    extends: Vote
-    type: column_aggregation
-    keyField: toward
-    keyValue: profit
   relations:
     Profit:
       local: profit_id
@@ -416,20 +414,16 @@ LocationScope:
       type: string(50)
       notnull: true
 VoteProfile:
+  inheritance:
+    type: column_aggregation
+    keyValue: profile
+    keyField: toward
+    extends: Vote
   columns:
     profile_id:
       type: integer(4)
-  inheritance:
-    extends: Vote
-    type: column_aggregation
-    keyField: toward
-    keyValue: profile
   relations:
-    Profile:
-      class: sfGuardUserProfile
-      foreignAlias: VoteProfile
-      type: one
-      foreignType: many
+    sfGuardUserProfile:
       local: profile_id
       foreign: id
 Address:
@@ -519,25 +513,25 @@ AreaHigh:
       foreign: id
 Inbox:
   actAs:
-    Timestampable: 
     Blameable:
       listener: BlameableFishery
-      columns:
-        created:
-          type: int
-          length: 4
-        updated:
-          type: int
-          length: 4
       relations:
         created:
-          disabled: false
           class: sfGuardUserProfile
+          disabled: false
           foreign: id
         updated:
           disabled: false
-          class: sfGuardUserProfile
           foreign: id
+          class: sfGuardUserProfile
+      columns:
+        created:
+          length: 4
+          type: int
+        updated:
+          length: 4
+          type: int
+    Timestampable: 
   columns:
     id:
       primary: true
@@ -574,39 +568,39 @@ Inboxed:
       local: profile_id
       foreign: id
 CommentInbox:
+  inheritance:
+    type: column_aggregation
+    keyValue: Inbox
+    keyField: toward
+    extends: Comment
   columns:
     inbox_id:
       type: integer(4)
-  inheritance:
-    extends: Comment
-    type: column_aggregation
-    keyField: toward
-    keyValue: Inbox
   relations:
     Inbox:
       local: inbox_id
       foreign: id
 Talk:
   actAs:
-    Timestampable: 
     Blameable:
       listener: BlameableFishery
       columns:
         created:
-          type: int
           length: 4
+          type: int
         updated:
-          type: int
           length: 4
+          type: int
       relations:
         created:
-          disabled: false
           class: sfGuardUserProfile
+          disabled: false
           foreign: id
         updated:
-          disabled: false
           class: sfGuardUserProfile
+          disabled: false
           foreign: id
+    Timestampable: 
     Taggable: 
   columns:
     id:
@@ -642,14 +636,14 @@ TalkSection:
       type: string(50)
       notnull: true
 CommentTalk:
+  inheritance:
+    extends: Comment
+    keyField: toward
+    keyValue: talk
+    type: column_aggregation
   columns:
     talk_id:
       type: integer(4)
-  inheritance:
-    extends: Comment
-    type: column_aggregation
-    keyField: toward
-    keyValue: talk
   relations:
     Talk:
       local: talk_id
@@ -672,39 +666,39 @@ ReadComment:
       local: comment_id
       foreign: id
 VoteTalk:
+  inheritance:
+    extends: Vote
+    keyField: toward
+    type: column_aggregation
+    keyValue: talk
   columns:
     talk_id:
       type: integer(4)
-  inheritance:
-    extends: Vote
-    type: column_aggregation
-    keyField: toward
-    keyValue: talk
   relations:
     Talk:
       local: talk_id
       foreign: id
 FishEvent:
   actAs:
-    Timestampable: 
     Blameable:
       listener: BlameableFishery
-      columns:
-        created:
-          type: int
-          length: 4
-        updated:
-          type: int
-          length: 4
       relations:
         created:
-          disabled: false
           class: sfGuardUserProfile
+          disabled: false
           foreign: id
         updated:
-          disabled: false
           class: sfGuardUserProfile
+          disabled: false
           foreign: id
+      columns:
+        created:
+          length: 4
+          type: int
+        updated:
+          length: 4
+          type: int
+    Timestampable: 
   columns:
     id:
       primary: true
@@ -730,14 +724,27 @@ FishEvent:
       local: location_id
       foreign: id
 VoteFishEvent:
+  inheritance:
+    type: column_aggregation
+    extends: Vote
+    keyField: toward
+    keyValue: fish_event
   columns:
     fish_event_id:
       type: integer(4)
+  relations:
+    FishEvent:
+      local: fish_event_id
+      foreign: id
+CommentFishEvent:
   inheritance:
-    extends: Vote
     type: column_aggregation
+    extends: Comment
     keyField: toward
     keyValue: fish_event
+  columns:
+    fish_event_id:
+      type: integer(4)
   relations:
     FishEvent:
       local: fish_event_id
@@ -746,22 +753,22 @@ Photo:
   actAs:
     Blameable:
       listener: BlameableFishery
-      columns:
-        created:
-          type: int
-          length: 4
-        updated:
-          type: int
-          length: 4
       relations:
         created:
-          disabled: false
           class: sfGuardUserProfile
+          disabled: false
           foreign: id
         updated:
-          disabled: false
           class: sfGuardUserProfile
           foreign: id
+          disabled: false
+      columns:
+        created:
+          length: 4
+          type: int
+        updated:
+          type: int
+          length: 4
   columns:
     id:
       primary: true
@@ -770,16 +777,15 @@ Photo:
     name:
       type: string(36)
       notnull: true
-    toward: 
 PhotoLocation:
+  inheritance:
+    type: column_aggregation
+    keyValue: location
+    keyField: toward
+    extends: Photo
   columns:
     location_id:
       type: integer(4)
-  inheritance:
-    extends: Photo
-    type: column_aggregation
-    keyField: toward
-    keyValue: location
   relations:
     Location:
       local: location_id
@@ -801,15 +807,15 @@ Friend:
     Requester:
       class: sfGuardUserProfile
       foreignAlias: Requesters
-      type: one
       foreignType: many
+      type: one
       local: requester_id
       foreign: id
     Accepter:
       class: sfGuardUserProfile
       foreignAlias: Accepters
-      type: one
       foreignType: many
+      type: one
       local: accepter_id
       foreign: id
 City:
@@ -828,20 +834,7 @@ City:
     Country:
       local: country_id
       foreign: id
-CommentFishEvent:
-  columns:
-    fish_event_id:
-      type: integer(4)
-  inheritance:
-    extends: Comment
-    type: column_aggregation
-    keyField: toward
-    keyValue: fish_event
-  relations:
-    FishEvent:
-      local: fish_event_id
-      foreign: id
 options:
+  type: INNODB
   charset: utf8
   collate: utf8_general_ci
-  type: INNODB

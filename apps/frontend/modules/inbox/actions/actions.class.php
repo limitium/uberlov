@@ -53,16 +53,6 @@ class inboxActions extends sfActions {
         $this->csrf = CSRF::getToken();
     }
 
-    public function executeUpdate(sfWebRequest $request) {
-        $this->forward404Unless($request->isMethod(sfRequest::POST) || $request->isMethod(sfRequest::PUT));
-        $this->forward404Unless($inbox = Doctrine::getTable('Inbox')->find(array($request->getParameter('id'))), sprintf('Object inbox does not exist (%s).', $request->getParameter('id')));
-        $this->form = new InboxForm($inbox);
-
-        $this->processForm($request, $this->form);
-
-        $this->setTemplate('show');
-    }
-
     public function executeDelete(sfWebRequest $request) {
 
         $request->checkCSRFProtection();

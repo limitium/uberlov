@@ -4,8 +4,8 @@ default:
 
   metas:
     title:        uberЛОВ
-    description:  uberЛОВ
-    keywords:     uber, ЛОВ
+    description:  рыбные места, рыбаловные места, рыбалка, места ловли
+    keywords:     рыбалка, места, ловля
     language:     ru
     robots:       index, follow
 
