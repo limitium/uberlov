@@ -52,6 +52,7 @@ class profitActions extends sfActions {
     }
 
     public function executeEdit(sfWebRequest $request) {
+        $this->forward404();
         $this->forward404Unless($profit = Doctrine::getTable('Profit')->find(array($request->getParameter('id'))), sprintf('Object profit does not exist (%s).', $request->getParameter('id')));
         $this->form = new ProfitForm($profit);
     }

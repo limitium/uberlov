@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" standalone="no" ?>
-<orm-designer version="1.4.3.457">
+<orm-designer version="1.3.1.332">
 
   <module import-format="DoctrineYml" import-path="fisheryYAML.yml" name="ht" visBkColor="16380923" visSizeX="227" visSizeX2="1327" visSizeY="51" visSizeY2="836">
     <table name="Location" visPositionX="205" visPositionY="117" visSizeX="0" visSizeX2="154" visSizeY="0" visSizeY2="185">
@@ -142,8 +142,6 @@
       <column auto-increment="true" name="id" primary="true" size="4" type="integer"/>
       <column name="parent" size="4" type="integer"/>
       <column name="message" required="true" size="1000" type="string"/>
-      <column name="toward"/>
-      <inheritance-parent discriminator-column="toward" type="column_aggregation"/>
       <orm-properties>
         <attribute name="actAs">
           <attribute name="Blameable">
@@ -180,11 +178,25 @@
     </table>
     <table name="CommentLocation" visPositionX="34" visPositionY="228" visSizeX="0" visSizeX2="120" visSizeY="0" visSizeY2="31">
       <column name="location_id" size="4" type="integer"/>
-      <inheritance-child derived-from="Comment" discriminator-value="location"/>
+      <orm-properties>
+        <attribute name="inheritance">
+          <attribute name="extends">Comment</attribute>
+          <attribute name="type">column_aggregation</attribute>
+          <attribute name="keyField">toward</attribute>
+          <attribute name="keyValue">location</attribute>
+        </attribute>
+      </orm-properties>
     </table>
     <table name="CommentProfit" visPositionX="30" visPositionY="448" visSizeX="0" visSizeX2="110" visSizeY="0" visSizeY2="31">
       <column name="profit_id" size="4" type="integer"/>
-      <inheritance-child derived-from="Comment" discriminator-value="profit"/>
+      <orm-properties>
+        <attribute name="inheritance">
+          <attribute name="extends">Comment</attribute>
+          <attribute name="keyField">toward</attribute>
+          <attribute name="keyValue">profit</attribute>
+          <attribute name="type">column_aggregation</attribute>
+        </attribute>
+      </orm-properties>
     </table>
     <table name="LocationType" visPositionX="33" visPositionY="169" visSizeX="0" visSizeX2="99" visSizeY="0" visSizeY2="45">
       <column auto-increment="true" name="id" primary="true" size="4" type="integer"/>
@@ -197,28 +209,54 @@
     <table name="Vote" visPositionX="475" visPositionY="754" visSizeX="0" visSizeX2="158" visSizeY="0" visSizeY2="73">
       <column name="value" required="true" size="4" type="integer"/>
       <column description="Foreign key to Profile" name="voter" size="4" type="integer"/>
-      <column name="toward"/>
-      <inheritance-parent discriminator-column="toward" type="column_aggregation"/>
     </table>
     <table name="VoteLocation" visPositionX="410" visPositionY="192" visSizeX="0" visSizeX2="120" visSizeY="0" visSizeY2="31">
       <column name="location_id" size="4" type="integer"/>
-      <inheritance-child derived-from="Vote" discriminator-value="location"/>
+      <orm-properties>
+        <attribute name="inheritance">
+          <attribute name="extends">Vote</attribute>
+          <attribute name="keyField">toward</attribute>
+          <attribute name="keyValue">location</attribute>
+          <attribute name="type">column_aggregation</attribute>
+        </attribute>
+      </orm-properties>
     </table>
     <table name="VoteComment" visPositionX="-52" visPositionY="746" visSizeX="0" visSizeX2="127" visSizeY="0" visSizeY2="31">
       <column name="comment_id" size="4" type="integer"/>
-      <inheritance-child derived-from="Vote" discriminator-value="comment"/>
+      <orm-properties>
+        <attribute name="inheritance">
+          <attribute name="type">column_aggregation</attribute>
+          <attribute name="keyValue">comment</attribute>
+          <attribute name="keyField">toward</attribute>
+          <attribute name="extends">Vote</attribute>
+        </attribute>
+      </orm-properties>
     </table>
     <table name="VoteProfit" visPositionX="28" visPositionY="386" visSizeX="0" visSizeX2="110" visSizeY="0" visSizeY2="31">
       <column name="profit_id" size="4" type="integer"/>
-      <inheritance-child derived-from="Vote" discriminator-value="profit"/>
+      <orm-properties>
+        <attribute name="inheritance">
+          <attribute name="type">column_aggregation</attribute>
+          <attribute name="keyValue">profit</attribute>
+          <attribute name="keyField">toward</attribute>
+          <attribute name="extends">Vote</attribute>
+        </attribute>
+      </orm-properties>
     </table>
     <table name="LocationScope" visPositionX="356" visPositionY="53" visSizeX="0" visSizeX2="99" visSizeY="0" visSizeY2="45">
       <column auto-increment="true" name="id" primary="true" size="4" type="integer"/>
       <column name="name" required="true" size="50" type="string" unique="true"/>
     </table>
-    <table name="VoteProfile" visPositionX="-67" visPositionY="518" visSizeX="0" visSizeX2="114" visSizeY="0" visSizeY2="31">
+    <table name="VoteProfile" visPositionX="-68" visPositionY="517" visSizeX="0" visSizeX2="114" visSizeY="0" visSizeY2="31">
       <column name="profile_id" size="4" type="integer"/>
-      <inheritance-child derived-from="Vote" discriminator-value="profile"/>
+      <orm-properties>
+        <attribute name="inheritance">
+          <attribute name="type">column_aggregation</attribute>
+          <attribute name="keyValue">profile</attribute>
+          <attribute name="keyField">toward</attribute>
+          <attribute name="extends">Vote</attribute>
+        </attribute>
+      </orm-properties>
     </table>
     <table name="Address" visPositionX="582" visPositionY="206" visSizeX="0" visSizeX2="177" visSizeY="0" visSizeY2="101">
       <column auto-increment="true" name="id" primary="true" size="4" type="integer"/>
@@ -227,7 +265,7 @@
       <column description="Foreign key to AreaHigh" name="area_high_id" size="4" type="integer"/>
       <column description="Foreign key to Locality" name="locality_id" size="4" type="integer"/>
     </table>
-    <table name="Country" visPositionX="461" visPositionY="-35" visSizeX="0" visSizeX2="104" visSizeY="0" visSizeY2="45">
+    <table name="Country" visPositionX="935" visPositionY="-31" visSizeX="0" visSizeX2="83" visSizeY="0" visSizeY2="45">
       <column auto-increment="true" name="id" primary="true" size="4" type="integer"/>
       <column name="name" required="true" size="255" type="string" unique="true"/>
     </table>
@@ -287,7 +325,14 @@
     </table>
     <table name="CommentInbox" visPositionX="583" visPositionY="588" visSizeX="0" visSizeX2="110" visSizeY="0" visSizeY2="31">
       <column description="Foreign key to Inbox" name="inbox_id" size="4" type="integer"/>
-      <inheritance-child derived-from="Comment" discriminator-value="Inbox"/>
+      <orm-properties>
+        <attribute name="inheritance">
+          <attribute name="type">column_aggregation</attribute>
+          <attribute name="keyValue">Inbox</attribute>
+          <attribute name="keyField">toward</attribute>
+          <attribute name="extends">Comment</attribute>
+        </attribute>
+      </orm-properties>
     </table>
     <table name="Talk" visPositionX="720" visPositionY="611" visSizeX="0" visSizeX2="138" visSizeY="0" visSizeY2="73">
       <column auto-increment="true" name="id" primary="true" required="true" size="4" type="integer"/>
@@ -340,7 +385,14 @@
     </table>
     <table name="CommentTalk" visPositionX="710" visPositionY="480" visSizeX="0" visSizeX2="103" visSizeY="0" visSizeY2="31">
       <column description="Foreign key to Talk" name="talk_id" size="4" type="integer"/>
-      <inheritance-child derived-from="Comment" discriminator-value="talk"/>
+      <orm-properties>
+        <attribute name="inheritance">
+          <attribute name="extends">Comment</attribute>
+          <attribute name="keyField">toward</attribute>
+          <attribute name="keyValue">talk</attribute>
+          <attribute name="type">column_aggregation</attribute>
+        </attribute>
+      </orm-properties>
     </table>
     <table name="ReadComment" visPositionX="-66" visPositionY="561" visSizeX="0" visSizeX2="172" visSizeY="0" visSizeY2="60">
       <column name="profile_id" primary="true" required="true" size="4" type="integer"/>
@@ -348,7 +400,14 @@
     </table>
     <table name="VoteTalk" visPositionX="950" visPositionY="639" visSizeX="0" visSizeX2="105" visSizeY="0" visSizeY2="31">
       <column name="talk_id" size="4" type="integer"/>
-      <inheritance-child derived-from="Vote" discriminator-value="talk"/>
+      <orm-properties>
+        <attribute name="inheritance">
+          <attribute name="extends">Vote</attribute>
+          <attribute name="keyField">toward</attribute>
+          <attribute name="type">column_aggregation</attribute>
+          <attribute name="keyValue">talk</attribute>
+        </attribute>
+      </orm-properties>
     </table>
     <table name="FishEvent" visPositionX="-8" visPositionY="47" visSizeX="0" visSizeX2="120" visSizeY="0" visSizeY2="101">
       <column auto-increment="true" name="id" primary="true" required="true" size="4" type="integer"/>
@@ -390,13 +449,29 @@
     </table>
     <table name="VoteFishEvent" visPositionX="-24" visPositionY="-4" visSizeX="0" visSizeX2="133" visSizeY="0" visSizeY2="31">
       <column name="fish_event_id" size="4" type="integer"/>
-      <inheritance-child derived-from="Vote" discriminator-value="fish_event"/>
+      <orm-properties>
+        <attribute name="inheritance">
+          <attribute name="type">column_aggregation</attribute>
+          <attribute name="extends">Vote</attribute>
+          <attribute name="keyField">toward</attribute>
+          <attribute name="keyValue">fish_event</attribute>
+        </attribute>
+      </orm-properties>
+    </table>
+    <table name="CommentFishEvent" visPositionX="-135" visPositionY="215" visSizeX="0" visSizeX2="133" visSizeY="0" visSizeY2="31">
+      <column name="fish_event_id" size="4" type="integer"/>
+      <orm-properties>
+        <attribute name="inheritance">
+          <attribute name="type">column_aggregation</attribute>
+          <attribute name="extends">Comment</attribute>
+          <attribute name="keyField">toward</attribute>
+          <attribute name="keyValue">fish_event</attribute>
+        </attribute>
+      </orm-properties>
     </table>
     <table name="Photo" visPositionX="-199" visPositionY="336" visSizeX="0" visSizeX2="99" visSizeY="0" visSizeY2="45">
       <column auto-increment="true" name="id" primary="true" size="4" type="integer"/>
       <column name="name" required="true" size="36" type="string"/>
-      <column name="toward"/>
-      <inheritance-parent discriminator-column="toward" type="column_aggregation"/>
       <orm-properties>
         <attribute name="actAs">
           <attribute name="Blameable">
@@ -429,21 +504,24 @@
     </table>
     <table name="PhotoLocation" visPositionX="-34" visPositionY="284" visSizeX="0" visSizeX2="120" visSizeY="0" visSizeY2="31">
       <column name="location_id" size="4" type="integer"/>
-      <inheritance-child derived-from="Photo" discriminator-value="location"/>
+      <orm-properties>
+        <attribute name="inheritance">
+          <attribute name="type">column_aggregation</attribute>
+          <attribute name="keyValue">location</attribute>
+          <attribute name="keyField">toward</attribute>
+          <attribute name="extends">Photo</attribute>
+        </attribute>
+      </orm-properties>
     </table>
     <table name="Friend" visPositionX="126" visPositionY="745" visSizeX="0" visSizeX2="212" visSizeY="0" visSizeY2="74">
       <column name="requester_id" primary="true" required="true" size="4" type="integer"/>
       <column name="accepter_id" primary="true" required="true" size="4" type="integer"/>
       <column default="0" name="accepted" type="boolean"/>
     </table>
-    <table name="City" visPositionX="-161" visPositionY="459" visSizeX="0" visSizeX2="122" visSizeY="0" visSizeY2="59">
+    <table name="City" visPositionX="-205" visPositionY="468" visSizeX="0" visSizeX2="120" visSizeY="0" visSizeY2="59">
       <column auto-increment="true" name="id" primary="true" required="true" size="4" type="integer"/>
       <column name="name" required="true" size="30" type="string"/>
       <column name="country_id" size="4" type="integer"/>
-    </table>
-    <table name="CommentFishEvent" visPositionX="-172" visPositionY="202" visSizeX="0" visSizeX2="133" visSizeY="0" visSizeY2="31">
-      <column name="fish_event_id" size="4" type="integer"/>
-      <inheritance-child derived-from="Comment" discriminator-value="fish_event"/>
     </table>
     <orm-properties>
       <attribute name="options">
@@ -500,8 +578,12 @@
     <foreign-key caption="Location WishList" from="WishList" name="FK_WishList_Location_id" to="Location" visCenterX="0" visCenterY="3" visShowCaption="0">
       <foreign-key-column from="location_id" to="id"/>
     </foreign-key>
-    <foreign-key from="Vote" inverse-alias="Voter" name="FK_Vote_Profile" owning-alias="Votes" to="sfGuardUserProfile">
+    <foreign-key from="Vote" name="FK_Vote_Profile" to="sfGuardUserProfile">
       <foreign-key-column from="voter" to="id"/>
+      <orm-properties>
+        <attribute name="localAlias">Voter</attribute>
+        <attribute name="foreignAlias">Votes</attribute>
+      </orm-properties>
     </foreign-key>
     <foreign-key caption="Location VoteLocation" from="VoteLocation" name="FK_VoteLocation_Location_id" to="Location" visShowCaption="0">
       <foreign-key-column from="location_id" to="id"/>
@@ -512,16 +594,8 @@
     <foreign-key caption="Profit VoteProfit" from="VoteProfit" name="FK_VoteProfit_Profit_id" to="Profit" visShowCaption="0">
       <foreign-key-column from="profit_id" to="id"/>
     </foreign-key>
-    <foreign-key caption="Profile VoteProfile" from="VoteProfile" inverse-alias="Profile" name="FK_VoteProfile_Profile_id" owning-alias="VoteProfile" to="sfGuardUserProfile" visShowCaption="0">
+    <foreign-key caption="Profile VoteProfile" from="VoteProfile" name="FK_VoteProfile_Profile_id" to="sfGuardUserProfile" visShowCaption="0">
       <foreign-key-column from="profile_id" to="id"/>
-      <orm-properties>
-        <attribute name="side-owning">
-          <attribute name="type">many</attribute>
-        </attribute>
-        <attribute name="side-inverse">
-          <attribute name="type">one</attribute>
-        </attribute>
-      </orm-properties>
     </foreign-key>
     <foreign-key from="Address" name="FK_Address_Country" to="Country">
       <foreign-key-column from="country_id" to="id"/>
@@ -574,36 +648,35 @@
     <foreign-key caption="FishEvent VoteFishEvent" from="VoteFishEvent" name="FK_VoteFishEvent_FishEvent_id" to="FishEvent" visShowCaption="0">
       <foreign-key-column from="fish_event_id" to="id"/>
     </foreign-key>
+    <foreign-key caption="FishEvent CommentFishEvent" from="CommentFishEvent" name="FK_CommentFishEvent_FishEvent_id" to="FishEvent" visShowCaption="0">
+      <foreign-key-column from="fish_event_id" to="id"/>
+    </foreign-key>
     <foreign-key caption="Location PhotoLocation" from="PhotoLocation" name="FK_PhotoLocation_Location_id" to="Location" visShowCaption="0">
       <foreign-key-column from="location_id" to="id"/>
     </foreign-key>
-    <foreign-key caption="sfGuardUserProfile Friend" from="Friend" inverse-alias="Requester" name="FK_Friend_sfGuardUserProfile_id" owning-alias="Requesters" to="sfGuardUserProfile" visCaption1X="-2" visCaption1Y="0" visCenterX="0" visCenterY="0" visShowCaption="0">
+    <foreign-key caption="sfGuardUserProfile Friend" from="Friend" name="FK_Friend_sfGuardUserProfile_id" to="sfGuardUserProfile" visCaption1X="-2" visCaption1Y="0" visCenterX="0" visCenterY="0" visShowCaption="0">
       <foreign-key-column from="requester_id" to="id"/>
       <orm-properties>
-        <attribute name="side-owning">
-          <attribute name="type">many</attribute>
-        </attribute>
-        <attribute name="side-inverse">
-          <attribute name="type">one</attribute>
-        </attribute>
+        <attribute name="foreignAlias">Requesters</attribute>
+        <attribute name="localAlias">Requester</attribute>
+        <attribute name="type">one</attribute>
+        <attribute name="foreignType">many</attribute>
       </orm-properties>
     </foreign-key>
-    <foreign-key caption="sfGuardUserProfile Friend" from="Friend" inverse-alias="Accepter" name="FK_Friend_sfGuardUserProfile_id2" owning-alias="Accepters" to="sfGuardUserProfile" visCaption1X="0" visCaption1Y="-1" visCenterX="0" visCenterY="0" visShowCaption="0">
+    <foreign-key caption="sfGuardUserProfile Friend" from="Friend" name="FK_Friend_sfGuardUserProfile_id2" to="sfGuardUserProfile" visCaption1X="0" visCaption1Y="-1" visCenterX="0" visCenterY="0" visShowCaption="0">
       <foreign-key-column from="accepter_id" to="id"/>
       <orm-properties>
-        <attribute name="side-owning">
-          <attribute name="type">many</attribute>
-        </attribute>
-        <attribute name="side-inverse">
-          <attribute name="type">one</attribute>
-        </attribute>
+        <attribute name="foreignAlias">Accepters</attribute>
+        <attribute name="localAlias">Accepter</attribute>
+        <attribute name="type">one</attribute>
+        <attribute name="foreignType">many</attribute>
       </orm-properties>
     </foreign-key>
     <foreign-key caption="Country City" from="City" name="FK_City_Country_id" to="Country" visShowCaption="0">
       <foreign-key-column from="country_id" to="id"/>
-    </foreign-key>
-    <foreign-key caption="FishEvent CommentFishEvent" from="CommentFishEvent" name="FK_CommentFishEvent_FishEvent_id" to="FishEvent" visCaption1X="0" visCaption1Y="-1" visCenterX="0" visCenterY="0" visShowCaption="0">
-      <foreign-key-column from="fish_event_id" to="id"/>
+      <orm-properties>
+        <attribute name="cascade"></attribute>
+      </orm-properties>
     </foreign-key>
     <many-to-many-relation mn-table="WishList">
       <many-to-many-foreign-key foreign-key="FK_WishList_Profile_id" relation-alias="Wishers"/>

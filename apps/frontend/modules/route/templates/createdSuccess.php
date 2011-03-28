@@ -1,1 +1,0 @@
-<?php echo $route->getId(); ?>|<?php echo $route->getName(); ?>
