@@ -11,7 +11,7 @@
     <body>
         <div id="page">
             <div id="header">
-                <div id="logo">uberЛОВ</div>
+                <div id="logo"><?php echo link_to(image_tag('/images/logo.png'), '@homepage') ?></div>
                 <div id="site_menu">
                     <ul>
                         <li><?php echo link_to('Места', 'collector/locations') ?></li>

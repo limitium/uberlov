@@ -1,0 +1,1 @@
+<?php include_partial('errorPage', array('header' => 'Куда лезешь? 403', 'message' => 'А вот сюда тебе нельзя.', 'title' => 'Uberлов - 403')); ?>

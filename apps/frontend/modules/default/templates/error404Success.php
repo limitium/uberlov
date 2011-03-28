@@ -1,0 +1,1 @@
+<?php include_partial('errorPage', array('header' => 'Упс не туда 404', 'message' => 'Похоже нет такой страницы.', 'title' => 'Uberлов - 404')); ?>
