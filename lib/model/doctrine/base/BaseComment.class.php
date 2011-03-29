@@ -46,7 +46,7 @@
  * @package    FISHERY
  * @subpackage model
  * @author     Sergei Belov <limitium@gmail.com>
- * @version    SVN: $Id: Builder.php 6820 2009-11-30 17:27:49Z jwage $
+ * @version    SVN: $Id: Builder.php 7490 2010-03-29 19:53:27Z jwage $
  */
 abstract class BaseComment extends sfDoctrineRecord
 {
@@ -57,16 +57,16 @@ abstract class BaseComment extends sfDoctrineRecord
              'primary' => true,
              'type' => 'integer',
              'autoincrement' => true,
-             'length' => '4',
+             'length' => 4,
              ));
         $this->hasColumn('parent', 'integer', 4, array(
              'type' => 'integer',
-             'length' => '4',
+             'length' => 4,
              ));
         $this->hasColumn('message', 'string', 1000, array(
              'type' => 'string',
              'notnull' => true,
-             'length' => '1000',
+             'length' => 1000,
              ));
         $this->hasColumn('toward', 'string', 255, array(
              'type' => 'string',
@@ -74,23 +74,23 @@ abstract class BaseComment extends sfDoctrineRecord
              ));
         $this->hasColumn('location_id', 'integer', 4, array(
              'type' => 'integer',
-             'length' => '4',
+             'length' => 4,
              ));
         $this->hasColumn('profit_id', 'integer', 4, array(
              'type' => 'integer',
-             'length' => '4',
+             'length' => 4,
              ));
         $this->hasColumn('inbox_id', 'integer', 4, array(
              'type' => 'integer',
-             'length' => '4',
+             'length' => 4,
              ));
         $this->hasColumn('talk_id', 'integer', 4, array(
              'type' => 'integer',
-             'length' => '4',
+             'length' => 4,
              ));
         $this->hasColumn('fish_event_id', 'integer', 4, array(
              'type' => 'integer',
-             'length' => '4',
+             'length' => 4,
              ));
 
         $this->option('type', 'INNODB');

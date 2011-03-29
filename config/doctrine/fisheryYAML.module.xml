@@ -138,7 +138,7 @@
       <column auto-increment="true" name="id" primary="true" size="4" type="integer"/>
       <column name="name" required="true" size="50" type="string"/>
     </table>
-    <table name="Comment" visPositionX="-32" visPositionY="664" visSizeX="0" visSizeX2="124" visSizeY="0" visSizeY2="59">
+    <table name="Comment" visPositionX="-32" visPositionY="660" visSizeX="0" visSizeX2="124" visSizeY="0" visSizeY2="59">
       <column auto-increment="true" name="id" primary="true" size="4" type="integer"/>
       <column name="parent" size="4" type="integer"/>
       <column name="message" required="true" size="1000" type="string"/>
@@ -247,7 +247,7 @@
       <column auto-increment="true" name="id" primary="true" size="4" type="integer"/>
       <column name="name" required="true" size="50" type="string" unique="true"/>
     </table>
-    <table name="VoteProfile" visPositionX="-68" visPositionY="517" visSizeX="0" visSizeX2="114" visSizeY="0" visSizeY2="31">
+    <table name="VoteProfile" visPositionX="-80" visPositionY="517" visSizeX="0" visSizeX2="114" visSizeY="0" visSizeY2="31">
       <column name="profile_id" size="4" type="integer"/>
       <orm-properties>
         <attribute name="inheritance">
@@ -518,9 +518,15 @@
       <column name="accepter_id" primary="true" required="true" size="4" type="integer"/>
       <column default="0" name="accepted" type="boolean"/>
     </table>
-    <table name="City" visPositionX="-205" visPositionY="468" visSizeX="0" visSizeX2="120" visSizeY="0" visSizeY2="59">
+    <table name="City" visPositionX="-204" visPositionY="468" visSizeX="0" visSizeX2="120" visSizeY="0" visSizeY2="73">
       <column auto-increment="true" name="id" primary="true" required="true" size="4" type="integer"/>
       <column name="name" required="true" size="30" type="string"/>
+      <column name="region_id" size="4" type="integer"/>
+      <column default="0" name="weight" required="true" size="4" type="integer"/>
+    </table>
+    <table name="Region" visPositionX="-211" visPositionY="33" visSizeX="0" visSizeX2="120" visSizeY="0" visSizeY2="59">
+      <column auto-increment="true" name="id" primary="true" size="4" type="integer"/>
+      <column name="name" required="true" size="100" type="string" unique="true"/>
       <column name="country_id" size="4" type="integer"/>
     </table>
     <orm-properties>
@@ -596,6 +602,10 @@
     </foreign-key>
     <foreign-key caption="Profile VoteProfile" from="VoteProfile" name="FK_VoteProfile_Profile_id" to="sfGuardUserProfile" visShowCaption="0">
       <foreign-key-column from="profile_id" to="id"/>
+      <orm-properties>
+        <attribute name="localAlias">Profile</attribute>
+        <attribute name="cascade"></attribute>
+      </orm-properties>
     </foreign-key>
     <foreign-key from="Address" name="FK_Address_Country" to="Country">
       <foreign-key-column from="country_id" to="id"/>
@@ -672,11 +682,11 @@
         <attribute name="foreignType">many</attribute>
       </orm-properties>
     </foreign-key>
-    <foreign-key caption="Country City" from="City" name="FK_City_Country_id" to="Country" visShowCaption="0">
+    <foreign-key caption="Region City" from="City" name="FK_City_Region_id" to="Region" visShowCaption="0">
+      <foreign-key-column from="region_id" to="id"/>
+    </foreign-key>
+    <foreign-key caption="Country Region" from="Region" name="FK_Region_Country_id" to="Country" visShowCaption="0">
       <foreign-key-column from="country_id" to="id"/>
-      <orm-properties>
-        <attribute name="cascade"></attribute>
-      </orm-properties>
     </foreign-key>
     <many-to-many-relation mn-table="WishList">
       <many-to-many-foreign-key foreign-key="FK_WishList_Profile_id" relation-alias="Wishers"/>

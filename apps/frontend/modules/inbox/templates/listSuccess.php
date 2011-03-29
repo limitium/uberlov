@@ -2,7 +2,7 @@
     app.csrf.inbox = "<?php echo $csrf; ?>";
 </script>
 <?php use_javascript('inbox'); ?>
-<?php use_helper('text'); ?>
+<?php use_helper('Text'); ?>
 <?php $inboxes = $pager->execute(); ?>
 <h2>Последние отчёты</h2>
 

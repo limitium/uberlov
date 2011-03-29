@@ -1,11 +1,15 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
     <head>
+        <link rel="shortcut icon" href="<?php echo image_path('/images/favicon.ico'); ?>" />
         <?php include_http_metas() ?>
         <?php include_metas() ?>
         <?php include_title() ?>
-        <link rel="shortcut icon" href="<?php echo image_path('/images/favicon.ico'); ?>" />
         <?php include_stylesheets() ?>
+        <script language="javascript">
+            baseUrl = "<?php echo sfContext::getInstance()->getRequest()->getRelativeUrlRoot(); ?>";
+            baseUrl = "<?php echo substr(url_for('@homepage'), 0, strlen(url_for('@homepage')) - 1); ?>";
+        </script>
         <?php include_javascripts() ?>
     </head>
     <body>

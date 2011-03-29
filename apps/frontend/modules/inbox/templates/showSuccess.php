@@ -1,4 +1,4 @@
-<?php use_helper('text'); ?>
+<?php use_helper('Text'); ?>
 
 <script type="text/javascript">
     app.csrf.inbox = "<?php echo $csrf; ?>";

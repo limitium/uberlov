@@ -423,7 +423,8 @@ VoteProfile:
     profile_id:
       type: integer(4)
   relations:
-    sfGuardUserProfile:
+    Profile:
+      class: sfGuardUserProfile
       local: profile_id
       foreign: id
 Address:
@@ -827,6 +828,26 @@ City:
       autoincrement: true
     name:
       type: string(30)
+      notnull: true
+    region_id:
+      type: integer(4)
+    weight:
+      default: 0
+      type: integer(4)
+      notnull: true
+  relations:
+    Region:
+      local: region_id
+      foreign: id
+Region:
+  columns:
+    id:
+      primary: true
+      type: integer(4)
+      autoincrement: true
+    name:
+      unique: true
+      type: string(100)
       notnull: true
     country_id:
       type: integer(4)

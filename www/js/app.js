@@ -30,8 +30,6 @@ $.extend({
     }
 });
 app = {
-    baseUrl:'/ht/www',
-//    baseUrl:'',
     csrf: {},
     modules: {},
     
@@ -187,7 +185,7 @@ app = {
         })
     },
     url: function(url){
-        return this.baseUrl+url;
+        return baseUrl+url;
     },
     loaderTag: function(){
         return "<img src='" + this.url('/images/loader-small.gif') + "'/>";

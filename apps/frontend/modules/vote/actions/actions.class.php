@@ -28,7 +28,7 @@ class voteActions extends sfActions {
 
         $profile = $this->getUser()->getProfile();
 
-        if ($voteClass == 'VoteProfile' && $object != $profile || $object->hasRelation('sfGuardUserProfile') && $object->getCreatedBy() != $profile) {
+        if ($voteClass == 'VoteProfile' && $object != $profile || $object->hasRelation('sfGuardUserProfile') && isset($object->created_by) != $profile) {
             $vote = Doctrine::getTable($voteClass)
                             ->createQuery('v')
                             ->where('v.voter = ? and ' . $field . '_id=?', array($profile->getId(), $object->getId()))

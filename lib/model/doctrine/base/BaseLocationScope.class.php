@@ -19,7 +19,7 @@
  * @package    FISHERY
  * @subpackage model
  * @author     Sergei Belov <limitium@gmail.com>
- * @version    SVN: $Id: Builder.php 6820 2009-11-30 17:27:49Z jwage $
+ * @version    SVN: $Id: Builder.php 7490 2010-03-29 19:53:27Z jwage $
  */
 abstract class BaseLocationScope extends sfDoctrineRecord
 {
@@ -30,13 +30,13 @@ abstract class BaseLocationScope extends sfDoctrineRecord
              'primary' => true,
              'type' => 'integer',
              'autoincrement' => true,
-             'length' => '4',
+             'length' => 4,
              ));
         $this->hasColumn('name', 'string', 50, array(
              'unique' => true,
              'type' => 'string',
              'notnull' => true,
-             'length' => '50',
+             'length' => 50,
              ));
 
         $this->option('type', 'INNODB');

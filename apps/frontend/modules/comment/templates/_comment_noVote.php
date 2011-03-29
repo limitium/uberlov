@@ -1,4 +1,4 @@
-<?php use_helper('text'); ?>
+<?php use_helper('Text'); ?>
 <div id="comment<?php echo $comment->getId(); ?>" class="comment tree indent_<?php echo $comment->getLevel(); ?>">
     <div class="commentMessage" author="user<?php echo $comment->getCreatedBy()->getId(); ?>"><?php echo simple_format_text($comment->getMessage()); ?></div>
     <div class="commentBar"

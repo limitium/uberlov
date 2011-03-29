@@ -28,7 +28,7 @@
  * @package    FISHERY
  * @subpackage model
  * @author     Sergei Belov <limitium@gmail.com>
- * @version    SVN: $Id: Builder.php 6820 2009-11-30 17:27:49Z jwage $
+ * @version    SVN: $Id: Builder.php 7490 2010-03-29 19:53:27Z jwage $
  */
 abstract class BaseTag extends sfDoctrineRecord
 {
@@ -37,22 +37,22 @@ abstract class BaseTag extends sfDoctrineRecord
         $this->setTableName('tag');
         $this->hasColumn('name', 'string', 100, array(
              'type' => 'string',
-             'length' => '100',
+             'length' => 100,
              ));
         $this->hasColumn('is_triple', 'boolean', null, array(
              'type' => 'boolean',
              ));
         $this->hasColumn('triple_namespace', 'string', 100, array(
              'type' => 'string',
-             'length' => '100',
+             'length' => 100,
              ));
         $this->hasColumn('triple_key', 'string', 100, array(
              'type' => 'string',
-             'length' => '100',
+             'length' => 100,
              ));
         $this->hasColumn('triple_value', 'string', 100, array(
              'type' => 'string',
-             'length' => '100',
+             'length' => 100,
              ));
 
 
