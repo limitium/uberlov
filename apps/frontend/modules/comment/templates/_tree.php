@@ -1,4 +1,4 @@
-<?php use_helper('text'); ?>
+<?php use_helper('Text'); ?>
 <?php use_javascript('comment'); ?>
 
 <div id="commentContainer" class="selected" type="<?php echo $form->getToward(); ?>">

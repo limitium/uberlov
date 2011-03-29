@@ -1,4 +1,4 @@
-<?php use_helper('text'); ?>
+<?php use_helper('Text'); ?>
 <?php $profits = $pager->execute(); ?>
 <h2>Последние отчёты</h2>
 

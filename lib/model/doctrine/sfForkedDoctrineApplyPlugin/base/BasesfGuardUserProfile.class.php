@@ -79,7 +79,7 @@
  * @package    FISHERY
  * @subpackage model
  * @author     Sergei Belov <limitium@gmail.com>
- * @version    SVN: $Id: Builder.php 6820 2009-11-30 17:27:49Z jwage $
+ * @version    SVN: $Id: Builder.php 7490 2010-03-29 19:53:27Z jwage $
  */
 abstract class BasesfGuardUserProfile extends sfDoctrineRecord
 {
@@ -94,20 +94,20 @@ abstract class BasesfGuardUserProfile extends sfDoctrineRecord
         $this->hasColumn('email_new', 'string', 255, array(
              'type' => 'string',
              'unique' => true,
-             'length' => '255',
+             'length' => 255,
              ));
         $this->hasColumn('validate_at', 'timestamp', null, array(
              'type' => 'timestamp',
              ));
         $this->hasColumn('validate', 'string', 33, array(
              'type' => 'string',
-             'length' => '33',
+             'length' => 33,
              ));
         $this->hasColumn('id', 'integer', 4, array(
              'primary' => true,
              'type' => 'integer',
              'autoincrement' => true,
-             'length' => '4',
+             'length' => 4,
              ));
         $this->hasColumn('sex', 'boolean', null, array(
              'default' => 1,
@@ -119,14 +119,14 @@ abstract class BasesfGuardUserProfile extends sfDoctrineRecord
              ));
         $this->hasColumn('userpic', 'string', 255, array(
              'type' => 'string',
-             'length' => '255',
+             'length' => 255,
              ));
         $this->hasColumn('description', 'string', null, array(
              'type' => 'string',
              ));
         $this->hasColumn('city_id', 'integer', 4, array(
              'type' => 'integer',
-             'length' => '4',
+             'length' => 4,
              ));
 
 

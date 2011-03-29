@@ -1,4 +1,4 @@
-<?php use_helper('text'); ?>
+<?php use_helper('Text'); ?>
 <?php use_javascript('voting'); ?>
 <?php $events = $pager->execute(); ?>
 <div class="eventList">

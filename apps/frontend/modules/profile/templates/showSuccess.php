@@ -1,5 +1,5 @@
 <?php use_helper('Countable'); ?>
-<?php use_helper('text'); ?>
+<?php use_helper('Text'); ?>
 <div class="profile">
     <div class="personal">
         <div class="info">

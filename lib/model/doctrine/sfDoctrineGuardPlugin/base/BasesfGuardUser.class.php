@@ -61,7 +61,7 @@
  * @package    FISHERY
  * @subpackage model
  * @author     Sergei Belov <limitium@gmail.com>
- * @version    SVN: $Id: Builder.php 6820 2009-11-30 17:27:49Z jwage $
+ * @version    SVN: $Id: Builder.php 7490 2010-03-29 19:53:27Z jwage $
  */
 abstract class BasesfGuardUser extends sfDoctrineRecord
 {
@@ -70,37 +70,37 @@ abstract class BasesfGuardUser extends sfDoctrineRecord
         $this->setTableName('sf_guard_user');
         $this->hasColumn('first_name', 'string', 255, array(
              'type' => 'string',
-             'length' => '255',
+             'length' => 255,
              ));
         $this->hasColumn('last_name', 'string', 255, array(
              'type' => 'string',
-             'length' => '255',
+             'length' => 255,
              ));
         $this->hasColumn('email_address', 'string', 255, array(
              'type' => 'string',
              'notnull' => true,
              'unique' => true,
-             'length' => '255',
+             'length' => 255,
              ));
         $this->hasColumn('username', 'string', 128, array(
              'type' => 'string',
              'notnull' => true,
              'unique' => true,
-             'length' => '128',
+             'length' => 128,
              ));
         $this->hasColumn('algorithm', 'string', 128, array(
              'type' => 'string',
              'default' => 'sha1',
              'notnull' => true,
-             'length' => '128',
+             'length' => 128,
              ));
         $this->hasColumn('salt', 'string', 128, array(
              'type' => 'string',
-             'length' => '128',
+             'length' => 128,
              ));
         $this->hasColumn('password', 'string', 128, array(
              'type' => 'string',
-             'length' => '128',
+             'length' => 128,
              ));
         $this->hasColumn('is_active', 'boolean', null, array(
              'type' => 'boolean',
@@ -156,7 +156,8 @@ abstract class BasesfGuardUser extends sfDoctrineRecord
              'local' => 'id',
              'foreign' => 'user_id'));
 
-        $timestampable0 = new Doctrine_Template_Timestampable();
+        $timestampable0 = new Doctrine_Template_Timestampable(array(
+             ));
         $this->actAs($timestampable0);
     }
 }

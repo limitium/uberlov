@@ -7,8 +7,8 @@
  *
  * @package    FISHERY
  * @subpackage form
- * @author     Your name here
- * @version    SVN: $Id: sfDoctrineFormGeneratedTemplate.php 24171 2009-11-19 16:37:50Z Kris.Wallsmith $
+ * @author     Sergei Belov <limitium@gmail.com>
+ * @version    SVN: $Id: sfDoctrineFormGeneratedTemplate.php 29553 2010-05-20 14:33:00Z Kris.Wallsmith $
  */
 abstract class BaseCommentForm extends BaseFormDoctrine
 {
@@ -24,35 +24,35 @@ abstract class BaseCommentForm extends BaseFormDoctrine
       'inbox_id'                   => new sfWidgetFormInputText(),
       'talk_id'                    => new sfWidgetFormInputText(),
       'fish_event_id'              => new sfWidgetFormInputText(),
+      'created_by'                 => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('CreatedBy'), 'add_empty' => false)),
+      'updated_by'                 => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('UpdatedBy'), 'add_empty' => false)),
       'created_at'                 => new sfWidgetFormDateTime(),
       'updated_at'                 => new sfWidgetFormDateTime(),
       'root_id'                    => new sfWidgetFormInputText(),
       'lft'                        => new sfWidgetFormInputText(),
       'rgt'                        => new sfWidgetFormInputText(),
       'level'                      => new sfWidgetFormInputText(),
-      'created_by'                 => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('CreatedBy'), 'add_empty' => false)),
-      'updated_by'                 => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('UpdatedBy'), 'add_empty' => false)),
       'sf_guard_user_profile_list' => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'sfGuardUserProfile')),
     ));
 
     $this->setValidators(array(
-      'id'                         => new sfValidatorDoctrineChoice(array('model' => $this->getModelName(), 'column' => 'id', 'required' => false)),
+      'id'                         => new sfValidatorChoice(array('choices' => array($this->getObject()->get('id')), 'empty_value' => $this->getObject()->get('id'), 'required' => false)),
       'parent'                     => new sfValidatorInteger(array('required' => false)),
       'message'                    => new sfValidatorString(array('max_length' => 1000)),
-      'toward'                     => new sfValidatorPass(array('required' => false)),
+      'toward'                     => new sfValidatorString(array('max_length' => 255, 'required' => false)),
       'location_id'                => new sfValidatorInteger(array('required' => false)),
       'profit_id'                  => new sfValidatorInteger(array('required' => false)),
       'inbox_id'                   => new sfValidatorInteger(array('required' => false)),
       'talk_id'                    => new sfValidatorInteger(array('required' => false)),
       'fish_event_id'              => new sfValidatorInteger(array('required' => false)),
+      'created_by'                 => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('CreatedBy'))),
+      'updated_by'                 => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('UpdatedBy'))),
       'created_at'                 => new sfValidatorDateTime(),
       'updated_at'                 => new sfValidatorDateTime(),
       'root_id'                    => new sfValidatorInteger(array('required' => false)),
       'lft'                        => new sfValidatorInteger(array('required' => false)),
       'rgt'                        => new sfValidatorInteger(array('required' => false)),
       'level'                      => new sfValidatorInteger(array('required' => false)),
-      'created_by'                 => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('CreatedBy'))),
-      'updated_by'                 => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('UpdatedBy'))),
       'sf_guard_user_profile_list' => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'sfGuardUserProfile', 'required' => false)),
     ));
 

@@ -1,4 +1,4 @@
-<?php use_helper('text'); ?>
+<?php use_helper('Text'); ?>
 <?php foreach ($pager->execute() as $talk): ?>
     <div class="talkBrief">
     <?php echo link_to($talk->getName(), 'talk/show?id=' . $talk->getId()); ?>

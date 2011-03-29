@@ -9,23 +9,23 @@
  * @property string $name
  * @property Doctrine_Collection $Address
  * @property Doctrine_Collection $AreaLow
- * @property Doctrine_Collection $City
+ * @property Doctrine_Collection $Region
  * 
  * @method integer             getId()      Returns the current record's "id" value
  * @method string              getName()    Returns the current record's "name" value
  * @method Doctrine_Collection getAddress() Returns the current record's "Address" collection
  * @method Doctrine_Collection getAreaLow() Returns the current record's "AreaLow" collection
- * @method Doctrine_Collection getCity()    Returns the current record's "City" collection
+ * @method Doctrine_Collection getRegion()  Returns the current record's "Region" collection
  * @method Country             setId()      Sets the current record's "id" value
  * @method Country             setName()    Sets the current record's "name" value
  * @method Country             setAddress() Sets the current record's "Address" collection
  * @method Country             setAreaLow() Sets the current record's "AreaLow" collection
- * @method Country             setCity()    Sets the current record's "City" collection
+ * @method Country             setRegion()  Sets the current record's "Region" collection
  * 
  * @package    FISHERY
  * @subpackage model
  * @author     Sergei Belov <limitium@gmail.com>
- * @version    SVN: $Id: Builder.php 6820 2009-11-30 17:27:49Z jwage $
+ * @version    SVN: $Id: Builder.php 7490 2010-03-29 19:53:27Z jwage $
  */
 abstract class BaseCountry extends sfDoctrineRecord
 {
@@ -36,13 +36,13 @@ abstract class BaseCountry extends sfDoctrineRecord
              'primary' => true,
              'type' => 'integer',
              'autoincrement' => true,
-             'length' => '4',
+             'length' => 4,
              ));
         $this->hasColumn('name', 'string', 255, array(
              'unique' => true,
              'type' => 'string',
              'notnull' => true,
-             'length' => '255',
+             'length' => 255,
              ));
 
         $this->option('type', 'INNODB');
@@ -61,7 +61,7 @@ abstract class BaseCountry extends sfDoctrineRecord
              'local' => 'id',
              'foreign' => 'country_id'));
 
-        $this->hasMany('City', array(
+        $this->hasMany('Region', array(
              'local' => 'id',
              'foreign' => 'country_id'));
     }

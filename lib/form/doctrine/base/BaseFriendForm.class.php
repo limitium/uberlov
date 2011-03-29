@@ -7,8 +7,8 @@
  *
  * @package    FISHERY
  * @subpackage form
- * @author     Your name here
- * @version    SVN: $Id: sfDoctrineFormGeneratedTemplate.php 24171 2009-11-19 16:37:50Z Kris.Wallsmith $
+ * @author     Sergei Belov <limitium@gmail.com>
+ * @version    SVN: $Id: sfDoctrineFormGeneratedTemplate.php 29553 2010-05-20 14:33:00Z Kris.Wallsmith $
  */
 abstract class BaseFriendForm extends BaseFormDoctrine
 {
@@ -21,8 +21,8 @@ abstract class BaseFriendForm extends BaseFormDoctrine
     ));
 
     $this->setValidators(array(
-      'requester_id' => new sfValidatorDoctrineChoice(array('model' => $this->getModelName(), 'column' => 'requester_id', 'required' => false)),
-      'accepter_id'  => new sfValidatorDoctrineChoice(array('model' => $this->getModelName(), 'column' => 'accepter_id', 'required' => false)),
+      'requester_id' => new sfValidatorChoice(array('choices' => array($this->getObject()->get('requester_id')), 'empty_value' => $this->getObject()->get('requester_id'), 'required' => false)),
+      'accepter_id'  => new sfValidatorChoice(array('choices' => array($this->getObject()->get('accepter_id')), 'empty_value' => $this->getObject()->get('accepter_id'), 'required' => false)),
       'accepted'     => new sfValidatorBoolean(array('required' => false)),
     ));
 

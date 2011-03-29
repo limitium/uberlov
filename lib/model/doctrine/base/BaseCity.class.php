@@ -7,25 +7,28 @@
  * 
  * @property integer $id
  * @property string $name
- * @property integer $country_id
- * @property Country $Country
+ * @property integer $region_id
+ * @property integer $weight
+ * @property Region $Region
  * @property Doctrine_Collection $sfGuardUserProfile
  * 
  * @method integer             getId()                 Returns the current record's "id" value
  * @method string              getName()               Returns the current record's "name" value
- * @method integer             getCountryId()          Returns the current record's "country_id" value
- * @method Country             getCountry()            Returns the current record's "Country" value
+ * @method integer             getRegionId()           Returns the current record's "region_id" value
+ * @method integer             getWeight()             Returns the current record's "weight" value
+ * @method Region              getRegion()             Returns the current record's "Region" value
  * @method Doctrine_Collection getSfGuardUserProfile() Returns the current record's "sfGuardUserProfile" collection
  * @method City                setId()                 Sets the current record's "id" value
  * @method City                setName()               Sets the current record's "name" value
- * @method City                setCountryId()          Sets the current record's "country_id" value
- * @method City                setCountry()            Sets the current record's "Country" value
+ * @method City                setRegionId()           Sets the current record's "region_id" value
+ * @method City                setWeight()             Sets the current record's "weight" value
+ * @method City                setRegion()             Sets the current record's "Region" value
  * @method City                setSfGuardUserProfile() Sets the current record's "sfGuardUserProfile" collection
  * 
  * @package    FISHERY
  * @subpackage model
  * @author     Sergei Belov <limitium@gmail.com>
- * @version    SVN: $Id: Builder.php 6820 2009-11-30 17:27:49Z jwage $
+ * @version    SVN: $Id: Builder.php 7490 2010-03-29 19:53:27Z jwage $
  */
 abstract class BaseCity extends sfDoctrineRecord
 {
@@ -36,16 +39,22 @@ abstract class BaseCity extends sfDoctrineRecord
              'primary' => true,
              'type' => 'integer',
              'autoincrement' => true,
-             'length' => '4',
+             'length' => 4,
              ));
         $this->hasColumn('name', 'string', 30, array(
              'type' => 'string',
              'notnull' => true,
-             'length' => '30',
+             'length' => 30,
              ));
-        $this->hasColumn('country_id', 'integer', 4, array(
+        $this->hasColumn('region_id', 'integer', 4, array(
              'type' => 'integer',
-             'length' => '4',
+             'length' => 4,
+             ));
+        $this->hasColumn('weight', 'integer', 4, array(
+             'default' => 0,
+             'type' => 'integer',
+             'notnull' => true,
+             'length' => 4,
              ));
 
         $this->option('type', 'INNODB');
@@ -56,8 +65,8 @@ abstract class BaseCity extends sfDoctrineRecord
     public function setUp()
     {
         parent::setUp();
-        $this->hasOne('Country', array(
-             'local' => 'country_id',
+        $this->hasOne('Region', array(
+             'local' => 'region_id',
              'foreign' => 'id'));
 
         $this->hasMany('sfGuardUserProfile', array(

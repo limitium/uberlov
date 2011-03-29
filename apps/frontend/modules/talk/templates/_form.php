@@ -5,10 +5,10 @@
     <?php if (!$form->getObject()->isNew()): ?>
         <input type="hidden" name="sf_method" value="put" />
     <?php endif; ?>
-        <table class="form">
-            <tfoot>
-                <tr>
-                    <td colspan="2">
+    <table class="form">
+        <tfoot>
+            <tr>
+                <td colspan="2">
                     <?php echo $form->renderHiddenFields(false) ?>
                     <input type="submit" value="Обсудить!" />
                 </td>
@@ -16,9 +16,9 @@
         </tfoot>
         <tbody>
             <?php echo $form->renderGlobalErrors() ?>
-                    <tr>
-                        <th><?php echo $form['name']->renderLabel() ?></th>
-                        <td>
+            <tr>
+                <th><?php echo $form['name']->renderLabel() ?></th>
+                <td>
                     <?php echo $form['name']->renderError() ?>
                     <?php echo $form['name'] ?>
                 </td>
@@ -41,6 +41,6 @@
 </form>
 
 <?php use_javascript('../sfDoctrineActAsTaggablePlugin/js/pkTagahead'); ?>
-                    <script>
-                        pkTagahead(<?php echo json_encode(url_for("talk/suggest")) ?>);
+<script>
+    pkTagahead(<?php echo json_encode(url_for("talk/suggest")) ?>);
 </script>
