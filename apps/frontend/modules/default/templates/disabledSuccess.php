@@ -1,1 +1,1 @@
-<?php include_partial('errorPage', array('header' => 'Отключили :(', 'message' => 'Что-то выключили втихаря', 'title' => 'Uberлов')); ?>
+<?php include_partial('errorPage', array('header' => 'Отключили :(', 'message' => 'Что-то выключили втихаря.', 'title' => 'Uberлов')); ?>

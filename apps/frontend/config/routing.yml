@@ -1,13 +1,7 @@
 # default rules
 homepage:
   url:   /
-  param: { module: collector, action: locations }
-
-# generic rules
-# please, remove them by adding more specific rules
-default_index:
-  url:   /:module
-  param: { action: index }
+  param: { module: default, action: underconstruction }
 
 default:
   url:   /:module/:action/*
