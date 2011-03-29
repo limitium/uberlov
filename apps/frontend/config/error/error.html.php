@@ -38,7 +38,7 @@
 
         }
     </style>
-    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+    <link rel="shortcut icon" href="<?php echo image_path('/images/favicon.ico'); ?>" />
 </head>
 <html>
     <head>

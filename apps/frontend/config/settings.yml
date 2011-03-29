@@ -2,7 +2,7 @@ prod:
   .settings:
     no_script_name:         true
     logging_enabled:        false
-
+    
 dev:
   .settings:
     error_reporting:        <?php echo (E_ALL | E_STRICT)."\n" ?>
@@ -25,7 +25,7 @@ all:
     login_module:           sfGuardAuth
     login_action:           signin
 
-    secure_module:          sfGuardAuth
+    secure_module:          default
     secure_action:          secure
 
     # Form security secret (CSRF protection)

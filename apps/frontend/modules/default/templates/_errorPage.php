@@ -38,7 +38,7 @@
 
         }
     </style>
-    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+    <link rel="shortcut icon" href="<?php echo image_path('/images/favicon.ico'); ?>" />
 </head>
 <html>
     <head>
@@ -50,7 +50,7 @@
             <tr>
                 <td>
                     <div class="holder">
-                        <div class="logo"><a href="/"><img src="/images/logo.png" alt="уберлов"/></a></div>
+                        <div class="logo"><?php echo link_to(image_tag('/images/logo.png'), '@homepage'); ?></div>
                         <div class="message">
                             <h2><?php echo $header ?></h2>
                             <p><?php echo $message . ' Можно попробовать попасть на ' . link_to('главную', '@homepage') . ' страницу.'; ?></p>
