@@ -236,14 +236,23 @@ abstract class BaseLocation extends sfDoctrineRecord
               ),
              ),
              ));
-        $geographical0 = new Doctrine_Template_Geographical();
         $sluggable0 = new Doctrine_Template_Sluggable();
         $timestampable0 = new Doctrine_Template_Timestampable();
         $versionable0 = new Doctrine_Template_Versionable();
+        $geographical0 = new Doctrine_Template_Geographical(array(
+             'latitude' => 
+             array(
+              'type' => 'double(18,15)',
+             ),
+             'longitude' => 
+             array(
+              'type' => 'double(18,15)',
+             ),
+             ));
         $this->actAs($blameable0);
-        $this->actAs($geographical0);
         $this->actAs($sluggable0);
         $this->actAs($timestampable0);
         $this->actAs($versionable0);
+        $this->actAs($geographical0);
     }
 }

@@ -29,12 +29,12 @@ abstract class BaseLocationForm extends BaseFormDoctrine
       'address_id'         => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Address'), 'add_empty' => true)),
       'created_by'         => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('CreatedBy'), 'add_empty' => false)),
       'updated_by'         => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('UpdatedBy'), 'add_empty' => false)),
-      'latitude'           => new sfWidgetFormInputText(),
-      'longitude'          => new sfWidgetFormInputText(),
       'slug'               => new sfWidgetFormInputText(),
       'created_at'         => new sfWidgetFormDateTime(),
       'updated_at'         => new sfWidgetFormDateTime(),
       'version'            => new sfWidgetFormInputText(),
+      'latitude'           => new sfWidgetFormInputText(),
+      'longitude'          => new sfWidgetFormInputText(),
       'wishers_list'       => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'sfGuardUserProfile')),
     ));
 
@@ -53,12 +53,12 @@ abstract class BaseLocationForm extends BaseFormDoctrine
       'address_id'         => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Address'), 'required' => false)),
       'created_by'         => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('CreatedBy'))),
       'updated_by'         => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('UpdatedBy'))),
-      'latitude'           => new sfValidatorPass(array('required' => false)),
-      'longitude'          => new sfValidatorPass(array('required' => false)),
       'slug'               => new sfValidatorString(array('max_length' => 255, 'required' => false)),
       'created_at'         => new sfValidatorDateTime(),
       'updated_at'         => new sfValidatorDateTime(),
       'version'            => new sfValidatorInteger(array('required' => false)),
+      'latitude'           => new sfValidatorPass(array('required' => false)),
+      'longitude'          => new sfValidatorPass(array('required' => false)),
       'wishers_list'       => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'sfGuardUserProfile', 'required' => false)),
     ));
 

@@ -2,7 +2,7 @@
 <orm-designer version="1.3.1.332">
 
   <module import-format="DoctrineYml" import-path="fisheryYAML.yml" name="ht" visBkColor="16380923" visSizeX="227" visSizeX2="1327" visSizeY="51" visSizeY2="836">
-    <table name="Location" visPositionX="204" visPositionY="117" visSizeX="0" visSizeX2="154" visSizeY="0" visSizeY2="185">
+    <table name="Location" visPositionX="205" visPositionY="117" visSizeX="0" visSizeX2="154" visSizeY="0" visSizeY2="185">
       <column auto-increment="true" name="id" primary="true" size="4" type="integer"/>
       <column default="''" name="name" required="true" size="50" type="string"/>
       <column default="''" name="description" required="true" type="string"/>
@@ -43,10 +43,17 @@
               </attribute>
             </attribute>
           </attribute>
-          <attribute name="Geographical"/>
           <attribute name="Sluggable"/>
           <attribute name="Timestampable"/>
           <attribute name="Versionable"/>
+          <attribute name="Geographical">
+            <attribute name="latitude">
+              <attribute name="type">double(18,15)</attribute>
+            </attribute>
+            <attribute name="longitude">
+              <attribute name="type">double(18,15)</attribute>
+            </attribute>
+          </attribute>
         </attribute>
       </orm-properties>
     </table>
@@ -523,6 +530,10 @@
       <column name="name" required="true" size="30" type="string"/>
       <column name="region_id" size="4" type="integer"/>
       <column default="0" name="weight" required="true" size="4" type="integer"/>
+      <index name="uniq_city" unique="true">
+        <index-column name="region_id"/>
+        <index-column name="name"/>
+      </index>
     </table>
     <table name="Region" visPositionX="-211" visPositionY="33" visSizeX="0" visSizeX2="120" visSizeY="0" visSizeY2="59">
       <column auto-increment="true" name="id" primary="true" size="4" type="integer"/>

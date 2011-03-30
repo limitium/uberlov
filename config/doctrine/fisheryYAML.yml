@@ -19,10 +19,14 @@ Location:
         created:
           type: int
           length: 4
-    Geographical: 
     Sluggable: 
     Timestampable: 
     Versionable: 
+    Geographical:
+      latitude:
+        type: double(18,15)
+      longitude:
+        type: double(18,15)
   columns:
     id:
       primary: true
@@ -835,6 +839,10 @@ City:
       default: 0
       type: integer(4)
       notnull: true
+  indexes:
+    uniq_city:
+      fields: [region_id, name]
+      type: unique
   relations:
     Region:
       local: region_id
