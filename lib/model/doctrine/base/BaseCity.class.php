@@ -57,6 +57,15 @@ abstract class BaseCity extends sfDoctrineRecord
              'length' => 4,
              ));
 
+
+        $this->index('uniq_city', array(
+             'fields' => 
+             array(
+              0 => 'region_id',
+              1 => 'name',
+             ),
+             'type' => 'unique',
+             ));
         $this->option('type', 'INNODB');
         $this->option('charset', 'utf8');
         $this->option('collate', 'utf8_general_ci');

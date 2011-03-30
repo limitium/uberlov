@@ -28,6 +28,10 @@ abstract class BaseCityForm extends BaseFormDoctrine
       'weight'    => new sfValidatorInteger(array('required' => false)),
     ));
 
+    $this->validatorSchema->setPostValidator(
+      new sfValidatorDoctrineUnique(array('model' => 'City', 'column' => array('region_id', 'name')))
+    );
+
     $this->widgetSchema->setNameFormat('city[%s]');
 
     $this->errorSchema = new sfValidatorErrorSchema($this->validatorSchema);

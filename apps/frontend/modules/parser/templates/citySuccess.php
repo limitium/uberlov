@@ -1,1 +1,1 @@
-<?php print_r($result); ?>
+ok
