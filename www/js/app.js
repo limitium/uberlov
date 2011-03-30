@@ -1,5 +1,7 @@
 if(typeof(console)!='undefined'){
-    fb =  console.log;
+    fb =  function(m){
+        console.log(m);
+    }
 }else{
     fb = function(){}
 }

@@ -71,7 +71,6 @@ class locationActions extends sfActions {
     }
 
     public function executeUpdate(sfWebRequest $request) {
-        $this->forward404();
         $this->forward404Unless($request->isMethod(sfRequest::POST) || $request->isMethod(sfRequest::PUT));
         $this->forward404Unless($location = Doctrine::getTable('Location')->find($request->getParameter('id')), sprintf('Object location does not exist (%s).', $request->getParameter('id')));
         $this->form = new LocationForm($location);
