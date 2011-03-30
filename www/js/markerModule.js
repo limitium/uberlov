@@ -142,6 +142,7 @@ ht_location_e.prototype.onClick = function(){
 }
 ht_location_e.prototype.getGeo = function(loader){
     this.address = {
+        route:'',
         country:'',
         administrative_area_level_1: '',
         administrative_area_level_2: '',

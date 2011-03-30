@@ -34,12 +34,12 @@ class LocationForm extends BaseLocationForm {
         $this->widgetSchema['address']           = new sfWidgetFormInputHidden();
 
         $this->validatorSchema['name']             = new sfValidatorString(array('min_length' => 3,'max_length' => 50, 'required' => true));
-        $this->validatorSchema['description']      = new sfValidatorString(array('min_length' => 5,'max_length' => 255, 'required' => true));
-        $this->validatorSchema['location_type_id']  = new sfValidatorDoctrineChoice(array('model'=>'LocationType','required' => true));
-        $this->validatorSchema['location_relief_id']  = new sfValidatorDoctrineChoice(array('model'=>'LocationRelief','required' => true));
-        $this->validatorSchema['location_flow_id']    = new sfValidatorDoctrineChoice(array('model'=>'LocationFlow','required' => true));
-        $this->validatorSchema['location_fundus_id']  = new sfValidatorDoctrineChoice(array('model'=>'LocationFundus','required' => true));
-        $this->validatorSchema['location_scope_id']  = new sfValidatorDoctrineChoice(array('model'=>'LocationScope','required' => true));
+        $this->validatorSchema['description']      = new sfValidatorString(array('min_length' => 5,'max_length' => 255, 'required' => false));
+        $this->validatorSchema['location_type_id']  = new sfValidatorDoctrineChoice(array('model'=>'LocationType','required' => false));
+        $this->validatorSchema['location_relief_id']  = new sfValidatorDoctrineChoice(array('model'=>'LocationRelief','required' => false));
+        $this->validatorSchema['location_flow_id']    = new sfValidatorDoctrineChoice(array('model'=>'LocationFlow','required' => false));
+        $this->validatorSchema['location_fundus_id']  = new sfValidatorDoctrineChoice(array('model'=>'LocationFundus','required' => false));
+        $this->validatorSchema['location_scope_id']  = new sfValidatorDoctrineChoice(array('model'=>'LocationScope','required' => false));
         $this->validatorSchema['is_free']            = new sfValidatorBoolean(array('required' => false));
         $this->validatorSchema['price']              = new sfValidatorString(array('required' => false));
         $this->validatorSchema['depth']            = new sfValidatorNumber(array('required' => false));
