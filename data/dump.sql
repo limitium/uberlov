@@ -1,5 +1,5 @@
 /*
-SQLyog Enterprise - MySQL GUI v8.12 
+SQLyog Enterprise - MySQL GUI v7.02 
 MySQL - 5.1.40-community : Database - FISHERY
 *********************************************************************
 */
@@ -10,10 +10,6 @@ MySQL - 5.1.40-community : Database - FISHERY
 
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-
-CREATE DATABASE /*!32312 IF NOT EXISTS*/`FISHERY` /*!40100 DEFAULT CHARACTER SET utf8 */;
-
-USE `FISHERY`;
 
 /*Table structure for table `address` */
 
@@ -38,7 +34,7 @@ CREATE TABLE `address` (
 
 /*Data for the table `address` */
 
-insert  into `address`(`id`,`country_id`,`area_low_id`,`area_high_id`,`locality_id`) values (1,1,3,3,5),(2,1,1,1,2),(3,1,1,1,3),(4,1,2,2,4);
+insert  into `address`(`id`,`country_id`,`area_low_id`,`area_high_id`,`locality_id`) values (1,1,3,7,NULL),(2,1,5,NULL,NULL),(3,1,5,6,NULL),(4,1,3,9,7);
 
 /*Table structure for table `area_high` */
 
@@ -52,11 +48,11 @@ CREATE TABLE `area_high` (
   UNIQUE KEY `name` (`name`),
   KEY `area_low_id_idx` (`area_low_id`),
   CONSTRAINT `area_high_area_low_id_area_low_id` FOREIGN KEY (`area_low_id`) REFERENCES `area_low` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 
 /*Data for the table `area_high` */
 
-insert  into `area_high`(`id`,`name`,`area_low_id`) values (1,'Боровский р-н',1),(2,'Подольский р-н',2),(3,'городской округ город Балашиха',3);
+insert  into `area_high`(`id`,`name`,`area_low_id`) values (1,'Боровский р-н',1),(2,'Подольский р-н',2),(3,'городской округ город Балашиха',3),(4,'Одинцовский район',3),(5,'Угранский район',4),(6,'Малоярославецкий район',5),(7,'Волоколамский район',3),(8,'Лотошинский район',3),(9,'Клинский район',3);
 
 /*Table structure for table `area_low` */
 
@@ -70,11 +66,11 @@ CREATE TABLE `area_low` (
   UNIQUE KEY `name` (`name`),
   KEY `country_id_idx` (`country_id`),
   CONSTRAINT `area_low_country_id_country_id` FOREIGN KEY (`country_id`) REFERENCES `country` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 /*Data for the table `area_low` */
 
-insert  into `area_low`(`id`,`name`,`country_id`) values (1,'Калужская обл',1),(2,'Московская обл',1),(3,'Московская область',1);
+insert  into `area_low`(`id`,`name`,`country_id`) values (1,'Калужская обл',1),(2,'Московская обл',1),(3,'Московская область',1),(4,'Смоленская область',1),(5,'Калужская область',1);
 
 /*Table structure for table `city` */
 
@@ -86,6 +82,7 @@ CREATE TABLE `city` (
   `region_id` int(11) DEFAULT NULL,
   `weight` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
+  UNIQUE KEY `uniq_city_idx` (`region_id`,`name`),
   KEY `region_id_idx` (`region_id`),
   CONSTRAINT `city_region_id_region_id` FOREIGN KEY (`region_id`) REFERENCES `region` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2281 DEFAULT CHARSET=utf8;
@@ -178,6 +175,7 @@ CREATE TABLE `fish_event` (
   `name` varchar(50) NOT NULL,
   `description` text NOT NULL,
   `rules` text,
+  `users` text,
   `location_id` int(11) NOT NULL,
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL,
@@ -194,7 +192,7 @@ CREATE TABLE `fish_event` (
 
 /*Data for the table `fish_event` */
 
-insert  into `fish_event`(`id`,`date`,`name`,`description`,`rules`,`location_id`,`created_at`,`updated_at`,`created_by`,`updated_by`) values (1,'2010-05-23','Сорвенование 1 ','Бла бла ловим карася','',1,'2010-05-20 19:51:53','2010-05-23 17:52:49',1,1);
+insert  into `fish_event`(`id`,`date`,`name`,`description`,`rules`,`users`,`location_id`,`created_at`,`updated_at`,`created_by`,`updated_by`) values (1,'2012-05-23','Сорвенование 1 ','Бла бла ловим карася','',NULL,1,'2010-05-20 19:51:53','2010-05-23 17:52:49',1,1);
 
 /*Table structure for table `friend` */
 
@@ -264,11 +262,11 @@ CREATE TABLE `locality` (
   UNIQUE KEY `name` (`name`),
   KEY `area_high_id_idx` (`area_high_id`),
   CONSTRAINT `locality_area_high_id_area_high_id` FOREIGN KEY (`area_high_id`) REFERENCES `area_high` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
 /*Data for the table `locality` */
 
-insert  into `locality`(`id`,`name`,`area_high_id`) values (1,'Роща',1),(2,'Боровск',1),(3,'Сатино',1),(4,'Подольск',2),(5,'город Балашиха',3);
+insert  into `locality`(`id`,`name`,`area_high_id`) values (1,'Роща',1),(2,'Боровск',1),(3,'Сатино',1),(4,'Подольск',2),(5,'город Балашиха',3),(6,'село Немчиновка',4),(7,'село Спас-Заулок',9);
 
 /*Table structure for table `location` */
 
@@ -289,11 +287,11 @@ CREATE TABLE `location` (
   `address_id` int(11) DEFAULT NULL,
   `created_by` int(11) NOT NULL,
   `updated_by` int(11) NOT NULL,
-  `latitude` double(18,2) DEFAULT NULL,
-  `longitude` double(18,2) DEFAULT NULL,
   `slug` varchar(255) DEFAULT NULL,
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL,
+  `latitude` double(18,15) DEFAULT NULL,
+  `longitude` double(18,15) DEFAULT NULL,
   `version` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `location_sluggable_idx` (`slug`),
@@ -317,7 +315,7 @@ CREATE TABLE `location` (
 
 /*Data for the table `location` */
 
-insert  into `location`(`id`,`name`,`description`,`depth`,`is_free`,`price`,`location_flow_id`,`location_fundus_id`,`location_relief_id`,`location_type_id`,`location_scope_id`,`address_id`,`created_by`,`updated_by`,`latitude`,`longitude`,`slug`,`created_at`,`updated_at`,`version`) values (1,'Первое место','',1.00,1,'',1,1,1,4,5,1,1,1,55.84,37.91,'','2011-03-11 20:52:18','2011-03-31 11:10:17',2),(2,'Отличное место','',NULL,1,NULL,NULL,NULL,NULL,NULL,NULL,2,2,2,2.00,2.00,NULL,'2011-03-11 20:52:18','2011-03-11 20:52:18',NULL),(3,'И тут!!!','',NULL,1,NULL,NULL,NULL,NULL,NULL,NULL,3,3,3,3.00,3.00,NULL,'2011-03-11 20:52:18','2011-03-11 20:52:18',NULL),(4,'Непонятно ничего','',NULL,1,NULL,NULL,NULL,NULL,NULL,NULL,4,1,1,1.00,1.00,NULL,'2011-03-11 20:52:18','2011-03-11 20:52:18',NULL),(5,'Место место','',NULL,1,NULL,NULL,NULL,NULL,NULL,NULL,3,2,2,2.00,2.00,NULL,'2011-03-11 20:52:18','2011-03-11 20:52:18',NULL),(6,'Аааа ееее!','',NULL,1,NULL,NULL,NULL,NULL,NULL,NULL,1,1,1,1.00,1.00,NULL,'2011-03-11 20:52:18','2011-03-11 20:52:18',NULL),(7,'Пыщь пыщь','',NULL,1,NULL,NULL,NULL,NULL,NULL,NULL,4,2,2,2.00,2.00,'2','2011-03-11 20:52:18','2011-03-11 20:52:18',NULL),(8,'И ололо','',NULL,1,NULL,NULL,NULL,NULL,NULL,NULL,2,3,3,3.00,3.00,'3','2011-03-11 20:52:18','2011-03-11 20:52:18',NULL);
+insert  into `location`(`id`,`name`,`description`,`depth`,`is_free`,`price`,`location_flow_id`,`location_fundus_id`,`location_relief_id`,`location_type_id`,`location_scope_id`,`address_id`,`created_by`,`updated_by`,`slug`,`created_at`,`updated_at`,`latitude`,`longitude`,`version`) values (1,'Первое место','',1.00,1,'',1,1,1,4,5,1,1,1,'','2011-03-11 20:52:18','2011-03-31 11:10:17',55.840000000000003,37.909999999999997,2),(2,'Отличное место','',NULL,1,'',NULL,NULL,NULL,NULL,NULL,2,2,1,'1','2011-03-11 20:52:18','2011-03-31 21:44:50',55.719999999999999,37.329999999999998,1),(3,'Заводь на угре','',NULL,1,'',NULL,NULL,NULL,NULL,NULL,3,3,1,'4','2011-03-11 20:52:18','2011-03-31 21:45:31',54.869999999999997,34.600000000000001,1),(4,'Непонятно ничего','',NULL,1,'',NULL,NULL,NULL,NULL,NULL,4,1,1,'7','2011-03-11 20:52:18','2011-03-31 21:48:58',56.329999999999998,35.450000000000003,1),(5,'Место место','',NULL,1,'',NULL,NULL,NULL,NULL,NULL,3,2,1,'5','2011-03-11 20:52:18','2011-03-31 21:47:18',55.070000000000000,36.450000000000003,1),(6,'Аааа ееее!','',NULL,1,'',NULL,NULL,NULL,NULL,NULL,1,1,1,'6','2011-03-11 20:52:18','2011-03-31 21:48:01',56.039999999999999,35.799999999999997,1),(7,'Пыщь пыщь','',NULL,1,'',NULL,NULL,NULL,NULL,NULL,4,2,1,'2','2011-03-11 20:52:18','2011-03-31 21:49:39',56.600000000000001,36.799999999999997,1),(8,'И ололо','',NULL,1,'',NULL,NULL,NULL,NULL,NULL,2,3,1,'3','2011-03-11 20:52:18','2011-03-31 21:48:36',54.270000000000003,36.049999999999997,1);
 
 /*Table structure for table `location_flow` */
 
@@ -359,7 +357,7 @@ CREATE TABLE `location_relief` (
 
 /*Data for the table `location_relief` */
 
-insert  into `location_relief`(`id`,`name`) values (1,'Равномерное'),(2,'Перепады'),(3,'Ямы'),(4,'Бровки'),(5,'Свал');
+insert  into `location_relief`(`id`,`name`) values (1,'Равномерный'),(2,'Перепады'),(3,'Ямы'),(4,'Бровки'),(5,'Свал');
 
 /*Table structure for table `location_scope` */
 
@@ -410,11 +408,11 @@ CREATE TABLE `location_version` (
   `address_id` int(11) DEFAULT NULL,
   `created_by` int(11) NOT NULL,
   `updated_by` int(11) NOT NULL,
-  `latitude` double(18,2) DEFAULT NULL,
-  `longitude` double(18,2) DEFAULT NULL,
   `slug` varchar(255) DEFAULT NULL,
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL,
+  `latitude` double(18,15) DEFAULT NULL,
+  `longitude` double(18,15) DEFAULT NULL,
   `version` bigint(20) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`,`version`),
   CONSTRAINT `location_version_id_location_id` FOREIGN KEY (`id`) REFERENCES `location` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
@@ -422,7 +420,7 @@ CREATE TABLE `location_version` (
 
 /*Data for the table `location_version` */
 
-insert  into `location_version`(`id`,`name`,`description`,`depth`,`is_free`,`price`,`location_flow_id`,`location_fundus_id`,`location_relief_id`,`location_type_id`,`location_scope_id`,`address_id`,`created_by`,`updated_by`,`latitude`,`longitude`,`slug`,`created_at`,`updated_at`,`version`) values (1,'Первое место','',1.00,1,'',1,1,1,4,5,1,1,1,NULL,NULL,'','2011-03-11 20:52:18','2011-03-31 11:07:04',1),(1,'Первое место','',1.00,1,'',1,1,1,4,5,1,1,1,NULL,NULL,'','2011-03-11 20:52:18','2011-03-31 11:10:17',2);
+insert  into `location_version`(`id`,`name`,`description`,`depth`,`is_free`,`price`,`location_flow_id`,`location_fundus_id`,`location_relief_id`,`location_type_id`,`location_scope_id`,`address_id`,`created_by`,`updated_by`,`slug`,`created_at`,`updated_at`,`latitude`,`longitude`,`version`) values (1,'Первое место','',1.00,1,'',1,1,1,4,5,1,1,1,'','2011-03-11 20:52:18','2011-03-31 11:07:04',NULL,NULL,1),(1,'Первое место','',1.00,1,'',1,1,1,4,5,1,1,1,'','2011-03-11 20:52:18','2011-03-31 11:10:17',NULL,NULL,2),(2,'Отличное место','',NULL,1,'',NULL,NULL,NULL,NULL,NULL,2,2,1,'1','2011-03-11 20:52:18','2011-03-31 21:44:50',NULL,NULL,1),(3,'Заводь на угре','',NULL,1,'',NULL,NULL,NULL,NULL,NULL,3,3,1,'4','2011-03-11 20:52:18','2011-03-31 21:45:31',NULL,NULL,1),(4,'Непонятно ничего','',NULL,1,'',NULL,NULL,NULL,NULL,NULL,4,1,1,'7','2011-03-11 20:52:18','2011-03-31 21:48:58',NULL,NULL,1),(5,'Место место','',NULL,1,'',NULL,NULL,NULL,NULL,NULL,3,2,1,'5','2011-03-11 20:52:18','2011-03-31 21:47:18',NULL,NULL,1),(6,'Аааа ееее!','',NULL,1,'',NULL,NULL,NULL,NULL,NULL,1,1,1,'6','2011-03-11 20:52:18','2011-03-31 21:48:01',NULL,NULL,1),(7,'Пыщь пыщь','',NULL,1,'',NULL,NULL,NULL,NULL,NULL,4,2,1,'2','2011-03-11 20:52:18','2011-03-31 21:49:39',NULL,NULL,1),(8,'И ололо','',NULL,1,'',NULL,NULL,NULL,NULL,NULL,2,3,1,'3','2011-03-11 20:52:18','2011-03-31 21:48:36',NULL,NULL,1);
 
 /*Table structure for table `photo` */
 
@@ -477,7 +475,7 @@ CREATE TABLE `profit` (
 
 /*Data for the table `profit` */
 
-insert  into `profit`(`id`,`name`,`location_id`,`date`,`cordage`,`description`,`fish_id`,`weight`,`created_at`,`updated_at`,`created_by`,`updated_by`) values (1,'Выезд см',1,'2010-05-20 00:00:00','','',3,4.00,'2010-05-20 16:13:13','2010-05-20 16:13:13',1,1),(2,'Опять ловили',1,'2010-05-20 00:00:00','Всякие клеви шутки','Все прошло гладко',NULL,NULL,'2010-05-20 18:30:57','2010-05-20 18:30:57',1,1),(3,'И снова тут',1,'2010-05-20 00:00:00','Всякие клеви шутки','Все прошло гладко',NULL,NULL,'2010-05-20 18:42:57','2010-05-20 18:42:57',1,1);
+insert  into `profit`(`id`,`name`,`location_id`,`date`,`cordage`,`description`,`fish_id`,`weight`,`created_at`,`updated_at`,`created_by`,`updated_by`) values (1,'Выезд на пробу',1,'2010-05-20 00:00:00','','',3,4.00,'2010-05-20 16:13:13','2010-05-20 16:13:13',1,1),(2,'Опять ловили',1,'2010-05-20 00:00:00','Всякие клеви шутки','Все прошло гладко',NULL,NULL,'2010-05-20 18:30:57','2010-05-20 18:30:57',1,1),(3,'И снова тут',1,'2010-05-20 00:00:00','Всякие клеви шутки','Все прошло гладко',NULL,NULL,'2010-05-20 18:42:57','2010-05-20 18:42:57',1,1);
 
 /*Table structure for table `profit_detail` */
 
@@ -535,6 +533,18 @@ CREATE TABLE `region` (
 /*Data for the table `region` */
 
 insert  into `region`(`id`,`name`,`country_id`) values (1,'Хакасия',1),(2,'Красноярский край',1),(3,'Тюменская область',1),(4,'Оренбургская область',1),(5,'Краснодарский край',1),(6,'Калининградская область',1),(7,'Челябинская область',1),(8,'Татарстан',1),(9,'Тверская область',1),(10,'Адыгея',1),(11,'Карачаево-Черкесия',1),(12,'Омская область',1),(13,'Ростовская область',1),(14,'Коми',1),(15,'Ямало-Ненецкий автономный округ',1),(16,'Читинская область',1),(17,'Башкортостан',1),(18,'Северная Осетия',1),(19,'Свердловская область',1),(20,'Чувашия',1),(21,'Саха-Якутия',1),(22,'Алтайский край',1),(23,'Владимирская область',1),(24,'Саратовская область',1),(25,'Ставропольский край',1),(26,'Томская область',1),(27,'Пермская область',1),(28,'Рязанская область',1),(29,'Белгородская область',1),(30,'Самарская область',1),(31,'Волгоградская область',1),(32,'Тульская область',1),(33,'Удмуртия',1),(34,'Курганская область',1),(35,'Хабаровский край',1),(36,'Чукотский автономный округ',1),(37,'Иркутская область',1),(38,'Кемеровская область',1),(39,'Воронежская область',1),(40,'Костромская область',1),(41,'Приморский край',1),(42,'Мурманская область',1),(43,'Кировская область',1),(44,'Чечня',1),(45,'Мордовия',1),(46,'Нижегородская область',1),(47,'Архангельская область',1),(48,'Астраханская область',1),(49,'Камчатка',1),(50,'Вологодская область',1),(51,'Калужская область',1),(52,'Новосибирская область',1),(53,'Ульяновская область',1),(54,'Алтай',1),(55,'Кабардино-Балкария',1),(56,'Бурятия',1),(57,'Новгородская область',1),(58,'Пензенская область',1),(59,'Псковская область',1),(60,'Курская область',1),(61,'Амурская область',1),(62,'Карелия',1),(63,'Ханты-Мансийский автономный округ',1),(64,'Еврейская автономная область',1),(65,'Ленинградская область',1),(66,'Орловская область',1),(67,'Ярославская область',1),(68,'Калмыкия',1),(69,'Тамбовская область',1),(70,'Брянская область',1),(71,'Смоленская область',1),(72,'Ивановская область',1),(73,'Марий Эл',1),(74,'Липецкая область',1),(75,'Московская область',1),(76,'Дагестан',1),(77,'Тыва',1),(78,'Магаданская область',1),(79,'Сахалин',1),(80,'Ингушетия',1),(81,'Усть-Ордынский автономный округ',1);
+
+/*Table structure for table `road` */
+
+DROP TABLE IF EXISTS `road`;
+
+CREATE TABLE `road` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Data for the table `road` */
 
 /*Table structure for table `sf_guard_forgot_password` */
 
@@ -649,7 +659,7 @@ CREATE TABLE `sf_guard_user` (
 
 /*Data for the table `sf_guard_user` */
 
-insert  into `sf_guard_user`(`id`,`first_name`,`last_name`,`email_address`,`username`,`algorithm`,`salt`,`password`,`is_active`,`is_super_admin`,`last_login`,`created_at`,`updated_at`) values (1,'Максим','Гречушкин','qweqwe@qwe.qwe','limitium','PasswordKeeper::generate','93b8926afa3c763923dc904682439337','93b8926afa3c763923dc904682439337qweqwe',1,0,'2011-03-31 12:36:29','2011-03-11 20:52:17','2011-03-31 12:36:29'),(2,'Андрей','Белоозеров','asd@qwe.qwe','platosha','PasswordKeeper::generate','8c65d6733a4dd32a5510ab6d3793d3d9','8c65d6733a4dd32a5510ab6d3793d3d9qweqwe',1,0,'2010-05-22 18:29:11','2011-03-11 20:52:31','2010-05-22 18:29:11'),(3,'Дмитрий','Хашабаев','zxc@zxc.zxc','homer','PasswordKeeper::generate','884f9de044df99d54aedf354eded1a32','884f9de044df99d54aedf354eded1a32qweqwe',1,0,NULL,'2011-03-11 20:52:47','2011-03-11 20:52:47'),(7,NULL,NULL,'qwe@qwe.qwe','newlogin','PasswordKeeper::generate','df4ec620183da5af8c2df4d1c60f9c53','df4ec620183da5af8c2df4d1c60f9c53qweqwe',1,0,'2011-03-31 12:35:25','2011-03-31 12:26:05','2011-03-31 12:35:25'),(8,NULL,NULL,'qwe@qwe.qwea','newlogin2','PasswordKeeper::generate','029ebfbfa5d62e84b04fc3a0bcb92339','029ebfbfa5d62e84b04fc3a0bcb92339qweqwe',1,0,'2011-03-31 12:34:00','2011-03-31 12:32:56','2011-03-31 12:34:00');
+insert  into `sf_guard_user`(`id`,`first_name`,`last_name`,`email_address`,`username`,`algorithm`,`salt`,`password`,`is_active`,`is_super_admin`,`last_login`,`created_at`,`updated_at`) values (1,'Максим','Гречушкин','qweqwe@qwe.qwe','limitium','PasswordKeeper::generate','93b8926afa3c763923dc904682439337','93b8926afa3c763923dc904682439337qweqwe',1,0,'2011-03-31 22:29:10','2011-03-11 20:52:17','2011-03-31 22:29:10'),(2,'Андрей','Белоозеров','asd@qwe.qwe','platosha','PasswordKeeper::generate','8c65d6733a4dd32a5510ab6d3793d3d9','8c65d6733a4dd32a5510ab6d3793d3d9qweqwe',1,0,'2010-05-22 18:29:11','2011-03-11 20:52:31','2010-05-22 18:29:11'),(3,'Дмитрий','Хашабаев','zxc@zxc.zxc','homer','PasswordKeeper::generate','884f9de044df99d54aedf354eded1a32','884f9de044df99d54aedf354eded1a32qweqwe',1,0,NULL,'2011-03-11 20:52:47','2011-03-11 20:52:47'),(7,NULL,NULL,'qwe@qwe.qwe','newlogin','PasswordKeeper::generate','df4ec620183da5af8c2df4d1c60f9c53','df4ec620183da5af8c2df4d1c60f9c53qweqwe',1,0,'2011-03-31 12:35:25','2011-03-31 12:26:05','2011-03-31 12:35:25'),(8,NULL,NULL,'qwe@qwe.qwea','newlogin2','PasswordKeeper::generate','029ebfbfa5d62e84b04fc3a0bcb92339','029ebfbfa5d62e84b04fc3a0bcb92339qweqwe',1,0,'2011-03-31 12:34:00','2011-03-31 12:32:56','2011-03-31 12:34:00');
 
 /*Table structure for table `sf_guard_user_group` */
 

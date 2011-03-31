@@ -2,7 +2,7 @@
 <orm-designer version="1.3.1.332">
 
   <module import-format="DoctrineYml" import-path="fisheryYAML.yml" name="ht" visBkColor="16380923" visSizeX="227" visSizeX2="1327" visSizeY="51" visSizeY2="836">
-    <table name="Location" visPositionX="205" visPositionY="117" visSizeX="0" visSizeX2="154" visSizeY="0" visSizeY2="185">
+    <table name="Location" visPositionX="207" visPositionY="117" visSizeX="0" visSizeX2="154" visSizeY="0" visSizeY2="185">
       <column auto-increment="true" name="id" primary="true" size="4" type="integer"/>
       <column default="''" name="name" required="true" size="50" type="string"/>
       <column default="''" name="description" required="true" type="string"/>
@@ -45,7 +45,6 @@
           </attribute>
           <attribute name="Sluggable"/>
           <attribute name="Timestampable"/>
-          <attribute name="Versionable"/>
           <attribute name="Geographical">
             <attribute name="latitude">
               <attribute name="type">double(18,15)</attribute>
@@ -54,6 +53,7 @@
               <attribute name="type">double(18,15)</attribute>
             </attribute>
           </attribute>
+          <attribute name="Versionable"/>
         </attribute>
       </orm-properties>
     </table>
@@ -286,7 +286,7 @@
       <column name="name" required="true" size="255" type="string" unique="true"/>
       <column description="Foreign key to Country" name="country_id" size="4" type="integer"/>
     </table>
-    <table name="AreaHigh" visPositionX="921" visPositionY="162" visSizeX="0" visSizeX2="113" visSizeY="0" visSizeY2="59">
+    <table name="AreaHigh" visPositionX="922" visPositionY="162" visSizeX="0" visSizeX2="124" visSizeY="0" visSizeY2="59">
       <column auto-increment="true" name="id" primary="true" size="4" type="integer"/>
       <column name="name" required="true" size="255" type="string" unique="true"/>
       <column description="Foreign key to AreaLow" name="area_low_id" size="4" type="integer"/>
@@ -422,6 +422,7 @@
       <column name="name" required="true" size="50" type="string"/>
       <column name="description" required="true" type="string"/>
       <column name="rules" type="string"/>
+      <column name="users" type="string"/>
       <column name="location_id" required="true" size="4" type="integer"/>
       <orm-properties>
         <attribute name="actAs">
@@ -539,6 +540,10 @@
       <column auto-increment="true" name="id" primary="true" size="4" type="integer"/>
       <column name="name" required="true" size="100" type="string" unique="true"/>
       <column name="country_id" size="4" type="integer"/>
+    </table>
+    <table name="Road" visPositionX="922" visPositionY="353" visSizeX="0" visSizeX2="104" visSizeY="0" visSizeY2="45">
+      <column auto-increment="true" name="id" primary="true" size="4" type="integer"/>
+      <column name="name" size="100" type="string"/>
     </table>
     <orm-properties>
       <attribute name="options">

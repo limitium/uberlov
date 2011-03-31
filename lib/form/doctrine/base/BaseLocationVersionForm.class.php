@@ -32,6 +32,8 @@ abstract class BaseLocationVersionForm extends BaseFormDoctrine
       'slug'               => new sfWidgetFormInputText(),
       'created_at'         => new sfWidgetFormDateTime(),
       'updated_at'         => new sfWidgetFormDateTime(),
+      'latitude'           => new sfWidgetFormInputText(),
+      'longitude'          => new sfWidgetFormInputText(),
       'version'            => new sfWidgetFormInputHidden(),
     ));
 
@@ -53,6 +55,8 @@ abstract class BaseLocationVersionForm extends BaseFormDoctrine
       'slug'               => new sfValidatorString(array('max_length' => 255, 'required' => false)),
       'created_at'         => new sfValidatorDateTime(),
       'updated_at'         => new sfValidatorDateTime(),
+      'latitude'           => new sfValidatorPass(array('required' => false)),
+      'longitude'          => new sfValidatorPass(array('required' => false)),
       'version'            => new sfValidatorChoice(array('choices' => array($this->getObject()->get('version')), 'empty_value' => $this->getObject()->get('version'), 'required' => false)),
     ));
 

@@ -10,6 +10,7 @@
  * @property string $name
  * @property string $description
  * @property string $rules
+ * @property string $users
  * @property integer $location_id
  * @property Location $Location
  * @property Doctrine_Collection $VoteFishEvent
@@ -20,6 +21,7 @@
  * @method string              getName()             Returns the current record's "name" value
  * @method string              getDescription()      Returns the current record's "description" value
  * @method string              getRules()            Returns the current record's "rules" value
+ * @method string              getUsers()            Returns the current record's "users" value
  * @method integer             getLocationId()       Returns the current record's "location_id" value
  * @method Location            getLocation()         Returns the current record's "Location" value
  * @method Doctrine_Collection getVoteFishEvent()    Returns the current record's "VoteFishEvent" collection
@@ -29,6 +31,7 @@
  * @method FishEvent           setName()             Sets the current record's "name" value
  * @method FishEvent           setDescription()      Sets the current record's "description" value
  * @method FishEvent           setRules()            Sets the current record's "rules" value
+ * @method FishEvent           setUsers()            Sets the current record's "users" value
  * @method FishEvent           setLocationId()       Sets the current record's "location_id" value
  * @method FishEvent           setLocation()         Sets the current record's "Location" value
  * @method FishEvent           setVoteFishEvent()    Sets the current record's "VoteFishEvent" collection
@@ -64,6 +67,9 @@ abstract class BaseFishEvent extends sfDoctrineRecord
              'notnull' => true,
              ));
         $this->hasColumn('rules', 'string', null, array(
+             'type' => 'string',
+             ));
+        $this->hasColumn('users', 'string', null, array(
              'type' => 'string',
              ));
         $this->hasColumn('location_id', 'integer', 4, array(

@@ -3,3 +3,4 @@
 <p>Все изменения и их автор сохраняются. Так что не стоит шкодничать.</p>
 <?php include_partial('location/location', array('location' => $form->getObject())) ?>
 <?php include_partial('form', array('form' => $form)) ?>
+<?php echo link_to1('Назад', 'location/show?id=' . $form->getObject()->getId()); ?>
