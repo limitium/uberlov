@@ -41,7 +41,12 @@ class Location extends BaseLocation {
     }
 
     public function getTotalProfit() {
-        return 666;
+       return Doctrine_Query::create()
+                ->select('sum(d.qty) as qty')
+                ->from('ProfitDetail d')
+                ->innerJoin('d.Profit p')
+                ->where('p.location_id = ?', $this->getId())
+                ->fetchOne()->qty;
     }
 
     public function getPhoto() {

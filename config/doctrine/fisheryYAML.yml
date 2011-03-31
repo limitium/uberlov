@@ -21,12 +21,12 @@ Location:
           length: 4
     Sluggable: 
     Timestampable: 
-    Versionable: 
     Geographical:
       latitude:
         type: double(18,15)
       longitude:
         type: double(18,15)
+    Versionable: 
   columns:
     id:
       primary: true
@@ -721,6 +721,8 @@ FishEvent:
       notnull: true
     rules:
       type: string
+    users:
+      type: string
     location_id:
       type: integer(4)
       notnull: true
@@ -863,6 +865,14 @@ Region:
     Country:
       local: country_id
       foreign: id
+Road:
+  columns:
+    id:
+      primary: true
+      type: integer(4)
+      autoincrement: true
+    name:
+      type: string(100)
 options:
   type: INNODB
   charset: utf8

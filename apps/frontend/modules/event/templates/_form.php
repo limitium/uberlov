@@ -31,10 +31,24 @@
                 </td>
             </tr>
             <tr>
+                <th><?php echo $form['rules']->renderLabel() ?></th>
+                <td>
+                    <?php echo $form['rules']->renderError() ?>
+                    <?php echo $form['rules'] ?>
+                </td>
+            </tr>
+            <tr>
                 <th><?php echo $form['description']->renderLabel() ?></th>
                 <td>
                     <?php echo $form['description']->renderError() ?>
                     <?php echo $form['description'] ?>
+                </td>
+            </tr>
+            <tr>
+                <th><?php echo $form['users']->renderLabel() ?></th>
+                <td>
+                    <?php echo $form['users']->renderError() ?>
+                    <?php echo $form['users'] ?>
                 </td>
             </tr>
         </tbody>

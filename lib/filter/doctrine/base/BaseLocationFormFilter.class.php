@@ -29,9 +29,9 @@ abstract class BaseLocationFormFilter extends BaseFormFilterDoctrine
       'slug'               => new sfWidgetFormFilterInput(),
       'created_at'         => new sfWidgetFormFilterDate(array('from_date' => new sfWidgetFormDate(), 'to_date' => new sfWidgetFormDate(), 'with_empty' => false)),
       'updated_at'         => new sfWidgetFormFilterDate(array('from_date' => new sfWidgetFormDate(), 'to_date' => new sfWidgetFormDate(), 'with_empty' => false)),
-      'version'            => new sfWidgetFormFilterInput(),
       'latitude'           => new sfWidgetFormFilterInput(),
       'longitude'          => new sfWidgetFormFilterInput(),
+      'version'            => new sfWidgetFormFilterInput(),
       'wishers_list'       => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'sfGuardUserProfile')),
     ));
 
@@ -52,9 +52,9 @@ abstract class BaseLocationFormFilter extends BaseFormFilterDoctrine
       'slug'               => new sfValidatorPass(array('required' => false)),
       'created_at'         => new sfValidatorDateRange(array('required' => false, 'from_date' => new sfValidatorDateTime(array('required' => false, 'datetime_output' => 'Y-m-d 00:00:00')), 'to_date' => new sfValidatorDateTime(array('required' => false, 'datetime_output' => 'Y-m-d 23:59:59')))),
       'updated_at'         => new sfValidatorDateRange(array('required' => false, 'from_date' => new sfValidatorDateTime(array('required' => false, 'datetime_output' => 'Y-m-d 00:00:00')), 'to_date' => new sfValidatorDateTime(array('required' => false, 'datetime_output' => 'Y-m-d 23:59:59')))),
-      'version'            => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
       'latitude'           => new sfValidatorPass(array('required' => false)),
       'longitude'          => new sfValidatorPass(array('required' => false)),
+      'version'            => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
       'wishers_list'       => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'sfGuardUserProfile', 'required' => false)),
     ));
 
@@ -110,9 +110,9 @@ abstract class BaseLocationFormFilter extends BaseFormFilterDoctrine
       'slug'               => 'Text',
       'created_at'         => 'Date',
       'updated_at'         => 'Date',
-      'version'            => 'Number',
       'latitude'           => 'Text',
       'longitude'          => 'Text',
+      'version'            => 'Number',
       'wishers_list'       => 'ManyKey',
     );
   }
