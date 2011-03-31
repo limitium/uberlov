@@ -34,6 +34,13 @@
                 </td>
             </tr>
             <tr>
+                <th><?php echo $form['city_id']->renderLabel() ?></th>
+                <td>
+                    <?php echo $form['city_id']->renderError() ?>
+                    <?php echo $form['city_id'] ?>
+                </td>
+            </tr>
+            <tr>
                 <th><?php echo $form['description']->renderLabel() ?></th>
                 <td>
                     <?php echo $form['description']->renderError() ?>

@@ -5,3 +5,7 @@ homepage:
 
 default:
   url:   /:module/:action/*
+
+user_confirm:
+  url:          /user/confirm/:validate
+  param:        { module: sfApply, action: confirm}

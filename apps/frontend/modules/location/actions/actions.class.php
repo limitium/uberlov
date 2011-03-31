@@ -37,7 +37,7 @@ class locationActions extends sfActions {
                         ->leftJoin('e.VoteFishEvent v')
                         ->where('e.location_id = ?', $this->location->getId())
                         ->execute();
-                        
+
         $this->csrf = CSRF::getToken();
 
         $this->form = new CommentLocationForm();
@@ -75,9 +75,11 @@ class locationActions extends sfActions {
         $this->forward404Unless($location = Doctrine::getTable('Location')->find($request->getParameter('id')), sprintf('Object location does not exist (%s).', $request->getParameter('id')));
         $this->form = new LocationForm($location);
 
-        $this->processForm($request, $this->form);
-
         $this->setTemplate('edit');
+
+        if ($this->location = $this->processForm($request, $this->form)) {
+            $this->redirect('location/show?id=' . $this->location->getId());
+        }
     }
 
     public function executeDelete(sfWebRequest $request) {
