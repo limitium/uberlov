@@ -27,26 +27,21 @@ class FRegistrationForm extends sfApplyApplyForm {
         // is definitely simpler.
         //Setting username widget
         $this->setWidget('username', new sfWidgetFormInput(array(), array('maxlength' => 16)));
-        $this->widgetSchema->moveField('username', sfWidgetFormSchema::FIRST);
-
-        //Setting password widgets
         $this->setWidget('password', new sfWidgetFormInputPassword(array(), array('maxlength' => 128)));
-        $this->widgetSchema->moveField('password', sfWidgetFormSchema::AFTER, 'username');
-
-        $this->setWidget('password2', new sfWidgetFormInputPassword(array(), array('maxlength' => 128)));
-        $this->widgetSchema->moveField('password2', sfWidgetFormSchema::AFTER, 'password');
 
         //Settings for email fields
         $this->setWidget('email', new sfWidgetFormInputText(array(), array('maxlength' => 255)));
         $this->setWidget('email2', new sfWidgetFormInputText(array(), array('maxlength' => 255)));
-        $this->widgetSchema->moveField('email2', sfWidgetFormSchema::AFTER, 'email');
+
+        //Setting password widgets
+
+
 
         $this->widgetSchema->setLabels(array(
-            'username' => 'Username',
-            'password' => 'Password',
-            'password2' => 'Confirm password',
-            'email' => 'Email address',
-            'email2' => 'Confirm email'
+            'username' => 'Логин',
+            'password' => 'Пароль',
+            'email' => 'E-mail',
+            'email2' => 'Повторить E-mail'
         ));
 
         $this->widgetSchema->setNameFormat('sfApplyApply[%s]');
@@ -60,7 +55,6 @@ class FRegistrationForm extends sfApplyApplyForm {
         $this->setValidator('username', new sfValidatorApplyUsername());
 
         $this->setValidator('password', new sfValidatorApplyPassword());
-        $this->setValidator('password2', new sfValidatorApplyPassword());
 
         // Be aware that sfValidatorEmail doesn't guarantee a string that is preescaped for HTML purposes.
         // If you choose to echo the user's email address somewhere, make sure you escape entities.
@@ -83,10 +77,7 @@ class FRegistrationForm extends sfApplyApplyForm {
         // Hey Fabien, adding more postvalidators is kinda verbose!
         $postValidator = $schema->getPostValidator();
 
-        $postValidators = array(
-            new sfValidatorSchemaCompare('password', sfValidatorSchemaCompare::EQUAL,
-                    'password2', array(), array('invalid' => 'The passwords did not match.')),
-            new sfValidatorSchemaCompare('email', sfValidatorSchemaCompare::EQUAL,
+        $postValidators = array(new sfValidatorSchemaCompare('email', sfValidatorSchemaCompare::EQUAL,
                     'email2', array(), array('invalid' => 'The email addresses did not match.')));
 
         if ($postValidator) {
@@ -109,7 +100,7 @@ class FRegistrationForm extends sfApplyApplyForm {
         // also doesn't get to modify the validate field which
         // is part of how their account is verified by email.
 
-        unset($this['requester_list'], $this['accepter_list'], $this['user_id'], $this['validate'], $this['validate_at'], $this['created_at'], $this['updated_at'], $this['birth_date'], $this['first_name'], $this['firstname'], $this['last_name'], $this['lastname'], $this['wishes_list'], $this['my_firends_list'], $this['my_firends2_list'], $this['inboxes_list'], $this['email_new'], $this['sex'], $this['userpic'], $this['description'], $this['read_comment_list']
+        unset($this['requester_list'], $this['city_id'], $this['accepter_list'], $this['user_id'], $this['validate'], $this['validate_at'], $this['created_at'], $this['updated_at'], $this['birth_date'], $this['first_name'], $this['firstname'], $this['last_name'], $this['lastname'], $this['wishes_list'], $this['my_firends_list'], $this['my_firends2_list'], $this['inboxes_list'], $this['email_new'], $this['sex'], $this['userpic'], $this['description'], $this['read_comment_list']
         );
     }
 

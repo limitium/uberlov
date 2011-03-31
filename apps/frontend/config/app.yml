@@ -6,6 +6,8 @@ all:
     applyForm: FRegistrationForm
     mail_editable: true
   sfApplyPlugin:
+    apply:
+      subject: "Подтверждение аккаунта на %1%"
     from:
       email: "spamer@uberlov.ru"
       fullname: "Важная информация с www.uberlov.ru"

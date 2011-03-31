@@ -20,7 +20,7 @@ class FloginForm extends BaseForm {
 
 
         $this->widgetSchema->setLabels(array(
-            'username' => 'Логин(почта)',
+            'username' => 'Логин или почта',
             'password' => 'Пароль',
             'remember' => 'Запомнить?',
         ));
