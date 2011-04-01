@@ -6,20 +6,20 @@
 
     <?php if ($form->hasGlobalErrors()): ?>
         <ul class="error_list">
-        <?php foreach ($form->getGlobalErrors() as $name => $error): ?>
-            <li><?php echo $name . ': ' . $error ?></li>
-        <?php endforeach; ?>
+            <?php foreach ($form->getGlobalErrors() as $name => $error): ?>
+                <li><?php echo $name . ': ' . $error ?></li>
+            <?php endforeach; ?>
         </ul>
     <?php endif; ?>
 
-            <form action="<?php echo url_for('profit/' . ($form->getObject()->isNew() ? 'create' : 'update') . (!$form->getObject()->isNew() ? '?id=' . $form->getObject()->getId() : '')) ?>" method="post" <?php $form->isMultipart() and print 'enctype="multipart/form-data" ' ?>>
-                <fieldset>
+    <form action="<?php echo url_for('profit/' . ($form->getObject()->isNew() ? 'create' : 'update') . (!$form->getObject()->isNew() ? '?id=' . $form->getObject()->getId() : '')) ?>" method="post" <?php $form->isMultipart() and print 'enctype="multipart/form-data" ' ?>>
+        <fieldset>
             <?php if (!$form->getObject()->isNew()): ?>
                 <input type="hidden" name="sf_medtod" value="put" />
             <?php endif; ?>
-                <dl>
-                    <dt>Название отчета:</dt>
-                    <dd>
+            <dl>
+                <dt>Название отчета:</dt>
+                <dd>
                     <?php echo $form['name']->renderError() ?>
                     <?php echo $form['name'] ?>
                 </dd>
@@ -80,9 +80,9 @@
             </dl>
         </fieldset>
         <?php include_partial('photo/photo') ?>
-                    <div>
+        <div>
             <?php echo $form->renderHiddenFields(false) ?>
-            <input type="submit" value="Добавить" />
+            <input type="submit" value="<?php echo $form->getObject()->isNew() ? 'Добавить' : 'Сохранить'; ?>" />
         </div>        
     </form>
 </div>

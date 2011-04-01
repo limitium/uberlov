@@ -9,7 +9,7 @@
             <tr>
                 <td colspan="2">
                     <?php echo $form->renderHiddenFields() ?>
-                    <input type="submit" class="button" value="Сохранить" />
+                    <input type="submit" class="button" value="<?php echo $form->getObject()->isNew() ? 'Добавить' : 'Сохранить'; ?>" />
                 </td>
             </tr>
         </tfoot>
