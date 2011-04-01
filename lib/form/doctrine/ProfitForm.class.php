@@ -11,10 +11,7 @@
 class ProfitForm extends BaseProfitForm {
 
     public function configure() {
-        unset($this['created_at'],
-                $this['updated_at'],
-                $this['created_by'],
-                $this['updated_by']
+        unset($this['created_at'], $this['updated_at'], $this['created_by'], $this['updated_by']
         );
 
         $this->widgetSchema['location_id'] = new sfWidgetFormInputHidden();
@@ -52,6 +49,15 @@ class ProfitForm extends BaseProfitForm {
             'best_fish_id' => 'Вид:<br /><sub>самой крупной рыбы</sub>',
             'description' => 'Описание:<br /><sub>Не забудте о погоде,<br />состоянии воды</sub>'
         ));
+    }
+
+    public function packDetails() {
+        $detailsData = array();
+        foreach ($this->object->getProfitDetail() as $detail) {
+            $detailsData[] = $detail->exportTo('json');
+        }
+        $packed = '[' . implode(',', $detailsData) . ']';
+        $this->setDefault('details', $packed);
     }
 
 }
