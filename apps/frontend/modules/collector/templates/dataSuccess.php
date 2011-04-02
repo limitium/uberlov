@@ -4,7 +4,8 @@
     "id": "<?php echo $location->getId() ?>",
     "name": "<?php echo $location->getName() ?>",
     "lat": "<?php echo $location->getLatitude() ?>",
-    "lng": "<?php echo $location->getLongitude() ?>"
+    "lng": "<?php echo $location->getLongitude() ?>",
+    "event": "<?php echo $location->getFishEvent()->count() > 0 ?>"
     }<?php echo $nb == $i ? '' : ',' ?>
 <?php endforeach; ?>
 ]}
