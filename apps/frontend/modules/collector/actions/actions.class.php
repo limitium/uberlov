@@ -16,7 +16,7 @@ class collectorActions extends sfActions {
      * @param sfRequest $request A request object
      */
     public function executeLocations(sfWebRequest $request) {
-         $this->ip = $request->getRemoteAddress();
+        $this->ip = $request->getRemoteAddress();
     }
 
     /**
@@ -27,6 +27,7 @@ class collectorActions extends sfActions {
     public function executeData(sfWebRequest $request) {
         $this->locations = Doctrine::getTable('Location')
                         ->createQuery('r')
+                        ->leftJoin('r.FishEvent e')
                         ->execute();
     }
 

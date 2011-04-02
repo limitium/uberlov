@@ -31,7 +31,7 @@
                 <div id="logo"><?php echo link_to(image_tag('/images/logo.png'), '@homepage') ?></div>
                 <div id="site_menu">
                     <ul>
-                        <li><?php echo link_to('Места', 'collector/locations') ?></li>
+                        <li><?php echo link_to('Карта мест', 'collector/locations') ?></li>
                         <li><?php echo link_to('Отчёты', 'profit/list') ?></li>
                         <li><?php echo link_to('Обсуждения', 'talk/list') ?></li>
                         <li><?php echo link_to('События', 'event/list') ?></li>

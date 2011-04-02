@@ -107,6 +107,7 @@ a.delItem{
     padding: 6em 0 0 6em;
 }
 #site_menu li{
+    background-color: #eee;
     display:inline;
 }
 #left_layout{
