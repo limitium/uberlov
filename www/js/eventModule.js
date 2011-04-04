@@ -1,14 +1,12 @@
 function eventModule(){
     this.menu = null;
     this.bar = null;
-    this.profit = null;
     this.location = null;
+    this.event = null;
     this.infoWindow = null;
     this.listeners = {};
-    this.cfg = {
-        editableZoom: 14
-    };
 }
+
 eventModule.name = 'eventModule';
 ModuleManager.add(eventModule);
 
@@ -17,21 +15,12 @@ eventModule.prototype.afterInit = function(){
     fb('initing... eventModule' )
     this.mm = app.getModule('mapModule');
     this.initMenu();
-    this.initListeners();
 }
 
-eventModule.prototype.initListeners = function(){
-    var self = this;
-    $('.removeProfitDetail').live('click', function(){
-        $($(this).parents()[1]).remove();
-        self.countDetailQty();
-        return false;
-    });
-}
 
 eventModule.prototype.initMenu = function(){
     this.menu = {
-        link: $('#new_profit',this.mm.addEditItem('<a id="new_profit" class="editItem" href=""><img class="mapIcon" src="' + app.url('/images/profit.png') + '"/>Добавить событие</a>'))
+        link: $('#new_event',this.mm.addEditItem('<a id="new_event" class="editItem" href=""><img class="mapIcon" src="' + app.url('/images/event.png') + '"/>Добавить событие</a>'))
         .click(this.startEdit.delegate(this))
     };
 }
@@ -60,9 +49,10 @@ eventModule.prototype.cancelEdit = function(){
 eventModule.prototype.getOnLocationClick =  function(){
     var self  = this;
     return function(location){
-        self.location = location;
-        var loader = this.mm.showLoader(location.marker.getPosition());
-        app.getForm('/event/new',this.showForm.delegate(this,location.marker,loader));
+        app.redirect('/event/new/location/'+location.id);
+    //        self.location = location;
+    //        var loader = this.mm.showLoader(location.marker.getPosition());
+    //        app.getForm('/event/new/location/'+location.id,this.showForm.delegate(this,location.marker,loader));
     }
 }
 
@@ -92,14 +82,6 @@ eventModule.prototype.showForm = function(form,marker,loader){
     loader.remove();
 }
 
-eventModule.prototype.countDetailQty = function(){
-    var qty = 0;
-    $('.tableContainer tbody tr').each(function(){
-        qty += parseFloat(this.getAttribute('qty'));
-    });
-    $('#detailTotal').html(qty);
-}
-
 eventModule.prototype.addSubmitHandler = function(form){
     var self = this;
 
@@ -107,19 +89,6 @@ eventModule.prototype.addSubmitHandler = function(form){
     
     app.formSubmiter({
         form: form,
-//        preSubmit: function(){
-//            var profitDetail = [];
-//
-//            $('.tableContainer tbody tr').each(function(){
-//                profitDetail.push({
-//                    qty: parseFloat(this.getAttribute('qty')),
-//                    style_id: parseFloat(this.getAttribute('styles')),
-//                    fish_id: parseFloat(this.getAttribute('fish'))
-//                });
-//            });
-//
-//            $('#profit_details', form).val($.JSON.encode(profitDetail));
-//        },
         response: function(newForm){
             var matches = newForm.match(/^(\d+)\|(.*)/)
 
@@ -139,7 +108,7 @@ eventModule.prototype.onSaveChange = function(disabled){
 }
 
 eventModule.prototype.barCreate = function(){
-    var bar = this.mm.updateBar('<img class="mapIcon" src="' + app.url('/images/profit.png') + '"/><span id="bar_msg"></span></span><input id="bar_save" class="button disabled" type="button" value="Сохранить"/><input id="bar_cancel" class="button" type="button" value="Отмена"/>');
+    var bar = this.mm.updateBar('<img class="mapIcon" src="' + app.url('/images/event.png') + '"/><span id="bar_msg"></span></span><input id="bar_save" class="button disabled" type="button" value="Сохранить"/><input id="bar_cancel" class="button" type="button" value="Отмена"/>');
     this.bar = {
         msg: $('#bar_msg',bar),
         save: $('#bar_save',bar),
@@ -159,6 +128,6 @@ eventModule.prototype.barSaveDisabled = function(disabled){
     if(disabled){
         this.bar.save.addClass('disabled').unbind('click');
     }else{
-        this.bar.save.removeClass('disabled').click(this.profit.onClick.delegate(this.profit));
+        this.bar.save.removeClass('disabled').click(this.event.onClick.delegate(this.event));
     }
 }
