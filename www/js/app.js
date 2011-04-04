@@ -49,6 +49,9 @@ app = {
     formatHtml:function(html){
         return $('<div class="baloon">' + html + '</div>').get(0);
     },
+    redirect: function(url){
+        window.location = this.url(url);
+    },
     getForm:function(url,handler){
         $.ajax({
             type: 'get',
