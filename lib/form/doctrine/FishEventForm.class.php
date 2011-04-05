@@ -31,7 +31,7 @@ class FishEventForm extends BaseFishEventForm {
             'date' => 'Дата начала',
             'rules' => 'Регламент',
             'description' => 'Описание',
-            'user' => 'Участники',
+            'users' => 'Участники',
         ));
     }
 
