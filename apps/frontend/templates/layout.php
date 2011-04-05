@@ -11,7 +11,6 @@
             baseUrl = "<?php echo sfContext::getInstance()->getRequest()->getRelativeUrlRoot(); ?>";
         </script>
         <script type="text/javascript">
-
             var _gaq = _gaq || [];
             _gaq.push(['_setAccount', 'UA-22389085-1']);
             _gaq.push(['_trackPageview']);
@@ -21,8 +20,34 @@
                 ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
                 var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
             })();
-
+        </script>        
+        <script type="text/javascript" language="JavaScript">
+            reformal_wdg_domain    = "uberlov";
+            reformal_wdg_mode    = 0;
+            reformal_wdg_title   = "Uberlov";
+            reformal_wdg_ltitle  = "";
+            reformal_wdg_lfont   = "";
+            reformal_wdg_lsize   = "";
+            reformal_wdg_color   = "#FFA000";
+            reformal_wdg_bcolor  = "#516683";
+            reformal_wdg_tcolor  = "#FFFFFF";
+            reformal_wdg_align   = "left";
+            reformal_wdg_charset = "utf-8";
+            reformal_wdg_waction = 0;
+            reformal_wdg_vcolor  = "#9FCE54";
+            reformal_wdg_cmline  = "#E0E0E0";
+            reformal_wdg_glcolor  = "#105895";
+            reformal_wdg_tbcolor  = "#FFFFFF";
+ 
+            reformal_wdg_bimage = "http://reformal.ru/files/images/buttons/7688f5685f7701e97daa5497d3d9c745.png";
         </script>
+
+        <script type="text/javascript" language="JavaScript" src="http://reformal.ru/tab6.js" />
+        <noscript>
+            <a href="http://uberlov.reformal.ru">Uberlov feedback</a> 
+            <a href="http://reformal.ru"><img src="http://reformal.ru/i/logo.gif" />
+            </a>
+        </noscript>
         <?php include_javascripts() ?>
     </head>
     <body>
