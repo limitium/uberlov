@@ -9,7 +9,6 @@ ModuleManager.add(formShow);
 
 formShow.prototype.afterInit = function(){
     $('textarea').tinymce({
-        script_url : app.url('/js/lib/tinymce/tiny_mce.js')
     });
 }
 

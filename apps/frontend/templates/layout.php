@@ -4,7 +4,7 @@
         <link rel="shortcut icon" href="<?php echo image_path('/images/favicon.ico'); ?>" />
         <?php include_http_metas() ?>
         <?php include_metas() ?>
-        <?php include_title() ?>
+        <?php include_title() ?>        
         <?php include_stylesheets() ?>
         <script language="javascript">
             baseUrl = "<?php echo substr(url_for('@homepage'), 0, strlen(url_for('@homepage')) - 1); ?>";
@@ -21,7 +21,8 @@
                 var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
             })();
         </script>        
-        <script type="text/javascript" language="JavaScript">
+        <?php include_javascripts() ?>        
+        <script type="text/javascript">
             reformal_wdg_domain    = "uberlov";
             reformal_wdg_mode    = 0;
             reformal_wdg_title   = "Uberlov";
@@ -40,15 +41,16 @@
             reformal_wdg_tbcolor  = "#FFFFFF";
  
             reformal_wdg_bimage = "http://reformal.ru/files/images/buttons/7688f5685f7701e97daa5497d3d9c745.png";
+ 
         </script>
-
-        <script type="text/javascript" language="JavaScript" src="http://reformal.ru/tab6.js" />
+        <script type="text/javascript" language="JavaScript" src="http://reformal.ru/tab6.js">
+        </script>
         <noscript>
-            <a href="http://uberlov.reformal.ru">Uberlov feedback</a> 
-            <a href="http://reformal.ru"><img src="http://reformal.ru/i/logo.gif" />
+            <a href="http://uberlov.reformal.ru">Uberlov feedback </a>
+            <a href="http://reformal.ru">
+                <img src="http://reformal.ru/i/logo.gif" />
             </a>
         </noscript>
-        <?php include_javascripts() ?>
     </head>
     <body>
         <div id="page">

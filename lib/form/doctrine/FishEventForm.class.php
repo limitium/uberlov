@@ -42,7 +42,7 @@ class FishEventForm extends BaseFishEventForm {
     }
 
     public function getJavaScripts() {
-        return array('/js/formShow.js');
+        return array('/js/lib/tinymce/tiny_mce.js','/js/formShow.js');
     }
 
 }
