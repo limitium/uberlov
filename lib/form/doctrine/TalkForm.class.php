@@ -11,10 +11,7 @@
 class TalkForm extends BaseTalkForm {
 
     public function configure() {
-        unset($this['created_at'],
-                $this['updated_at'],
-                $this['created_by'],
-                $this['updated_by']
+        unset($this['created_at'], $this['updated_at'], $this['created_by'], $this['updated_by']
         );
 
         $this->widgetSchema['talk_section_id'] = new sfWidgetFormInputHidden();
@@ -37,7 +34,7 @@ class TalkForm extends BaseTalkForm {
     }
 
     public function getJavaScripts() {
-        return array('/js/formShow.js');
+        return array('/js/lib/tinymce/tiny_mce.js', '/js/formShow.js');
     }
 
 }
