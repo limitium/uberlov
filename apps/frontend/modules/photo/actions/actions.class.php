@@ -16,10 +16,6 @@ class photoActions extends sfActions {
 
             //@todo: added CSRF check;
 
-            if ($this->getUser()->isAnonymous()) {
-                throw new Exception('Wazzap?');
-            }
-
             $fileData = array_pop($request->getFiles());
 
             $validator = new sfValidatorFile(array(

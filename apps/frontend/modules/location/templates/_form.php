@@ -85,6 +85,7 @@
                     <?php echo $form['description'] ?>
                 </td>
             </tr>
+            <tr><td><?php include_partial('photo/photo') ?></td></tr>
         </tbody>
-    </table>
+    </table>    
 </form>

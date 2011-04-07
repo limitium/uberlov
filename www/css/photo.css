@@ -9,13 +9,14 @@
 
 .photos .image {
     cursor:pointer;
-    height:341px;
-    line-height:341px;
+    height:600px;
+    line-height:600px;
     vertical-align:bottom;
-    width:452px;
+    width:800px;
 }
 .photos .image img{
-    width:452px;
+    margin: auto;
+    /*    width:452px;*/
 }
 
 .photos .image img.loading{
@@ -32,10 +33,8 @@
 
 .photos .thumbs {
     list-style:none outside none;
-    margin:0 0 0 -2px;
     overflow:hidden;
-    padding:2px 0 0 2px;
-    width:460px;
+    width: 800px;
 }
 .photos .thumbs {
     list-style:none outside none;
@@ -61,6 +60,7 @@
 .photos .thumbs li a img {
     display:block;
     opacity:0.5;
-    height: 90px;
+    height: 60px;
+    width: 80px;
     border:0 none;
 }
