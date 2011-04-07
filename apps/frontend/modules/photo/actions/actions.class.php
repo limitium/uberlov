@@ -13,9 +13,9 @@ class photoActions extends sfActions {
     public function executeUpload(sfWebRequest $request) {
         $result = 'All broken :(';
         try {
-
+            print_r($_SESSION);
             //@todo: added CSRF check;
-
+sfContext::getInstance()->getUser()->getGuardUser()->getProfile();
             $fileData = array_pop($request->getFiles());
 
             $validator = new sfValidatorFile(array(
@@ -36,9 +36,12 @@ class photoActions extends sfActions {
             $uploader = new ImageUploader();
 
             $uploaded = $uploader->login()->upload($file->getTempName());
-
+            
+            $photo = new Photo();
+            $photo->name = $uploaded->image;
+            $photo->save();
             $result = array(
-                'id' => 1,
+                'id' => $photo->getId(),
                 'image' => $uploaded->image,
                 'thumb' => $uploaded->thumb
             );
