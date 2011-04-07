@@ -17,7 +17,7 @@ photoUpload.prototype.initUploader = function(){
         // Backend Settings
         upload_url: app.url('/photo/upload'),
         post_params: {
-            "PHPSESSID": "3kbal94vseio0c4h16nirutjp4"
+            "PHPSESSID": $.cookie('PHPSESSID')
         },
 
         // File Upload Settings
@@ -200,7 +200,7 @@ photoUpload.prototype.uploadNext = function() {
     var file = this.uploader.getQueueFile(0);
     fb('uploading ' + file.id);
 
-    this.uploader.startResizedUpload(file.id, 800, 600, SWFUpload.RESIZE_ENCODING.JPEG, 95);
+    this.uploader.startUpload(file.id, 800, 600, SWFUpload.RESIZE_ENCODING.JPEG, 95);
     this.onUploadProgress(file,file.size);
 //            this.uploader.startUpload();
 }
