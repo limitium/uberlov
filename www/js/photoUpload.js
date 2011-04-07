@@ -15,10 +15,12 @@ photoUpload.prototype.afterInit = function(){
 photoUpload.prototype.initUploader = function(){
     this.uploader = new SWFUpload({
         // Backend Settings
-        upload_url: app.url('/photo/upload'),
-        post_params: {
-            "PHPSESSID": $.cookie('PHPSESSID')
-        },
+        upload_url: app.url('/frontend_dev.php/photo/upload'),
+//        post_params: {
+//            "PHPSESSID": $.cookie('PHPSESSID'),
+//            "symfony": $.cookie('symfony'),
+//            "sfRemember": $.cookie('sfRemember')
+//        },
 
         // File Upload Settings
         file_size_limit : "5 MB",	// 2MB
@@ -129,7 +131,7 @@ photoUpload.prototype.onUploadSuccess = function(file, serverData) {
     var resp = $.parseJSON(serverData);
     if (resp.id) {
         
-        var row = $('<li><a href="'+resp.image+'"><img style="display:none" src="'+resp.thumb+'"/><button>-</button></a></li>');
+        var row = $('<li><a href="'+resp.image+'"><img id="photo_'+resp.id+'" style="display:none" src="'+resp.thumb+'"/><button>x</button></a></li>');
         
         $('img',row).load(function(){
             $(this).fadeIn();
@@ -185,7 +187,7 @@ photoUpload.prototype.onUploadError = function(file, errorCode, message) {
                 imageName = "uploadlimit.gif";
                 break;
             default:
-                alert(message);
+                app.popUp('Ошибка загрузки: ' + message);
                 break;
         }
 

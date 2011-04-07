@@ -1,4 +1,5 @@
 <?php use_javascript('/swfupload/swfupload'); ?>
+<?php use_javascript('/swfupload/swfupload.cookies.js'); ?>
 
 <?php use_javascript('photoUpload'); ?>
 <?php use_stylesheet('photoUpload'); ?>
