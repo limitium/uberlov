@@ -50,10 +50,10 @@ class sfHtSessionStorage extends sfSessionStorage {
 
         session_name($sessionName);
 
-        if (!(boolean) ini_get('session.use_cookies') && $sessionId = $this->options['session_id']) {
+        if ($sessionId = $this->options['session_id']) {
             session_id($sessionId);
         }
-fb($sessionId);
+
         $lifetime = $this->options['session_cookie_lifetime'];
         $path = $this->options['session_cookie_path'];
         $domain = $this->options['session_cookie_domain'];
