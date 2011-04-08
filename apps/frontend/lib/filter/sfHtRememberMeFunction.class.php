@@ -23,6 +23,7 @@ class sfHtRememberMeFilter extends sfFilter {
                 $cookie = $this->context->getRequest()->getParameter($cookieName);
             }
             if ($cookie) {
+                //@TODO: IP CHECK !!! very important
                 $q = Doctrine_Core::getTable('sfGuardRememberKey')->createQuery('r')
                                 ->innerJoin('r.User u')
                                 ->where('r.remember_key = ?', $cookie);
