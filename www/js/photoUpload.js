@@ -16,10 +16,6 @@ photoUpload.prototype.initUploader = function(){
     this.uploader = new SWFUpload({
         // Backend Settings
         upload_url: app.url('/photo/upload'),
-        post_params: {
-            "symfony": $.cookie('symfony'),
-            "sfRemember": $.cookie('sfRemember')
-        },
 
         // File Upload Settings
         file_size_limit : "5 MB",	// 2MB

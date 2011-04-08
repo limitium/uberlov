@@ -5,7 +5,6 @@
  * 
  * 
  * @package    FISHERY
- * @subpackage model
  * @author     Sergei Belov <limitium@gmail.com>
  * @version    SVN: $Id: sfHtRememberMeFilter.class.php 27166 2010-01-25 21:04:41Z Kris.Wallsmith $
  */

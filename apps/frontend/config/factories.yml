@@ -45,6 +45,16 @@ dev:
           password:   ~
 
 all:
+  user:
+    class:       myUser
+    param:
+      timeout:   1800           # Session lifetime in seconds
+
+  storage:
+    class: sfHtSessionStorage
+    param:
+      session_name: ht_cookie
+      
   routing:
     class: sfPatternRouting
     param:
