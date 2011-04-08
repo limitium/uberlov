@@ -2,6 +2,7 @@ all:
   sf_guard_plugin:
     algorithm_callable: [PasswordKeeper, generate]
     signin_form: FloginForm
+    remember_cookie_name: ht_remember
   sfForkedApply:
     applyForm: FRegistrationForm
     mail_editable: true
