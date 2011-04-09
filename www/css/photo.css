@@ -1,4 +1,5 @@
 .photos {
+    width:800px;
     margin-bottom:1em;
     border: 1px solid blue;
 }
