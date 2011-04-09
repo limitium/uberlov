@@ -158,35 +158,14 @@ photoUpload.prototype.onUploadError = function(file, errorCode, message) {
     try {
         switch (errorCode) {
             case SWFUpload.UPLOAD_ERROR.FILE_CANCELLED:
-                try {
-                //                    progress = new FileProgress(file,  'loader_' + file.id);
-                //                    progress.setCancelled();
-                //                    progress.setStatus("Cancelled");
-                //                    progress.toggleCancel(false);
-                }
-                catch (ex1) {
-                    fb(ex1);
-                }
-                break;
             case SWFUpload.UPLOAD_ERROR.UPLOAD_STOPPED:
-                try {
-                //                    progress = new FileProgress(file,  'loader_' + file.id);
-                //                    progress.setCancelled();
-                //                    progress.setStatus("Stopped");
-                //                    progress.toggleCancel(true);
-                }
-                catch (ex2) {
-                    fb(ex2);
-                }
             case SWFUpload.UPLOAD_ERROR.UPLOAD_LIMIT_EXCEEDED:
                 imageName = "uploadlimit.gif";
-                break;
             default:
-                app.popUp('Ошибка загрузки: ' + message);
-                break;
         }
 
-        addImage("images/" + imageName);
+        $($('#'+file.id).children()[1]).html(message);
+        app.popUp('Ошибка загрузки ' + file.name + '<br/>' + message);
 
     } catch (ex3) {
         fb(ex3);
