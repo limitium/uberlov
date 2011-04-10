@@ -137,6 +137,10 @@ class sfGuardUserProfile extends PluginsfGuardUserProfile {
     public function getLastName() {
         return $this->getUser()->getLastName();
     }
+    
+    public function getEmail() {
+        return $this->getUser()->getEmailAddress();
+    }
 
     public function isFriend($profile) {
         return Doctrine_Query::create()

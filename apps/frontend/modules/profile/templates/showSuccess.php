@@ -5,7 +5,7 @@
         <div class="info">
             <?php include_partial('vote/vote', array('obj' => $profile, 'objType' => 'Profile')); ?>
             <div class="userpic">
-                <?php echo image_tag($profile->getUserpic() ? '/images/userpic/' . $profile->getUserpic() : '/images/userpic/' . ($profile->getSex() ? 'male' : 'female') . '.png') ?>
+                <?php echo image_tag($profile->getUserpic() ? '/images/userpic/' . $profile->getUserpic() : 'http://www.gravatar.com/avatar/'.md5($profile->getEmail()).'?d=wavatar&s=32') ?>
             </div>
             <p><?php echo $profile->getFirstName() ?>
                 <?php echo $profile->getNickName() ?>
