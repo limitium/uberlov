@@ -6,8 +6,19 @@ ModuleManager.add(locationEdit);
 
 locationEdit.prototype.afterInit = function(){
     fb('initing... locationEdit' )
+    this.initListeners();
     this.mm = app.getModule('mapModule');
     this.mm.$.bind('startMap',this.onStartMap.delegate(this));
+}
+
+locationEdit.prototype.initListeners = function(){
+    var photos = [];
+    $('form.location').submit(function(){
+        $('.thumbs img').each(function(){
+            photos.push(this.id.substr(6))
+        });
+        $('#location_photos').val(photos.join(';'));
+    });
 }
 
 locationEdit.prototype.onStartMap = function(){
