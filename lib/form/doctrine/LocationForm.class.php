@@ -26,6 +26,7 @@ class LocationForm extends BaseLocationForm {
         $this->widgetSchema['latitude'] = new sfWidgetFormInputHidden();
         $this->widgetSchema['longitude'] = new sfWidgetFormInputHidden();
         $this->widgetSchema['address'] = new sfWidgetFormInputHidden();
+        $this->widgetSchema['photos'] = new sfWidgetFormInputHidden();
 
         $this->validatorSchema['name'] = new sfValidatorString(array('min_length' => 3, 'max_length' => 50, 'required' => true));
         $this->validatorSchema['description'] = new sfValidatorString(array('min_length' => 5, 'max_length' => 255, 'required' => false));
@@ -40,6 +41,7 @@ class LocationForm extends BaseLocationForm {
         $this->validatorSchema['latitude'] = new sfValidatorNumber(array('required' => true));
         $this->validatorSchema['longitude'] = new sfValidatorNumber(array('required' => true));
         $this->validatorSchema['address'] = new sfValidatorString(array('required' => true));
+        $this->validatorSchema['photos'] = new sfValidatorString(array('required' => false));
 
         $this->widgetSchema->setLabels(array(
             'name' => 'Название<br /><sub>желательно содержащее название водоема</sub>',
