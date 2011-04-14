@@ -7,13 +7,16 @@
  * 
  * @property integer $id
  * @property string $name
+ * @property integer $weight
  * @property Doctrine_Collection $Location
  * 
  * @method integer             getId()       Returns the current record's "id" value
  * @method string              getName()     Returns the current record's "name" value
+ * @method integer             getWeight()   Returns the current record's "weight" value
  * @method Doctrine_Collection getLocation() Returns the current record's "Location" collection
  * @method LocationFundus      setId()       Sets the current record's "id" value
  * @method LocationFundus      setName()     Sets the current record's "name" value
+ * @method LocationFundus      setWeight()   Sets the current record's "weight" value
  * @method LocationFundus      setLocation() Sets the current record's "Location" collection
  * 
  * @package    FISHERY
@@ -29,13 +32,15 @@ abstract class BaseLocationFundus extends sfDoctrineRecord
         $this->hasColumn('id', 'integer', 4, array(
              'primary' => true,
              'type' => 'integer',
-             'autoincrement' => true,
              'length' => 4,
              ));
         $this->hasColumn('name', 'string', 50, array(
              'type' => 'string',
              'notnull' => true,
              'length' => 50,
+             ));
+        $this->hasColumn('weight', 'integer', null, array(
+             'type' => 'integer',
              ));
 
         $this->option('type', 'INNODB');

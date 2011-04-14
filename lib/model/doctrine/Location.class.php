@@ -40,8 +40,27 @@ class Location extends BaseLocation {
         return $this;
     }
 
+    public function updatePhotos($photos) {
+        Doctrine_Query::create()
+                ->update('Photo p')
+                ->set('p.toward', 'null')
+                ->set('p.location_id', 'null')
+                ->where('p.location_id = ?', $this->getId())
+                ->andWhere('toward = ?', "location")
+                ->execute();
+
+        Doctrine_Query::create()
+                ->update('Photo p')
+                ->set('p.toward', '"location"')
+                ->set('p.location_id', $this->getId())
+                ->whereIn('p.id', $photos)
+                ->execute();
+
+        return $this;
+    }
+
     public function getTotalProfit() {
-       return Doctrine_Query::create()
+        return Doctrine_Query::create()
                 ->select('sum(d.qty) as qty')
                 ->from('ProfitDetail d')
                 ->innerJoin('d.Profit p')
@@ -58,6 +77,14 @@ class Location extends BaseLocation {
             $profile = sfContext::getInstance()->getUser()->getProfile();
         }
         return $this->getCreatedBy() == $profile;
+    }
+
+    /**
+     *
+     * @return Doctrine_Collection 
+     */
+    public function getPhotos() {
+        return parent::getPhotoLocation();
     }
 
 }

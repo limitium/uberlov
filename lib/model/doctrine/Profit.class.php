@@ -45,4 +45,12 @@ class Profit extends BaseProfit {
         return $total;
     }
 
+    /**
+     *
+     * @return Doctrine_Collection 
+     */
+    public function getPhotos() {
+        return parent::getPhotoLocation();
+    }
+
 }

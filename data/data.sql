@@ -41,7 +41,7 @@ insert  into `fish`(`id`,`name`) values (3,'Карась'),(1,'Окунь'),(2,'
 
 /*Data for the table `fish_event` */
 
-insert  into `fish_event`(`id`,`date`,`name`,`description`,`rules`,`location_id`,`created_at`,`updated_at`,`created_by`,`updated_by`) values (1,'2012-05-23','Сорвенование 1 ','Бла бла ловим карася','',1,'2010-05-20 19:51:53','2010-05-23 17:52:49',1,1);
+insert  into `fish_event`(`id`,`date`,`name`,`description`,`rules`,`users`,`location_id`,`created_at`,`updated_at`,`created_by`,`updated_by`) values (1,'2012-05-23','Сорвенование 1 ','Бла бла ловим карася','',NULL,1,'2010-05-20 19:51:53','2010-05-23 17:52:49',1,1);
 
 /*Data for the table `friend` */
 
@@ -59,33 +59,41 @@ insert  into `locality`(`id`,`name`,`area_high_id`) values (1,'Роща',1),(2,'
 
 /*Data for the table `location` */
 
-insert  into `location`(`id`,`name`,`description`,`depth`,`is_free`,`price`,`location_flow_id`,`location_fundus_id`,`location_relief_id`,`location_type_id`,`location_scope_id`,`address_id`,`created_by`,`updated_by`,`latitude`,`longitude`,`slug`,`created_at`,`updated_at`,`version`) values (1,'Первое место','',1.00,1,'',1,1,1,4,5,1,1,1,55.84,37.91,'','2011-03-11 20:52:18','2011-03-31 11:10:17',2),(2,'Отличное место','',NULL,1,'',NULL,NULL,NULL,NULL,NULL,2,2,1,55.72,37.33,'1','2011-03-11 20:52:18','2011-03-31 21:44:50',1),(3,'Заводь на угре','',NULL,1,'',NULL,NULL,NULL,NULL,NULL,3,3,1,54.87,34.60,'4','2011-03-11 20:52:18','2011-03-31 21:45:31',1),(4,'Непонятно ничего','',NULL,1,'',NULL,NULL,NULL,NULL,NULL,4,1,1,56.33,35.45,'7','2011-03-11 20:52:18','2011-03-31 21:48:58',1),(5,'Место место','',NULL,1,'',NULL,NULL,NULL,NULL,NULL,3,2,1,55.07,36.45,'5','2011-03-11 20:52:18','2011-03-31 21:47:18',1),(6,'Аааа ееее!','',NULL,1,'',NULL,NULL,NULL,NULL,NULL,1,1,1,56.04,35.80,'6','2011-03-11 20:52:18','2011-03-31 21:48:01',1),(7,'Пыщь пыщь','',NULL,1,'',NULL,NULL,NULL,NULL,NULL,4,2,1,56.60,36.80,'2','2011-03-11 20:52:18','2011-03-31 21:49:39',1),(8,'И ололо','',NULL,1,'',NULL,NULL,NULL,NULL,NULL,2,3,1,54.27,36.05,'3','2011-03-11 20:52:18','2011-03-31 21:48:36',1);
+insert  into `location`(`id`,`name`,`description`,`depth`,`is_free`,`price`,`location_flow_id`,`location_fundus_id`,`location_relief_id`,`location_type_id`,`location_scope_id`,`address_id`,`created_by`,`updated_by`,`slug`,`created_at`,`updated_at`,`latitude`,`longitude`,`version`) values (1,'Первое место','',1.00,1,'',1,1,1,4,5,1,1,1,'','2011-03-11 20:52:18','2011-03-31 11:10:17',55.840000000000003,37.909999999999997,2),(2,'Отличное место','',NULL,1,'',NULL,NULL,NULL,NULL,NULL,2,2,1,'1','2011-03-11 20:52:18','2011-03-31 21:44:50',55.719999999999999,37.329999999999998,1),(3,'Заводь на угре','',NULL,1,'',NULL,NULL,NULL,NULL,NULL,3,3,1,'4','2011-03-11 20:52:18','2011-03-31 21:45:31',54.869999999999997,34.600000000000001,1),(4,'Непонятно ничего','',NULL,1,'',NULL,NULL,NULL,NULL,NULL,4,1,1,'7','2011-03-11 20:52:18','2011-03-31 21:48:58',56.329999999999998,35.450000000000003,1),(5,'Место место','',NULL,1,'',NULL,NULL,NULL,NULL,NULL,3,2,1,'5','2011-03-11 20:52:18','2011-03-31 21:47:18',55.070000000000000,36.450000000000003,1),(6,'Аааа ееее!','',NULL,1,'',NULL,NULL,NULL,NULL,NULL,1,1,1,'6','2011-03-11 20:52:18','2011-03-31 21:48:01',56.039999999999999,35.799999999999997,1),(7,'Пыщь пыщь','',NULL,1,'',NULL,NULL,NULL,NULL,NULL,4,2,1,'2','2011-03-11 20:52:18','2011-03-31 21:49:39',56.600000000000001,36.799999999999997,1),(8,'И ололо','',NULL,1,'',NULL,NULL,NULL,NULL,NULL,2,3,1,'3','2011-03-11 20:52:18','2011-03-31 21:48:36',54.270000000000003,36.049999999999997,1);
 
 /*Data for the table `location_flow` */
 
-insert  into `location_flow`(`id`,`name`) values (1,'Отсутствует'),(2,'Медленное'),(3,'Среднее'),(4,'Быстрое');
+insert  into `location_flow`(`id`,`name`,`weight`) values (1,'Отсутствует',NULL),(2,'Медленное',NULL),(3,'Среднее',NULL),(4,'Быстрое',NULL);
 
 /*Data for the table `location_fundus` */
 
-insert  into `location_fundus`(`id`,`name`) values (1,'Песчаное'),(2,'Илистое'),(3,'Каменистое'),(4,'Заросшее'),(5,'Коряжник');
+insert  into `location_fundus`(`id`,`name`,`weight`) values (1,'Песчаное',NULL),(2,'Илистое',NULL),(3,'Каменистое',NULL),(4,'Заросшее',NULL),(5,'Коряжник',NULL);
 
 /*Data for the table `location_relief` */
 
-insert  into `location_relief`(`id`,`name`) values (1,'Равномерный'),(2,'Перепады'),(3,'Ямы'),(4,'Бровки'),(5,'Свал');
+insert  into `location_relief`(`id`,`name`,`weight`) values (1,'Равномерный',NULL),(2,'Перепады',NULL),(3,'Ямы',NULL),(4,'Бровки',NULL),(5,'Свал',NULL);
 
 /*Data for the table `location_scope` */
 
-insert  into `location_scope`(`id`,`name`) values (5,'Всем'),(2,'Друзьям'),(3,'Зарегистрированным'),(1,'Мне');
+insert  into `location_scope`(`id`,`name`,`weight`) values (1,'Мне',NULL),(2,'Друзьям',NULL),(3,'Зарегистрированным',NULL),(5,'Всем',NULL);
 
 /*Data for the table `location_type` */
 
-insert  into `location_type`(`id`,`name`) values (4,'Водохранилище'),(2,'Озеро'),(3,'Пруд'),(1,'Река');
+insert  into `location_type`(`id`,`name`,`weight`) values (1,'Река',NULL),(2,'Озеро',NULL),(3,'Пруд',NULL),(4,'Водохранилище',NULL);
 
 /*Data for the table `location_version` */
 
-insert  into `location_version`(`id`,`name`,`description`,`depth`,`is_free`,`price`,`location_flow_id`,`location_fundus_id`,`location_relief_id`,`location_type_id`,`location_scope_id`,`address_id`,`created_by`,`updated_by`,`latitude`,`longitude`,`slug`,`created_at`,`updated_at`,`version`) values (1,'Первое место','',1.00,1,'',1,1,1,4,5,1,1,1,NULL,NULL,'','2011-03-11 20:52:18','2011-03-31 11:07:04',1),(1,'Первое место','',1.00,1,'',1,1,1,4,5,1,1,1,NULL,NULL,'','2011-03-11 20:52:18','2011-03-31 11:10:17',2),(2,'Отличное место','',NULL,1,'',NULL,NULL,NULL,NULL,NULL,2,2,1,NULL,NULL,'1','2011-03-11 20:52:18','2011-03-31 21:44:50',1),(3,'Заводь на угре','',NULL,1,'',NULL,NULL,NULL,NULL,NULL,3,3,1,NULL,NULL,'4','2011-03-11 20:52:18','2011-03-31 21:45:31',1),(4,'Непонятно ничего','',NULL,1,'',NULL,NULL,NULL,NULL,NULL,4,1,1,NULL,NULL,'7','2011-03-11 20:52:18','2011-03-31 21:48:58',1),(5,'Место место','',NULL,1,'',NULL,NULL,NULL,NULL,NULL,3,2,1,NULL,NULL,'5','2011-03-11 20:52:18','2011-03-31 21:47:18',1),(6,'Аааа ееее!','',NULL,1,'',NULL,NULL,NULL,NULL,NULL,1,1,1,NULL,NULL,'6','2011-03-11 20:52:18','2011-03-31 21:48:01',1),(7,'Пыщь пыщь','',NULL,1,'',NULL,NULL,NULL,NULL,NULL,4,2,1,NULL,NULL,'2','2011-03-11 20:52:18','2011-03-31 21:49:39',1),(8,'И ололо','',NULL,1,'',NULL,NULL,NULL,NULL,NULL,2,3,1,NULL,NULL,'3','2011-03-11 20:52:18','2011-03-31 21:48:36',1);
+insert  into `location_version`(`id`,`name`,`description`,`depth`,`is_free`,`price`,`location_flow_id`,`location_fundus_id`,`location_relief_id`,`location_type_id`,`location_scope_id`,`address_id`,`created_by`,`updated_by`,`slug`,`created_at`,`updated_at`,`latitude`,`longitude`,`version`) values (1,'Первое место','',1.00,1,'',1,1,1,4,5,1,1,1,'','2011-03-11 20:52:18','2011-03-31 11:07:04',NULL,NULL,1),(1,'Первое место','',1.00,1,'',1,1,1,4,5,1,1,1,'','2011-03-11 20:52:18','2011-03-31 11:10:17',NULL,NULL,2),(2,'Отличное место','',NULL,1,'',NULL,NULL,NULL,NULL,NULL,2,2,1,'1','2011-03-11 20:52:18','2011-03-31 21:44:50',NULL,NULL,1),(3,'Заводь на угре','',NULL,1,'',NULL,NULL,NULL,NULL,NULL,3,3,1,'4','2011-03-11 20:52:18','2011-03-31 21:45:31',NULL,NULL,1),(4,'Непонятно ничего','',NULL,1,'',NULL,NULL,NULL,NULL,NULL,4,1,1,'7','2011-03-11 20:52:18','2011-03-31 21:48:58',NULL,NULL,1),(5,'Место место','',NULL,1,'',NULL,NULL,NULL,NULL,NULL,3,2,1,'5','2011-03-11 20:52:18','2011-03-31 21:47:18',NULL,NULL,1),(6,'Аааа ееее!','',NULL,1,'',NULL,NULL,NULL,NULL,NULL,1,1,1,'6','2011-03-11 20:52:18','2011-03-31 21:48:01',NULL,NULL,1),(7,'Пыщь пыщь','',NULL,1,'',NULL,NULL,NULL,NULL,NULL,4,2,1,'2','2011-03-11 20:52:18','2011-03-31 21:49:39',NULL,NULL,1),(8,'И ололо','',NULL,1,'',NULL,NULL,NULL,NULL,NULL,2,3,1,'3','2011-03-11 20:52:18','2011-03-31 21:48:36',NULL,NULL,1);
 
 /*Data for the table `photo` */
+
+insert  into `photo`(`id`,`name`,`thumb`,`toward`,`location_id`,`profit_id`,`created_by`,`updated_by`,`version`) values (7,'http://img822.imageshack.us/img822/4889/phpb51.jpg','http://img822.imageshack.us/img822/4889/phpb51.th.jpg','location',1,NULL,7,7,NULL),(8,'http://img585.imageshack.us/img585/998/phpb53.jpg','http://img585.imageshack.us/img585/998/phpb53.th.jpg','location',1,NULL,7,7,NULL),(9,'http://img251.imageshack.us/img251/7185/phpb5c.jpg','http://img251.imageshack.us/img251/7185/phpb5c.th.jpg','location',1,NULL,7,7,NULL),(10,'http://img715.imageshack.us/img715/6608/phpb71.jpg','http://img715.imageshack.us/img715/6608/phpb71.th.jpg','location',1,NULL,7,7,NULL),(11,'http://img825.imageshack.us/img825/5011/phpb85.jpg','http://img825.imageshack.us/img825/5011/phpb85.th.jpg','location',1,NULL,7,7,NULL);
+
+/*Data for the table `photo_location_version` */
+
+/*Data for the table `photo_profit_version` */
+
+/*Data for the table `photo_version` */
 
 /*Data for the table `profit` */
 
@@ -101,6 +109,8 @@ insert  into `profit_detail`(`id`,`profit_id`,`style_id`,`fish_id`,`qty`) values
 
 insert  into `region`(`id`,`name`,`country_id`) values (1,'Хакасия',1),(2,'Красноярский край',1),(3,'Тюменская область',1),(4,'Оренбургская область',1),(5,'Краснодарский край',1),(6,'Калининградская область',1),(7,'Челябинская область',1),(8,'Татарстан',1),(9,'Тверская область',1),(10,'Адыгея',1),(11,'Карачаево-Черкесия',1),(12,'Омская область',1),(13,'Ростовская область',1),(14,'Коми',1),(15,'Ямало-Ненецкий автономный округ',1),(16,'Читинская область',1),(17,'Башкортостан',1),(18,'Северная Осетия',1),(19,'Свердловская область',1),(20,'Чувашия',1),(21,'Саха-Якутия',1),(22,'Алтайский край',1),(23,'Владимирская область',1),(24,'Саратовская область',1),(25,'Ставропольский край',1),(26,'Томская область',1),(27,'Пермская область',1),(28,'Рязанская область',1),(29,'Белгородская область',1),(30,'Самарская область',1),(31,'Волгоградская область',1),(32,'Тульская область',1),(33,'Удмуртия',1),(34,'Курганская область',1),(35,'Хабаровский край',1),(36,'Чукотский автономный округ',1),(37,'Иркутская область',1),(38,'Кемеровская область',1),(39,'Воронежская область',1),(40,'Костромская область',1),(41,'Приморский край',1),(42,'Мурманская область',1),(43,'Кировская область',1),(44,'Чечня',1),(45,'Мордовия',1),(46,'Нижегородская область',1),(47,'Архангельская область',1),(48,'Астраханская область',1),(49,'Камчатка',1),(50,'Вологодская область',1),(51,'Калужская область',1),(52,'Новосибирская область',1),(53,'Ульяновская область',1),(54,'Алтай',1),(55,'Кабардино-Балкария',1),(56,'Бурятия',1),(57,'Новгородская область',1),(58,'Пензенская область',1),(59,'Псковская область',1),(60,'Курская область',1),(61,'Амурская область',1),(62,'Карелия',1),(63,'Ханты-Мансийский автономный округ',1),(64,'Еврейская автономная область',1),(65,'Ленинградская область',1),(66,'Орловская область',1),(67,'Ярославская область',1),(68,'Калмыкия',1),(69,'Тамбовская область',1),(70,'Брянская область',1),(71,'Смоленская область',1),(72,'Ивановская область',1),(73,'Марий Эл',1),(74,'Липецкая область',1),(75,'Московская область',1),(76,'Дагестан',1),(77,'Тыва',1),(78,'Магаданская область',1),(79,'Сахалин',1),(80,'Ингушетия',1),(81,'Усть-Ордынский автономный округ',1);
 
+/*Data for the table `road` */
+
 /*Data for the table `sf_guard_forgot_password` */
 
 /*Data for the table `sf_guard_group` */
@@ -111,11 +121,11 @@ insert  into `region`(`id`,`name`,`country_id`) values (1,'Хакасия',1),(2
 
 /*Data for the table `sf_guard_remember_key` */
 
-insert  into `sf_guard_remember_key`(`id`,`user_id`,`remember_key`,`ip_address`,`created_at`,`updated_at`) values (1,2,'hlgprbz4u5kok4808gss4ko4c8g4s0s','127.0.0.1','2010-05-17 22:14:42','2010-05-17 22:14:42'),(2,1,'hocqsx2q3qoss8kkc88kkckccggwkso','127.0.0.1','2010-05-18 20:21:38','2010-05-18 20:21:38');
+insert  into `sf_guard_remember_key`(`id`,`user_id`,`remember_key`,`ip_address`,`created_at`,`updated_at`) values (4,1,'9p5nf5hoj74sgggscgkw8o8cgckc448','127.0.0.1','2011-04-09 05:08:43','2011-04-09 05:08:43');
 
 /*Data for the table `sf_guard_user` */
 
-insert  into `sf_guard_user`(`id`,`first_name`,`last_name`,`email_address`,`username`,`algorithm`,`salt`,`password`,`is_active`,`is_super_admin`,`last_login`,`created_at`,`updated_at`) values (1,'Максим','Гречушкин','qweqwe@qwe.qwe','limitium','PasswordKeeper::generate','93b8926afa3c763923dc904682439337','93b8926afa3c763923dc904682439337qweqwe',1,0,'2011-03-31 22:29:10','2011-03-11 20:52:17','2011-03-31 22:29:10'),(2,'Андрей','Белоозеров','asd@qwe.qwe','platosha','PasswordKeeper::generate','8c65d6733a4dd32a5510ab6d3793d3d9','8c65d6733a4dd32a5510ab6d3793d3d9qweqwe',1,0,'2010-05-22 18:29:11','2011-03-11 20:52:31','2010-05-22 18:29:11'),(3,'Дмитрий','Хашабаев','zxc@zxc.zxc','homer','PasswordKeeper::generate','884f9de044df99d54aedf354eded1a32','884f9de044df99d54aedf354eded1a32qweqwe',1,0,NULL,'2011-03-11 20:52:47','2011-03-11 20:52:47'),(7,NULL,NULL,'qwe@qwe.qwe','newlogin','PasswordKeeper::generate','df4ec620183da5af8c2df4d1c60f9c53','df4ec620183da5af8c2df4d1c60f9c53qweqwe',1,0,'2011-03-31 12:35:25','2011-03-31 12:26:05','2011-03-31 12:35:25'),(8,NULL,NULL,'qwe@qwe.qwea','newlogin2','PasswordKeeper::generate','029ebfbfa5d62e84b04fc3a0bcb92339','029ebfbfa5d62e84b04fc3a0bcb92339qweqwe',1,0,'2011-03-31 12:34:00','2011-03-31 12:32:56','2011-03-31 12:34:00');
+insert  into `sf_guard_user`(`id`,`first_name`,`last_name`,`email_address`,`username`,`algorithm`,`salt`,`password`,`is_active`,`is_super_admin`,`last_login`,`created_at`,`updated_at`) values (1,'Максим','Гречушкин','qweqwe@qwe.qwe','limitium','PasswordKeeper::generate','93b8926afa3c763923dc904682439337','93b8926afa3c763923dc904682439337qweqwe',1,0,'2011-04-10 02:06:45','2011-03-11 20:52:17','2011-04-10 02:06:45'),(2,'Андрей','Белоозеров','asd@qwe.qwe','platosha','PasswordKeeper::generate','8c65d6733a4dd32a5510ab6d3793d3d9','8c65d6733a4dd32a5510ab6d3793d3d9qweqwe',1,0,'2010-05-22 18:29:11','2011-03-11 20:52:31','2010-05-22 18:29:11'),(3,'Дмитрий','Хашабаев','zxc@zxc.zxc','homer','PasswordKeeper::generate','884f9de044df99d54aedf354eded1a32','884f9de044df99d54aedf354eded1a32qweqwe',1,0,NULL,'2011-03-11 20:52:47','2011-03-11 20:52:47'),(7,NULL,NULL,'zzzzz@qwe.qwe','admin','PasswordKeeper::generate','df4ec620183da5af8c2df4d1c60f9c53','df4ec620183da5af8c2df4d1c60f9c53qweqwe',1,0,'2011-04-10 03:03:05','2011-03-31 12:26:05','2011-04-10 03:03:05'),(8,NULL,NULL,'ddddd@qwe.qwea','newlogin2','PasswordKeeper::generate','029ebfbfa5d62e84b04fc3a0bcb92339','029ebfbfa5d62e84b04fc3a0bcb92339qweqwe',1,0,'2011-03-31 12:34:00','2011-03-31 12:32:56','2011-03-31 12:34:00'),(12,NULL,NULL,'limitium@gmail.com','Hashan','PasswordKeeper::generate','0f84562f3f85267ce6c0fba5c16464a3','0f84562f3f85267ce6c0fba5c16464a3qweqwe',0,0,NULL,'2011-04-02 15:51:18','2011-04-02 15:51:18');
 
 /*Data for the table `sf_guard_user_group` */
 
@@ -123,7 +133,7 @@ insert  into `sf_guard_user`(`id`,`first_name`,`last_name`,`email_address`,`user
 
 /*Data for the table `sf_guard_user_profile` */
 
-insert  into `sf_guard_user_profile`(`user_id`,`email_new`,`validate_at`,`validate`,`id`,`sex`,`birth_date`,`userpic`,`description`,`city_id`,`created_at`,`updated_at`) values (1,'xxx@cc.cc','2010-05-23 20:12:20','e992509a6769b476993e5c352b270bac2',1,1,'2010-05-23',NULL,'',123,'2011-03-11 20:52:18','2010-05-23 20:12:20'),(2,NULL,'2011-03-11 20:52:31','n2b1d22bf44686b95b77bb07f52e365d0',2,1,NULL,NULL,NULL,456,'2011-03-11 20:52:31','2011-03-11 20:52:31'),(3,NULL,'2011-03-11 20:52:47','n87805300e6edd21d174f7fc147de786b',3,0,NULL,NULL,NULL,213,'2011-03-11 20:52:47','2011-03-11 20:52:47'),(7,NULL,NULL,NULL,7,1,NULL,NULL,NULL,234,'2011-03-31 12:26:06','2011-03-31 12:31:12'),(8,NULL,NULL,NULL,8,1,NULL,NULL,NULL,66,'2011-03-31 12:32:57','2011-03-31 12:33:59');
+insert  into `sf_guard_user_profile`(`user_id`,`email_new`,`validate_at`,`validate`,`id`,`sex`,`birth_date`,`userpic`,`description`,`city_id`,`created_at`,`updated_at`) values (1,'xxx@cc.cc','2010-05-23 20:12:20','e992509a6769b476993e5c352b270bac2',1,1,'2010-05-23',NULL,'',123,'2011-03-11 20:52:18','2010-05-23 20:12:20'),(2,NULL,'2011-03-11 20:52:31','n2b1d22bf44686b95b77bb07f52e365d0',2,1,NULL,NULL,NULL,456,'2011-03-11 20:52:31','2011-03-11 20:52:31'),(3,NULL,'2011-03-11 20:52:47','n87805300e6edd21d174f7fc147de786b',3,0,NULL,NULL,NULL,213,'2011-03-11 20:52:47','2011-03-11 20:52:47'),(7,NULL,NULL,NULL,7,1,NULL,NULL,NULL,234,'2011-03-31 12:26:06','2011-03-31 12:31:12'),(8,NULL,NULL,NULL,8,1,NULL,NULL,NULL,66,'2011-03-31 12:32:57','2011-03-31 12:33:59'),(12,NULL,'2011-04-02 15:51:18','nc299c92d4bb3eff72ee6d9f520a11343',12,1,NULL,NULL,NULL,NULL,'2011-04-02 15:51:18','2011-04-02 15:51:18');
 
 /*Data for the table `style` */
 
@@ -145,7 +155,7 @@ insert  into `talk_section`(`id`,`parent`,`name`,`lft`,`rgt`,`level`) values (13
 
 /*Data for the table `vote` */
 
-insert  into `vote`(`id`,`value`,`voter`,`toward`,`location_id`,`comment_id`,`profit_id`,`profile_id`,`talk_id`,`fish_event_id`) values (23,-1,1,'location',1,NULL,NULL,NULL,NULL,NULL),(24,1,1,'profile',NULL,NULL,NULL,1,NULL,NULL),(33,1,2,'location',1,NULL,NULL,NULL,NULL,NULL),(36,1,2,'profit',NULL,NULL,2,NULL,NULL,NULL),(37,1,2,'profile',NULL,NULL,NULL,1,NULL,NULL),(38,1,2,'profile',NULL,NULL,NULL,3,NULL,NULL),(39,-1,1,'profile',NULL,NULL,NULL,2,NULL,NULL),(40,1,1,'comment',NULL,21,NULL,NULL,NULL,NULL),(41,-1,1,'profile',NULL,NULL,NULL,3,NULL,NULL);
+insert  into `vote`(`id`,`value`,`voter`,`toward`,`location_id`,`comment_id`,`profit_id`,`profile_id`,`talk_id`,`fish_event_id`,`photo_id`) values (23,-1,1,'location',1,NULL,NULL,NULL,NULL,NULL,NULL),(24,1,1,'profile',NULL,NULL,NULL,1,NULL,NULL,NULL),(33,1,2,'location',1,NULL,NULL,NULL,NULL,NULL,NULL),(36,1,2,'profit',NULL,NULL,2,NULL,NULL,NULL,NULL),(37,1,2,'profile',NULL,NULL,NULL,1,NULL,NULL,NULL),(38,1,2,'profile',NULL,NULL,NULL,3,NULL,NULL,NULL),(39,-1,1,'profile',NULL,NULL,NULL,2,NULL,NULL,NULL),(40,1,1,'comment',NULL,21,NULL,NULL,NULL,NULL,NULL),(41,-1,1,'profile',NULL,NULL,NULL,3,NULL,NULL,NULL);
 
 /*Data for the table `wish_list` */
 

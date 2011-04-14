@@ -15,9 +15,9 @@ locationEdit.prototype.initListeners = function(){
     var photos = [];
     $('form.location').submit(function(){
         $('.thumbs img').each(function(){
-            photos.push(this.id.substr(6))
+            photos.push(this.id.substr(6));
         });
-        $('#location_photos').val(photos.join(';'));
+        $('#location_photos').val($.JSON.encode(photos));
     });
 }
 
@@ -85,7 +85,6 @@ ht_location_e.prototype.getGeo = function(loader){
     }, function(result, status) {
         if (status == gm.GeocoderStatus.OK) {
             var data = result[0];
-            fb(data);
             if (data) {
                 $.each(data.address_components, function(){
                     if(self.address[this.types[0]] == ''){

@@ -315,64 +315,68 @@ CREATE TABLE `location` (
 
 /*Data for the table `location` */
 
-insert  into `location`(`id`,`name`,`description`,`depth`,`is_free`,`price`,`location_flow_id`,`location_fundus_id`,`location_relief_id`,`location_type_id`,`location_scope_id`,`address_id`,`created_by`,`updated_by`,`slug`,`created_at`,`updated_at`,`latitude`,`longitude`,`version`) values (1,'Первое место','',1.00,1,'',1,1,1,4,5,1,1,1,'','2011-03-11 20:52:18','2011-03-31 11:10:17',55.840000000000003,37.909999999999997,2),(2,'Отличное место','',NULL,1,'',NULL,NULL,NULL,NULL,NULL,2,2,1,'1','2011-03-11 20:52:18','2011-03-31 21:44:50',55.719999999999999,37.329999999999998,1),(3,'Заводь на угре','',NULL,1,'',NULL,NULL,NULL,NULL,NULL,3,3,1,'4','2011-03-11 20:52:18','2011-03-31 21:45:31',54.869999999999997,34.600000000000001,1),(4,'Непонятно ничего','',NULL,1,'',NULL,NULL,NULL,NULL,NULL,4,1,1,'7','2011-03-11 20:52:18','2011-03-31 21:48:58',56.329999999999998,35.450000000000003,1),(5,'Место место','',NULL,1,'',NULL,NULL,NULL,NULL,NULL,3,2,1,'5','2011-03-11 20:52:18','2011-03-31 21:47:18',55.070000000000000,36.450000000000003,1),(6,'Аааа ееее!','',NULL,1,'',NULL,NULL,NULL,NULL,NULL,1,1,1,'6','2011-03-11 20:52:18','2011-03-31 21:48:01',56.039999999999999,35.799999999999997,1),(7,'Пыщь пыщь','',NULL,1,'',NULL,NULL,NULL,NULL,NULL,4,2,1,'2','2011-03-11 20:52:18','2011-03-31 21:49:39',56.600000000000001,36.799999999999997,1),(8,'И ололо','',NULL,1,'',NULL,NULL,NULL,NULL,NULL,2,3,1,'3','2011-03-11 20:52:18','2011-03-31 21:48:36',54.270000000000003,36.049999999999997,1);
+insert  into `location`(`id`,`name`,`description`,`depth`,`is_free`,`price`,`location_flow_id`,`location_fundus_id`,`location_relief_id`,`location_type_id`,`location_scope_id`,`address_id`,`created_by`,`updated_by`,`slug`,`created_at`,`updated_at`,`latitude`,`longitude`,`version`) values (1,'Первое место','',1.00,1,'',1,1,1,4,5,1,1,7,'','2011-03-11 20:52:18','2011-04-15 02:13:35',55.840000000000003,37.909999999999997,3),(2,'Отличное место','',NULL,1,'',NULL,NULL,NULL,NULL,NULL,2,2,1,'1','2011-03-11 20:52:18','2011-03-31 21:44:50',55.719999999999999,37.329999999999998,1),(3,'Заводь на угре','',NULL,1,'',NULL,NULL,NULL,NULL,NULL,3,3,1,'4','2011-03-11 20:52:18','2011-03-31 21:45:31',54.869999999999997,34.600000000000001,1),(4,'Непонятно ничего','',NULL,1,'',NULL,NULL,NULL,NULL,NULL,4,1,1,'7','2011-03-11 20:52:18','2011-03-31 21:48:58',56.329999999999998,35.450000000000003,1),(5,'Место место','',NULL,1,'',NULL,NULL,NULL,NULL,NULL,3,2,1,'5','2011-03-11 20:52:18','2011-03-31 21:47:18',55.070000000000000,36.450000000000003,1),(6,'Аааа ееее!','',NULL,1,'',NULL,NULL,NULL,NULL,NULL,1,1,1,'6','2011-03-11 20:52:18','2011-03-31 21:48:01',56.039999999999999,35.799999999999997,1),(7,'Пыщь пыщь','',NULL,1,'',NULL,NULL,NULL,NULL,NULL,4,2,1,'2','2011-03-11 20:52:18','2011-03-31 21:49:39',56.600000000000001,36.799999999999997,1),(8,'И ололо','',NULL,1,'',NULL,NULL,NULL,NULL,NULL,2,3,1,'3','2011-03-11 20:52:18','2011-03-31 21:48:36',54.270000000000003,36.049999999999997,1);
 
 /*Table structure for table `location_flow` */
 
 DROP TABLE IF EXISTS `location_flow`;
 
 CREATE TABLE `location_flow` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL DEFAULT '0',
   `name` varchar(50) NOT NULL,
+  `weight` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `location_flow` */
 
-insert  into `location_flow`(`id`,`name`) values (1,'Отсутствует'),(2,'Медленное'),(3,'Среднее'),(4,'Быстрое');
+insert  into `location_flow`(`id`,`name`,`weight`) values (1,'Отсутствует',NULL),(2,'Медленное',NULL),(3,'Среднее',NULL),(4,'Быстрое',NULL);
 
 /*Table structure for table `location_fundus` */
 
 DROP TABLE IF EXISTS `location_fundus`;
 
 CREATE TABLE `location_fundus` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL DEFAULT '0',
   `name` varchar(50) NOT NULL,
+  `weight` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `location_fundus` */
 
-insert  into `location_fundus`(`id`,`name`) values (1,'Песчаное'),(2,'Илистое'),(3,'Каменистое'),(4,'Заросшее'),(5,'Коряжник');
+insert  into `location_fundus`(`id`,`name`,`weight`) values (1,'Песчаное',NULL),(2,'Илистое',NULL),(3,'Каменистое',NULL),(4,'Заросшее',NULL),(5,'Коряжник',NULL);
 
 /*Table structure for table `location_relief` */
 
 DROP TABLE IF EXISTS `location_relief`;
 
 CREATE TABLE `location_relief` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL DEFAULT '0',
   `name` varchar(50) NOT NULL,
+  `weight` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `location_relief` */
 
-insert  into `location_relief`(`id`,`name`) values (1,'Равномерный'),(2,'Перепады'),(3,'Ямы'),(4,'Бровки'),(5,'Свал');
+insert  into `location_relief`(`id`,`name`,`weight`) values (1,'Равномерный',NULL),(2,'Перепады',NULL),(3,'Ямы',NULL),(4,'Бровки',NULL),(5,'Свал',NULL);
 
 /*Table structure for table `location_scope` */
 
 DROP TABLE IF EXISTS `location_scope`;
 
 CREATE TABLE `location_scope` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL DEFAULT '0',
   `name` varchar(50) NOT NULL,
+  `weight` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `location_scope` */
 
-insert  into `location_scope`(`id`,`name`) values (5,'Всем'),(2,'Друзьям'),(3,'Зарегистрированным'),(1,'Мне');
+insert  into `location_scope`(`id`,`name`,`weight`) values (1,'Мне',NULL),(2,'Друзьям',NULL),(3,'Зарегистрированным',NULL),(5,'Всем',NULL);
 
 /*Table structure for table `location_type` */
 
@@ -381,13 +385,14 @@ DROP TABLE IF EXISTS `location_type`;
 CREATE TABLE `location_type` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL,
+  `weight` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 /*Data for the table `location_type` */
 
-insert  into `location_type`(`id`,`name`) values (4,'Водохранилище'),(2,'Озеро'),(3,'Пруд'),(1,'Река');
+insert  into `location_type`(`id`,`name`,`weight`) values (1,'Река',NULL),(2,'Озеро',NULL),(3,'Пруд',NULL),(4,'Водохранилище',NULL);
 
 /*Table structure for table `location_version` */
 
@@ -420,7 +425,7 @@ CREATE TABLE `location_version` (
 
 /*Data for the table `location_version` */
 
-insert  into `location_version`(`id`,`name`,`description`,`depth`,`is_free`,`price`,`location_flow_id`,`location_fundus_id`,`location_relief_id`,`location_type_id`,`location_scope_id`,`address_id`,`created_by`,`updated_by`,`slug`,`created_at`,`updated_at`,`latitude`,`longitude`,`version`) values (1,'Первое место','',1.00,1,'',1,1,1,4,5,1,1,1,'','2011-03-11 20:52:18','2011-03-31 11:07:04',NULL,NULL,1),(1,'Первое место','',1.00,1,'',1,1,1,4,5,1,1,1,'','2011-03-11 20:52:18','2011-03-31 11:10:17',NULL,NULL,2),(2,'Отличное место','',NULL,1,'',NULL,NULL,NULL,NULL,NULL,2,2,1,'1','2011-03-11 20:52:18','2011-03-31 21:44:50',NULL,NULL,1),(3,'Заводь на угре','',NULL,1,'',NULL,NULL,NULL,NULL,NULL,3,3,1,'4','2011-03-11 20:52:18','2011-03-31 21:45:31',NULL,NULL,1),(4,'Непонятно ничего','',NULL,1,'',NULL,NULL,NULL,NULL,NULL,4,1,1,'7','2011-03-11 20:52:18','2011-03-31 21:48:58',NULL,NULL,1),(5,'Место место','',NULL,1,'',NULL,NULL,NULL,NULL,NULL,3,2,1,'5','2011-03-11 20:52:18','2011-03-31 21:47:18',NULL,NULL,1),(6,'Аааа ееее!','',NULL,1,'',NULL,NULL,NULL,NULL,NULL,1,1,1,'6','2011-03-11 20:52:18','2011-03-31 21:48:01',NULL,NULL,1),(7,'Пыщь пыщь','',NULL,1,'',NULL,NULL,NULL,NULL,NULL,4,2,1,'2','2011-03-11 20:52:18','2011-03-31 21:49:39',NULL,NULL,1),(8,'И ололо','',NULL,1,'',NULL,NULL,NULL,NULL,NULL,2,3,1,'3','2011-03-11 20:52:18','2011-03-31 21:48:36',NULL,NULL,1);
+insert  into `location_version`(`id`,`name`,`description`,`depth`,`is_free`,`price`,`location_flow_id`,`location_fundus_id`,`location_relief_id`,`location_type_id`,`location_scope_id`,`address_id`,`created_by`,`updated_by`,`slug`,`created_at`,`updated_at`,`latitude`,`longitude`,`version`) values (1,'Первое место','',1.00,1,'',1,1,1,4,5,1,1,1,'','2011-03-11 20:52:18','2011-03-31 11:07:04',NULL,NULL,1),(1,'Первое место','',1.00,1,'',1,1,1,4,5,1,1,1,'','2011-03-11 20:52:18','2011-03-31 11:10:17',NULL,NULL,2),(1,'Первое место','',1.00,1,'',1,1,1,4,5,1,1,7,'','2011-03-11 20:52:18','2011-04-15 02:13:35',55.840000000000003,37.909999999999997,3),(2,'Отличное место','',NULL,1,'',NULL,NULL,NULL,NULL,NULL,2,2,1,'1','2011-03-11 20:52:18','2011-03-31 21:44:50',NULL,NULL,1),(3,'Заводь на угре','',NULL,1,'',NULL,NULL,NULL,NULL,NULL,3,3,1,'4','2011-03-11 20:52:18','2011-03-31 21:45:31',NULL,NULL,1),(4,'Непонятно ничего','',NULL,1,'',NULL,NULL,NULL,NULL,NULL,4,1,1,'7','2011-03-11 20:52:18','2011-03-31 21:48:58',NULL,NULL,1),(5,'Место место','',NULL,1,'',NULL,NULL,NULL,NULL,NULL,3,2,1,'5','2011-03-11 20:52:18','2011-03-31 21:47:18',NULL,NULL,1),(6,'Аааа ееее!','',NULL,1,'',NULL,NULL,NULL,NULL,NULL,1,1,1,'6','2011-03-11 20:52:18','2011-03-31 21:48:01',NULL,NULL,1),(7,'Пыщь пыщь','',NULL,1,'',NULL,NULL,NULL,NULL,NULL,4,2,1,'2','2011-03-11 20:52:18','2011-03-31 21:49:39',NULL,NULL,1),(8,'И ололо','',NULL,1,'',NULL,NULL,NULL,NULL,NULL,2,3,1,'3','2011-03-11 20:52:18','2011-03-31 21:48:36',NULL,NULL,1);
 
 /*Table structure for table `photo` */
 
@@ -428,22 +433,89 @@ DROP TABLE IF EXISTS `photo`;
 
 CREATE TABLE `photo` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(36) NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `thumb` varchar(100) NOT NULL,
   `toward` varchar(255) DEFAULT NULL,
   `location_id` int(11) DEFAULT NULL,
+  `profit_id` int(11) DEFAULT NULL,
   `created_by` int(11) NOT NULL,
   `updated_by` int(11) NOT NULL,
+  `version` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `photo_toward_idx` (`toward`),
   KEY `created_by_idx` (`created_by`),
   KEY `updated_by_idx` (`updated_by`),
   KEY `photo_location_id_location_id` (`location_id`),
-  CONSTRAINT `photo_location_id_location_id` FOREIGN KEY (`location_id`) REFERENCES `location` (`id`),
+  KEY `photo_profit_id_profit_id` (`profit_id`),
+  CONSTRAINT `photo_profit_id_profit_id` FOREIGN KEY (`profit_id`) REFERENCES `profit` (`id`),
   CONSTRAINT `photo_created_by_sf_guard_user_profile_id` FOREIGN KEY (`created_by`) REFERENCES `sf_guard_user_profile` (`id`),
+  CONSTRAINT `photo_location_id_location_id` FOREIGN KEY (`location_id`) REFERENCES `location` (`id`),
   CONSTRAINT `photo_updated_by_sf_guard_user_profile_id` FOREIGN KEY (`updated_by`) REFERENCES `sf_guard_user_profile` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 
 /*Data for the table `photo` */
+
+insert  into `photo`(`id`,`name`,`thumb`,`toward`,`location_id`,`profit_id`,`created_by`,`updated_by`,`version`) values (7,'http://img822.imageshack.us/img822/4889/phpb51.jpg','http://img822.imageshack.us/img822/4889/phpb51.th.jpg','location',1,NULL,7,7,NULL),(8,'http://img585.imageshack.us/img585/998/phpb53.jpg','http://img585.imageshack.us/img585/998/phpb53.th.jpg','location',1,NULL,7,7,NULL),(9,'http://img251.imageshack.us/img251/7185/phpb5c.jpg','http://img251.imageshack.us/img251/7185/phpb5c.th.jpg','location',1,NULL,7,7,NULL),(10,'http://img715.imageshack.us/img715/6608/phpb71.jpg','http://img715.imageshack.us/img715/6608/phpb71.th.jpg','location',1,NULL,7,7,NULL),(11,'http://img825.imageshack.us/img825/5011/phpb85.jpg','http://img825.imageshack.us/img825/5011/phpb85.th.jpg','location',1,NULL,7,7,NULL);
+
+/*Table structure for table `photo_location_version` */
+
+DROP TABLE IF EXISTS `photo_location_version`;
+
+CREATE TABLE `photo_location_version` (
+  `id` int(11) NOT NULL DEFAULT '0',
+  `name` varchar(100) NOT NULL,
+  `thumb` varchar(100) NOT NULL,
+  `toward` varchar(255) DEFAULT NULL,
+  `location_id` int(11) DEFAULT NULL,
+  `profit_id` int(11) DEFAULT NULL,
+  `created_by` int(11) NOT NULL,
+  `updated_by` int(11) NOT NULL,
+  `version` bigint(20) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`,`version`),
+  CONSTRAINT `photo_location_version_id_photo_id` FOREIGN KEY (`id`) REFERENCES `photo` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Data for the table `photo_location_version` */
+
+/*Table structure for table `photo_profit_version` */
+
+DROP TABLE IF EXISTS `photo_profit_version`;
+
+CREATE TABLE `photo_profit_version` (
+  `id` int(11) NOT NULL DEFAULT '0',
+  `name` varchar(100) NOT NULL,
+  `thumb` varchar(100) NOT NULL,
+  `toward` varchar(255) DEFAULT NULL,
+  `location_id` int(11) DEFAULT NULL,
+  `profit_id` int(11) DEFAULT NULL,
+  `created_by` int(11) NOT NULL,
+  `updated_by` int(11) NOT NULL,
+  `version` bigint(20) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`,`version`),
+  CONSTRAINT `photo_profit_version_id_photo_id` FOREIGN KEY (`id`) REFERENCES `photo` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Data for the table `photo_profit_version` */
+
+/*Table structure for table `photo_version` */
+
+DROP TABLE IF EXISTS `photo_version`;
+
+CREATE TABLE `photo_version` (
+  `id` int(11) NOT NULL DEFAULT '0',
+  `name` varchar(100) NOT NULL,
+  `thumb` varchar(100) NOT NULL,
+  `toward` varchar(255) DEFAULT NULL,
+  `location_id` int(11) DEFAULT NULL,
+  `profit_id` int(11) DEFAULT NULL,
+  `created_by` int(11) NOT NULL,
+  `updated_by` int(11) NOT NULL,
+  `version` bigint(20) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`,`version`),
+  CONSTRAINT `photo_version_id_photo_id` FOREIGN KEY (`id`) REFERENCES `photo` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Data for the table `photo_version` */
 
 /*Table structure for table `profit` */
 
@@ -627,11 +699,11 @@ CREATE TABLE `sf_guard_remember_key` (
   PRIMARY KEY (`id`),
   KEY `user_id_idx` (`user_id`),
   CONSTRAINT `sf_guard_remember_key_user_id_sf_guard_user_id` FOREIGN KEY (`user_id`) REFERENCES `sf_guard_user` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=cp1251;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=cp1251;
 
 /*Data for the table `sf_guard_remember_key` */
 
-insert  into `sf_guard_remember_key`(`id`,`user_id`,`remember_key`,`ip_address`,`created_at`,`updated_at`) values (1,2,'hlgprbz4u5kok4808gss4ko4c8g4s0s','127.0.0.1','2010-05-17 22:14:42','2010-05-17 22:14:42'),(2,1,'hocqsx2q3qoss8kkc88kkckccggwkso','127.0.0.1','2010-05-18 20:21:38','2010-05-18 20:21:38');
+insert  into `sf_guard_remember_key`(`id`,`user_id`,`remember_key`,`ip_address`,`created_at`,`updated_at`) values (4,1,'9p5nf5hoj74sgggscgkw8o8cgckc448','127.0.0.1','2011-04-09 05:08:43','2011-04-09 05:08:43');
 
 /*Table structure for table `sf_guard_user` */
 
@@ -655,11 +727,11 @@ CREATE TABLE `sf_guard_user` (
   UNIQUE KEY `email_address` (`email_address`),
   UNIQUE KEY `username` (`username`),
   KEY `is_active_idx_idx` (`is_active`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=cp1251;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=cp1251;
 
 /*Data for the table `sf_guard_user` */
 
-insert  into `sf_guard_user`(`id`,`first_name`,`last_name`,`email_address`,`username`,`algorithm`,`salt`,`password`,`is_active`,`is_super_admin`,`last_login`,`created_at`,`updated_at`) values (1,'Максим','Гречушкин','qweqwe@qwe.qwe','limitium','PasswordKeeper::generate','93b8926afa3c763923dc904682439337','93b8926afa3c763923dc904682439337qweqwe',1,0,'2011-03-31 22:29:10','2011-03-11 20:52:17','2011-03-31 22:29:10'),(2,'Андрей','Белоозеров','asd@qwe.qwe','platosha','PasswordKeeper::generate','8c65d6733a4dd32a5510ab6d3793d3d9','8c65d6733a4dd32a5510ab6d3793d3d9qweqwe',1,0,'2010-05-22 18:29:11','2011-03-11 20:52:31','2010-05-22 18:29:11'),(3,'Дмитрий','Хашабаев','zxc@zxc.zxc','homer','PasswordKeeper::generate','884f9de044df99d54aedf354eded1a32','884f9de044df99d54aedf354eded1a32qweqwe',1,0,NULL,'2011-03-11 20:52:47','2011-03-11 20:52:47'),(7,NULL,NULL,'qwe@qwe.qwe','newlogin','PasswordKeeper::generate','df4ec620183da5af8c2df4d1c60f9c53','df4ec620183da5af8c2df4d1c60f9c53qweqwe',1,0,'2011-03-31 12:35:25','2011-03-31 12:26:05','2011-03-31 12:35:25'),(8,NULL,NULL,'qwe@qwe.qwea','newlogin2','PasswordKeeper::generate','029ebfbfa5d62e84b04fc3a0bcb92339','029ebfbfa5d62e84b04fc3a0bcb92339qweqwe',1,0,'2011-03-31 12:34:00','2011-03-31 12:32:56','2011-03-31 12:34:00');
+insert  into `sf_guard_user`(`id`,`first_name`,`last_name`,`email_address`,`username`,`algorithm`,`salt`,`password`,`is_active`,`is_super_admin`,`last_login`,`created_at`,`updated_at`) values (1,'Максим','Гречушкин','qweqwe@qwe.qwe','limitium','PasswordKeeper::generate','93b8926afa3c763923dc904682439337','93b8926afa3c763923dc904682439337qweqwe',1,0,'2011-04-10 02:06:45','2011-03-11 20:52:17','2011-04-10 02:06:45'),(2,'Андрей','Белоозеров','asd@qwe.qwe','platosha','PasswordKeeper::generate','8c65d6733a4dd32a5510ab6d3793d3d9','8c65d6733a4dd32a5510ab6d3793d3d9qweqwe',1,0,'2010-05-22 18:29:11','2011-03-11 20:52:31','2010-05-22 18:29:11'),(3,'Дмитрий','Хашабаев','zxc@zxc.zxc','homer','PasswordKeeper::generate','884f9de044df99d54aedf354eded1a32','884f9de044df99d54aedf354eded1a32qweqwe',1,0,NULL,'2011-03-11 20:52:47','2011-03-11 20:52:47'),(7,NULL,NULL,'zzzzz@qwe.qwe','admin','PasswordKeeper::generate','df4ec620183da5af8c2df4d1c60f9c53','df4ec620183da5af8c2df4d1c60f9c53qweqwe',1,0,'2011-04-10 03:03:05','2011-03-31 12:26:05','2011-04-10 03:03:05'),(8,NULL,NULL,'ddddd@qwe.qwea','newlogin2','PasswordKeeper::generate','029ebfbfa5d62e84b04fc3a0bcb92339','029ebfbfa5d62e84b04fc3a0bcb92339qweqwe',1,0,'2011-03-31 12:34:00','2011-03-31 12:32:56','2011-03-31 12:34:00'),(12,NULL,NULL,'limitium@gmail.com','Hashan','PasswordKeeper::generate','0f84562f3f85267ce6c0fba5c16464a3','0f84562f3f85267ce6c0fba5c16464a3qweqwe',0,0,NULL,'2011-04-02 15:51:18','2011-04-02 15:51:18');
 
 /*Table structure for table `sf_guard_user_group` */
 
@@ -719,11 +791,11 @@ CREATE TABLE `sf_guard_user_profile` (
   KEY `city_id_idx` (`city_id`),
   CONSTRAINT `sf_guard_user_profile_city_id_city_id` FOREIGN KEY (`city_id`) REFERENCES `city` (`id`),
   CONSTRAINT `sf_guard_user_profile_user_id_sf_guard_user_id` FOREIGN KEY (`user_id`) REFERENCES `sf_guard_user` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
 
 /*Data for the table `sf_guard_user_profile` */
 
-insert  into `sf_guard_user_profile`(`user_id`,`email_new`,`validate_at`,`validate`,`id`,`sex`,`birth_date`,`userpic`,`description`,`city_id`,`created_at`,`updated_at`) values (1,'xxx@cc.cc','2010-05-23 20:12:20','e992509a6769b476993e5c352b270bac2',1,1,'2010-05-23',NULL,'',123,'2011-03-11 20:52:18','2010-05-23 20:12:20'),(2,NULL,'2011-03-11 20:52:31','n2b1d22bf44686b95b77bb07f52e365d0',2,1,NULL,NULL,NULL,456,'2011-03-11 20:52:31','2011-03-11 20:52:31'),(3,NULL,'2011-03-11 20:52:47','n87805300e6edd21d174f7fc147de786b',3,0,NULL,NULL,NULL,213,'2011-03-11 20:52:47','2011-03-11 20:52:47'),(7,NULL,NULL,NULL,7,1,NULL,NULL,NULL,234,'2011-03-31 12:26:06','2011-03-31 12:31:12'),(8,NULL,NULL,NULL,8,1,NULL,NULL,NULL,66,'2011-03-31 12:32:57','2011-03-31 12:33:59');
+insert  into `sf_guard_user_profile`(`user_id`,`email_new`,`validate_at`,`validate`,`id`,`sex`,`birth_date`,`userpic`,`description`,`city_id`,`created_at`,`updated_at`) values (1,'xxx@cc.cc','2010-05-23 20:12:20','e992509a6769b476993e5c352b270bac2',1,1,'2010-05-23',NULL,'',123,'2011-03-11 20:52:18','2010-05-23 20:12:20'),(2,NULL,'2011-03-11 20:52:31','n2b1d22bf44686b95b77bb07f52e365d0',2,1,NULL,NULL,NULL,456,'2011-03-11 20:52:31','2011-03-11 20:52:31'),(3,NULL,'2011-03-11 20:52:47','n87805300e6edd21d174f7fc147de786b',3,0,NULL,NULL,NULL,213,'2011-03-11 20:52:47','2011-03-11 20:52:47'),(7,NULL,NULL,NULL,7,1,NULL,NULL,NULL,234,'2011-03-31 12:26:06','2011-03-31 12:31:12'),(8,NULL,NULL,NULL,8,1,NULL,NULL,NULL,66,'2011-03-31 12:32:57','2011-03-31 12:33:59'),(12,NULL,'2011-04-02 15:51:18','nc299c92d4bb3eff72ee6d9f520a11343',12,1,NULL,NULL,NULL,NULL,'2011-04-02 15:51:18','2011-04-02 15:51:18');
 
 /*Table structure for table `style` */
 
@@ -837,12 +909,14 @@ CREATE TABLE `vote` (
   `profile_id` int(11) DEFAULT NULL,
   `talk_id` int(11) DEFAULT NULL,
   `fish_event_id` int(11) DEFAULT NULL,
+  `photo_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `vote_toward_idx` (`toward`),
   KEY `voter_idx` (`voter`),
   KEY `vote_comment_id_comment_id` (`comment_id`),
   KEY `vote_fish_event_id_fish_event_id` (`fish_event_id`),
   KEY `vote_location_id_location_id` (`location_id`),
+  KEY `vote_photo_id_photo_id` (`photo_id`),
   KEY `vote_profile_id_sf_guard_user_profile_id` (`profile_id`),
   KEY `vote_profit_id_profit_id` (`profit_id`),
   KEY `vote_talk_id_talk_id` (`talk_id`),
@@ -850,6 +924,7 @@ CREATE TABLE `vote` (
   CONSTRAINT `vote_comment_id_comment_id` FOREIGN KEY (`comment_id`) REFERENCES `comment` (`id`),
   CONSTRAINT `vote_fish_event_id_fish_event_id` FOREIGN KEY (`fish_event_id`) REFERENCES `fish_event` (`id`),
   CONSTRAINT `vote_location_id_location_id` FOREIGN KEY (`location_id`) REFERENCES `location` (`id`),
+  CONSTRAINT `vote_photo_id_photo_id` FOREIGN KEY (`photo_id`) REFERENCES `photo` (`id`),
   CONSTRAINT `vote_profile_id_sf_guard_user_profile_id` FOREIGN KEY (`profile_id`) REFERENCES `sf_guard_user_profile` (`id`),
   CONSTRAINT `vote_profit_id_profit_id` FOREIGN KEY (`profit_id`) REFERENCES `profit` (`id`),
   CONSTRAINT `vote_voter_sf_guard_user_profile_id` FOREIGN KEY (`voter`) REFERENCES `sf_guard_user_profile` (`id`)
@@ -857,7 +932,7 @@ CREATE TABLE `vote` (
 
 /*Data for the table `vote` */
 
-insert  into `vote`(`id`,`value`,`voter`,`toward`,`location_id`,`comment_id`,`profit_id`,`profile_id`,`talk_id`,`fish_event_id`) values (23,-1,1,'location',1,NULL,NULL,NULL,NULL,NULL),(24,1,1,'profile',NULL,NULL,NULL,1,NULL,NULL),(33,1,2,'location',1,NULL,NULL,NULL,NULL,NULL),(36,1,2,'profit',NULL,NULL,2,NULL,NULL,NULL),(37,1,2,'profile',NULL,NULL,NULL,1,NULL,NULL),(38,1,2,'profile',NULL,NULL,NULL,3,NULL,NULL),(39,-1,1,'profile',NULL,NULL,NULL,2,NULL,NULL),(40,1,1,'comment',NULL,21,NULL,NULL,NULL,NULL),(41,-1,1,'profile',NULL,NULL,NULL,3,NULL,NULL);
+insert  into `vote`(`id`,`value`,`voter`,`toward`,`location_id`,`comment_id`,`profit_id`,`profile_id`,`talk_id`,`fish_event_id`,`photo_id`) values (23,-1,1,'location',1,NULL,NULL,NULL,NULL,NULL,NULL),(24,1,1,'profile',NULL,NULL,NULL,1,NULL,NULL,NULL),(33,1,2,'location',1,NULL,NULL,NULL,NULL,NULL,NULL),(36,1,2,'profit',NULL,NULL,2,NULL,NULL,NULL,NULL),(37,1,2,'profile',NULL,NULL,NULL,1,NULL,NULL,NULL),(38,1,2,'profile',NULL,NULL,NULL,3,NULL,NULL,NULL),(39,-1,1,'profile',NULL,NULL,NULL,2,NULL,NULL,NULL),(40,1,1,'comment',NULL,21,NULL,NULL,NULL,NULL,NULL),(41,-1,1,'profile',NULL,NULL,NULL,3,NULL,NULL,NULL);
 
 /*Table structure for table `wish_list` */
 

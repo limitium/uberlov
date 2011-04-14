@@ -14,6 +14,7 @@
  * @property integer $profile_id
  * @property integer $talk_id
  * @property integer $fish_event_id
+ * @property integer $photo_id
  * @property sfGuardUserProfile $Voter
  * 
  * @method integer            getValue()         Returns the current record's "value" value
@@ -25,6 +26,7 @@
  * @method integer            getProfileId()     Returns the current record's "profile_id" value
  * @method integer            getTalkId()        Returns the current record's "talk_id" value
  * @method integer            getFishEventId()   Returns the current record's "fish_event_id" value
+ * @method integer            getPhotoId()       Returns the current record's "photo_id" value
  * @method sfGuardUserProfile getVoter()         Returns the current record's "Voter" value
  * @method Vote               setValue()         Sets the current record's "value" value
  * @method Vote               setVoter()         Sets the current record's "voter" value
@@ -35,6 +37,7 @@
  * @method Vote               setProfileId()     Sets the current record's "profile_id" value
  * @method Vote               setTalkId()        Sets the current record's "talk_id" value
  * @method Vote               setFishEventId()   Sets the current record's "fish_event_id" value
+ * @method Vote               setPhotoId()       Sets the current record's "photo_id" value
  * @method Vote               setVoter()         Sets the current record's "Voter" value
  * 
  * @package    FISHERY
@@ -84,6 +87,10 @@ abstract class BaseVote extends sfDoctrineRecord
              'type' => 'integer',
              'length' => 4,
              ));
+        $this->hasColumn('photo_id', 'integer', 4, array(
+             'type' => 'integer',
+             'length' => 4,
+             ));
 
         $this->option('type', 'INNODB');
         $this->option('charset', 'utf8');
@@ -113,6 +120,10 @@ abstract class BaseVote extends sfDoctrineRecord
              'VoteFishEvent' => 
              array(
               'toward' => 'fish_event',
+             ),
+             'VotePhoto' => 
+             array(
+              'toward' => 'photo',
              ),
              ));
     }

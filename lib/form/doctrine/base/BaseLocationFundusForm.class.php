@@ -15,13 +15,15 @@ abstract class BaseLocationFundusForm extends BaseFormDoctrine
   public function setup()
   {
     $this->setWidgets(array(
-      'id'   => new sfWidgetFormInputHidden(),
-      'name' => new sfWidgetFormInputText(),
+      'id'     => new sfWidgetFormInputHidden(),
+      'name'   => new sfWidgetFormInputText(),
+      'weight' => new sfWidgetFormInputText(),
     ));
 
     $this->setValidators(array(
-      'id'   => new sfValidatorChoice(array('choices' => array($this->getObject()->get('id')), 'empty_value' => $this->getObject()->get('id'), 'required' => false)),
-      'name' => new sfValidatorString(array('max_length' => 50)),
+      'id'     => new sfValidatorChoice(array('choices' => array($this->getObject()->get('id')), 'empty_value' => $this->getObject()->get('id'), 'required' => false)),
+      'name'   => new sfValidatorString(array('max_length' => 50)),
+      'weight' => new sfValidatorInteger(array('required' => false)),
     ));
 
     $this->widgetSchema->setNameFormat('location_fundus[%s]');

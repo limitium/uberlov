@@ -1,16 +1,16 @@
 <?php
 
 /**
- * Photo form base class.
+ * PhotoLocationVersion form base class.
  *
- * @method Photo getObject() Returns the current form's model object
+ * @method PhotoLocationVersion getObject() Returns the current form's model object
  *
  * @package    FISHERY
  * @subpackage form
  * @author     Sergei Belov <limitium@gmail.com>
  * @version    SVN: $Id: sfDoctrineFormGeneratedTemplate.php 29553 2010-05-20 14:33:00Z Kris.Wallsmith $
  */
-abstract class BasePhotoForm extends BaseFormDoctrine
+abstract class BasePhotoLocationVersionForm extends BaseFormDoctrine
 {
   public function setup()
   {
@@ -21,9 +21,9 @@ abstract class BasePhotoForm extends BaseFormDoctrine
       'toward'      => new sfWidgetFormInputText(),
       'location_id' => new sfWidgetFormInputText(),
       'profit_id'   => new sfWidgetFormInputText(),
-      'created_by'  => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('CreatedBy'), 'add_empty' => false)),
-      'updated_by'  => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('UpdatedBy'), 'add_empty' => false)),
-      'version'     => new sfWidgetFormInputText(),
+      'created_by'  => new sfWidgetFormInputText(),
+      'updated_by'  => new sfWidgetFormInputText(),
+      'version'     => new sfWidgetFormInputHidden(),
     ));
 
     $this->setValidators(array(
@@ -33,12 +33,12 @@ abstract class BasePhotoForm extends BaseFormDoctrine
       'toward'      => new sfValidatorString(array('max_length' => 255, 'required' => false)),
       'location_id' => new sfValidatorInteger(array('required' => false)),
       'profit_id'   => new sfValidatorInteger(array('required' => false)),
-      'created_by'  => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('CreatedBy'))),
-      'updated_by'  => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('UpdatedBy'))),
-      'version'     => new sfValidatorInteger(array('required' => false)),
+      'created_by'  => new sfValidatorPass(),
+      'updated_by'  => new sfValidatorPass(),
+      'version'     => new sfValidatorChoice(array('choices' => array($this->getObject()->get('version')), 'empty_value' => $this->getObject()->get('version'), 'required' => false)),
     ));
 
-    $this->widgetSchema->setNameFormat('photo[%s]');
+    $this->widgetSchema->setNameFormat('photo_location_version[%s]');
 
     $this->errorSchema = new sfValidatorErrorSchema($this->validatorSchema);
 
@@ -49,7 +49,7 @@ abstract class BasePhotoForm extends BaseFormDoctrine
 
   public function getModelName()
   {
-    return 'Photo';
+    return 'PhotoLocationVersion';
   }
 
 }

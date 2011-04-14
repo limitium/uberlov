@@ -38,6 +38,7 @@ class photoActions extends sfActions {
 
             $photo = new Photo();
             $photo->name = $uploaded->image;
+            $photo->thumb = $uploaded->thumb;
             $photo->save();
             $result = array(
                 'id' => $photo->getId(),

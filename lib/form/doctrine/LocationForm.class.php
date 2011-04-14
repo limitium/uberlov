@@ -15,11 +15,11 @@ class LocationForm extends BaseLocationForm {
         );
 
         $this->widgetSchema['description'] = new sfWidgetFormTextarea();
-        $this->widgetSchema['location_relief_id'] = new sfWidgetFormDoctrineChoice(array('model' => 'LocationRelief', 'add_empty' => true, 'order_by' => array('name', 'asc')));
-        $this->widgetSchema['location_type_id'] = new sfWidgetFormDoctrineChoice(array('model' => 'LocationType', 'add_empty' => true, 'order_by' => array('name', 'asc')));
-        $this->widgetSchema['location_flow_id'] = new sfWidgetFormDoctrineChoice(array('model' => 'LocationFlow', 'add_empty' => true, 'order_by' => array('name', 'asc')));
-        $this->widgetSchema['location_fundus_id'] = new sfWidgetFormDoctrineChoice(array('model' => 'LocationFundus', 'add_empty' => true, 'order_by' => array('name', 'asc')));
-        $this->widgetSchema['location_scope_id'] = new sfWidgetFormDoctrineChoice(array('model' => 'LocationScope', 'add_empty' => true, 'order_by' => array('name', 'asc')));
+        $this->widgetSchema['location_relief_id'] = new sfWidgetFormDoctrineChoice(array('model' => 'LocationRelief', 'add_empty' => true, 'order_by' => array('weight', 'asc')));
+        $this->widgetSchema['location_type_id'] = new sfWidgetFormDoctrineChoice(array('model' => 'LocationType', 'add_empty' => true, 'order_by' => array('weight', 'asc')));
+        $this->widgetSchema['location_flow_id'] = new sfWidgetFormDoctrineChoice(array('model' => 'LocationFlow', 'add_empty' => true, 'order_by' => array('weight', 'asc')));
+        $this->widgetSchema['location_fundus_id'] = new sfWidgetFormDoctrineChoice(array('model' => 'LocationFundus', 'add_empty' => true, 'order_by' => array('weight', 'asc')));
+        $this->widgetSchema['location_scope_id'] = new sfWidgetFormDoctrineChoice(array('model' => 'LocationScope', 'add_empty' => true, 'order_by' => array('weight', 'asc')));
         $this->widgetSchema['is_free'] = new sfWidgetFormInputCheckbox();
         $this->widgetSchema['price'] = new sfWidgetFormTextarea();
         $this->widgetSchema['depth'] = new sfWidgetFormInputText();
@@ -55,6 +55,19 @@ class LocationForm extends BaseLocationForm {
             'location_type_id' => 'Тип',
             'location_scope_id' => 'Видимость локации<br /><sub>кто может видеть на карте</sub>',
         ));
+    }
+
+    public function packAddress() {
+        $addressData = (object) array();
+        $address = $this->object->getAddress();
+
+        $address instanceof Address;
+        $addressData->country = $address->getCountryId() ? $address->getCountry()->name : '';
+        $addressData->areaLow = $address->getAreaLowId() ? $address->getAreaLow()->name : '';
+        $addressData->areaHigh = $address->getAreaHighId() ? $address->getAreaHigh()->name : '';
+        $addressData->locality = $address->getLocalityId() ? $address->getLocality()->name : '';
+
+        $this->setDefault('address', json_encode($addressData));
     }
 
 }

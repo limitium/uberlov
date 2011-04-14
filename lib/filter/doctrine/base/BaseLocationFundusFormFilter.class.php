@@ -13,11 +13,13 @@ abstract class BaseLocationFundusFormFilter extends BaseFormFilterDoctrine
   public function setup()
   {
     $this->setWidgets(array(
-      'name' => new sfWidgetFormFilterInput(array('with_empty' => false)),
+      'name'   => new sfWidgetFormFilterInput(array('with_empty' => false)),
+      'weight' => new sfWidgetFormFilterInput(),
     ));
 
     $this->setValidators(array(
-      'name' => new sfValidatorPass(array('required' => false)),
+      'name'   => new sfValidatorPass(array('required' => false)),
+      'weight' => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
     ));
 
     $this->widgetSchema->setNameFormat('location_fundus_filters[%s]');
@@ -37,8 +39,9 @@ abstract class BaseLocationFundusFormFilter extends BaseFormFilterDoctrine
   public function getFields()
   {
     return array(
-      'id'   => 'Number',
-      'name' => 'Text',
+      'id'     => 'Number',
+      'name'   => 'Text',
+      'weight' => 'Number',
     );
   }
 }
