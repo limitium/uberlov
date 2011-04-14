@@ -176,7 +176,7 @@ photoUpload.prototype.uploadNext = function() {
     var file = this.uploader.getQueueFile(0);
     fb('uploading ' + file.id);
 
-    this.uploader.startUpload(file.id, 800, 600, SWFUpload.RESIZE_ENCODING.JPEG, 95);
+    this.uploader.startResizedUpload(file.id, 800, 600, SWFUpload.RESIZE_ENCODING.JPEG, 95);
     this.onUploadProgress(file,file.size);
 //            this.uploader.startUpload();
 }

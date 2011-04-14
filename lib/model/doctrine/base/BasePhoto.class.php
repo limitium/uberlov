@@ -7,17 +7,26 @@
  * 
  * @property integer $id
  * @property string $name
+ * @property string $thumb
  * @property string $toward
  * @property integer $location_id
+ * @property integer $profit_id
+ * @property Doctrine_Collection $VotePhoto
  * 
- * @method integer getId()          Returns the current record's "id" value
- * @method string  getName()        Returns the current record's "name" value
- * @method string  getToward()      Returns the current record's "toward" value
- * @method integer getLocationId()  Returns the current record's "location_id" value
- * @method Photo   setId()          Sets the current record's "id" value
- * @method Photo   setName()        Sets the current record's "name" value
- * @method Photo   setToward()      Sets the current record's "toward" value
- * @method Photo   setLocationId()  Sets the current record's "location_id" value
+ * @method integer             getId()          Returns the current record's "id" value
+ * @method string              getName()        Returns the current record's "name" value
+ * @method string              getThumb()       Returns the current record's "thumb" value
+ * @method string              getToward()      Returns the current record's "toward" value
+ * @method integer             getLocationId()  Returns the current record's "location_id" value
+ * @method integer             getProfitId()    Returns the current record's "profit_id" value
+ * @method Doctrine_Collection getVotePhoto()   Returns the current record's "VotePhoto" collection
+ * @method Photo               setId()          Sets the current record's "id" value
+ * @method Photo               setName()        Sets the current record's "name" value
+ * @method Photo               setThumb()       Sets the current record's "thumb" value
+ * @method Photo               setToward()      Sets the current record's "toward" value
+ * @method Photo               setLocationId()  Sets the current record's "location_id" value
+ * @method Photo               setProfitId()    Sets the current record's "profit_id" value
+ * @method Photo               setVotePhoto()   Sets the current record's "VotePhoto" collection
  * 
  * @package    FISHERY
  * @subpackage model
@@ -35,16 +44,25 @@ abstract class BasePhoto extends sfDoctrineRecord
              'autoincrement' => true,
              'length' => 4,
              ));
-        $this->hasColumn('name', 'string', 36, array(
+        $this->hasColumn('name', 'string', 100, array(
              'type' => 'string',
              'notnull' => true,
-             'length' => 36,
+             'length' => 100,
+             ));
+        $this->hasColumn('thumb', 'string', 100, array(
+             'type' => 'string',
+             'notnull' => true,
+             'length' => 100,
              ));
         $this->hasColumn('toward', 'string', 255, array(
              'type' => 'string',
              'length' => 255,
              ));
         $this->hasColumn('location_id', 'integer', 4, array(
+             'type' => 'integer',
+             'length' => 4,
+             ));
+        $this->hasColumn('profit_id', 'integer', 4, array(
              'type' => 'integer',
              'length' => 4,
              ));
@@ -58,12 +76,20 @@ abstract class BasePhoto extends sfDoctrineRecord
              array(
               'toward' => 'location',
              ),
+             'PhotoProfit' => 
+             array(
+              'toward' => 'profit',
+             ),
              ));
     }
 
     public function setUp()
     {
         parent::setUp();
+        $this->hasMany('VotePhoto', array(
+             'local' => 'id',
+             'foreign' => 'photo_id'));
+
         $blameable0 = new Doctrine_Template_Blameable(array(
              'listener' => 'BlameableFishery',
              'relations' => 
@@ -95,6 +121,8 @@ abstract class BasePhoto extends sfDoctrineRecord
               ),
              ),
              ));
+        $versionable0 = new Doctrine_Template_Versionable();
         $this->actAs($blameable0);
+        $this->actAs($versionable0);
     }
 }

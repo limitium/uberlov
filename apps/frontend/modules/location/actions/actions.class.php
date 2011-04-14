@@ -68,6 +68,7 @@ class locationActions extends sfActions {
     public function executeEdit(sfWebRequest $request) {
         $this->forward404Unless($location = Doctrine::getTable('Location')->find($request->getParameter('id')), sprintf('Object location does not exist (%s).', $request->getParameter('id')));
         $this->form = new LocationForm($location);
+        $this->form->packAddress();
     }
 
     public function executeUpdate(sfWebRequest $request) {
@@ -76,7 +77,6 @@ class locationActions extends sfActions {
         $this->form = new LocationForm($location);
 
         $this->setTemplate('edit');
-
         if ($this->location = $this->processForm($request, $this->form)) {
             $this->redirect('location/show?id=' . $this->location->getId());
         }
@@ -95,8 +95,8 @@ class locationActions extends sfActions {
         $form->bind($request->getParameter($form->getName()));
         if ($form->isValid()) {
             $addressData = (array) json_decode($form->getValue('address'));
-
-            return $form->save()->updateAddress($addressData);
+            $photos = (array)json_decode($form->getValue('photos'));
+            return $form->save()->updateAddress($addressData)->updatePhotos($photos);
         }
         return null;
     }

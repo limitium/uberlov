@@ -25,6 +25,7 @@ abstract class BaseVoteForm extends BaseFormDoctrine
       'profile_id'    => new sfWidgetFormInputText(),
       'talk_id'       => new sfWidgetFormInputText(),
       'fish_event_id' => new sfWidgetFormInputText(),
+      'photo_id'      => new sfWidgetFormInputText(),
     ));
 
     $this->setValidators(array(
@@ -38,6 +39,7 @@ abstract class BaseVoteForm extends BaseFormDoctrine
       'profile_id'    => new sfValidatorInteger(array('required' => false)),
       'talk_id'       => new sfValidatorInteger(array('required' => false)),
       'fish_event_id' => new sfValidatorInteger(array('required' => false)),
+      'photo_id'      => new sfValidatorInteger(array('required' => false)),
     ));
 
     $this->widgetSchema->setNameFormat('vote[%s]');

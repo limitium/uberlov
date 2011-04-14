@@ -1,14 +1,14 @@
 <?php
 
 /**
- * Photo filter form base class.
+ * PhotoVersion filter form base class.
  *
  * @package    FISHERY
  * @subpackage filter
  * @author     Sergei Belov <limitium@gmail.com>
  * @version    SVN: $Id: sfDoctrineFormFilterGeneratedTemplate.php 29570 2010-05-21 14:49:47Z Kris.Wallsmith $
  */
-abstract class BasePhotoFormFilter extends BaseFormFilterDoctrine
+abstract class BasePhotoVersionFormFilter extends BaseFormFilterDoctrine
 {
   public function setup()
   {
@@ -18,9 +18,8 @@ abstract class BasePhotoFormFilter extends BaseFormFilterDoctrine
       'toward'      => new sfWidgetFormFilterInput(),
       'location_id' => new sfWidgetFormFilterInput(),
       'profit_id'   => new sfWidgetFormFilterInput(),
-      'created_by'  => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('CreatedBy'), 'add_empty' => true)),
-      'updated_by'  => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('UpdatedBy'), 'add_empty' => true)),
-      'version'     => new sfWidgetFormFilterInput(),
+      'created_by'  => new sfWidgetFormFilterInput(array('with_empty' => false)),
+      'updated_by'  => new sfWidgetFormFilterInput(array('with_empty' => false)),
     ));
 
     $this->setValidators(array(
@@ -29,12 +28,11 @@ abstract class BasePhotoFormFilter extends BaseFormFilterDoctrine
       'toward'      => new sfValidatorPass(array('required' => false)),
       'location_id' => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
       'profit_id'   => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
-      'created_by'  => new sfValidatorDoctrineChoice(array('required' => false, 'model' => $this->getRelatedModelName('CreatedBy'), 'column' => 'id')),
-      'updated_by'  => new sfValidatorDoctrineChoice(array('required' => false, 'model' => $this->getRelatedModelName('UpdatedBy'), 'column' => 'id')),
-      'version'     => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
+      'created_by'  => new sfValidatorPass(array('required' => false)),
+      'updated_by'  => new sfValidatorPass(array('required' => false)),
     ));
 
-    $this->widgetSchema->setNameFormat('photo_filters[%s]');
+    $this->widgetSchema->setNameFormat('photo_version_filters[%s]');
 
     $this->errorSchema = new sfValidatorErrorSchema($this->validatorSchema);
 
@@ -45,7 +43,7 @@ abstract class BasePhotoFormFilter extends BaseFormFilterDoctrine
 
   public function getModelName()
   {
-    return 'Photo';
+    return 'PhotoVersion';
   }
 
   public function getFields()
@@ -57,8 +55,8 @@ abstract class BasePhotoFormFilter extends BaseFormFilterDoctrine
       'toward'      => 'Text',
       'location_id' => 'Number',
       'profit_id'   => 'Number',
-      'created_by'  => 'ForeignKey',
-      'updated_by'  => 'ForeignKey',
+      'created_by'  => 'Text',
+      'updated_by'  => 'Text',
       'version'     => 'Number',
     );
   }

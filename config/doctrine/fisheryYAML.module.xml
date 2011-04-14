@@ -2,7 +2,7 @@
 <orm-designer version="1.3.1.332">
 
   <module import-format="DoctrineYml" import-path="fisheryYAML.yml" name="ht" visBkColor="16380923" visSizeX="227" visSizeX2="1327" visSizeY="51" visSizeY2="836">
-    <table name="Location" visPositionX="207" visPositionY="117" visSizeX="0" visSizeX2="154" visSizeY="0" visSizeY2="185">
+    <table name="Location" visPositionX="208" visPositionY="117" visSizeX="0" visSizeX2="154" visSizeY="0" visSizeY2="185">
       <column auto-increment="true" name="id" primary="true" size="4" type="integer"/>
       <column default="''" name="name" required="true" size="50" type="string"/>
       <column default="''" name="description" required="true" type="string"/>
@@ -134,16 +134,19 @@
       </index>
     </table>
     <table name="LocationRelief" visPositionX="168" visPositionY="-12" visSizeX="0" visSizeX2="99" visSizeY="0" visSizeY2="45">
-      <column auto-increment="true" name="id" primary="true" size="4" type="integer"/>
+      <column name="id" primary="true" size="4" type="integer"/>
       <column name="name" required="true" size="50" type="string"/>
+      <column name="weight" type="integer"/>
     </table>
-    <table name="LocationFlow" visPositionX="434" visPositionY="125" visSizeX="0" visSizeX2="99" visSizeY="0" visSizeY2="45">
-      <column auto-increment="true" name="id" primary="true" size="4" type="integer"/>
+    <table name="LocationFlow" visPositionX="433" visPositionY="123" visSizeX="0" visSizeX2="99" visSizeY="0" visSizeY2="45">
+      <column name="id" primary="true" size="4" type="integer"/>
       <column name="name" required="true" size="50" type="string"/>
+      <column name="weight" type="integer"/>
     </table>
     <table name="LocationFundus" visPositionX="281" visPositionY="-30" visSizeX="0" visSizeX2="99" visSizeY="0" visSizeY2="45">
-      <column auto-increment="true" name="id" primary="true" size="4" type="integer"/>
+      <column name="id" primary="true" size="4" type="integer"/>
       <column name="name" required="true" size="50" type="string"/>
+      <column name="weight" type="integer"/>
     </table>
     <table name="Comment" visPositionX="-32" visPositionY="660" visSizeX="0" visSizeX2="124" visSizeY="0" visSizeY2="59">
       <column auto-increment="true" name="id" primary="true" size="4" type="integer"/>
@@ -183,7 +186,7 @@
         </attribute>
       </orm-properties>
     </table>
-    <table name="CommentLocation" visPositionX="34" visPositionY="228" visSizeX="0" visSizeX2="120" visSizeY="0" visSizeY2="31">
+    <table name="CommentLocation" visPositionX="24" visPositionY="241" visSizeX="0" visSizeX2="120" visSizeY="0" visSizeY2="31">
       <column name="location_id" size="4" type="integer"/>
       <orm-properties>
         <attribute name="inheritance">
@@ -205,9 +208,10 @@
         </attribute>
       </orm-properties>
     </table>
-    <table name="LocationType" visPositionX="33" visPositionY="169" visSizeX="0" visSizeX2="99" visSizeY="0" visSizeY2="45">
+    <table name="LocationType" visPositionX="48" visPositionY="173" visSizeX="0" visSizeX2="102" visSizeY="0" visSizeY2="59">
       <column auto-increment="true" name="id" primary="true" size="4" type="integer"/>
       <column name="name" required="true" size="50" type="string" unique="true"/>
+      <column name="weight" type="integer"/>
     </table>
     <table name="WishList" visPositionX="334" visPositionY="508" visSizeX="0" visSizeX2="120" visSizeY="0" visSizeY2="60">
       <column name="profile_id" primary="true" required="true" size="4" type="integer"/>
@@ -239,7 +243,7 @@
         </attribute>
       </orm-properties>
     </table>
-    <table name="VoteProfit" visPositionX="28" visPositionY="386" visSizeX="0" visSizeX2="110" visSizeY="0" visSizeY2="31">
+    <table name="VoteProfit" visPositionX="28" visPositionY="385" visSizeX="0" visSizeX2="110" visSizeY="0" visSizeY2="31">
       <column name="profit_id" size="4" type="integer"/>
       <orm-properties>
         <attribute name="inheritance">
@@ -250,9 +254,10 @@
         </attribute>
       </orm-properties>
     </table>
-    <table name="LocationScope" visPositionX="356" visPositionY="53" visSizeX="0" visSizeX2="99" visSizeY="0" visSizeY2="45">
-      <column auto-increment="true" name="id" primary="true" size="4" type="integer"/>
+    <table name="LocationScope" visPositionX="394" visPositionY="50" visSizeX="0" visSizeX2="99" visSizeY="0" visSizeY2="59">
+      <column name="id" primary="true" size="4" type="integer"/>
       <column name="name" required="true" size="50" type="string" unique="true"/>
+      <column name="weight" type="integer"/>
     </table>
     <table name="VoteProfile" visPositionX="-80" visPositionY="517" visSizeX="0" visSizeX2="114" visSizeY="0" visSizeY2="31">
       <column name="profile_id" size="4" type="integer"/>
@@ -477,9 +482,10 @@
         </attribute>
       </orm-properties>
     </table>
-    <table name="Photo" visPositionX="-199" visPositionY="336" visSizeX="0" visSizeX2="99" visSizeY="0" visSizeY2="45">
+    <table name="Photo" visPositionX="-199" visPositionY="330" visSizeX="0" visSizeX2="104" visSizeY="0" visSizeY2="45">
       <column auto-increment="true" name="id" primary="true" size="4" type="integer"/>
-      <column name="name" required="true" size="36" type="string"/>
+      <column name="name" required="true" size="100" type="string"/>
+      <column name="thumb" required="true" size="100" type="string"/>
       <orm-properties>
         <attribute name="actAs">
           <attribute name="Blameable">
@@ -507,10 +513,11 @@
               </attribute>
             </attribute>
           </attribute>
+          <attribute name="Versionable"/>
         </attribute>
       </orm-properties>
     </table>
-    <table name="PhotoLocation" visPositionX="-34" visPositionY="284" visSizeX="0" visSizeX2="120" visSizeY="0" visSizeY2="31">
+    <table name="PhotoLocation" visPositionX="-37" visPositionY="283" visSizeX="0" visSizeX2="120" visSizeY="0" visSizeY2="31">
       <column name="location_id" size="4" type="integer"/>
       <orm-properties>
         <attribute name="inheritance">
@@ -544,6 +551,28 @@
     <table name="Road" visPositionX="922" visPositionY="353" visSizeX="0" visSizeX2="104" visSizeY="0" visSizeY2="45">
       <column auto-increment="true" name="id" primary="true" size="4" type="integer"/>
       <column name="name" size="100" type="string"/>
+    </table>
+    <table name="PhotoProfit" visPositionX="-32" visPositionY="329" visSizeX="0" visSizeX2="110" visSizeY="0" visSizeY2="31">
+      <column name="profit_id" size="4" type="integer"/>
+      <orm-properties>
+        <attribute name="inheritance">
+          <attribute name="extends">Photo</attribute>
+          <attribute name="type">column_aggregation</attribute>
+          <attribute name="keyValue">profit</attribute>
+          <attribute name="keyField">toward</attribute>
+        </attribute>
+      </orm-properties>
+    </table>
+    <table name="VotePhoto" visPositionX="-94" visPositionY="413" visSizeX="0" visSizeX2="111" visSizeY="0" visSizeY2="31">
+      <column name="photo_id" size="4" type="integer"/>
+      <orm-properties>
+        <attribute name="inheritance">
+          <attribute name="extends">Vote</attribute>
+          <attribute name="keyField">toward</attribute>
+          <attribute name="keyValue">photo</attribute>
+          <attribute name="type">column_aggregation</attribute>
+        </attribute>
+      </orm-properties>
     </table>
     <orm-properties>
       <attribute name="options">
@@ -703,6 +732,12 @@
     </foreign-key>
     <foreign-key caption="Country Region" from="Region" name="FK_Region_Country_id" to="Country" visShowCaption="0">
       <foreign-key-column from="country_id" to="id"/>
+    </foreign-key>
+    <foreign-key caption="Profit PhotoProfit" from="PhotoProfit" name="FK_PhotoProfit_Profit_id" to="Profit" visCaption1X="0" visCaption1Y="-1" visCenterX="0" visCenterY="0" visShowCaption="0">
+      <foreign-key-column from="profit_id" to="id"/>
+    </foreign-key>
+    <foreign-key caption="Photo VotePhoto" from="VotePhoto" name="FK_VotePhoto_Photo_id" to="Photo" visCaption1X="0" visCaption1Y="-1" visCenterX="0" visCenterY="0" visShowCaption="0">
+      <foreign-key-column from="photo_id" to="id"/>
     </foreign-key>
     <many-to-many-relation mn-table="WishList">
       <many-to-many-foreign-key foreign-key="FK_WishList_Profile_id" relation-alias="Wishers"/>
