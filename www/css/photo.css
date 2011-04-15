@@ -39,6 +39,7 @@
 }
 .photos .thumbs {
     list-style:none outside none;
+    border-top: 1px solid blue;
 }
 
 .photos .thumbs li {
