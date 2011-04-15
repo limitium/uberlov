@@ -10,8 +10,7 @@
     <div id="buttonPlaceholder">
         <div id="uploadButton"></div>
     </div>
-    <table id="photoList">
-    </table>
+    <table id="photoList"></table>
 
     <div class="photos"><div class="image"><img src=""/></div>
         <ul class="thumbs">

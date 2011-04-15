@@ -26,13 +26,19 @@
 .location .photo{
     float:right;
 }
-.location .photo img{
-    width: 400px;
+.photo div.photos div.image{
+    height: 350px;
+    line-height: 350px;
 }
-
+.location .photo div.photos,.location .photo div.photos div.image,.location .photo div.photos ul.thumbs,.location .photo img{
+    width: 498px;
+}
+.location .photo div.photos ul.thumbs li a img{
+    width: 83px
+}
 .location .description{
     padding: 2em 0 0 1em;
-    clear:both;
+    float: left;
 }
 
 .location .meta{

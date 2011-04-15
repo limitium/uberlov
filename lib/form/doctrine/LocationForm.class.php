@@ -29,7 +29,7 @@ class LocationForm extends BaseLocationForm {
         $this->widgetSchema['photos'] = new sfWidgetFormInputHidden();
 
         $this->validatorSchema['name'] = new sfValidatorString(array('min_length' => 3, 'max_length' => 50, 'required' => true));
-        $this->validatorSchema['description'] = new sfValidatorString(array('min_length' => 5, 'max_length' => 255, 'required' => false));
+        $this->validatorSchema['description'] = new sfValidatorString(array('min_length' => 5, 'max_length' => 4000, 'required' => false));
         $this->validatorSchema['location_type_id'] = new sfValidatorDoctrineChoice(array('model' => 'LocationType', 'required' => false));
         $this->validatorSchema['location_relief_id'] = new sfValidatorDoctrineChoice(array('model' => 'LocationRelief', 'required' => false));
         $this->validatorSchema['location_flow_id'] = new sfValidatorDoctrineChoice(array('model' => 'LocationFlow', 'required' => false));
