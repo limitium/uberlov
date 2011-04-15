@@ -19,6 +19,13 @@ locationEdit.prototype.initListeners = function(){
         });
         $('#location_photos').val($.JSON.encode(photos));
     });
+    var priceRow = $($('#location_price').parents()[1]);
+    if($('#location_is_free').attr('checked')){
+        priceRow.hide();
+    }
+    $('#location_is_free').change(function(){
+        priceRow[$('#location_is_free').attr('checked')?'fadeOut':'fadeIn']();
+    });
 }
 
 locationEdit.prototype.onStartMap = function(){
