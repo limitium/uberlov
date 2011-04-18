@@ -1,11 +1,36 @@
 # default rules
 homepage:
   url:   /
-  param: { module: default, action: underconstruction }
+  param: { module: default, action: underconstruction}  
 
-default:
-  url:   /:module/:action/*
+#main routes
+map:
+  url: /map
+  param: {module: collector, action locations, menu map}  
+profits:
+  url: /profits
+  param: {module: profit, action list, menu profits}
+talks:
+  url: /talks
+  param: {module: talk, action list, menu talks}
+events:
+  url: /events
+  param: {module: event, action list, menu events}
 
+#guard routes
+sf_guard_signin:
+  url:   /login
+  param: { module: sfGuardAuth, action: signin, menu sf_guard_signin}
+
+sf_guard_signout:
+  url:   /logout
+  param: { module: sfGuardAuth, action: signout }
+
+#apply
 user_confirm:
   url:          /user/confirm/:validate
   param:        { module: sfApply, action: confirm}
+  
+#to remove nah!
+  default:
+  url:   /:module/:action/*
