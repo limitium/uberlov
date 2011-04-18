@@ -54,24 +54,41 @@
     </head>
     <body>
         <div id="page">
-            <div id="header">
-                <div id="logo"><?php echo link_to(image_tag('/images/logo.png'), '@homepage') ?></div>
-                <div id="site_menu">
-                    <ul>
-                        <li><?php echo link_to('Карта мест', 'collector/locations') ?></li>
-                        <li><?php echo link_to('Отчёты', 'profit/list') ?></li>
-                        <li><?php echo link_to('Обсуждения', 'talk/list') ?></li>
-                        <li><?php echo link_to('События', 'event/list') ?></li>
+            <div id="header" class="content">
+                <div class="clear_fix">
+                    <div id="logo">
+                        <?php echo link_to(image_tag('/images/logo.png'), '@homepage') ?>
+                    </div>
+                    <?php if ($sf_user->isAnonymous()): ?>
+                        <div class="register_button_wrapper">
+                            <a class="register_button" href="<?php echo url_for('@apply') ?>">    
+                                <span class="border_l png_fix">
+                                    <span class="border_r png_fix">
+                                        <span class="btn_bg png_fix">
+                                            Регистрация!
+                                        </span>
+                                    </span>
+                                </span>
+                            </a>
+                        </div>
+                    <?php endif; ?>
+                </div>
+                <div id="main_menu" class="clear_fix">
+                    <ul class="clear_fix">
+                        <li class="first<?php echo 'map' == $sf_request->getParameter('menu') ? ' selected' : '' ?>"><?php echo link_to('Карта мест', '@map') ?></li>
+                        <li<?php echo 'profits' == $sf_request->getParameter('menu') ? ' class="selected"' : '' ?>><?php echo link_to('Отчёты', '@profits') ?></li>
+                        <li<?php echo 'talks' == $sf_request->getParameter('menu') ? ' class="selected"' : '' ?>><?php echo link_to('Обсуждения', '@talks') ?></li>
+                        <li<?php echo 'events' == $sf_request->getParameter('menu') ? ' class="selected"' : '' ?>><?php echo link_to('События', '@events') ?></li>
+                        <li<?php echo 'events' == $sf_request->getParameter('menu') ? ' class="selected"' : '' ?>><?php echo link_to('Люди', '@events') ?></li>
                         <?php if ($sf_user->isAnonymous()): ?>
-                            <li><?php echo link_to('Вход', '@sf_guard_signin') ?></li>
-                            <li><?php echo link_to('Регистрация', '@apply') ?></li>
+                            <li class="last<?php echo 'sf_guard_signin' == $sf_request->getParameter('menu') ? ' selected' : '' ?>"><?php echo link_to('Вход', '@sf_guard_signin') ?></li>
                         <?php else: ?>
-                            <li><?php echo link_to('Выход', '@sf_guard_signout') ?></li>
+                            <li class="last"><?php echo link_to('Выход', '@sf_guard_signout') ?></li>
                         <?php endif; ?>
                     </ul>
                 </div>
             </div>
-            <div id="middle">
+            <div id="middle" class="content clear_fix">
                 <div id="left_layout">
                     <?php include_component('user', 'menu') ?>
                     <?php include_component('event', 'last') ?>
@@ -98,8 +115,37 @@
                     <?php echo $sf_content ?>
                 </div>
             </div>
-            <div id="footer">
-                Какие-то слова в футере
+            <div class="footer">
+                <div class="content">
+                    <h2>Uberлов - мы знаем все места.</h2>
+                    <div class="footer_box_menu clear_fix">
+                        <div class="footer_menu">
+                            <h3>
+                                <?php echo link_to('Карта мест', '@map') ?>
+                            </h3>
+                        </div>
+                        <div class="footer_menu">
+                            <h3>
+                                <?php echo link_to('Отчёты', '@profits') ?>
+                            </h3>
+                        </div>
+                        <div class="footer_menu">
+                            <h3>
+                                <?php echo link_to('Обсуждения', '@talks') ?>
+                            </h3>
+                        </div>
+                        <div class="footer_menu">
+                            <h3>
+                                <?php echo link_to('События', '@events') ?>
+                            </h3>
+                        </div>
+                        <div class="footer_menu">
+                            <h3>
+                                <?php echo link_to('Люди', '@events') ?>
+                            </h3>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </body>
