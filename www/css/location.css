@@ -90,14 +90,3 @@
 #eventContainer.selected{
     display: block;
 }
-
-/* last block */
-#locationLast{
-    margin: 0.5em;
-    background-color: #E8EDFF;
-}
-#locationLast span{
-    display: block;
-    font-size: x-small;
-    text-align: right;
-}

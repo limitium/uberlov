@@ -75,15 +75,29 @@
                 </div>
                 <div id="main_menu" class="clear_fix">
                     <ul class="clear_fix">
-                        <li class="first<?php echo 'map' == $sf_request->getParameter('menu') ? ' selected' : '' ?>"><?php echo link_to('Карта мест', '@map') ?></li>
-                        <li<?php echo 'profits' == $sf_request->getParameter('menu') ? ' class="selected"' : '' ?>><?php echo link_to('Отчёты', '@profits') ?></li>
-                        <li<?php echo 'talks' == $sf_request->getParameter('menu') ? ' class="selected"' : '' ?>><?php echo link_to('Обсуждения', '@talks') ?></li>
-                        <li<?php echo 'events' == $sf_request->getParameter('menu') ? ' class="selected"' : '' ?>><?php echo link_to('События', '@events') ?></li>
-                        <li<?php echo 'events' == $sf_request->getParameter('menu') ? ' class="selected"' : '' ?>><?php echo link_to('Люди', '@events') ?></li>
+                        <li class="first<?php echo 'map' == $sf_request->getParameter('menu') ? ' selected' : '' ?>">
+                            <?php echo link_to('Карта мест', '@map') ?>
+                        </li>
+                        <li<?php echo 'profits' == $sf_request->getParameter('menu') ? ' class="selected"' : '' ?>>
+                            <?php echo link_to('Отчёты', '@profits') ?>
+                        </li>
+                        <li<?php echo 'talks' == $sf_request->getParameter('menu') ? ' class="selected"' : '' ?>>
+                            <?php echo link_to('Обсуждения', '@talks') ?>
+                        </li>
+                        <li<?php echo 'events' == $sf_request->getParameter('menu') ? ' class="selected"' : '' ?>>
+                            <?php echo link_to('События', '@events') ?>
+                        </li>
+                        <li<?php echo 'events' == $sf_request->getParameter('menu') ? ' class="selected"' : '' ?>>
+                            <?php echo link_to('Люди', '@events') ?>
+                        </li>
                         <?php if ($sf_user->isAnonymous()): ?>
-                            <li class="last<?php echo 'sf_guard_signin' == $sf_request->getParameter('menu') ? ' selected' : '' ?>"><?php echo link_to('Вход', '@sf_guard_signin') ?></li>
+                            <li class="last<?php echo 'sf_guard_signin' == $sf_request->getParameter('menu') ? ' selected' : '' ?>">
+                                <?php echo link_to('Вход', '@sf_guard_signin') ?>
+                            </li>
                         <?php else: ?>
-                            <li class="last"><?php echo link_to('Выход', '@sf_guard_signout') ?></li>
+                            <li class="last">
+                                <?php echo link_to('Выход', '@sf_guard_signout') ?>
+                            </li>
                         <?php endif; ?>
                     </ul>
                 </div>
@@ -92,8 +106,8 @@
                 <div id="left_layout">
                     <?php include_component('user', 'menu') ?>
                     <?php include_component('event', 'last') ?>
-                    <?php include_component('location', 'last') ?>
                     <?php include_component('profit', 'last') ?>
+                    <?php include_component('location', 'last') ?>
                     <?php if (has_slot('extra')): ?>
                         <?php include_slot('extra'); ?>
                     <?php endif; ?>

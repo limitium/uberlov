@@ -95,7 +95,8 @@ body{
     border: 1px solid #DFDFDF;
 }
 .content{
-    width: 1000px;
+    width: 90%;
+    min-width: 1000px;
     margin:0 auto;
 }
 

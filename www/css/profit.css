@@ -158,14 +158,3 @@ html:not([dummy]) .tableContainer thead th + th { width: 58px; }
 .profit #profit_qty{
     width: 2em;
 }
-
-/* last block */
-#profitLast{
-    margin: 0.5em;
-    background-color: #E8EDFF;
-}
-#profitLast span{
-    display: block;
-    font-size: x-small;
-    text-align: right;
-}
