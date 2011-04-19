@@ -21,10 +21,9 @@ class userComponents extends sfComponents {
             $profile = $this->getUser()->getProfile();
 
             $this->menu[] = array('url' => 'profile/show?id=' . $profile->getId(), 'title' => 'Профаил ' . $this->getUser()->getUsername());
-            $this->menu[] = array('url' => 'profile/friends', 'title' => 'Друзья (<span id="myFriendCounter">' . sizeof($profile->getFriends()) . '</span>)');
-            $this->menu[] = array('url' => 'location/my', 'title' => 'Мои места (<span id="myLocationCounter">' . sizeof($profile->getLocation()) . '</span>)');
-            $this->menu[] = array('url' => 'inbox/list', 'title' => 'Инбоксы (<span id="myInboxCounter">' . sizeof($profile->getInbox()) . '</span>)');
+            $this->menu[] = array('url' => 'profile/friends', 'title' => 'Друзья <span class="count"><span id="myFriendCounter">' . sizeof($profile->getFriends()) . '</span></span>');
+            $this->menu[] = array('url' => 'location/my', 'title' => 'Мои места <span class="count"><span id="myLocationCounter">' . sizeof($profile->getLocation()) . '</span></span>');
+            $this->menu[] = array('url' => 'inbox/list', 'title' => 'Инбоксы <span class="count"><span id="myInboxCounter">' . sizeof($profile->getInbox()) . '</span></span>');
         }
     }
-
 }
