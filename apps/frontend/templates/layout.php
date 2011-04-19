@@ -144,6 +144,17 @@
                                 <?php echo link_to('Люди', '@events') ?>
                             </h3>
                         </div>
+                        <div class="footer_menu">
+                            <h3>
+                                powered by
+                            </h3>
+                            <ul class="footer_menu_list">
+                                <li><a href="http://www.symfony-project.com/">Symfony</a></li>
+                                <li><a href="http://www.jquery.com/">jQuery</a></li>
+                                <li><a href="http://www.imageshack.us/">ImageShack</a></li>
+                                <li><a href="http://www.gravatar.com/">Gravatar</a></li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
