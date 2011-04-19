@@ -10,6 +10,10 @@
     color: #FFFFFF;
     font-size: 12px;
 }
+.footer .content h2 a img
+{
+    margin-bottom: -30px;
+}
 .footer_menu h3, .footer_menu h3 a, .footer_menu h3 a:hover {
     color: #D1D1D1;
     font-size: 11px;
