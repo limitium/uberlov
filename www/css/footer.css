@@ -39,23 +39,23 @@
     width:146px;
     padding-left:16px;
 }
-.list_footer_menu
+.footer_menu_list
 {
     padding-bottom:18px;
 }
-.footer_menu .list_footer_menu li
+.footer_menu .footer_menu_list li
 {
     font-size:11px;
     padding-bottom:2px;
 }
-.footer_menu .list_footer_menu li a,
-.footer_menu .list_footer_menu li a:hover
+.footer_menu .footer_menu_list li a,
+.footer_menu .footer_menu_list li a:hover
 {
     font-family:"Lucida Sans Unicode", "Lucida Grande", Verdana, Arial, Helvetica, sans-serif;
     color:#d1d1d1;
     text-decoration:none;
 }
-.footer_menu .list_footer_menu li a:hover
+.footer_menu .footer_menu_list li a:hover
 {
     text-decoration:underline;
 }
