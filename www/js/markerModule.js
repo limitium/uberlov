@@ -117,7 +117,7 @@ ht_location_e.prototype.moveTo = function(e){
 ht_location_e.prototype.createMarker = function(latLng){
     this.marker = this.mm.createMarker({
         position:latLng,
-        title:'new location',
+        title:'Новое место',
         draggable: true
     });
     this.addListenerClick();

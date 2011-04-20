@@ -46,8 +46,9 @@ a.delItem{
 }
 .button {
     margin-left:5px;
-    background:#0053E4 none repeat scroll 0 0;
+    background: #AACD4E none repeat scroll 0 0;
     border-color:#0071F3 #003798 #003798 #0071F3;
+    border-color:#BBDE5F #99BC3D #99BC3D #BBDE5F;
     border-style:solid;
     border-width:1px;
     color:#FFFFFF;
