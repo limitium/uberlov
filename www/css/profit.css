@@ -95,9 +95,6 @@
 .profitNew fieldset{
     border: none;
 }
-.profitNew input, textarea{
-    width: 100%;
-}
 .profitNew #profit_best_weight{
     width: 3em;
 }
