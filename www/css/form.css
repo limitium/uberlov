@@ -13,18 +13,17 @@ input,textarea {
 textarea {
     min-height: 300px;
 }
-input:hover{
-    border: 1px solid #666666;
+input:focus{
+    background-color: #FEFAE2
 }
-
+input:hover,.mceEditor table.mceLayout:hover{
+    border: 1px solid #666666 !important;
+}
 .mceEditor table.mceLayout{
     -moz-border-radius: 3px 3px 3px 3px !important;
     border: 1px solid #BBBBBB !important; 
     display:block !important;;
     height: auto !important;
-}
-.mceEditor table.mceLayout:hover{
-    border: 1px solid #666666 !important;
 }
 .mceEditor iframe{
     width: 104% !important;
