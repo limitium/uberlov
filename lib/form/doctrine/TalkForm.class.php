@@ -26,15 +26,4 @@ class TalkForm extends BaseTalkForm {
             'tags' => 'Тэги<br /><sub>Можно добавить несколько тэгов через запятую</sub>'
         ));
     }
-
-    public function getStylesheets() {
-        return array(
-            '/css/form.css' => 'screen'
-        );
-    }
-
-    public function getJavaScripts() {
-        return array('/js/lib/tinymce/tiny_mce.js', '/js/formShow.js');
-    }
-
 }

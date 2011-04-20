@@ -2,6 +2,7 @@ function formShow(){
     this.inputs = [];
     this.initListeners();
     this.moveLabels();
+    throw "depricated!!!";
 }
 formShow.name = 'formShow';
 ModuleManager.add(formShow);
