@@ -27,7 +27,7 @@
     font-family:"Lucida Sans Unicode", "Lucida Grande", Verdana, Arial, Helvetica, sans-serif;
     border-left:1px solid #b9b9b9;
     text-align: center;
-    width: 16.58%;
+    width: 16.60%;
 }
 
 #main_menu li.first
@@ -112,15 +112,15 @@
 }
 #user_menu li a span.label {
     display: block;
-    min-height: 22px;
-    padding: 20px 20px 16px 65px;
+    min-height: 14px;
+    padding: 14px 10px 16px 65px;
 }
 #user_menu li a span.icon {
     display: block;
     left: 0;
     position: absolute;
     text-align: center;
-    top: 10px;
+    top: 4px;
     width: 60px;
 }
 strong {
@@ -132,7 +132,7 @@ strong {
     padding: 0;
     position: absolute;
     right: 10px;
-    top: 18px;
+    top: 9px;
 }
 #user_menu span.count span {
     -moz-border-radius: 6px 6px 6px 6px;

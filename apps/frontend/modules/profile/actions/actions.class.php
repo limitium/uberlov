@@ -10,8 +10,14 @@
  */
 class profileActions extends sfActions {
 
+    public function executeMy(sfWebRequest $request) {
+        $request->setParameter('id', $this->getUser()->getProfile()->getId());
+        $this->forward('profile', 'show');
+    }
+
     public function executeFriends(sfWebRequest $request) {
         $this->csrf = CSRF::getToken();
+        $this->friends = $this->getUser()->getProfile()->getFriends();
     }
 
     public function executeAdd(sfWebRequest $request) {
@@ -106,9 +112,8 @@ class profileActions extends sfActions {
             // if the form isn't instance of sfApplySettingsForm, we don't accept it
             throw new InvalidArgumentException(sfContext::getInstance()->
                             getI18N()->
-                            __('The custom %action% form should be instance of %form%',
-                                    array('%action%' => 'editEmail',
-                                        '%form%' => 'sfApplyEditEmailForm'), 'sfForkedApply')
+                            __('The custom %action% form should be instance of %form%', array('%action%' => 'editEmail',
+                                '%form%' => 'sfApplyEditEmailForm'), 'sfForkedApply')
             );
         }
     }

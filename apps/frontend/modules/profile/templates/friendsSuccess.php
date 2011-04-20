@@ -3,10 +3,10 @@
 <script type="text/javascript">
     app.csrf.friend = "<?php echo $csrf; ?>";
 </script>
-
 <div id="fiendsMy">
-    <h4>Мои друзья:</h4>
-    <?php foreach ($sf_user->getProfile()->getFriends() as $friend): ?>
+    <?php if($friends->count()): ?>
+    <h2>Мои друзья:</h2>
+    <?php foreach ($firends as $friend): ?>
         <div>
             <?php echo link_to(image_tag($friend->getUserpic() ? '/images/userpic/' . $friend->getUserpic() : '/images/userpic/' . ($friend->getSex() ? 'male' : 'female') . '.png'), 'profile/show?id=' . $friend->getId(), array('class' => 'userpic')); ?>
             <div class="meta">
@@ -21,4 +21,7 @@
             </div>
         </div>
     <?php endforeach; ?>
+    <?php else: ?>
+    <h2>Тут вы еще одиноки.</h2>
+    <?php endif; ?>
 </div>
