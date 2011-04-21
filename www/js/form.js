@@ -8,6 +8,8 @@ form.prototype.afterInit = function(){
     $('textarea').tinymce({
         });
     
+//    body#tinymce:focus,div.mceIframeContainer iframe:focus
+    
     $('input').each(function(){
         var input = $(this);
         if(input.id.indexOf('_date')>-1){
