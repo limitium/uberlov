@@ -16,10 +16,10 @@ all:
       email: "spamer@uberlov.ru"
       fullname: "Важная информация с www.uberlov.ru"
       routes:
-          apply: /user/new
-          reset: /user/password-reset
-          resetRequest: /user/reset-request
-          resetCancel: /user/reset-cancel
+          apply: /register
+          reset: /password-reset
+          resetRequest: /reset-request
+          resetCancel: /reset-cancel
           validate: /user/confirm/:validate
-          settings: /user/settings
+          settings: /settings
 

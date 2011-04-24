@@ -5,14 +5,31 @@ ModuleManager.add(form);
 
 
 form.prototype.afterInit = function(){
-    $('textarea').tinymce({
-        });
+    $('#right_layout textarea').tinymce({
+        force_p_newlines : false,
+        force_br_newlines : true,
+        init_instance_callback: function(ed){
+            var s = ed.settings;
+            var realID = ed.id+'_ifr';
+            
+            tinymce.dom.Event.add(ed.getWin(), 'focus', function(e) {
+                if($(realID)) {
+                   $('#'+realID).contents().find('body').css('background-color','#FEFAE2');
+                }
+            });
+            tinymce.dom.Event.add(ed.getWin(), 'blur', function(e) {
+                if($(realID)) {
+                   $('#'+realID).contents().find('body').css('background-color','#FFF');
+                }
+            });
+
+        }
+    });
     
-//    body#tinymce:focus,div.mceIframeContainer iframe:focus
     
-    $('input').each(function(){
+    $('#right_layout input').each(function(){
         var input = $(this);
-        if(input.id.indexOf('_date')>-1){
+        if(this.id.indexOf('_date')>-1){
             input.DatePicker({
                 format:'d.m.Y',
                 date: input.val(),

@@ -1,14 +1,33 @@
+dl{
+    padding-top: 0.5em
+}
+dd{
+    padding-left: 0.5em
+}
+div.form_footer{
+    padding-top: 1em
+}
+.form_footer a{
+    margin-top: -2px;
+    display: inline-block;    
+    vertical-align: middle;
+}
+.form_footer a span{
+    padding-left: 0.5em;
+}
 input,textarea {
     -moz-border-radius: 3px 3px 3px 3px;
     -webkit-border-radius:3px 3px 3px 3px;
     border-radius:3px 3px 3px 3px;
-    background: url("../images/gravatar-vertical-sprite.png") repeat-x scroll 0 -150px transparent;
     border: 1px solid #BBBBBB;
     font-family: Helvetica,Arial,sans-serif;
     font-size: 15px;
     line-height: 1em;
     min-width: 300px;
     padding: 5px 7px;
+}
+input[type=checkbox]{
+    min-width: 0px;
 }
 textarea {
     min-height: 300px;
@@ -28,6 +47,28 @@ input:hover,.mceEditor table.mceLayout:hover{
 .mceEditor iframe{
     width: 104% !important;
 }
+
+ul.error_list {
+    margin: 0.2em 0;
+}
+ul.error_list li{
+    font-size: 15px;
+    list-style: none outside none;
+    margin: 0;
+    padding: 5px 7px;
+    background: none repeat scroll 0 0 #FFB4AE;
+    color: #801800;
+}
+ul.error_list li:first-child {
+    -moz-border-radius-topleft: 4px;
+    -moz-border-radius-topright: 4px;
+}
+ul.error_list li:last-child {
+    -moz-border-radius-bottomleft: 4px;
+    -moz-border-radius-bottomright: 4px;
+}
+
+/*upload*/
 
 .labeled {
     color: darkgray;
@@ -76,8 +117,4 @@ input:hover,.mceEditor table.mceLayout:hover{
     color: Gray;
     padding: 1px 0 0 19px;
     margin-top:-20px;    
-}
-.error_list {
-    background-color: red;
-    list-style-type: none;
 }
