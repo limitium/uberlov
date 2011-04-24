@@ -38,7 +38,7 @@
                 </dd>
             </dl>
         </fieldset>
-        <div>
+        <div class="form_footer">
             <?php echo $form->renderHiddenFields(false) ?>
             <button class="button_01" type="submit">
                 <span class="border_l">

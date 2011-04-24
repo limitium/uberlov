@@ -1,40 +1,47 @@
 <?php use_stylesheets_for_form($form) ?>
 <?php use_javascripts_for_form($form) ?>
 
+<?php if ($form->hasGlobalErrors()): ?>
+    <ul class="error_list">
+        <?php foreach ($form->getGlobalErrors() as $name => $error): ?>
+            <li><?php echo $name . ': ' . $error ?></li>
+        <?php endforeach; ?>
+    </ul>
+<?php endif; ?>
+
 <form action="<?php echo url_for('@sf_guard_signin') ?>" method="post" <?php $form->isMultipart() and print 'enctype="multipart/form-data" ' ?>>
-    <table class="form">
-        <tfoot>
-            <tr>
-                <td colspan="2">
-                    <?php echo $form->renderHiddenFields(false) ?>
-                    <input type="submit" value="Войти" />
-                </td>
-            </tr>
-        </tfoot>
-        <tbody>
-            <?php echo $form->renderGlobalErrors() ?>
-            <tr>
-                <th><?php echo $form['username']->renderLabel() ?></th>
-                <td>
-                    <?php echo $form['username']->renderError() ?>
-                    <?php echo $form['username'] ?>
-                </td>
-            </tr>
-            <tr>
-                <th><?php echo $form['password']->renderLabel() ?></th>
-                <td>
-                    <?php echo $form['password']->renderError() ?>
-                    <?php echo $form['password'] ?>
-                </td>
-            </tr>
-            <tr>
-                <th><?php echo $form['remember']->renderLabel() ?></th>
-                <td>
-                    <?php echo $form['remember']->renderError() ?>
-                    <?php echo $form['remember'] ?>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+    <fieldset>
+        <dl>
+            <dt><?php echo $form['username']->renderLabel() ?></dt>
+            <dd>
+                <?php echo $form['username']->renderError() ?>
+                <?php echo $form['username'] ?>
+            </dd>
+        </dl>
+        <dl>
+            <dt><?php echo $form['password']->renderLabel() ?></dt>
+            <dd>
+                <?php echo $form['password']->renderError() ?>
+                <?php echo $form['password'] ?>
+            </dd>
+        </dl>
+        <dl>
+            <dt><?php echo $form['remember']->renderLabel() ?></dt>
+            <dd>
+                <?php echo $form['remember']->renderError() ?>
+                <?php echo $form['remember'] ?>
+            </dd>
+        </dl>
+    </fieldset>
+    <div class="form_footer">
+        <?php echo $form->renderHiddenFields(false) ?>
+        <button class="button_01" type="submit">
+            <span class="border_l">
+                <span class="border_r">
+                    <span class="btn_bg">ВОЙТИ</span>
+                </span>
+            </span>
+        </button> или <a class="clear_fix" href="<?php echo url_for('@resetRequest') ?>"><span>Забыл?</span></a>
+    </div>
 </form>
-<a href="<?php echo url_for('@resetRequest') ?>"><?php echo 'Забыл?' ?></a>
+

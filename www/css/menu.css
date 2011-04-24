@@ -1,11 +1,6 @@
-
-#main_menu{
-    padding-bottom: 40px;
-}
-
 #main_menu
 {
-    padding:20px 0 20px 0;
+    padding: 1em 0;
 }
 
 #main_menu ul
@@ -81,7 +76,7 @@
 
 /*user menu*/
 #user_menu {
-    margin: -5px -5px 0 -5px
+    margin: -0.5em -0.5em 0 -0.5em
         /*    border-right: 1px solid #DFDFDF;*/
 }
 #user_menu li:first-child, #user_menu li:first-child a, #user_menu li:first-child a span.label {
