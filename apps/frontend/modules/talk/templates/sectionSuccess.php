@@ -12,28 +12,27 @@
 <?php use_stylesheets_for_form($form) ?>
 <?php use_javascripts_for_form($form) ?>
 
-    <form action="<?php echo url_for('talk/section') ?>" method="post" <?php $form->isMultipart() and print 'enctype="multipart/form-data" ' ?>>
-    <?php if (!$form->getObject()->isNew()): ?>
-        <input type="hidden" name="sf_method" value="put" />
-    <?php endif; ?>
-        <table>
-            <tfoot>
-                <tr>
-                    <td colspan="2">
-                    <?php echo $form->renderHiddenFields(false) ?>
-                    <input type="submit" value="Создать" />
-                </td>
-            </tr>
-        </tfoot>
-        <tbody>
-            <?php echo $form->renderGlobalErrors() ?>
-                    <tr>
-                        <th><?php echo $form['name']->renderLabel() ?></th>
-                        <td>
-                    <?php echo $form['name']->renderError() ?>
-                    <?php echo $form['name'] ?>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+<form action="<?php echo url_for('talk/section') ?>" method="post" <?php $form->isMultipart() and print 'enctype="multipart/form-data" ' ?>>
+    <fieldset>
+        <?php if (!$form->getObject()->isNew()): ?>
+            <input type="hidden" name="sf_medtod" value="put" />
+        <?php endif; ?>
+        <dl>
+            <dt><?php echo $form['name']->renderLabel() ?></dt>
+            <dd>
+                <?php echo $form['name']->renderError() ?>
+                <?php echo $form['name'] ?>
+            </dd>
+        </dl>
+    </fieldset>
+    <div class="form_footer">
+        <?php echo $form->renderHiddenFields(false) ?>
+        <button class="button_01" type="submit">
+            <span class="border_l">
+                <span class="border_r">
+                    <span class="btn_bg">ДОБАВИТЬ</span>
+                </span>
+            </span>
+        </button>
+    </div>
 </form>

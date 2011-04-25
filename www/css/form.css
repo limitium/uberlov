@@ -1,3 +1,4 @@
+/*layout*/
 dl{
     padding-top: 0.5em
 }
@@ -16,6 +17,7 @@ div.form_footer{
     padding-left: 0.5em;
 }
 
+/*nice view*/
 #right_layout input,textarea {
     -moz-border-radius: 3px 3px 3px 3px;
     -webkit-border-radius:3px 3px 3px 3px;
@@ -28,8 +30,8 @@ div.form_footer{
     padding: 5px 7px;
 }
 #right_layout textarea {
-/*    min-width: 500px;
-    min-height: 300px;*/
+    /*    min-width: 500px;
+        min-height: 300px;*/
 }
 #right_layout input[type=checkbox]{
     min-width: 0px;
@@ -50,6 +52,9 @@ div.form_footer{
     width: 104% !important;
 }
 
+
+
+/*errors*/
 ul.error_list {
     margin: 0.2em 0;
 }
@@ -70,6 +75,26 @@ ul.error_list li:last-child {
     -moz-border-radius-bottomright: 4px;
 }
 
+/*tags*/
+.tag-suggestions ul li{
+    padding: 0.3em;
+    background-color: #EFEFEF;
+    border-left: 1px solid #DDDDDD;
+    border-right: 1px solid #DDDDDD;
+}
+.tag-suggestions ul li:hover{
+    background-color: #FFFFDD
+}
+.tag-suggestions ul li:first-child{
+    border-top: 1px solid #DDDDDD;
+    -moz-border-radius-topleft: 4px;
+    -moz-border-radius-topright: 4px;
+}
+.tag-suggestions ul li:last-child {
+    border-bottom: 1px solid #DDDDDD;
+    -moz-border-radius-bottomleft: 4px;
+    -moz-border-radius-bottomright: 4px;
+}
 /*upload*/
 .labeled {
     color: darkgray;
