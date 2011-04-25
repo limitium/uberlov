@@ -51,27 +51,6 @@
     font-weight: bold;
 }
 
-/*from*/
-.location select{
-    width: 100%;
-}
-.location input[type=text]{
-    width: 100%;
-}
-
-.location table tbody tr th{
-    width: 250px;
-}
-
-.location sub{
-    color:#777;
-    font-size: 0.5em;
-}
-.location .name{
-    font-size:12px;
-    font-weight:800;
-}
-
 #commentContainer {
     display: none;
 }

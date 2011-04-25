@@ -208,7 +208,7 @@
         </attribute>
       </orm-properties>
     </table>
-    <table name="LocationType" visPositionX="48" visPositionY="173" visSizeX="0" visSizeX2="102" visSizeY="0" visSizeY2="59">
+    <table name="LocationType" visPositionX="83" visPositionY="170" visSizeX="0" visSizeX2="99" visSizeY="0" visSizeY2="59">
       <column auto-increment="true" name="id" primary="true" size="4" type="integer"/>
       <column name="name" required="true" size="50" type="string" unique="true"/>
       <column name="weight" type="integer"/>
@@ -421,7 +421,7 @@
         </attribute>
       </orm-properties>
     </table>
-    <table name="FishEvent" visPositionX="-8" visPositionY="50" visSizeX="0" visSizeX2="120" visSizeY="0" visSizeY2="101">
+    <table name="FishEvent" visPositionX="-16" visPositionY="42" visSizeX="0" visSizeX2="157" visSizeY="0" visSizeY2="129">
       <column auto-increment="true" name="id" primary="true" required="true" size="4" type="integer"/>
       <column name="date" required="true" type="date"/>
       <column name="name" required="true" size="50" type="string"/>
@@ -429,6 +429,7 @@
       <column name="rules" type="string"/>
       <column name="users" type="string"/>
       <column name="location_id" required="true" size="4" type="integer"/>
+      <column name="fish_event_type_id" size="4" type="integer"/>
       <orm-properties>
         <attribute name="actAs">
           <attribute name="Timestampable"/>
@@ -574,6 +575,11 @@
         </attribute>
       </orm-properties>
     </table>
+    <table name="FishEventType" visPositionX="-151" visPositionY="100" visSizeX="0" visSizeX2="104" visSizeY="0" visSizeY2="59">
+      <column auto-increment="true" name="id" primary="true" required="true" size="4" type="integer"/>
+      <column name="name" required="true" size="100" type="string"/>
+      <column name="weight" type="integer"/>
+    </table>
     <orm-properties>
       <attribute name="options">
         <attribute name="type">INNODB</attribute>
@@ -590,7 +596,7 @@
     <foreign-key from="Location" name="FK_Location_Location_relief" to="LocationRelief" visCenterX="-1" visCenterY="6">
       <foreign-key-column from="location_relief_id" to="id"/>
     </foreign-key>
-    <foreign-key from="Location" name="FK_Location_LocationType" to="LocationType" visCenterX="3" visCenterY="-6">
+    <foreign-key from="Location" name="FK_Location_LocationType" to="LocationType" visCenterX="0" visCenterY="-6">
       <foreign-key-column from="location_type_id" to="id"/>
     </foreign-key>
     <foreign-key caption="LocationScope Location" from="Location" name="FK_Location_LocationScope_id" to="LocationScope" visShowCaption="0">
@@ -699,6 +705,9 @@
     </foreign-key>
     <foreign-key caption="Location FishEvent" from="FishEvent" name="FK_FishEvent_Location_id" to="Location" visCaption1X="0" visCaption1Y="0" visCenterX="0" visCenterY="0" visShowCaption="0">
       <foreign-key-column from="location_id" to="id"/>
+    </foreign-key>
+    <foreign-key caption="FishEventType FishEvent" from="FishEvent" name="FK_FishEvent_FishEventType_id" to="FishEventType" visShowCaption="0">
+      <foreign-key-column from="fish_event_type_id" to="id"/>
     </foreign-key>
     <foreign-key caption="FishEvent VoteFishEvent" from="VoteFishEvent" name="FK_VoteFishEvent_FishEvent_id" to="FishEvent" visShowCaption="0">
       <foreign-key-column from="fish_event_id" to="id"/>

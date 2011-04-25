@@ -12,30 +12,36 @@
  * @property string $rules
  * @property string $users
  * @property integer $location_id
+ * @property integer $fish_event_type_id
  * @property Location $Location
+ * @property FishEventType $FishEventType
  * @property Doctrine_Collection $VoteFishEvent
  * @property Doctrine_Collection $CommentFishEvent
  * 
- * @method integer             getId()               Returns the current record's "id" value
- * @method date                getDate()             Returns the current record's "date" value
- * @method string              getName()             Returns the current record's "name" value
- * @method string              getDescription()      Returns the current record's "description" value
- * @method string              getRules()            Returns the current record's "rules" value
- * @method string              getUsers()            Returns the current record's "users" value
- * @method integer             getLocationId()       Returns the current record's "location_id" value
- * @method Location            getLocation()         Returns the current record's "Location" value
- * @method Doctrine_Collection getVoteFishEvent()    Returns the current record's "VoteFishEvent" collection
- * @method Doctrine_Collection getCommentFishEvent() Returns the current record's "CommentFishEvent" collection
- * @method FishEvent           setId()               Sets the current record's "id" value
- * @method FishEvent           setDate()             Sets the current record's "date" value
- * @method FishEvent           setName()             Sets the current record's "name" value
- * @method FishEvent           setDescription()      Sets the current record's "description" value
- * @method FishEvent           setRules()            Sets the current record's "rules" value
- * @method FishEvent           setUsers()            Sets the current record's "users" value
- * @method FishEvent           setLocationId()       Sets the current record's "location_id" value
- * @method FishEvent           setLocation()         Sets the current record's "Location" value
- * @method FishEvent           setVoteFishEvent()    Sets the current record's "VoteFishEvent" collection
- * @method FishEvent           setCommentFishEvent() Sets the current record's "CommentFishEvent" collection
+ * @method integer             getId()                 Returns the current record's "id" value
+ * @method date                getDate()               Returns the current record's "date" value
+ * @method string              getName()               Returns the current record's "name" value
+ * @method string              getDescription()        Returns the current record's "description" value
+ * @method string              getRules()              Returns the current record's "rules" value
+ * @method string              getUsers()              Returns the current record's "users" value
+ * @method integer             getLocationId()         Returns the current record's "location_id" value
+ * @method integer             getFishEventTypeId()    Returns the current record's "fish_event_type_id" value
+ * @method Location            getLocation()           Returns the current record's "Location" value
+ * @method FishEventType       getFishEventType()      Returns the current record's "FishEventType" value
+ * @method Doctrine_Collection getVoteFishEvent()      Returns the current record's "VoteFishEvent" collection
+ * @method Doctrine_Collection getCommentFishEvent()   Returns the current record's "CommentFishEvent" collection
+ * @method FishEvent           setId()                 Sets the current record's "id" value
+ * @method FishEvent           setDate()               Sets the current record's "date" value
+ * @method FishEvent           setName()               Sets the current record's "name" value
+ * @method FishEvent           setDescription()        Sets the current record's "description" value
+ * @method FishEvent           setRules()              Sets the current record's "rules" value
+ * @method FishEvent           setUsers()              Sets the current record's "users" value
+ * @method FishEvent           setLocationId()         Sets the current record's "location_id" value
+ * @method FishEvent           setFishEventTypeId()    Sets the current record's "fish_event_type_id" value
+ * @method FishEvent           setLocation()           Sets the current record's "Location" value
+ * @method FishEvent           setFishEventType()      Sets the current record's "FishEventType" value
+ * @method FishEvent           setVoteFishEvent()      Sets the current record's "VoteFishEvent" collection
+ * @method FishEvent           setCommentFishEvent()   Sets the current record's "CommentFishEvent" collection
  * 
  * @package    FISHERY
  * @subpackage model
@@ -77,6 +83,10 @@ abstract class BaseFishEvent extends sfDoctrineRecord
              'notnull' => true,
              'length' => 4,
              ));
+        $this->hasColumn('fish_event_type_id', 'integer', 4, array(
+             'type' => 'integer',
+             'length' => 4,
+             ));
 
         $this->option('type', 'INNODB');
         $this->option('charset', 'utf8');
@@ -88,6 +98,10 @@ abstract class BaseFishEvent extends sfDoctrineRecord
         parent::setUp();
         $this->hasOne('Location', array(
              'local' => 'location_id',
+             'foreign' => 'id'));
+
+        $this->hasOne('FishEventType', array(
+             'local' => 'fish_event_type_id',
              'foreign' => 'id'));
 
         $this->hasMany('VoteFishEvent', array(
