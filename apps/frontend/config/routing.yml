@@ -16,6 +16,10 @@ talks:
 events:
   url: /events
   param: {module: event, action list, menu events}
+people:
+  url: /people
+  param: {module: profile, action list, menu people}
+    
 
 #guard routes
 sf_guard_signin:

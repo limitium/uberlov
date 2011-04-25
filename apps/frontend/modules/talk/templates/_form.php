@@ -1,43 +1,51 @@
 <?php use_stylesheets_for_form($form) ?>
 <?php use_javascripts_for_form($form) ?>
 
+<?php if ($form->hasGlobalErrors()): ?>
+    <ul class="error_list">
+        <?php foreach ($form->getGlobalErrors() as $name => $error): ?>
+            <li><?php echo $name . ': ' . $error ?></li>
+        <?php endforeach; ?>
+    </ul>
+<?php endif; ?>
+
 <form action="<?php echo url_for('talk/' . ($form->getObject()->isNew() ? 'create' : 'update') . (!$form->getObject()->isNew() ? '?id=' . $form->getObject()->getId() : '')) ?>" method="post" <?php $form->isMultipart() and print 'enctype="multipart/form-data" ' ?>>
-    <?php if (!$form->getObject()->isNew()): ?>
-        <input type="hidden" name="sf_method" value="put" />
-    <?php endif; ?>
-    <table class="form">
-        <tfoot>
-            <tr>
-                <td colspan="2">
-                    <?php echo $form->renderHiddenFields(false) ?>
-                    <input type="submit" value="Обсудить!" />
-                </td>
-            </tr>
-        </tfoot>
-        <tbody>
-            <?php echo $form->renderGlobalErrors() ?>
-            <tr>
-                <th><?php echo $form['name']->renderLabel() ?></th>
-                <td>
-                    <?php echo $form['name']->renderError() ?>
-                    <?php echo $form['name'] ?>
-                </td>
-            </tr>
-            <tr>
-                <th><?php echo $form['message']->renderLabel() ?></th>
-                <td>
-                    <?php echo $form['message']->renderError() ?>
-                    <?php echo $form['message'] ?>
-                </td>
-            </tr>
-            <tr>
-                <th><?php echo $form['tags']->renderLabel() ?></th>
-                <td>
-                    <?php include_component('taggableComplete', 'tagWidget', array('object' => $form->getObject())) ?>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+    <fieldset>
+        <?php if (!$form->getObject()->isNew()): ?>
+            <input type="hidden" name="sf_medtod" value="put" />
+        <?php endif; ?>
+        <dl>
+            <dt><?php echo $form['name']->renderLabel() ?></dt>
+            <dd>
+                <?php echo $form['name']->renderError() ?>
+                <?php echo $form['name'] ?>
+            </dd>
+        </dl>
+        <dl>
+            <dt><?php echo $form['message']->renderLabel() ?></dt>
+            <dd>
+                <?php echo $form['message']->renderError() ?>
+                <?php echo $form['message'] ?>
+            </dd>
+        </dl>
+        <dl>
+            <dt><?php echo $form['tags']->renderLabel() ?></dt>
+            <dd>
+                <?php echo $form['tags']->renderError() ?>
+                <?php include_component('taggableComplete', 'tagWidget', array('object' => $form->getObject())) ?>
+            </dd>
+        </dl>
+    </fieldset>
+    <div class="form_footer">
+        <?php echo $form->renderHiddenFields(false) ?>
+        <button class="button_01" type="submit">
+            <span class="border_l">
+                <span class="border_r">
+                    <span class="btn_bg">ОБСУДИТЬ</span>
+                </span>
+            </span>
+        </button>
+    </div>
 </form>
 
 <?php use_javascript('../sfDoctrineActAsTaggablePlugin/js/pkTagahead'); ?>

@@ -9,6 +9,13 @@
  * @version    SVN: $Id: actions.class.php 23810 2009-11-12 11:07:44Z Kris.Wallsmith $
  */
 class profileActions extends sfActions {
+    public function executeList(sfWebRequest $request) {
+        $this->pager = htPagerLayout::create(Doctrine::getTable('sfGuardUser')
+                                ->createQuery('f')
+                                ->orderBy('f.created_at ASC'),
+                        'user/list?page={%page_number}',
+                        $request->getParameter('page', 1));
+    }
 
     public function executeMy(sfWebRequest $request) {
         $request->setParameter('id', $this->getUser()->getProfile()->getId());
