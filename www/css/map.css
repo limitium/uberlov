@@ -9,6 +9,13 @@
     height: 600px;
     float:left;
 }
+input, textarea, select {
+    font-size: small;
+    font-weight: bold;
+}
+
+
+/*hernya kakaya to*/
 a.dashed:visited {
     color:#0053E4;
 }
@@ -32,6 +39,9 @@ a.editItem:hover {
 a.delItem{
     background-color:#222222
 }
+
+
+/*peredelat nahui*/
 .mapIcon {
     border:0px;
     margin-bottom:-4px;

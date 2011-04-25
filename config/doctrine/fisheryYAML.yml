@@ -732,9 +732,14 @@ FishEvent:
     location_id:
       type: integer(4)
       notnull: true
+    fish_event_type_id:
+      type: integer(4)
   relations:
     Location:
       local: location_id
+      foreign: id
+    FishEventType:
+      local: fish_event_type_id
       foreign: id
 VoteFishEvent:
   inheritance:
@@ -909,6 +914,18 @@ VotePhoto:
     Photo:
       local: photo_id
       foreign: id
+FishEventType:
+  columns:
+    id:
+      primary: true
+      type: integer(4)
+      notnull: true
+      autoincrement: true
+    name:
+      type: string(100)
+      notnull: true
+    weight:
+      type: integer
 options:
   type: INNODB
   charset: utf8
