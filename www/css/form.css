@@ -15,7 +15,8 @@ div.form_footer{
 .form_footer a span{
     padding-left: 0.5em;
 }
-input,textarea {
+
+#right_layout input,textarea {
     -moz-border-radius: 3px 3px 3px 3px;
     -webkit-border-radius:3px 3px 3px 3px;
     border-radius:3px 3px 3px 3px;
@@ -26,16 +27,17 @@ input,textarea {
     min-width: 300px;
     padding: 5px 7px;
 }
-input[type=checkbox]{
+#right_layout textarea {
+/*    min-width: 500px;
+    min-height: 300px;*/
+}
+#right_layout input[type=checkbox]{
     min-width: 0px;
 }
-textarea {
-    min-height: 300px;
-}
-input:focus{
+#right_layout input:focus{
     background-color: #FEFAE2
 }
-input:hover,.mceEditor table.mceLayout:hover{
+#right_layout input:hover,.mceEditor table.mceLayout:hover{
     border: 1px solid #666666 !important;
 }
 .mceEditor table.mceLayout{
@@ -69,7 +71,6 @@ ul.error_list li:last-child {
 }
 
 /*upload*/
-
 .labeled {
     color: darkgray;
 }

@@ -79,7 +79,7 @@
                 </dd>
             </dl>
         </fieldset>
-        <?php include_partial('photo/upload') ?>
+        <?php include_partial('photo/upload', array('object' => $form->getObject())) ?>
         <div>
             <?php echo $form->renderHiddenFields(false) ?>
             <input type="submit" value="<?php echo $form->getObject()->isNew() ? 'Добавить' : 'Сохранить'; ?>" />

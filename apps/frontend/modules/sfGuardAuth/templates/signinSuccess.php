@@ -41,7 +41,7 @@
                     <span class="btn_bg">ВОЙТИ</span>
                 </span>
             </span>
-        </button> или <a class="clear_fix" href="<?php echo url_for('@resetRequest') ?>"><span>Забыл?</span></a>
+        </button> или <a href="<?php echo url_for('@resetRequest') ?>"><span>Забыл?</span></a>
     </div>
 </form>
 
