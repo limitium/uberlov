@@ -1,4 +1,12 @@
 /*map partial*/
+
+a.dashed:visited {
+    color:#0053E4;
+}
+a.dashed:link, a.dashed:active, a.dashed:visited, a.dashed:hover {
+    border-bottom:1px dashed #0053E4;
+    text-decoration:none;
+}
 .locationMap .name{
     padding-bottom: 1em;
 }

@@ -105,7 +105,7 @@ lineModule.prototype.afterInit = function(){
 }
 lineModule.prototype.initMenu = function(){
   this.menu = {
-    link: $('#new_route',this.mm.addEditItem('<a id="new_route" class="editItem" href=""><img class="mapIcon" src="/images/route.png"/>add route</a>'))
+    link: $('#new_route',this.mm.addEditItem('<a id="new_route" href=""><img src="/images/route.png"/>add route</a>'))
     .click(this.startEdit.delegate(this))
   };
 }

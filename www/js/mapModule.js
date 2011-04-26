@@ -108,13 +108,13 @@ mapModule.prototype.deselectAll = function(){
 mapModule.prototype.initMenu = function(){
     var self = this;
     var map = $('#map');
-    this.bar = $('<div class="mapOverLay"></div>').css({
+    this.bar = $('<div class="mapOverLay map_footer"></div>').css({
         opacity:0.8,
         bottom:0
     });
     map.append(this.bar);
 
-    this.mapType = $('<div class="mapOverLay"><input class="button" type="button" value="map"/><input class="button" type="button" value="roads"/></div>').css({
+    this.mapType = $('<div class="mapOverLay"><input class="map_button" type="button" value="map"/><input class="map_button" type="button" value="roads"/></div>').css({
         opacity:0.8,
         top:0,
         right:0
@@ -131,22 +131,22 @@ mapModule.prototype.initMenu = function(){
     });
     map.append(this.mapType);
 
-    this.mapList = $('<div class="mapOverLay"></div>').css({
-        width: 200,
-        height: map.height(),
-        opacity:0.6,
-        top:0,
-        right:0,
-        display:'none'
-    });
-    this.mapListHider=$('<div class="mapOverLay"><a id="list_hider" class="editItem" href="">>></a></div>').css({
-        opacity:0.6,
-        top:35,
-        right:0,
-        display:'none'
-    });
-    map.append(this.mapList);
-    map.append(this.mapListHider);
+//    this.mapList = $('<div class="mapOverLay"></div>').css({
+//        width: 200,
+//        height: map.height(),
+//        opacity:0.6,
+//        top:0,
+//        right:0,
+//        display:'none'
+//    });
+//    this.mapListHider=$('<div class="mapOverLay"><a id="list_hider" href="">>></a></div>').css({
+//        opacity:0.6,
+//        top:35,
+//        right:0,
+//        display:'none'
+//    });
+//    map.append(this.mapList);
+//    map.append(this.mapListHider);
 }
 
 mapModule.prototype.showList = function(){
@@ -204,7 +204,7 @@ mapModule.prototype.closeList = function(){
 }
 mapModule.prototype.addEditItem =  function(item){
     if(!this.edit){
-        this.edit = $('<div class="mapOverLay"></div>').css({
+        this.edit = $('<div class="mapOverLay map_header"></div>').css({
             opacity:0.8,
             top:0,
             right:110

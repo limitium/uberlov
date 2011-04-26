@@ -20,7 +20,7 @@ eventModule.prototype.afterInit = function(){
 
 eventModule.prototype.initMenu = function(){
     this.menu = {
-        link: $('#new_event',this.mm.addEditItem('<a id="new_event" class="editItem" href=""><img class="mapIcon" src="' + app.url('/images/event.png') + '"/>Добавить событие</a>'))
+        link: $('#new_event',this.mm.addEditItem('<a id="new_event" href=""><img src="' + app.url('/images/event.png') + '"/>добавить событие</a>'))
         .click(this.startEdit.delegate(this))
     };
 }
@@ -108,7 +108,7 @@ eventModule.prototype.onSaveChange = function(disabled){
 }
 
 eventModule.prototype.barCreate = function(){
-    var bar = this.mm.updateBar('<img class="mapIcon" src="' + app.url('/images/event.png') + '"/><span id="bar_msg"></span></span><input id="bar_save" class="button disabled" type="button" value="Сохранить"/><input id="bar_cancel" class="button" type="button" value="Отмена"/>');
+    var bar = this.mm.updateBar('<img class="mapIcon" src="' + app.url('/images/event.png') + '"/><span id="bar_msg"></span></span><input id="bar_save" class="map_button disabled" type="button" value="Сохранить"/><input id="bar_cancel" class="map_button" type="button" value="Отмена"/>');
     this.bar = {
         msg: $('#bar_msg',bar),
         save: $('#bar_save',bar),
