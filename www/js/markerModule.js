@@ -18,7 +18,7 @@ markerModule.prototype.afterInit = function(){
 }
 markerModule.prototype.initMenu = function(){
     this.menu = {
-        link: $('#new_location',this.mm.addEditItem('<a id="new_location" class="editItem" href=""><img class="mapIcon" src="' + app.url('/images/location.png') + '"/>Добавить место</a>'))
+        link: $('#new_location',this.mm.addEditItem('<a id="new_location" href=""><img src="' + app.url('/images/location.png') + '"/>добавить место</a>'))
         .click(this.startEdit.delegate(this))
     };
 }
@@ -51,7 +51,7 @@ markerModule.prototype.onSaveChange = function(disabled){
     this.barSaveDisabled(disabled);
 }
 markerModule.prototype.barCreate = function(){
-    var bar = this.mm.updateBar('<img class="mapIcon" src="' + app.url('/images/location.png') + '"/><span id="bar_msg"></span></span><input id="bar_save" class="button disabled" type="button" value="Сохранить"/><input id="bar_cancel" class="button" type="button" value="Отменить"/>');
+    var bar = this.mm.updateBar('<img class="mapIcon" src="' + app.url('/images/location.png') + '"/><span id="bar_msg"></span></span><input id="bar_save" class="map_button disabled" type="button" value="Сохранить"/><input id="bar_cancel" class="map_button" type="button" value="Отменить"/>');
     this.bar = {
         msg: $('#bar_msg',bar),
         save: $('#bar_save',bar),

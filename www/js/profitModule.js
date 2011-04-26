@@ -18,7 +18,7 @@ profitModule.prototype.afterInit = function(){
 
 profitModule.prototype.initMenu = function(){
     this.menu = {
-        link: $('#new_profit',this.mm.addEditItem('<a id="new_profit" class="editItem" href=""><img class="mapIcon" src="' + app.url('/images/profit.png') + '"/>Добавить отчет</a>'))
+        link: $('#new_profit',this.mm.addEditItem('<a id="new_profit" href=""><img src="' + app.url('/images/profit.png') + '"/>добавить отчет</a>'))
         .click(this.startEdit.delegate(this))
     };
 }
@@ -55,7 +55,7 @@ profitModule.prototype.onSaveChange = function(disabled){
 }
 
 profitModule.prototype.barCreate = function(){
-    var bar = this.mm.updateBar('<img class="mapIcon" src="' + app.url('/images/profit.png') + '"/><span id="bar_msg"></span></span><input id="bar_save" class="button disabled" type="button" value="Сохранить"/><input id="bar_cancel" class="button" type="button" value="Отмена"/>');
+    var bar = this.mm.updateBar('<img class="mapIcon" src="' + app.url('/images/profit.png') + '"/><span id="bar_msg"></span></span><input id="bar_save" class="map_button disabled" type="button" value="Сохранить"/><input id="bar_cancel" class="map_button" type="button" value="Отмена"/>');
     this.bar = {
         msg: $('#bar_msg',bar),
         save: $('#bar_save',bar),
