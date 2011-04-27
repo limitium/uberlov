@@ -18,6 +18,7 @@ DROP TABLE IF EXISTS `address`;
 CREATE TABLE `address` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `country_id` int(11) DEFAULT NULL,
+  `road_id` int(11) DEFAULT NULL,
   `area_low_id` int(11) DEFAULT NULL,
   `area_high_id` int(11) DEFAULT NULL,
   `locality_id` int(11) DEFAULT NULL,
@@ -26,15 +27,17 @@ CREATE TABLE `address` (
   KEY `area_low_id_idx` (`area_low_id`),
   KEY `area_high_id_idx` (`area_high_id`),
   KEY `locality_id_idx` (`locality_id`),
+  KEY `road_id_idx` (`road_id`),
   CONSTRAINT `address_area_high_id_area_high_id` FOREIGN KEY (`area_high_id`) REFERENCES `area_high` (`id`),
   CONSTRAINT `address_area_low_id_area_low_id` FOREIGN KEY (`area_low_id`) REFERENCES `area_low` (`id`),
   CONSTRAINT `address_country_id_country_id` FOREIGN KEY (`country_id`) REFERENCES `country` (`id`),
-  CONSTRAINT `address_locality_id_locality_id` FOREIGN KEY (`locality_id`) REFERENCES `locality` (`id`)
+  CONSTRAINT `address_locality_id_locality_id` FOREIGN KEY (`locality_id`) REFERENCES `locality` (`id`),
+  CONSTRAINT `address_road_id_road_id` FOREIGN KEY (`road_id`) REFERENCES `road` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 /*Data for the table `address` */
 
-insert  into `address`(`id`,`country_id`,`area_low_id`,`area_high_id`,`locality_id`) values (1,1,3,7,NULL),(2,1,5,NULL,NULL),(3,1,5,6,NULL),(4,1,3,9,7);
+insert  into `address`(`id`,`country_id`,`road_id`,`area_low_id`,`area_high_id`,`locality_id`) values (1,1,NULL,3,7,NULL),(2,1,NULL,5,NULL,NULL),(3,1,NULL,5,6,NULL),(4,1,NULL,3,9,7);
 
 /*Table structure for table `area_high` */
 
@@ -629,7 +632,10 @@ DROP TABLE IF EXISTS `road`;
 CREATE TABLE `road` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `country_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `country_id_idx` (`country_id`),
+  CONSTRAINT `road_country_id_country_id` FOREIGN KEY (`country_id`) REFERENCES `country` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `road` */

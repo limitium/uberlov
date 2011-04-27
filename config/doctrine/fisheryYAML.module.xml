@@ -273,25 +273,26 @@
     <table name="Address" visPositionX="582" visPositionY="206" visSizeX="0" visSizeX2="177" visSizeY="0" visSizeY2="101">
       <column auto-increment="true" name="id" primary="true" size="4" type="integer"/>
       <column description="Foreign key to Country" name="country_id" size="4" type="integer"/>
+      <column name="road_id" size="4" type="integer"/>
       <column description="Foreign key to AreaLow" name="area_low_id" size="4" type="integer"/>
       <column description="Foreign key to AreaHigh" name="area_high_id" size="4" type="integer"/>
       <column description="Foreign key to Locality" name="locality_id" size="4" type="integer"/>
     </table>
-    <table name="Country" visPositionX="935" visPositionY="-31" visSizeX="0" visSizeX2="83" visSizeY="0" visSizeY2="45">
+    <table name="Country" visPositionX="1066" visPositionY="43" visSizeX="0" visSizeX2="104" visSizeY="0" visSizeY2="45">
       <column auto-increment="true" name="id" primary="true" size="4" type="integer"/>
       <column name="name" required="true" size="255" type="string" unique="true"/>
     </table>
-    <table name="Locality" visPositionX="919" visPositionY="267" visSizeX="0" visSizeX2="117" visSizeY="0" visSizeY2="59">
+    <table name="Locality" visPositionX="892" visPositionY="321" visSizeX="0" visSizeX2="128" visSizeY="0" visSizeY2="59">
       <column auto-increment="true" name="id" primary="true" size="4" type="integer"/>
       <column name="name" required="true" size="255" type="string" unique="true"/>
       <column description="Foreign key to AreaHigh" name="area_high_id" size="4" type="integer"/>
     </table>
-    <table name="AreaLow" visPositionX="923" visPositionY="68" visSizeX="0" visSizeX2="109" visSizeY="0" visSizeY2="59">
+    <table name="AreaLow" visPositionX="909" visPositionY="85" visSizeX="0" visSizeX2="120" visSizeY="0" visSizeY2="59">
       <column auto-increment="true" name="id" primary="true" size="4" type="integer"/>
       <column name="name" required="true" size="255" type="string" unique="true"/>
       <column description="Foreign key to Country" name="country_id" size="4" type="integer"/>
     </table>
-    <table name="AreaHigh" visPositionX="922" visPositionY="162" visSizeX="0" visSizeX2="124" visSizeY="0" visSizeY2="59">
+    <table name="AreaHigh" visPositionX="928" visPositionY="176" visSizeX="0" visSizeX2="124" visSizeY="0" visSizeY2="59">
       <column auto-increment="true" name="id" primary="true" size="4" type="integer"/>
       <column name="name" required="true" size="255" type="string" unique="true"/>
       <column description="Foreign key to AreaLow" name="area_low_id" size="4" type="integer"/>
@@ -549,9 +550,10 @@
       <column name="name" required="true" size="100" type="string" unique="true"/>
       <column name="country_id" size="4" type="integer"/>
     </table>
-    <table name="Road" visPositionX="922" visPositionY="353" visSizeX="0" visSizeX2="104" visSizeY="0" visSizeY2="45">
+    <table name="Road" visPositionX="915" visPositionY="-41" visSizeX="0" visSizeX2="120" visSizeY="0" visSizeY2="59">
       <column auto-increment="true" name="id" primary="true" size="4" type="integer"/>
       <column name="name" size="100" type="string"/>
+      <column name="country_id" size="4" type="integer"/>
     </table>
     <table name="PhotoProfit" visPositionX="-32" visPositionY="329" visSizeX="0" visSizeX2="110" visSizeY="0" visSizeY2="31">
       <column name="profit_id" size="4" type="integer"/>
@@ -670,6 +672,9 @@
     <foreign-key from="Address" name="FK_Address_Locality" to="Locality">
       <foreign-key-column from="locality_id" to="id"/>
     </foreign-key>
+    <foreign-key caption="Road Address" from="Address" name="FK_Address_Road_id" to="Road" visShowCaption="0">
+      <foreign-key-column from="road_id" to="id"/>
+    </foreign-key>
     <foreign-key from="Locality" name="FK_Locality_AreaHigh" to="AreaHigh">
       <foreign-key-column from="area_high_id" to="id"/>
     </foreign-key>
@@ -740,6 +745,9 @@
       <foreign-key-column from="region_id" to="id"/>
     </foreign-key>
     <foreign-key caption="Country Region" from="Region" name="FK_Region_Country_id" to="Country" visShowCaption="0">
+      <foreign-key-column from="country_id" to="id"/>
+    </foreign-key>
+    <foreign-key caption="Country Road" from="Road" name="FK_Road_Country_id" to="Country" visShowCaption="0">
       <foreign-key-column from="country_id" to="id"/>
     </foreign-key>
     <foreign-key caption="Profit PhotoProfit" from="PhotoProfit" name="FK_PhotoProfit_Profit_id" to="Profit" visCaption1X="0" visCaption1Y="-1" visCenterX="0" visCenterY="0" visShowCaption="0">
