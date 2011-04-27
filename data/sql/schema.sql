@@ -1,4 +1,4 @@
-CREATE TABLE address (id INT AUTO_INCREMENT, country_id INT, area_low_id INT, area_high_id INT, locality_id INT, INDEX country_id_idx (country_id), INDEX area_low_id_idx (area_low_id), INDEX area_high_id_idx (area_high_id), INDEX locality_id_idx (locality_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci ENGINE = INNODB;
+CREATE TABLE address (id INT AUTO_INCREMENT, country_id INT, road_id INT, area_low_id INT, area_high_id INT, locality_id INT, INDEX country_id_idx (country_id), INDEX area_low_id_idx (area_low_id), INDEX area_high_id_idx (area_high_id), INDEX locality_id_idx (locality_id), INDEX road_id_idx (road_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci ENGINE = INNODB;
 CREATE TABLE area_high (id INT AUTO_INCREMENT, name VARCHAR(255) NOT NULL UNIQUE, area_low_id INT, INDEX area_low_id_idx (area_low_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci ENGINE = INNODB;
 CREATE TABLE area_low (id INT AUTO_INCREMENT, name VARCHAR(255) NOT NULL UNIQUE, country_id INT, INDEX country_id_idx (country_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci ENGINE = INNODB;
 CREATE TABLE city (id INT AUTO_INCREMENT, name VARCHAR(30) NOT NULL, region_id INT, weight INT DEFAULT 0 NOT NULL, UNIQUE INDEX uniq_city_idx (region_id, name), INDEX region_id_idx (region_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci ENGINE = INNODB;
@@ -33,7 +33,7 @@ CREATE TABLE profit (id INT AUTO_INCREMENT, name VARCHAR(50) NOT NULL, location_
 CREATE TABLE profit_detail (id BIGINT AUTO_INCREMENT, profit_id INT, style_id INT, fish_id INT, qty FLOAT(18, 2) NOT NULL, UNIQUE INDEX unique_fish_style_per_profit_idx (profit_id, style_id, fish_id), INDEX profit_id_idx (profit_id), INDEX style_id_idx (style_id), INDEX fish_id_idx (fish_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci ENGINE = INNODB;
 CREATE TABLE read_comment (profile_id INT, comment_id INT, PRIMARY KEY(profile_id, comment_id)) DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci ENGINE = INNODB;
 CREATE TABLE region (id INT AUTO_INCREMENT, name VARCHAR(100) NOT NULL UNIQUE, country_id INT, INDEX country_id_idx (country_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci ENGINE = INNODB;
-CREATE TABLE road (id INT AUTO_INCREMENT, name VARCHAR(100), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci ENGINE = INNODB;
+CREATE TABLE road (id INT AUTO_INCREMENT, name VARCHAR(100), country_id INT, INDEX country_id_idx (country_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci ENGINE = INNODB;
 CREATE TABLE style (id INT AUTO_INCREMENT, name VARCHAR(100) NOT NULL UNIQUE, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci ENGINE = INNODB;
 CREATE TABLE tag (id BIGINT AUTO_INCREMENT, name VARCHAR(100), is_triple TINYINT(1), triple_namespace VARCHAR(100), triple_key VARCHAR(100), triple_value VARCHAR(100), INDEX name_idx (name), INDEX triple1_idx (triple_namespace), INDEX triple2_idx (triple_key), INDEX triple3_idx (triple_value), PRIMARY KEY(id)) ENGINE = INNODB;
 CREATE TABLE tagging (id BIGINT AUTO_INCREMENT, tag_id BIGINT NOT NULL, taggable_model VARCHAR(30), taggable_id BIGINT, INDEX tag_idx (tag_id), INDEX taggable_idx (taggable_model, taggable_id), PRIMARY KEY(id)) ENGINE = INNODB;
@@ -57,6 +57,7 @@ CREATE TABLE sf_guard_user (id BIGINT AUTO_INCREMENT, first_name VARCHAR(255), l
 CREATE TABLE sf_guard_user_group (user_id BIGINT, group_id BIGINT, created_at DATETIME NOT NULL, updated_at DATETIME NOT NULL, PRIMARY KEY(user_id, group_id)) ENGINE = INNODB;
 CREATE TABLE sf_guard_user_permission (user_id BIGINT, permission_id BIGINT, created_at DATETIME NOT NULL, updated_at DATETIME NOT NULL, PRIMARY KEY(user_id, permission_id)) ENGINE = INNODB;
 CREATE TABLE sf_guard_user_profile (user_id BIGINT UNIQUE NOT NULL, email_new VARCHAR(255) UNIQUE, validate_at DATETIME, validate VARCHAR(33), id INT AUTO_INCREMENT, sex TINYINT(1) DEFAULT '1' NOT NULL, birth_date DATE, userpic VARCHAR(255), description TEXT, city_id INT, created_at DATETIME NOT NULL, updated_at DATETIME NOT NULL, UNIQUE INDEX user_id_unique_idx (user_id), INDEX city_id_idx (city_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci ENGINE = INNODB;
+ALTER TABLE address ADD CONSTRAINT address_road_id_road_id FOREIGN KEY (road_id) REFERENCES road(id);
 ALTER TABLE address ADD CONSTRAINT address_locality_id_locality_id FOREIGN KEY (locality_id) REFERENCES locality(id);
 ALTER TABLE address ADD CONSTRAINT address_country_id_country_id FOREIGN KEY (country_id) REFERENCES country(id);
 ALTER TABLE address ADD CONSTRAINT address_area_low_id_area_low_id FOREIGN KEY (area_low_id) REFERENCES area_low(id);
@@ -108,6 +109,7 @@ ALTER TABLE profit_detail ADD CONSTRAINT profit_detail_fish_id_fish_id FOREIGN K
 ALTER TABLE read_comment ADD CONSTRAINT read_comment_profile_id_sf_guard_user_profile_id FOREIGN KEY (profile_id) REFERENCES sf_guard_user_profile(id);
 ALTER TABLE read_comment ADD CONSTRAINT read_comment_comment_id_comment_id FOREIGN KEY (comment_id) REFERENCES comment(id);
 ALTER TABLE region ADD CONSTRAINT region_country_id_country_id FOREIGN KEY (country_id) REFERENCES country(id);
+ALTER TABLE road ADD CONSTRAINT road_country_id_country_id FOREIGN KEY (country_id) REFERENCES country(id);
 ALTER TABLE talk ADD CONSTRAINT talk_updated_by_sf_guard_user_profile_id FOREIGN KEY (updated_by) REFERENCES sf_guard_user_profile(id);
 ALTER TABLE talk ADD CONSTRAINT talk_talk_section_id_talk_section_id FOREIGN KEY (talk_section_id) REFERENCES talk_section(id);
 ALTER TABLE talk ADD CONSTRAINT talk_created_by_sf_guard_user_profile_id FOREIGN KEY (created_by) REFERENCES sf_guard_user_profile(id);

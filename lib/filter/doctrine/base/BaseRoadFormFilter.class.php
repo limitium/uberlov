@@ -13,11 +13,13 @@ abstract class BaseRoadFormFilter extends BaseFormFilterDoctrine
   public function setup()
   {
     $this->setWidgets(array(
-      'name' => new sfWidgetFormFilterInput(),
+      'name'       => new sfWidgetFormFilterInput(),
+      'country_id' => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Country'), 'add_empty' => true)),
     ));
 
     $this->setValidators(array(
-      'name' => new sfValidatorPass(array('required' => false)),
+      'name'       => new sfValidatorPass(array('required' => false)),
+      'country_id' => new sfValidatorDoctrineChoice(array('required' => false, 'model' => $this->getRelatedModelName('Country'), 'column' => 'id')),
     ));
 
     $this->widgetSchema->setNameFormat('road_filters[%s]');
@@ -37,8 +39,9 @@ abstract class BaseRoadFormFilter extends BaseFormFilterDoctrine
   public function getFields()
   {
     return array(
-      'id'   => 'Number',
-      'name' => 'Text',
+      'id'         => 'Number',
+      'name'       => 'Text',
+      'country_id' => 'ForeignKey',
     );
   }
 }

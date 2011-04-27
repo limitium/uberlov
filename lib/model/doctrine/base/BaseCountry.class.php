@@ -10,17 +10,20 @@
  * @property Doctrine_Collection $Address
  * @property Doctrine_Collection $AreaLow
  * @property Doctrine_Collection $Region
+ * @property Doctrine_Collection $Road
  * 
  * @method integer             getId()      Returns the current record's "id" value
  * @method string              getName()    Returns the current record's "name" value
  * @method Doctrine_Collection getAddress() Returns the current record's "Address" collection
  * @method Doctrine_Collection getAreaLow() Returns the current record's "AreaLow" collection
  * @method Doctrine_Collection getRegion()  Returns the current record's "Region" collection
+ * @method Doctrine_Collection getRoad()    Returns the current record's "Road" collection
  * @method Country             setId()      Sets the current record's "id" value
  * @method Country             setName()    Sets the current record's "name" value
  * @method Country             setAddress() Sets the current record's "Address" collection
  * @method Country             setAreaLow() Sets the current record's "AreaLow" collection
  * @method Country             setRegion()  Sets the current record's "Region" collection
+ * @method Country             setRoad()    Sets the current record's "Road" collection
  * 
  * @package    FISHERY
  * @subpackage model
@@ -62,6 +65,10 @@ abstract class BaseCountry extends sfDoctrineRecord
              'foreign' => 'country_id'));
 
         $this->hasMany('Region', array(
+             'local' => 'id',
+             'foreign' => 'country_id'));
+
+        $this->hasMany('Road', array(
              'local' => 'id',
              'foreign' => 'country_id'));
     }

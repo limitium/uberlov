@@ -7,11 +7,20 @@
  * 
  * @property integer $id
  * @property string $name
+ * @property integer $country_id
+ * @property Country $Country
+ * @property Doctrine_Collection $Address
  * 
- * @method integer getId()   Returns the current record's "id" value
- * @method string  getName() Returns the current record's "name" value
- * @method Road    setId()   Sets the current record's "id" value
- * @method Road    setName() Sets the current record's "name" value
+ * @method integer             getId()         Returns the current record's "id" value
+ * @method string              getName()       Returns the current record's "name" value
+ * @method integer             getCountryId()  Returns the current record's "country_id" value
+ * @method Country             getCountry()    Returns the current record's "Country" value
+ * @method Doctrine_Collection getAddress()    Returns the current record's "Address" collection
+ * @method Road                setId()         Sets the current record's "id" value
+ * @method Road                setName()       Sets the current record's "name" value
+ * @method Road                setCountryId()  Sets the current record's "country_id" value
+ * @method Road                setCountry()    Sets the current record's "Country" value
+ * @method Road                setAddress()    Sets the current record's "Address" collection
  * 
  * @package    FISHERY
  * @subpackage model
@@ -33,6 +42,10 @@ abstract class BaseRoad extends sfDoctrineRecord
              'type' => 'string',
              'length' => 100,
              ));
+        $this->hasColumn('country_id', 'integer', 4, array(
+             'type' => 'integer',
+             'length' => 4,
+             ));
 
         $this->option('type', 'INNODB');
         $this->option('charset', 'utf8');
@@ -42,6 +55,12 @@ abstract class BaseRoad extends sfDoctrineRecord
     public function setUp()
     {
         parent::setUp();
-        
+        $this->hasOne('Country', array(
+             'local' => 'country_id',
+             'foreign' => 'id'));
+
+        $this->hasMany('Address', array(
+             'local' => 'id',
+             'foreign' => 'road_id'));
     }
 }

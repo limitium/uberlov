@@ -445,6 +445,8 @@ Address:
       autoincrement: true
     country_id:
       type: integer(4)
+    road_id:
+      type: integer(4)
     area_low_id:
       type: integer(4)
     area_high_id:
@@ -463,6 +465,9 @@ Address:
       foreign: id
     Locality:
       local: locality_id
+      foreign: id
+    Road:
+      local: road_id
       foreign: id
 Country:
   columns:
@@ -888,6 +893,12 @@ Road:
       autoincrement: true
     name:
       type: string(100)
+    country_id:
+      type: integer(4)
+  relations:
+    Country:
+      local: country_id
+      foreign: id
 PhotoProfit:
   inheritance:
     extends: Photo
