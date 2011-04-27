@@ -1,6 +1,5 @@
 <?php use_stylesheets_for_form($form) ?>
 <?php use_javascripts_for_form($form) ?>
-
 <?php if ($form->hasGlobalErrors()): ?>
     <ul class="error_list">
         <?php foreach ($form->getGlobalErrors() as $name => $error): ?>
@@ -9,7 +8,7 @@
     </ul>
 <?php endif; ?>
 
-<form class ="location form" action="<?php echo url_for('location/' . ($form->getObject()->isNew() ? 'create' : 'update') . (!$form->getObject()->isNew() ? '?id=' . $form->getObject()->getId() : '')) ?>" method="post" <?php $form->isMultipart() and print 'enctype="multipart/form-data" ' ?>>
+<form class="location_form" action="<?php echo url_for('location/' . ($form->getObject()->isNew() ? 'create' : 'update') . (!$form->getObject()->isNew() ? '?id=' . $form->getObject()->getId() : '')) ?>" method="post" <?php $form->isMultipart() and print 'enctype="multipart/form-data" ' ?>>
     <fieldset>
         <dl>
             <dt><?php echo $form['name']->renderLabel() ?></dt>
@@ -45,20 +44,20 @@
                     <?php echo $form['location_fundus_id'] ?>
                 </dd>
             </dl>
-            <dl>
-                <dt><?php echo $form['location_relief_id']->renderLabel() ?></dt>
-                <dd>
-                    <?php echo $form['location_relief_id']->renderError() ?>
-                    <?php echo $form['location_relief_id'] ?>
-                </dd>
-            </dl>
     </fieldset>
-    <fieldset>
+    <fieldset class="right_inputs">
         <dl>
             <dt><?php echo $form['location_scope_id']->renderLabel() ?></dt>
             <dd>
                 <?php echo $form['location_scope_id']->renderError() ?>
                 <?php echo $form['location_scope_id'] ?>
+            </dd>
+        </dl>
+        <dl>
+            <dt><?php echo $form['location_relief_id']->renderLabel() ?></dt>
+            <dd>
+                <?php echo $form['location_relief_id']->renderError() ?>
+                <?php echo $form['location_relief_id'] ?>
             </dd>
         </dl>
         <dl>
