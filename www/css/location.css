@@ -1,3 +1,20 @@
+/*from*/
+.location_form{
+    
+}
+.location_form fieldset{
+    float: left;
+    display: block;
+}
+.location_form_wrapper{
+    width: 700px;
+    height: 390px;
+}
+.form_footer{
+    display: block;
+    clear: both;
+}
+
 /*map partial*/
 
 a.dashed:visited {
@@ -59,6 +76,7 @@ a.dashed:link, a.dashed:active, a.dashed:visited, a.dashed:hover {
     font-weight: bold;
 }
 
+/*tab panel*/
 #commentContainer {
     display: none;
 }

@@ -6,7 +6,9 @@ function mapModule(){
     this.defaultLng = 36.627886718750005;
     this.defaultMapType = 'roadmap'
     this.editor = null;
-    this.infoWindow = new gm.InfoWindow();
+    this.infoWindow = new gm.InfoWindow({
+        maxWidth:700
+    });
     this.geocoder = new gm.Geocoder();
 
     this.selected = [];
