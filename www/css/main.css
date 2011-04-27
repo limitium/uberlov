@@ -31,39 +31,58 @@ body{
     border: 1px solid #DFDFDF;
 }
 .content{
-/*    width: 90%;*/
+    /*    width: 90%;*/
     min-width: 1000px;
     margin:0 1.5em;
 }
 
 
 .tabPanel{
-    border-bottom:1px solid #0053E4;
-    margin-bottom: 0.5em;
-    clear:both;
+    height: 2.6em;
+    margin-bottom: 1.2em;
+    overflow: hidden;
+    position: relative;
 }
 .tabPanel ul{
-    list-style-type: none;
+    border-bottom: 1px solid #BBBBBB;
+    bottom: 0;
+    margin: 0;
+    padding-left: 1em;
+    position: absolute;
+    width: 2000px;
 }
 .tabPanel ul li{
-    display: inline;
+    background: none repeat scroll 0 0 #FFFFFF;
+    float: left;
+    list-style-type: none;
+    margin-bottom: -1px;
+    margin-right: 8px;
+    position: relative;
+    white-space: nowrap;
 }
 .tabPanel ul li span{
+    -moz-border-radius-topleft: 0.3em;
+    -moz-border-radius-topright: 0.3em;
+    background-color: #EEEEEE;
+    border-color: #CCCCCC #CCCCCC #BBBBBB;
+    border-style: solid;
+    border-width: 1px;
+    display: block;
+    font-size: 0.9em;
+    line-height: 1.3em;
+    padding: 4px 6px;
     text-decoration: none;
-    padding: 0 1em;
-    border-top:1px solid #0053E4;
-    border-left:1px solid #0053E4;
-    border-right:1px solid #0053E4;
+    color: #333333;
+    font-weight: normal;
 }
 
 .tabPanel ul li span:hover{
-    color: #fff;
     cursor: pointer;
-    background-color: #369;
+    background-color: #ffffdd;
 }
 .tabPanel ul li span.selected{
-    border-bottom:1px solid white;
-}
-.tabPanel ul li a:link, a:active, a:visited, a:hover {
-    text-decoration:none;
+    background-color: #FFFFFF;
+    border-color: #BBBBBB #BBBBBB #FFFFFF;
+    border-style: solid;
+    border-width: 1px;
 }
