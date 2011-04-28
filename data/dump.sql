@@ -1,5 +1,5 @@
 /*
-SQLyog Enterprise - MySQL GUI v7.02 
+SQLyog Enterprise - MySQL GUI v8.12 
 MySQL - 5.1.40-community : Database - FISHERY
 *********************************************************************
 */
@@ -10,6 +10,10 @@ MySQL - 5.1.40-community : Database - FISHERY
 
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+
+CREATE DATABASE /*!32312 IF NOT EXISTS*/`FISHERY` /*!40100 DEFAULT CHARACTER SET utf8 */;
+
+USE `FISHERY`;
 
 /*Table structure for table `address` */
 
