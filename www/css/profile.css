@@ -1,6 +1,7 @@
 .userpic{
     position: relative;
     display: inline-block;
+    margin-right: 6px;
 }
 .userpic b.s32{
     background: url("/images/common/backgrounds/bg_avatar_mask_32.gif") no-repeat scroll 0 0 transparent;
