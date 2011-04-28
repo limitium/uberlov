@@ -24,6 +24,8 @@ class Address extends BaseAddress {
             $uPartName = ucfirst($partName);
             $this->$uPartName = $part ? $part : null;
         }
+        
+        $this->Route = $this->getAddressPart($addressData, 'route', $this->Country);
     }
 
     private function getAddressPart($addressData, $partName, $parent) {
