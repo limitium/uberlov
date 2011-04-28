@@ -7,7 +7,7 @@
                     <?php echo link_to($location->getName(), 'location/show?id=' . $location->getId()); ?>
                 </h5>
                 <span>
-                    <?php include_partial('profile/addBy', array('added' => $location)); ?>
+                    <?php include_partial('profile/addBy', array('added' => $location,'size'=>24)); ?>
                 </span>
             </li>
         <?php endforeach; ?>

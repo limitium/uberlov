@@ -201,6 +201,7 @@ Profit:
       type: float
   relations:
     Location:
+      onDelete: CASCADE
       local: location_id
       foreign: id
     Fish:
@@ -234,6 +235,7 @@ ProfitDetail:
       type: unique
   relations:
     Profit:
+      onDelete: CASCADE
       local: profit_id
       foreign: id
     Style:
@@ -316,6 +318,7 @@ CommentLocation:
       type: integer(4)
   relations:
     Location:
+      onDelete: CASCADE
       local: location_id
       foreign: id
 CommentProfit:
@@ -329,6 +332,7 @@ CommentProfit:
       type: integer(4)
   relations:
     Profit:
+      onDelete: CASCADE
       local: profit_id
       foreign: id
 LocationType:
@@ -358,6 +362,7 @@ WishList:
       local: profile_id
       foreign: id
     Location:
+      onDelete: CASCADE
       local: location_id
       foreign: id
 Vote:
@@ -384,6 +389,7 @@ VoteLocation:
       type: integer(4)
   relations:
     Location:
+      onDelete: CASCADE
       local: location_id
       foreign: id
 VoteComment:
@@ -397,6 +403,7 @@ VoteComment:
       type: integer(4)
   relations:
     Comment:
+      onDelete: CASCADE
       local: comment_id
       foreign: id
 VoteProfit:
@@ -410,6 +417,7 @@ VoteProfit:
       type: integer(4)
   relations:
     Profit:
+      onDelete: CASCADE
       local: profit_id
       foreign: id
 LocationScope:
@@ -445,13 +453,13 @@ Address:
       autoincrement: true
     country_id:
       type: integer(4)
-    road_id:
-      type: integer(4)
     area_low_id:
       type: integer(4)
     area_high_id:
       type: integer(4)
     locality_id:
+      type: integer(4)
+    route_id:
       type: integer(4)
   relations:
     Country:
@@ -466,8 +474,8 @@ Address:
     Locality:
       local: locality_id
       foreign: id
-    Road:
-      local: road_id
+    Route:
+      local: route_id
       foreign: id
 Country:
   columns:
@@ -578,6 +586,7 @@ Inboxed:
       notnull: true
   relations:
     Inbox:
+      onDelete: CASCADE
       local: inbox_id
       foreign: id
     sfGuardUserProfile:
@@ -594,6 +603,7 @@ CommentInbox:
       type: integer(4)
   relations:
     Inbox:
+      onDelete: CASCADE
       local: inbox_id
       foreign: id
 Talk:
@@ -662,6 +672,7 @@ CommentTalk:
       type: integer(4)
   relations:
     Talk:
+      onDelete: CASCADE
       local: talk_id
       foreign: id
 ReadComment:
@@ -692,6 +703,7 @@ VoteTalk:
       type: integer(4)
   relations:
     Talk:
+      onDelete: CASCADE
       local: talk_id
       foreign: id
 FishEvent:
@@ -741,6 +753,7 @@ FishEvent:
       type: integer(4)
   relations:
     Location:
+      onDelete: CASCADE
       local: location_id
       foreign: id
     FishEventType:
@@ -757,6 +770,7 @@ VoteFishEvent:
       type: integer(4)
   relations:
     FishEvent:
+      onDelete: CASCADE
       local: fish_event_id
       foreign: id
 CommentFishEvent:
@@ -770,6 +784,7 @@ CommentFishEvent:
       type: integer(4)
   relations:
     FishEvent:
+      onDelete: CASCADE
       local: fish_event_id
       foreign: id
 Photo:
@@ -815,6 +830,7 @@ PhotoLocation:
       type: integer(4)
   relations:
     Location:
+      onDelete: CASCADE
       local: location_id
       foreign: id
 Friend:
@@ -885,20 +901,6 @@ Region:
     Country:
       local: country_id
       foreign: id
-Road:
-  columns:
-    id:
-      primary: true
-      type: integer(4)
-      autoincrement: true
-    name:
-      type: string(100)
-    country_id:
-      type: integer(4)
-  relations:
-    Country:
-      local: country_id
-      foreign: id
 PhotoProfit:
   inheritance:
     extends: Photo
@@ -910,6 +912,7 @@ PhotoProfit:
       type: integer(4)
   relations:
     Profit:
+      onDelete: CASCADE
       local: profit_id
       foreign: id
 VotePhoto:
@@ -937,6 +940,21 @@ FishEventType:
       notnull: true
     weight:
       type: integer
+Route:
+  columns:
+    id:
+      primary: true
+      type: integer(4)
+      notnull: true
+      autoincrement: true
+    name:
+      type: string(100)
+    country_id:
+      type: integer(4)
+  relations:
+    Country:
+      local: country_id
+      foreign: id
 options:
   type: INNODB
   charset: utf8

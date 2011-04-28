@@ -104,7 +104,8 @@ abstract class BaseProfit extends sfDoctrineRecord
         parent::setUp();
         $this->hasOne('Location', array(
              'local' => 'location_id',
-             'foreign' => 'id'));
+             'foreign' => 'id',
+             'onDelete' => 'CASCADE'));
 
         $this->hasOne('Fish', array(
              'local' => 'fish_id',

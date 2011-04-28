@@ -22,6 +22,7 @@ abstract class BaseCommentInbox extends Comment
         parent::setUp();
         $this->hasOne('Inbox', array(
              'local' => 'inbox_id',
-             'foreign' => 'id'));
+             'foreign' => 'id',
+             'onDelete' => 'CASCADE'));
     }
 }

@@ -75,7 +75,8 @@ abstract class BaseProfitDetail extends sfDoctrineRecord
         parent::setUp();
         $this->hasOne('Profit', array(
              'local' => 'profit_id',
-             'foreign' => 'id'));
+             'foreign' => 'id',
+             'onDelete' => 'CASCADE'));
 
         $this->hasOne('Style', array(
              'local' => 'style_id',

@@ -22,6 +22,7 @@ abstract class BaseVoteComment extends Vote
         parent::setUp();
         $this->hasOne('Comment', array(
              'local' => 'comment_id',
-             'foreign' => 'id'));
+             'foreign' => 'id',
+             'onDelete' => 'CASCADE'));
     }
 }

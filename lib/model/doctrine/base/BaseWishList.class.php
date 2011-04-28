@@ -54,6 +54,7 @@ abstract class BaseWishList extends sfDoctrineRecord
 
         $this->hasOne('Location', array(
              'local' => 'location_id',
-             'foreign' => 'id'));
+             'foreign' => 'id',
+             'onDelete' => 'CASCADE'));
     }
 }

@@ -22,6 +22,7 @@ abstract class BasePhotoLocation extends Photo
         parent::setUp();
         $this->hasOne('Location', array(
              'local' => 'location_id',
-             'foreign' => 'id'));
+             'foreign' => 'id',
+             'onDelete' => 'CASCADE'));
     }
 }
