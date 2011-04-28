@@ -22,6 +22,7 @@ abstract class BaseVoteFishEvent extends Vote
         parent::setUp();
         $this->hasOne('FishEvent', array(
              'local' => 'fish_event_id',
-             'foreign' => 'id'));
+             'foreign' => 'id',
+             'onDelete' => 'CASCADE'));
     }
 }

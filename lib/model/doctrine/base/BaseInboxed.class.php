@@ -50,7 +50,8 @@ abstract class BaseInboxed extends sfDoctrineRecord
         parent::setUp();
         $this->hasOne('Inbox', array(
              'local' => 'inbox_id',
-             'foreign' => 'id'));
+             'foreign' => 'id',
+             'onDelete' => 'CASCADE'));
 
         $this->hasOne('sfGuardUserProfile', array(
              'local' => 'profile_id',

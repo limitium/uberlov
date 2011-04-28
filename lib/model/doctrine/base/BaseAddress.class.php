@@ -11,11 +11,12 @@
  * @property integer $area_low_id
  * @property integer $area_high_id
  * @property integer $locality_id
+ * @property integer $route_id
  * @property Country $Country
  * @property AreaLow $AreaLow
  * @property AreaHigh $AreaHigh
  * @property Locality $Locality
- * @property Road $Road
+ * @property Route $Route
  * @property Doctrine_Collection $Location
  * 
  * @method integer             getId()           Returns the current record's "id" value
@@ -24,11 +25,12 @@
  * @method integer             getAreaLowId()    Returns the current record's "area_low_id" value
  * @method integer             getAreaHighId()   Returns the current record's "area_high_id" value
  * @method integer             getLocalityId()   Returns the current record's "locality_id" value
+ * @method integer             getRouteId()      Returns the current record's "route_id" value
  * @method Country             getCountry()      Returns the current record's "Country" value
  * @method AreaLow             getAreaLow()      Returns the current record's "AreaLow" value
  * @method AreaHigh            getAreaHigh()     Returns the current record's "AreaHigh" value
  * @method Locality            getLocality()     Returns the current record's "Locality" value
- * @method Road                getRoad()         Returns the current record's "Road" value
+ * @method Route               getRoute()        Returns the current record's "Route" value
  * @method Doctrine_Collection getLocation()     Returns the current record's "Location" collection
  * @method Address             setId()           Sets the current record's "id" value
  * @method Address             setCountryId()    Sets the current record's "country_id" value
@@ -36,11 +38,12 @@
  * @method Address             setAreaLowId()    Sets the current record's "area_low_id" value
  * @method Address             setAreaHighId()   Sets the current record's "area_high_id" value
  * @method Address             setLocalityId()   Sets the current record's "locality_id" value
+ * @method Address             setRouteId()      Sets the current record's "route_id" value
  * @method Address             setCountry()      Sets the current record's "Country" value
  * @method Address             setAreaLow()      Sets the current record's "AreaLow" value
  * @method Address             setAreaHigh()     Sets the current record's "AreaHigh" value
  * @method Address             setLocality()     Sets the current record's "Locality" value
- * @method Address             setRoad()         Sets the current record's "Road" value
+ * @method Address             setRoute()        Sets the current record's "Route" value
  * @method Address             setLocation()     Sets the current record's "Location" collection
  * 
  * @package    FISHERY
@@ -79,6 +82,10 @@ abstract class BaseAddress extends sfDoctrineRecord
              'type' => 'integer',
              'length' => 4,
              ));
+        $this->hasColumn('route_id', 'integer', 4, array(
+             'type' => 'integer',
+             'length' => 4,
+             ));
 
         $this->option('type', 'INNODB');
         $this->option('charset', 'utf8');
@@ -104,8 +111,8 @@ abstract class BaseAddress extends sfDoctrineRecord
              'local' => 'locality_id',
              'foreign' => 'id'));
 
-        $this->hasOne('Road', array(
-             'local' => 'road_id',
+        $this->hasOne('Route', array(
+             'local' => 'route_id',
              'foreign' => 'id'));
 
         $this->hasMany('Location', array(

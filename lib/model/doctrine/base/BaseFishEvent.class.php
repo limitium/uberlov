@@ -98,7 +98,8 @@ abstract class BaseFishEvent extends sfDoctrineRecord
         parent::setUp();
         $this->hasOne('Location', array(
              'local' => 'location_id',
-             'foreign' => 'id'));
+             'foreign' => 'id',
+             'onDelete' => 'CASCADE'));
 
         $this->hasOne('FishEventType', array(
              'local' => 'fish_event_type_id',

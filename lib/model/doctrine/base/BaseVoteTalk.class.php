@@ -22,6 +22,7 @@ abstract class BaseVoteTalk extends Vote
         parent::setUp();
         $this->hasOne('Talk', array(
              'local' => 'talk_id',
-             'foreign' => 'id'));
+             'foreign' => 'id',
+             'onDelete' => 'CASCADE'));
     }
 }

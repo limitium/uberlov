@@ -217,7 +217,7 @@
       <column name="profile_id" primary="true" required="true" size="4" type="integer"/>
       <column name="location_id" primary="true" required="true" size="4" type="integer"/>
     </table>
-    <table name="Vote" visPositionX="475" visPositionY="754" visSizeX="0" visSizeX2="158" visSizeY="0" visSizeY2="73">
+    <table name="Vote" visPositionX="356" visPositionY="731" visSizeX="0" visSizeX2="99" visSizeY="0" visSizeY2="45">
       <column name="value" required="true" size="4" type="integer"/>
       <column description="Foreign key to Profile" name="voter" size="4" type="integer"/>
     </table>
@@ -270,13 +270,13 @@
         </attribute>
       </orm-properties>
     </table>
-    <table name="Address" visPositionX="582" visPositionY="206" visSizeX="0" visSizeX2="177" visSizeY="0" visSizeY2="101">
+    <table name="Address" visPositionX="582" visPositionY="207" visSizeX="0" visSizeX2="128" visSizeY="0" visSizeY2="115">
       <column auto-increment="true" name="id" primary="true" size="4" type="integer"/>
       <column description="Foreign key to Country" name="country_id" size="4" type="integer"/>
-      <column name="road_id" size="4" type="integer"/>
       <column description="Foreign key to AreaLow" name="area_low_id" size="4" type="integer"/>
       <column description="Foreign key to AreaHigh" name="area_high_id" size="4" type="integer"/>
       <column description="Foreign key to Locality" name="locality_id" size="4" type="integer"/>
+      <column name="route_id" size="4" type="integer"/>
     </table>
     <table name="Country" visPositionX="1066" visPositionY="43" visSizeX="0" visSizeX2="104" visSizeY="0" visSizeY2="45">
       <column auto-increment="true" name="id" primary="true" size="4" type="integer"/>
@@ -484,7 +484,7 @@
         </attribute>
       </orm-properties>
     </table>
-    <table name="Photo" visPositionX="-199" visPositionY="330" visSizeX="0" visSizeX2="104" visSizeY="0" visSizeY2="45">
+    <table name="Photo" visPositionX="-212" visPositionY="306" visSizeX="0" visSizeX2="107" visSizeY="0" visSizeY2="59">
       <column auto-increment="true" name="id" primary="true" size="4" type="integer"/>
       <column name="name" required="true" size="100" type="string"/>
       <column name="thumb" required="true" size="100" type="string"/>
@@ -550,11 +550,6 @@
       <column name="name" required="true" size="100" type="string" unique="true"/>
       <column name="country_id" size="4" type="integer"/>
     </table>
-    <table name="Road" visPositionX="915" visPositionY="-41" visSizeX="0" visSizeX2="120" visSizeY="0" visSizeY2="59">
-      <column auto-increment="true" name="id" primary="true" size="4" type="integer"/>
-      <column name="name" size="100" type="string"/>
-      <column name="country_id" size="4" type="integer"/>
-    </table>
     <table name="PhotoProfit" visPositionX="-32" visPositionY="329" visSizeX="0" visSizeX2="110" visSizeY="0" visSizeY2="31">
       <column name="profit_id" size="4" type="integer"/>
       <orm-properties>
@@ -581,6 +576,11 @@
       <column auto-increment="true" name="id" primary="true" required="true" size="4" type="integer"/>
       <column name="name" required="true" size="100" type="string"/>
       <column name="weight" type="integer"/>
+    </table>
+    <table name="Route" visPositionX="874" visPositionY="-12" visSizeX="0" visSizeX2="120" visSizeY="0" visSizeY2="59">
+      <column auto-increment="true" name="id" primary="true" required="true" size="4" type="integer"/>
+      <column name="name" size="100" type="string"/>
+      <column name="country_id" size="4" type="integer"/>
     </table>
     <orm-properties>
       <attribute name="options">
@@ -610,14 +610,21 @@
     <foreign-key caption="City sfGuardUserProfile" from="sfGuardUserProfile" name="FK_sfGuardUserProfile_City_id" to="City" visShowCaption="0">
       <foreign-key-column from="city_id" to="id"/>
     </foreign-key>
-    <foreign-key from="Profit" name="FK_Profit_Location_id" to="Location" visCenterX="0" visCenterY="0">
+    <foreign-key from="Profit" name="FK_Profit_Location_id" to="Location" visCenterX="0" visCenterY="-1">
       <foreign-key-column from="location_id" to="id"/>
+      <orm-properties>
+        <attribute name="cascade"></attribute>
+        <attribute name="onDelete">CASCADE</attribute>
+      </orm-properties>
     </foreign-key>
     <foreign-key from="Profit" name="FK_Profit_Fish" to="Fish">
       <foreign-key-column from="fish_id" to="id"/>
     </foreign-key>
     <foreign-key caption="Profit ProfitDetail" from="ProfitDetail" name="FK_ProfitDetail_Profit_id" to="Profit" visCenterX="-3" visCenterY="0" visShowCaption="0">
       <foreign-key-column from="profit_id" to="id"/>
+      <orm-properties>
+        <attribute name="onDelete">CASCADE</attribute>
+      </orm-properties>
     </foreign-key>
     <foreign-key caption="Style ProfitDetail" from="ProfitDetail" name="FK_ProfitDetail_Style_id" to="Style" visCenterX="0" visCenterY="0" visShowCaption="0">
       <foreign-key-column from="style_id" to="id"/>
@@ -627,15 +634,24 @@
     </foreign-key>
     <foreign-key caption="Location CommentLocation" from="CommentLocation" name="FK_CommentLocation_Location_id" to="Location" visCenterX="0" visCenterY="17" visShowCaption="0">
       <foreign-key-column from="location_id" to="id"/>
+      <orm-properties>
+        <attribute name="onDelete">CASCADE</attribute>
+      </orm-properties>
     </foreign-key>
     <foreign-key caption="Profit CommentProfit" from="CommentProfit" name="FK_CommentProfit_Profit_id" to="Profit" visCaption1X="0" visCaption1Y="0" visCenterX="0" visCenterY="0" visShowCaption="0">
       <foreign-key-column from="profit_id" to="id"/>
+      <orm-properties>
+        <attribute name="onDelete">CASCADE</attribute>
+      </orm-properties>
     </foreign-key>
     <foreign-key caption="Profile WishList" from="WishList" name="FK_WishList_Profile_id" to="sfGuardUserProfile" visCenterX="0" visCenterY="0" visShowCaption="0">
       <foreign-key-column from="profile_id" to="id"/>
     </foreign-key>
     <foreign-key caption="Location WishList" from="WishList" name="FK_WishList_Location_id" to="Location" visCenterX="0" visCenterY="3" visShowCaption="0">
       <foreign-key-column from="location_id" to="id"/>
+      <orm-properties>
+        <attribute name="onDelete">CASCADE</attribute>
+      </orm-properties>
     </foreign-key>
     <foreign-key from="Vote" name="FK_Vote_Profile" to="sfGuardUserProfile">
       <foreign-key-column from="voter" to="id"/>
@@ -646,12 +662,21 @@
     </foreign-key>
     <foreign-key caption="Location VoteLocation" from="VoteLocation" name="FK_VoteLocation_Location_id" to="Location" visShowCaption="0">
       <foreign-key-column from="location_id" to="id"/>
+      <orm-properties>
+        <attribute name="onDelete">CASCADE</attribute>
+      </orm-properties>
     </foreign-key>
     <foreign-key caption="Comment VoteComment" from="VoteComment" name="FK_VoteComment_Comment_id" to="Comment" visShowCaption="0">
       <foreign-key-column from="comment_id" to="id"/>
+      <orm-properties>
+        <attribute name="onDelete">CASCADE</attribute>
+      </orm-properties>
     </foreign-key>
     <foreign-key caption="Profit VoteProfit" from="VoteProfit" name="FK_VoteProfit_Profit_id" to="Profit" visShowCaption="0">
       <foreign-key-column from="profit_id" to="id"/>
+      <orm-properties>
+        <attribute name="onDelete">CASCADE</attribute>
+      </orm-properties>
     </foreign-key>
     <foreign-key caption="Profile VoteProfile" from="VoteProfile" name="FK_VoteProfile_Profile_id" to="sfGuardUserProfile" visShowCaption="0">
       <foreign-key-column from="profile_id" to="id"/>
@@ -672,8 +697,8 @@
     <foreign-key from="Address" name="FK_Address_Locality" to="Locality">
       <foreign-key-column from="locality_id" to="id"/>
     </foreign-key>
-    <foreign-key caption="Road Address" from="Address" name="FK_Address_Road_id" to="Road" visShowCaption="0">
-      <foreign-key-column from="road_id" to="id"/>
+    <foreign-key caption="Route Address" from="Address" name="FK_Address_Route_id" to="Route" visShowCaption="0">
+      <foreign-key-column from="route_id" to="id"/>
     </foreign-key>
     <foreign-key from="Locality" name="FK_Locality_AreaHigh" to="AreaHigh">
       <foreign-key-column from="area_high_id" to="id"/>
@@ -686,18 +711,27 @@
     </foreign-key>
     <foreign-key caption="Inbox Inboxed" from="Inboxed" name="FK_Inboxed_Inbox_id" to="Inbox" visShowCaption="0">
       <foreign-key-column from="inbox_id" to="id"/>
+      <orm-properties>
+        <attribute name="onDelete">CASCADE</attribute>
+      </orm-properties>
     </foreign-key>
     <foreign-key caption="Profile Inboxed" from="Inboxed" name="FK_Inboxed_Profile_id" to="sfGuardUserProfile" visShowCaption="0">
       <foreign-key-column from="profile_id" to="id"/>
     </foreign-key>
     <foreign-key from="CommentInbox" name="FK_CommentInbox_Inbox" to="Inbox">
       <foreign-key-column from="inbox_id" to="id"/>
+      <orm-properties>
+        <attribute name="onDelete">CASCADE</attribute>
+      </orm-properties>
     </foreign-key>
     <foreign-key from="Talk" name="FK_Talk_TalkSection" to="TalkSection">
       <foreign-key-column from="talk_section_id" to="id"/>
     </foreign-key>
     <foreign-key from="CommentTalk" name="FK_CommentTalk_Talk" to="Talk">
       <foreign-key-column from="talk_id" to="id"/>
+      <orm-properties>
+        <attribute name="onDelete">CASCADE</attribute>
+      </orm-properties>
     </foreign-key>
     <foreign-key caption="Profile Read" from="ReadComment" name="FK_Read_Profile_id" to="sfGuardUserProfile" visCaption1X="0" visCaption1Y="-2" visCenterX="0" visCenterY="0" visShowCaption="0">
       <foreign-key-column from="profile_id" to="id"/>
@@ -707,21 +741,36 @@
     </foreign-key>
     <foreign-key caption="Talk VoteTalk" from="VoteTalk" name="FK_VoteTalk_Talk_id" to="Talk" visShowCaption="0">
       <foreign-key-column from="talk_id" to="id"/>
+      <orm-properties>
+        <attribute name="onDelete">CASCADE</attribute>
+      </orm-properties>
     </foreign-key>
     <foreign-key caption="Location FishEvent" from="FishEvent" name="FK_FishEvent_Location_id" to="Location" visCaption1X="0" visCaption1Y="0" visCenterX="0" visCenterY="0" visShowCaption="0">
       <foreign-key-column from="location_id" to="id"/>
+      <orm-properties>
+        <attribute name="onDelete">CASCADE</attribute>
+      </orm-properties>
     </foreign-key>
     <foreign-key caption="FishEventType FishEvent" from="FishEvent" name="FK_FishEvent_FishEventType_id" to="FishEventType" visShowCaption="0">
       <foreign-key-column from="fish_event_type_id" to="id"/>
     </foreign-key>
-    <foreign-key caption="FishEvent VoteFishEvent" from="VoteFishEvent" name="FK_VoteFishEvent_FishEvent_id" to="FishEvent" visShowCaption="0">
+    <foreign-key caption="FishEvent VoteFishEvent" from="VoteFishEvent" name="FK_VoteFishEvent_FishEvent_id" to="FishEvent" visCenterX="0" visCenterY="1" visShowCaption="0">
       <foreign-key-column from="fish_event_id" to="id"/>
+      <orm-properties>
+        <attribute name="onDelete">CASCADE</attribute>
+      </orm-properties>
     </foreign-key>
-    <foreign-key caption="FishEvent CommentFishEvent" from="CommentFishEvent" name="FK_CommentFishEvent_FishEvent_id" to="FishEvent" visShowCaption="0">
+    <foreign-key caption="FishEvent CommentFishEvent" from="CommentFishEvent" name="FK_CommentFishEvent_FishEvent_id" to="FishEvent" visCenterX="0" visCenterY="-1" visShowCaption="0">
       <foreign-key-column from="fish_event_id" to="id"/>
+      <orm-properties>
+        <attribute name="onDelete">CASCADE</attribute>
+      </orm-properties>
     </foreign-key>
-    <foreign-key caption="Location PhotoLocation" from="PhotoLocation" name="FK_PhotoLocation_Location_id" to="Location" visShowCaption="0">
+    <foreign-key caption="Location PhotoLocation" from="PhotoLocation" name="FK_PhotoLocation_Location_id" to="Location" visCenterX="-1" visCenterY="0" visShowCaption="0">
       <foreign-key-column from="location_id" to="id"/>
+      <orm-properties>
+        <attribute name="onDelete">CASCADE</attribute>
+      </orm-properties>
     </foreign-key>
     <foreign-key caption="sfGuardUserProfile Friend" from="Friend" name="FK_Friend_sfGuardUserProfile_id" to="sfGuardUserProfile" visCaption1X="-2" visCaption1Y="0" visCenterX="0" visCenterY="0" visShowCaption="0">
       <foreign-key-column from="requester_id" to="id"/>
@@ -747,14 +796,17 @@
     <foreign-key caption="Country Region" from="Region" name="FK_Region_Country_id" to="Country" visShowCaption="0">
       <foreign-key-column from="country_id" to="id"/>
     </foreign-key>
-    <foreign-key caption="Country Road" from="Road" name="FK_Road_Country_id" to="Country" visShowCaption="0">
-      <foreign-key-column from="country_id" to="id"/>
-    </foreign-key>
     <foreign-key caption="Profit PhotoProfit" from="PhotoProfit" name="FK_PhotoProfit_Profit_id" to="Profit" visCaption1X="0" visCaption1Y="-1" visCenterX="0" visCenterY="0" visShowCaption="0">
       <foreign-key-column from="profit_id" to="id"/>
+      <orm-properties>
+        <attribute name="onDelete">CASCADE</attribute>
+      </orm-properties>
     </foreign-key>
     <foreign-key caption="Photo VotePhoto" from="VotePhoto" name="FK_VotePhoto_Photo_id" to="Photo" visCaption1X="0" visCaption1Y="-1" visCenterX="0" visCenterY="0" visShowCaption="0">
       <foreign-key-column from="photo_id" to="id"/>
+    </foreign-key>
+    <foreign-key caption="Country Route" from="Route" name="FK_Route_Country_id" to="Country" visShowCaption="0">
+      <foreign-key-column from="country_id" to="id"/>
     </foreign-key>
     <many-to-many-relation mn-table="WishList">
       <many-to-many-foreign-key foreign-key="FK_WishList_Profile_id" relation-alias="Wishers"/>

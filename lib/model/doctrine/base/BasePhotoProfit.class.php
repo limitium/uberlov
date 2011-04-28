@@ -22,6 +22,7 @@ abstract class BasePhotoProfit extends Photo
         parent::setUp();
         $this->hasOne('Profit', array(
              'local' => 'profit_id',
-             'foreign' => 'id'));
+             'foreign' => 'id',
+             'onDelete' => 'CASCADE'));
     }
 }

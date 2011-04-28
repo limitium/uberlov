@@ -1,19 +1,16 @@
 .commentMeta{
-    float: right;
 }
 .comment .commentBar {
     color:#666666;
-    font-size:0.8em;
-    line-height:140%;
-    position:relative;
-    width:100%;
+    font-size:small;
 }
-.comment .commentBar .commentAnchor{
-    float:left;    
+.comment .commentBar>a,.comment .commentBar div{
+    display: inline-block;
 }
 .comment .commentBar #newComment{
     margin-left: 30px;
     margin-top: 2em;
+    display: block;
 }
 
 .comment .commentBar .rating{
@@ -72,7 +69,6 @@
 }
 
 .comments{
-    float:right;
     background:url(../images/comment.png) left top no-repeat;
     padding-left:18px;
     margin-top: 3px;
