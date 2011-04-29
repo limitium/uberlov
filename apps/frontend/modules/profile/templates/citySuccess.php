@@ -1,0 +1,3 @@
+Obninsk|Kalujskaya
+Balobanovo|Kalujskaya
+Malii|Moscovscaya
