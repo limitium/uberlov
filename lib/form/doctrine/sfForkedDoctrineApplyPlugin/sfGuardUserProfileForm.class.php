@@ -49,4 +49,14 @@ class sfGuardUserProfileForm extends PluginsfGuardUserProfileForm {
         ));
     }
 
+    public function getStylesheets() {
+        return array(
+            '/css/form.css' => 'screen'
+        );
+    }
+
+    public function getJavaScripts() {
+        return array('/js/lib/tinymce/tiny_mce.js', '/js/form.js');
+    }
+
 }

@@ -1,6 +1,5 @@
 <?php use_stylesheets_for_form($form) ?>
 <?php use_javascripts_for_form($form) ?>
-
 <?php if ($form->hasGlobalErrors()): ?>
     <ul class="error_list">
         <?php foreach ($form->getGlobalErrors() as $name => $error): ?>
