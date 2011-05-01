@@ -10,5 +10,5 @@
 </div>
 <?php include_partial('editProfileTab', array('form' => $form)); ?>
 <?php include_partial('editSettingsTab', array()); ?>
-<?php include_partial('editPasswordTab', array()); ?>
+<?php include_partial('editPasswordTab', array('form'=>$resetform)); ?>
 <?php include_partial('editMailTab', array('form' => $mailForm, 'profile' => $form->getObject())); ?>

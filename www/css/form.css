@@ -142,9 +142,9 @@ ul.error_list li:last-child {
 .fakeButton {
     position: absolute;
     z-index: 1;
-    width: 85px;
-    height: 21px;
-    background: url(/images/form/button.png) no-repeat left top;
+    width: 101px;
+    height: 28px;
+    background: url(/images/common/buttons/userpic/button.png) no-repeat left top;
     float: left;
     font-size: 10pt;
     padding: 2px 0 0 10px;
@@ -152,7 +152,7 @@ ul.error_list li:last-child {
     cursor: pointer;
 }
 .fakeButton.active {
-    background: url(/images/form/button_active.png) no-repeat left top;
+    background: url(/images/common/buttons/userpic/button_active.png) no-repeat left top;
 }
 
 .blocker {
@@ -160,7 +160,7 @@ ul.error_list li:last-child {
     z-index: 3;
     width: 150px;
     height: 21px;
-    background: url(/images/form/transparent.gif);
+    background: url(/images/common/buttons/userpic/transparent.gif);
     margin-left: -155px;
 }
 .fileName {

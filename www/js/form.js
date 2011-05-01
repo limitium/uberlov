@@ -52,7 +52,7 @@ form.prototype.afterInit = function(){
         if(input.attr('type') == 'file'){
             var td = input.parent();
             input.remove();
-            td.append('<div class="blocker" /><input type="file" id="'+input.attr('id')+'" name="'+input.attr('name')+'" class="customFile" /><div class="fakeButton" >Изменить</div><div class="fileName" />');
+            td.append('<div class="blocker" /><input type="file" id="'+input.attr('id')+'" name="'+input.attr('name')+'" class="customFile" /><div class="fakeButton" ></div><div class="fileName" />');
                 
             var newInput = $('input',td);
             var fileName = $('.fileName',td);
@@ -129,7 +129,7 @@ form.prototype.afterInit = function(){
                     };
                     fileName.css({
                         display: 'block',
-                        background:'url(' + app.url('/images/form/icons.png') + ') no-repeat 0 -'+pos+'px'
+                        background:'url(' + app.url('/images/common/buttons/userpic/icons.png') + ') no-repeat 0 -'+pos+'px'
                     });
                 }
             });
@@ -141,7 +141,7 @@ form.prototype.afterInit = function(){
         var wraper = $(this);
         var baseSelect = $(wraper.find('select'));
         wraper.height(baseSelect.outerHeight());        
-        $('#right_layout').append('<input class ="autocompete_input" id="autocomplete_for_'+baseSelect.id+'" type="text">');
+        $('#profileContainer').append('<input class ="autocompete_input" id="autocomplete_for_'+baseSelect.id+'" type="text">');
         var input = $('#autocomplete_for_'+baseSelect.id);
         input.css({
             top:wraper.offset().top,
