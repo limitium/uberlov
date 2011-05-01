@@ -13,7 +13,7 @@ class profileActions extends sfActions {
     public function executeCity(sfWebRequest $request) {
         $this->cities = Doctrine_Query::create()
                         ->from('City c')
-                        ->where('c.name LIKE ?', $request->getParameter('q').'%')
+                        ->where('c.name LIKE ?', $request->getParameter('q') . '%')
                         ->leftJoin('c.Region')
                         ->limit($request->getParameter('limit', 10))
                         ->orderBy('c.weight desc, c.name desc')
@@ -132,6 +132,18 @@ class profileActions extends sfActions {
                                 '%form%' => 'sfApplyEditEmailForm'), 'sfForkedApply')
             );
         }
+
+        //won't present this page to users that are not authenticated or haven't got confirmation code
+        if (!$this->getUser()->isAuthenticated() && !$this->getUser()->getAttribute('sfApplyReset', false)) {
+            $this->redirect('@sf_guard_signin');
+        }
+        // we're getting default or customized resetForm for the task
+        if (!( ($this->resetform = new sfApplyResetForm() ) instanceof sfApplyResetForm)) {
+            // if the form isn't instance of sfApplyResetForm, we don't accept it
+            throw new InvalidArgumentException(
+                    'The custom reset form should be instance of sfApplyResetForm'
+            );
+        }
     }
 
     public function executeUpdate(sfWebRequest $request) {
@@ -149,6 +161,20 @@ class profileActions extends sfActions {
                                 '%form%' => 'sfApplyEditEmailForm'), 'sfForkedApply')
             );
         }
+        
+        
+        //won't present this page to users that are not authenticated or haven't got confirmation code
+        if (!$this->getUser()->isAuthenticated() && !$this->getUser()->getAttribute('sfApplyReset', false)) {
+            $this->redirect('@sf_guard_signin');
+        }
+        // we're getting default or customized resetForm for the task
+        if (!( ($this->resetform = new sfApplyResetForm() ) instanceof sfApplyResetForm)) {
+            // if the form isn't instance of sfApplyResetForm, we don't accept it
+            throw new InvalidArgumentException(
+                    'The custom reset form should be instance of sfApplyResetForm'
+            );
+        }
+        
         $this->setTemplate('edit');
     }
 
@@ -163,7 +189,7 @@ class profileActions extends sfActions {
             $profile->getUser()->save();
 
             if ($files['userpic']['name']) {
-                $userpic = new sfThumbnail(32, 32);
+                $userpic = new sfThumbnail(48, 48);
                 $userpic->loadFile($files['userpic']['tmp_name']);
                 $name = md5($profile->id . 'userpic fuck yea') . '.gif';
                 $userpic->save(sfConfig::get('sf_user_pic_dir') . $name, 'image/gif');
