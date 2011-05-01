@@ -9,15 +9,21 @@
  * @version    SVN: $Id: actions.class.php 23810 2009-11-12 11:07:44Z Kris.Wallsmith $
  */
 class profileActions extends sfActions {
-    public function executeCity(sfWebRequest $request){
-        
+
+    public function executeCity(sfWebRequest $request) {
+        $this->cities = Doctrine_Query::create()
+                        ->from('City c')
+                        ->where('c.name LIKE ?', $request->getParameter('q').'%')
+                        ->leftJoin('c.Region')
+                        ->limit($request->getParameter('limit', 10))
+                        ->orderBy('c.weight desc, c.name desc')
+                        ->execute();
     }
+
     public function executeList(sfWebRequest $request) {
         $this->pager = htPagerLayout::create(Doctrine::getTable('sfGuardUser')
                                 ->createQuery('f')
-                                ->orderBy('f.created_at ASC'),
-                        'user/list?page={%page_number}',
-                        $request->getParameter('page', 1));
+                                ->orderBy('f.created_at ASC'), 'user/list?page={%page_number}', $request->getParameter('page', 1));
     }
 
     public function executeMy(sfWebRequest $request) {
@@ -134,7 +140,15 @@ class profileActions extends sfActions {
         $this->form = new sfGuardUserProfileForm($profile);
 
         $this->processForm($request, $this->form);
-
+        $formClass = sfConfig::get('app_sfForkedApply_editEmailForm');
+        if (!( ($this->mailForm = new $formClass() ) instanceof sfApplyEditEmailForm)) {
+            // if the form isn't instance of sfApplySettingsForm, we don't accept it
+            throw new InvalidArgumentException(sfContext::getInstance()->
+                            getI18N()->
+                            __('The custom %action% form should be instance of %form%', array('%action%' => 'editEmail',
+                                '%form%' => 'sfApplyEditEmailForm'), 'sfForkedApply')
+            );
+        }
         $this->setTemplate('edit');
     }
 

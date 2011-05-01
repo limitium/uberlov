@@ -4,7 +4,7 @@ form.name = 'form';
 ModuleManager.add(form);
 
 
-form.prototype.afterInit = function(){
+form.prototype.afterInit = function(){    
     $('#right_layout textarea').tinymce({
         force_p_newlines : false,
         force_br_newlines : true,
@@ -14,12 +14,12 @@ form.prototype.afterInit = function(){
             
             tinymce.dom.Event.add(ed.getWin(), 'focus', function(e) {
                 if($(realID)) {
-                   $('#'+realID).contents().find('body').css('background-color','#FEFAE2');
+                    $('#'+realID).contents().find('body').css('background-color','#FEFAE2');
                 }
             });
             tinymce.dom.Event.add(ed.getWin(), 'blur', function(e) {
                 if($(realID)) {
-                   $('#'+realID).contents().find('body').css('background-color','#FFF');
+                    $('#'+realID).contents().find('body').css('background-color','#FFF');
                 }
             });
 
@@ -52,7 +52,7 @@ form.prototype.afterInit = function(){
         if(input.attr('type') == 'file'){
             var td = input.parent();
             input.remove();
-            td.append('<div class="blocker" /><input type="file" id="'+input.attr('id')+'" name="'+input.attr('name')+'" class="customFile" /><div class="fakeButton" >'+label.html()+'</div><div class="fileName" />');
+            td.append('<div class="blocker" /><input type="file" id="'+input.attr('id')+'" name="'+input.attr('name')+'" class="customFile" /><div class="fakeButton" >Изменить</div><div class="fileName" />');
                 
             var newInput = $('input',td);
             var fileName = $('.fileName',td);
@@ -135,6 +135,64 @@ form.prototype.afterInit = function(){
             });
                 
         }
+    });
+    
+    $('.autocomplete').each(function(){
+        var wraper = $(this);
+        var baseSelect = $(wraper.find('select'));
+        wraper.height(baseSelect.outerHeight());        
+        $('#right_layout').append('<input class ="autocompete_input" id="autocomplete_for_'+baseSelect.id+'" type="text">');
+        var input = $('#autocomplete_for_'+baseSelect.id);
+        input.css({
+            top:wraper.offset().top,
+            left:wraper.offset().left,
+            position: 'absolute'
+        }).val($('option:selected',baseSelect).html());
+        baseSelect.hide();
+        input.autocomplete(wraper.attr('url'),{ 
+            minChars: "3", 
+            formatItem: function(data, i, n, value) {
+                return "<div>" + data[0]+"</div><div>"+data[1]+"</div>";
+            },
+            formatResult: function(data, value){
+                baseSelect.html('<option selected="selected" value="'+data[2]+'">'+data[0]+'</option>');
+                return data[0];
+            }            
+        });
+        input.result(function(resp,data){
+            baseSelect.html('<option selected="selected" value="'+data[2]+'">'+data[0]+'</option>');
+        });
+        
+        var select = '<div style="display:none;position: absolute; width: '+input.width()+'px; top: '+(parseFloat(input.outerHeight())+parseFloat(input.offset().top))+'px; left: '+input.offset().left+'px;" class="ac_results"><ul style="max-height: 180px; overflow: auto;">';
+        var i=0;
+        $('option',baseSelect).each(function(){
+            select += '<li class="ac_'+(i++%2==0?'even':'odd')+'" val="'+this.value+'">'+this.innerHTML+'</li>';
+        });        
+        select += '</ul></div>';
+        select= $(select);
+        
+        $('li',select).hover(
+            function () {
+                $(this).addClass("ac_over");
+            },
+            function () {
+                $(this).removeClass("ac_over");
+            }
+            ).click(function(){
+            input.val(this.innerHTML);
+            input.attr('val',$(this).attr('val'));
+            select.hide();
+        });
+        
+        $('body').append(select);
+        var expander = wraper.find('b');
+        expander.click(function(){
+            select.toggle();
+        });
+        input.focus(function(){
+            expander.hide();
+            select.remove();
+        })
     });
 }
 

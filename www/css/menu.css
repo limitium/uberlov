@@ -130,7 +130,9 @@ strong {
     top: 9px;
 }
 #user_menu span.count span {
-    -moz-border-radius: 6px 6px 6px 6px;
+    -moz-border-radius: 6px ;
+    -webkit-border-radius:6px ;
+    border-radius:6px ;
     background-color: #AACD4E;
     color: white;
     display: inline-block;
