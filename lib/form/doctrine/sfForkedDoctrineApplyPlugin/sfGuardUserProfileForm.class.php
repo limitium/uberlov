@@ -16,7 +16,7 @@ class sfGuardUserProfileForm extends PluginsfGuardUserProfileForm {
         $this->widgetSchema['first_name'] = new sfWidgetFormInputText(array(), array('maxlength' => 30));
         $this->widgetSchema['last_name'] = new sfWidgetFormInputText(array(), array('maxlength' => 70));
         $this->widgetSchema['birth_date'] = new formInputDate();
-        $this->widgetSchema['city_id'] = new sfWidgetFormDoctrineChoice(array('model' => 'City', 'add_empty' => true, 'table_method' => 'getCities'));
+        $this->widgetSchema['city_id'] = new sfWidgetFormDoctrineChoice(array('model' => 'City', 'table_method' => 'getCities'));
         $this->widgetSchema['description'] = new sfWidgetFormTextarea();
         $this->widgetSchema['userpic'] = new sfWidgetFormInputFile();
         $this->widgetSchema['sex'] = new sfWidgetFormInputCheckbox();
@@ -47,6 +47,7 @@ class sfGuardUserProfileForm extends PluginsfGuardUserProfileForm {
             'sex' => 'Мужик',
             'description' => 'О себе',
         ));
+        $this->widgetSchema->setNameFormat('profile[%s]');
     }
 
     public function getStylesheets() {
