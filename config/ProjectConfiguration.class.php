@@ -14,6 +14,7 @@ class ProjectConfiguration extends sfProjectConfiguration {
         $this->enablePlugins('sfJqueryReloadedPlugin');
         $this->enablePlugins('sfThumbnailPlugin');
         $this->enablePlugins('sfForkedDoctrineApplyPlugin');
+        $this->enablePlugins('sfXssSafePlugin');
     }
 
     public function setWebDir($webDir) {

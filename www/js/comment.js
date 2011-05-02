@@ -88,7 +88,7 @@ function comment(){
         return false;
     });
     
-    $('.commentMessage p').hover(function(){
+    $('.commentMessage').hover(function(){
         $(this).addClass('reading')
     },function(){
         $(this).removeClass('reading')
