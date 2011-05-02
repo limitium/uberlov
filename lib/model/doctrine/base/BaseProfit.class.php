@@ -65,10 +65,10 @@ abstract class BaseProfit extends sfDoctrineRecord
              'autoincrement' => true,
              'length' => 4,
              ));
-        $this->hasColumn('name', 'string', 50, array(
+        $this->hasColumn('name', 'string', 255, array(
              'type' => 'string',
              'notnull' => true,
-             'length' => 50,
+             'length' => 255,
              ));
         $this->hasColumn('location_id', 'integer', 4, array(
              'type' => 'integer',
@@ -80,11 +80,9 @@ abstract class BaseProfit extends sfDoctrineRecord
              ));
         $this->hasColumn('cordage', 'string', null, array(
              'type' => 'string',
-             'notnull' => true,
              ));
         $this->hasColumn('description', 'string', null, array(
              'type' => 'string',
-             'notnull' => true,
              ));
         $this->hasColumn('fish_id', 'integer', 4, array(
              'type' => 'integer',

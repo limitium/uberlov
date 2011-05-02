@@ -14,7 +14,6 @@ abstract class BaseAddressFormFilter extends BaseFormFilterDoctrine
   {
     $this->setWidgets(array(
       'country_id'   => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Country'), 'add_empty' => true)),
-      'road_id'      => new sfWidgetFormFilterInput(),
       'area_low_id'  => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('AreaLow'), 'add_empty' => true)),
       'area_high_id' => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('AreaHigh'), 'add_empty' => true)),
       'locality_id'  => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Locality'), 'add_empty' => true)),
@@ -23,7 +22,6 @@ abstract class BaseAddressFormFilter extends BaseFormFilterDoctrine
 
     $this->setValidators(array(
       'country_id'   => new sfValidatorDoctrineChoice(array('required' => false, 'model' => $this->getRelatedModelName('Country'), 'column' => 'id')),
-      'road_id'      => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
       'area_low_id'  => new sfValidatorDoctrineChoice(array('required' => false, 'model' => $this->getRelatedModelName('AreaLow'), 'column' => 'id')),
       'area_high_id' => new sfValidatorDoctrineChoice(array('required' => false, 'model' => $this->getRelatedModelName('AreaHigh'), 'column' => 'id')),
       'locality_id'  => new sfValidatorDoctrineChoice(array('required' => false, 'model' => $this->getRelatedModelName('Locality'), 'column' => 'id')),
@@ -49,7 +47,6 @@ abstract class BaseAddressFormFilter extends BaseFormFilterDoctrine
     return array(
       'id'           => 'Number',
       'country_id'   => 'ForeignKey',
-      'road_id'      => 'Number',
       'area_low_id'  => 'ForeignKey',
       'area_high_id' => 'ForeignKey',
       'locality_id'  => 'ForeignKey',

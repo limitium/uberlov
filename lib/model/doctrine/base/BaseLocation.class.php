@@ -98,16 +98,14 @@ abstract class BaseLocation extends sfDoctrineRecord
              'autoincrement' => true,
              'length' => 4,
              ));
-        $this->hasColumn('name', 'string', 50, array(
+        $this->hasColumn('name', 'string', 255, array(
              'default' => '',
              'type' => 'string',
              'notnull' => true,
-             'length' => 50,
+             'length' => 255,
              ));
         $this->hasColumn('description', 'string', null, array(
-             'default' => '',
              'type' => 'string',
-             'notnull' => true,
              ));
         $this->hasColumn('depth', 'float', null, array(
              'type' => 'float',

@@ -10,6 +10,22 @@
  */
 class parserActions extends sfActions {
 
+    public function executeLoc1(sfWebRequest $request) {
+        $xmldata = file_get_contents('http://fishingmap.ru/pages/read.php');
+        $xml = simplexml_load_string($xmldata);
+        $data = array();
+        foreach ($xml->location as $loc) {
+            $loc instanceof SimpleXMLElement;
+            $data[] = (object) array(
+                        'name' => $loc['name']->__toString(),
+                        'x' => $loc['x']->__toString(),
+                        'y' => $loc['y']->__toString(),
+                        'mtype' => $loc['mtype']->__toString(),
+            );
+        }
+        $this->locations =$data;
+    }
+
     /**
      * Executes index action
      *

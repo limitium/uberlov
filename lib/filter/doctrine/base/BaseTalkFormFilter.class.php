@@ -14,7 +14,7 @@ abstract class BaseTalkFormFilter extends BaseFormFilterDoctrine
   {
     $this->setWidgets(array(
       'name'            => new sfWidgetFormFilterInput(array('with_empty' => false)),
-      'message'         => new sfWidgetFormFilterInput(array('with_empty' => false)),
+      'message'         => new sfWidgetFormFilterInput(),
       'talk_section_id' => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('TalkSection'), 'add_empty' => true)),
       'created_by'      => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('CreatedBy'), 'add_empty' => true)),
       'updated_by'      => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('UpdatedBy'), 'add_empty' => true)),

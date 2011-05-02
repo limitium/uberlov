@@ -34,12 +34,11 @@ Location:
       autoincrement: true
     name:
       default: ''
-      type: string(50)
+      type: string(255)
       notnull: true
     description:
-      default: ''
+      default: 
       type: string
-      notnull: true
     depth:
       type: float
     is_free:
@@ -182,7 +181,7 @@ Profit:
       notnull: true
       autoincrement: true
     name:
-      type: string(50)
+      type: string(255)
       notnull: true
     location_id:
       type: integer(4)
@@ -191,10 +190,8 @@ Profit:
       notnull: true
     cordage:
       type: string
-      notnull: true
     description:
       type: string
-      notnull: true
     fish_id:
       type: integer(4)
     weight:
@@ -635,11 +632,10 @@ Talk:
       notnull: true
       autoincrement: true
     name:
-      type: string(50)
+      type: string(255)
       notnull: true
     message:
       type: string
-      notnull: true
     talk_section_id:
       type: integer(4)
   relations:
@@ -737,11 +733,10 @@ FishEvent:
       type: date
       notnull: true
     name:
-      type: string(50)
+      type: string(255)
       notnull: true
     description:
       type: string
-      notnull: true
     rules:
       type: string
     users:
