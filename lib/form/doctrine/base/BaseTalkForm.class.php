@@ -27,8 +27,8 @@ abstract class BaseTalkForm extends BaseFormDoctrine
 
     $this->setValidators(array(
       'id'              => new sfValidatorChoice(array('choices' => array($this->getObject()->get('id')), 'empty_value' => $this->getObject()->get('id'), 'required' => false)),
-      'name'            => new sfValidatorString(array('max_length' => 50)),
-      'message'         => new sfValidatorString(),
+      'name'            => new sfValidatorString(array('max_length' => 255)),
+      'message'         => new sfValidatorString(array('required' => false)),
       'talk_section_id' => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('TalkSection'), 'required' => false)),
       'created_by'      => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('CreatedBy'))),
       'updated_by'      => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('UpdatedBy'))),

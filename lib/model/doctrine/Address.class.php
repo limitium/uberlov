@@ -13,7 +13,6 @@
 class Address extends BaseAddress {
 
     public function updateAddress($addressData) {
-        fb($addressData);
         $parent = null;
         foreach (array('country', 'areaLow', 'areaHigh', 'locality') as $partName) {
             $part = $this->getAddressPart($addressData, $partName, $parent);
@@ -24,8 +23,8 @@ class Address extends BaseAddress {
             $uPartName = ucfirst($partName);
             $this->$uPartName = $part ? $part : null;
         }
-        
-        $this->Route = $this->getAddressPart($addressData, 'route', $this->Country);
+        $route = $this->getAddressPart($addressData, 'route', $this->Country);
+        $this->Route = $route ? $route : null;
     }
 
     private function getAddressPart($addressData, $partName, $parent) {

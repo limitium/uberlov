@@ -14,7 +14,7 @@ abstract class BaseLocationFormFilter extends BaseFormFilterDoctrine
   {
     $this->setWidgets(array(
       'name'               => new sfWidgetFormFilterInput(array('with_empty' => false)),
-      'description'        => new sfWidgetFormFilterInput(array('with_empty' => false)),
+      'description'        => new sfWidgetFormFilterInput(),
       'depth'              => new sfWidgetFormFilterInput(),
       'is_free'            => new sfWidgetFormChoice(array('choices' => array('' => 'yes or no', 1 => 'yes', 0 => 'no'))),
       'price'              => new sfWidgetFormFilterInput(),

@@ -7,7 +7,6 @@
  * 
  * @property integer $id
  * @property integer $country_id
- * @property integer $road_id
  * @property integer $area_low_id
  * @property integer $area_high_id
  * @property integer $locality_id
@@ -21,7 +20,6 @@
  * 
  * @method integer             getId()           Returns the current record's "id" value
  * @method integer             getCountryId()    Returns the current record's "country_id" value
- * @method integer             getRoadId()       Returns the current record's "road_id" value
  * @method integer             getAreaLowId()    Returns the current record's "area_low_id" value
  * @method integer             getAreaHighId()   Returns the current record's "area_high_id" value
  * @method integer             getLocalityId()   Returns the current record's "locality_id" value
@@ -34,7 +32,6 @@
  * @method Doctrine_Collection getLocation()     Returns the current record's "Location" collection
  * @method Address             setId()           Sets the current record's "id" value
  * @method Address             setCountryId()    Sets the current record's "country_id" value
- * @method Address             setRoadId()       Sets the current record's "road_id" value
  * @method Address             setAreaLowId()    Sets the current record's "area_low_id" value
  * @method Address             setAreaHighId()   Sets the current record's "area_high_id" value
  * @method Address             setLocalityId()   Sets the current record's "locality_id" value
@@ -63,10 +60,6 @@ abstract class BaseAddress extends sfDoctrineRecord
              'length' => 4,
              ));
         $this->hasColumn('country_id', 'integer', 4, array(
-             'type' => 'integer',
-             'length' => 4,
-             ));
-        $this->hasColumn('road_id', 'integer', 4, array(
              'type' => 'integer',
              'length' => 4,
              ));

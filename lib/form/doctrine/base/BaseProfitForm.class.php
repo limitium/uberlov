@@ -31,11 +31,11 @@ abstract class BaseProfitForm extends BaseFormDoctrine
 
     $this->setValidators(array(
       'id'          => new sfValidatorChoice(array('choices' => array($this->getObject()->get('id')), 'empty_value' => $this->getObject()->get('id'), 'required' => false)),
-      'name'        => new sfValidatorString(array('max_length' => 50)),
+      'name'        => new sfValidatorString(array('max_length' => 255)),
       'location_id' => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Location'), 'required' => false)),
       'date'        => new sfValidatorDateTime(),
-      'cordage'     => new sfValidatorString(),
-      'description' => new sfValidatorString(),
+      'cordage'     => new sfValidatorString(array('required' => false)),
+      'description' => new sfValidatorString(array('required' => false)),
       'fish_id'     => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Fish'), 'required' => false)),
       'weight'      => new sfValidatorNumber(array('required' => false)),
       'created_at'  => new sfValidatorDateTime(),

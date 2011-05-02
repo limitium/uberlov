@@ -32,8 +32,8 @@ abstract class BaseFishEventForm extends BaseFormDoctrine
     $this->setValidators(array(
       'id'                 => new sfValidatorChoice(array('choices' => array($this->getObject()->get('id')), 'empty_value' => $this->getObject()->get('id'), 'required' => false)),
       'date'               => new sfValidatorDate(),
-      'name'               => new sfValidatorString(array('max_length' => 50)),
-      'description'        => new sfValidatorString(),
+      'name'               => new sfValidatorString(array('max_length' => 255)),
+      'description'        => new sfValidatorString(array('required' => false)),
       'rules'              => new sfValidatorString(array('required' => false)),
       'users'              => new sfValidatorString(array('required' => false)),
       'location_id'        => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Location'))),

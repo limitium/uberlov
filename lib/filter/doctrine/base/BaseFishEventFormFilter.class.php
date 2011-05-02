@@ -15,7 +15,7 @@ abstract class BaseFishEventFormFilter extends BaseFormFilterDoctrine
     $this->setWidgets(array(
       'date'               => new sfWidgetFormFilterDate(array('from_date' => new sfWidgetFormDate(), 'to_date' => new sfWidgetFormDate(), 'with_empty' => false)),
       'name'               => new sfWidgetFormFilterInput(array('with_empty' => false)),
-      'description'        => new sfWidgetFormFilterInput(array('with_empty' => false)),
+      'description'        => new sfWidgetFormFilterInput(),
       'rules'              => new sfWidgetFormFilterInput(),
       'users'              => new sfWidgetFormFilterInput(),
       'location_id'        => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Location'), 'add_empty' => true)),

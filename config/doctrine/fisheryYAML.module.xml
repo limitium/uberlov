@@ -2,10 +2,10 @@
 <orm-designer version="1.3.1.332">
 
   <module import-format="DoctrineYml" import-path="fisheryYAML.yml" name="ht" visBkColor="16380923" visSizeX="227" visSizeX2="1327" visSizeY="51" visSizeY2="836">
-    <table name="Location" visPositionX="208" visPositionY="117" visSizeX="0" visSizeX2="154" visSizeY="0" visSizeY2="185">
+    <table name="Location" visPositionX="208" visPositionY="116" visSizeX="0" visSizeX2="154" visSizeY="0" visSizeY2="185">
       <column auto-increment="true" name="id" primary="true" size="4" type="integer"/>
-      <column default="''" name="name" required="true" size="50" type="string"/>
-      <column default="''" name="description" required="true" type="string"/>
+      <column default="''" name="name" required="true" size="255" type="string"/>
+      <column default="" name="description" type="string"/>
       <column name="depth" type="float"/>
       <column default="1" name="is_free" type="boolean"/>
       <column name="price" type="string"/>
@@ -80,11 +80,11 @@
     </table>
     <table name="Profit" visPositionX="188" visPositionY="348" visSizeX="0" visSizeX2="120" visSizeY="0" visSizeY2="129">
       <column auto-increment="true" name="id" primary="true" required="true" size="4" type="integer"/>
-      <column name="name" required="true" size="50" type="string"/>
+      <column name="name" required="true" size="255" type="string"/>
       <column name="location_id" size="4" type="integer"/>
       <column name="date" required="true" type="timestamp"/>
-      <column name="cordage" required="true" type="string"/>
-      <column name="description" required="true" type="string"/>
+      <column name="cordage" type="string"/>
+      <column name="description" type="string"/>
       <column description="Foreign key to Fish" name="fish_id" size="4" type="integer"/>
       <column name="weight" type="float"/>
       <orm-properties>
@@ -349,8 +349,8 @@
     </table>
     <table name="Talk" visPositionX="720" visPositionY="611" visSizeX="0" visSizeX2="138" visSizeY="0" visSizeY2="73">
       <column auto-increment="true" name="id" primary="true" required="true" size="4" type="integer"/>
-      <column name="name" required="true" size="50" type="string"/>
-      <column name="message" required="true" type="string"/>
+      <column name="name" required="true" size="255" type="string"/>
+      <column name="message" type="string"/>
       <column description="Foreign key to TalkSection" name="talk_section_id" size="4" type="integer"/>
       <orm-properties>
         <attribute name="actAs">
@@ -425,8 +425,8 @@
     <table name="FishEvent" visPositionX="-16" visPositionY="42" visSizeX="0" visSizeX2="157" visSizeY="0" visSizeY2="129">
       <column auto-increment="true" name="id" primary="true" required="true" size="4" type="integer"/>
       <column name="date" required="true" type="date"/>
-      <column name="name" required="true" size="50" type="string"/>
-      <column name="description" required="true" type="string"/>
+      <column name="name" required="true" size="255" type="string"/>
+      <column name="description" type="string"/>
       <column name="rules" type="string"/>
       <column name="users" type="string"/>
       <column name="location_id" required="true" size="4" type="integer"/>
@@ -473,7 +473,7 @@
         </attribute>
       </orm-properties>
     </table>
-    <table name="CommentFishEvent" visPositionX="-135" visPositionY="215" visSizeX="0" visSizeX2="133" visSizeY="0" visSizeY2="31">
+    <table name="CommentFishEvent" visPositionX="-135" visPositionY="214" visSizeX="0" visSizeX2="133" visSizeY="0" visSizeY2="31">
       <column name="fish_event_id" size="4" type="integer"/>
       <orm-properties>
         <attribute name="inheritance">

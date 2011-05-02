@@ -63,14 +63,13 @@ abstract class BaseFishEvent extends sfDoctrineRecord
              'type' => 'date',
              'notnull' => true,
              ));
-        $this->hasColumn('name', 'string', 50, array(
+        $this->hasColumn('name', 'string', 255, array(
              'type' => 'string',
              'notnull' => true,
-             'length' => 50,
+             'length' => 255,
              ));
         $this->hasColumn('description', 'string', null, array(
              'type' => 'string',
-             'notnull' => true,
              ));
         $this->hasColumn('rules', 'string', null, array(
              'type' => 'string',
