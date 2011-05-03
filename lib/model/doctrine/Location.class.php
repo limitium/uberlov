@@ -61,7 +61,7 @@ class Location extends BaseLocation {
 
     public function getTotalProfit() {
         return Doctrine_Query::create()
-                ->select('sum(d.qty) as qty')
+                ->select('if(sum(d.qty)>0,sum(d.qty),0) as qty')
                 ->from('ProfitDetail d')
                 ->innerJoin('d.Profit p')
                 ->where('p.location_id = ?', $this->getId())

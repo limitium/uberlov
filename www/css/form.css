@@ -166,7 +166,7 @@ ul.error_list li:last-child {
 .fileName {
     position: absolute;
     height: 15px;
-    margin: 2px 0 0px 90px;
+    margin: -16px 0 0 110px;
     font-family: Verdana;
     font-size: 8pt;
     color: Gray;
