@@ -2,6 +2,7 @@
     app.csrf.wishlist = "<?php echo $csrf; ?>";
 </script>
 <?php use_helper('text'); ?>
+<?php use_helper('XssSafe') ?>
 <?php use_javascript('wishes'); ?>
 
 <?php include_partial('location/location', array('location' => $location)) ?>
@@ -14,23 +15,25 @@
 <div class="location">
     <div class="stat">
         <table>
-            <tr><th>Глубина:</th><td><?php echo $location->getDepth() ?> м.</td></tr>
-            <tr><th>Течение:</th><td><?php echo $location->getLocationFlow() ?></td></tr>
-            <tr><th>Рельеф:</th><td><?php echo $location->getLocationRelief() ?></td></tr>
-            <tr><th>Дно:</th><td><?php echo $location->getLocationFundus() ?></td></tr>
-            <tr><th>Наловили:</th><td><?php echo $location->getTotalProfit() ?> кг.</td></tr>
+            <tr><td>Глубина:</td><td><?php echo $location->getDepth() ?> м.</td></tr>
+            <tr><td>Течение:</td><td><?php echo $location->getLocationFlow() ?></td></tr>
+            <tr><td>Рельеф:</td><td><?php echo $location->getLocationRelief() ?></td></tr>
+            <tr><td>Дно:</td><td><?php echo $location->getLocationFundus() ?></td></tr>
+            <tr><td>Наловили:</td><td><?php echo $location->getTotalProfit() ?> кг.</td></tr>
         </table>
+        <p>стили</p>
+        <p>рыбка</p>
         <?php if ($location->getIsFree()): ?>
-            <p>Бесплатное</p>
+            <p class="free"></p>
         <?php else: ?>
-            <p><?php echo $location->getPrice() ?></p>
+            <p><?php echo $location->getPrice(ESC_XSSSAFE) ?></p>
         <?php endif; ?>
     </div>
     <div class="photo">
         <?php include_partial('photo/show', array('object' => $location)) ?>
     </div>
 
-    <div class="description"><?php echo simple_format_text($location->getDescription()); ?></div>
+    <div class="description"><?php echo simple_format_text($location->getDescription(ESC_XSSSAFE)); ?></div>
     
     <div class="meta">
         <?php use_javascript('voting'); ?>

@@ -1,6 +1,6 @@
 /*from*/
 .location_form{
-    
+
 }
 .location_form fieldset{
     float: left;
@@ -39,11 +39,16 @@ a.dashed:link, a.dashed:active, a.dashed:visited, a.dashed:hover {
 .location .stat{
     float:left;
 }
-
+.location .stat table {
+    margin: 2em 0 0 3em;
+}
+.location .stat table, .location .stat th, .location .stat td, .location .stat tr {
+    border: none;
+}
 .location .stat p{
     line-height: 1.6em;
 }
-.location .stat table tr th{
+.location .stat table tr td{
     width: 120px;
     text-align: left;
     line-height: 2em;
@@ -58,12 +63,24 @@ a.dashed:link, a.dashed:active, a.dashed:visited, a.dashed:hover {
 .location .photo div.photos,.location .photo div.photos div.image,.location .photo div.photos ul.thumbs,.location .photo img{
     width: 498px;
 }
+.location .photo img{
+    height: 350px;
+}
+.location .photo img.loading{
+    height: 5px;
+}
 .location .photo div.photos ul.thumbs li a img{
     width: 83px
 }
 .location .description{
     padding: 2em 0 0 1em;
     float: left;
+}
+.location p.free{
+    background: url("/images/icons/location/free.png") no-repeat scroll left top transparent;
+    height: 150px;
+    margin-left: -35px;
+    width: 122px;
 }
 
 .location .meta{

@@ -11,7 +11,7 @@
 class sfGuardUserProfileForm extends PluginsfGuardUserProfileForm {
 
     public function configure() {
-        unset($this['user_id'], $this['nick_name'], $this['created_at'], $this['updated_at'], $this['wishes_list'], $this['my_firends_list'], $this['my_firends2_list'], $this['inboxes_list'], $this['read_comment_list']);
+        unset($this['accepter_list'], $this['requester_list'],$this['validate_at'],$this['email_new'],$this['user_id'], $this['nick_name'], $this['created_at'], $this['updated_at'], $this['wishes_list'], $this['my_firends_list'], $this['my_firends2_list'], $this['inboxes_list'], $this['read_comment_list']);
 
         $this->widgetSchema['first_name'] = new sfWidgetFormInputText(array(), array('maxlength' => 30));
         $this->widgetSchema['last_name'] = new sfWidgetFormInputText(array(), array('maxlength' => 70));

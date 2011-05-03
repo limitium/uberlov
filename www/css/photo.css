@@ -1,7 +1,8 @@
 .photos {
     width:800px;
     margin-bottom:1em;
-    border: 1px solid blue;
+    border: 1px solid #DFDFDF;
+    background-color: #F6F6F6
 }
 
 .photos {
@@ -39,7 +40,7 @@
 }
 .photos .thumbs {
     list-style:none outside none;
-    border-top: 1px solid blue;
+    border-top: 1px solid #DFDFDF;
 }
 
 .photos .thumbs li {

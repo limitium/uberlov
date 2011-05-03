@@ -189,15 +189,21 @@ class profileActions extends sfActions {
             $profile->getUser()->save();
 
             if ($files['userpic']['name']) {
-                $userpic = new sfThumbnail(48, 48);
+                $userpic = new sfThumbnail(48, 48, false);
                 $userpic->loadFile($files['userpic']['tmp_name']);
-                $name = md5($profile->id . 'userpic fuck yea') . '.gif';
-                $userpic->save(sfConfig::get('sf_user_pic_dir') . $name, 'image/gif');
+                $name = md5($profile->id . 'userpic fuck yea') . '.png';
+                $userpic->save(sfConfig::get('sf_user_pic_dir') . $name, 'image/png');
                 $profile->userpic = $name;
                 $profile->save();
             }
 
             $this->redirect('profile/show?id=' . $profile->getId());
+        }else{
+                      foreach ($form->getFormFieldSchema() as $name => $formField) {
+                if ($formField->getError() != "") {
+                    echo "ActionClassName::methodName( ): Field Error for :" . $name . " : " . $formField->getError();
+                }
+            }
         }
     }
 
