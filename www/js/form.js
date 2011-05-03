@@ -8,10 +8,15 @@ form.prototype.afterInit = function(){
     $('#right_layout textarea').tinymce({
         force_p_newlines : false,
         force_br_newlines : true,
+        theme : "advanced",
+        
+        theme_advanced_buttons1 : "bold,italic,underline,link,unlink,image,bullist,numlist,blockquote,undo", 
+        theme_advanced_buttons2 : "", 
+        theme_advanced_buttons3 : "",
+
         init_instance_callback: function(ed){
             var s = ed.settings;
             var realID = ed.id+'_ifr';
-            
             tinymce.dom.Event.add(ed.getWin(), 'focus', function(e) {
                 if($(realID)) {
                     $('#'+realID).contents().find('body').css('background-color','#FEFAE2');
