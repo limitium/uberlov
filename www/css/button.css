@@ -50,6 +50,9 @@ button span span, button span span span {
     font: bold 11px/28px Arial,Helvetica,sans-serif;
     padding: 0 14px;
 }
+.button_01:hover{
+    text-decoration: none;
+}
 .button_01:hover span, .button_01_selected span {
     background: url("/images/common/buttons/button_01/border_l_hover.png") no-repeat scroll left top transparent;
 }
