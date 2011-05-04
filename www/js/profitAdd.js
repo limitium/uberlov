@@ -102,7 +102,7 @@ profitAdd.prototype.onAdd = function(){
 }
 
 profitAdd.prototype.addRow = function(data){
-    $('.profitDetails tbody').append('<tr fish="'+data.fish.val+'" styles="'+data.style.val+'" qty="'+data.qty+'"><td>'+data.fish.text+'</td><td>'+ data.style.text+'</td><td>'+data.qty+'</td><td><input type="button" value="&nbsp;-&nbsp;" class="button removeProfitDetail"></td></tr>');
+    $('.profitDetails tbody').append('<tr fish="'+data.fish.val+'" styles="'+data.style.val+'" qty="'+data.qty+'"><td>'+data.fish.text+'</td><td>'+ data.style.text+'</td><td>'+data.qty+'</td><td><button class="removeProfitDetail button_01"><span class="border_l"><span class="border_r"><span class="btn_bg">-</span></span></span></button></td></tr>');
 }
 
 profitAdd.prototype.onRemove = function(e){

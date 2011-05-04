@@ -10,7 +10,6 @@
 }
 
 .photos .image {
-    cursor:pointer;
     height:600px;
     line-height:600px;
     vertical-align:bottom;

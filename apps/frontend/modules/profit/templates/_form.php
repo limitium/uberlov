@@ -62,8 +62,14 @@
                             <tr>
                                 <th>Как: <?php echo $form['styles'] ?></th>
                                 <th>Кого: <?php echo $form['fishes'] ?></th>
-                                <th>Сколько: <?php echo $form['qty'] ?><input type="button" value="+" id="addProfitDetail" class="button"></th>
-                                <th></th>
+                                <th>Сколько: <?php echo $form['qty'] ?></th>
+                                <th><button id="addProfitDetail" class="button_01">
+                                        <span class="border_l">
+                                            <span class="border_r">
+                                                <span class="btn_bg">+</span>
+                                            </span>
+                                        </span>
+                                    </button></th>
                             </tr>
                         </thead>
                         <tbody></tbody>
@@ -82,7 +88,13 @@
         <?php include_partial('photo/upload', array('object' => $form->getObject())) ?>
         <div>
             <?php echo $form->renderHiddenFields(false) ?>
-            <input type="submit" value="<?php echo $form->getObject()->isNew() ? 'Добавить' : 'Сохранить'; ?>" />
+            <button class="button_01" type="submit">
+                <span class="border_l">
+                    <span class="border_r">
+                        <span class="btn_bg"><?php echo $form->getObject()->isNew() ? 'ДОБАВИТЬ' : 'СОХРАНИТЬ'; ?></span>
+                    </span>
+                </span>
+            </button>
         </div>        
     </form>
 </div>
