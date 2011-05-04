@@ -1,3 +1,4 @@
+<?php use_helper('XssSafe') ?>
 <?php include_partial('location/location', array('location' => $profit->getLocation())) ?>
 
 <div class="profitFull">
@@ -45,8 +46,8 @@
             нету :(
         <?php endif; ?>
     </div>
-    <div>Использовались снасти: <?php echo $profit->getCordage(); ?></div>
-    <div class="text"><?php echo $profit->getDescription(); ?></div>
+    <div>Использовались снасти: <?php echo $profit->getCordage(ESC_XSSSAFE); ?></div>
+    <div class="text"><?php echo $profit->getDescription(ESC_XSSSAFE); ?></div>
     <div class="meta">
         <?php use_javascript('voting'); ?>
         <?php include_partial('vote/vote', array('obj' => $profit)); ?>

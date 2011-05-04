@@ -28,6 +28,9 @@
 
 /*profit details table*/
 
+table.profitDetails ,.profitDetails tr,.profitDetails th,.profitDetails td{
+    border:none;
+}
 .profitDetails 
 {
     font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
