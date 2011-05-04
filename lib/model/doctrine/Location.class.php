@@ -67,7 +67,27 @@ class Location extends BaseLocation {
                 ->where('p.location_id = ?', $this->getId())
                 ->fetchOne()->qty;
     }
-
+    
+    public function getFishes(){
+       return Doctrine_Query::create()
+                ->from('Fish f')
+                ->innerJoin('f.ProfitDetail d')
+                ->innerJoin('d.Profit p')
+                ->where('p.location_id = ?', $this->getId())
+                ->groupBy('f.id')
+                ->execute();
+    }
+    
+    public function getStyles(){
+       return Doctrine_Query::create()
+                ->from('Style s')
+                ->innerJoin('s.ProfitDetail d')
+                ->innerJoin('d.Profit p')
+                ->where('p.location_id = ?', $this->getId())
+                ->groupBy('s.id')
+                ->execute();
+    }
+    
     public function getPhoto() {
         return '';
     }

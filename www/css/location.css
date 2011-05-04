@@ -38,9 +38,11 @@ a.dashed:link, a.dashed:active, a.dashed:visited, a.dashed:hover {
 /*details*/
 .location .stat{
     float:left;
+    width: 57%;
 }
 .location .stat table {
-    margin: 2em 0 0 3em;
+    margin: 1em 0 0 2em;
+    float: left;
 }
 .location .stat table, .location .stat th, .location .stat td, .location .stat tr {
     border: none;
@@ -52,6 +54,17 @@ a.dashed:link, a.dashed:active, a.dashed:visited, a.dashed:hover {
     width: 120px;
     text-align: left;
     line-height: 2em;
+}
+.location .stat div.fish{
+    margin: 1em 0 0 0.5em;
+    padding: 0 0 0 0.5em;
+    border-left: 1px solid #DFDFDF;
+    float: left;
+    width: 55%;
+}
+.location .stat div.fish ul li {
+    float: left;
+    padding: 0.5em 0 0 1em;
 }
 .location .photo{
     float:right;
@@ -74,13 +87,14 @@ a.dashed:link, a.dashed:active, a.dashed:visited, a.dashed:hover {
 }
 .location .description{
     padding: 2em 0 0 1em;
-    float: left;
+    clear: both;
 }
 .location p.free{
     background: url("/images/icons/location/free.png") no-repeat scroll left top transparent;
     height: 150px;
     margin-left: -35px;
     width: 122px;
+    clear: both;
 }
 
 .location .meta{

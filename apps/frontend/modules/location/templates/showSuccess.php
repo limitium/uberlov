@@ -21,12 +21,14 @@
             <tr><td>Дно:</td><td><?php echo $location->getLocationFundus() ?></td></tr>
             <tr><td>Наловили:</td><td><?php echo $location->getTotalProfit() ?> кг.</td></tr>
         </table>
-        <p>стили</p>
-        <p>рыбка</p>
+        <div class="fish">
+            <p>Клюет</p>
+            <ul><li>карась</li><li>окунь</li><li>плотва</li><li>щука</li><li>галавль</li><li>пескарик</li><li>карась</li><li>окунь</li><li>плотва</li><li>щука</li><li>галавль</li><li>пескарик</li></ul>
+        </div>
         <?php if ($location->getIsFree()): ?>
             <p class="free"></p>
         <?php else: ?>
-            <p><?php echo $location->getPrice(ESC_XSSSAFE) ?></p>
+            <p class="price"><?php echo $location->getPrice(ESC_XSSSAFE) ?></p>
         <?php endif; ?>
     </div>
     <div class="photo">
@@ -34,7 +36,7 @@
     </div>
 
     <div class="description"><?php echo simple_format_text($location->getDescription(ESC_XSSSAFE)); ?></div>
-    
+
     <div class="meta">
         <?php use_javascript('voting'); ?>
         <?php include_partial('vote/vote', array('obj' => $location)); ?>
