@@ -39,7 +39,9 @@ class locationActions extends sfActions {
                         ->execute();
 
         $this->csrf = CSRF::getToken();
-
+        
+        $this->fishes = $this->location->getFishes();
+        
         $this->form = new CommentLocationForm();
         $this->form->setCommented($this->location);
     }

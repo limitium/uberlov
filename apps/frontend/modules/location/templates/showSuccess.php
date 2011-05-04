@@ -22,8 +22,14 @@
             <tr><td>Наловили:</td><td><?php echo $location->getTotalProfit() ?> кг.</td></tr>
         </table>
         <div class="fish">
+            <?php if($fishes->count()): ?>
             <p>Клюет</p>
-            <ul><li>карась</li><li>окунь</li><li>плотва</li><li>щука</li><li>галавль</li><li>пескарик</li><li>карась</li><li>окунь</li><li>плотва</li><li>щука</li><li>галавль</li><li>пескарик</li></ul>
+            <ul>
+                <?php foreach($fishes as $fish): ?>
+                <li><?php echo $fish->name; ?></li>
+                <?php endforeach; ?>
+            </ul>
+            <?php endif; ?>
         </div>
         <?php if ($location->getIsFree()): ?>
             <p class="free"></p>

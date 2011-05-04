@@ -87,6 +87,8 @@ body{
     border-color: #BBBBBB #BBBBBB #FFFFFF;
     border-style: solid;
     border-width: 1px;
+    /*fix for profit tab must be checks*/
+    margin-bottom: -1px;
 }
 
 /*meta*/
@@ -95,4 +97,9 @@ body{
 }
 .meta div{
     display: inline-block;
+}
+
+/*table fix*/
+table, th, td, tr {
+    border: none;
 }
