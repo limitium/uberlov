@@ -82,6 +82,9 @@
             </dd>
         </dl>
     </fieldset>
+    <?php if (!$form->getObject()->isNew()): ?>
+        <?php include_partial('photo/upload', array('object' => $form->getObject())) ?>
+    <?php endif; ?>
     <div class="form_footer">
         <?php if (!$form->getObject()->isNew()): ?>
             <input type="hidden" name="sf_medtod" value="put" />
@@ -94,5 +97,6 @@
                 </span>
             </span>
         </button>
+            <?php echo $form->getObject()->isNew()?'':link_to('Назад', 'location/show?id=' . $form->getObject()->getId()); ?>
     </div>
 </form>
