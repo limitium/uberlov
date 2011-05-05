@@ -6,6 +6,10 @@
     float: left;
     display: block;
 }
+.location_form .photowraper{
+    padding-top: 1em;
+    clear: both;
+}
 .location_form_wrapper{
     width: 700px;
     height: 390px;
@@ -109,18 +113,21 @@ a.dashed:link, a.dashed:active, a.dashed:visited, a.dashed:hover {
 
 /*tab panel*/
 #commentContainer {
+    padding-left: 1em;
     display: none;
 }
 #commentContainer.selected{
     display: block;
 }
 #profitContainer {
+    padding-left: 1em;
     display: none;
 }
 #profitContainer.selected{
     display: block;
 }
 #eventContainer {
+    padding-left: 1em;
     display: none;
 }
 #eventContainer.selected{

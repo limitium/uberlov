@@ -6,23 +6,7 @@
     padding:5px 5px 0.5em;
     position:relative;
 }
-.profitBrief .bar {
-    color:#666666;
-    font-size:0.8em;
-    line-height:140%;
-    position:relative;
-    width:100%;
-}
-.profitBrief .bar #newprofit{
-    margin-left: 30px;
-    margin-top: 2em;
-}
-
-.profitBrief .bar .rating{
-    font-size: 1em;
-    font-weight: bold;
-}
-.profitBrief .name{
+.profitBrief h2{
     padding-top: 1em;
 }
 

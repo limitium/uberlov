@@ -6,7 +6,7 @@
 <?php use_javascript('photoModule'); ?>
 <?php use_stylesheet('photo'); ?>
 
-<div>
+<div class="photowraper">
     <div id="buttonPlaceholder">
         <div id="uploadButton"></div>
     </div>

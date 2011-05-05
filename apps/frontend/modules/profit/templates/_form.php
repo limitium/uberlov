@@ -95,6 +95,7 @@
                     </span>
                 </span>
             </button>
+            <?php echo $form->getObject()->isNew()?'':link_to('Назад', 'profit/show?id=' . $form->getObject()->getId()); ?>
         </div>        
     </form>
 </div>
