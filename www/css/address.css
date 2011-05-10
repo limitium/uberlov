@@ -1,17 +1,23 @@
 .address {
     clear: both;
+    font-size: larger;
+    padding-bottom: 1.5em;
 }
 .addressParts ul li{
     list-style-type: none;
+    padding-left: 1em;
+    display: inline-block;
 }
 .addressParts{
     float:left;
+    width:50%;
 }
 .locationList{
+    width:50%;
     float:left;
 }
-
 .locationList ul li{
+    padding-top: 1em;
     clear: both;
     list-style-type: none;
 }
@@ -23,7 +29,11 @@
     float: none;
 }
 .pager{
+    padding-top: 3em;
     clear: both;
+}
+.meta{
+    padding-left: 5em;
 }
 
 

@@ -1,4 +1,4 @@
-/*from*/
+/*form*/
 .location_form{
 
 }
@@ -132,4 +132,16 @@ a.dashed:link, a.dashed:active, a.dashed:visited, a.dashed:hover {
 }
 #eventContainer.selected{
     display: block;
+}
+/*regions*/
+.contries li h3{
+    padding-top: 1em;
+}
+ul.regions {
+    display: block;
+    padding-left: 1em;
+}
+.regions li{
+    display: inline-block;
+    padding: 0 0.5em 0 1em;
 }
