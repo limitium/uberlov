@@ -19,7 +19,8 @@ class collectorActions extends sfActions {
         $this->countries = Doctrine_Query::create()
                 ->select()
                 ->from('Country c')
-                ->leftJoin('c.AreaLow')
+                ->leftJoin('c.AreaLow a')
+                ->orderBy('c.name, a.name')
                 ->execute();
 
     }

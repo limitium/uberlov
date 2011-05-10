@@ -19,8 +19,9 @@ class addressActions extends sfActions {
         $this->forward404Unless($country = Doctrine::getTable('Country')->find($request->getParameter('id')), sprintf('Object country does not exist (%s).', $request->getParameter('id')));
         $this->country = $country;
         $this->lows = Doctrine_Query::create()->from('AreaLow l')
-                        ->where('l.country_id = ?', $this->country->getId())
-                        ->execute();
+                ->where('l.country_id = ?', $this->country->getId())
+                ->orderBy('l.name')
+                ->execute();
         $this->pager = $this->getLocationPager($request, $this->country, 'country');
     }
 
@@ -28,8 +29,9 @@ class addressActions extends sfActions {
         $this->forward404Unless($low = Doctrine::getTable('AreaLow')->find($request->getParameter('id')), sprintf('Object low does not exist (%s).', $request->getParameter('id')));
         $this->low = $low;
         $this->highs = Doctrine_Query::create()->from('AreaHigh h')
-                        ->where('h.area_low_id = ?', $this->low->getId())
-                        ->execute();
+                ->where('h.area_low_id = ?', $this->low->getId())
+                ->orderBy('h.name')
+                ->execute();
         $this->pager = $this->getLocationPager($request, $this->low, 'low');
     }
 
@@ -37,8 +39,9 @@ class addressActions extends sfActions {
         $this->forward404Unless($high = Doctrine::getTable('AreaHigh')->find($request->getParameter('id')), sprintf('Object low does not exist (%s).', $request->getParameter('id')));
         $this->high = $high;
         $this->localities = Doctrine_Query::create()->from('Locality l')
-                        ->where('l.area_high_id = ?', $this->high->getId())
-                        ->execute();
+                ->where('l.area_high_id = ?', $this->high->getId())
+                ->orderBy('l.name')
+                ->execute();
 
         $this->pager = $this->getLocationPager($request, $this->high, 'high');
     }
@@ -55,9 +58,7 @@ class addressActions extends sfActions {
                         ->leftJoin('a.' . $part->getTable()->getComponentName() . ' part')
                         ->leftJoin('l.CreatedBy p')
                         ->leftJoin('l.VoteLocation v')
-                        ->where('part.id = ?', $part->getId()),
-                'address/' . $partUrl . '?id=' . $part->getId() . '&page={%page_number}',
-                $request->getParameter('page', 1));
+                        ->where('part.id = ?', $part->getId()), 'address/' . $partUrl . '?id=' . $part->getId() . '&page={%page_number}', $request->getParameter('page', 1));
     }
 
 }
