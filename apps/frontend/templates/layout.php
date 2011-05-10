@@ -139,7 +139,7 @@
                             </h3>
                             <ul class="footer_menu_list">
                                 <li><?php echo link_to('По рейтингу', '@map') ?></li>
-                                <li><?php echo link_to('По регионам', '@map') ?></li>
+                                <li><?php echo link_to('По регионам', '@regions') ?></li>
                             </ul>
                         </div>
                         <div class="footer_menu">

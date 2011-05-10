@@ -7,6 +7,9 @@ homepage:
 map:
   url: /map
   param: {module: collector, action locations, menu map}  
+regions:
+  url: /regions
+  param: {module: collector, action regions, menu regions}  
 profits:
   url: /profits
   param: {module: profit, action list, menu profits}
