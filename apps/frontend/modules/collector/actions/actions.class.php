@@ -15,6 +15,20 @@ class collectorActions extends sfActions {
      *
      * @param sfRequest $request A request object
      */
+    public function executeRegions(sfWebRequest $request) {
+        $this->countries = Doctrine_Query::create()
+                ->select()
+                ->from('Country c')
+                ->leftJoin('c.AreaLow')
+                ->execute();
+
+    }
+
+    /**
+     * Executes map action
+     *
+     * @param sfRequest $request A request object
+     */
     public function executeLocations(sfWebRequest $request) {
         $this->ip = $request->getRemoteAddress();
     }
