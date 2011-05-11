@@ -231,7 +231,7 @@ mapModule.prototype.centerBar = function(){
 
 mapModule.prototype.loadData = function(){
     var self = this;
-    app.getJSON('/collector/data', function(data){
+    app.getJSON('/data', function(data){
         $.each(data.locations,function(){
             self.createLocation({
                 id: this.id,

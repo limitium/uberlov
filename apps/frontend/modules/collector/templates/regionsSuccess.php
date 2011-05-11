@@ -8,7 +8,7 @@
                 <ul class="regions">
                     <?php foreach ($areasLow as $areaLow): ?>
                         <li>
-                            <?php echo link_to($areaLow->getName(),'address/low?id='.$areaLow->getId()); ?>
+                            <?php echo link_to($areaLow->getName(),'@address_low?id='.$areaLow->getId()); ?>
                         </li>
                     <?php endforeach; ?>
                 </ul>
