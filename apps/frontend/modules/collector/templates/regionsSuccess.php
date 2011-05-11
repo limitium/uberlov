@@ -1,3 +1,4 @@
+<h4>Все регионы:</h4>
 <ul class="contries">
     <?php foreach ($countries as $country): ?>
         <?php $areasLow = $country->getAreaLow();

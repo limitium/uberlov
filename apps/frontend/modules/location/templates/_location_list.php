@@ -3,7 +3,20 @@
     <ul>
         <?php foreach ($locations as $location): ?>
             <li>
-                <h4><?php echo link_to($location->getName(), 'location/show?id=' . $location->getId()); ?></h4>                
+                <h4><?php echo link_to($location->getName(), 'location/show?id=' . $location->getId()); ?></h4>     
+                <div class="fish">
+                    <?php $fishes = $location->getFishes(); ?>
+                    <?php if ($fishes->count()): ?>
+                        <p>Клюет</p>
+                        <ul>
+                            <?php foreach ($fishes as $fish): ?>
+                                <li><?php echo $fish->name; ?></li>
+                            <?php endforeach; ?>
+                        </ul>
+                    <?php else: ?>
+                        <p>Тут еще не ловили</p>
+                    <?php endif; ?>
+                </div>
                 <div class="meta">
                     <?php include_partial('vote/vote', array('obj' => $location)); ?>
                     <?php include_partial('profile/addBy', array('added' => $location)); ?>
