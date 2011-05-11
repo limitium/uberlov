@@ -15,14 +15,29 @@ class collectorActions extends sfActions {
      *
      * @param sfRequest $request A request object
      */
+    public function executeTop(sfWebRequest $request) {
+        $this->locations = Doctrine_Query::create()
+                        ->select('sum(v.value) as weight,l.*')
+                        ->from('Location l')
+                        ->leftJoin('l.VoteLocation v')
+                        ->groupBy('l.id')
+                        ->orderBy('weight desc')
+                        ->limit(10)
+                        ->execute();
+    }
+
+    /**
+     * Executes map action
+     *
+     * @param sfRequest $request A request object
+     */
     public function executeRegions(sfWebRequest $request) {
         $this->countries = Doctrine_Query::create()
-                ->select()
-                ->from('Country c')
-                ->leftJoin('c.AreaLow a')
-                ->orderBy('c.name, a.name')
-                ->execute();
-
+                        ->select()
+                        ->from('Country c')
+                        ->leftJoin('c.AreaLow a')
+                        ->orderBy('c.name, a.name')
+                        ->execute();
     }
 
     /**

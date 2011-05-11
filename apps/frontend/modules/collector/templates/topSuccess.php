@@ -1,0 +1,1 @@
+<?php include_partial('location/location_list', array('locations' => $locations)); ?>

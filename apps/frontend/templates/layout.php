@@ -138,7 +138,7 @@
                                 <?php echo link_to('Карта мест', '@map') ?>
                             </h3>
                             <ul class="footer_menu_list">
-                                <li><?php echo link_to('По рейтингу', '@map') ?></li>
+                                <li><?php echo link_to('По рейтингу', '@top') ?></li>
                                 <li><?php echo link_to('По регионам', '@regions') ?></li>
                             </ul>
                         </div>

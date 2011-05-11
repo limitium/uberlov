@@ -9,7 +9,11 @@ map:
   param: {module: collector, action locations, menu map}  
 regions:
   url: /regions
-  param: {module: collector, action regions, menu regions}  
+  param: {module: collector, action regions, menu regions}
+top:
+  url: /top
+  param: {module: collector, action top, menu top}
+  
 profits:
   url: /profits
   param: {module: profit, action list, menu profits}
