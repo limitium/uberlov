@@ -42,7 +42,7 @@ a.dashed:link, a.dashed:active, a.dashed:visited, a.dashed:hover {
 /*details*/
 .location .stat{
     float:left;
-    width: 50%;
+    width: 53%;
 }
 .location .stat table {
     margin: 1em 0 0 2em;
