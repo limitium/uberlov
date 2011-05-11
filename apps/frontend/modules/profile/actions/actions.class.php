@@ -101,20 +101,6 @@ class profileActions extends sfActions {
         $this->csrf = CSRF::getToken();
     }
 
-    public function executeNew(sfWebRequest $request) {
-        $this->form = new sfGuardUserProfileForm();
-    }
-
-    public function executeCreate(sfWebRequest $request) {
-        $this->forward404Unless($request->isMethod(sfRequest::POST));
-
-        $this->form = new sfGuardUserProfileForm();
-
-        $this->processForm($request, $this->form);
-
-        $this->setTemplate('new');
-    }
-
     public function executeEdit(sfWebRequest $request) {
         $this->forward404Unless($profile = Doctrine::getTable('sfGuardUserProfile')->find(array($request->getParameter('id'))), sprintf('Object profile does not exist (%s).', $request->getParameter('id')));
         $this->form = new sfGuardUserProfileForm($profile);

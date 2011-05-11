@@ -6,14 +6,7 @@ homepage:
 #main routes
 map:
   url: /map
-  param: {module: collector, action locations, menu map}  
-regions:
-  url: /regions
-  param: {module: collector, action regions, menu regions}
-top:
-  url: /top
-  param: {module: collector, action top, menu top}
-  
+  param: {module: collector, action locations, menu map}   
 profits:
   url: /profits
   param: {module: profit, action list, menu profits}
@@ -55,7 +48,217 @@ my_locations:
 my_profile:
   url:   /my_profile
   param: { module: profile, action: my, menu my_profile}
+
+#profile routes
+address_country:
+  url:   /address/country/:id
+  param: { module: address, action: country}
+address_high:
+  url:   /address/high/:id
+  param: { module: address, action: high}
+address_low:
+  url:   /address/low/:id
+  param: { module: address, action: low}
+address_locality:
+  url:   /address/locality/:id
+  param: { module: address, action: locality}
   
-#to remove nah!
-  default:
-  url:   /:module/:action/*
+#collector routes
+regions:
+  url: /regions
+  param: {module: collector, action regions}
+top:
+  url: /top
+  param: {module: collector, action top}
+data:
+  url: /data
+  param: {module: collector, action data}
+
+#comment
+comment_for:
+  url: /comment/for
+  param: {module: comment, action for}
+  
+#event
+event_list:
+  url:        /event/list
+  params:     { module: event, action: list }
+  requirements:
+    sf_method: [get]
+event_new:
+  url:        /event/new
+  params:     { module: event, action: new }
+  requirements:
+    sf_method: [get]
+event_create:
+  url:        /event
+  params:     { module: event, action: create }
+  requirements:
+    sf_method: [post]
+event_edit:
+  url:        /event/:id/edit
+  params:     { module: event, action: edit }
+  requirements:
+    sf_method: [get]
+event_update:
+  url:        /event/:id
+  params:     { module: event, action: update }
+  requirements:
+    sf_method: [put]
+event_show:
+  url:        /event/:id
+  params:     { module: event, action: show }
+  requirements:
+    sf_method: [get]
+
+comment_for:
+  url: /comment/for
+  param: {module: comment, action for}
+  
+#inbox
+inbox_list:
+  url:        /inbox/list
+  params:     { module: inbox, action: list }
+  requirements:
+    sf_method: [get]
+inbox_new:
+  url:        /inbox/new/:whom
+  params:     { module: inbox, action: new }
+  requirements:
+    sf_method: [get]
+inbox_create:
+  url:        /inbox
+  params:     { module: inbox, action: create }
+  requirements:
+    sf_method: [post]
+inbox_show:
+  url:        /inbox/:id
+  params:     { module: inbox, action: show }
+  requirements:
+    sf_method: [get]
+inbox_delete:
+  url:        /inbox/delete/:id
+  params:     { module: inbox, action: delete }
+  requirements:
+    sf_method: [post]
+inbox_remove:
+  url:        /remove/remove/:id/:profile
+  params:     { module: inbox, action: remove }
+  requirements:
+    sf_method: [post]
+inbox_add:
+  url:        /inbox/add/:id/:data
+  params:     { module: inbox, action: add }
+  requirements:
+    sf_method: [post]
+
+#location
+location_list:
+  url:        /location/list
+  params:     { module: location, action: list }
+  requirements:
+    sf_method: [get]
+location_new:
+  url:        /location/new
+  params:     { module: location, action: new }
+  requirements:
+    sf_method: [get]
+location_create:
+  url:        /location
+  params:     { module: location, action: create }
+  requirements:
+    sf_method: [post]
+location_edit:
+  url:        /location/:id/edit
+  params:     { module: location, action: edit }
+  requirements:
+    sf_method: [get]
+location_update:
+  url:        /location/:id
+  params:     { module: location, action: update }
+  requirements:
+    sf_method: [put]
+location_show:
+  url:        /location/:id
+  params:     { module: location, action: show }
+  requirements:
+    sf_method: [get]
+location_map:
+  url:        /location/map/:id
+  params:     { module: location, action: map }
+  requirements:
+    sf_method: [get]
+location_tomy:
+  url:        /location/tomy/:id
+  params:     { module: location, action: tomy }
+  requirements:
+    sf_method: [post]
+location_frommy:
+  url:        /location/frommy/:id
+  params:     { module: location, action: frommy }
+  requirements:
+    sf_method: [post]
+location_my:
+  url:        /location/my
+  params:     { module: location, action: my }
+  requirements:
+    sf_method: [get]   
+  
+#photo
+photo_upload:
+  url:        /photo/upload
+  params:     { module: photo, action: upload}
+  requirements:
+    sf_method: [post]   
+    
+#profile
+profile_add:
+  url:        /profile/add/:id
+  params:     { module: profile, action: add }
+  requirements:
+    sf_method: [post]
+profile_city:
+  url:        /profile/city/:q/:limit
+  params:     { module: profile, action: city }
+  requirements:
+    sf_method: [post]
+profile_edit:
+  url:        /profile/:id/edit
+  params:     { module: profile, action: edit }
+  requirements:
+    sf_method: [get]    
+profile_editemail:
+  url:        /profile/editemail
+  params:     { module: profile, action: edit_email}
+  requirements:
+    sf_method: [get]    
+profile_friends:
+  url:        /profile/friends
+  params:     { module: profile, action: friends}
+  requirements:
+    sf_method: [get]    
+profile_list:
+  url:        /profile/list
+  params:     { module: profile, action: list }
+  requirements:
+    sf_method: [get]
+profile_show:
+  url:        /profile/:id
+  params:     { module: profile, action: show }
+  requirements:
+    sf_method: [get]
+profile_my:
+  url:        /profile/my
+  params:     { module: profile, action: my }
+  requirements:
+    sf_method: [get]
+profile_remove:
+  url:        /profile/remove/:id
+  params:     { module: profile, action: remove }
+  requirements:
+    sf_method: [post]
+profile_update:
+  url:        /profile/:id
+  params:     { module: profile, action: update }
+  requirements:
+    sf_method: [put]

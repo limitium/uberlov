@@ -68,15 +68,6 @@ class profitActions extends sfActions {
         $this->setTemplate('edit');
     }
 
-    public function executeDelete(sfWebRequest $request) {
-        $request->checkCSRFProtection();
-
-        $this->forward404Unless($profit = Doctrine::getTable('Profit')->find(array($request->getParameter('id'))), sprintf('Object profit does not exist (%s).', $request->getParameter('id')));
-        $profit->delete();
-
-        $this->redirect('profit/index');
-    }
-
     protected function processForm(sfWebRequest $request, sfForm $form) {
         $params = $request->getParameter($form->getName());
 
