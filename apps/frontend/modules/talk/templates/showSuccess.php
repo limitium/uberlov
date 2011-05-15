@@ -3,56 +3,56 @@
 
 <div class="sectionMenuShow">
     <ul>
+        <?php $sections = array(); ?>
         <?php foreach ($talk->getSections() as $section): ?>
-            <li>
-            <?php echo link_to($section, 'talk/list?section=' . $section->getId()); ?>
-        </li>        
+            <?php $sections[] = '<li>' . link_to($section, 'talk/list?section=' . $section->getId()) . '</li>'; ?>
         <?php endforeach; ?>
-        </ul>
-    </div>
+        <?php echo implode($sections,' &rarr; '); ?>
+    </ul>
+</div>
 
-    <div id="talk">
-        <h2><?php echo $talk->getName(); ?></h2>
+<div id="talk">
+    <h2><?php echo $talk->getName(); ?></h2>
     <?php echo simple_format_text($talk->getMessage()); ?>
-            <div class="assigned-tags">
-                <ul>
+    <div class="assigned-tags">
+        <ul>
             <?php foreach ($talk->getTags() as $tag): ?>
                 <li>
                     <span><?php echo link_to($tag, 'talk/tag?tag=' . $tag); ?></span>
                 </li>
             <?php endforeach ?>
-            </ul>
-        </div>
-        <div class="meta">
-            <div>
+        </ul>
+    </div>
+    <div class="meta">
+        <div>
             <?php include_partial('vote/vote', array('obj' => $talk)); ?>
-                <a href="" id="goToReply">□</a>
+            <a href="" id="goToReply">□</a>
             <?php include_partial('profile/writeBy', array('written' => $talk)); ?>
-                <a href="" class="commentShowAuthor" author="user<?php echo $talk->getCreatedBy(); ?>">●</a>
-            </div>
+            <a href="" class="commentShowAuthor" author="user<?php echo $talk->getCreatedBy(); ?>">●</a>
         </div>
-        <div class="tabPanel">
-            <ul>
-                <li><span href="#" id="tabComments" class="selected">Комментарии (<i id="commentCounter"><?php echo sizeof($comments); ?></i>)</span></li>
-            </ul>
-        </div>
+    </div>
+    <div class="tabPanel">
+        <ul>
+            <li><span href="#" id="tabComments" class="selected">Комментарии (<i id="commentCounter"><?php echo sizeof($comments); ?></i>)</span></li>
+        </ul>
+    </div>
 
     <?php include_partial('comment/tree', array('form' => $form, 'comments' => $comments)); ?>
-            </div>
+</div>
 <?php slot('extra'); ?>
-                <div id="talkRelated">
-                    <h4>Похожие обсуждения:</h4>
+<div id="talkRelated">
+    <h4>Похожие обсуждения:</h4>
     <?php foreach ($related as $relTalk): ?>
-    <?php if ($relTalk != $talk): ?>
+        <?php if ($relTalk != $talk): ?>
 
-                        <div>
-        <?php echo link_to($relTalk->getName(), 'talk/show?id=' . $relTalk->getId()); ?>
-                        <div class="meta">
-                            <span><?php echo link_to($relTalk->getCreatedBy()->getNickName(), 'profile/show?id=' . $relTalk->getCreatedBy()->getId()); ?> <?php echo $relTalk->getDateTimeObject('created_at')->format('d.m.Y'); ?></span>
-                        </div>
-                    </div>
+            <div>
+                <?php echo link_to($relTalk->getName(), 'talk/show?id=' . $relTalk->getId()); ?>
+                <div class="meta">
+                    <span><?php echo link_to($relTalk->getCreatedBy()->getNickName(), 'profile/show?id=' . $relTalk->getCreatedBy()->getId()); ?> <?php echo $relTalk->getDateTimeObject('created_at')->format('d.m.Y'); ?></span>
+                </div>
+            </div>
 
-    <?php endif; ?>
+        <?php endif; ?>
     <?php endforeach; ?>
-                    </div>
+</div>
 <?php end_slot(); ?>

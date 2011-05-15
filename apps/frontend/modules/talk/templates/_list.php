@@ -7,7 +7,7 @@
         <ul>
             <?php foreach ($talk->getTagging() as $tagging): ?>
                 <li>
-                    <span><?php echo link_to($tagging->getTag()->getName(), 'tag/word?word=' . $tagging->getTag()->getName()); ?></span>
+                    <span><?php echo link_to($tagging->getTag()->getName(), 'talk/tag?tag=' . $tagging->getTag()->getName()); ?></span>
                 </li>
             <?php endforeach ?>
             </ul>
