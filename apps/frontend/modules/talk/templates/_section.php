@@ -7,5 +7,5 @@
     <?php foreach ($tree->toHierarchy() as $section) : ?>
         <?php include_partial('talk/section_node', array('node' => $section, 'curSection' => $curSection)); ?>
     <?php endforeach; ?>
-    <?php echo link_to('Добавить', 'talk/section' . ($curSection ? '?parent=' . $curSection->getId() : '')); ?>
+    <?php echo link_to('Добавить', '@talk_section' . ($curSection ? '?parent=' . $curSection->getId() : '')); ?>
 </div>

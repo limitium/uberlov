@@ -101,10 +101,8 @@ event_edit:
   requirements:
     sf_method: [get]
 event_update:
-  url:        /event/:id
+  url:        /event/update/:id
   params:     { module: event, action: update }
-  requirements:
-    sf_method: [put]
 event_show:
   url:        /event/:id
   params:     { module: event, action: show }
@@ -174,10 +172,8 @@ location_edit:
   requirements:
     sf_method: [get]
 location_update:
-  url:        /location/:id
+  url:        /location/update/:id
   params:     { module: location, action: update }
-  requirements:
-    sf_method: [put]
 location_show:
   url:        /location/:id
   params:     { module: location, action: show }
@@ -258,7 +254,83 @@ profile_remove:
   requirements:
     sf_method: [post]
 profile_update:
-  url:        /profile/:id
+  url:        /profile/update/:id
   params:     { module: profile, action: update }
+  
+#profit
+profit_list:
+  url:        /profit/list
+  params:     { module: profit, action: list }
   requirements:
-    sf_method: [put]
+    sf_method: [get]
+profit_new:
+  url:        /profit/new/:location
+  params:     { module: profit, action: new }
+  requirements:
+    sf_method: [get]
+profit_create:
+  url:        /profit
+  params:     { module: profit, action: create }
+  requirements:
+    sf_method: [post]
+profit_edit:
+  url:        /profit/:id/edit
+  params:     { module: profit, action: edit }
+  requirements:
+    sf_method: [get]
+profit_update:
+  url:        /profit/update/:id
+  params:     { module: profit, action: update }
+profit_show:
+  url:        /profit/:id
+  params:     { module: profit, action: show }
+  requirements:
+    sf_method: [get]
+    
+#talk
+talks_with_section:
+  url: /talks/section/:section/:page
+  param: {module: talk, action list, menu talks, page:1,section:''}
+  requirements:
+    sf_method: [get]
+talk_new:
+  url:        /talk/new
+  params:     { module: talk, action: new }
+  requirements:
+    sf_method: [get]
+talk_create:
+  url:        /talk
+  params:     { module: talk, action: create }
+  requirements:
+    sf_method: [post]
+talk_edit:
+  url:        /talk/:id/edit
+  params:     { module: talk, action: edit }
+  requirements:
+    sf_method: [get]
+talk_update:
+  url:        /talk/update/:id
+  params:     { module: talk, action: update }
+talk_section:
+  url:        /talk/section
+  params:     { module: talk, action: section }
+talk_suggest:
+  url:        /talk/suggest
+  params:     { module: talk, action: suggest }
+talk_tag:
+  url:        /talk/tag/:tag
+  params:     { module: talk, action: tag}
+  requirements:
+    sf_method: [get]
+talk_show:
+  url:        /talk/:id
+  params:     { module: talk, action: show }
+  requirements:
+    sf_method: [get]
+    
+#vote
+vote_for:
+  url:        /vote/for
+  params:     { module: vote, action: for}
+  requirements:
+    sf_method: [post]

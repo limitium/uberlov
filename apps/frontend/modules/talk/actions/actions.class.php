@@ -15,7 +15,7 @@ class talkActions extends sfActions {
     }
 
     public function executeTag($request) {
-        $this->tag = Doctrine::getTable('Tag')->findBy('name', array($request->getParameter('word')))->getFirst();
+        $this->tag = Doctrine::getTable('Tag')->findBy('name', array($request->getParameter('tag')))->getFirst();
         $this->forward404Unless($this->tag);
 
         $url = 'talk/tag?&tag=' . $this->tag->getName() . 'page={%page_number}';

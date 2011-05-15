@@ -15,7 +15,7 @@ class TalkForm extends BaseTalkForm {
         );
 
         $this->widgetSchema['talk_section_id'] = new sfWidgetFormInputHidden();
-        $this->widgetSchema['tags'] = new sfWidgetFormInputHidden();
+        $this->widgetSchema['tags'] = new sfWidgetFormInputText();
 
         $this->validatorSchema['talk_section_id'] = new sfValidatorDoctrineChoice(array('model' => 'TalkSection', 'required' => true));
         $this->validatorSchema['tags'] = new sfValidatorString(array('required' => true));

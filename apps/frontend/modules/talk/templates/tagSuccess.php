@@ -5,4 +5,4 @@
     </div>
 <?php endforeach; ?>
 </div>
-<?php include_partial('talk/talks', array('pager' => $pager)); ?>
+<?php include_partial('talk/list', array('pager' => $pager)); ?>
