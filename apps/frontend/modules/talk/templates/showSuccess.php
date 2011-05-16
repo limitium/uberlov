@@ -1,4 +1,4 @@
-<?php use_helper('Text'); ?>
+<?php use_helper('XssSafe'); ?>
 <?php use_javascript('voting'); ?>
 
 <div class="sectionMenuShow">
@@ -11,9 +11,11 @@
     </ul>
 </div>
 
-<div id="talk">
+<div class="talk">
     <h2><?php echo $talk->getName(); ?></h2>
-    <?php echo simple_format_text($talk->getMessage()); ?>
+    <div class="text">
+    <?php echo $talk->getMessage(ESC_XSSSAFE); ?>
+    </div>
     <div class="assigned-tags">
         <ul>
             <?php foreach ($talk->getTags() as $tag): ?>
@@ -39,7 +41,7 @@
 
     <?php include_partial('comment/tree', array('form' => $form, 'comments' => $comments)); ?>
 </div>
-<?php slot('extra'); ?>
+<?php //slot('extra'); ?>
 <div id="talkRelated">
     <h4>Похожие обсуждения:</h4>
     <?php foreach ($related as $relTalk): ?>
@@ -55,4 +57,4 @@
         <?php endif; ?>
     <?php endforeach; ?>
 </div>
-<?php end_slot(); ?>
+<?php //end_slot(); ?>
