@@ -7,23 +7,41 @@
         <?php foreach ($talk->getSections() as $section): ?>
             <?php $sections[] = '<li>' . link_to($section, 'talk/list?section=' . $section->getId()) . '</li>'; ?>
         <?php endforeach; ?>
-        <?php echo implode($sections,' &rarr; '); ?>
+        <?php echo implode($sections, ' &rarr; '); ?>
     </ul>
 </div>
-
-<div class="talk">
-    <h2><?php echo $talk->getName(); ?></h2>
-    <div class="text">
-    <?php echo $talk->getMessage(ESC_XSSSAFE); ?>
+<div class="talkWrapper">
+    <div class="talk">
+        <h2><?php echo $talk->getName(); ?></h2>
+        <div class="text">
+            <?php echo $talk->getMessage(ESC_XSSSAFE); ?>
+        </div>
+        <div class="assigned-tags">
+            <ul>
+                <?php $tags = array();
+                foreach ($talk->getTags() as $tag): ?>
+                    <?php $tags[] = '<li>' . link_to($tag, 'talk/tag?tag=' . $tag) . '</li>'; ?>
+                <?php endforeach ?>
+                <?php echo implode(',', $tags); ?>
+            </ul>
+        </div>
     </div>
-    <div class="assigned-tags">
-        <ul>
-            <?php foreach ($talk->getTags() as $tag): ?>
-                <li>
-                    <span><?php echo link_to($tag, 'talk/tag?tag=' . $tag); ?></span>
-                </li>
-            <?php endforeach ?>
-        </ul>
+    <div id="talkRelated">
+        <h4>Похожие обсуждения:</h4>
+        <?php foreach ($related as $relTalk): ?>
+            <?php if ($relTalk != $talk): ?>
+
+                <div class="related">
+                    <?php echo link_to($relTalk->getName(), 'talk/show?id=' . $relTalk->getId()); ?>
+                    <div class="meta">
+                        <span>
+                            <?php include_partial('profile/writeBy', array('written' => $relTalk, 'size' => 24)); ?>
+                        </span>
+                    </div>
+                </div>
+
+            <?php endif; ?>
+        <?php endforeach; ?>
     </div>
     <div class="meta">
         <div>
@@ -33,28 +51,11 @@
             <a href="" class="commentShowAuthor" author="user<?php echo $talk->getCreatedBy(); ?>">●</a>
         </div>
     </div>
-    <div class="tabPanel">
-        <ul>
-            <li><span href="#" id="tabComments" class="selected">Комментарии (<i id="commentCounter"><?php echo sizeof($comments); ?></i>)</span></li>
-        </ul>
-    </div>
-
-    <?php include_partial('comment/tree', array('form' => $form, 'comments' => $comments)); ?>
 </div>
-<?php //slot('extra'); ?>
-<div id="talkRelated">
-    <h4>Похожие обсуждения:</h4>
-    <?php foreach ($related as $relTalk): ?>
-        <?php if ($relTalk != $talk): ?>
-
-            <div>
-                <?php echo link_to($relTalk->getName(), 'talk/show?id=' . $relTalk->getId()); ?>
-                <div class="meta">
-                    <span><?php echo link_to($relTalk->getCreatedBy()->getNickName(), 'profile/show?id=' . $relTalk->getCreatedBy()->getId()); ?> <?php echo $relTalk->getDateTimeObject('created_at')->format('d.m.Y'); ?></span>
-                </div>
-            </div>
-
-        <?php endif; ?>
-    <?php endforeach; ?>
+<div class="tabPanel">
+    <ul>
+        <li><span href="#" id="tabComments" class="selected">Комментарии (<i id="commentCounter"><?php echo sizeof($comments); ?></i>)</span></li>
+    </ul>
 </div>
-<?php //end_slot(); ?>
+
+<?php include_partial('comment/tree', array('form' => $form, 'comments' => $comments)); ?>

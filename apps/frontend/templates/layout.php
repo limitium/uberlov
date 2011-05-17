@@ -159,7 +159,7 @@
                         </div>
                         <div class="footer_menu">
                             <h3>
-                                <?php echo link_to('Люди', '@events') ?>
+                                <?php echo link_to('Люди', '@people') ?>
                             </h3>
                         </div>
                         <div class="footer_menu">

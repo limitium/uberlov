@@ -93,14 +93,14 @@ body{
 
 /*meta*/
 .meta{
-    padding-top: 1em;
+/*    padding-top: 1em;*/
 }
 .meta div{
     display: inline-block;
 }
 
 .text{
-    padding: 1em;
+    padding: 0.5em 0 0.3em 1em;
 }
 /*table fix*/
 table, th, td, tr {
