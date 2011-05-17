@@ -1,5 +1,13 @@
 
 /*talks show*/
+.talkWrapper .meta{
+    clear: both;
+    display: block;
+}
+.talk {
+    display: block;
+    float: left;
+}
 .talk h2{
     padding-top: 1em;
 }
@@ -23,15 +31,12 @@
 .talkBrief{
     margin-top: 5em;
 }
-.talkBrief p{
-    margin: 0.5em;
-}
 .talkBrief .meta{
     clear: both;
     height: 20px;
-    margin-top: 10px;
     font-size: 12pt;
     color: #444;
+    padding: 0;
 }
 
 /*talk tags*/
@@ -62,8 +67,12 @@
 
 /* last block */
 #talkRelated{
-    margin: 0.5em;
-    background-color: #E8EDFF;
+    float: right;
+    width: 30%;
+    padding: 0.5em;
+    margin-top: 1em;
+    background-color: #F6F6F6;
+    border: 1px solid #DFDFDF;
 }
 #talkRelated span{
     display: block;
@@ -71,8 +80,15 @@
     text-align: right;
 }
 #talkRelated div {
-    margin-top:1em;
 }
 #talkRelated div p {
     margin-top:0.5em;
+}
+
+.related{
+    padding-top: 1em;
+}
+.related .meta{
+    padding: 0;
+    text-align: right;
 }

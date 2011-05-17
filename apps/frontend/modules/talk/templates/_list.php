@@ -2,8 +2,10 @@
 <?php use_helper('Text'); ?>
 <?php foreach ($pager->execute() as $talk): ?>
     <div class="talkBrief">
-        <?php echo link_to($talk->getName(), 'talk/show?id=' . $talk->getId()); ?>
-        <?php echo simple_format_text(truncate_text($talk->getMessage(ESC_XSSSAFE), 100, '...', true)); ?>
+        <h2><?php echo link_to($talk->getName(), 'talk/show?id=' . $talk->getId()); ?></h2>
+        <div class="text">
+            <?php echo simple_format_text(truncate_text($talk->getMessage(ESC_XSSSAFE), 100, '...', true)); ?>
+        </div>
         <div class="assigned-tags">
             <ul>
                 <?php $tags = array();
