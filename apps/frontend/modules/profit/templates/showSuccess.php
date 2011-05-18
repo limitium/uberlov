@@ -9,6 +9,9 @@
         <?php endif; ?>
     </h2>
     <div class="where">Ловили <?php echo $profit->getDateTimeObject('date')->format('d.m.Y'); ?> на <?php echo link_to($profit->getLocation()->getName(), 'location/show?id=' . $profit->getLocation()->getId()); ?></div>
+    <div class="text"><?php echo $profit->getDescription(ESC_XSSSAFE); ?></div>
+    <h4>Снасти:</h4>
+    <div class="text"><?php echo $profit->getCordage(ESC_XSSSAFE); ?></div>
     <table class="profitDetails">
         <thead>
             <tr>
@@ -46,8 +49,6 @@
             нету :(
         <?php endif; ?>
     </div>
-    <div>Использовались снасти: <?php echo $profit->getCordage(ESC_XSSSAFE); ?></div>
-    <div class="text"><?php echo $profit->getDescription(ESC_XSSSAFE); ?></div>
     <div class="meta">
         <?php use_javascript('voting'); ?>
         <?php include_partial('vote/vote', array('obj' => $profit)); ?>

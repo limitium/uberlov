@@ -1,7 +1,6 @@
 <script type="text/javascript">
     app.csrf.wishlist = "<?php echo $csrf; ?>";
 </script>
-<?php use_helper('text'); ?>
 <?php use_helper('XssSafe') ?>
 <?php use_javascript('wishes'); ?>
 
@@ -41,7 +40,7 @@
         <?php include_partial('photo/show', array('object' => $location)) ?>
     </div>
 
-    <div class="description"><?php echo simple_format_text($location->getDescription(ESC_XSSSAFE)); ?></div>
+    <div class="description"><?php echo $location->getDescription(ESC_XSSSAFE); ?></div>
 
     <div class="meta">
         <?php use_javascript('voting'); ?>

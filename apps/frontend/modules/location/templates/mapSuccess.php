@@ -1,4 +1,3 @@
-<?php use_helper('Text'); ?>
 <?php use_helper('XssSafe'); ?>
 <div class="map_location">
     <div class="location_header">
@@ -6,7 +5,7 @@
         <h2><?php echo $location->getName() ?></h2>    
     </div>
     <div class="description">
-        <?php echo simple_format_text(truncate_text($location->getDescription(ESC_XSSSAFE), 200, '...', true)) ?>
+        <?php echo truncate_text($location->getDescription(ESC_XSSSAFE), 200, '...', true) ?>
     </div>
     <div class="location_footer">
         комментариев <?php echo $comments; ?> | отчетов 0 | событий 0 |  <?php echo link_to('подробнее', 'location/show?id=' . $location->getId()) ?>

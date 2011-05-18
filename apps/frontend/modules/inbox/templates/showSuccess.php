@@ -1,4 +1,4 @@
-<?php use_helper('Text'); ?>
+<?php use_helper('XssSafe'); ?>
 
 <script type="text/javascript">
     app.csrf.inbox = "<?php echo $csrf; ?>";
@@ -7,7 +7,7 @@
 
 <div id="inbox">
     <h2><?php echo $inbox->getName(); ?></h2>
-    <div class=qweqwe"><?php echo simple_format_text($inbox->getMessage()); ?></div>
+    <div class=qweqwe"><?php echo $inbox->getMessage(ESC_XSSSAFE); ?></div>
     <div class="meta">
         <div>
             <a href="" id="goToReply">□</a> 
@@ -34,7 +34,7 @@
     <ul>
         <?php foreach ($inboxed as $profile): ?>
             <li profile="<?php echo $profile->getId(); ?>"><?php echo link_to($profile->getNickName(), 'profile/show?id=' . $profile->getId()); ?><?php if ($inbox->isOwner()): ?><a href="" class="delete"> x </a><?php endif; ?></li>
-            <?php endforeach; ?>
+        <?php endforeach; ?>
     </ul>
 </div>
 
