@@ -8,7 +8,7 @@
  * @property integer $id
  * @property string $name
  * @property integer $location_id
- * @property timestamp $date
+ * @property date $date
  * @property string $cordage
  * @property string $description
  * @property integer $fish_id
@@ -23,7 +23,7 @@
  * @method integer             getId()            Returns the current record's "id" value
  * @method string              getName()          Returns the current record's "name" value
  * @method integer             getLocationId()    Returns the current record's "location_id" value
- * @method timestamp           getDate()          Returns the current record's "date" value
+ * @method date                getDate()          Returns the current record's "date" value
  * @method string              getCordage()       Returns the current record's "cordage" value
  * @method string              getDescription()   Returns the current record's "description" value
  * @method integer             getFishId()        Returns the current record's "fish_id" value
@@ -74,8 +74,8 @@ abstract class BaseProfit extends sfDoctrineRecord
              'type' => 'integer',
              'length' => 4,
              ));
-        $this->hasColumn('date', 'timestamp', null, array(
-             'type' => 'timestamp',
+        $this->hasColumn('date', 'date', null, array(
+             'type' => 'date',
              'notnull' => true,
              ));
         $this->hasColumn('cordage', 'string', null, array(

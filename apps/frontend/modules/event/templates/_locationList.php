@@ -1,4 +1,5 @@
 <?php use_helper('XssSafe'); ?>
+<?php use_helper('Text'); ?>
 <div class="eventListItem">
     <h3>
         <?php echo $event->getDateTimeObject('date')->format('d.m.Y') ?> <?php echo link_to($event->getName(), 'event/show?id=' . $event->getId()); ?>
