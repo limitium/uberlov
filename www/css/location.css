@@ -59,14 +59,14 @@ a.dashed:link, a.dashed:active, a.dashed:visited, a.dashed:hover {
     text-align: left;
     line-height: 2em;
 }
-.location .stat div.fish{
+div.fish{
     margin: 1em 0 0 0.5em;
     padding: 0 0 0 0.5em;
     border-left: 1px solid #DFDFDF;
     float: left;
     width: 50%;
 }
-.location .stat div.fish ul li {
+div.fish ul li {
     float: left;
     padding: 0.5em 0 0 1em;
 }
@@ -123,12 +123,18 @@ a.dashed:link, a.dashed:active, a.dashed:visited, a.dashed:hover {
     padding-left: 1em;
     display: none;
 }
+#profitContainer .button_01{
+    margin-top: 1em;
+}
 #profitContainer.selected{
     display: block;
 }
 #eventContainer {
     padding-left: 1em;
     display: none;
+}
+#eventContainer .button_01{
+    margin-top: 1em;
 }
 #eventContainer.selected{
     display: block;

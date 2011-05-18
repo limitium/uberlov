@@ -17,7 +17,7 @@
     float:left;
 }
 .locationList ul li{
-    padding-top: 1em;
+    padding-top: 3em;
     clear: both;
     list-style-type: none;
 }
@@ -27,6 +27,13 @@
 .locationList ul li div.createdBy{
     clear:both;
     float: none;
+}
+.locationList .fish{
+    float: none;
+}
+.locationList .fish li{
+    float: none;
+    display: inline-block
 }
 .pager{
     padding-top: 3em;
