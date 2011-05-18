@@ -1,8 +1,8 @@
-<?php use_helper('Text'); ?>
+<?php use_helper('XssSafe'); ?>
 <div class="inbox">
     <div class="message">
         <?php echo link_to($inbox->getName(), 'inbox/show?id=' . $inbox->getId()); ?>
-        <p><?php echo simple_format_text($inbox->getMessage(), 100, '...', true); ?></p>
+        <p><?php echo truncate_text($inbox->getMessage(ESC_XSSSAFE), 100, '...', true); ?></p>
     </div>
     <div class="meta">
         <div>

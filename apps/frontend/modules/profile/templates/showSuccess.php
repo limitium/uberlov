@@ -1,5 +1,5 @@
 <?php use_helper('Countable'); ?>
-<?php use_helper('Text'); ?>
+<?php use_helper('XssSafe'); ?>
 <div class="profile">
     <div class="personal">
         <div class="info">
@@ -16,7 +16,7 @@
                 <?php endif; ?>
             </p>
             <p>Родил<?php echo $profile->getSex() ? 'ся' : 'ась' ?>: <?php echo $profile->getDateTimeObject('birth_date')->format('d.m.Y') ?></p>
-            <p><?php echo simple_format_text($profile->getDescription()); ?></p>
+            <p><?php echo $profile->getDescription(ESC_XSSSAFE); ?></p>
         </div>
     </div>
 

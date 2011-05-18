@@ -1,13 +1,6 @@
 /*profit brief*/
-.profitBrief  {
-    padding-bottom:2em;
-}
-.profitBrief .message {
-    padding:5px 5px 0.5em;
-    position:relative;
-}
-.profitBrief h2{
-    padding-top: 1em;
+.profitBrief{
+    padding-top: 2em;
 }
 
 /*profit details table*/

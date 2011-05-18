@@ -1,4 +1,4 @@
-<?php use_helper('Text'); ?>
+<?php use_helper('XssSafe'); ?>
 <?php use_javascript('voting'); ?>
 
 
@@ -11,15 +11,15 @@
     </h2>
     <div class="rules">
         <h3>Регламент:</h3>
-        <?php echo simple_format_text($event->getRules()); ?>
+        <?php echo $event->getRules(ESC_XSSSAFE); ?>
     </div>
     <div class="desctiption">
         <h3>Описание:</h3>
-        <?php echo simple_format_text($event->getDescription()); ?>
+        <?php echo $event->getDescription(ESC_XSSSAFE); ?>
     </div>
     <div class="users">
         <h3>Участники:</h3>
-        <?php echo simple_format_text($event->getUsers()); ?>
+        <?php echo $event->getUsers(ESC_XSSSAFE); ?>
     </div>
     <div class="meta">
         <?php include_partial('vote/vote', array('obj' => $event)); ?>
