@@ -78,11 +78,11 @@
       <column auto-increment="true" name="id" primary="true" required="true" size="4" type="integer"/>
       <column name="name" required="true" size="100" type="string" unique="true"/>
     </table>
-    <table name="Profit" visPositionX="188" visPositionY="348" visSizeX="0" visSizeX2="120" visSizeY="0" visSizeY2="129">
+    <table name="Profit" visPositionX="188" visPositionY="346" visSizeX="0" visSizeX2="120" visSizeY="0" visSizeY2="129">
       <column auto-increment="true" name="id" primary="true" required="true" size="4" type="integer"/>
       <column name="name" required="true" size="255" type="string"/>
       <column name="location_id" size="4" type="integer"/>
-      <column name="date" required="true" type="timestamp"/>
+      <column name="date" required="true" type="date"/>
       <column name="cordage" type="string"/>
       <column name="description" type="string"/>
       <column description="Foreign key to Fish" name="fish_id" size="4" type="integer"/>
@@ -422,15 +422,18 @@
         </attribute>
       </orm-properties>
     </table>
-    <table name="FishEvent" visPositionX="-16" visPositionY="42" visSizeX="0" visSizeX2="157" visSizeY="0" visSizeY2="129">
+    <table name="FishEvent" visPositionX="-4" visPositionY="-9" visSizeX="0" visSizeX2="157" visSizeY="0" visSizeY2="171">
       <column auto-increment="true" name="id" primary="true" required="true" size="4" type="integer"/>
       <column name="date" required="true" type="date"/>
       <column name="name" required="true" size="255" type="string"/>
       <column name="description" type="string"/>
+      <column name="schedule" type="string"/>
+      <column name="price" type="string"/>
+      <column name="contact" type="string"/>
       <column name="rules" type="string"/>
       <column name="users" type="string"/>
       <column name="location_id" required="true" size="4" type="integer"/>
-      <column name="fish_event_type_id" size="4" type="integer"/>
+      <column name="fish_event_type_id" required="true" size="4" type="integer"/>
       <orm-properties>
         <attribute name="actAs">
           <attribute name="Timestampable"/>
@@ -462,7 +465,7 @@
         </attribute>
       </orm-properties>
     </table>
-    <table name="VoteFishEvent" visPositionX="-24" visPositionY="-4" visSizeX="0" visSizeX2="133" visSizeY="0" visSizeY2="31">
+    <table name="VoteFishEvent" visPositionX="-153" visPositionY="-40" visSizeX="0" visSizeX2="133" visSizeY="0" visSizeY2="31">
       <column name="fish_event_id" size="4" type="integer"/>
       <orm-properties>
         <attribute name="inheritance">
@@ -572,7 +575,7 @@
         </attribute>
       </orm-properties>
     </table>
-    <table name="FishEventType" visPositionX="-151" visPositionY="100" visSizeX="0" visSizeX2="104" visSizeY="0" visSizeY2="59">
+    <table name="FishEventType" visPositionX="-145" visPositionY="110" visSizeX="0" visSizeX2="104" visSizeY="0" visSizeY2="59">
       <column auto-increment="true" name="id" primary="true" required="true" size="4" type="integer"/>
       <column name="name" required="true" size="100" type="string"/>
       <column name="weight" type="integer"/>
@@ -760,7 +763,7 @@
         <attribute name="onDelete">CASCADE</attribute>
       </orm-properties>
     </foreign-key>
-    <foreign-key caption="FishEvent CommentFishEvent" from="CommentFishEvent" name="FK_CommentFishEvent_FishEvent_id" to="FishEvent" visCenterX="0" visCenterY="-1" visShowCaption="0">
+    <foreign-key caption="FishEvent CommentFishEvent" from="CommentFishEvent" name="FK_CommentFishEvent_FishEvent_id" to="FishEvent" visCenterX="0" visCenterY="0" visShowCaption="0">
       <foreign-key-column from="fish_event_id" to="id"/>
       <orm-properties>
         <attribute name="onDelete">CASCADE</attribute>

@@ -9,6 +9,9 @@
  * @property date $date
  * @property string $name
  * @property string $description
+ * @property string $schedule
+ * @property string $price
+ * @property string $contact
  * @property string $rules
  * @property string $users
  * @property integer $location_id
@@ -22,6 +25,9 @@
  * @method date                getDate()               Returns the current record's "date" value
  * @method string              getName()               Returns the current record's "name" value
  * @method string              getDescription()        Returns the current record's "description" value
+ * @method string              getSchedule()           Returns the current record's "schedule" value
+ * @method string              getPrice()              Returns the current record's "price" value
+ * @method string              getContact()            Returns the current record's "contact" value
  * @method string              getRules()              Returns the current record's "rules" value
  * @method string              getUsers()              Returns the current record's "users" value
  * @method integer             getLocationId()         Returns the current record's "location_id" value
@@ -34,6 +40,9 @@
  * @method FishEvent           setDate()               Sets the current record's "date" value
  * @method FishEvent           setName()               Sets the current record's "name" value
  * @method FishEvent           setDescription()        Sets the current record's "description" value
+ * @method FishEvent           setSchedule()           Sets the current record's "schedule" value
+ * @method FishEvent           setPrice()              Sets the current record's "price" value
+ * @method FishEvent           setContact()            Sets the current record's "contact" value
  * @method FishEvent           setRules()              Sets the current record's "rules" value
  * @method FishEvent           setUsers()              Sets the current record's "users" value
  * @method FishEvent           setLocationId()         Sets the current record's "location_id" value
@@ -71,6 +80,15 @@ abstract class BaseFishEvent extends sfDoctrineRecord
         $this->hasColumn('description', 'string', null, array(
              'type' => 'string',
              ));
+        $this->hasColumn('schedule', 'string', null, array(
+             'type' => 'string',
+             ));
+        $this->hasColumn('price', 'string', null, array(
+             'type' => 'string',
+             ));
+        $this->hasColumn('contact', 'string', null, array(
+             'type' => 'string',
+             ));
         $this->hasColumn('rules', 'string', null, array(
              'type' => 'string',
              ));
@@ -84,6 +102,7 @@ abstract class BaseFishEvent extends sfDoctrineRecord
              ));
         $this->hasColumn('fish_event_type_id', 'integer', 4, array(
              'type' => 'integer',
+             'notnull' => true,
              'length' => 4,
              ));
 

@@ -186,7 +186,7 @@ Profit:
     location_id:
       type: integer(4)
     date:
-      type: timestamp
+      type: date
       notnull: true
     cordage:
       type: string
@@ -737,6 +737,12 @@ FishEvent:
       notnull: true
     description:
       type: string
+    schedule:
+      type: string
+    price:
+      type: string
+    contact:
+      type: string
     rules:
       type: string
     users:
@@ -746,6 +752,7 @@ FishEvent:
       notnull: true
     fish_event_type_id:
       type: integer(4)
+      notnull: true
   relations:
     Location:
       onDelete: CASCADE

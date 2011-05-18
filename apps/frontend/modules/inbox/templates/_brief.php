@@ -1,4 +1,5 @@
 <?php use_helper('XssSafe'); ?>
+<?php use_helper('Text'); ?>
 <div class="inbox">
     <div class="message">
         <?php echo link_to($inbox->getName(), 'inbox/show?id=' . $inbox->getId()); ?>

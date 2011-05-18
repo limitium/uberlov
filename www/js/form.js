@@ -35,17 +35,17 @@ form.prototype.afterInit = function(){
     $('#right_layout input').each(function(){
         var input = $(this);
         if(this.id.indexOf('_date')>-1){
+            fb(1)
             input.DatePicker({
                 format:'d.m.Y',
                 date: input.val(),
                 current: input.val(),
                 starts: 1,
-                position: 'r'
-            //                onChange: function(formated, dates){
-            //                    input.removeClass('labeled');
-            //                    input.val(formated);
-            //                    input.DatePickerHide();
-            //                },
+                position: 'r',
+                onChange: function(formated, dates){
+                    input.val(formated);
+                    input.DatePickerHide();
+                }
             //                onBeforeShow: function(formated, dates){
             //                    if(input.val() == input.label){
             //                        input.val('');

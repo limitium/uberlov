@@ -1,3 +1,4 @@
+<?php use_helper('Text'); ?>
 <?php use_helper('XssSafe'); ?>
 <?php foreach ($pager->execute() as $talk): ?>
     <div class="talkBrief">

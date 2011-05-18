@@ -9,29 +9,37 @@
             <?php echo link_to(image_tag('/images/ui/edit.png'), 'event/edit?id=' . $event->getId()) ?>
         <?php endif; ?>
     </h2>
-    <div class="contacts">
-        <h2>Контакты:</h2>
-        <div class="text">
-        </div>
-    </div>
-    <div class="desctiption">
+    <div id="desctiption">
         <h2>Описание:</h2>
         <div class="text">
             <?php echo $event->getDescription(ESC_XSSSAFE); ?>
         </div>
     </div>
-    <div class="schedule">
-        <h2>Расписание:</h2>
+    <div id="contacts">
+        <h2>Контакты:</h2>
         <div class="text">
+            <?php echo $event->getContact(ESC_XSSSAFE); ?>
         </div>
     </div>
-    <div class="rules">
+    <div id="price">
+        <h2>Цены:</h2>
+        <div class="text">
+            <?php echo $event->getPrice(ESC_XSSSAFE); ?>
+        </div>
+    </div>
+    <div id="schedule">
+        <h2>Расписание:</h2>
+        <div class="text">
+            <?php echo $event->getSchedule(ESC_XSSSAFE); ?>
+        </div>
+    </div>
+    <div id="rules">
         <h2>Регламент:</h2>
         <div class="text">
             <?php echo $event->getRules(ESC_XSSSAFE); ?>
         </div>
     </div>
-    <div class="users">
+    <div id="users">
         <h2>Участники:</h2>
         <div class="text">
             <?php echo $event->getUsers(ESC_XSSSAFE); ?>
