@@ -9,8 +9,10 @@
         <?php foreach ($locations as $location): ?>
             <li>
                 <?php echo link_to($location->getName(), 'location/show?id=' . $location->getId()); ?>
-                <?php include_partial('profile/addBy', array('added' => $location)); ?>
-                <?php include_partial('location/wish', array('location' => $location)); ?>
+                <div class="meta">
+                    <?php include_partial('profile/addBy', array('added' => $location)); ?>
+                    <?php include_partial('location/wish', array('location' => $location)); ?>
+                </div>
             </li>
         <?php endforeach; ?>
     </ul>

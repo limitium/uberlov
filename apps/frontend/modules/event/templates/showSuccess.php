@@ -9,17 +9,33 @@
             <?php echo link_to(image_tag('/images/ui/edit.png'), 'event/edit?id=' . $event->getId()) ?>
         <?php endif; ?>
     </h2>
-    <div class="rules">
-        <h3>Регламент:</h3>
-        <?php echo $event->getRules(ESC_XSSSAFE); ?>
+    <div class="contacts">
+        <h2>Контакты:</h2>
+        <div class="text">
+        </div>
     </div>
     <div class="desctiption">
-        <h3>Описание:</h3>
-        <?php echo $event->getDescription(ESC_XSSSAFE); ?>
+        <h2>Описание:</h2>
+        <div class="text">
+            <?php echo $event->getDescription(ESC_XSSSAFE); ?>
+        </div>
+    </div>
+    <div class="schedule">
+        <h2>Расписание:</h2>
+        <div class="text">
+        </div>
+    </div>
+    <div class="rules">
+        <h2>Регламент:</h2>
+        <div class="text">
+            <?php echo $event->getRules(ESC_XSSSAFE); ?>
+        </div>
     </div>
     <div class="users">
-        <h3>Участники:</h3>
-        <?php echo $event->getUsers(ESC_XSSSAFE); ?>
+        <h2>Участники:</h2>
+        <div class="text">
+            <?php echo $event->getUsers(ESC_XSSSAFE); ?>
+        </div>
     </div>
     <div class="meta">
         <?php include_partial('vote/vote', array('obj' => $event)); ?>
