@@ -3,11 +3,10 @@
     <ul>
         <?php foreach ($locations as $location): ?>
             <li>
-                <h4><?php echo link_to($location->getName(), 'location/show?id=' . $location->getId()); ?></h4>     
+                <h3><?php echo link_to($location->getName(), 'location/show?id=' . $location->getId()); ?></h3>     
                 <div class="fish">
                     <?php $fishes = $location->getFishes(); ?>
                     <?php if ($fishes->count()): ?>
-                        <p>Клюет</p>
                         <ul>
                             <?php foreach ($fishes as $fish): ?>
                                 <li><?php echo $fish->name; ?></li>
