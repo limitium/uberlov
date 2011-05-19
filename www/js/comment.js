@@ -1,7 +1,7 @@
 function comment(){
     var self = this;
     this.comment = $('#newComment');
-    this.comment.child = false;
+    this.comment.parent = false;
     this.container = $('#commentContainer');
     this.type = $('#commentContainer').attr('type');
         
@@ -10,8 +10,8 @@ function comment(){
         response: function(newComment){
             $('textarea',self.comment).val('');
             $('#commentCounter').html(parseInt($('#commentCounter').html())+1);
-            if(self.comment.child){
-                self.comment.parent().parent().after(newComment);
+            if(self.comment.parent){
+                self.comment.parent.parent().parent().after(newComment);
                 $('#commentReplyDefault a').trigger('click');
             }else{
                 self.comment.before(newComment);
@@ -20,24 +20,62 @@ function comment(){
     });
     
     $('.commentReply').live('click', function(){
-        $(this).parent().append(self.comment);
+        if(self.comment.parent){
+            self.comment.parent.parent().css({
+                'margin-bottom':0
+            });
+            self.comment.css({
+                'margin-top':0
+            });
+        }
+        
+        self.comment.parent = $(this);
         $('#commentReplyDefault').css({
             display: 'block'
         });
+        
         $('#comment_'+self.type+'_parent').val($(this).parent().parent().attr('id').substr(7));
-        self.comment.child = true;
+        
+        var commentHeight = self.comment.outerHeight(true);
+        var offset = {
+            top: $(this).parent().offset().top + $(this).parent().outerHeight(true), 
+            left: $(this).parent().offset().left + 50
+        }
+        self.comment.offset(offset);
+        self.comment.css({
+            'margin-top':-commentHeight
+        });
+        $(this).parent().css({
+            'margin-bottom':commentHeight
+        });
         $('textarea',self.comment).focus();
+        
         return false;
     });
     
     $('#commentReplyDefault a').click(function(){
+        //        self.comment.offset($('#commentReplyDefault').offset())
+        
+        self.comment.css({
+            top:0 ,
+            left:0,
+            position:'relative'
+        });
+
         $('#commentReplyDefault').css({
             display: 'none'
         });
-        self.container.append(self.comment);
         
         $('#comment_'+self.type+'_parent').val('');
-        self.comment.child = false;
+        
+        
+        self.comment.parent.parent().css({
+            'margin-bottom':0
+        });
+        self.comment.css({
+            'margin-top':0
+        });
+        self.comment.parent = false;
         return false;
     });
     
