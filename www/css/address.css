@@ -10,10 +10,10 @@
 }
 .addressParts{
     float:left;
-    width:50%;
+    width:40%;
 }
 .locationList{
-    width:50%;
+    width:60%;
     float:left;
 }
 .locationList ul li{

@@ -1,5 +1,5 @@
 <?php use_helper('XssSafe'); ?>
-v<?php use_helper('Text'); ?>
+<?php use_helper('Text'); ?>
 <div class="map_location">
     <div class="location_header">
         <?php include_partial('vote/vote', array('obj' => $location)); ?>
