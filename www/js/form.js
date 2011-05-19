@@ -35,7 +35,6 @@ form.prototype.afterInit = function(){
     $('#right_layout input').each(function(){
         var input = $(this);
         if(this.id.indexOf('_date')>-1){
-            fb(1)
             input.DatePicker({
                 format:'d.m.Y',
                 date: input.val(),
