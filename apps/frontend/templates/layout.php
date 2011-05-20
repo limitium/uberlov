@@ -7,8 +7,8 @@
         <?php include_title() ?>        
         <?php include_stylesheets() ?>
         <script language="javascript">
-            baseUrl = "<?php echo substr(url_for('@homepage'), 0, strlen(url_for('@homepage')) - 1); ?>";
             baseUrl = "<?php echo sfContext::getInstance()->getRequest()->getRelativeUrlRoot(); ?>";
+            baseUrl = "<?php echo substr(url_for('@homepage'), 0, strlen(url_for('@homepage')) - 1); ?>";
         </script>
         <script type="text/javascript">
             var _gaq = _gaq || [];

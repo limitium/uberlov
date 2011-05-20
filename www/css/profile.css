@@ -29,15 +29,22 @@
 }
 .profile .personal {
 }
-.profile .personal .userpic{
-    float:left;
+.profile .personal .info .rating{
+    float: left;
+    display: inline-block;
 }
-.profile .personal .info{
-    float:left
+.profile .personal .info .userpic{
+    float: left;
+    display: inline-block;
 }
-.profile .personal .info p a img{
-    border: none;
+.profile .personal .info .name{
+    padding-left: 1em;
+    display: inline-block;
 }
+.profile .personal .info p{
+    display: block;
+}
+
 .profile .personal .info ul{
     list-style-type: none;
     padding-left:10px;
@@ -70,5 +77,40 @@
     display: none;
 }
 #mailContainer.selected{
+    display: block;
+}
+
+
+.user_list {
+    display: block;
+    clear:both;
+    padding-top: 30px;
+    border-bottom: 1px solid #EDEDED;
+    height: 70px;
+
+}
+.user_list div{
+    display: block;
+    float: left;
+    padding-left: 1em;
+    height: 70px;
+}
+
+.user_list div.rating{
+    display: inline;
+    float: left;
+    padding: 0;
+}
+.user_list .name{
+    width: 200px;
+    font-size: larger;
+}
+.user_list .info{    
+    width: 150px;
+    font-size: smaller;
+}
+.user_list .actions{
+}
+.user_list .name a,.user_list .actions a{
     display: block;
 }
