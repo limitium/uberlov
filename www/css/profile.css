@@ -51,7 +51,37 @@
 }
 
 .profile .achieves {
+
+}
+.profile .achieves .fish{
+    width: 30%;
+    display: block;
+}
+.profile .achieves .style{
+    width: 30%;
+    border-left: 1px solid #DFDFDF;
+    float: left;
+    display: block;
+    margin: 1em 0 0 0.5em;
+    padding: 0 0 0 2.5em;
+}
+.profile .achieves .style ul li {
+    float: left;
+    display: block;
+    padding: 0.5em 0 0 1em;
+}
+.profile .friends{
     clear:both;
+    padding: 0.5em 0em 0.3em 1em;
+}
+.profile .friends div{
+    padding-top: 2em;
+    clear: both;
+}
+.profile .friends ul li{
+    float: left;
+    display: block;
+    padding: 0.5em 0 0 1em;
 }
 
 

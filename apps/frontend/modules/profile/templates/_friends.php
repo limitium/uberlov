@@ -3,12 +3,12 @@
     app.csrf.friend = "<?php echo $csrf; ?>";
 </script>
 
-<div id="friends">
+<div class="friends">
     <?php if (!$sf_user->isAnonymous() && !$profile->isFriend($sf_user->getProfile()) && $profile != $sf_user->getProfile()): ?>
         <?php echo link_to('Добавить в друзья', 'profile/add?id=' . $profile->getId(), array('class' => 'addFriend', 'user' => $profile->getId())); ?>        
     <?php endif; ?>
 
-    <div id="accepted">
+    <div class="accepted">
         Дружит с:
         <ul>
             <?php foreach ($profile->getFriends() as $friend): ?>
@@ -20,7 +20,7 @@
             <?php endforeach; ?>
         </ul>
     </div>
-    <div id="accepters">
+    <div class="accepters">
         Хочет дружить с:
         <ul>
             <?php foreach ($profile->getAccepters() as $friend): ?>
@@ -32,7 +32,7 @@
             <?php endforeach; ?>
         </ul>
     </div>
-    <div id="requesters">
+    <div class="requesters">
         Хотят дружить:
         <ul>
             <?php foreach ($profile->getRequesters() as $friend): ?>
