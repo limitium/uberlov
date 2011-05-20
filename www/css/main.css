@@ -57,18 +57,13 @@ body{
     list-style-type: none;
     margin-bottom: -1px;
     margin-right: 8px;
-    position: relative;
     white-space: nowrap;
 }
 .tabPanel ul li span{
     -moz-border-radius: 0.3em 0.3em  0 0;
     -webkit-border-radius: 0.3em 0.3em  0 0;
     border-radius:0.3em 0.3em  0 0;
-    
-    background-color: #EEEEEE;
-    border-color: #CCCCCC #CCCCCC #BBBBBB;
-    border-style: solid;
-    border-width: 1px;
+
     display: block;
     font-size: 0.9em;
     line-height: 1.3em;
@@ -76,6 +71,13 @@ body{
     text-decoration: none;
     color: #333333;
     font-weight: normal;
+    
+    margin-bottom: -1px;
+    background-color: #EEEEEE;
+    border-left: 1px solid #BBBBBB;
+    border-right: 1px solid #BBBBBB;
+    border-top: 1px solid #BBBBBB;
+    border-bottom: 1px solid #BBBBBB;
 }
 
 .tabPanel ul li span:hover{
@@ -83,17 +85,13 @@ body{
     background-color: #ffffdd;
 }
 .tabPanel ul li span.selected{
-    background-color: #FFFFFF;
-    border-color: #BBBBBB #BBBBBB #FFFFFF;
-    border-style: solid;
-    border-width: 1px;
-    /*fix for profit tab must be checks*/
-    margin-bottom: -1px;
+    background: none repeat scroll 0 0 #FFFFFF;
+    border-bottom: 1px solid #FFFFFF;
 }
 
 /*meta*/
 .meta{
-/*    padding-top: 1em;*/
+    /*    padding-top: 1em;*/
 }
 .meta div{
     display: inline-block;

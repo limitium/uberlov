@@ -1,22 +1,26 @@
 <?php use_helper('Countable'); ?>
 <?php use_helper('XssSafe'); ?>
+<?php use_javascript('voting'); ?>
 <div class="profile">
     <div class="personal">
         <div class="info">
             <?php include_partial('vote/vote', array('obj' => $profile, 'objType' => 'Profile')); ?>
             <div class="userpic">
-                <?php echo image_tag($profile->getUserpic() ? '/images/userpic/' . $profile->getUserpic() : 'http://www.gravatar.com/avatar/'.md5($profile->getEmail()).'?d=wavatar&s=48') ?>
+                <?php echo image_tag($profile->getUserpic() ? '/images/userpic/' . $profile->getUserpic() : 'http://www.gravatar.com/avatar/' . md5($profile->getEmail()) . '?d=wavatar&s=48') ?>
                 <b class="s48"></b>
             </div>
-            <p><?php echo $profile->getFirstName() ?>
-                <?php echo $profile->getNickName() ?>
-                <?php echo $profile->getLastName() ?>
-                <?php if ($sf_user->getProfile() == $profile): ?>
-                    <?php echo link_to(image_tag('/images/ui/edit.png'), 'profile/edit?id=' . $profile->getId()) ?>
-                <?php endif; ?>
-            </p>
-            <p>Родил<?php echo $profile->getSex() ? 'ся' : 'ась' ?>: <?php echo $profile->getDateTimeObject('birth_date')->format('d.m.Y') ?></p>
-            <p><?php echo $profile->getDescription(ESC_XSSSAFE); ?></p>
+            <div class="name">
+                <p><?php echo $profile->getFirstName() ?>
+                    <?php echo $profile->getNickName() ?>
+                    <?php echo $profile->getLastName() ?>
+                    <?php if ($sf_user->getProfile() == $profile): ?>
+                        <?php echo link_to(image_tag('/images/ui/edit.png'), 'profile/edit?id=' . $profile->getId()) ?>
+                    <?php endif; ?>
+                </p>
+                <p>Родил<?php echo $profile->getSex() ? 'ся' : 'ась' ?>: <?php echo $profile->getDateTimeObject('birth_date')->format('d.m.Y') ?></p>
+                <p>Город: <?php echo $profile->getCity(); ?></p>
+            </div>
+            <div class="text"><?php echo $profile->getDescription(ESC_XSSSAFE); ?></div>
         </div>
     </div>
 
