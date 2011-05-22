@@ -18,33 +18,36 @@ friendShow.prototype.initListeners = function(){
 
 friendShow.prototype.addFriend = function(a){
     var a = $(a.target);
-
+    var self = this;
     if(!a.hasClass('adding')){
         a.addClass('adding');
 
         var user_id = a.attr('user');
 
         a.html('добавляем');
-
+        var request = {
+            id:user_id,
+            _csrf_token: app.csrf.friend
+                
+        };
+        if(a.hasClass('self')){
+            request.self = 1;
+        }
         app.sendData({
             url:app.url('/profile/add'),
-            data:{
-                id:user_id,
-                _csrf_token: app.csrf.friend
-            },
+            data:request,
             handler: function(response){
                 if(response.status == 'ok'){
                     var paresnts = a.parents();
-                    
-                    if(paresnts[2].id == 'requesters'){
+                    if($(paresnts[2]).hasClass('requesters')){
                         var counter = $('#myFriendCounter');
                         counter.html(parseInt(counter.html())+1);
-                        $(paresnts[0]).remove();
                         
-                        $('div#accepted ul').append('<li><a href="'+app.url('/profile/show/id/')+response.id+'">'+response.nick+'</a> <a href="'+app.url('/profile/remove/id/')+response.id+'" user="'+response.id+'" class="removeFriend">-</a></li>');
+                        self.addLink('accepted', response, ' <a href="'+app.url('/profile/remove/id/')+response.id+'" user="'+response.id+'" class="removeFriend">-</a>');
+                        self.removeLink(a);
                     }else{
                         a.remove();
-                        $('div#requesters ul').append('<li><a href="'+app.url('/profile/show/id/')+response.id+'>'+response.nick+'</a></li>');
+                        self.addLink('requesters', response, '');
                     }
                 }                                
             }
@@ -55,7 +58,7 @@ friendShow.prototype.addFriend = function(a){
 }
 friendShow.prototype.removeFriend = function(a){
     var a = $(a.target);
-
+    var self = this;
     if(!a.hasClass('removing')){
         a.addClass('removing');
 
@@ -76,11 +79,28 @@ friendShow.prototype.removeFriend = function(a){
                         var counter = $('#myFriendCounter');
                         counter.html(parseInt(counter.html())-1);
                     }
-                    $(paresnts[0]).remove();
+                    
+                    
+                    self.removeLink(a);
                 }
             }
         });
 
     }
     return false;
+}
+
+friendShow.prototype.addLink = function(where, data, addLink){
+    $('div.'+where+' ul').append('<li><a href="'+app.url('/profile/')+data.id+'" class="userpic"><img width="32" height="32" src="'+app.url(data.userpic)+'"><b class="s32"></b></a><a href="'+app.url('/profile/')+data.id+'">'+data.nick+'</a>'+addLink+'</li>');
+    if($($('div.'+where)).hasClass('empty')){
+        $($('div.'+where)).removeClass('empty') 
+    }
+}
+
+friendShow.prototype.removeLink = function(a){
+    var parents = a.parents();
+    $(parents[0]).remove();
+    if($(parents[1]).children().length == 0){
+        $(parents[2]).addClass('empty');
+    }
 }

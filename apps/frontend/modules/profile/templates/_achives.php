@@ -42,7 +42,13 @@
 
     <?php if (!$sf_user->isAnonymous()): ?>
         <?php if ($sf_user->getProfile() != $profile): ?>
-            <?php echo link_to('Написать инбокс', 'inbox/new?whom=' . $profile->getNickName()); ?>        
+            <button class="button_01" type="submit" onclick="window.location.href='<?php echo url_for('inbox/new?whom=' . $profile->getNickName()); ?>'">
+                <span class="border_l">
+                    <span class="border_r">
+                        <span class="btn_bg">НАПИСАТЬ ИНБОКС</span>
+                    </span>
+                </span>
+            </button>
         <?php endif; ?>
     <?php endif; ?>
 

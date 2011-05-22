@@ -144,3 +144,11 @@
 .user_list .name a,.user_list .actions a{
     display: block;
 }
+
+.achieves .button_01{
+    clear: both;
+    display: block;
+}
+.achieves .friends .empty{
+    display: none;
+}
