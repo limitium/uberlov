@@ -5,7 +5,6 @@ if(typeof(console)!='undefined'){
 }else{
     fb = function(){}
 }
-
 Function.prototype.delegate = function(){
     var arg = $.makeArray(arguments);
     var scope = arg.shift();

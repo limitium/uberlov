@@ -1,17 +1,16 @@
 <?php use_helper('XssSafe'); ?>
-<?php use_helper('Text'); ?>
 <div class="map_location">
     <div class="location_header">
         <?php include_partial('vote/vote', array('obj' => $location)); ?>
         <h2><?php echo $location->getName() ?></h2>    
     </div>
     <div class="description">
-        <?php echo truncate_text($location->getDescription(ESC_XSSSAFE), 200, '...', true) ?>
+        <?php echo $location->getDescription(ESC_XSSSAFE) ?>
     </div>
     <div class="location_footer">
         комментариев <?php echo $comments; ?> | отчетов 0 | событий 0 |  <?php echo link_to('подробнее', 'location/show?id=' . $location->getId()) ?>
         <div class="comments"><p class="comments_count"> <?php echo $comments; ?></p></div>
-       
+
         <div class="events">
             <?php $events = $location->getFishEvent(); ?>
             <ul>

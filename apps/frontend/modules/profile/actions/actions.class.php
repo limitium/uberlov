@@ -43,6 +43,9 @@ class profileActions extends sfActions {
         $this->forward404Unless($this->profile);
 
         $this->getUser()->getProfile()->addFriend($this->profile);
+        if ($request->hasParameter('self')) {
+            $this->profile = $this->getUser()->getProfile();
+        }
     }
 
     public function executeRemove(sfWebRequest $request) {
@@ -147,8 +150,8 @@ class profileActions extends sfActions {
                                 '%form%' => 'sfApplyEditEmailForm'), 'sfForkedApply')
             );
         }
-        
-        
+
+
         //won't present this page to users that are not authenticated or haven't got confirmation code
         if (!$this->getUser()->isAuthenticated() && !$this->getUser()->getAttribute('sfApplyReset', false)) {
             $this->redirect('@sf_guard_signin');
@@ -160,7 +163,7 @@ class profileActions extends sfActions {
                     'The custom reset form should be instance of sfApplyResetForm'
             );
         }
-        
+
         $this->setTemplate('edit');
     }
 
@@ -184,8 +187,8 @@ class profileActions extends sfActions {
             }
 
             $this->redirect('profile/show?id=' . $profile->getId());
-        }else{
-                      foreach ($form->getFormFieldSchema() as $name => $formField) {
+        } else {
+            foreach ($form->getFormFieldSchema() as $name => $formField) {
                 if ($formField->getError() != "") {
                     echo "ActionClassName::methodName( ): Field Error for :" . $name . " : " . $formField->getError();
                 }

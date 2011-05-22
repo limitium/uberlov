@@ -209,7 +209,7 @@ photo_upload:
     
 #profile
 profile_add:
-  url:        /profile/add/:id
+  url:        /profile/add
   params:     { module: profile, action: add }
   requirements:
     sf_method: [post]
@@ -238,21 +238,21 @@ profile_list:
   params:     { module: profile, action: list }
   requirements:
     sf_method: [get]
-profile_show:
-  url:        /profile/:id
-  params:     { module: profile, action: show }
-  requirements:
-    sf_method: [get]
 profile_my:
   url:        /profile/my
   params:     { module: profile, action: my }
   requirements:
     sf_method: [get]
 profile_remove:
-  url:        /profile/remove/:id
+  url:        /profile/remove
   params:     { module: profile, action: remove }
   requirements:
     sf_method: [post]
+profile_show:
+  url:        /profile/:id/:view
+  params:     { module: profile, action: show, view:'' }
+  requirements:
+    sf_method: [get]
 profile_update:
   url:        /profile/update/:id
   params:     { module: profile, action: update }
