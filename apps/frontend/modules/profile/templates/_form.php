@@ -41,7 +41,7 @@
             <dt><?php echo $form['city_id']->renderLabel() ?></dt>
             <dd>
                 <?php echo $form['city_id']->renderError() ?>
-                <div class="autocomplete" url="<?php echo url_for("profile/city"); ?>">
+                <div class="autocomplete" url="<?php echo url_for("@profile_city"); ?>">
                     <?php echo $form['city_id'] ?>
                     <b></b>
                 </div>
