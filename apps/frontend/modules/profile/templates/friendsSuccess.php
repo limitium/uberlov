@@ -22,6 +22,7 @@
         </div>
     <?php endforeach; ?>
     <?php else: ?>
+    <?php include_partial('friends', array('profile' => $profile, 'csrf' => $csrf)); ?>
     <h2>Тут вы еще одиноки.</h2>
     <?php endif; ?>
 </div>

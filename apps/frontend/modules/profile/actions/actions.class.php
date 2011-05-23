@@ -34,6 +34,7 @@ class profileActions extends sfActions {
     public function executeFriends(sfWebRequest $request) {
         $this->csrf = CSRF::getToken();
         $this->friends = $this->getUser()->getProfile()->getFriends();
+        $this->profile = $this->getUser()->getProfile();
     }
 
     public function executeAdd(sfWebRequest $request) {
