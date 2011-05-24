@@ -79,17 +79,20 @@ div.form_footer{
 
 /*errors*/
 ul.error_list {
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
     margin: 0.2em 0;
+    background: none repeat scroll 0 0 #FFB4AE;
+    color: #801800;
 }
 ul.error_list li{
     font-size: 15px;
     list-style: none outside none;
     margin: 0;
     padding: 5px 7px;
-    background: none repeat scroll 0 0 #FFB4AE;
-    color: #801800;
 }
-ul.error_list li:first-child {
+/*ul.error_list li:first-child {
     -moz-border-radius: 4px 4px 0 0;
     -webkit-border-radius: 4px 4px 0 0;
     border-radius: 4px 4px 0 0;
@@ -99,7 +102,7 @@ ul.error_list li:last-child {
     -moz-border-radius: 0 0 4px 4px;
     -webkit-border-radius: 0 0 4px 4px;
     border-radius: 0 0 4px 4px;
-}
+}*/
 
 /*tags*/
 .tag-suggestions ul li{
