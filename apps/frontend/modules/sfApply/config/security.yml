@@ -1,0 +1,4 @@
+apply:
+  is_secure: false
+resetRequest:
+  is_secure: false

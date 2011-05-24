@@ -41,7 +41,7 @@ class talkActions extends sfActions {
             $this->curSection->modifyQuery($query);
             $url .= '&section=' . $this->curSection->getId();
 
-            if ($this->curSection->getNode()->isLeaf()) {
+            if ($this->curSection->getNode()->isLeaf() && !$this->getUser()->isAnonymous()) {
                 $this->form = new TalkForm();
                 $this->form->setDefault('talk_section_id', $this->curSection->getId());
             }
