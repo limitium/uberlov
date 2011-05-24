@@ -123,6 +123,10 @@
     height: 70px;
 
 }
+.user_list:last-child {
+    border: 0px;
+
+}
 .user_list div{
     display: block;
     float: left;
@@ -153,6 +157,8 @@
     clear: both;
     display: block;
 }
-.achieves .friends .empty{
+
+
+.friends .empty{
     display: none;
 }

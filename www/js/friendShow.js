@@ -38,14 +38,21 @@ friendShow.prototype.addFriend = function(a){
             data:request,
             handler: function(response){
                 if(response.status == 'ok'){
-                    var paresnts = a.parents();
-                    if($(paresnts[2]).hasClass('requesters')){
+                    var parents = a.parents();
+                    
+                    if($(parents[2]).hasClass('requesters')){
+                        //from profile
                         var counter = $('#myFriendCounter');
                         counter.html(parseInt(counter.html())+1);
                         
                         self.addLink('accepted', response, ' <a href="'+app.url('/profile/remove/id/')+response.id+'" user="'+response.id+'" class="removeFriend">-</a>');
                         self.removeLink(a);
+                    }else if($('.friends .user_list',parents)){
+                        //from frends list
+                        a.remove();
+                        self.toContainer('accepted', $('.user_list',$('.removeFriend').parents()));
                     }else{
+                        //profile friend accept
                         a.remove();
                         self.addLink('requesters', response, '');
                     }
@@ -74,14 +81,18 @@ friendShow.prototype.removeFriend = function(a){
             },
             handler: function(response){
                 if(response.status == 'ok'){
-                    var paresnts = a.parents();
-                    if(paresnts[2].id == 'accepted'){
+                    var parents = a.parents();
+                    if($('.accepted',parents)){
                         var counter = $('#myFriendCounter');
                         counter.html(parseInt(counter.html())-1);
                     }
                     
-                    
-                    self.removeLink(a);
+                    if(1){
+                        //from friend show
+                    }else{
+                        //profile accept
+                        self.removeLink(a);
+                    }
                 }
             }
         });
@@ -90,11 +101,14 @@ friendShow.prototype.removeFriend = function(a){
     return false;
 }
 
-friendShow.prototype.addLink = function(where, data, addLink){
-    $('div.'+where+' ul').append('<li><a href="'+app.url('/profile/')+data.id+'" class="userpic"><img width="32" height="32" src="'+app.url(data.userpic)+'"><b class="s32"></b></a><a href="'+app.url('/profile/')+data.id+'">'+data.nick+'</a>'+addLink+'</li>');
+friendShow.prototype.toContainer = function(where, data){
+    $('div.'+where+' ul').append(data);
     if($($('div.'+where)).hasClass('empty')){
         $($('div.'+where)).removeClass('empty') 
     }
+}
+friendShow.prototype.addLink = function(where, data, addLink){
+    this.toContainer(where, '<li><a href="'+app.url('/profile/')+data.id+'" class="userpic"><img width="32" height="32" src="'+app.url(data.userpic)+'"><b class="s32"></b></a><a href="'+app.url('/profile/')+data.id+'">'+data.nick+'</a>'+addLink+'</li>');
 }
 
 friendShow.prototype.removeLink = function(a){
