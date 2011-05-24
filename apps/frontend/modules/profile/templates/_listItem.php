@@ -11,7 +11,8 @@
         <span><?php echo'Обнинск' ?></span>
     </div>
     <div class="actions">
-        <?php echo link_to('убрать', 'profile/remove?id=' . $profile->getId(), array('class' => 'removeFriend', 'user' => $profile->getId())); ?>        
+        <?php echo link_to('добавить', '@profile_add?id=' . $profile->getId(), array('class' => 'removeFriend', 'user' => $profile->getId())); ?>        
+        <?php echo link_to('убрать', '@profile_remove?id=' . $profile->getId(), array('class' => 'removeFriend', 'user' => $profile->getId())); ?>        
         <?php echo link_to('написать инбокс', 'profile/remove?id=' . $profile->getId(), array('class' => 'removeFriend', 'user' => $profile->getId())); ?>        
     </div>
 </div>
