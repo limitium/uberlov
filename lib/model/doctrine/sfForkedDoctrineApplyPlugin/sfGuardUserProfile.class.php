@@ -163,8 +163,10 @@ class sfGuardUserProfile extends PluginsfGuardUserProfile {
             $friend = Doctrine_Query::create()
                             ->from('Friend f')
                             ->where('f.requester_id  = ? and f.accepter_id = ?', array($profile->id, $this->id))
-                            ->orWhere('f.accepter_id = ? and f.requester_id = ?', array($profile->id, $this->id))
                             ->fetchOne();
+            if(!$friend){
+                return false;
+            }
             $friend->accepted = true;
         } else {
             $friend = new Friend();

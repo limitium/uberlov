@@ -11,8 +11,10 @@
         <span><?php echo'Обнинск' ?></span>
     </div>
     <div class="actions">
-        <?php echo link_to('добавить', '@profile_add?id=' . $profile->getId(), array('class' => 'addFriend', 'user' => $profile->getId())); ?>        
-        <?php echo link_to('убрать', '@profile_remove?id=' . $profile->getId(), array('class' => 'removeFriend', 'user' => $profile->getId())); ?>        
+        <?php print_r($friends->getPrimaryKeys()); ?>
+        <?php print_r($friends->contains($profile->getId())); ?>
+        <?php echo isset($add) || (isset($friends) && !$friends->contains($profile->getId())) ? link_to('добавить', '@profile_add?id=' . $profile->getId(), array('class' => 'addFriend', 'user' => $profile->getId())) : ''; ?>        
+        <?php echo isset($remove) ? link_to('убрать', '@profile_remove?id=' . $profile->getId(), array('class' => 'removeFriend', 'user' => $profile->getId())) : ''; ?>        
         <?php echo link_to('написать инбокс', '@inbox_new?whom==' . $profile->getNickName()); ?>        
     </div>
 </div>
