@@ -11,10 +11,17 @@
         <span><?php echo'Обнинск' ?></span>
     </div>
     <div class="actions">
-        <?php print_r($friends->getPrimaryKeys()); ?>
-        <?php print_r($friends->contains($profile->getId())); ?>
-        <?php echo isset($add) || (isset($friends) && !$friends->contains($profile->getId())) ? link_to('добавить', '@profile_add?id=' . $profile->getId(), array('class' => 'addFriend', 'user' => $profile->getId())) : ''; ?>        
+        <?php
+        $isFriend = false;
+        foreach ($friends as $friend):
+            if ($profile == $friend) {
+                $isFriend = true;
+                break;
+            }
+        endforeach;
+        ?>
+        <?php echo isset($add) || (isset($friends) && !$isFriend) ? link_to('добавить', '@profile_add?id=' . $profile->getId(), array('class' => 'addFriend', 'user' => $profile->getId())) : ''; ?>        
         <?php echo isset($remove) ? link_to('убрать', '@profile_remove?id=' . $profile->getId(), array('class' => 'removeFriend', 'user' => $profile->getId())) : ''; ?>        
-        <?php echo link_to('написать инбокс', '@inbox_new?whom==' . $profile->getNickName()); ?>        
+<?php echo link_to('написать инбокс', '@inbox_new?whom==' . $profile->getNickName()); ?>        
     </div>
 </div>
