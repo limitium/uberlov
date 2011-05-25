@@ -50,13 +50,14 @@ friendShow.prototype.addFriend = function(a){
                     }else if($('.friends .user_list',parents)){
                         //from frends list
                         a.remove();
-                        self.toContainer('accepted', $('.user_list',$('.removeFriend').parents()));
+                        self.toContainer('accepted', $('.requesters li',$('.removeFriend').parents()));
+                        self.fromContainer('requesters');
                     }else{
                         //profile friend accept
                         a.remove();
                         self.addLink('requesters', response, '');
                     }
-                }                                
+                }                                 
             }
         });
         
@@ -87,8 +88,10 @@ friendShow.prototype.removeFriend = function(a){
                         counter.html(parseInt(counter.html())-1);
                     }
                     
-                    if(1){
+                    if($('.friends .user_list',parents)){
                         //from friend show
+                        $('.accepted li',$('.removeFriend').parents()).remove();
+                        self.fromContainer('accepted');
                     }else{
                         //profile accept
                         self.removeLink(a);
@@ -105,6 +108,11 @@ friendShow.prototype.toContainer = function(where, data){
     $('div.'+where+' ul').append(data);
     if($($('div.'+where)).hasClass('empty')){
         $($('div.'+where)).removeClass('empty') 
+    }
+}
+friendShow.prototype.fromContainer = function(where){
+    if($('div.'+where+' ul').children().length == 0){
+        $('div.'+where).addClass('empty');
     }
 }
 friendShow.prototype.addLink = function(where, data, addLink){

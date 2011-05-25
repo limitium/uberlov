@@ -13,7 +13,7 @@
         <ul>
             <?php foreach ($profile->getFriends() as $friend): ?>
                 <li><?php include_partial('profile/picnick', array('profile' => $friend)); ?>
-                    <?php if (!$sf_user->isAnonymous() && $profile == $sf_user->getProfile()): ?>
+                    <?php if (false && !$sf_user->isAnonymous() && $profile == $sf_user->getProfile()): ?>
                         <?php echo link_to('-', 'profile/remove?id=' . $friend->getId(), array('class' => 'removeFriend', 'user' => $friend->getId(), 'title' => 'Удалить из друзей')); ?>        
                     <?php endif; ?>
                 </li>
@@ -25,7 +25,7 @@
         <ul>
             <?php foreach ($profile->getAccepters() as $friend): ?>
                 <li><?php include_partial('profile/picnick', array('profile' => $friend)); ?>
-                    <?php if (!$sf_user->isAnonymous() && $profile == $sf_user->getProfile()): ?>
+                    <?php if (false && !$sf_user->isAnonymous() && $profile == $sf_user->getProfile()): ?>
                         <?php echo link_to('-', 'profile/remove?id=' . $friend->getId(), array('class' => 'removeFriend', 'user' => $friend->getId(), 'title' => 'Удалить хотелку')); ?>        
                     <?php endif; ?>
                 </li>
@@ -37,7 +37,7 @@
         <ul>
             <?php foreach ($profile->getRequesters() as $friend): ?>
                 <li><?php include_partial('profile/picnick', array('profile' => $friend)); ?>
-                    <?php if (!$sf_user->isAnonymous() && $profile == $sf_user->getProfile()): ?>
+                    <?php if (false && !$sf_user->isAnonymous() && $profile == $sf_user->getProfile()): ?>
                         <?php echo link_to('+', 'profile/add?id=' . $friend->getId(), array('class' => 'addFriend', 'user' => $friend->getId(), 'title' => 'Принять дружбу')); ?>        
                         <?php echo link_to('-', 'profile/remove?id=' . $friend->getId(), array('class' => 'removeFriend', 'user' => $friend->getId(), 'title' => 'Удалить хотелку')); ?>        
                     <?php endif; ?>

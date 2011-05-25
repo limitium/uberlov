@@ -12,18 +12,23 @@ class profileActions extends sfActions {
 
     public function executeCity(sfWebRequest $request) {
         $this->cities = Doctrine_Query::create()
-                        ->from('City c')
-                        ->where('c.name LIKE ?', $request->getParameter('q') . '%')
-                        ->leftJoin('c.Region')
-                        ->limit($request->getParameter('limit', 10))
-                        ->orderBy('c.weight desc, c.name desc')
-                        ->execute();
+                ->from('City c')
+                ->where('c.name LIKE ?', $request->getParameter('q') . '%')
+                ->leftJoin('c.Region')
+                ->limit($request->getParameter('limit', 10))
+                ->orderBy('c.weight desc, c.name desc')
+                ->execute();
     }
 
     public function executeList(sfWebRequest $request) {
         $this->pager = htPagerLayout::create(Doctrine::getTable('sfGuardUser')
                                 ->createQuery('f')
                                 ->orderBy('f.created_at ASC'), 'user/list?page={%page_number}', $request->getParameter('page', 1));
+
+        $this->csrf = CSRF::getToken();
+        if (!$this->getUser()->isAnonymous()) {
+            $this->friends = $this->getUser()->getProfile()->getFriends();
+        }
     }
 
     public function executeMy(sfWebRequest $request) {
@@ -68,22 +73,22 @@ class profileActions extends sfActions {
         }
 
         $this->comments = Doctrine_Query::create()
-                        ->from('Comment c')
-                        ->where('c.created_by = ? and c.parent > 0', $this->profile->getId())
-                        ->andWhere('c.inbox_id is null')
-                        ->execute();
+                ->from('Comment c')
+                ->where('c.created_by = ? and c.parent > 0', $this->profile->getId())
+                ->andWhere('c.inbox_id is null')
+                ->execute();
 
         $this->profits = Doctrine_Query::create()
-                        ->from('Profit p')
-                        ->leftJoin('p.ProfitDetail d')
-                        ->leftJoin('d.Fish f')
-                        ->leftJoin('d.Style s')
-                        ->where('p.created_by = ?', $this->profile->getId())
-                        ->execute();
+                ->from('Profit p')
+                ->leftJoin('p.ProfitDetail d')
+                ->leftJoin('d.Fish f')
+                ->leftJoin('d.Style s')
+                ->where('p.created_by = ?', $this->profile->getId())
+                ->execute();
         $this->locations = Doctrine_Query::create()
-                        ->from('Location l')
-                        ->where('l.created_by = ?', $this->profile->getId())
-                        ->execute();
+                ->from('Location l')
+                ->where('l.created_by = ?', $this->profile->getId())
+                ->execute();
 //@todo: add events
         $this->total = 0;
         $this->best = array(
