@@ -13,10 +13,6 @@ class locationActions extends sfActions {
     public function executeMap(sfWebRequest $request) {
         $this->location = Doctrine::getTable('Location')->find($request->getParameter('id'));
         $this->forward404Unless($this->location);
-        $this->comments = Doctrine_Query::create()
-                        ->from('CommentLocation c')
-                        ->where('c.location_id = ? and c.parent > 0', $this->location->getId())
-                        ->count();
     }
 
     public function executeShow(sfWebRequest $request) {

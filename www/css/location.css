@@ -28,16 +28,12 @@ a.dashed:link, a.dashed:active, a.dashed:visited, a.dashed:hover {
     border-bottom:1px dashed #0053E4;
     text-decoration:none;
 }
-.locationMap .name{
+.map_location .location_footer{
+    padding-top: 1em;
     padding-bottom: 1em;
-}
-.locationMap .name a{
-    font-size: 2em;
+    font-size: smaller;
 }
 
-.locationMap #map{
-    margin: 0 0 1em 0
-}
 
 /*details*/
 .location .stat{
