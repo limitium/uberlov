@@ -23,6 +23,7 @@ class profileActions extends sfActions {
     public function executeList(sfWebRequest $request) {
         $this->pager = htPagerLayout::create(Doctrine::getTable('sfGuardUser')
                                 ->createQuery('f')
+                                ->leftJoin('f.Profile')
                                 ->orderBy('f.created_at ASC'), 'user/list?page={%page_number}', $request->getParameter('page', 1));
 
         $this->csrf = CSRF::getToken();
