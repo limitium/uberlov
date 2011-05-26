@@ -18,7 +18,7 @@ class sfGuardUserProfile extends PluginsfGuardUserProfile {
     public function setUp() {
         parent::setUp();
 
-        $this->hasOne('sfGuardUser', array(
+        $this->hasOne('sfGuardUser as User', array(
             'local' => 'user_id',
             'foreign' => 'id',
         ));

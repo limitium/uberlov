@@ -14,9 +14,11 @@ class profitComponents extends sfComponents {
         $this->profits = Doctrine_Query::create()->select()->from('Profit pf')
                         ->leftJoin('pf.CreatedBy p')
                         ->leftJoin('pf.Location l')
+                        ->leftJoin('p.User u')
                         ->orderBy('pf.created_at desc')
                         ->limit(5)
                         ->execute();
+         print_r(get_class($this->profits->getFirst()->getCreatedBy()));
     }
 
 }
