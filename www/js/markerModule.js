@@ -200,17 +200,21 @@ ht_location_e.prototype.showForm = function(loader){
     fb(this.address);
     var marker = this.marker;
     var form = this.form;
-    var self = this;
     
     $('#location_latitude', form).val(marker.getPosition().lat());
     $('#location_longitude', form).val(marker.getPosition().lng());
     $('#location_address', form).val($.JSON.encode((this.address)));
 
     
-    
     marker.infoWindow = this.mm.openInfo(marker.getPosition(),this.addSubmitHandler(form),this.addListenerClick.delegate(this,marker));
+    this.priceChangeListener(form);
 
+    loader.remove();
+}
+ht_location_e.prototype.priceChangeListener = function(form){
+    var self = this;
     var price = $($('#location_price',form).parents()[1]);
+    
     $('#location_is_free', form).change(function(){
         if($(this).attr('checked')){
             price.hide();
@@ -223,10 +227,10 @@ ht_location_e.prototype.showForm = function(loader){
             $(this).val(0);
             self.mm.map.panBy(0,-85);
         }
-        gm.event.trigger(marker.infoWindow, 'content_changed');
+        self.marker.infoWindow && gm.event.trigger(self.marker.infoWindow, 'content_changed');
     }).change();
-
-    loader.remove();
+    
+    return form;
 }
 ht_location_e.prototype.addSubmitHandler = function(form){
     var self = this;

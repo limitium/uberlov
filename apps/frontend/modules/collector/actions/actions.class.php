@@ -17,13 +17,13 @@ class collectorActions extends sfActions {
      */
     public function executeTop(sfWebRequest $request) {
         $this->locations = Doctrine_Query::create()
-                        ->select('sum(v.value) as weight,l.*')
-                        ->from('Location l')
-                        ->leftJoin('l.VoteLocation v')
-                        ->groupBy('l.id')
-                        ->orderBy('weight desc')
-                        ->limit(10)
-                        ->execute();
+                ->select('sum(v.value) as weight,l.*')
+                ->from('Location l')
+                ->leftJoin('l.VoteLocation v')
+                ->groupBy('l.id')
+                ->orderBy('weight desc')
+                ->limit(10)
+                ->execute();
     }
 
     /**
@@ -33,11 +33,11 @@ class collectorActions extends sfActions {
      */
     public function executeRegions(sfWebRequest $request) {
         $this->countries = Doctrine_Query::create()
-                        ->select()
-                        ->from('Country c')
-                        ->leftJoin('c.AreaLow a')
-                        ->orderBy('c.name, a.name')
-                        ->execute();
+                ->select()
+                ->from('Country c')
+                ->leftJoin('c.AreaLow a')
+                ->orderBy('c.name, a.name')
+                ->execute();
     }
 
     /**
@@ -56,9 +56,10 @@ class collectorActions extends sfActions {
      */
     public function executeData(sfWebRequest $request) {
         $this->locations = Doctrine::getTable('Location')
-                        ->createQuery('r')
-                        ->leftJoin('r.FishEvent e')
-                        ->execute();
+                ->createQuery('r')
+                ->leftJoin('r.FishEvent e')
+                ->where('r.location_scope = 5')
+                ->execute();
     }
 
     public function executeImport(sfWebRequest $request) {
