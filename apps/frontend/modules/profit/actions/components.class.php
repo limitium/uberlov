@@ -18,7 +18,6 @@ class profitComponents extends sfComponents {
                         ->orderBy('pf.created_at desc')
                         ->limit(5)
                         ->execute();
-         print_r(get_class($this->profits->getFirst()->getCreatedBy()));
     }
 
 }

@@ -24,6 +24,7 @@ class Comment extends BaseComment {
         $componentName = $object->getTable()->getComponentName();
         $q = Doctrine_Query::create()->select('c.message, c.parent, c.created_at, c.updated_at, c.created_by, c.updated_by, p.*, v.*')->from('Comment' . $componentName . ' c')
                         ->leftJoin('c.CreatedBy p')
+                        ->leftJoin('p.User')
                         ->leftJoin('c.VoteComment v')
                         ->where('c.' . $tableName . '_id = ?', $object->getId());
 
