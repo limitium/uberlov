@@ -12,8 +12,10 @@ class locationComponents extends sfComponents {
 
 
     public function executeLast() {
-        $this->locations = Doctrine_Query::create()->select()->from('Location l')
+        $this->locations = Doctrine::getTable('Location')
+                ->createQuery('l')
                 ->leftJoin('l.CreatedBy p')
+                ->leftJoin('p.User u')
                 ->orderBy('l.created_at desc')
                 ->limit(5)
                 ->execute();
