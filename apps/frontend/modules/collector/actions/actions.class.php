@@ -60,7 +60,7 @@ class collectorActions extends sfActions {
         $this->locations = Doctrine::getTable('Location')
                 ->createQuery('r')
                 ->leftJoin('r.FishEvent e')
-                ->where('r.location_scope = 5')
+                ->where('r.location_scope_id = 5')
                 ->execute();
     }
 
