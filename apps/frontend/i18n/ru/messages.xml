@@ -4,15 +4,34 @@
     <file source-language="EN" target-language="ru" datatype="plaintext" original="messages" date="2011-05-26T15:27:15Z" product-name="messages">
         <header/>
         <body>
-            <trans-unit id="1">
+            <trans-unit>
                 <source>Required.</source>
-                <target>adasdasd</target>
+                <target>Обязательно.</target>
             </trans-unit> 
-            <trans-unit id="2">
-                <source>Required</source>
-                <target>desfsdf</target>
+            <trans-unit>
+                <source>Invalid.</source>
+                <target>Неверное значение.</target>
             </trans-unit>
-            
+            <trans-unit>
+                <source>"%value%" is too long (%max_length% characters max).</source>
+                <target>"%value%" слишком длинное максимум %max_length%.</target>
+            </trans-unit>
+            <trans-unit>
+                <source>"%value%" is too short (%min_length% characters min).</source>
+                <target>"%value%" слишком короткое минимум %min_length%.</target>
+            </trans-unit>
+            <trans-unit>
+                <source>"%value%" is not a number.</source>
+                <target>"%value%" не число.</target>
+            </trans-unit>
+            <trans-unit>
+                <source>"%value%" must be at most %max%.</source>
+                <target>Должно быть не больше %max%.</target>
+            </trans-unit>
+            <trans-unit>
+                <source>"%value%" must be at least %min%.</source>
+                <target>Должно быть не меньше %min%.</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
