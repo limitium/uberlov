@@ -15,7 +15,8 @@ class profitActions extends sfActions {
 
         $query = Doctrine::getTable('Profit')->createQuery('p')
                         ->leftJoin('p.CommentProfit')
-                        ->leftJoin('p.CreatedBy')
+                        ->leftJoin('p.CreatedBy pr')
+                        ->leftJoin('pr.User')
                         ->leftJoin('p.Location ')
                         ->orderBy('p.created_at desc');
 

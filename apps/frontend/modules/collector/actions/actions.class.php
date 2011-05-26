@@ -17,9 +17,11 @@ class collectorActions extends sfActions {
      */
     public function executeTop(sfWebRequest $request) {
         $this->locations = Doctrine_Query::create()
-                ->select('sum(v.value) as weight,l.*')
+                ->select('sum(v.value) as weight,l.*,p.*,u.*,v.*')
                 ->from('Location l')
                 ->leftJoin('l.VoteLocation v')
+                ->leftJoin('l.CreatedBy p')
+                ->leftJoin('p.User u')
                 ->groupBy('l.id')
                 ->orderBy('weight desc')
                 ->limit(10)
