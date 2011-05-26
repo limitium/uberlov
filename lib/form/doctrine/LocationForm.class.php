@@ -19,7 +19,7 @@ class LocationForm extends BaseLocationForm {
         $this->widgetSchema['location_type_id'] = new sfWidgetFormDoctrineChoice(array('model' => 'LocationType', 'add_empty' => true, 'order_by' => array('weight', 'asc')));
         $this->widgetSchema['location_flow_id'] = new sfWidgetFormDoctrineChoice(array('model' => 'LocationFlow', 'add_empty' => true, 'order_by' => array('weight', 'asc')));
         $this->widgetSchema['location_fundus_id'] = new sfWidgetFormDoctrineChoice(array('model' => 'LocationFundus', 'add_empty' => true, 'order_by' => array('weight', 'asc')));
-        $this->widgetSchema['location_scope_id'] = new sfWidgetFormDoctrineChoice(array('model' => 'LocationScope', 'add_empty' => true, 'order_by' => array('weight', 'asc')));
+        $this->widgetSchema['location_scope_id'] = new sfWidgetFormDoctrineChoice(array('model' => 'LocationScope', 'add_empty' => false, 'order_by' => array('id', 'desc')));
         $this->widgetSchema['is_free'] = new sfWidgetFormInputCheckbox();
         $this->widgetSchema['price'] = new sfWidgetFormTextarea();
         $this->widgetSchema['depth'] = new sfWidgetFormInputText();
@@ -34,10 +34,10 @@ class LocationForm extends BaseLocationForm {
         $this->validatorSchema['location_relief_id'] = new sfValidatorDoctrineChoice(array('model' => 'LocationRelief', 'required' => false));
         $this->validatorSchema['location_flow_id'] = new sfValidatorDoctrineChoice(array('model' => 'LocationFlow', 'required' => false));
         $this->validatorSchema['location_fundus_id'] = new sfValidatorDoctrineChoice(array('model' => 'LocationFundus', 'required' => false));
-        $this->validatorSchema['location_scope_id'] = new sfValidatorDoctrineChoice(array('model' => 'LocationScope', 'required' => false));
+        $this->validatorSchema['location_scope_id'] = new sfValidatorDoctrineChoice(array('model' => 'LocationScope', 'required' => true));
         $this->validatorSchema['is_free'] = new sfValidatorBoolean(array('required' => false));
         $this->validatorSchema['price'] = new sfValidatorString(array('required' => false));
-        $this->validatorSchema['depth'] = new sfValidatorNumber(array('required' => false));
+        $this->validatorSchema['depth'] = new sfValidatorNumber(array('required' => false, 'min' => 0));
         $this->validatorSchema['latitude'] = new sfValidatorNumber(array('required' => true));
         $this->validatorSchema['longitude'] = new sfValidatorNumber(array('required' => true));
         $this->validatorSchema['address'] = new sfValidatorString(array('required' => true));

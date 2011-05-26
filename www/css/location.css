@@ -12,7 +12,7 @@
 }
 .location_form_wrapper{
     width: 700px;
-    height: 390px;
+    display: block;
 }
 .form_footer{
     display: block;
