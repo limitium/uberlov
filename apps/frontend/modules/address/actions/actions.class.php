@@ -58,7 +58,8 @@ class addressActions extends sfActions {
                         ->leftJoin('a.' . $part->getTable()->getComponentName() . ' part')
                         ->leftJoin('l.CreatedBy p')
                         ->leftJoin('l.VoteLocation v')
-                        ->where('part.id = ?', $part->getId()), 'address/' . $partUrl . '?id=' . $part->getId() . '&page={%page_number}', $request->getParameter('page', 1));
+                        ->where('part.id = ?', $part->getId())
+                        ->andWhere('l.location_scope_id=5'), 'address/' . $partUrl . '?id=' . $part->getId() . '&page={%page_number}', $request->getParameter('page', 1));
     }
 
 }

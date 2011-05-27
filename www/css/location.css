@@ -36,6 +36,9 @@ a.dashed:link, a.dashed:active, a.dashed:visited, a.dashed:hover {
 
 
 /*details*/
+.location{
+    position: relative;
+}
 .location .stat{
     float:left;
     width: 53%;
