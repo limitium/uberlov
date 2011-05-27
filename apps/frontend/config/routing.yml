@@ -214,8 +214,8 @@ profile_add:
   requirements:
     sf_method: [post]
 profile_city:
-  url:        /profile/city/:q/:limit
-  params:     { module: profile, action: city, q:'',limit:10}
+  url:        /profile/city
+  params:     { module: profile, action: city}
   requirements:
     sf_method: [post]
 profile_edit:
