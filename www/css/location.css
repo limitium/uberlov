@@ -41,7 +41,8 @@ a.dashed:link, a.dashed:active, a.dashed:visited, a.dashed:hover {
 }
 .location .stat{
     float:left;
-    width: 53%;
+    width: 47%;
+    min-width: 450px
 }
 .location .stat table {
     margin: 1em 0 0 2em;
