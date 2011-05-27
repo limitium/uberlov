@@ -22,6 +22,7 @@ class collectorActions extends sfActions {
                 ->leftJoin('l.VoteLocation v')
                 ->leftJoin('l.CreatedBy p')
                 ->leftJoin('p.User u')
+                ->where('l.location_scope_id=5')
                 ->groupBy('l.id')
                 ->orderBy('weight desc')
                 ->limit(10)
