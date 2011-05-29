@@ -220,11 +220,13 @@ ht_location_e.prototype.priceChangeListener = function(form){
             price.hide();
             $('#location_price',price).attr('disabled', 'disabled');
             $(this).val(1);
+            $('.location_form_wrapper').append('<br class="height_fix"><br class="height_fix">');
             self.mm.map.panBy(0,85);
         }else{
             price.show();
             $('#location_price',price).removeAttr('disabled');
             $(this).val(0);
+            $('.location_form_wrapper br.height_fix').remove();
             self.mm.map.panBy(0,-85);
         }
         self.marker.infoWindow && gm.event.trigger(self.marker.infoWindow, 'content_changed');
