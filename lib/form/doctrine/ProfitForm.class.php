@@ -26,7 +26,7 @@ class ProfitForm extends BaseProfitForm {
 
         $this->widgetSchema['qty'] = new sfWidgetFormInputText();
         $this->widgetSchema['styles'] = new sfWidgetFormDoctrineChoice(array('model' => 'Style', 'add_empty' => true));
-        $this->widgetSchema['fishes'] = new sfWidgetFormDoctrineChoice(array('model' => 'Fish', 'add_empty' => true));
+        $this->widgetSchema['fishes'] = new sfWidgetFormDoctrineChoice(array('model' => 'Fish', 'add_empty' => true, 'order_by' => array('name', 'asc')));
 
         $this->validatorSchema['location_id'] = new sfValidatorDoctrineChoice(array('model' => 'Location', 'required' => true));
         $this->validatorSchema['name'] = new sfValidatorString(array('required' => true));
