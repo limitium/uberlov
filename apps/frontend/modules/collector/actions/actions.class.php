@@ -63,6 +63,34 @@ class collectorActions extends sfActions {
                 ->leftJoin('r.FishEvent e')
                 ->where('r.location_scope_id = 5')
                 ->execute();
+
+        if (!$this->getUser()->isAnonymous()) {
+            $this->locations->merge(Doctrine::getTable('Location')
+                            ->createQuery('r')
+                            ->leftJoin('r.FishEvent e')
+                            ->where('r.location_scope_id = 1 or r.location_scope_id = 3')
+                            ->execute());
+
+            $this->locations->merge(Doctrine_Query::create()
+                            ->select()
+                            ->from('Location l')
+                            ->leftJoin('l.FishEvent e')
+                            ->leftJoin('l.CreatedBy c')
+                            ->leftJoin('c.Accepter f with accepted = 1')
+                            ->where('l.location_scope_id = 2')
+                            ->andWhere('f.id = ?', $this->getUser()->getProfile()->id)
+                            ->execute());
+
+            $this->locations->merge(Doctrine_Query::create()
+                            ->select()
+                            ->from('Location l')
+                            ->leftJoin('l.FishEvent e')
+                            ->leftJoin('l.CreatedBy c')
+                            ->leftJoin('c.Requester f with accepted = 1')
+                            ->where('l.location_scope_id = 2')
+                            ->andWhere('f.id = ?', $this->getUser()->getProfile()->id)
+                            ->execute());
+        }
     }
 
     public function executeImport(sfWebRequest $request) {

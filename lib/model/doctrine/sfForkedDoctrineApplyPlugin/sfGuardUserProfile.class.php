@@ -137,7 +137,7 @@ class sfGuardUserProfile extends PluginsfGuardUserProfile {
     public function getLastName() {
         return $this->getUser()->getLastName();
     }
-    
+
     public function getEmail() {
         return $this->getUser()->getEmailAddress();
     }
@@ -161,10 +161,10 @@ class sfGuardUserProfile extends PluginsfGuardUserProfile {
     public function addFriend($profile) {
         if ($this->isFriend($profile)) {
             $friend = Doctrine_Query::create()
-                            ->from('Friend f')
-                            ->where('f.requester_id  = ? and f.accepter_id = ?', array($profile->id, $this->id))
-                            ->fetchOne();
-            if(!$friend){
+                    ->from('Friend f')
+                    ->where('f.requester_id  = ? and f.accepter_id = ?', array($profile->id, $this->id))
+                    ->fetchOne();
+            if (!$friend) {
                 return false;
             }
             $friend->accepted = true;
@@ -180,28 +180,26 @@ class sfGuardUserProfile extends PluginsfGuardUserProfile {
     public function getFriends() {
         return $this->getTable()->createQuery('p')
                 ->leftJoin('p.User u')
-                ->leftJoin('p.Requesters r')
-                ->where('r.accepted = true and r.accepter_id = ?', $this->id)
+                ->leftJoin('p.VoteProfile')
+                ->innerJoin('p.Requester r with accepted = 1 and requester_id = ?', $this->id)
                 ->execute()->merge($this->getTable()->createQuery('p')
                         ->leftJoin('p.User u')
-                        ->leftJoin('p.Accepters a')
-                        ->where('a.accepted = true and a.requester_id = ?', $this->id)
+                        ->leftJoin('p.VoteProfile')
+                        ->innerJoin('p.Accepter a with accepted = 1 and accepter_id = ?', $this->id)
                         ->execute());
     }
 
     public function getRequesters() {
         return $this->getTable()->createQuery('p')
-                ->leftJoin('p.Requesters r')
+                ->innerJoin('p.Accepter a with accepted = 0 and accepter_id = ?', $this->id)
                 ->leftJoin('p.User u')
-                ->where('r.accepted != true and r.accepter_id = ?', $this->id)
                 ->execute();
     }
 
     public function getAccepters() {
         return $this->getTable()->createQuery('p')
-                ->leftJoin('p.Accepters a')
+                ->innerJoin('p.Requester r with accepted = 0 and requester_id = ?', $this->id)
                 ->leftJoin('p.User u')
-                ->where('a.accepted != true and a.requester_id = ?', $this->id)
                 ->execute();
     }
 
