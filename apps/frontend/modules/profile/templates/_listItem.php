@@ -13,15 +13,17 @@
     <div class="actions">
         <?php
         $isFriend = false;
-        foreach ($friends as $friend):
-            if ($profile == $friend) {
-                $isFriend = true;
-                break;
-            }
-        endforeach;
+        if (isset($friends)):
+            foreach ($friends as $friend):
+                if ($profile == $friend) {
+                    $isFriend = true;
+                    break;
+                }
+            endforeach;
+        endif;
         ?>
         <?php echo isset($add) || (isset($friends) && !$isFriend) ? link_to('добавить', '@profile_add?id=' . $profile->getId(), array('class' => 'addFriend', 'user' => $profile->getId())) : ''; ?>        
         <?php echo isset($remove) ? link_to('убрать', '@profile_remove?id=' . $profile->getId(), array('class' => 'removeFriend', 'user' => $profile->getId())) : ''; ?>        
-<?php echo link_to('написать инбокс', '@inbox_new?whom==' . $profile->getNickName()); ?>        
+        <?php echo link_to('написать инбокс', '@inbox_new?whom==' . $profile->getNickName()); ?>        
     </div>
 </div>
