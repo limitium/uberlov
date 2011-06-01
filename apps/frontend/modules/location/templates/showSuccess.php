@@ -21,19 +21,22 @@
             <tr><td>Наловили:</td><td><?php echo $location->getTotalProfit() ?> кг.</td></tr>
         </table>
         <div class="fish">
-            <?php if($fishes->count()): ?>
-            <p>Клюет</p>
-            <ul>
-                <?php foreach($fishes as $fish): ?>
-                <li><?php echo $fish->name; ?></li>
-                <?php endforeach; ?>
-            </ul>
+            <?php if ($fishes->count()): ?>
+                <p>Клюет</p>
+                <ul>
+                    <?php foreach ($fishes as $fish): ?>
+                        <li><?php echo $fish->name; ?></li>
+                    <?php endforeach; ?>
+                </ul>
             <?php endif; ?>
         </div>
         <?php if ($location->getIsFree()): ?>
             <p class="free"></p>
         <?php else: ?>
-            <p class="price"><?php echo $location->getPrice(ESC_XSSSAFE) ?></p>
+            <div class="price">
+                <p class="icon"></p>
+                <?php echo $location->getPrice(ESC_XSSSAFE) ?>
+            </div>
         <?php endif; ?>
     </div>
     <div class="photo">
