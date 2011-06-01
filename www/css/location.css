@@ -41,8 +41,8 @@ a.dashed:link, a.dashed:active, a.dashed:visited, a.dashed:hover {
 }
 .location .stat{
     float:left;
-    width: 47%;
-    min-width: 450px
+    width: 46%;
+    min-width: 420px
 }
 .location .stat table {
     margin: 1em 0 0 2em;
@@ -53,6 +53,19 @@ a.dashed:link, a.dashed:active, a.dashed:visited, a.dashed:hover {
 }
 .location .stat p{
     line-height: 1.6em;
+}
+.location .price{
+    float:left;
+    padding: 1em;
+}
+.location .price .icon{
+    background: url("/images/icons/location/price.png") no-repeat scroll left top transparent;
+    height: 128px;
+    width: 128px;
+    margin-left: -50px;
+    display: block;
+    float: left;
+
 }
 .location .stat table tr td{
     width: 120px;
