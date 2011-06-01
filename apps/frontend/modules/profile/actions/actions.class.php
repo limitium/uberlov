@@ -27,9 +27,8 @@ class profileActions extends sfActions {
                                 ->orderBy('f.created_at ASC'), 'user/list?page={%page_number}', $request->getParameter('page', 1));
 
         $this->csrf = CSRF::getToken();
-        if (!$this->getUser()->isAnonymous()) {
-            $this->friends = $this->getUser()->getProfile()->getFriends();
-        }
+
+        $this->friends = !$this->getUser()->isAnonymous() ? $this->getUser()->getProfile()->getFriends() : null;
     }
 
     public function executeMy(sfWebRequest $request) {

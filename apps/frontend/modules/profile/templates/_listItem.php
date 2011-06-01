@@ -8,7 +8,7 @@
         <?php echo link_to($profile->getFirstName() . ' ' . $profile->getLastName(), 'profile/show?id=' . $profile->getId()); ?>
     </div>
     <div class="info">
-        <span><?php echo'Обнинск' ?></span>
+        <span><?php echo $profile->getCity(); ?></span>
     </div>
     <div class="actions">
         <?php
