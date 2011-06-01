@@ -11,10 +11,10 @@ all:
     
   sfApplyPlugin:
     apply:
-      subject: "Подтверждение аккаунта на %1%"
+      subject: "Подтверждение аккаунта на uberlov.ru"
     from:
       email: "spamer@uberlov.ru"
-      fullname: "Важная информация с www.uberlov.ru"
+      fullname: "Uberlov"
       routes:
           apply: /register
           reset: /password-reset
