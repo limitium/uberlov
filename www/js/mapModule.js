@@ -300,7 +300,7 @@ mapModule.prototype.showLoader = function(point){
 }
 
 mapModule.prototype.showLocationName = function(point,html){
-    return new mapOverlay(point,html,this.map,'overlayMouseTarget');
+    return new mapOverlay(point,html,this.map,'overlayMouseTarget',-20);
 }
 
 mapModule.prototype.openInfo = function(point,html,closeHandler){
@@ -333,12 +333,13 @@ mapModule.prototype.idToType = {
 
 
 window.gm = google.maps;
-function mapOverlay(point,html,map,overlay){
+function mapOverlay(point,html,map,overlay,y){
     this.point = point;
     this.html = html;
     this.overlay = overlay;
     this.div = null;
     this.setMap(map);
+    this.y = y;
 }
 
 mapOverlay.prototype = new gm.OverlayView();
@@ -357,7 +358,9 @@ mapOverlay.prototype.draw = function(){
     var overlayProjection = this.getProjection();
     
     var point = overlayProjection.fromLatLngToDivPixel(this.point);
-
+    if(this.y){
+        point.y -= this.y;
+    }
     this.div.style.left = (point.x) + "px";
     this.div.style.top = (point.y) + "px";
 
