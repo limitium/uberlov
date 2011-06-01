@@ -49,13 +49,14 @@ class Location extends BaseLocation {
                 ->andWhere('toward = ?', "location")
                 ->execute();
 
-        Doctrine_Query::create()
-                ->update('Photo p')
-                ->set('p.toward', '"location"')
-                ->set('p.location_id', $this->getId())
-                ->whereIn('p.id', $photos)
-                ->execute();
-
+        if (sizeof($photos)) {
+            Doctrine_Query::create()
+                    ->update('Photo p')
+                    ->set('p.toward', '"location"')
+                    ->set('p.location_id', $this->getId())
+                    ->whereIn('p.id', $photos)
+                    ->execute();
+        }
         return $this;
     }
 
@@ -67,9 +68,9 @@ class Location extends BaseLocation {
                 ->where('p.location_id = ?', $this->getId())
                 ->fetchOne()->qty;
     }
-    
-    public function getFishes(){
-       return Doctrine_Query::create()
+
+    public function getFishes() {
+        return Doctrine_Query::create()
                 ->from('Fish f')
                 ->innerJoin('f.ProfitDetail d')
                 ->innerJoin('d.Profit p')
@@ -77,9 +78,9 @@ class Location extends BaseLocation {
                 ->groupBy('f.id')
                 ->execute();
     }
-    
-    public function getStyles(){
-       return Doctrine_Query::create()
+
+    public function getStyles() {
+        return Doctrine_Query::create()
                 ->from('Style s')
                 ->innerJoin('s.ProfitDetail d')
                 ->innerJoin('d.Profit p')
@@ -87,7 +88,7 @@ class Location extends BaseLocation {
                 ->groupBy('s.id')
                 ->execute();
     }
-    
+
     public function getPhoto() {
         return '';
     }

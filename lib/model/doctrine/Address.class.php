@@ -23,8 +23,10 @@ class Address extends BaseAddress {
             $uPartName = ucfirst($partName);
             $this->$uPartName = $part ? $part : null;
         }
-        $route = $this->getAddressPart($addressData, 'route', $this->Country);
-        $this->Route = $route ? $route : null;
+        $this->Route = null;
+        if (isset($addressData['route'])) {
+            $this->Route = $this->getAddressPart($addressData, 'route', $this->Country);
+        }
     }
 
     private function getAddressPart($addressData, $partName, $parent) {
