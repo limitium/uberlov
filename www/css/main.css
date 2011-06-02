@@ -89,11 +89,12 @@ body{
 }
 
 ul.i_like_it{
-    padding: 1em 0 2em 3em;    
+    padding: 1em 0 2em 1em;    
+    clear: both;
 }
 ul.i_like_it li{
     display: block;
-    width: 190px;
+    width: 180px;
     position: relative;
     float:left;
 }
