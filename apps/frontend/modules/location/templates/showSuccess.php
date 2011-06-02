@@ -6,8 +6,26 @@
 
 <?php include_partial('location/location', array('location' => $location)) ?>
 <!-- AddThis Button BEGIN -->
-<script type="text/javascript">var addthis_config = {"data_track_clickback":true};</script>
-<a class="addthis_button" href="http://www.addthis.com/bookmark.php?v=250&amp;username=uberlov"><img src="http://s7.addthis.com/static/btn/v2/lg-share-en.gif" width="125" height="16" alt="Bookmark and Share" style="border:0"/></a><script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#username=uberlov"></script>
+<a href="http://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-via="uberlov">Tweet</a><script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+
+<div id="fb-root"></div><script src="http://connect.facebook.net/en_US/all.js#appId=227389200621319&amp;xfbml=1"></script><fb:like href="" send="true" layout="button_count" width="300" show_faces="false" font=""></fb:like>
+
+<!-- Put this script tag to the <head> of your page -->
+<script type="text/javascript" src="http://userapi.com/js/api/openapi.js?31"></script>
+
+<script type="text/javascript">
+  VK.init({apiId: API_ID, onlyWidgets: true});
+</script>
+
+<!-- Put this div tag to the place, where the Like block will be -->
+<div id="vk_like"></div>
+<script type="text/javascript">
+VK.Widgets.Like("vk_like", {type: "button"});
+</script>
+
+<a target="_blank" class="mrc__plugin_like_button" href="http://connect.mail.ru/share" data-mrc-config="{'type' : 'button', 'width' : '300'}">Нравится</a>
+<script src="http://cdn.connect.mail.ru/js/loader.js" type="text/javascript" charset="UTF-8"></script>
+
 <!-- AddThis Button END -->
 
 
