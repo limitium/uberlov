@@ -71,7 +71,7 @@ body{
     text-decoration: none;
     color: #333333;
     font-weight: normal;
-    
+
     background-color: #EEEEEE;
     border-left: 1px solid #BBBBBB;
     border-right: 1px solid #BBBBBB;
@@ -86,6 +86,16 @@ body{
 .tabPanel ul li span.selected{
     background: none repeat scroll 0 0 #FFFFFF;
     border-bottom: 1px solid #FFFFFF;
+}
+
+ul.i_like_it{
+    padding: 1em 0 2em 3em;    
+}
+ul.i_like_it li{
+    display: block;
+    width: 130px;
+    position: relative;
+    float:left;
 }
 
 /*meta*/

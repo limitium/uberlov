@@ -9,7 +9,7 @@
 
 <ul class="i_like_it">
     <li>
-        <a href="http://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-via="uberlov">Tweet</a><script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+        <a href="http://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-via="Uberlov">Tweet</a><script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
     </li>
     <li>
         <div id="fb-root"></div><script src="http://connect.facebook.net/en_US/all.js#appId=227389200621319&amp;xfbml=1"></script><fb:like href="" send="true" layout="button_count" width="300" show_faces="false" font=""></fb:like>
@@ -29,7 +29,7 @@
     </script>
 </li>
 <li>
-    <a target="_blank" class="mrc__plugin_like_button" href="http://connect.mail.ru/share" data-mrc-config="{'type' : 'button', 'width' : '150'}">Нравится</a>
+    <a target="_blank" class="mrc__plugin_like_button" href="http://connect.mail.ru/share" data-mrc-config="{'type' : 'button', 'width' : '130'}">Нравится</a>
     <script src="http://cdn.connect.mail.ru/js/loader.js" type="text/javascript" charset="UTF-8"></script>
 </li>
 <li>
