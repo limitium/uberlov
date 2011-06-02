@@ -32,6 +32,16 @@
     <a target="_blank" class="mrc__plugin_like_button" href="http://connect.mail.ru/share" data-mrc-config="{'type' : 'button', 'width' : '150'}">Нравится</a>
     <script src="http://cdn.connect.mail.ru/js/loader.js" type="text/javascript" charset="UTF-8"></script>
 </li>
+<li>
+    <link href="http://stg.odnoklassniki.ru/share/odkl_share.css" rel="stylesheet">
+    <script src="http://stg.odnoklassniki.ru/share/odkl_share.js" type="text/javascript" ></script>
+    <div style="float: left;">
+        <a class="odkl-klass-stat" href="Абсолютный адрес страницы" onclick="ODKL.Share(this);return false;" ><span>0</span></a>
+    </div>
+    <script type="text/javascript">
+        ODKL.init();
+    </script>
+</li>
 </ul>
 
 
