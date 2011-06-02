@@ -957,6 +957,21 @@ Route:
     Country:
       local: country_id
       foreign: id
+LocationShow:
+  columns:
+    shows:
+      type: integer
+      notnull: true
+    location_id:
+      type: integer(4)
+      notnull: true
+  relations:
+    Location:
+      foreignType: one
+      onDelete: CASCADE
+      type: one
+      local: location_id
+      foreign: id
 options:
   type: INNODB
   charset: utf8

@@ -100,6 +100,15 @@ class Location extends BaseLocation {
         return $this->getCreatedBy() == $profile;
     }
 
+    public function showed() {
+        $show = $this->getLocationShow();
+        if (!$show) {
+            $this->LocationShow = new LocationShow();
+        }
+        $show->shows++;
+        $show->save();
+    }
+
     /**
      *
      * @return Doctrine_Collection 
