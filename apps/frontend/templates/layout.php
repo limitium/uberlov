@@ -131,7 +131,7 @@
             </div>
             <div class="footer">
                 <div class="content">
-                    <h2><?php echo link_to(image_tag('/images/logo_small.png'), '@homepage') ?>Uberлов - мы знаем все места.</h2>
+                    <h2><?php echo link_to(image_tag('/images/logo_small.png'), '@homepage') ?>Uberлов — мы знаем все места.</h2>
                     <div class="footer_box_menu clear_fix">
                         <div class="footer_menu">
                             <h3>
