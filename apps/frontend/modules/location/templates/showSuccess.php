@@ -5,28 +5,34 @@
 <?php use_javascript('wishes'); ?>
 
 <?php include_partial('location/location', array('location' => $location)) ?>
-<!-- AddThis Button BEGIN -->
-<a href="http://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-via="uberlov">Tweet</a><script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
 
-<div id="fb-root"></div><script src="http://connect.facebook.net/en_US/all.js#appId=227389200621319&amp;xfbml=1"></script><fb:like href="" send="true" layout="button_count" width="300" show_faces="false" font=""></fb:like>
 
-<!-- Put this script tag to the <head> of your page -->
-<script type="text/javascript" src="http://userapi.com/js/api/openapi.js?31"></script>
+<ul class="i_like_it">
+    <li>
+        <a href="http://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-via="uberlov">Tweet</a><script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+    </li>
+    <li>
+        <div id="fb-root"></div><script src="http://connect.facebook.net/en_US/all.js#appId=227389200621319&amp;xfbml=1"></script><fb:like href="" send="true" layout="button_count" width="300" show_faces="false" font=""></fb:like>
+</li>
+<li>
+    <?php use_javascript('http://userapi.com/js/api/openapi.js?31'); ?>
+    <!-- Put this script tag to the <head> of your page -->
 
-<script type="text/javascript">
-  VK.init({apiId: API_ID, onlyWidgets: true});
-</script>
+    <script type="text/javascript">
+        VK.init({apiId: 2350662, onlyWidgets: true});
+    </script>
 
-<!-- Put this div tag to the place, where the Like block will be -->
-<div id="vk_like"></div>
-<script type="text/javascript">
-VK.Widgets.Like("vk_like", {type: "button"});
-</script>
-
-<a target="_blank" class="mrc__plugin_like_button" href="http://connect.mail.ru/share" data-mrc-config="{'type' : 'button', 'width' : '300'}">Нравится</a>
-<script src="http://cdn.connect.mail.ru/js/loader.js" type="text/javascript" charset="UTF-8"></script>
-
-<!-- AddThis Button END -->
+    <!-- Put this div tag to the place, where the Like block will be -->
+    <div id="vk_like"></div>
+    <script type="text/javascript">
+        VK.Widgets.Like("vk_like", {type: "button"});
+    </script>
+</li>
+<li>
+    <a target="_blank" class="mrc__plugin_like_button" href="http://connect.mail.ru/share" data-mrc-config="{'type' : 'button', 'width' : '150'}">Нравится</a>
+    <script src="http://cdn.connect.mail.ru/js/loader.js" type="text/javascript" charset="UTF-8"></script>
+</li>
+</ul>
 
 
 <div class="location">
