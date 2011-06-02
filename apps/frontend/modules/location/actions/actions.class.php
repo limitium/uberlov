@@ -13,11 +13,14 @@ class locationActions extends sfActions {
     public function executeMap(sfWebRequest $request) {
         $this->location = Doctrine::getTable('Location')->find($request->getParameter('id'));
         $this->forward404Unless($this->location);
+        $this->location->showed();
     }
 
     public function executeShow(sfWebRequest $request) {
         $this->location = Doctrine::getTable('Location')->find($request->getParameter('id'));
         $this->forward404Unless($this->location);
+
+        $this->location->showed();
 
         $this->comments = Comment::getFor($this->location);
 
@@ -35,9 +38,9 @@ class locationActions extends sfActions {
                         ->execute();
 
         $this->csrf = CSRF::getToken();
-        
+
         $this->fishes = $this->location->getFishes();
-        
+
         $this->form = new CommentLocationForm();
         $this->form->setCommented($this->location);
     }
@@ -93,7 +96,7 @@ class locationActions extends sfActions {
         $form->bind($request->getParameter($form->getName()));
         if ($form->isValid()) {
             $addressData = (array) json_decode($form->getValue('address'));
-            $photos = (array)json_decode($form->getValue('photos'));
+            $photos = (array) json_decode($form->getValue('photos'));
             return $form->save()->updateAddress($addressData)->updatePhotos($photos);
         }
         return null;

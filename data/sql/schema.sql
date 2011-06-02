@@ -22,6 +22,7 @@ CREATE TABLE location_flow (id INT, name VARCHAR(50) NOT NULL, weight BIGINT, PR
 CREATE TABLE location_fundus (id INT, name VARCHAR(50) NOT NULL, weight BIGINT, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci ENGINE = INNODB;
 CREATE TABLE location_relief (id INT, name VARCHAR(50) NOT NULL, weight BIGINT, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci ENGINE = INNODB;
 CREATE TABLE location_scope (id INT, name VARCHAR(50) NOT NULL UNIQUE, weight BIGINT, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci ENGINE = INNODB;
+CREATE TABLE location_show (id BIGINT AUTO_INCREMENT, shows BIGINT NOT NULL, location_id INT NOT NULL, INDEX location_id_idx (location_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci ENGINE = INNODB;
 CREATE TABLE location_type (id INT AUTO_INCREMENT, name VARCHAR(50) NOT NULL UNIQUE, weight BIGINT, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci ENGINE = INNODB;
 CREATE TABLE photo_version (id INT, name VARCHAR(100) NOT NULL, thumb VARCHAR(100) NOT NULL, toward VARCHAR(255), location_id INT, profit_id INT, created_by INT NOT NULL, updated_by INT NOT NULL, version BIGINT, PRIMARY KEY(id, version)) DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci ENGINE = INNODB;
 CREATE TABLE photo (id INT AUTO_INCREMENT, name VARCHAR(100) NOT NULL, thumb VARCHAR(100) NOT NULL, toward VARCHAR(255), location_id INT, profit_id INT, created_by INT NOT NULL, updated_by INT NOT NULL, version BIGINT, INDEX photo_toward_idx (toward), INDEX created_by_idx (created_by), INDEX updated_by_idx (updated_by), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci ENGINE = INNODB;
@@ -92,6 +93,7 @@ ALTER TABLE location ADD CONSTRAINT location_location_fundus_id_location_fundus_
 ALTER TABLE location ADD CONSTRAINT location_location_flow_id_location_flow_id FOREIGN KEY (location_flow_id) REFERENCES location_flow(id);
 ALTER TABLE location ADD CONSTRAINT location_created_by_sf_guard_user_profile_id FOREIGN KEY (created_by) REFERENCES sf_guard_user_profile(id);
 ALTER TABLE location ADD CONSTRAINT location_address_id_address_id FOREIGN KEY (address_id) REFERENCES address(id);
+ALTER TABLE location_show ADD CONSTRAINT location_show_location_id_location_id FOREIGN KEY (location_id) REFERENCES location(id) ON DELETE CASCADE;
 ALTER TABLE photo_version ADD CONSTRAINT photo_version_id_photo_id FOREIGN KEY (id) REFERENCES photo(id) ON UPDATE CASCADE ON DELETE CASCADE;
 ALTER TABLE photo ADD CONSTRAINT photo_updated_by_sf_guard_user_profile_id FOREIGN KEY (updated_by) REFERENCES sf_guard_user_profile(id);
 ALTER TABLE photo ADD CONSTRAINT photo_created_by_sf_guard_user_profile_id FOREIGN KEY (created_by) REFERENCES sf_guard_user_profile(id);
@@ -131,5 +133,5 @@ ALTER TABLE sf_guard_user_group ADD CONSTRAINT sf_guard_user_group_user_id_sf_gu
 ALTER TABLE sf_guard_user_group ADD CONSTRAINT sf_guard_user_group_group_id_sf_guard_group_id FOREIGN KEY (group_id) REFERENCES sf_guard_group(id) ON DELETE CASCADE;
 ALTER TABLE sf_guard_user_permission ADD CONSTRAINT sf_guard_user_permission_user_id_sf_guard_user_id FOREIGN KEY (user_id) REFERENCES sf_guard_user(id) ON DELETE CASCADE;
 ALTER TABLE sf_guard_user_permission ADD CONSTRAINT sf_guard_user_permission_permission_id_sf_guard_permission_id FOREIGN KEY (permission_id) REFERENCES sf_guard_permission(id) ON DELETE CASCADE;
-ALTER TABLE sf_guard_user_profile ADD CONSTRAINT sf_guard_user_profile_user_id_sf_guard_user_id FOREIGN KEY (user_id) REFERENCES sf_guard_user(id) ON DELETE CASCADE;
+ALTER TABLE sf_guard_user_profile ADD CONSTRAINT sf_guard_user_profile_user_id_sf_guard_user_id FOREIGN KEY (user_id) REFERENCES sf_guard_user(id);
 ALTER TABLE sf_guard_user_profile ADD CONSTRAINT sf_guard_user_profile_city_id_city_id FOREIGN KEY (city_id) REFERENCES city(id);

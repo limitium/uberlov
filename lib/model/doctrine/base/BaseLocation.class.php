@@ -30,6 +30,7 @@
  * @property Doctrine_Collection $VoteLocation
  * @property Doctrine_Collection $FishEvent
  * @property Doctrine_Collection $PhotoLocation
+ * @property LocationShow $LocationShow
  * 
  * @method integer             getId()                 Returns the current record's "id" value
  * @method string              getName()               Returns the current record's "name" value
@@ -56,6 +57,7 @@
  * @method Doctrine_Collection getVoteLocation()       Returns the current record's "VoteLocation" collection
  * @method Doctrine_Collection getFishEvent()          Returns the current record's "FishEvent" collection
  * @method Doctrine_Collection getPhotoLocation()      Returns the current record's "PhotoLocation" collection
+ * @method LocationShow        getLocationShow()       Returns the current record's "LocationShow" value
  * @method Location            setId()                 Sets the current record's "id" value
  * @method Location            setName()               Sets the current record's "name" value
  * @method Location            setDescription()        Sets the current record's "description" value
@@ -81,6 +83,7 @@
  * @method Location            setVoteLocation()       Sets the current record's "VoteLocation" collection
  * @method Location            setFishEvent()          Sets the current record's "FishEvent" collection
  * @method Location            setPhotoLocation()      Sets the current record's "PhotoLocation" collection
+ * @method Location            setLocationShow()       Sets the current record's "LocationShow" value
  * 
  * @package    FISHERY
  * @subpackage model
@@ -200,6 +203,10 @@ abstract class BaseLocation extends sfDoctrineRecord
              'foreign' => 'location_id'));
 
         $this->hasMany('PhotoLocation', array(
+             'local' => 'id',
+             'foreign' => 'location_id'));
+
+        $this->hasOne('LocationShow', array(
              'local' => 'id',
              'foreign' => 'location_id'));
 
