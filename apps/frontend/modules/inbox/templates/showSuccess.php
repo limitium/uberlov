@@ -7,7 +7,7 @@
 
 <div id="inbox">
     <h2><?php echo $inbox->getName(); ?></h2>
-    <div class=qweqwe"><?php echo $inbox->getMessage(ESC_XSSSAFE); ?></div>
+    <div class="text"><?php echo $inbox->getMessage(ESC_XSSSAFE); ?></div>
     <div class="meta">
         <div>
             <a href="" id="goToReply">□</a> 
@@ -27,13 +27,13 @@
 <div id="inboxControl">
     <a href="" class="inboxDelete" inbox="<?php echo $inbox->getId(); ?>">Удалить инбокс</a>
     <?php if ($inbox->isOwner()): ?>
-        Добавить
+        <label>Добавить</label>
         <input id="inboxAdd" type="text" />
     <?php endif; ?>
-    Подписчики:
+    <h4>Подписчики:</h4>
     <ul>
         <?php foreach ($inboxed as $profile): ?>
-            <li profile="<?php echo $profile->getId(); ?>"><?php echo link_to($profile->getNickName(), 'profile/show?id=' . $profile->getId()); ?><?php if ($inbox->isOwner()): ?><a href="" class="delete"> x </a><?php endif; ?></li>
+            <li profile="<?php echo $profile->getId(); ?>"><?php echo link_to($profile->getNickName(), 'profile/show?id=' . $profile->getId()); ?><?php if ($inbox->isOwner()): ?><a href="" class="delete">x</a><?php endif; ?></li>
         <?php endforeach; ?>
     </ul>
 </div>

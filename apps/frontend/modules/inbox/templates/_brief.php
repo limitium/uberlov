@@ -7,7 +7,7 @@
     <div class="meta">
         <div>
             <?php include_partial('profile/writeBy', array('written' => $inbox)); ?> | 
-            <a href="" class="inboxDelete" inbox="<?php echo $inbox->getId(); ?>">Удалить инбокс</a>
+            <a href="" class="inboxDelete" inbox="<?php echo $inbox->getId(); ?>">Удалить инбокс</a> | 
             <?php include_partial('comment/meta', array('commented' => $inbox)); ?>            
         </div>
     </div>

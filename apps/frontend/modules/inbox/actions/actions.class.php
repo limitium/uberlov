@@ -104,7 +104,7 @@ class inboxActions extends sfActions {
     public function executeAdd(sfWebRequest $request) {
 
         $request->checkCSRFProtection();
-
+        
         $this->forward404Unless($inbox = Doctrine::getTable('Inbox')->find(array($request->getParameter('id'))), sprintf('Object inbox does not exist (%s).', $request->getParameter('id')));
 
         if ($inbox->isOwner()) {

@@ -121,7 +121,7 @@ inbox_list:
     sf_method: [get]
 inbox_new:
   url:        /inbox/new/:whom
-  params:     { module: inbox, action: new }
+  params:     { module: inbox, action: new, whom: '' }
   requirements:
     sf_method: [get]
 inbox_create:
@@ -129,26 +129,27 @@ inbox_create:
   params:     { module: inbox, action: create }
   requirements:
     sf_method: [post]
+inbox_add:
+  url:        /inbox/add
+  params:     { module: inbox, action: add }
+  requirements:
+    sf_method: [post]
+inbox_remove:
+  url:        /inbox/remove
+  params:     { module: inbox, action: remove }
+  requirements:
+    sf_method: [post]
+inbox_delete:
+  url:        /inbox/delete
+  params:     { module: inbox, action: delete }
+  requirements:
+    sf_method: [post]
 inbox_show:
   url:        /inbox/:id
   params:     { module: inbox, action: show }
   requirements:
     sf_method: [get]
-inbox_delete:
-  url:        /inbox/delete/:id
-  params:     { module: inbox, action: delete }
-  requirements:
-    sf_method: [post]
-inbox_remove:
-  url:        /remove/remove/:id/:profile
-  params:     { module: inbox, action: remove }
-  requirements:
-    sf_method: [post]
-inbox_add:
-  url:        /inbox/add/:id/:data
-  params:     { module: inbox, action: add }
-  requirements:
-    sf_method: [post]
+
 
 #location
 location_list:
