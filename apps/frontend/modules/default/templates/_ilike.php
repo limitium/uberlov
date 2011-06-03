@@ -1,9 +1,12 @@
 <ul class="i_like_it">
     <li>
-        <a href="http://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-via="Uberlov">Tweet</a><script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
-    </li>
-    <li>
-        <div id="fb-root"></div><script src="http://connect.facebook.net/en_US/all.js#appId=227389200621319&amp;xfbml=1"></script><fb:like href="" send="true" layout="button_count" width="300" show_faces="false" font=""></fb:like>
+        <!-- Place this tag in your head or just before your close body tag -->
+        <script type="text/javascript" src="http://apis.google.com/js/plusone.js">
+            {lang: 'ru'}
+        </script>
+
+        <!-- Place this tag where you want the +1 button to render -->
+    <g:plusone size="medium"></g:plusone>
 </li>
 <li>
     <?php use_javascript('http://userapi.com/js/api/openapi.js?31'); ?>
@@ -18,6 +21,12 @@
     <script type="text/javascript">
         VK.Widgets.Like("vk_like", {type: "button"});
     </script>
+</li>
+<li>
+    <a href="http://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-via="Uberlov">Tweet</a><script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+</li>
+<li>
+    <div id="fb-root"></div><script src="http://connect.facebook.net/en_US/all.js#appId=227389200621319&amp;xfbml=1"></script><fb:like href="" send="true" layout="button_count" width="100" show_faces="false" font=""></fb:like>
 </li>
 <li>
     <a target="_blank" class="mrc__plugin_like_button" href="http://connect.mail.ru/share" data-mrc-config="{'type' : 'button', 'width' : '130'}">Нравится</a>
