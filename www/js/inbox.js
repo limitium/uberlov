@@ -29,31 +29,42 @@ function inbox(){
     $('#inboxControl a.delete').live('click', function(){
         var a = $(this);
         var li  = $(a.parents()[0]);
-        
-        app.sendData({
-            url:app.url('/inbox/remove'),
-            data:{
-                id: $('a.inboxDelete').attr('inbox'),
-                profile: li.attr('profile'),
-                _csrf_token: app.csrf.inbox
-            },
-            handler: function(){
-                li.remove();
-            }
-        });
+        if(!a.hasClass('removing')){
+            a.addClass('removing');
+            a.html('удаляем')
+            app.sendData({
+                url:app.url('/inbox/remove'),
+                data:{
+                    id: $('a.inboxDelete').attr('inbox'),
+                    profile: li.attr('profile'),
+                    _csrf_token: app.csrf.inbox
+                },
+                handler: function(){
+                    li.remove();
+                }
+            });
+        }
         return false;
     });
 
-    $('#inboxAdd').keyup(function(e){
+    var input = $('#inboxAdd');
+    input.keyup(function(e){
         if(e.keyCode == 13){
+            var users = $(this).val();
+            
+            input.attr('disabled','disabled');
+            input.val('добавляем...');
+
             app.sendData({
                 url:app.url('/inbox/add'),
                 data:{
                     id: $('a.inboxDelete').attr('inbox'),
-                    data: $(this).val(),
+                    data: users,
                     _csrf_token: app.csrf.inbox
                 },
                 handler: function(data){
+                    input.removeAttr('disabled');
+                    input.val('');
                     if(data.added.length){
                         var ul = $('#inboxControl ul');
                         
@@ -77,5 +88,5 @@ inbox.prototype.afterInit = function(){
 };
 inbox.prototype.onDelete = function(event, inbox){
     $('#myInboxCounter').html(parseInt($('#myInboxCounter').html())-1);
-    inbox.remove();
+    $(inbox.parents()[0]).remove();
 }

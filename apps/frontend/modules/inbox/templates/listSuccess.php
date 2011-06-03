@@ -6,7 +6,7 @@
 <?php $inboxes = $pager->execute(); ?>
 
 <div class="inboxContainer">
-    <a class="non_extensible_button button_01" href="<?php echo url_for('inbox/new') ?>">  
+    <a class="non_extensible_button button_01" href="<?php echo url_for('@inbox_new') ?>">  
     <span class="border_l png_fix">
         <span class="border_r png_fix">
             <span class="btn_bg png_fix">
