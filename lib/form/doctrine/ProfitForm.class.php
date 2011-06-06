@@ -31,9 +31,9 @@ class ProfitForm extends BaseProfitForm {
         $this->validatorSchema['location_id'] = new sfValidatorDoctrineChoice(array('model' => 'Location', 'required' => true));
         $this->validatorSchema['name'] = new sfValidatorString(array('required' => true));
         $this->validatorSchema['date'] = new sfValidatorDate(array('date_format' => "/[0-2][0-9]\.[0-1][0-9]\.[0-9]{4}/", 'with_time' => false, 'required' => true, 'date_format_error' => 'd.m.Y'));
-        $this->validatorSchema['cordage'] = new sfValidatorString(array('required' => true));
-        $this->validatorSchema['description'] = new sfValidatorString(array('required' => true));
-        $this->validatorSchema['details'] = new sfValidatorString(array('required' => true));
+        $this->validatorSchema['cordage'] = new sfValidatorString(array('required' => false));
+        $this->validatorSchema['description'] = new sfValidatorString(array('required' => false));
+        $this->validatorSchema['details'] = new sfValidatorString(array('required' => false));
         $this->validatorSchema['weight'] = new sfValidatorNumber(array('required' => false));
         $this->validatorSchema['fish_id'] = new sfValidatorDoctrineChoice(array('required' => false, 'model' => $this->getRelatedModelName('Fish')));
 

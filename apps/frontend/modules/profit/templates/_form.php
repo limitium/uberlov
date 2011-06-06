@@ -32,7 +32,7 @@
                 </dd>
             </dl>
             <dl>
-                <dt>Используемые снасти:</dt>
+                <dt>Используемые снасти, прикормки, приманки:</dt>
                 <dd>
                     <?php echo $form['cordage']->renderError() ?>
                     <?php echo $form['cordage'] ?>

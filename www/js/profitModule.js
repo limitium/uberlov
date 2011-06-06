@@ -29,7 +29,7 @@ profitModule.prototype.startEdit = function(){
         this.mm.setEditor(this);
         this.menu.link.addClass('disabled');
 
-        this.mm.handlers.onLocationClick = this.getOnLocationClick().delegate(this)
+        this.mm.handlers.onLocationClick = this.onLocationClick().delegate(this)
 
         this.barCreate();
         this.barSetMsg('Выберите место или добавьте новое');
@@ -38,15 +38,15 @@ profitModule.prototype.startEdit = function(){
 }
 
 profitModule.prototype.cancelEdit = function(){
-    this.mm.handlers.onLocationClick = this.mm.getOnLocationClick().delegate(this.mm)
+    this.mm.handlers.onLocationClick = this.mm.onLocationClick().delegate(this.mm)
     this.barRemove();
     this.menu.link.removeClass('disabled');
 }
 
 
-profitModule.prototype.getOnLocationClick =  function(){
+profitModule.prototype.onLocationClick =  function(){
     return function(location){
-        app.redirect('/profit/new/location/'+location.id);
+        app.redirect('/profit/new/'+location.id);
     }
 }
 

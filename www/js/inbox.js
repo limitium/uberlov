@@ -15,7 +15,7 @@ function inbox(){
                     if(inbox.length){
                         app.$.trigger('inboxDelete',[inbox]);
                     }else{
-                        window.location = app.url('/inbox/list');
+                        app.redirect('/inbox/list');
                     }
                 }
             });

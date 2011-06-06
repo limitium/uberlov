@@ -49,7 +49,7 @@ eventModule.prototype.cancelEdit = function(){
 eventModule.prototype.getOnLocationClick =  function(){
     var self  = this;
     return function(location){
-        app.redirect('/event/new/location/'+location.id);
+        app.redirect('/event/new/'+location.id);
     //        self.location = location;
     //        var loader = this.mm.showLoader(location.marker.getPosition());
     //        app.getForm('/event/new/location/'+location.id,this.showForm.delegate(this,location.marker,loader));

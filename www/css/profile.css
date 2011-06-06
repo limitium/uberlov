@@ -3,6 +3,9 @@
     display: inline-block;
     margin-right: 6px;
 }
+.userpic img{
+    margin-bottom: -8px;
+}
 .userpic b.s32{
     background: url("/images/common/backgrounds/bg_avatar_mask_32.gif") no-repeat scroll 0 0 transparent;
     height: 32px;
@@ -69,6 +72,9 @@
     float: left;
     display: block;
     padding: 0.5em 0 0 1em;
+}
+.profile .achieves .button_01 {
+    padding-top: 1em;
 }
 .profile .friends{
     clear:both;
