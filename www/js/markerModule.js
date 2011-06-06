@@ -18,7 +18,7 @@ markerModule.prototype.afterInit = function(){
 }
 markerModule.prototype.initMenu = function(){
     this.menu = {
-        link: $('#new_location',this.mm.addEditItem('<a id="new_location" href=""><img src="' + app.url('/images/location.png') + '"/>добавить место</a>'))
+        link: $('#new_location',this.mm.addEditItem('<a id="new_location" href=""><img src="' + app.url('/images/location_m.png') + '"/>добавить место</a>'))
         .click(this.startEdit.delegate(this))
     };
 }
@@ -29,7 +29,7 @@ markerModule.prototype.startEdit = function(){
         this.mm.setEditor(this);
         this.menu.link.addClass('disabled');
 
-        this.location = new ht_location_e(this.mm,{
+        this.location = new ht_location_m(this.mm,{
             onSaveChange: this.onSaveChange.delegate(this)
         });
         this.listeners.zoom_changed = gm.event.addListener(this.mm.map,'zoom_changed',this.checkZoom.delegate(this));
@@ -51,7 +51,7 @@ markerModule.prototype.onSaveChange = function(disabled){
     this.barSaveDisabled(disabled);
 }
 markerModule.prototype.barCreate = function(){
-    var bar = this.mm.updateBar('<img class="mapIcon" src="' + app.url('/images/location.png') + '"/><span id="bar_msg"></span></span><input id="bar_save" class="map_button disabled" type="button" value="Сохранить"/><input id="bar_cancel" class="map_button" type="button" value="Отменить"/>');
+    var bar = this.mm.updateBar('<img class="mapIcon" src="' + app.url('/images/location_m.png') + '"/><span id="bar_msg"></span></span><input id="bar_save" class="map_button disabled" type="button" value="Сохранить"/><input id="bar_cancel" class="map_button" type="button" value="Отменить"/>');
     this.bar = {
         msg: $('#bar_msg',bar),
         save: $('#bar_save',bar),
@@ -90,7 +90,7 @@ markerModule.prototype.checkZoom = function(){
 /**
  * Editable location
  */
-function ht_location_e(mm,opt){
+function ht_location_m(mm,opt){
     this.mm = mm;
     this.marker = null;
     this.address = null;
@@ -103,18 +103,18 @@ function ht_location_e(mm,opt){
 
     this.onSaveChange = opt.onSaveChange;
 }
-ht_location_e.prototype.remove = function(){
+ht_location_m.prototype.remove = function(){
     this.marker && this.mm.removeMarker(this.marker);
     this.mm.closeInfo();
     delete this.marker;
     this.marker = null;
 }
-ht_location_e.prototype.moveTo = function(e){
+ht_location_m.prototype.moveTo = function(e){
     this.remove();
 
     this.createMarker(e.latLng);
 }
-ht_location_e.prototype.createMarker = function(latLng){
+ht_location_m.prototype.createMarker = function(latLng){
     this.marker = this.mm.createMarker({
         position:latLng,
         title:'Новое место',
@@ -124,12 +124,12 @@ ht_location_e.prototype.createMarker = function(latLng){
 
     gm.event.addListener(this.marker,'dragend',this.mm.closeInfo.delegate(this.mm));
 }
-ht_location_e.prototype.addListenerClick = function(){
+ht_location_m.prototype.addListenerClick = function(){
     this.onSaveChange(false);
     this.listeners.click = gm.event.addListener(this.marker,'click',this.onClick.delegate(this));
 }
 
-ht_location_e.prototype.onClick = function(){
+ht_location_m.prototype.onClick = function(){
 
     this.onSaveChange(true);
     gm.event.removeListener(this.listeners.click);
@@ -140,7 +140,7 @@ ht_location_e.prototype.onClick = function(){
     this.getForm(loader);
     
 }
-ht_location_e.prototype.getGeo = function(loader){
+ht_location_m.prototype.getGeo = function(loader){
     this.address = {
         route:'',
         country:'',
@@ -181,7 +181,7 @@ ht_location_e.prototype.getGeo = function(loader){
     });
 }
 
-ht_location_e.prototype.getForm = function(loader){
+ht_location_m.prototype.getForm = function(loader){
     this.loading.form = true;
     this.form = null;
     var self = this;
@@ -192,7 +192,7 @@ ht_location_e.prototype.getForm = function(loader){
         self.showForm(loader);
     });
 }
-ht_location_e.prototype.showForm = function(loader){
+ht_location_m.prototype.showForm = function(loader){
     if(this.loading.address || this.loading.form){
         fb('loading');
         return ;
@@ -211,7 +211,7 @@ ht_location_e.prototype.showForm = function(loader){
 
     loader.remove();
 }
-ht_location_e.prototype.priceChangeListener = function(form){
+ht_location_m.prototype.priceChangeListener = function(form){
     var self = this;
     var price = $($('#location_price',form).parents()[1]);
     
@@ -234,7 +234,7 @@ ht_location_e.prototype.priceChangeListener = function(form){
     
     return form;
 }
-ht_location_e.prototype.addSubmitHandler = function(form){
+ht_location_m.prototype.addSubmitHandler = function(form){
     var self = this;
     
     app.formSubmiter({
