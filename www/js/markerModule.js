@@ -240,11 +240,12 @@ ht_location_m.prototype.addSubmitHandler = function(form){
     app.formSubmiter({
         form: form,
         response: function(newForm){
-            var matches = newForm.match(/^(\d+)\|(.*)/)
-            if(matches && matches.length==3){
+            var matches = newForm.match(/^(\d+)\|(.*)\|(\d)/)
+            if(matches && matches.length==4){
                 self.mm.createLocation({
                     name:matches[2],
                     id:matches[1],
+                    free:matches[3]==1,
                     position:self.marker.getPosition()
                 });
 

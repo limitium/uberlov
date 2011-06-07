@@ -1,1 +1,1 @@
-<?php echo $location->getId(); ?>|<?php echo $location->getName(); ?>
+<?php echo $location->getId(); ?>|<?php echo $location->getName(); ?>|<?php echo (int)$location->getIsFree(); ?>
