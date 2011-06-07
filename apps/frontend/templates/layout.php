@@ -167,6 +167,16 @@
                         </div>
                         <div class="footer_menu">
                             <h3>
+                                Мы в
+                            </h3>
+                            <ul class="footer_menu_list">
+                                <li><a href="http://www.vkontakte.ru/uberlover"><img src="/images/icons/social/vkontakte.png"/></a></li>
+                                <li><a href="http://www.twitter.com/uberlov"><img src="/images/icons/social/twitter.png"/></a></li>
+                                <li><a href="http://www.facebook.com/pages/Uberlov/190569190994314"><img src="/images/icons/social/facebook.png"/></a></li>
+                            </ul>
+                        </div>
+                        <div class="footer_menu">
+                            <h3>
                                 powered by
                             </h3>
                             <ul class="footer_menu_list">
