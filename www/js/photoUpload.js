@@ -15,7 +15,7 @@ photoUpload.prototype.afterInit = function(){
 photoUpload.prototype.initUploader = function(){
     this.uploader = new SWFUpload({
         // Backend Settings
-        upload_url: app.url('/photo/upload'),
+        upload_url: baseUrlFull + '/photo/upload',
 
         // File Upload Settings
         file_size_limit : "5 MB",	// 2MB
@@ -37,7 +37,7 @@ photoUpload.prototype.initUploader = function(){
         upload_complete_handler : this.onUploadComplete.delegate(this),
 
         // Button Settings
-        button_image_url : "images/SmallSpyGlassWithTransperancy_17x18.png",
+//        button_image_url : baseUrlFull + "/images/SmallSpyGlassWithTransperancy_17x18.png",
         button_placeholder_id : "uploadButton",
         button_width: 180,
         button_height: 18,
@@ -49,7 +49,7 @@ photoUpload.prototype.initUploader = function(){
         button_cursor: SWFUpload.CURSOR.HAND,
 
         // Flash Settings
-        flash_url :  app.url("/swfupload/swfupload.swf"),
+        flash_url :  baseUrlFull + "/swfupload/swfupload.swf",
 
         // Debug Settings
         debug: false
@@ -94,7 +94,6 @@ photoUpload.prototype.onFileQueueError = function (file, errorCode, message) {
 }
 
 photoUpload.prototype.onFileQueued =  function(file) {
-    fb(file);
 
     $('#photoList').append(
         '<tr id="' + file.id + '">' +

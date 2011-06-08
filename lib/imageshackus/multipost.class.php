@@ -10,7 +10,7 @@ class part {
 
     }
 
-    function getBoundary() {
+    static function getBoundary() {
         return BOUNDARY;
     }
 
