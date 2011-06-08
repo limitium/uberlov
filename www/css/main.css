@@ -88,15 +88,11 @@ body{
     border-bottom: 1px solid #FFFFFF;
 }
 
-ul.i_like_it{
-    padding: 1em 0 2em 0em;    
-    clear: both;
+.addthis_toolbox{
+    padding: 1em 0 0 1em;
 }
-ul.i_like_it li{
-    display: block;
-    padding-left: 1em;
-    position: relative;
-    float:left;
+.addthis_toolbox a{
+    margin-left: 0.5em !important;
 }
 
 /*meta*/
