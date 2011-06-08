@@ -42,16 +42,16 @@ class ImageUploader extends ImageShackUploader {
         return $this;
     }
 
-    public function upload($file) {
+    public function upload($file, $optsize = null, $removeBar = true, $tags = null, $public = null, $contentType = null, $frameFilename = null) {
         if (!$this->cookie) {
             $this->login();
         }
         $response = parent::upload($file, '1280x1280', true, '', true, 'image/jpeg');
         if (get_class($response) == 'SimpleXMLElement') {
             if (isset($response->links)) {
-                return (object) array('file' => $response->files->image->__toString(),
-                    'image' => $response->links->image_link->__toString(),
-                    'thumb' => $response->links->thumb_link->__toString());
+                return (object) array('file' => (string) $response->files->image,
+                    'image' => (string) $response->links->image_link,
+                    'thumb' => (string) $response->links->thumb_link);
             }
         }
         throw new Exception('Upload image fail');

@@ -14,8 +14,8 @@ class photoActions extends sfActions {
         $result = 'All broken :(';
         try {
             //@todo: added CSRF check;
-
-            $fileData = array_pop($request->getFiles());
+            $files = $request->getFiles();
+            $fileData = array_pop($files);
 
             $validator = new sfValidatorFile(array(
                         'max_size' => 1024 * 1024,
