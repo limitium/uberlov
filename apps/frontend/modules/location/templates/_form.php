@@ -46,6 +46,7 @@
             </dl>
     </fieldset>
     <fieldset class="right_inputs">
+        <?php if(!$form->getObject()->isNew() && !$sf_user->isAnonymous() && $sf_user->getProfile()->id == $form->getObject()->created_by ):?>
         <dl>
             <dt><?php echo $form['location_scope_id']->renderLabel() ?></dt>
             <dd>
@@ -53,6 +54,7 @@
                 <?php echo $form['location_scope_id'] ?>
             </dd>
         </dl>
+        <?php endif; ?>
         <dl>
             <dt><?php echo $form['location_relief_id']->renderLabel() ?></dt>
             <dd>
