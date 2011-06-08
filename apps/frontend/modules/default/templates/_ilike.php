@@ -1,45 +1,20 @@
-<ul class="i_like_it">
-    <li>
-        <!-- Place this tag in your head or just before your close body tag -->
-        <script type="text/javascript" src="http://apis.google.com/js/plusone.js">
-            {lang: 'ru'}
-        </script>
-
-        <!-- Place this tag where you want the +1 button to render -->
-    <g:plusone size="medium"></g:plusone>
-</li>
-<li>
-    <?php use_javascript('http://userapi.com/js/api/openapi.js?31'); ?>
-    <!-- Put this script tag to the <head> of your page -->
-
-    <script type="text/javascript">
-        VK.init({apiId: 2350662, onlyWidgets: true});
-    </script>
-
-    <!-- Put this div tag to the place, where the Like block will be -->
-    <div id="vk_like"></div>
-    <script type="text/javascript">
-        VK.Widgets.Like("vk_like", {type: "button"});
-    </script>
-</li>
-<li>
-    <a href="http://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-via="Uberlov">Tweet</a><script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
-</li>
-<li>
-    <div id="fb-root"></div><script src="http://connect.facebook.net/en_US/all.js#appId=227389200621319&amp;xfbml=1"></script><fb:like href="" send="true" layout="button_count" width="100" show_faces="false" font=""></fb:like>
-</li>
-<li>
-    <a target="_blank" class="mrc__plugin_like_button" href="http://connect.mail.ru/share" data-mrc-config="{'type' : 'button', 'width' : '130'}">Нравится</a>
-    <script src="http://cdn.connect.mail.ru/js/loader.js" type="text/javascript" charset="UTF-8"></script>
-</li>
-<li>
-    <link href="http://stg.odnoklassniki.ru/share/odkl_share.css" rel="stylesheet">
-    <script src="http://stg.odnoklassniki.ru/share/odkl_share.js" type="text/javascript" ></script>
-    <div style="float: left;">
-        <a class="odkl-klass-stat" href="<?php echo url_for($url, true); ?>" onclick="ODKL.Share(this);return false;" ><span>0</span></a>
-    </div>
-    <script type="text/javascript">
-        ODKL.init();
-    </script>
-</li>
-</ul>
+<!-- AddThis Button BEGIN -->
+<div class="addthis_toolbox addthis_default_style addthis_32x32_style">
+    <a class="addthis_button_vk"></a>
+    <a class="addthis_button_facebook"></a>
+    <a class="addthis_button_twitter"></a>
+    <a class="addthis_button_odnoklassniki_ru"></a>
+    <a class="addthis_button_mymailru"></a>
+    <a class="addthis_button_favorites"></a>
+    <a class="addthis_button_google"></a>
+    <a class="addthis_button_livejournal"></a>
+    <a class="addthis_button_delicious"></a>
+    <a class="addthis_button_compact"></a>
+    <a class="addthis_counter addthis_bubble_style"></a>
+</div>
+<script type="text/javascript">var addthis_config = {
+    data_track_clickback:true,
+    ui_language: 'ru_RU'
+};</script>
+<script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=uberlov"></script>
+<!-- AddThis Button END -->
