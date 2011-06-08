@@ -9,7 +9,7 @@ default:
     language:     ru
     robots:       index, follow
 
-  stylesheets:    [reset,base,header,menu,main,footer,button,common, form, location, comment, profile,rating,profit,user,inbox,talk,pager,address,lib/datepicker]
+  stylesheets:    [reset,base,header,menu,main,footer,button,common, form, location, comment, profile,rating,profit,user,inbox,talk,pager,address,event,lib/datepicker]
 
   javascripts:    [lib/jquery-1.4.2.js,lib/jqueryBlockUI,lib/jqueryColor,lib/jqueryJSON,lib/datepicker,lib/tinymce/jquery.tinymce.js,app,moduleManager]
 
