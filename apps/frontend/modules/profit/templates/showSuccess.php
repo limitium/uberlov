@@ -1,6 +1,7 @@
 <?php use_helper('XssSafe') ?>
 <?php include_partial('location/location', array('location' => $profit->getLocation())) ?>
 <?php include_partial('default/ilike', array('url' => '@profit_show?id='.$profit->getId())) ?>
+<?php slot('title', $profit->getName()) ?>
 <div class="profitFull">
     <h2>
         <?php echo $profit->getName(); ?>

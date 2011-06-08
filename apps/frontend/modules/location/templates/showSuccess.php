@@ -6,12 +6,13 @@
 
 <?php include_partial('location/location', array('location' => $location)) ?>
 
-<?php include_partial('default/ilike', array('url' => '@location_show?id='.$location->getId())) ?>
+<?php include_partial('default/ilike', array('url' => '@location_show?id=' . $location->getId())) ?>
 
 
 
 
 
+<?php slot('title', $location->getName()) ?>
 <div class="location">
     <div class="stat">
         <table>
