@@ -1,6 +1,6 @@
 <?php use_helper('XssSafe'); ?>
 <?php use_javascript('voting'); ?>
-
+<?php slot('title', $profit->getName()) ?>
 <div class="sectionMenuShow">
     <ul>
         <?php $sections = array(); ?>

@@ -4,6 +4,7 @@
 
 <?php include_partial('location/location', array('location' => $event->getLocation())) ?>
 <?php include_partial('default/ilike', array('url' => '@event_show?id='.$event->getId())) ?>
+<?php slot('title', $event->getDateTimeObject('date')->format('d.m.Y').' '.$event->getName()) ?>
 <div class="eventFull">
     <h2><?php echo $event->getDateTimeObject('date')->format('d.m.Y') ?> <?php echo $event->getName(); ?>
         <?php if ($sf_user->getProfile() == $event->getCreatedBy()): ?>

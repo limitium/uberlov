@@ -4,11 +4,13 @@
         <link rel="shortcut icon" href="<?php echo image_path('/images/favicon.ico'); ?>" />
         <?php include_http_metas() ?>
         <?php include_metas() ?>
-        <?php include_title() ?>        
+
+        <title><?php echo get_slot('title', 'Uberлов — мы знаем все места.') ?></title>
+
         <?php include_stylesheets() ?>
         <script language="javascript">
             baseUrl = "<?php echo substr(url_for('@homepage'), 0, strlen(url_for('@homepage')) - 1); ?>";
-            baseUrlFull = "<?php echo substr(url_for('@homepage',true), 0, strlen(url_for('@homepage'), true) - 1); ?>";
+            baseUrlFull = "<?php echo substr(url_for('@homepage', true), 0, strlen(url_for('@homepage'), true) - 1); ?>";
             baseUrl = "<?php echo sfContext::getInstance()->getRequest()->getRelativeUrlRoot(); ?>";
         </script>
         <script type="text/javascript">
