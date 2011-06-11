@@ -16,7 +16,7 @@
 <div class="location">
     <div class="stat">
         <table>
-            <tr><td>Глубина:</td><td><?php echo $location->getDepth() ?> м.</td></tr>
+            <tr><td>Глубина:</td><td><?php echo $location->depth?$location->getDepth().' м.':'' ?></td></tr>
             <tr><td>Течение:</td><td><?php echo $location->getLocationFlow() ?></td></tr>
             <tr><td>Рельеф:</td><td><?php echo $location->getLocationRelief() ?></td></tr>
             <tr><td>Дно:</td><td><?php echo $location->getLocationFundus() ?></td></tr>
