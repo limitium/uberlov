@@ -1,6 +1,9 @@
+<?php use_javascript('talk'); ?>
 <div class="sectionMenu">
     <h4>Раздел:</h4>
     <?php echo link_to('Все', 'talk/list'); ?>
+    <?php echo link_to('□', 'talk/list', array('class'=>'section_max')); ?>
+    <?php echo link_to('_', 'talk/list', array('class'=>'section_min')); ?>
     <?php $tree = Doctrine_Core::getTable('TalkSection')->getTree()->fetchTree(); ?>
     <?php $tree instanceof Doctrine_Tree_NestedSet; ?>
 

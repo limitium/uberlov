@@ -13,6 +13,10 @@
 }
 
 /*sections tree*/
+.sectionMenu .section_max,.sectionMenu .section_min{
+    float: right;
+    padding-right: 0.5em
+}
 .sectionMenu ul {
     list-style:none outside none;
 }
