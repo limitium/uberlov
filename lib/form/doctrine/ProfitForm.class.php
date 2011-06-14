@@ -37,9 +37,9 @@ class ProfitForm extends BaseProfitForm {
         $this->validatorSchema['weight'] = new sfValidatorNumber(array('required' => false));
         $this->validatorSchema['fish_id'] = new sfValidatorDoctrineChoice(array('required' => false, 'model' => $this->getRelatedModelName('Fish')));
 
-        $this->validatorSchema['qty'] = new sfValidatorString();
-        $this->validatorSchema['styles'] = new sfValidatorString();
-        $this->validatorSchema['fishes'] = new sfValidatorString();
+        $this->validatorSchema['qty'] = new sfValidatorString(array('required' => false));
+        $this->validatorSchema['styles'] = new sfValidatorString(array('required' => false));
+        $this->validatorSchema['fishes'] = new sfValidatorString(array('required' => false));
 
         $this->widgetSchema->setLabels(array(
             'date' => 'Дата:',

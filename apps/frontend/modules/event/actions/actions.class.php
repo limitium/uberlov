@@ -71,11 +71,15 @@ class eventActions extends sfActions {
     }
 
     protected function processForm(sfWebRequest $request, sfForm $form) {
+        $params = $request->getParameter($form->getName());
+
+        $this->forward404Unless($this->location = Doctrine::getTable('Location')->find(array($params['location_id'])), sprintf('Location does not exist (%s).', $params['location_id']));
+
         $form->bind($request->getParameter($form->getName()), $request->getFiles($form->getName()));
         if ($form->isValid()) {
             $fish_event = $form->save();
 
-            $this->redirect('event/show?id=' . $fish_event->getId());
+            $this->redirect('@event_show?id=' . $fish_event->getId());
         }
     }
 

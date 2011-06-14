@@ -86,7 +86,7 @@ event_list:
   requirements:
     sf_method: [get]
 event_new:
-  url:        /event/new
+  url:        /event/new/:location
   params:     { module: event, action: new }
   requirements:
     sf_method: [get]
