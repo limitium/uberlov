@@ -9,8 +9,8 @@
 
         <?php include_stylesheets() ?>
         <script language="javascript">
-            baseUrl = "<?php echo substr(url_for('@homepage'), 0, strlen(url_for('@homepage')) - 1); ?>";
-            baseUrlFull = "<?php echo substr(url_for('@homepage', true), 0, strlen(url_for('@homepage'), true) - 1); ?>";
+            baseUrl = "<?php  echo substr(url_for('@homepage'), 0, strlen(url_for('@homepage')) - 1); ?>";
+            baseUrlFull = "<?php echo substr(url_for('@homepage', true), 0, strlen(url_for('@homepage', true)) - 1); ?>";
             baseUrl = "<?php echo sfContext::getInstance()->getRequest()->getRelativeUrlRoot(); ?>";
         </script>
         <script type="text/javascript">
