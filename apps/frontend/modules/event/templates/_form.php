@@ -34,7 +34,7 @@
                 <?php echo $form['contact'] ?>
             </dd>
         </dl>
-            <dl>
+        <dl>
             <dt><?php echo $form['description']->renderLabel() ?></dt>
             <dd>
                 <?php echo $form['description']->renderError() ?>
@@ -79,6 +79,6 @@
                 </span>
             </span>
         </button>
-        <?php echo $form->getObject()->isNew() ? '' : link_to('Назад', 'profit/show?id=' . $form->getObject()->getId()); ?>
+        <?php echo link_to('Назад', $form->getObject()->isNew() ? ('@location_show?id=' . $form->getDefault('location_id')) : '@event_show?id=' . $form->getObject()->getId()); ?>
     </div>
 </form>

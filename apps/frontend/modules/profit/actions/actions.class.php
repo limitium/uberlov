@@ -14,11 +14,11 @@ class profitActions extends sfActions {
         $url = 'profit/list?page={%page_number}';
 
         $query = Doctrine::getTable('Profit')->createQuery('p')
-                        ->leftJoin('p.CommentProfit')
-                        ->leftJoin('p.CreatedBy pr')
-                        ->leftJoin('pr.User')
-                        ->leftJoin('p.Location ')
-                        ->orderBy('p.created_at desc');
+                ->leftJoin('p.CommentProfit')
+                ->leftJoin('p.CreatedBy pr')
+                ->leftJoin('pr.User')
+                ->leftJoin('p.Location ')
+                ->orderBy('p.created_at desc');
 
 
         $this->pager = htPagerLayout::create($query, $url, $request->getParameter('page', 1));
@@ -47,9 +47,7 @@ class profitActions extends sfActions {
 
         $this->setTemplate('new');
 
-        if ($this->profit = $this->processForm($request, $this->form)) {
-            $this->redirect('profit/show?id=' . $this->profit->getId());
-        }
+        $this->processForm($request, $this->form);
     }
 
     public function executeEdit(sfWebRequest $request) {
@@ -78,7 +76,9 @@ class profitActions extends sfActions {
 
         if ($form->isValid()) {
             $detailsData = (array) json_decode($form->getValue('details'));
-            return $form->save()->updateDetails($detailsData);
+            $form->save()->updateDetails($detailsData);
+
+            $this->redirect('profit/show?id=' . $this->profit->getId());
         } else {
 //            foreach ($form->getFormFieldSchema() as $name => $formField) {
 //                if ($formField->getError() != "") {

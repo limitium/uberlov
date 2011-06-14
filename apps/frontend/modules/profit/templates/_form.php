@@ -95,7 +95,7 @@
                     </span>
                 </span>
             </button>
-            <?php echo $form->getObject()->isNew()?'':link_to('Назад', 'profit/show?id=' . $form->getObject()->getId()); ?>
+            <?php echo link_to('Назад', $form->getObject()->isNew() ? ('@location_show?id=' . $form->getDefault('location_id')) : '@profit_show?id=' . $form->getObject()->getId()); ?>
         </div>        
     </form>
 </div>
