@@ -25,7 +25,7 @@ class FishEventForm extends BaseFishEventForm {
 
         $this->validatorSchema['location_id'] = new sfValidatorDoctrineChoice(array('model' => 'Location', 'required' => true));
         $this->validatorSchema['fish_event_type_id'] = new sfValidatorDoctrineChoice(array('model' => 'FishEventType', 'required' => false));
-        $this->validatorSchema['date'] = new sfValidatorDate(array('date_format' => "/[0-2][0-9]\.[0-1][0-9]\.[0-9]{4}/", 'with_time' => false, 'required' => true, 'date_format_error' => 'd.m.Y'));
+        $this->validatorSchema['date'] = new sfValidatorDate(array('date_format' =>"~(?P<day>\d{2})\.(?P<month>\d{2})\.(?P<year>\d{4})~", 'with_time' => false, 'required' => true, 'date_format_error' => 'd.m.Y'));
         $this->validatorSchema['rules'] = new sfValidatorString(array('required' => false));
         $this->validatorSchema['description'] = new sfValidatorString(array('required' => false));
         $this->validatorSchema['user'] = new sfValidatorString(array('required' => false));
