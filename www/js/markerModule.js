@@ -4,7 +4,7 @@ function markerModule(){
     this.location = null;
     this.listeners = {};
     this.cfg = {
-        editableZoom: 14
+        editableZoom: 12
     };
 }
 markerModule.name = 'markerModule';
@@ -80,6 +80,9 @@ markerModule.prototype.checkZoom = function(){
         this.barSetMsg('Добавление места');
         this.listeners.click = gm.event.addListener(this.mm.map,'click',this.location.moveTo.delegate(this.location));
     }else{
+        this.listeners.click = gm.event.addListener(this.mm.map,'click',function(){
+         app.popUp('Нужно увеличить масштаб для добавления новой локации.');
+        });
         this.barSetMsg('Добавление места, слишком  мелкий масштаб - промахнешься');
     }
 }
