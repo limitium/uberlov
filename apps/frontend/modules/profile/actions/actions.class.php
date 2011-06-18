@@ -194,11 +194,11 @@ class profileActions extends sfActions {
 
             $this->redirect('profile/show?id=' . $profile->getId());
         } else {
-            foreach ($form->getFormFieldSchema() as $name => $formField) {
-                if ($formField->getError() != "") {
-                    echo "ActionClassName::methodName( ): Field Error for :" . $name . " : " . $formField->getError();
-                }
-            }
+//            foreach ($form->getFormFieldSchema() as $name => $formField) {
+//                if ($formField->getError() != "") {
+//                    echo "ActionClassName::methodName( ): Field Error for :" . $name . " : " . $formField->getError();
+//                }
+//            }
         }
     }
 

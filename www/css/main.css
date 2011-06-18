@@ -110,3 +110,9 @@ body{
 table, th, td, tr {
     border: none;
 }
+
+.blockUI{
+    -moz-border-radius: 8px;
+    -webkit-border-radius: 8px;
+    border-radius: 8px;
+}
