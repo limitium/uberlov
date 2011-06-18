@@ -255,7 +255,9 @@ ht_location_m.prototype.addSubmitHandler = function(form){
                 self.remove();
                 self.onSaveChange(true);
             }else{
-                self.marker.infoWindow.setContent(self.addSubmitHandler(app.formatHtml(newForm)));
+                var errorForm = self.addSubmitHandler(app.formatHtml(newForm));
+                self.marker.infoWindow.setContent(errorForm);
+                self.priceChangeListener(errorForm);
             }
         }
     });

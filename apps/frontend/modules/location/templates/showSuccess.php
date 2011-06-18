@@ -32,6 +32,7 @@
                 </ul>
             <?php endif; ?>
         </div>
+        <div class="clear_fix"></div>
         <?php if ($location->getIsFree()): ?>
             <p class="free"></p>
         <?php else: ?>
