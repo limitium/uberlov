@@ -46,14 +46,14 @@
             </dl>
     </fieldset>
     <fieldset class="right_inputs">
-        <?php if($form->getObject()->isNew() || !$sf_user->isAnonymous() && $sf_user->getProfile()->id == $form->getObject()->created_by ):?>
-        <dl>
-            <dt><?php echo $form['location_scope_id']->renderLabel() ?></dt>
-            <dd>
-                <?php echo $form['location_scope_id']->renderError() ?>
-                <?php echo $form['location_scope_id'] ?>
-            </dd>
-        </dl>
+        <?php if (isset($form['location_scope_id'])): ?>
+            <dl>
+                <dt><?php echo $form['location_scope_id']->renderLabel() ?></dt>
+                <dd>
+                    <?php echo $form['location_scope_id']->renderError() ?>
+                    <?php echo $form['location_scope_id'] ?>
+                </dd>
+            </dl>
         <?php endif; ?>
         <dl>
             <dt><?php echo $form['location_relief_id']->renderLabel() ?></dt>
@@ -99,6 +99,6 @@
                 </span>
             </span>
         </button>
-            <?php echo $form->getObject()->isNew()?'':link_to('Назад', 'location/show?id=' . $form->getObject()->getId()); ?>
+        <?php echo $form->getObject()->isNew() ? '' : link_to('Назад', 'location/show?id=' . $form->getObject()->getId()); ?>
     </div>
 </form>
