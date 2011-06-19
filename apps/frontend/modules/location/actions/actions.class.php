@@ -25,17 +25,17 @@ class locationActions extends sfActions {
         $this->comments = Comment::getFor($this->location);
 
         $this->profits = Doctrine_Query::create()->select()->from('Profit pf')
-                        ->leftJoin('pf.ProfitDetail d')
-                        ->leftJoin('pf.CreatedBy p')
-                        ->leftJoin('pf.VoteProfit v')
-                        ->where('pf.location_id = ?', $this->location->getId())
-                        ->execute();
+                ->leftJoin('pf.ProfitDetail d')
+                ->leftJoin('pf.CreatedBy p')
+                ->leftJoin('pf.VoteProfit v')
+                ->where('pf.location_id = ?', $this->location->getId())
+                ->execute();
 
         $this->events = Doctrine_Query::create()->select()->from('FishEvent e')
-                        ->leftJoin('e.CreatedBy p')
-                        ->leftJoin('e.VoteFishEvent v')
-                        ->where('e.location_id = ?', $this->location->getId())
-                        ->execute();
+                ->leftJoin('e.CreatedBy p')
+                ->leftJoin('e.VoteFishEvent v')
+                ->where('e.location_id = ?', $this->location->getId())
+                ->execute();
 
         $this->csrf = CSRF::getToken();
 
@@ -68,14 +68,25 @@ class locationActions extends sfActions {
 
     public function executeEdit(sfWebRequest $request) {
         $this->forward404Unless($location = Doctrine::getTable('Location')->find($request->getParameter('id')), sprintf('Object location does not exist (%s).', $request->getParameter('id')));
-        $this->form = new LocationForm($location);
+
+        if (!$this->getUser()->isAnonymous() && $this->getUser()->getProfile()->id == $location->created_by) {
+            $this->form = new LocationForm($location);
+        } else {
+            $this->form = new LocationEnemyForm($location);
+        }
+
         $this->form->packAddress();
     }
 
     public function executeUpdate(sfWebRequest $request) {
         $this->forward404Unless($request->isMethod(sfRequest::POST) || $request->isMethod(sfRequest::PUT));
         $this->forward404Unless($location = Doctrine::getTable('Location')->find($request->getParameter('id')), sprintf('Object location does not exist (%s).', $request->getParameter('id')));
-        $this->form = new LocationForm($location);
+
+        if (!$this->getUser()->isAnonymous() && $this->getUser()->getProfile()->id == $location->created_by) {
+            $this->form = new LocationForm($location);
+        } else {
+            $this->form = new LocationEnemyForm($location);
+        }
 
         $this->setTemplate('edit');
         if ($this->location = $this->processForm($request, $this->form)) {
