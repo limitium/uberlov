@@ -17,8 +17,8 @@ events:
   url: /events
   param: {module: event, action list, menu events}
 people:
-  url: /people
-  param: {module: profile, action list, menu people}
+  url: /people/:page
+  param: {module: profile, action list, menu people, page:1}
     
 
 #guard routes
