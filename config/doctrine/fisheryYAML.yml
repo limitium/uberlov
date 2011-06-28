@@ -655,7 +655,7 @@ TalkSection:
     parent:
       type: integer(4)
     name:
-      type: string(50)
+      type: string(255)
       notnull: true
 CommentTalk:
   inheritance:

@@ -387,7 +387,7 @@
     <table name="TalkSection" visPositionX="842" visPositionY="497" visSizeX="0" visSizeX2="102" visSizeY="0" visSizeY2="59">
       <column auto-increment="true" name="id" primary="true" required="true" size="4" type="integer"/>
       <column name="parent" size="4" type="integer"/>
-      <column name="name" required="true" size="50" type="string"/>
+      <column name="name" required="true" size="255" type="string"/>
       <orm-properties>
         <attribute name="actAs">
           <attribute name="NestedSet">
