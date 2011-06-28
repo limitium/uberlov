@@ -43,6 +43,7 @@
             <?php endif; ?>
         <?php endforeach; ?>
     </div>
+    <div class="clear_fix"></div>
     <?php include_partial('default/ilike', array('url' => '@talk_show?id='.$talk->getId())) ?>
     <div class="meta">
         <div>
