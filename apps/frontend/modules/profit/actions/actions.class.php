@@ -77,8 +77,7 @@ class profitActions extends sfActions {
         if ($form->isValid()) {
             $detailsData = (array) json_decode($form->getValue('details'));
             $form->save()->updateDetails($detailsData);
-
-            $this->redirect('profit/show?id=' . $this->profit->getId());
+            $this->redirect('profit/show?id=' . $form->getObject()->getId());
         } else {
 //            foreach ($form->getFormFieldSchema() as $name => $formField) {
 //                if ($formField->getError() != "") {
