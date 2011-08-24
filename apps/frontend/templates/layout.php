@@ -60,7 +60,7 @@
             <div id="header" class="content">
                 <div class="clear_fix">
                     <div id="logo">
-                        <?php echo link_to(image_tag('/images/logo.png'), '@homepage') ?>
+                        <?php echo link_to(image_tag('/images/logo_new.png'), '@homepage') ?>
                     </div>
                     <?php if ($sf_user->isAnonymous()): ?>
                         <div class="register_button_wrapper">
