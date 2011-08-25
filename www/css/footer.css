@@ -6,13 +6,16 @@
 }
 .footer .content h2
 {
-    padding-bottom:16px;
     color: #FFFFFF;
     font-size: 12px;
 }
+.footer .content h2 a{
+    float: right;
+}
 .footer .content h2 a img
 {
-    margin-bottom: -30px;
+    margin-top: -50px;
+    margin-right: 3em;
 }
 .footer_menu h3, .footer_menu h3 a, .footer_menu h3 a:hover {
     color: #D1D1D1;
