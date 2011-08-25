@@ -146,7 +146,7 @@ strong {
     padding-top: 20px;
 }
 .menu_block li{
- padding-top: 10px;   
+    padding-top: 10px;   
 }
 .menu_block h4{
     color: #759E1A;
@@ -155,7 +155,7 @@ strong {
     text-transform: uppercase;
 }
 .menu_block h5{
-     font-size: 14px;
+    font-size: 14px;
 }
 .menu_block img.userpic{
     width: 24px;
@@ -166,3 +166,27 @@ strong {
     text-align: right;
 }
 
+.mini_menu{
+    background-color: #313131;
+    height: 25px;
+    position: absolute;
+    top: 0;
+    width:100%;
+}
+.mini_menu div{
+    color: #FFFFFF;
+    margin: 0 1.5em;
+    min-width: 1230px;
+    margin-top: 2px;
+}
+.mini_menu a{
+    color: #FFFFFF;
+    display: inline-block;
+    float: right;
+    margin: 0 0.3em;
+    position: relative;
+}
+.mini_menu a.last{
+    padding-left: 0.5em;
+    border-left: 1.5px solid #FFFFFF;
+}

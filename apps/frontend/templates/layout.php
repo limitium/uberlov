@@ -5,11 +5,11 @@
         <?php include_http_metas() ?>
         <?php include_metas() ?>
 
-        <title><?php echo get_slot('title', 'Uberлов — мы знаем все места.') ?></title>
+        <title><?php echo get_slot('title', 'Uberлов — найди свое место.') ?></title>
 
         <?php include_stylesheets() ?>
         <script language="javascript">
-            baseUrl = "<?php  echo substr(url_for('@homepage'), 0, strlen(url_for('@homepage')) - 1); ?>";
+            baseUrl = "<?php echo substr(url_for('@homepage'), 0, strlen(url_for('@homepage')) - 1); ?>";
             baseUrlFull = "<?php echo substr(url_for('@homepage', true), 0, strlen(url_for('@homepage', true)) - 1); ?>";
             baseUrl = "<?php echo sfContext::getInstance()->getRequest()->getRelativeUrlRoot(); ?>";
         </script>
@@ -62,19 +62,6 @@
                     <div id="logo">
                         <?php echo link_to(image_tag('/images/logo_new.png'), '@homepage') ?>
                     </div>
-                    <?php if ($sf_user->isAnonymous()): ?>
-                        <div class="register_button_wrapper">
-                            <a class="register_button" href="<?php echo url_for('@apply') ?>">    
-                                <span class="border_l png_fix">
-                                    <span class="border_r png_fix">
-                                        <span class="btn_bg png_fix">
-                                            Регистрация!
-                                        </span>
-                                    </span>
-                                </span>
-                            </a>
-                        </div>
-                    <?php endif; ?>
                 </div>
                 <div id="main_menu" class="clear_fix">
                     <ul class="clear_fix">
@@ -134,7 +121,7 @@
             </div>
             <div class="footer">
                 <div class="content">
-                    <h2><?php echo link_to(image_tag('/images/logo_small.png'), '@homepage') ?>Uberлов — мы знаем все места.</h2>
+                    <h2><?php echo link_to(image_tag('/images/logo_small.png'), '@homepage') ?></h2>
                     <div class="footer_box_menu clear_fix">
                         <div class="footer_menu">
                             <h3>
@@ -190,6 +177,16 @@
                             </ul>
                         </div>
                     </div>
+                </div>
+            </div>
+            <div class="mini_menu">
+                <div>
+                    <?php if ($sf_user->isAnonymous()): ?>
+                        <?php echo link_to('Регистрация', '@apply', array('class' => 'last')) ?>
+                        <?php echo link_to('Вход', '@sf_guard_signin') ?>
+                    <?php else: ?>
+                        <?php echo link_to('Выход', '@sf_guard_signout') ?>
+                    <?php endif; ?>
                 </div>
             </div>
         </div>
