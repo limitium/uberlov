@@ -36,10 +36,34 @@
     color: white;
     overflow:auto;
 }
-.mapList {
-    margin:5px 5px 5px 20px;
-    color:#0053E4;
+.mapOverLay .mapList {
+    margin:5px 5px 5px 20px;    
+}
+.mapOverLay#list_hider{
+    -moz-border-radius: 3px 0 0 3px;
+    -webkit-border-radius:3px 0 0 3px;
+    border-radius:3px 0 0 3px;
+}
+.mapOverLay .mapList li{
+    padding: 5px;
     cursor:pointer;
+    margin-top: 1em;
+    color:#D1D1D1;    
+}
+.mapOverLay .mapList li:hover{
+    background-color: #99BC3D;    
+    color: #FFFFFF
+}
+.mapOverLay #serch_button{
+    width: 19px;
+    height: 19px;
+    background-image:url("./images/search.png");
+    margin-bottom: -5px;
+}
+.mapOverLay #serch_field{
+    border: 1px solid #99BC3D;
+    margin-left: 5px ;
+    height: 17px;
 }
 .disabled {
     opacity:0.5;
