@@ -133,22 +133,22 @@ mapModule.prototype.initMenu = function(){
     });
     map.append(this.mapType);
 
-//    this.mapList = $('<div class="mapOverLay"></div>').css({
-//        width: 200,
-//        height: map.height(),
-//        opacity:0.6,
-//        top:0,
-//        right:0,
-//        display:'none'
-//    });
-//    this.mapListHider=$('<div class="mapOverLay"><a id="list_hider" href="">>></a></div>').css({
-//        opacity:0.6,
-//        top:35,
-//        right:0,
-//        display:'none'
-//    });
-//    map.append(this.mapList);
-//    map.append(this.mapListHider);
+    this.mapList = $('<div class="mapOverLay"></div>').css({
+        width: 200,
+        height: map.height(),
+        opacity:0.6,
+        top:0,
+        right:0,
+        display:'none'
+    });
+    this.mapListHider=$('<div class="mapOverLay"><a id="list_hider" href="">>></a></div>').css({
+        opacity:0.6,
+        top:35,
+        right:0,
+        display:'none'
+    });
+    map.append(this.mapList);
+    map.append(this.mapListHider);
 }
 
 mapModule.prototype.showList = function(){
@@ -316,6 +316,29 @@ mapModule.prototype.openInfo = function(point,html,closeHandler){
 
     return this.infoWindow;
 }
+mapModule.prototype.search = function(word){
+    var self = this;
+    this.geocoder.geocode({
+        address:word,
+        language:'ru'
+    },function(results,status){
+        if(status == gm.GeocoderStatus.OK){
+            var list= [];
+            var ii = 1;
+            fb(results);
+//            $.each(results, function(){
+            //                list.push({
+            //                    id:ii++,
+            //                    name: this.formatted_address
+            //                });
+            //                });
+            self.openList(list);
+        }else{
+            app.popUp("Ничего не найдено!");
+        }
+    });
+}
+
 mapModule.prototype.closeInfo = function(){
     if(this.infoWindow.closeHandler){
         this.infoWindow.closeHandler();
