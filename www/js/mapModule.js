@@ -115,7 +115,27 @@ mapModule.prototype.initMenu = function(){
         bottom:0
     });
     map.append(this.bar);
-
+    
+    this.searchMenu = $('<div class="mapOverLay"><input id="serch_field" type="text" /><img id="serch_button" class="map_button" src="' + app.url('/images/search.png') + '"/></div>').css({
+        opacity:0.8,
+        top:0,
+        right:150
+    });
+    
+    $('input',this.searchMenu).keyup(function(event){
+        if (event.keyCode == '13') {
+            $('img',this.searchMenu).trigger('click');
+        }
+    });
+    
+    $('img',this.searchMenu).click(function(){
+        var word = $('#serch_field').val();
+        if(word){
+            self.search(word);
+        }
+    });
+    map.append(this.searchMenu);
+    
     this.mapType = $('<div class="mapOverLay"><input class="map_button" type="button" value="map"/><input class="map_button" type="button" value="roads"/></div>').css({
         opacity:0.8,
         top:0,
@@ -135,27 +155,36 @@ mapModule.prototype.initMenu = function(){
 
     this.mapList = $('<div class="mapOverLay"></div>').css({
         width: 200,
-        height: map.height(),
-        opacity:0.6,
+        height: map.height()-10,
+        opacity:0.8,
         top:0,
         right:0,
         display:'none'
     });
-    this.mapListHider=$('<div class="mapOverLay"><a id="list_hider" href="">>></a></div>').css({
-        opacity:0.6,
+    this.mapList.hider=$('<div id="list_hider" class="mapOverLay"><a href="">>></a></div>').css({
+        opacity:0.8,
         top:35,
         right:0,
         display:'none'
     });
+    this.mapList.markers = [];
     map.append(this.mapList);
-    map.append(this.mapListHider);
+    map.append(this.mapList.hider);
 }
 
 mapModule.prototype.showList = function(){
+    if(this.mapList.is(":visible")){
+        return false; 
+    }
     this.mapType.css({
         right: 200 + 10
     });
-    this.mapListHider.css({
+    
+    this.searchMenu.css({
+        right: 200 + 179
+    });
+    
+    this.mapList.hider.css({
         right: 200 + 5
     });
     if(this.edit){
@@ -165,15 +194,24 @@ mapModule.prototype.showList = function(){
     }
     this.mapList.show();
     this.map.panBy(100,0);
-    $('#list_hider').html('>>');
+    $('#list_hider a').html('>>');
+    $.each(this.mapList.markers, function(){
+        this.setVisible(true);
+    });
     return false;
 }
 mapModule.prototype.hideList = function(){
+    if(!this.mapList.is(":visible")){
+        return false; 
+    }
     this.mapType.css({
         right: 0
     });
-    this.mapListHider.css({
+    this.mapList.hider.css({
         right: 0
+    });
+    this.serachMenu.css({
+        right: 150
     });
     if(this.edit){
         this.edit.css({
@@ -182,27 +220,46 @@ mapModule.prototype.hideList = function(){
     }
     this.mapList.hide();
     this.map.panBy(-100,0);
-    $('#list_hider').html('<<');
+    $('#list_hider a').html('<<');
+    $.each(this.mapList.markers, function(){
+        this.setVisible(false);
+    });
     return false;
 }
 mapModule.prototype.openList = function(items){
-    var html = '<ul class="mapList">';
-    $.each(items,function(){
-        html += '<li id="listItem_'+this.id+'"><span>'+this.name+'</span></li>';
+    var self  = this;
+    var list = $('<ul class="mapList">');
+    $.each(this.mapList.markers, function(){
+        self.removeMarker(this);
     });
-    html += '</ul>';
-    this.mapList.html(html);
+    this.mapList.markers=[];
+    $.each(items,function(){
+        var item = this;
+        
+        var serachMarker = new gm.Marker({
+            map: self.map,
+            name: item.formatted_address,
+            position: item.geometry.location
+        });
+        
+        self.mapList.markers.push(serachMarker);
+        
+        list.append($('<li><span>'+item.formatted_address+'</span></li>').click(function(){
+            self.map.fitBounds(item.geometry.viewport);
+        }));
+    });
+    this.mapList.html(list);
   
     this.showList();
-    this.mapListHider.show();
+    this.mapList.hider.show();
   
-    $('#list_hider').toggle(this.hideList.delegate(this),this.showList.delegate(this));
+    $('#list_hider a').toggle(this.hideList.delegate(this),this.showList.delegate(this));
     return this.mapList;
 }
 mapModule.prototype.closeList = function(){
     this.hideList();
-    this.mapListHider.hide();
-    $('#list_hider').unbind('click');
+    this.mapList.hider.hide();
+    $('#list_hider a').unbind('click');
 }
 mapModule.prototype.addEditItem =  function(item){
     if(!this.edit){
@@ -323,16 +380,7 @@ mapModule.prototype.search = function(word){
         language:'ru'
     },function(results,status){
         if(status == gm.GeocoderStatus.OK){
-            var list= [];
-            var ii = 1;
-            fb(results);
-//            $.each(results, function(){
-            //                list.push({
-            //                    id:ii++,
-            //                    name: this.formatted_address
-            //                });
-            //                });
-            self.openList(list);
+            self.openList(results);
         }else{
             app.popUp("Ничего не найдено!");
         }
