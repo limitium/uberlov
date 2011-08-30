@@ -119,12 +119,12 @@ mapModule.prototype.initMenu = function(){
     this.searchMenu = $('<div class="mapOverLay"><input id="serch_field" type="text" /><img id="serch_button" class="map_button" src="' + app.url('/images/search.png') + '"/></div>').css({
         opacity:0.8,
         top:0,
-        right:150
+        right:569
     });
     
     $('input',this.searchMenu).keyup(function(event){
         if (event.keyCode == '13') {
-            $('img',this.searchMenu).trigger('click');
+            $('img',self.searchMenu).trigger('click');
         }
     });
     
@@ -136,7 +136,7 @@ mapModule.prototype.initMenu = function(){
     });
     map.append(this.searchMenu);
     
-    this.mapType = $('<div class="mapOverLay"><input class="map_button" type="button" value="map"/><input class="map_button" type="button" value="roads"/></div>').css({
+    this.mapType = $('<div class="mapOverLay"><input class="map_button" type="button" value="карта"/><input class="map_button" type="button" value="схема"/></div>').css({
         opacity:0.8,
         top:0,
         right:0
@@ -179,9 +179,8 @@ mapModule.prototype.showList = function(){
     this.mapType.css({
         right: 200 + 10
     });
-    
     this.searchMenu.css({
-        right: 200 + 179
+        right: 200 + 569 + 10
     });
     
     this.mapList.hider.css({
@@ -210,8 +209,8 @@ mapModule.prototype.hideList = function(){
     this.mapList.hider.css({
         right: 0
     });
-    this.serachMenu.css({
-        right: 150
+    this.searchMenu.css({
+        right: 569
     });
     if(this.edit){
         this.edit.css({
@@ -238,7 +237,7 @@ mapModule.prototype.openList = function(items){
         
         var serachMarker = new gm.Marker({
             map: self.map,
-            name: item.formatted_address,
+            title: item.formatted_address,
             position: item.geometry.location
         });
         
