@@ -21,8 +21,8 @@
     margin-left:5px;
 }
 .mapOverLay a:hover,map_footer a:hover {
-    background-color:white;
-    color:#121212;
+    background-color:#99BC3D;
+    color:#FFFFFF;
 }
 .mapOverLay img{
     border:0px;

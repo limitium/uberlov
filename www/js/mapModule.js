@@ -161,7 +161,7 @@ mapModule.prototype.initMenu = function(){
         right:0,
         display:'none'
     });
-    this.mapList.hider=$('<div id="list_hider" class="mapOverLay"><a href="">>></a></div>').css({
+    this.mapList.hider=$('<div id="list_hider" class="mapOverLay"><a href="">►</a></div>').css({
         opacity:0.8,
         top:35,
         right:0,
@@ -193,7 +193,7 @@ mapModule.prototype.showList = function(){
     }
     this.mapList.show();
     this.map.panBy(100,0);
-    $('#list_hider a').html('>>');
+    $('#list_hider a').html('►');
     $.each(this.mapList.markers, function(){
         this.setVisible(true);
     });
@@ -219,7 +219,7 @@ mapModule.prototype.hideList = function(){
     }
     this.mapList.hide();
     this.map.panBy(-100,0);
-    $('#list_hider a').html('<<');
+    $('#list_hider a').html('◄');
     $.each(this.mapList.markers, function(){
         this.setVisible(false);
     });
