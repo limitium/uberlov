@@ -77,8 +77,8 @@
                         <li<?php echo 'events' == $sf_request->getParameter('menu') ? ' class="selected"' : '' ?>>
                             <?php echo link_to('События', '@events') ?>
                         </li>
-                        <li<?php echo 'people' == $sf_request->getParameter('menu') ? ' class="selected"' : '' ?>>
-                            <?php echo link_to('Люди', '@people') ?>
+                        <li<?php echo 'search' == $sf_request->getParameter('menu') ? ' class="selected"' : '' ?>>
+                            <?php echo link_to('Поиск', '@search') ?>
                         </li>
                         <?php if ($sf_user->isAnonymous()): ?>
                             <li class="last<?php echo 'sf_guard_signin' == $sf_request->getParameter('menu') ? ' selected' : '' ?>">
