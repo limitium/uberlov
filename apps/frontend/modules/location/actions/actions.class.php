@@ -142,4 +142,17 @@ class locationActions extends sfActions {
                 ->execute();
     }
 
+    public function executeSearch(sfWebRequest $request) {
+        $this->form = new LocationSearchForm(array(), array(), false);
+//        foreach (Doctrine::getTable('Location')->findAll() as $l) {
+//            $l->updateLuceneIndex();
+//        }
+        if ($request->hasParameter('query')) {
+            $this->form->bind(array('query' => $request->getParameter('query')));
+            if ($this->form->isValid()) {
+                $this->locations = Doctrine_Core::getTable('Location')->getForLuceneQuery($this->form->getValue("query"));
+            }
+        }
+    }
+
 }

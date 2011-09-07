@@ -33,8 +33,6 @@ class LocationTable extends Doctrine_Table {
                 ->whereIn('j.id', $pks)
                 ->limit(20);
 
-        $q = $this->addActiveJobsQuery($q);
-
         return $q->execute();
     }
 
