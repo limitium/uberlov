@@ -20,8 +20,8 @@ people:
   url: /people/:page
   param: {module: profile, action list, menu people, page:1}
 search:
-  url: /search/:page
-  param: {module: profile, action list, menu search, page:1}  
+  url: /search
+  param: {module: location, action search, menu search, page:1}  
     
 
 #guard routes

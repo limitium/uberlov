@@ -1,6 +1,6 @@
 <?php
 
-require_once 'c:/webservers/symfony-1.4.10/lib/autoload/sfCoreAutoload.class.php';
+require_once 'd:/webservers/symfony-1.4.10/lib/autoload/sfCoreAutoload.class.php';
 sfCoreAutoload::register();
 
 class ProjectConfiguration extends sfProjectConfiguration {
@@ -15,6 +15,12 @@ class ProjectConfiguration extends sfProjectConfiguration {
         set_include_path(sfConfig::get('sf_lib_dir') . '/vendor' . PATH_SEPARATOR . get_include_path());
         require_once sfConfig::get('sf_lib_dir') . '/vendor/Zend/Loader/Autoloader.php';
         Zend_Loader_Autoloader::getInstance();
+        Zend_Search_Lucene_Search_QueryParser::setDefaultEncoding('utf-8');
+        Zend_Search_Lucene_Analysis_Analyzer::setDefault(
+                new Zend_Search_Lucene_Analysis_Analyzer_Common_Utf8_CaseInsensitive()
+        );
+
+
         self::$zendLoaded = true;
     }
 
