@@ -144,9 +144,15 @@ class locationActions extends sfActions {
 
     public function executeSearch(sfWebRequest $request) {
         $this->form = new LocationSearchForm(array(), array(), false);
-//        foreach (Doctrine::getTable('Location')->findAll() as $l) {
+//        foreach (Doctrine_Query::create()
+//                ->select()
+//                ->from('Location')
+//                ->limit(150)
+//                ->offset(749)
+//                ->execute() as $l) {
 //            $l->updateLuceneIndex();
 //        }
+        
         if ($request->hasParameter('query')) {
             $this->form->bind(array('query' => $request->getParameter('query')));
             if ($this->form->isValid()) {
