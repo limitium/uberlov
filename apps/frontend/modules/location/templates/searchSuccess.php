@@ -3,14 +3,19 @@
 <?php include_partial('search', array('form' => $form)) ?>
 <?php if (isset($locations)): ?>
 
-    <div class="locationList">
+    <div class="locationList search_list">
         <ul>
             <?php foreach ($locations as $location): ?>
                 <li>
                     <h3><?php echo link_to($location->getName(), 'location/show?id=' . $location->getId()); ?></h3>     
-                    <div class="text">
-                        <?php echo $location->getDescription(ESC_XSSSAFE) ?>
+                    <div class="address">
+                        <?php echo htmlspecialchars_decode($location->getAddress()); ?>
                     </div>
+                    <?php if ($location->getDescription(ESC_XSSSAFE)) : ?>
+                        <div class="text">
+                            <?php echo $location->getDescription(ESC_XSSSAFE) ?>
+                        </div>
+                    <?php endif; ?>
                     <div class="fish">
                         <?php $fishes = $location->getFishes(); ?>
                         <?php if ($fishes->count()): ?>

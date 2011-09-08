@@ -3,10 +3,16 @@
 }
 #logo{
     float:left;
-    width: 227px;
+    width: 310px;
     height: 104px;
 }
-
+#bleat img{
+    margin-top: 5px;
+}
+#bleat{
+    float:right;
+    margin-bottom: -5px;
+}
 #logo a {
     display: block;
 }
