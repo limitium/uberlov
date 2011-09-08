@@ -70,6 +70,15 @@ class Location extends BaseLocation {
     }
 
     public function getFishes() {
+        $fishes=array();
+        foreach($this->getProfit() as $profit){
+            $profit instanceof Profit;
+            foreach($profit->getProfitDetail() as $detail){
+                $detail instanceof ProfitDetail;
+                $fishes[$detail->getFishId()] = $detail->getFish();
+            }
+        }
+        return array_values($fishes);
         return Doctrine_Query::create()
                 ->from('Fish f')
                 ->innerJoin('f.ProfitDetail d')

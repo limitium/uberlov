@@ -58,15 +58,15 @@ class Address extends BaseAddress {
     public function __toString() {
         $address = link_to($this->getCountry()->getName(), 'address/country?id=' . $this->getCountry()->getId());
         $low = $this->getAreaLow();
-        if (!$low->isNew()) {
+        if ($low && !$low->isNew()) {
             $address .= ' → ' . link_to($low->getName(), 'address/low?id=' . $low->getId());
         }
         $high = $this->getAreaHigh();
-        if (!$high->isNew()) {
+        if ($high && !$high->isNew()) {
             $address .= ' → ' . link_to($high->getName(), 'address/high?id=' . $high->getId());
         }
         $locality = $this->getLocality();
-        if (!$locality->isNew()) {
+        if ($locality && !$locality->isNew()) {
             $address .= ' → ' . link_to($locality->getName(), 'address/locality?id=' . $locality->getId());
         }
         return $address;

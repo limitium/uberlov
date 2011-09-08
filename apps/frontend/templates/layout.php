@@ -62,6 +62,9 @@
                     <div id="logo">
                         <?php echo link_to(image_tag('/images/logo_new.png'), '@homepage') ?>
                     </div>
+                    <div id="bleat">
+                        <?php echo image_tag('/images/bleat2.png'); ?>
+                    </div>
                 </div>
                 <div id="main_menu" class="clear_fix">
                     <ul class="clear_fix">

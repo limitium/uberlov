@@ -24,6 +24,10 @@
 .search_form button.button_01{
     margin-top: -4px;
 }
+.search_list .address {
+    padding: 0 0 0 0.5em;
+    font-size: medium;
+}
 /*map partial*/
 
 a.dashed:visited {
