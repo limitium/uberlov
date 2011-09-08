@@ -13,8 +13,8 @@ class LocationTable extends Doctrine_Table {
     }
 
     static public function getLuceneIndexFile() {
-        $filename = strtolower(substr(get_called_class(), 0, -5));
-        return sfConfig::get('sf_data_dir') . '/' . $filename . '.' . sfConfig::get('sf_environment') . '.index';
+//        $filename = strtolower(substr(get_called_class(), 0, -5));
+        return sfConfig::get('sf_data_dir') . '/location.' . sfConfig::get('sf_environment') . '.index';
     }
 
     public function getForLuceneQuery($query) {
