@@ -1,0 +1,9 @@
+country:
+  is_secure: false  
+low:
+  is_secure: false
+high:
+  is_secure: false
+locality:
+  is_secure: false  
+  
