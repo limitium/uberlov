@@ -1,3 +1,4 @@
+<?php slot('title', "Рыбалка " . $locality->getName()) ?>
 <div class="address">
     <?php echo link_to($locality->getAreaHigh()->getAreaLow()->getCountry()->getName(), '@address_country?id=' . $locality->getAreaHigh()->getAreaLow()->getCountry()->getId()); ?> &rarr; 
     <?php echo link_to($locality->getAreaHigh()->getAreaLow()->getName(), '@address_low?id=' . $locality->getAreaHigh()->getAreaLow()->getId()); ?> &rarr;

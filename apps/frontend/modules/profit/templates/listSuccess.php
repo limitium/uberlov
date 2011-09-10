@@ -1,3 +1,4 @@
+<?php slot('title', "Отчёты о рыбалке") ?>
 <?php use_helper('Text'); ?>
 <?php $profits = $pager->execute(); ?>
 <h2>Последние отчёты</h2>

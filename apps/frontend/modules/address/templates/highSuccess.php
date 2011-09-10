@@ -1,3 +1,4 @@
+<?php slot('title', "Рыбалка " . $high->getName()) ?>
 <div class="address">
     <?php echo link_to($high->getAreaLow()->getCountry()->getName(), '@address_country?id=' . $high->getAreaLow()->getCountry()->getId()); ?> &rarr; 
     <?php echo link_to($high->getAreaLow()->getName(), '@address_low?id=' . $high->getAreaLow()->getId()); ?> &rarr;
