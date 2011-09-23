@@ -13,6 +13,7 @@
             baseUrlFull = "<?php echo substr(url_for('@homepage', true), 0, strlen(url_for('@homepage', true)) - 1); ?>";
             baseUrl = "<?php echo sfContext::getInstance()->getRequest()->getRelativeUrlRoot(); ?>";
         </script>
+        <?php if (sfConfig::get('sf_environment') == 'prod'): ?> 
         <script type="text/javascript">
             var _gaq = _gaq || [];
             _gaq.push(['_setAccount', 'UA-22389085-1']);
@@ -24,6 +25,7 @@
                 var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
             })();
         </script>        
+        <?php endif; ?>
         <?php include_javascripts() ?>        
         <script type="text/javascript">
             reformal_wdg_domain    = "uberlov";
