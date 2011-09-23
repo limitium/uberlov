@@ -6,8 +6,12 @@
 
 <?php include_partial('location/location', array('location' => $location)) ?>
 
-<?php include_partial('default/ilike', array('url' => '@location_show?id=' . $location->getId())) ?>
-
+<div class="ilike clear_fix">
+    <?php include_partial('default/ilike', array('url' => '@location_show?id=' . $location->getId())) ?>
+    <div class="export">
+        <div class="ozi"><?php echo link_to(image_tag('/images/icons/location/ozi.gif'), '@location_export?id=' . $location->getId()); ?></div>
+    </div>
+</div>
 
 
 
@@ -16,7 +20,7 @@
 <div class="location">
     <div class="stat">
         <table>
-            <tr><td>Глубина:</td><td><?php echo $location->depth?$location->getDepth().' м.':'' ?></td></tr>
+            <tr><td>Глубина:</td><td><?php echo $location->depth ? $location->getDepth() . ' м.' : '' ?></td></tr>
             <tr><td>Течение:</td><td><?php echo $location->getLocationFlow() ?></td></tr>
             <tr><td>Рельеф:</td><td><?php echo $location->getLocationRelief() ?></td></tr>
             <tr><td>Дно:</td><td><?php echo $location->getLocationFundus() ?></td></tr>
