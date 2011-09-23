@@ -117,7 +117,7 @@ class locationActions extends sfActions {
         $this->forward404Unless($location = Doctrine::getTable('Location')->find($request->getParameter('id')), sprintf('Object location does not exist (%s).', $request->getParameter('id')));
         $this->location = $location;
         $this->getResponse()->setContentType('text/wpt');
-        $this->getResponse()->addHttpMeta('content-disposition: ', 'attachment; filename="location.wpt"', true);
+        $this->getResponse()->addHttpMeta('content-disposition: ', 'attachment; filename="'.$location->getId().'_uberlov.wpt"', true);
         $this->setLayout(false);
     }
 

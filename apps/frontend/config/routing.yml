@@ -183,6 +183,11 @@ location_show:
   params:     { module: location, action: show }
   requirements:
     sf_method: [get]
+location_export:
+  url:        /location/export/:id
+  params:     { module: location, action: export }
+  requirements:
+    sf_method: [get]
 location_map:
   url:        /location/map/:id
   params:     { module: location, action: map }

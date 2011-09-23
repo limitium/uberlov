@@ -177,3 +177,13 @@ ul.regions {
 #locationMy ul li{
     padding-top: 2em;
 }
+
+.ilike .addthis_toolbox{
+    float: left;
+}
+.ilike .export{
+    float:right;
+}
+.ilike .export .ozi{
+    padding: 1em;
+}
