@@ -39,10 +39,10 @@ abstract class BaseTalkSection extends sfDoctrineRecord
              'type' => 'integer',
              'length' => 4,
              ));
-        $this->hasColumn('name', 'string', 50, array(
+        $this->hasColumn('name', 'string', 255, array(
              'type' => 'string',
              'notnull' => true,
-             'length' => 50,
+             'length' => 255,
              ));
 
         $this->option('type', 'INNODB');

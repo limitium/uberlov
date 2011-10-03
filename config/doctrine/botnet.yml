@@ -1,0 +1,24 @@
+IsBot:
+  columns:
+    profile_id:
+      primary: true
+      type: integer(4)
+  relations:
+    Profile:
+      class: sfGuardUserProfile
+      onDelete: cascade
+      local: profile_id
+      foreign: id
+NickMap:
+  columns:
+    profile_id:
+      type: integer(4)
+      notnull: true
+    nick:
+      type: string(255)
+  relations:
+    Bot:
+      class: IsBot
+      onDelete: cascade
+      local: profile_id
+      foreign: profile_id

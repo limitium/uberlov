@@ -5,8 +5,11 @@
 
   <include name="..\fisheryYAML.module.xml"/>
 
-  <project code-name="Fishery" name="fishery" orm="Doctrine" visSizeX="229" visSizeX2="1282" visSizeY="90" visSizeY2="796">
+  <include name="..\botnet.module.xml"/>
+
+  <project code-name="Fishery" name="fishery" orm="Doctrine" visSizeX="229" visSizeX2="1539" visSizeY="90" visSizeY2="1022">
     <module-position name="ht" visPositionX="26" visPositionY="11"/>
+    <module-position name="BotNet" visPositionX="-200" visPositionY="858"/>
   </project>
 
 </orm-designer>

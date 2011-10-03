@@ -343,3 +343,8 @@ vote_for:
   params:     { module: vote, action: for}
   requirements:
     sf_method: [post]
+
+#parser
+parser:
+  url:   /parser/:action/*
+  params: { module: parser}
