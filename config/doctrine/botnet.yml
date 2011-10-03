@@ -3,11 +3,21 @@ IsBot:
     profile_id:
       primary: true
       type: integer(4)
+    bot_nick_id:
+      type: integer(4)
+    bot_data_id:
+      type: integer(4)
   relations:
     Profile:
       class: sfGuardUserProfile
       onDelete: cascade
       local: profile_id
+      foreign: id
+    BotNick:
+      local: bot_nick_id
+      foreign: id
+    BotData:
+      local: bot_data_id
       foreign: id
 NickMap:
   columns:
@@ -22,3 +32,29 @@ NickMap:
       onDelete: cascade
       local: profile_id
       foreign: profile_id
+BotNick:
+  columns:
+    id:
+      primary: true
+      type: integer(4)
+      autoincrement: true
+    nikck:
+      unique: true
+      type: string
+      notnull: true
+BotData:
+  columns:
+    id:
+      primary: true
+      type: integer(4)
+      autoincrement: true
+    uid:
+      unique: true
+      type: integer(4)
+      notnull: true
+    name:
+      type: string(255)
+    ava:
+      type: string(255)
+    userpic:
+      type: string(255)
