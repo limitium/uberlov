@@ -108,6 +108,9 @@ class locationActions extends sfActions {
         if ($form->isValid()) {
             $addressData = (array) json_decode($form->getValue('address'));
             $photos = (array) json_decode($form->getValue('photos'));
+
+            BotNet::create()->spammed($form->getObject(), 'description');
+
             return $form->save()->updateAddress($addressData)->updatePhotos($photos);
         }
         return null;
@@ -117,7 +120,7 @@ class locationActions extends sfActions {
         $this->forward404Unless($location = Doctrine::getTable('Location')->find($request->getParameter('id')), sprintf('Object location does not exist (%s).', $request->getParameter('id')));
         $this->location = $location;
         $this->getResponse()->setContentType('text/wpt');
-        $this->getResponse()->addHttpMeta('content-disposition: ', 'attachment; filename="'.$location->getId().'_uberlov.wpt"', true);
+        $this->getResponse()->addHttpMeta('content-disposition: ', 'attachment; filename="' . $location->getId() . '_uberlov.wpt"', true);
         $this->setLayout(false);
     }
 
@@ -152,7 +155,7 @@ class locationActions extends sfActions {
 //                ->execute() as $l) {
 //            $l->updateLuceneIndex();
 //        }
-        
+
         if ($request->hasParameter('query')) {
             $this->form->bind(array('query' => $request->getParameter('query')));
             if ($this->form->isValid()) {

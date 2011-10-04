@@ -13,6 +13,7 @@
 class BotNet {
 
     public $start = 1278288000;
+    public $spamer = "Spamer";
     public $activeBots;
     public $totalBots;
     private static $instance;
@@ -73,33 +74,34 @@ class BotNet {
         }
     }
 
-    private function addBot($nick, $dateBorn, $data=array()) {
+    private function addBot(BotNick $nick, $dateBorn, BotData $data=null) {
         $bot = new sfGuardUser();
         $botProfile = new sfGuardUserProfile();
         $botProfile->setUser($bot);
         $isBot = new IsBot();
 
-        $bot->username = $nick;
+        $bot->username = $nick->username;
         $bot->is_active = true;
-        $bot->email_address = (isset($data['uid']) ? $data['uid'] : md5($nick . "uberlov mail")) . "@uberlov.ru";
+        $bot->email_address = ($data ? $data->uid : md5($nick->username . "uberlov mail")) . "@uberlov.ru";
         $bot->created_at = $dateBorn;
         $bot->updated_at = $dateBorn;
         $bot->last_login = $dateBorn;
 
         if (!empty($data)) {
-            if (isset($data['userpic']) && strstr($data['userpic'], 'jpg')) {
+            if (isset($data->userpic) && strstr($data->userpic, 'jpg')) {
                 $userpic = new sfThumbnail(48, 48, false);
-                $userpic->loadFile("Z:/home/ht/www/images/userpic/bot/" . $data['userpic']);
-                $name = md5($data['uid'] . 'userpic fuck yea') . '.png';
+                $userpic->loadFile("Z:/home/ht/www/images/userpic/bot/" . $data->userpic);
+                $name = md5($data->uid . 'userpic fuck yea') . '.png';
                 $userpic->save(sfConfig::get('sf_user_pic_dir') . $name, 'image/png');
                 $botProfile->userpic = $name;
             }
-            if (isset($data['name'])) {
-                $names = explode(" ", $data['name']);
+            if (isset($data->name)) {
+                $names = explode(" ", $data->name);
                 $bot->last_name = isset($names[1]) ? $names[1] : "";
                 $bot->first_name = isset($names[0]) ? $names[0] : "";
             }
-            $isBot->setActive(true);
+            $isBot->setBotDataId($nick->id);
+            $isBot->setIsActive(true);
             $this->activeBots->add($bot);
         }
         $botProfile->sex = 1;
@@ -109,6 +111,7 @@ class BotNet {
 
         $bot->save();
         $botProfile->save();
+        $isBot->setBotNickId($nick->id);
         $isBot->setProfileId($botProfile->id);
         $isBot->save();
 
@@ -160,8 +163,7 @@ class BotNet {
         return $bot;
     }
 
-    public function attachTo($object, $nick, $from = 0) {
-        $bot = $this->getBotByNick($nick);
+    public function attachTo($object, IsBot $bot, $from = 0) {
         if (!$from) {
             $from = $bot->getProfile()->getDateTimeObject('created_at')->format('U');
         }
@@ -186,7 +188,13 @@ class BotNet {
         preg_match("/^\%(.+)?\%/i", $object->$field, $match);
         $nick = $match[0];
         $object->$field = substr($object->$field, strlen($object->$field) + 2);
-        $this->attachTo($object, $nick, $from);
+        $this->attachTo($object, $this->getBotByNick($nick), $from);
+    }
+
+    public function spammed($object, $field, $from=0) {
+        if (sfContext::getInstance()->getUser()->username == $this->spamer) {
+            $this->publishedByBot($object, $field, $from);
+        }
     }
 
 }
