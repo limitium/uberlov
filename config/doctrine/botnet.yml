@@ -1,4 +1,4 @@
-IsBot:
+Bot:
   columns:
     profile_id:
       primary: true
@@ -28,7 +28,7 @@ NickMap:
       type: string(255)
   relations:
     Bot:
-      class: IsBot
+      class: Bot
       onDelete: cascade
       local: profile_id
       foreign: profile_id
