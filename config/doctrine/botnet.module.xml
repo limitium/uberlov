@@ -13,7 +13,7 @@
     </table>
     <table name="BotNick" visPositionX="188" visPositionY="11" visSizeX="0" visSizeX2="83" visSizeY="0" visSizeY2="45">
       <column auto-increment="true" name="id" primary="true" size="4" type="integer"/>
-      <column name="nikck" required="true" type="string" unique="true"/>
+      <column name="nick" required="true" size="255" type="string" unique="true"/>
     </table>
     <table name="BotData" visPositionX="191" visPositionY="73" visSizeX="0" visSizeX2="111" visSizeY="0" visSizeY2="87">
       <column auto-increment="true" name="id" primary="true" size="4" type="integer"/>

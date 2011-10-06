@@ -38,9 +38,9 @@ BotNick:
       primary: true
       type: integer(4)
       autoincrement: true
-    nikck:
+    nick:
       unique: true
-      type: string
+      type: string(255)
       notnull: true
 BotData:
   columns:

@@ -15,17 +15,17 @@ abstract class BaseBotNickForm extends BaseFormDoctrine
   public function setup()
   {
     $this->setWidgets(array(
-      'id'    => new sfWidgetFormInputHidden(),
-      'nikck' => new sfWidgetFormTextarea(),
+      'id'   => new sfWidgetFormInputHidden(),
+      'nick' => new sfWidgetFormInputText(),
     ));
 
     $this->setValidators(array(
-      'id'    => new sfValidatorChoice(array('choices' => array($this->getObject()->get('id')), 'empty_value' => $this->getObject()->get('id'), 'required' => false)),
-      'nikck' => new sfValidatorString(),
+      'id'   => new sfValidatorChoice(array('choices' => array($this->getObject()->get('id')), 'empty_value' => $this->getObject()->get('id'), 'required' => false)),
+      'nick' => new sfValidatorString(array('max_length' => 255)),
     ));
 
     $this->validatorSchema->setPostValidator(
-      new sfValidatorDoctrineUnique(array('model' => 'BotNick', 'column' => array('nikck')))
+      new sfValidatorDoctrineUnique(array('model' => 'BotNick', 'column' => array('nick')))
     );
 
     $this->widgetSchema->setNameFormat('bot_nick[%s]');

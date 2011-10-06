@@ -22,7 +22,7 @@
  * @property Doctrine_Collection $ReadComment
  * @property Doctrine_Collection $Requester
  * @property Doctrine_Collection $Accepter
- * @property Doctrine_Collection $IsBot
+ * @property Doctrine_Collection $Bot
  * @property Doctrine_Collection $WishList
  * @property Doctrine_Collection $Votes
  * @property Doctrine_Collection $VoteProfile
@@ -47,7 +47,7 @@
  * @method Doctrine_Collection getReadComment() Returns the current record's "ReadComment" collection
  * @method Doctrine_Collection getRequester()   Returns the current record's "Requester" collection
  * @method Doctrine_Collection getAccepter()    Returns the current record's "Accepter" collection
- * @method Doctrine_Collection getIsBot()       Returns the current record's "IsBot" collection
+ * @method Doctrine_Collection getBot()         Returns the current record's "Bot" collection
  * @method Doctrine_Collection getWishList()    Returns the current record's "WishList" collection
  * @method Doctrine_Collection getVotes()       Returns the current record's "Votes" collection
  * @method Doctrine_Collection getVoteProfile() Returns the current record's "VoteProfile" collection
@@ -71,7 +71,7 @@
  * @method sfGuardUserProfile  setReadComment() Sets the current record's "ReadComment" collection
  * @method sfGuardUserProfile  setRequester()   Sets the current record's "Requester" collection
  * @method sfGuardUserProfile  setAccepter()    Sets the current record's "Accepter" collection
- * @method sfGuardUserProfile  setIsBot()       Sets the current record's "IsBot" collection
+ * @method sfGuardUserProfile  setBot()         Sets the current record's "Bot" collection
  * @method sfGuardUserProfile  setWishList()    Sets the current record's "WishList" collection
  * @method sfGuardUserProfile  setVotes()       Sets the current record's "Votes" collection
  * @method sfGuardUserProfile  setVoteProfile() Sets the current record's "VoteProfile" collection
@@ -182,7 +182,7 @@ abstract class BasesfGuardUserProfile extends sfDoctrineRecord
              'local' => 'requester_id',
              'foreign' => 'accepter_id'));
 
-        $this->hasMany('IsBot', array(
+        $this->hasMany('Bot', array(
              'local' => 'id',
              'foreign' => 'profile_id'));
 
