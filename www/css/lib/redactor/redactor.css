@@ -116,27 +116,27 @@ body .imp_redactor_resize div {
 /* =Skin
 -----------------------------------------------------------------------------*/
 body .imp_redactor_box .imp_redactor_toolbar {
-	background: url(../i/bg.png) repeat-x top #d1d1d1;
+	background: url(/js/lib/redactor/i/bg.png) repeat-x top #d1d1d1;
 	border-bottom: 1px solid #b2b2b2;
 }
 body .imp_redactor_box .imp_redactor_toolbar li.act {
-	background: url(../i/hover.png) repeat-x;
+	background: url(/js/lib/redactor/i/hover.png) repeat-x;
 }
 body .imp_redactor_box .imp_redactor_toolbar li a {
-	background: url(../i/icons.png) no-repeat;	
+	background: url(/js/lib/redactor/i/icons.png) no-repeat;	
 }
 body .imp_redactor_box .imp_redactor_toolbar li:hover {
-	background: url(../i/hover.png) repeat-x;
+	background: url(/js/lib/redactor/i/hover.png) repeat-x;
 }
 body .imp_redactor_box .imp_redactor_resize {
 	border-top: 1px solid #d7d6d6 !important;
-	background: url(../i/bg.png) repeat-x !important;	
+	background: url(/js/lib/redactor/i/bg.png) repeat-x !important;	
 }
 body .imp_redactor_box .imp_redactor_resize div {
-	background: url(../i/resizer.gif) center no-repeat !important;
+	background: url(/js/lib/redactor/i/resizer.gif) center no-repeat !important;
 }
 body .imp_redactor_box .imp_redactor_toolbar li.separator {
-	background: url(../i/separator.png) no-repeat right;
+	background: url(/js/lib/redactor/i/separator.png) no-repeat right;
 }
 
 

@@ -1068,10 +1068,10 @@ function detectWebkit()
 
                 $('#redactor_file_alt').val($el.attr('alt'));
                 
-                var float = $el.css('float');
-                if (float == 'none') float = 0;
+                var flt = $el.css('float');
+                if (flt == 'none') flt = 0;
                 
-                $('#redactor_form_image_align').val(float);
+                $('#redactor_form_image_align').val(flt);
 
             }.bind2(this);       
         
@@ -1085,12 +1085,12 @@ function detectWebkit()
             var style = '';
             if ($('#redactor_form_image_align') != 0)
             {
-                var float = $('#redactor_form_image_align').val();
+                var flt = $('#redactor_form_image_align').val();
                 
-                if (float == 'left') $(el).css({ float: 'left', margin: '10px' });
-                else if (float == 'right') $(el).css({ float: 'right', margin: '10px' });
+                if (flt == 'left') $(el).css({ "float": 'left', margin: '10px' });
+                else if (flt == 'right') $(el).css({ "float": 'right', margin: '10px' });
             }
-            else $(el).css({ float: 'none', margin: '0' });
+            else $(el).css({ "float": 'none', margin: '0' });
 
             this.modalClose();
         },
@@ -1130,10 +1130,10 @@ function detectWebkit()
             var className = '';
             if ($('#redactor_form_image_align') != 0)
             {
-                var float = $('#redactor_form_image_align').val();
+                var flt = $('#redactor_form_image_align').val();
                 
-                if (float == 'left') className = 'class=="img_left"';
-                else if (float == 'right') className = 'class="img_right"';
+                if (flt == 'left') className = 'class=="img_left"';
+                else if (flt == 'right') className = 'class="img_right"';
                 
                 var html = '<img alt="' + alt + '" src="' + data + '" ' + className + ' />';
             }

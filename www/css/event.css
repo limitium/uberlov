@@ -10,3 +10,10 @@
     padding-top: 1em;
     padding-bottom: 2em;
 }
+
+/*from*/
+#fish_event_contact,#fish_event_description,#fish_event_price,#fish_event_schedule,#fish_event_rules,#fish_event_users{
+    width: 700px;
+    height: 300px;
+
+}

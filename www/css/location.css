@@ -18,6 +18,10 @@
     display: block;
     clear: both;
 }
+#right_layout>.location_form #location_price,#right_layout>.location_form #location_description{
+    width: 400px;
+    height: 200px;
+}
 .search_empty{
     padding: 1em 0 0.5em 0em;
 }

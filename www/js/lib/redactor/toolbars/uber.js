@@ -56,7 +56,6 @@ var RTOOLBAR = {
 			delete_table: { name: 'delete_table', title: RLANG.delete_table, func: 'deleteTable' }																		
 		}		
 	},
-	video: { name: 'video', title: RLANG.video, func: 'showVideo' },
 	link: 
 	{
 		name: 'link', title: RLANG.link, func: 'show',
