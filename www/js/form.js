@@ -4,32 +4,61 @@ form.name = 'form';
 ModuleManager.add(form);
 
 
-form.prototype.afterInit = function(){    
-    $('#right_layout textarea').tinymce({
-        force_p_newlines : false,
-        force_br_newlines : true,
-        theme : "advanced",
-        
-        theme_advanced_buttons1 : "bold,italic,underline,link,unlink,image,bullist,numlist,blockquote,undo", 
-        theme_advanced_buttons2 : "", 
-        theme_advanced_buttons3 : "",
-
-        init_instance_callback: function(ed){
-            var s = ed.settings;
-            var realID = ed.id+'_ifr';
-            tinymce.dom.Event.add(ed.getWin(), 'focus', function(e) {
-                if($(realID)) {
-                    $('#'+realID).contents().find('body').css('background-color','#FEFAE2');
-                }
-            });
-            tinymce.dom.Event.add(ed.getWin(), 'blur', function(e) {
-                if($(realID)) {
-                    $('#'+realID).contents().find('body').css('background-color','#FFF');
-                }
-            });
-
-        }
+form.prototype.afterInit = function(){ 
+    $('#right_layout textarea').redactor({	
+        air: false,
+        toolbar: 'uber', // false, main, mini, air
+        lang: 'ru', // ru, en, fr, ua, pt_br, pl		
+        typo: false,
+        autosave: false, // false or url
+        interval: 20, // seconds
+        resize: true,
+        visual: true,
+        focus: false,
+        image_upload: false,
+        imageUploadFunction: false, // callback function
+			
+        file_upload: false,	
+        file_download: false,		
+        file_delete: false,		
+        fileUploadFunction: false, // callback function
+			
+        autoclear: true,
+        remove_classes: false,
+        remove_styles: true,
+        convert_links: true,	
+        autoformat: true,
+        init_clear: false,					
+        overlay: true, // modal overlay
+        path: app.url("/js/lib/redactor/"),
+        pathCss: 'css/',
+        css: ['wym.css']
     });
+    //    $('#right_layout textarea').tinymce({
+    //        force_p_newlines : false,
+    //        force_br_newlines : true,
+    //        theme : "advanced",
+    //        
+    //        theme_advanced_buttons1 : "bold,italic,underline,link,unlink,image,bullist,numlist,blockquote,undo", 
+    //        theme_advanced_buttons2 : "", 
+    //        theme_advanced_buttons3 : "",
+    //
+    //        init_instance_callback: function(ed){
+    //            var s = ed.settings;
+    //            var realID = ed.id+'_ifr';
+    //            tinymce.dom.Event.add(ed.getWin(), 'focus', function(e) {
+    //                if($(realID)) {
+    //                    $('#'+realID).contents().find('body').css('background-color','#FEFAE2');
+    //                }
+    //            });
+    //            tinymce.dom.Event.add(ed.getWin(), 'blur', function(e) {
+    //                if($(realID)) {
+    //                    $('#'+realID).contents().find('body').css('background-color','#FFF');
+    //                }
+    //            });
+    //
+    //        }
+    //    });
     
     
     $('#right_layout input').each(function(){
