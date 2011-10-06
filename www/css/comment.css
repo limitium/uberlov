@@ -12,6 +12,10 @@
     margin-top: 2em;
     display: block;
 }
+#newComment textarea{
+    width: 700px;
+    height: 300px;
+}
 
 .comment .commentBar .rating{
     font-size: 1em;

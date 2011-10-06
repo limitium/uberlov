@@ -96,3 +96,9 @@
     padding: 0;
     text-align: right;
 }
+
+/* talk cre8*/
+#talk_message{
+    width: 700px;
+    height: 350px;
+}

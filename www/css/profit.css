@@ -45,8 +45,8 @@ table.profitDetails ,.profitDetails tr,.profitDetails th,.profitDetails td{
     text-align: right
 }
 #profit_styles,#profit_fishes,#profit_qty{
-    width: 100px !important;
-    min-width: 100px !important;
+    width: 200px !important;
+    min-width: 200px !important;
 }
 
 
@@ -73,8 +73,13 @@ table.profitDetails ,.profitDetails tr,.profitDetails th,.profitDetails td{
 .profitNew fieldset{
     border: none;
 }
-.profitNew #profit_best_weight{
-    width: 3em;
+.profitNew #profit_weight{
+    width: 200px;
+    min-width: 100px;
+}
+.profitNew #profit_fish_id{
+    width: 275px;
+    min-width: 200px;
 }
 .profitNew #profit_date{
     width: 5em;
@@ -85,6 +90,11 @@ table.profitDetails ,.profitDetails tr,.profitDetails th,.profitDetails td{
 .profitNew dl dt{
     font-weight:bold;
 }
+.profitNew #profit_cordage,.profitNew #profit_description{
+    width: 700px;
+    height: 300px;
+}
+
 /*formMap*/
 .profit{
     width: 70em;

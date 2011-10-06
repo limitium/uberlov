@@ -24,7 +24,7 @@ locationEdit.prototype.initListeners = function(){
         priceRow.hide();
     }
     $('#location_is_free').change(function(){
-        priceRow[$('#location_is_free').attr('checked')?'fadeOut':'fadeIn']();
+        priceRow[$('#location_is_free').attr('checked')?'slideUp':'slideDown']();
     });
 }
 
