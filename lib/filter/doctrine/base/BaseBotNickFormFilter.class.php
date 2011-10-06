@@ -13,11 +13,11 @@ abstract class BaseBotNickFormFilter extends BaseFormFilterDoctrine
   public function setup()
   {
     $this->setWidgets(array(
-      'nikck' => new sfWidgetFormFilterInput(array('with_empty' => false)),
+      'nick' => new sfWidgetFormFilterInput(array('with_empty' => false)),
     ));
 
     $this->setValidators(array(
-      'nikck' => new sfValidatorPass(array('required' => false)),
+      'nick' => new sfValidatorPass(array('required' => false)),
     ));
 
     $this->widgetSchema->setNameFormat('bot_nick_filters[%s]');
@@ -37,8 +37,8 @@ abstract class BaseBotNickFormFilter extends BaseFormFilterDoctrine
   public function getFields()
   {
     return array(
-      'id'    => 'Number',
-      'nikck' => 'Text',
+      'id'   => 'Number',
+      'nick' => 'Text',
     );
   }
 }

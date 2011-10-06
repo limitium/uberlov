@@ -1,8 +1,9 @@
 CREATE TABLE address (id INT AUTO_INCREMENT, country_id INT, area_low_id INT, area_high_id INT, locality_id INT, route_id INT, INDEX country_id_idx (country_id), INDEX area_low_id_idx (area_low_id), INDEX area_high_id_idx (area_high_id), INDEX locality_id_idx (locality_id), INDEX route_id_idx (route_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci ENGINE = INNODB;
 CREATE TABLE area_high (id INT AUTO_INCREMENT, name VARCHAR(255) NOT NULL UNIQUE, area_low_id INT, INDEX area_low_id_idx (area_low_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci ENGINE = INNODB;
 CREATE TABLE area_low (id INT AUTO_INCREMENT, name VARCHAR(255) NOT NULL UNIQUE, country_id INT, INDEX country_id_idx (country_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci ENGINE = INNODB;
+CREATE TABLE bot (profile_id INT, bot_nick_id INT, bot_data_id INT, INDEX bot_nick_id_idx (bot_nick_id), INDEX bot_data_id_idx (bot_data_id), PRIMARY KEY(profile_id)) ENGINE = INNODB;
 CREATE TABLE bot_data (id INT AUTO_INCREMENT, uid INT UNIQUE NOT NULL, name VARCHAR(255), ava VARCHAR(255), userpic VARCHAR(255), PRIMARY KEY(id)) ENGINE = INNODB;
-CREATE TABLE bot_nick (id INT AUTO_INCREMENT, nikck TEXT NOT NULL UNIQUE, PRIMARY KEY(id)) ENGINE = INNODB;
+CREATE TABLE bot_nick (id INT AUTO_INCREMENT, nick VARCHAR(255) NOT NULL UNIQUE, PRIMARY KEY(id)) ENGINE = INNODB;
 CREATE TABLE city (id INT AUTO_INCREMENT, name VARCHAR(30) NOT NULL, region_id INT, weight INT DEFAULT 0 NOT NULL, UNIQUE INDEX uniq_city_idx (region_id, name), INDEX region_id_idx (region_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci ENGINE = INNODB;
 CREATE TABLE comment (id INT AUTO_INCREMENT, parent INT, message TEXT NOT NULL, toward VARCHAR(255), location_id INT, profit_id INT, inbox_id INT, talk_id INT, fish_event_id INT, created_by INT NOT NULL, updated_by INT NOT NULL, created_at DATETIME NOT NULL, updated_at DATETIME NOT NULL, root_id BIGINT, lft INT, rgt INT, level SMALLINT, INDEX comment_toward_idx (toward), INDEX created_by_idx (created_by), INDEX updated_by_idx (updated_by), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci ENGINE = INNODB;
 CREATE TABLE comment (id INT AUTO_INCREMENT, parent INT, message TEXT NOT NULL, toward VARCHAR(255), location_id INT, profit_id INT, inbox_id INT, talk_id INT, fish_event_id INT, created_by INT NOT NULL, updated_by INT NOT NULL, created_at DATETIME NOT NULL, updated_at DATETIME NOT NULL, root_id BIGINT, lft INT, rgt INT, level SMALLINT, INDEX created_by_idx (created_by), INDEX updated_by_idx (updated_by), INDEX fish_event_id_idx (fish_event_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci ENGINE = INNODB;
@@ -69,6 +70,8 @@ ALTER TABLE address ADD CONSTRAINT address_area_low_id_area_low_id FOREIGN KEY (
 ALTER TABLE address ADD CONSTRAINT address_area_high_id_area_high_id FOREIGN KEY (area_high_id) REFERENCES area_high(id);
 ALTER TABLE area_high ADD CONSTRAINT area_high_area_low_id_area_low_id FOREIGN KEY (area_low_id) REFERENCES area_low(id);
 ALTER TABLE area_low ADD CONSTRAINT area_low_country_id_country_id FOREIGN KEY (country_id) REFERENCES country(id);
+ALTER TABLE bot ADD CONSTRAINT bot_bot_nick_id_bot_nick_id FOREIGN KEY (bot_nick_id) REFERENCES bot_nick(id);
+ALTER TABLE bot ADD CONSTRAINT bot_bot_data_id_bot_data_id FOREIGN KEY (bot_data_id) REFERENCES bot_data(id);
 ALTER TABLE city ADD CONSTRAINT city_region_id_region_id FOREIGN KEY (region_id) REFERENCES region(id);
 ALTER TABLE comment ADD CONSTRAINT comment_updated_by_sf_guard_user_profile_id FOREIGN KEY (updated_by) REFERENCES sf_guard_user_profile(id);
 ALTER TABLE comment ADD CONSTRAINT comment_created_by_sf_guard_user_profile_id FOREIGN KEY (created_by) REFERENCES sf_guard_user_profile(id);
@@ -100,7 +103,7 @@ ALTER TABLE location ADD CONSTRAINT location_location_flow_id_location_flow_id F
 ALTER TABLE location ADD CONSTRAINT location_created_by_sf_guard_user_profile_id FOREIGN KEY (created_by) REFERENCES sf_guard_user_profile(id);
 ALTER TABLE location ADD CONSTRAINT location_address_id_address_id FOREIGN KEY (address_id) REFERENCES address(id);
 ALTER TABLE location_show ADD CONSTRAINT location_show_location_id_location_id FOREIGN KEY (location_id) REFERENCES location(id) ON DELETE CASCADE;
-ALTER TABLE nick_map ADD CONSTRAINT nick_map_profile_id_is_bot_profile_id FOREIGN KEY (profile_id) REFERENCES is_bot(profile_id) ON DELETE CASCADE;
+ALTER TABLE nick_map ADD CONSTRAINT nick_map_profile_id_bot_profile_id FOREIGN KEY (profile_id) REFERENCES bot(profile_id) ON DELETE CASCADE;
 ALTER TABLE photo_version ADD CONSTRAINT photo_version_id_photo_id FOREIGN KEY (id) REFERENCES photo(id) ON UPDATE CASCADE ON DELETE CASCADE;
 ALTER TABLE photo ADD CONSTRAINT photo_updated_by_sf_guard_user_profile_id FOREIGN KEY (updated_by) REFERENCES sf_guard_user_profile(id);
 ALTER TABLE photo ADD CONSTRAINT photo_created_by_sf_guard_user_profile_id FOREIGN KEY (created_by) REFERENCES sf_guard_user_profile(id);

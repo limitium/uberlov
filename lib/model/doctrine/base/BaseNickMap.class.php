@@ -7,11 +7,11 @@
  * 
  * @property integer $profile_id
  * @property string $nick
- * @property IsBot $Bot
+ * @property Bot $Bot
  * 
  * @method integer getProfileId()  Returns the current record's "profile_id" value
  * @method string  getNick()       Returns the current record's "nick" value
- * @method IsBot   getBot()        Returns the current record's "Bot" value
+ * @method Bot     getBot()        Returns the current record's "Bot" value
  * @method NickMap setProfileId()  Sets the current record's "profile_id" value
  * @method NickMap setNick()       Sets the current record's "nick" value
  * @method NickMap setBot()        Sets the current record's "Bot" value
@@ -40,7 +40,7 @@ abstract class BaseNickMap extends sfDoctrineRecord
     public function setUp()
     {
         parent::setUp();
-        $this->hasOne('IsBot as Bot', array(
+        $this->hasOne('Bot', array(
              'local' => 'profile_id',
              'foreign' => 'profile_id',
              'onDelete' => 'cascade'));

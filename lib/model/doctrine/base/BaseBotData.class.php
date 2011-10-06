@@ -10,20 +10,20 @@
  * @property string $name
  * @property string $ava
  * @property string $userpic
- * @property Doctrine_Collection $IsBot
+ * @property Doctrine_Collection $Bot
  * 
  * @method integer             getId()      Returns the current record's "id" value
  * @method integer             getUid()     Returns the current record's "uid" value
  * @method string              getName()    Returns the current record's "name" value
  * @method string              getAva()     Returns the current record's "ava" value
  * @method string              getUserpic() Returns the current record's "userpic" value
- * @method Doctrine_Collection getIsBot()   Returns the current record's "IsBot" collection
+ * @method Doctrine_Collection getBot()     Returns the current record's "Bot" collection
  * @method BotData             setId()      Sets the current record's "id" value
  * @method BotData             setUid()     Sets the current record's "uid" value
  * @method BotData             setName()    Sets the current record's "name" value
  * @method BotData             setAva()     Sets the current record's "ava" value
  * @method BotData             setUserpic() Sets the current record's "userpic" value
- * @method BotData             setIsBot()   Sets the current record's "IsBot" collection
+ * @method BotData             setBot()     Sets the current record's "Bot" collection
  * 
  * @package    FISHERY
  * @subpackage model
@@ -64,7 +64,7 @@ abstract class BaseBotData extends sfDoctrineRecord
     public function setUp()
     {
         parent::setUp();
-        $this->hasMany('IsBot', array(
+        $this->hasMany('Bot', array(
              'local' => 'id',
              'foreign' => 'bot_data_id'));
     }
