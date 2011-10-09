@@ -72,23 +72,14 @@ class FRegistrationForm extends sfApplyApplyForm {
         $this->setValidator('email2', new sfValidatorEmail(
                         array('required' => true, 'trim' => true)));
 
-        $schema = $this->validatorSchema;
-
-        // Hey Fabien, adding more postvalidators is kinda verbose!
-        $postValidator = $schema->getPostValidator();
-
         $postValidators = array(new sfValidatorSchemaCompare('email', sfValidatorSchemaCompare::EQUAL,
                     'email2', array(), array('invalid' => 'The email addresses did not match.')));
 
-        if ($postValidator) {
-            $postValidators[] = $postValidator;
-        }
 
         //Include captcha if enabled
         if ($this->isCaptchaEnabled()) {
             $this->addCaptcha();
         }
-
         $this->validatorSchema->setPostValidator(new sfValidatorAnd($postValidators));
     }
 
@@ -109,6 +100,12 @@ class FRegistrationForm extends sfApplyApplyForm {
             '/css/form.css' => 'screen',
             '/sfForkedDoctrineApplyPlugin/css/forked.css' => 'screen',
         );
+    }
+
+    public function getJavaScripts() {
+        $url_params = sfJqueryFormValidationRules::getUrlParams();
+        $url_params['form'] = get_class($this);
+        return array_merge(parent::getJavaScripts(), array('/js/lib/jquery.validate.js', url_for($url_params)));
     }
 
     public function doSave($con = null) {

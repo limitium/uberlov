@@ -29,5 +29,10 @@ class FloginForm extends BaseForm {
 
         $this->widgetSchema->setNameFormat('signin[%s]');
     }
-
+    
+    public function getJavaScripts() {
+        $url_params = sfJqueryFormValidationRules::getUrlParams();
+        $url_params['form'] = get_class($this);
+        return array_merge(parent::getJavaScripts(),array(url_for($url_params)));
+    }
 }

@@ -22,4 +22,6 @@ all:
           resetCancel: /reset-cancel
           validate: /user/confirm/:validate
           settings: /settings
-
+  sf_jquery_form_validation:
+    default: disabled
+#    forms: [FloginForm, FRegistrationForm]

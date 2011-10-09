@@ -51,7 +51,7 @@ class sfGuardUserProfileForm extends PluginsfGuardUserProfileForm {
     }
 
     public function getJavaScripts() {
-        return array('/js/lib/tinymce/tiny_mce.js', '/js/form.js');
+        return array('/js/lib/redactor/redactor.js', '/js/form.js');
     }
 
 }

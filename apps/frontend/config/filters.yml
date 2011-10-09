@@ -3,6 +3,5 @@ remember_me:
   class: sfHtRememberMeFilter
 security: ~
 # insert your own filters here
-
 cache:     ~
 execution: ~
