@@ -9,7 +9,7 @@
     </ul>
 <?php endif; ?>
 
-<form method="post" action="<?php echo url_for('sfApply/apply') ?>"
+<form method="post" action="<?php echo url_for('sfApply/apply') ?>">
     <fieldset>
         <dl>
             <dt><?php echo $form['username']->renderLabel() ?></dt>
