@@ -66,7 +66,7 @@ class sfJqueryFormValidationRules
   
   public function __construct(sfForm $form)
   {
-    
+      
     // if an alternative date method has been specified, update the static widget array
     if(strlen(sfConfig::get('app_sf_jquery_form_validation_date_method')) > 0)
     {
@@ -120,7 +120,7 @@ class sfJqueryFormValidationRules
       // get the correct html "name" for this field
       $validation_name = $this->createValidationName($name, $fieldname, $is_embedded);
     
-      $this->processRules($validation_name, $objField);
+      $this->processRules($validation_name, $objField, $form, $fieldname);
       $this->processMessages($validation_name, $objField);
     }
 
@@ -134,15 +134,29 @@ class sfJqueryFormValidationRules
    *
    * @return void
    */
-  private function processRules($validation_name, sfValidatorBase $objField)
+  private function processRules($validation_name, sfValidatorBase $objField, sfForm $form, $fieldname)
   {
+    if(get_class($objField) =='sfValidatorDoctrineUnique'){
+        $options = $objField->getOptions();
+
+        if(!is_array($options['column'])){
+          $options['column'] = array($options['column']);
+        }
+        foreach ($options['column'] as $column) {
+            $remote = sfContext::getInstance()->getController()->genUrl(                    
+            self::$url_params['module'] . "/remote?form=" . get_class($form) . "&validator=sfValidatorDoctrineUnique&column=".$fieldname);
+            $this->addRule($validation_name, "remote", $remote);
+            $this->addMessage($validation_name, "remote", $objField->getMessage('invalid'));
+        }
+        return;
+    }
+    
     if ($objField instanceof sfValidatorSchema) {
       foreach ($objField->getFields() as $subValidatorName => $subObjField) {
-        $this->processRules($subValidatorName, $subObjField);
+        $this->processRules($subValidatorName, $subObjField, $form, $fieldname);
       }
       return;
     }
-    
     $field_options = $objField->getOptions();
     
     // process the common rules for all widets
@@ -159,29 +173,14 @@ class sfJqueryFormValidationRules
      $this->addRule($validation_name, 'minlength', $field_options['min_length']);
     }
     
-    // TODO - add support for sfValidatorAnd and sfValidatorOr
     if(get_class($objField) == 'sfValidatorAnd'){
         foreach ($objField->getValidators() as $v) {
-            $this->processRules($validation_name,  $v);
+            $this->processRules($validation_name,  $v, $form, $fieldname);
         }
     }
-      
-    if(get_class($objField) =='sfValidatorDoctrineUnique'){
-        if(!is_array($options['column'])){
-          $options['column'] = array($options['column']);
-        }
-        foreach ($options['column'] as $column) {
-          extract(sfJqueryFormValidationRules::getUrlParams());
-          $rules['remote'] = sfContext::getInstance()->getController()->genUrl(
-            "{$module}/remote?form=" . get_class($form) . "&validator={$validatorName}");
-          $rules['messages'] = array(
-            'remote' => $messages['invalid'],
-          );
-          $return[] = "$('#{$formName}_{$column}').rules('add', " . json_encode($rules) . ");";
-                  $this->addRule($validation_name, "remote", $val);
-        $this->addMessage($validation_name, "remote", $this->parseMessageVal($key, $objField));
-        }
-    }
+    // TODO - add support for sfValidatorOr
+     
+    
     // now add widget specific rules
     foreach(self::$widgets as $widget_name => $properties)
     {
@@ -343,7 +342,7 @@ class sfJqueryFormValidationRules
   private function addMessage($validation_name, $rule, $value)
   {
     if(strlen($value) > 0)
-      $this->messages[$validation_name][$rule] = $value;
+      $this->messages[$validation_name][$rule] =  sfContext::getInstance ()->getI18N ()-> __($value);
   }
   
   private function createValidationName($form_name, $fieldname, $is_embedded)

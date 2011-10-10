@@ -55,19 +55,31 @@ class sfJqueryFormValActions extends sfActions
       }
     }
     $formObj = new $form();
-    switch ($validator) {
-      case 'sfValidatorDoctrineUnique':
-      case 'sfValidatorPropelUnique':
-        $validatorObj = new $validator(array('model' => $formObj->getModelName(), 'column' => array_keys($params)));
-        $this->result = 'true';
+    
+    //validator per field
+    if(isset($column)){
+        $formObj instanceof FRegistrationForm;
+        $vs = $formObj->getValidatorSchema();
+        $this->clean($vs[$column], $params[$column]);
+    //post validators
+    }else{
+        switch ($validator) {
+          case 'sfValidatorDoctrineUnique':
+          case 'sfValidatorPropelUnique':
+            $this->clean(new $validator(array('model' => $formObj->getModelName(), 'column' => array_keys($params))), $params);
+            break;
+        }
+    }
+    return sfView::NONE;
+  }  
+  
+  private function clean(sfValidatorBase $v, $value){
+      $this->result = 'true';
         try {
-          $validatorObj->clean($params);
+          $v->clean($value);
         } catch (Exception $e) {
           $this->result = 'false';
         }
         $this->renderText($this->result);
-        break;
-    }
-    return sfView::NONE;
-  }  
+  }
 }

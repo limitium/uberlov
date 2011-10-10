@@ -26,7 +26,7 @@ class FRegistrationForm extends sfApplyApplyForm {
         // own transactions. Adding two fields to the profile form
         // is definitely simpler.
         //Setting username widget
-        $this->setWidget('username', new sfWidgetFormInput(array(), array('maxlength' => 26)));
+        $this->setWidget('username', new sfWidgetFormInput(array(), array('maxlength' => 16)));
         $this->setWidget('password', new sfWidgetFormInputPassword(array(), array('maxlength' => 128)));
 
         //Settings for email fields
@@ -52,7 +52,24 @@ class FRegistrationForm extends sfApplyApplyForm {
         // rest of the user profile come from the schema and from the
         // developer's form subclass
 
-        $this->setValidator('username', new sfValidatorApplyUsername());
+        $this->setValidator('username', new sfValidatorAnd(array(
+                    new sfValidatorString(
+                            array(
+                                'required' => true,
+                                'trim' => true,
+                                'min_length' => 4,
+                                'max_length' => 16
+                            )
+                    ),
+                    new sfValidatorRegex(
+                            array('pattern' => '/^\w+$/'),
+                            array('invalid' => 'Usernames must contain only letters, numbers and underscores.')
+                    ),
+                    new sfValidatorDoctrineUnique(
+                            array('model' => 'sfGuardUser', 'column' => 'username'),
+                            array('invalid' => 'There is already a user by that name. Choose another.')
+                    )
+                )));
 
         $this->setValidator('password', new sfValidatorApplyPassword());
 
@@ -63,7 +80,6 @@ class FRegistrationForm extends sfApplyApplyForm {
 
         $this->setValidator('email', new sfValidatorAnd(array(
                     new sfValidatorEmail(array('required' => true, 'trim' => true)),
-                    new sfValidatorString(array('required' => true, 'max_length' => 255)),
                     new sfValidatorDoctrineUnique(
                             array('model' => 'sfGuardUser', 'column' => 'email_address'),
                             array('invalid' => 'An account with that email address already exists. If you have forgotten your password, click "cancel", then "Reset My Password."'))
