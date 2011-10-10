@@ -26,7 +26,7 @@ class FRegistrationForm extends sfApplyApplyForm {
         // own transactions. Adding two fields to the profile form
         // is definitely simpler.
         //Setting username widget
-        $this->setWidget('username', new sfWidgetFormInput(array(), array('maxlength' => 16)));
+        $this->setWidget('username', new sfWidgetFormInput(array(), array('maxlength' => 26)));
         $this->setWidget('password', new sfWidgetFormInputPassword(array(), array('maxlength' => 128)));
 
         //Settings for email fields

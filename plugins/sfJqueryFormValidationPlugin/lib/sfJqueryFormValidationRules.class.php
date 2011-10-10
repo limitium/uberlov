@@ -160,8 +160,28 @@ class sfJqueryFormValidationRules
     }
     
     // TODO - add support for sfValidatorAnd and sfValidatorOr
-    //if(get_class($objField) == 'sfValidatorAnd');
+    if(get_class($objField) == 'sfValidatorAnd'){
+        foreach ($objField->getValidators() as $v) {
+            $this->processRules($validation_name,  $v);
+        }
+    }
       
+    if(get_class($objField) =='sfValidatorDoctrineUnique'){
+        if(!is_array($options['column'])){
+          $options['column'] = array($options['column']);
+        }
+        foreach ($options['column'] as $column) {
+          extract(sfJqueryFormValidationRules::getUrlParams());
+          $rules['remote'] = sfContext::getInstance()->getController()->genUrl(
+            "{$module}/remote?form=" . get_class($form) . "&validator={$validatorName}");
+          $rules['messages'] = array(
+            'remote' => $messages['invalid'],
+          );
+          $return[] = "$('#{$formName}_{$column}').rules('add', " . json_encode($rules) . ");";
+                  $this->addRule($validation_name, "remote", $val);
+        $this->addMessage($validation_name, "remote", $this->parseMessageVal($key, $objField));
+        }
+    }
     // now add widget specific rules
     foreach(self::$widgets as $widget_name => $properties)
     {
@@ -386,6 +406,9 @@ class sfJqueryFormValidationRules
       case 'sfValidatorDoctrineUnique':
       case 'sfValidatorPropelUnique':
         $return = array();
+        if(!is_array($options['column'])){
+          $options['column'] = array($options['column']);
+        }
         foreach ($options['column'] as $column) {
           extract(sfJqueryFormValidationRules::getUrlParams());
           $rules['remote'] = sfContext::getInstance()->getController()->genUrl(
