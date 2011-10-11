@@ -10,6 +10,7 @@ jQuery(function($){
     errorElement: 'li',
     errorPlacement: function(error, element) 
     {
+     error.hide();
      if(element.parents('.radio_list').is('*') || element.parents('.checkbox_list').is('*'))
      {
        error.prependTo( element.parent().parent().parent() );
@@ -18,9 +19,22 @@ jQuery(function($){
      {
        error.prependTo( element.parent() );
      }
-     //, submitHandler: function(form) {}
+     if(error.children().html().length){
+        error.slideDown();     
+        }
+   },
+   success: function(error){
+    
+    var ul = error.parent();
+    if(error.hasClass('error_list')){
+        ul = error;
+    }
+    if(ul.hasClass('error_list')){
+        ul.slideUp(500,function(){
+        ul.remove();
+        });
+    }    
    }
-  
   });
   
   <?php foreach($sf_jq_rules->getPostValidators() as $pv): ?>
