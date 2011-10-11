@@ -85,12 +85,14 @@ div.imp_redactor_box{
 
 /*errors*/
 ul.error_list {
-    -moz-border-radius: 4px;
-    -webkit-border-radius: 4px;
-    border-radius: 4px;
-    margin: 0.2em 0;
+    -moz-border-radius: 4px 4px 0 0;
+    -webkit-border-radius: 4px 4px 0 0;
+    border-radius: 4px 4px 0 0;
     background: none repeat scroll 0 0 #FFB4AE;
     color: #801800;
+    margin-bottom: -2px;
+    padding-bottom: 2px;
+    width: 316px;
 }
 ul.error_list li{
     font-size: 15px;
@@ -109,6 +111,20 @@ ul.error_list li:last-child {
     -webkit-border-radius: 0 0 4px 4px;
     border-radius: 0 0 4px 4px;
 }*/
+
+/*infos*/
+.field_info {
+    -moz-border-radius: 0 0 4px 4px;
+    -webkit-border-radius: 0 0 4px 4px;
+    border-radius: 0 0 4px 4px;
+    background: none repeat scroll 0 0 #EFEFEF;
+    color: #000000;
+    display: none;
+    font-size: 12px;
+    margin-top: -2px;
+    padding: 7px 7px 5px 7px;
+    width: 302px;
+}
 
 /*tags*/
 .tag-suggestions ul li{

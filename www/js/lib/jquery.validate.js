@@ -655,7 +655,6 @@ $.extend($.validator, {
 						: label.insertAfter(element);
 			}
 			if ( !message && this.settings.success ) {
-				label.text("");
 				typeof this.settings.success == "string"
 					? label.addClass( this.settings.success )
 					: this.settings.success( label );

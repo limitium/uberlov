@@ -16,6 +16,7 @@
             <dd>
                 <?php echo $form['username']->renderError() ?>
                 <?php echo $form['username'] ?>
+                <div class="field_info">Под этим именем Вас будут знать здесь.</div>
             </dd>
         </dl>
         <dl>
@@ -23,6 +24,7 @@
             <dd>
                 <?php echo $form['password']->renderError() ?>
                 <?php echo $form['password'] ?>
+                <div class="field_info">Пароль не менее 6 знаков, а лучше с цифрами!</div>
             </dd>
         </dl>
         <dl>
@@ -30,6 +32,7 @@
             <dd>
                 <?php echo $form['email']->renderError() ?>
                 <?php echo $form['email'] ?>
+                <div class="field_info">Сюда мы будем присылать Вам уведомления, если захотите.</div>
             </dd>
         </dl>
         <dl>
@@ -37,6 +40,7 @@
             <dd>
                 <?php echo $form['email2']->renderError() ?>
                 <?php echo $form['email2'] ?>
+                <div class="field_info">Главное не ошибиться.</div>
             </dd>
         </dl>
     </fieldset>

@@ -170,6 +170,16 @@ form.prototype.afterInit = function(){
             });
                 
         }
+        
+        var info = input.next();
+        if(info.hasClass('field_info')){
+            input.focus(function(){
+                info.slideDown()
+            }).blur(function(){
+                info.slideUp()
+            });
+        }
+        
     });
     
     $('.autocomplete').each(function(){

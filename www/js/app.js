@@ -180,10 +180,10 @@ app = {
                 right: '10px',
                 border: 'none',
                 padding: '5px',
-                backgroundColor: '#000',
+                backgroundColor: '#AACD4E',
                 '-webkit-border-radius': '10px',
                 '-moz-border-radius': '10px',
-                opacity: .6,
+                opacity: .9,
                 color: '#fff'
             }
         })
