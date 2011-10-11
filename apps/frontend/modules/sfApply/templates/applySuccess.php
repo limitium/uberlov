@@ -48,6 +48,6 @@
                     <span class="btn_bg">Я С ВАМИ</span>
                 </span>
             </span>
-        </button>
+        </button> или <a href="<?php echo url_for('@resetRequest') ?>"><span>уже зарегистрирован?</span></a>
     </div>
 </form>

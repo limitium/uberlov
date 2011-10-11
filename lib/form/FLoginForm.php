@@ -14,8 +14,8 @@ class FloginForm extends BaseForm {
         $this->widgetSchema['password'] = new sfWidgetFormInputPassword(array('type' => 'password'));
         $this->widgetSchema['remember'] = new sfWidgetFormInputCheckbox();
 
-        $this->validatorSchema['username'] = new sfValidatorString(array('min_length' => 3, 'max_length' => 50, 'required' => true));
-        $this->validatorSchema['password'] = new sfValidatorString(array('min_length' => 3, 'max_length' => 50, 'required' => true));
+        $this->validatorSchema['username'] = new sfValidatorString(array('min_length' => 4, 'max_length' => 16, 'required' => true),array( 'min_length' => 'That username is too short. It must contain a minimum of %min_length% characters.'));
+        $this->validatorSchema['password'] = new sfValidatorString(array('min_length' => 6, 'max_length' => 128, 'required' => true),array( 'min_length' => 'That password is too short. It must contain a minimum of %min_length% characters.'));
         $this->validatorSchema['remember'] = new sfValidatorString(array('required' => false));
 
 
@@ -30,9 +30,9 @@ class FloginForm extends BaseForm {
         $this->widgetSchema->setNameFormat('signin[%s]');
     }
     
-    public function getJavaScripts() {
+     public function getJavaScripts() {
         $url_params = sfJqueryFormValidationRules::getUrlParams();
         $url_params['form'] = get_class($this);
-        return array_merge(parent::getJavaScripts(),array(url_for($url_params)));
+        return array_merge(parent::getJavaScripts(), array('/js/lib/jquery.validate.js', url_for($url_params)));
     }
 }

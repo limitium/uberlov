@@ -59,7 +59,9 @@ class FRegistrationForm extends sfApplyApplyForm {
                                 'trim' => true,
                                 'min_length' => 4,
                                 'max_length' => 16
-                            )
+                            ),
+                            array( 'min_length' => 'That username is too short. It must contain a minimum of %min_length% characters.')
+
                     ),
                     new sfValidatorRegex(
                             array('pattern' => '/^\w+$/'),
@@ -79,14 +81,14 @@ class FRegistrationForm extends sfApplyApplyForm {
         // (read the RFC if you don't believe me...).
 
         $this->setValidator('email', new sfValidatorAnd(array(
-                    new sfValidatorEmail(array('required' => true, 'trim' => true)),
+                    new sfValidatorEmail(array('required' => true, 'trim' => true),array('invalid'=>'Please enter a valid email address.')),
                     new sfValidatorDoctrineUnique(
                             array('model' => 'sfGuardUser', 'column' => 'email_address'),
                             array('invalid' => 'An account with that email address already exists. If you have forgotten your password, click "cancel", then "Reset My Password."'))
                 )));
 
         $this->setValidator('email2', new sfValidatorEmail(
-                        array('required' => true, 'trim' => true)));
+                        array('required' => true, 'trim' => true),array('invalid'=>'Please enter a valid email address.')));
 
         $postValidators = array(new sfValidatorSchemaCompare('email', sfValidatorSchemaCompare::EQUAL,
                     'email2', array(), array('invalid' => 'The email addresses did not match.')));
