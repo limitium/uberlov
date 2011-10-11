@@ -1,6 +1,5 @@
-<div id="mailContainer">
-    <?php use_stylesheets_for_form($form) ?>
-    <p>На ваш текущий ящик <b><?php echo $profile->getEmail(); ?></b> придет письмо с подверждением о смене почтового ящика.</p>
+<?php use_stylesheets_for_form($form) ?>
+    <p>На ваш текущий ящик <b><?php echo $sf_user->getProfile()->getEmail(); ?></b> придет письмо с подверждением о смене почтового ящика.</p>
     <form method="post" action="<?php echo url_for("sfApply/editEmail") ?>" name="sf_apply_email_edit_form">
         <fieldset>
             <dl>
@@ -22,4 +21,3 @@
             </button>
         </div>
     </form>
-</div>
