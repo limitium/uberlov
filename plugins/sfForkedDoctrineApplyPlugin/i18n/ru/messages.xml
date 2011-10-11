@@ -46,7 +46,7 @@
       </trans-unit>
       <trans-unit id="12" approved="yes">
         <source>An account with that email address already exists. If you have forgotten your password, click "cancel", then "Reset My Password."</source>
-        <target>Аккаунт с этим email уже вуществует. Если вы просто забыли пароль нажмите "отмена", а потом "Востановить пароль"</target>
+        <target>Аккаунт с этим email уже вуществует. Если вы просто забыли пароль нажмите "уже зарегистрирован?", а потом "Востановить пароль"</target>
       </trans-unit>
       <trans-unit id="13" approved="yes">
         <source>The passwords did not match.</source>

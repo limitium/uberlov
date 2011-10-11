@@ -32,6 +32,14 @@
                 <source>"%value%" must be at least %min%.</source>
                 <target>Должно быть не меньше %min%.</target>
             </trans-unit>
+            <trans-unit>
+                <source>Please enter a valid email address.</source>
+                <target>Неверный E-mail.</target>
+            </trans-unit>
+            <trans-unit>
+                <source>That username is too short. It must contain a minimum of %min_length% characters.</source>
+                <target>Этот логин слишком короткий минимум %min_length% знака</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

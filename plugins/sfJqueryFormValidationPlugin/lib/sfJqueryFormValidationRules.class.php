@@ -215,11 +215,17 @@ class sfJqueryFormValidationRules
              
           }
        }
-    }
+    }    
   }
   
   private function processMessages($validation_name, sfValidatorBase $objField)
   {
+    if(get_class($objField) == 'sfValidatorAnd'){
+        foreach ($objField->getValidators() as $v) {
+            $this->processMessages($validation_name,  $v);
+        }
+        return;
+    }
     foreach($objField->getOptions() as $key => $val)
     {
       $this->addMessage($validation_name, $this->outputMessageKey($key, $objField), $this->parseMessageVal($key, $objField));
@@ -309,7 +315,7 @@ class sfJqueryFormValidationRules
     {
       return;
     }
-    
+    $val = sfContext::getInstance ()->getI18N ()-> __($val);
     // add slashes to ensure correct json output
     $val = addslashes($val);
     
@@ -340,8 +346,8 @@ class sfJqueryFormValidationRules
   }
   
   private function addMessage($validation_name, $rule, $value)
-  {
-    if(strlen($value) > 0)
+  {      
+    if(strlen($value) > 0)        
       $this->messages[$validation_name][$rule] =  sfContext::getInstance ()->getI18N ()-> __($value);
   }
   
@@ -376,11 +382,13 @@ class sfJqueryFormValidationRules
     {
       if($pv = $form->getValidatorSchema()->getPostValidator())
       {
-        $post_validators = array_merge($post_validators, $this->parsePostValidator($form, $pv));
+        if($parsedValidators  =$this->parsePostValidator($form, $pv)){
+            $post_validators = array_merge($post_validators, $parsedValidators);
+        }
       }
     }
     //dev::pr($post_validators, true);
-    return sizeof($post_validators) > 0 ? $post_validators : null;
+    return $post_validators;
   }
   
   private function parsePostValidator(sfForm $form, sfValidatorBase $validator)
@@ -413,7 +421,7 @@ class sfJqueryFormValidationRules
           $rules['remote'] = sfContext::getInstance()->getController()->genUrl(
             "{$module}/remote?form=" . get_class($form) . "&validator={$validatorName}");
           $rules['messages'] = array(
-            'remote' => $messages['invalid'],
+            'remote' => sfContext::getInstance ()->getI18N ()-> __($messages['invalid']),
           );
           $return[] = "$('#{$formName}_{$column}').rules('add', " . json_encode($rules) . ");";
         }
@@ -423,7 +431,7 @@ class sfJqueryFormValidationRules
         if($options['operator'] == '==' || $options['operator'] == '===') {
           $rules['equalTo'] = "#{$formName}_{$options['left_field']}";
           $rules['messages'] = array(
-            'equalTo' => $messages['invalid'],
+            'equalTo' => sfContext::getInstance ()->getI18N ()-> __($messages['invalid']),
           );
           return "$('#{$formName}_{$options['right_field']}').rules('add', " . json_encode($rules) . ");";
         }
