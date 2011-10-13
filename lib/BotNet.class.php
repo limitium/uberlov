@@ -31,14 +31,14 @@ class BotNet {
 
     private function __construct() {
         $this->totalBots = Doctrine_Query::create()
-                ->from('IsBot')
+                ->from('Bot')
                 ->count();
 
         $this->activeBots = Doctrine_Query::create()
-                ->from('IsBot b')
+                ->from('Bot b')
                 ->leftJoin('b.Profile p')
                 ->leftJoin('b.NickMap')
-                ->where('i.active = 1')
+                ->innerJoin('b.BotData')
                 ->execute();
     }
 
@@ -47,12 +47,14 @@ class BotNet {
                 ->from('BotNick')
                 ->offset($this->totalBots)
                 ->limit($count)
+                ->orderBy('id')
                 ->execute();
 
         $data = Doctrine_Query::create()
                 ->from('BotData')
                 ->offset($this->activeBots->count())
                 ->limit($count)
+                ->orderBy('id')
                 ->execute();
 
         if ($nicks->count() < $count || $data->count() < $count) {
@@ -63,12 +65,12 @@ class BotNet {
         $nicksIterator = $nicks->getIterator();
         $dataIterator = $data->getIterator();
         for ($i = 0; $i < $count; $i++) {
-            $botData = array();
-            if (rand(0, 10000) / 10000 < 0.6) {
+            $botData = null;
+            if (rand(0, 10000) / 10000 < 0.65) {
                 $botData = $dataIterator->current();
-                $data->next();
+                $dataIterator->next();
             }
-
+                
             $this->addBot($nicksIterator->current(), date("Y-m-d H:i:s", $times[$i]), $botData);
             $nicksIterator->next();
         }
@@ -78,11 +80,10 @@ class BotNet {
         $bot = new sfGuardUser();
         $botProfile = new sfGuardUserProfile();
         $botProfile->setUser($bot);
-        $isBot = new IsBot();
+        $Bot = new Bot();
 
-        $bot->username = $nick->username;
-        $bot->is_active = true;
-        $bot->email_address = ($data ? $data->uid : md5($nick->username . "uberlov mail")) . "@uberlov.ru";
+        $bot->username = $nick->nick;
+        $bot->email_address = ($data ? $data->uid : md5($nick->nick . "uberlov mail")) . "@uberlov.ru";
         $bot->created_at = $dateBorn;
         $bot->updated_at = $dateBorn;
         $bot->last_login = $dateBorn;
@@ -100,8 +101,7 @@ class BotNet {
                 $bot->last_name = isset($names[1]) ? $names[1] : "";
                 $bot->first_name = isset($names[0]) ? $names[0] : "";
             }
-            $isBot->setBotDataId($nick->id);
-            $isBot->setIsActive(true);
+            $Bot->setBotDataId($data->id);
             $this->activeBots->add($bot);
         }
         $botProfile->sex = 1;
@@ -111,9 +111,9 @@ class BotNet {
 
         $bot->save();
         $botProfile->save();
-        $isBot->setBotNickId($nick->id);
-        $isBot->setProfileId($botProfile->id);
-        $isBot->save();
+        $Bot->setBotNickId($nick->id);
+        $Bot->setProfileId($botProfile->id);
+        $Bot->save();
 
         $this->totalBots++;
     }
@@ -163,7 +163,7 @@ class BotNet {
         return $bot;
     }
 
-    public function attachTo($object, IsBot $bot, $from = 0) {
+    public function attachTo($object, Bot $bot, $from = 0) {
         if (!$from) {
             $from = $bot->getProfile()->getDateTimeObject('created_at')->format('U');
         }
