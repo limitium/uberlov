@@ -49,7 +49,7 @@
                                     <table cellspacing="0" cellpadding="0" border="0">
                                         <tbody>
                                             <tr>
-                                                <td style="font-size:100%;"><?php echo $message; ?></td>
+                                                <td style="font-size:100%;"><?php echo html_entity_decode($message); ?></td>
                                             </tr>
                                         </tbody>
                                     </table>                                   
