@@ -305,7 +305,7 @@ class BasesfApplyActions extends sfActions
           $profile->setValidateAt( $date->format( 'Y-m-d H:i:s' ) );
           $profile->save();
           $this->mail(array('subject' => sfConfig::get('app_sfApplyPlugin_apply_subject',
-            sfContext::getInstance()->getI18N()->__("Please verify your email on %1%",
+            sfContext::getInstance()->getI18N()->__("Пожайлуста подтвердите смену email на %1%",
                                                     array('%1%' => $this->getRequest()->getHost()), 'sfForkedApply')),
             'fullname' => $profile->getFullname(),
             'email' => $profile->getUser()->getEmailAddress(),

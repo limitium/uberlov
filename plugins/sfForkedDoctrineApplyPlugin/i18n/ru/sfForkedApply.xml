@@ -159,7 +159,7 @@ You will then be prompted for the new password you wish to use.
 Your password will not be changed unless you click on the link above and complete the form.
 &lt;/p&gt;</source>
         <target>&lt;p&gt;
-Мы получили Ваш запрос на восстановление логина и возможно пароля на: %1%
+Мы получили Ваш запрос на восстановление пароля на: %1%
 &lt;/p&gt;&lt;p&gt;
 Ваш логин: %USERNAME%
 &lt;/p&gt;&lt;p&gt;
@@ -306,6 +306,9 @@ This account is inactive. Please contact the administrator.
         <source>Unable to check the captcha from the server (%error%).</source>
         <target>Невозможно проверить код на сервере (%error%).</target>
       </trans-unit>
-    </body>
+      <trans-unit id="37" approved="yes">
+        <source>Please verify your email on %1%</source>
+        <target>Пожайлуста подтвердите смену email на %1%</target>
+      </trans-unit>
   </file>
 </xliff>
