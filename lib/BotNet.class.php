@@ -192,7 +192,7 @@ class BotNet {
             }
         }
 
-        $this->updateObject($object);
+        $this->updateObjectVotes($object);
         $this->updateBot($bot);
     }
 
@@ -220,8 +220,9 @@ class BotNet {
         }
     }
 
-    private function updateObject($object) {
-        $voters = 57 - round(atan(sqrt(rand(0, 10000) / 10000)) * 57);
+    public function updateObjectVotes($object) {
+        $maxVoters = rand(0, 43);
+        $voters = $maxVoters - round(atan(sqrt(rand(0, 10000) / 10000)) * $maxVoters);
         $voteType = "Vote" . get_class($object);
         $voteSetter = "set" . get_class($object);
         for ($i = 0; $i < $voters; $i++) {

@@ -16,17 +16,29 @@ class collectorActions extends sfActions {
      * @param sfRequest $request A request object
      */
     public function executeTop(sfWebRequest $request) {
-        $this->locations = Doctrine_Query::create()
-                ->select('sum(v.value) as weight,l.*,p.*,u.*,v.*')
+        $locOrdered = array();
+        foreach (Doctrine_Query::create()
+                ->select('sum(v.value) as weight,l.id')
                 ->from('Location l')
                 ->leftJoin('l.VoteLocation v')
-                ->leftJoin('l.CreatedBy p')
-                ->leftJoin('p.User u')
                 ->where('l.location_scope_id=5')
                 ->groupBy('l.id')
                 ->orderBy('weight desc')
                 ->limit(10)
-                ->execute();
+                ->execute() as $loc) {
+            $locOrdered[$loc->id] = $loc->weight;
+        }
+
+        foreach(Doctrine_Query::create()
+                ->from('Location l')
+                ->leftJoin('l.VoteLocation v')
+                ->leftJoin('l.CreatedBy p')
+                ->leftJoin('p.User u')
+                ->whereIn("l.id", array_keys($locOrdered))
+                ->execute() as $location){
+            $locOrdered[$location->id] = $location;
+        }
+        $this->locations = $locOrdered;
     }
 
     /**
