@@ -310,5 +310,6 @@ This account is inactive. Please contact the administrator.
         <source>Please verify your email on %1%</source>
         <target>Пожайлуста подтвердите смену email на %1%</target>
       </trans-unit>
+      </body>
   </file>
 </xliff>
