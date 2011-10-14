@@ -87,7 +87,14 @@ class parserActions extends sfActions {
      * @param sfRequest $request A request object
      */
     public function executeAddbot(sfWebRequest $request) {
-        BotNet::create()->fillOutBots(300);
+        $bn = BotNet::create();
+        $lcoations = Doctrine_Query::create()->from('Location')
+                ->where('created_by = 1')
+                ->execute();
+        
+        foreach ($lcoations as $loc) {
+            $bn->attachTo($loc, $bn->getRandomBot());
+        }
     }
 
     /**

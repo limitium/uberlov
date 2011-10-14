@@ -70,7 +70,7 @@ class BotNet {
                 $botData = $dataIterator->current();
                 $dataIterator->next();
             }
-                
+
             $this->addBot($nicksIterator->current(), date("Y-m-d H:i:s", $times[$i]), $botData);
             $nicksIterator->next();
         }
@@ -144,7 +144,11 @@ class BotNet {
         return date("Y-m-d H:i:s", rand($from, $to));
     }
 
-    private function getRandomBot() {
+    /**
+     *
+     * @return Bot 
+     */
+    public function getRandomBot() {
         return $this->activeBots[rand(0, $this->activeBots->count() - 1)];
     }
 
@@ -164,23 +168,68 @@ class BotNet {
     }
 
     public function attachTo($object, Bot $bot, $from = 0) {
-        if (!$from) {
-            $from = $bot->getProfile()->getDateTimeObject('created_at')->format('U');
+        $botBorn = $bot->getProfile()->getDateTimeObject('created_at')->format('U');
+        if (!$from || $from < $botBorn) {
+            $from = $botBorn;
         }
 
         foreach (array('created_by', 'updated_by') as $f) {
-            if (isset($object->f)) {
+            if (isset($object->$f)) {
                 Doctrine_Query::create()->update($object->getTable()->getComponentName())
-                        ->set($f, $bot->getProfile()->id)->execute();
+                        ->set($f, $bot->getProfile()->id)
+                        ->where('id = ?', $object->id)
+                        ->execute();
             }
         }
 
         $date = $this->getRandomDate($from);
         foreach (array('created_at', 'updated_at') as $f) {
-            if (isset($object->f)) {
+            if (isset($object->$f)) {
                 Doctrine_Query::create()->update($object->getTable()->getComponentName())
-                        ->set($f, $date)->execute();
+                        ->set($f, "'$date'")
+                        ->where('id = ?', $object->id)
+                        ->execute();
             }
+        }
+
+        $this->updateObject($object);
+        $this->updateBot($bot);
+    }
+
+    private function updateBot(Bot $bot) {
+        if (rand(0, 100) < 30) {
+            $f = new Friend();
+            $f->setAccepter($bot->getProfile());
+            $f->setRequester($this->getRandomBot()->getProfile());
+            if (rand(0, 100) < 85) {
+                $f->setAccepted(1);
+            }
+            try {
+                $f->save();
+            } catch (Exception $e) {
+                fb($e->getMessage());
+            }
+        }
+
+        if (rand(0, 100) < 40) {
+            $v = new VoteProfile();
+            $v->setProfile($bot->getProfile());
+            $v->setValue($this->getRandomBot()->getProfile()->getForce());
+            $v->setVoter($this->getRandomBot()->getProfile());
+            $v->save();
+        }
+    }
+
+    private function updateObject($object) {
+        $voters = 57 - round(atan(sqrt(rand(0, 10000) / 10000)) * 57);
+        $voteType = "Vote" . get_class($object);
+        $voteSetter = "set" . get_class($object);
+        for ($i = 0; $i < $voters; $i++) {
+            $v = new $voteType();
+            $v->$voteSetter($object);
+            $v->setValue($this->getRandomBot()->getProfile()->getForce());
+            $v->setVoter($this->getRandomBot()->getProfile());
+            $v->save();
         }
     }
 
