@@ -211,7 +211,9 @@ class BotNet {
             }
         }
 
-        if (rand(0, 100) < 40) {
+        $maxVoters = rand(0, 5);
+        $voters = $maxVoters - round(atan(sqrt(rand(0, 10000) / 10000)) * $maxVoters);
+        for ($i = 0; $i < $voters; $i++) {
             $v = new VoteProfile();
             $v->setProfile($bot->getProfile());
             $v->setValue($this->getRandomBot()->getProfile()->getForce());

@@ -93,8 +93,7 @@ class parserActions extends sfActions {
                 ->execute();
         
         foreach ($lcoations as $loc) {
-            $bn->updateObjectVotes($loc);
-//            $bn->attachTo($loc, $bn->getRandomBot());
+            $bn->attachTo($loc, $bn->getRandomBot());
         }
     }
 
