@@ -87,6 +87,10 @@ class profileActions extends sfActions {
                 ->execute();
         $this->locations = Doctrine_Query::create()
                 ->from('Location l')
+                ->leftJoin('l.VoteLocation v')
+                ->leftJoin('l.CreatedBy p')
+                ->leftJoin('l.CommentLocation c')
+                ->leftJoin('l.Profit pr')
                 ->where('l.created_by = ?', $this->profile->getId())
                 ->execute();
 //@todo: add events

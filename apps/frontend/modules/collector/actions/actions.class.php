@@ -34,6 +34,8 @@ class collectorActions extends sfActions {
                 ->leftJoin('l.VoteLocation v')
                 ->leftJoin('l.CreatedBy p')
                 ->leftJoin('p.User u')
+                ->leftJoin('l.CommentLocation c')
+                ->leftJoin('l.Profit pr')
                 ->whereIn("l.id", array_keys($locOrdered))
                 ->execute() as $location){
             $locOrdered[$location->id] = $location;
