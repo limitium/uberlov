@@ -13,7 +13,7 @@
 class BotNet {
 
     public $start = 1278288000;
-    public $spamer = "Spamer";
+    public $spamer = "spamer";
     public $activeBots;
     public $totalBots;
     private static $instance;
@@ -244,8 +244,8 @@ class BotNet {
     }
 
     public function spammed($object, $field, $from=0) {
-        if (sfContext::getInstance()->getUser()->username == $this->spamer) {
-            $this->publishedByBot($object, $field, $from);
+        if (sfContext::getInstance()->getUser()->getUsername() == $this->spamer) {
+//            $this->publishedByBot($object, $field, $from);
         }
     }
 

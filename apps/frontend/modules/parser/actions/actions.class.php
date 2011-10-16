@@ -14,16 +14,28 @@ class parserActions extends sfActions {
         $xmldata = file_get_contents('http://fishingmap.ru/pages/read.php');
         $xml = simplexml_load_string($xmldata);
         $data = array();
+
         foreach ($xml->location as $loc) {
             $loc instanceof SimpleXMLElement;
-            $data[] = (object) array(
-                        'name' => $loc['name']->__toString(),
-                        'x' => $loc['x']->__toString(),
-                        'y' => $loc['y']->__toString(),
-                        'mtype' => $loc['mtype']->__toString(),
-            );
+            $id = $loc['id']->__toString();
+            $lastId=  484 ;
+            if (/*$id > 484 &&*/ $loc['mtype'] != 'shop') {
+                $page = file_get_contents("http://fishingmap.ru/?p=hotspot&action=show&id=$id");
+                preg_match("/<p class=\"oj\">(.+)?<\/p><br><p class=\"ol\">Метки/", $page, $matches);
+                $data[$id] = (object) array(
+                            'id' => $id,
+                            'name' => $loc['name']->__toString(),
+                            'x' => $loc['x']->__toString(),
+                            'y' => $loc['y']->__toString(),
+                            'mtype' => $loc['mtype']->__toString(),
+                            'description' => sizeOf($matches) > 1 ? $matches[1] : ""
+                );
+            }
         }
-        $this->locations = $data;
+        ksort($data);
+        var_export($data);
+        die();
+        $this->locations = array_values($data);
     }
 
     /**
@@ -88,13 +100,13 @@ class parserActions extends sfActions {
      */
     public function executeAddbot(sfWebRequest $request) {
         $bn = BotNet::create();
-        $lcoations = Doctrine_Query::create()->from('Location')
-                ->where('created_by = 1')
+        $lcs = Doctrine_Query::create()->from('Profit')
+                ->where('created_by = 7')
                 ->execute();
         
-        foreach ($lcoations as $loc) {
-            $bn->attachTo($loc, $bn->getRandomBot());
-        }
+        foreach ($lcs as $loc) {
+            $bn->updateObjectVotes($loc);
+    }
     }
 
     /**
