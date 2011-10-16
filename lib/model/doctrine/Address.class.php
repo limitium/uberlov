@@ -24,7 +24,7 @@ class Address extends BaseAddress {
             $this->$uPartName = $part ? $part : null;
         }
         $this->Route = null;
-        if (isset($addressData['route'])) {
+        if (isset($addressData['route'])&& $addressData['route']) {
             $this->Route = $this->getAddressPart($addressData, 'route', $this->Country);
         }
     }
