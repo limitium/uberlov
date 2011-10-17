@@ -99,14 +99,7 @@ class parserActions extends sfActions {
      * @param sfRequest $request A request object
      */
     public function executeAddbot(sfWebRequest $request) {
-        $bn = BotNet::create();
-        $lcs = Doctrine_Query::create()->from('Profit')
-                ->where('created_by = 7')
-                ->execute();
-        
-        foreach ($lcs as $loc) {
-            $bn->updateObjectVotes($loc);
-    }
+        fb(Syncer::create()->doWell("и главное - по путевке можно ловить до 12 часов подряд, в стоимость путевки входит 8 кг рыбы."));
     }
 
     /**
