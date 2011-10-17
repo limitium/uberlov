@@ -28,15 +28,17 @@ class Location extends BaseLocation {
     }
 
     public function updateAddress($addressData) {
-        if (!$this->isNew()) {
-            $address = $this->getAddress();
-        } else {
-            $address = new Address();
-            $this->setAddress($address);
-        }
+        $address = $this->getAddress();
         $address->updateAddress($addressData);
-
-        $this->save();
+        $address->save();
+        if (!$this->address_id) {
+            Doctrine_Query::create()->update("Location")
+                    ->set("address_id", $address->id)
+                    ->where('id = ?', $this->id)
+                    ->execute();
+        } else {
+            $this->save();
+        }
         return $this;
     }
 
@@ -62,40 +64,40 @@ class Location extends BaseLocation {
 
     public function getTotalProfit() {
         return Doctrine_Query::create()
-                ->select('if(sum(d.qty)>0,sum(d.qty),0) as qty')
-                ->from('ProfitDetail d')
-                ->innerJoin('d.Profit p')
-                ->where('p.location_id = ?', $this->getId())
-                ->fetchOne()->qty;
+                        ->select('if(sum(d.qty)>0,sum(d.qty),0) as qty')
+                        ->from('ProfitDetail d')
+                        ->innerJoin('d.Profit p')
+                        ->where('p.location_id = ?', $this->getId())
+                        ->fetchOne()->qty;
     }
 
     public function getFishes() {
-        $fishes=array();
-        foreach($this->getProfit() as $profit){
+        $fishes = array();
+        foreach ($this->getProfit() as $profit) {
             $profit instanceof Profit;
-            foreach($profit->getProfitDetail() as $detail){
+            foreach ($profit->getProfitDetail() as $detail) {
                 $detail instanceof ProfitDetail;
                 $fishes[$detail->getFishId()] = $detail->getFish();
             }
         }
         return array_values($fishes);
         return Doctrine_Query::create()
-                ->from('Fish f')
-                ->innerJoin('f.ProfitDetail d')
-                ->innerJoin('d.Profit p')
-                ->where('p.location_id = ?', $this->getId())
-                ->groupBy('f.id')
-                ->execute();
+                        ->from('Fish f')
+                        ->innerJoin('f.ProfitDetail d')
+                        ->innerJoin('d.Profit p')
+                        ->where('p.location_id = ?', $this->getId())
+                        ->groupBy('f.id')
+                        ->execute();
     }
 
     public function getStyles() {
         return Doctrine_Query::create()
-                ->from('Style s')
-                ->innerJoin('s.ProfitDetail d')
-                ->innerJoin('d.Profit p')
-                ->where('p.location_id = ?', $this->getId())
-                ->groupBy('s.id')
-                ->execute();
+                        ->from('Style s')
+                        ->innerJoin('s.ProfitDetail d')
+                        ->innerJoin('d.Profit p')
+                        ->where('p.location_id = ?', $this->getId())
+                        ->groupBy('s.id')
+                        ->execute();
     }
 
     public function getPhoto() {

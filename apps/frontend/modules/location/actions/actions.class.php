@@ -108,10 +108,11 @@ class locationActions extends sfActions {
         if ($form->isValid()) {
             $addressData = (array) json_decode($form->getValue('address'));
             $photos = (array) json_decode($form->getValue('photos'));
+            
+            $loc = $form->save()->updateAddress($addressData)->updatePhotos($photos);
+            BotNet::create()->spammed($loc, 'description');
 
-            BotNet::create()->spammed($form->getObject(), 'description');
-
-            return $form->save()->updateAddress($addressData)->updatePhotos($photos);
+            return $loc;
         }
         return null;
     }
