@@ -153,6 +153,10 @@ class BotNet {
     }
 
     private function getBotByNick($nick) {
+        if(!$nick){
+            return $this->getRandomBot();
+        }
+        
         foreach ($this->activeBots as $bot) {
             foreach ($bot->getNickMap() as $nickMap) {
                 if ($nickMap->nick == $nick) {
@@ -160,10 +164,14 @@ class BotNet {
                 }
             }
         }
+        
         $bot = $this->getRandomBot();
+        
         $nm = new NickMap();
         $nm->nick = $nick;
         $nm->setBot($bot);
+        $nm->save();
+        
         return $bot;
     }
 
@@ -226,10 +234,10 @@ class BotNet {
         $maxVoters = rand(0, 43);
         $voters = $maxVoters - round(atan(sqrt(rand(0, 10000) / 10000)) * $maxVoters);
         $voteType = "Vote" . get_class($object);
-        $voteSetter = "set" . get_class($object);
+        $voteSetter = $object->getTable()->getTableName()."_id";
         for ($i = 0; $i < $voters; $i++) {
             $v = new $voteType();
-            $v->$voteSetter($object);
+            $v->$voteSetter = $object->id;
             $v->setValue($this->getRandomBot()->getProfile()->getForce());
             $v->setVoter($this->getRandomBot()->getProfile());
             $v->save();
@@ -237,15 +245,22 @@ class BotNet {
     }
 
     public function publishedByBot($object, $field, $from=0) {
-        preg_match("/^\%(.+)?\%/i", $object->$field, $match);
-        $nick = $match[0];
-        $object->$field = substr($object->$field, strlen($object->$field) + 2);
+        preg_match("/^\%(.+)?\%.*/i", $object->$field, $match);
+        $nick = isset($match[1])?$match[1]:"";
+        
+        $text = substr($object->$field, strlen($nick) + 2);
+        //@todo: change it!;
+        Doctrine_Query::create()->update($object->getTable()->getComponentName())
+                        ->set($field, "'$text'")
+                        ->where('id = ?', $object->id)
+                        ->execute();
+        
         $this->attachTo($object, $this->getBotByNick($nick), $from);
     }
 
     public function spammed($object, $field, $from=0) {
         if (sfContext::getInstance()->getUser()->getUsername() == $this->spamer) {
-//            $this->publishedByBot($object, $field, $from);
+            $this->publishedByBot($object, $field, $from);
         }
     }
 
