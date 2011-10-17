@@ -248,7 +248,7 @@ class BotNet {
         preg_match("/^\%(.+)?\%.*/i", $object->$field, $match);
         $nick = isset($match[1])?$match[1]:"";
         
-        $text = substr($object->$field, strlen($nick) + 2);
+        $text = $nick?substr($object->$field, strlen($nick) + 2):$object->$field;
         //@todo: change it!;
         Doctrine_Query::create()->update($object->getTable()->getComponentName())
                         ->set($field, "'$text'")
