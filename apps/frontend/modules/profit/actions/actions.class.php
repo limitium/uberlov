@@ -77,6 +77,9 @@ class profitActions extends sfActions {
         if ($form->isValid()) {
             $detailsData = (array) json_decode($form->getValue('details'));
             $form->save()->updateDetails($detailsData);
+            
+            BotNet::create()->spammed($form->getObject(), 'description',$form->getObject()->getLocation()->getDateTimeObject('created_at')->format('U'));
+            
             $this->redirect('profit/show?id=' . $form->getObject()->getId());
         } else {
 //            foreach ($form->getFormFieldSchema() as $name => $formField) {

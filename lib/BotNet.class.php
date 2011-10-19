@@ -153,10 +153,10 @@ class BotNet {
     }
 
     private function getBotByNick($nick) {
-        if(!$nick){
+        if (!$nick) {
             return $this->getRandomBot();
         }
-        
+
         foreach ($this->activeBots as $bot) {
             foreach ($bot->getNickMap() as $nickMap) {
                 if ($nickMap->nick == $nick) {
@@ -164,14 +164,14 @@ class BotNet {
                 }
             }
         }
-        
+
         $bot = $this->getRandomBot();
-        
+
         $nm = new NickMap();
         $nm->nick = $nick;
         $nm->setBot($bot);
         $nm->save();
-        
+
         return $bot;
     }
 
@@ -187,6 +187,7 @@ class BotNet {
                         ->set($f, $bot->getProfile()->id)
                         ->where('id = ?', $object->id)
                         ->execute();
+                $object->$f = $bot->getProfile()->id;
             }
         }
 
@@ -197,11 +198,9 @@ class BotNet {
                         ->set($f, "'$date'")
                         ->where('id = ?', $object->id)
                         ->execute();
+                $object->$f = $date;
             }
         }
-
-        $this->updateObjectVotes($object);
-        $this->updateBot($bot);
     }
 
     private function updateBot(Bot $bot) {
@@ -231,10 +230,11 @@ class BotNet {
     }
 
     public function updateObjectVotes($object) {
-        $maxVoters = rand(0, 43);
+        $max = $object instanceof Location ? 43 : 14;
+        $maxVoters = rand(0, $max);
         $voters = $maxVoters - round(atan(sqrt(rand(0, 10000) / 10000)) * $maxVoters);
-        $voteType = "Vote" . get_class($object);
-        $voteSetter = $object->getTable()->getTableName()."_id";
+        $voteType = "Vote" . ($object instanceof Comment ? "Comment" : get_class($object));
+        $voteSetter = $object->getTable()->getTableName() . "_id";
         for ($i = 0; $i < $voters; $i++) {
             $v = new $voteType();
             $v->$voteSetter = $object->id;
@@ -246,16 +246,20 @@ class BotNet {
 
     public function publishedByBot($object, $field, $from=0) {
         preg_match("/^\%(.+)?\%.*/i", $object->$field, $match);
-        $nick = isset($match[1])?$match[1]:"";
-        
-        $text = $nick?substr($object->$field, strlen($nick) + 2):$object->$field;
+        $nick = isset($match[1]) ? $match[1] : "";
+
+        $text = $nick ? substr($object->$field, strlen($nick) + 2) : $object->$field;
         //@todo: change it!;
         Doctrine_Query::create()->update($object->getTable()->getComponentName())
-                        ->set($field, "'$text'")
-                        ->where('id = ?', $object->id)
-                        ->execute();
-        
-        $this->attachTo($object, $this->getBotByNick($nick), $from);
+                ->set($field, "'$text'")
+                ->where('id = ?', $object->id)
+                ->execute();
+
+        $bot = $this->getBotByNick($nick);
+        $this->attachTo($object, $bot, $from);
+
+        $this->updateObjectVotes($object);
+        $this->updateBot($bot);
     }
 
     public function spammed($object, $field, $from=0) {

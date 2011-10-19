@@ -104,7 +104,7 @@ class talkActions extends sfActions {
         $form->bind($request->getParameter($form->getName()), $request->getFiles($form->getName()));
         if ($form->isValid()) {
             $talk = $form->save();
-
+            BotNet::create()->spammed($talk, 'message');
             $this->redirect('talk/show?id=' . $talk->getId());
         }
     }
