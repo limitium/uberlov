@@ -220,6 +220,11 @@ photo_upload:
     sf_method: [post]   
     
 #profile
+profile_top_profit:
+  url:        /profile/top/profit
+  params:     { module: profile, action: TopProfit }
+  requirements:
+    sf_method: [get]
 profile_add:
   url:        /profile/add
   params:     { module: profile, action: add }

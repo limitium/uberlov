@@ -159,6 +159,9 @@
                             <h3>
                                 <?php echo link_to('Люди', '@people') ?>
                             </h3>
+                            <ul class="footer_menu_list">
+                                <li><?php echo link_to('По улову', '@profile_top_profit') ?></li>
+                            </ul>
                         </div>
                         <div class="footer_menu">
                             <h3>
