@@ -39,6 +39,9 @@ class commentActions extends sfActions {
                 $root->parent = null;
                 $root->save();
                 $tree->createRoot($root);
+
+                $getterCommented = "get$componentName";
+                BotNet::create()->attachTo($root, BotNet::create()->getRandomBot(), $root->$getterCommented()->getDateTimeObject('created_at')->format('U'));
             }
 
             $parent = $root;
@@ -51,6 +54,8 @@ class commentActions extends sfActions {
 
             $this->comment = $form->save();
             $this->comment->getNode()->insertAsLastChildOf($parent);
+
+            BotNet::create()->spammed($this->comment, 'message', $parent->getDateTimeObject('created_at')->format('U'));
 
             $this->noVote = $form->getValue('noVote', false);
             $this->setTemplate('created');
