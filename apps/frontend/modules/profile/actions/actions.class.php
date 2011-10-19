@@ -31,6 +31,34 @@ class profileActions extends sfActions {
         $this->friends = !$this->getUser()->isAnonymous() ? $this->getUser()->getProfile()->getFriends() : null;
     }
 
+    public function executeTopProfit(sfWebRequest $request) {
+        $peopleOrdered = array();
+        foreach (Doctrine_Query::create()
+                ->select('sum(pd.qty) as weight,p.created_by as id')
+                ->from('ProfitDetail pd')
+                ->leftJoin('pd.Profit p')
+                ->groupBy('p.created_by')
+                ->orderBy('weight desc')
+                ->limit(10)
+                ->execute() as $loc) {
+            $peopleOrdered[$loc->id] = $loc->weight;
+        }
+
+        foreach (Doctrine_Query::create()
+                ->from('sfGuardUserProfile p')
+                ->leftJoin('p.User u')
+                ->whereIn("u.id", array_keys($peopleOrdered))
+                ->execute() as $profile) {
+            $peopleOrdered[$profile->id] = (object) array('profile' => $profile, 'weight' => $peopleOrdered[$profile->id]);
+        }
+
+        $this->people = $peopleOrdered;
+
+        $this->csrf = CSRF::getToken();
+
+        $this->friends = !$this->getUser()->isAnonymous() ? $this->getUser()->getProfile()->getFriends() : null;
+    }
+
     public function executeMy(sfWebRequest $request) {
         $request->setParameter('id', $this->getUser()->getProfile()->getId());
         $this->forward('profile', 'show');

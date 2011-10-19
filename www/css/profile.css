@@ -168,3 +168,10 @@
 .friends .empty{
     display: none;
 }
+
+.profile_top_weight,.profile_top_profile{
+}
+.profile_top_weight{
+    padding-left: 1em;
+    font-size: 16pt;
+}
