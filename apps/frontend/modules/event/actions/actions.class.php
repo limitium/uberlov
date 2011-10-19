@@ -18,6 +18,14 @@ class eventActions extends sfActions {
                                 ->where('f.date >= ?', array(date('Y-m-d', time())))
                                 ->orderBy('f.date ASC'), 'event/list?page={%page_number}', $request->getParameter('page', 1));
     }
+    public function executeArchive(sfWebRequest $request) {
+        $this->pager = htPagerLayout::create(Doctrine::getTable('FishEvent')
+                                ->createQuery('f')
+                                ->leftJoin('f.CreatedBy p')
+                                ->leftJoin('p.User')
+                                ->where('f.date < ?', array(date('Y-m-d', time())))
+                                ->orderBy('f.date ASC'), 'event/list?page={%page_number}', $request->getParameter('page', 1));
+    }
 
     public function executeShow(sfWebRequest $request) {
         $this->event = Doctrine::getTable('FishEvent')->find(array($request->getParameter('id')));

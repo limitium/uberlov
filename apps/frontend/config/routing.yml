@@ -83,6 +83,9 @@ comment_for:
   param: {module: comment, action for}
   
 #event
+events_archive:
+  url: /events/archive
+  param: {module: event, action archive}
 event_list:
   url:        /event/list
   params:     { module: event, action: list }

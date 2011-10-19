@@ -152,7 +152,7 @@
                                 <?php echo link_to('События', '@events') ?>
                             </h3>
                             <ul class="footer_menu_list">
-                                <li><?php echo link_to('Архив', '@events') ?></li>
+                                <li><?php echo link_to('Архив', '@events_archive') ?></li>
                             </ul>
                         </div>
                         <div class="footer_menu">

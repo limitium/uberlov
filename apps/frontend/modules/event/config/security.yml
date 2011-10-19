@@ -2,3 +2,5 @@ show:
   is_secure: false
 list:
   is_secure: false
+archive:
+  is_secure: false
