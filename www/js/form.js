@@ -1,12 +1,14 @@
 function form(){
+    this.editors = {};
 }
 form.name = 'form';
 ModuleManager.add(form);
 
 
 form.prototype.afterInit = function(){ 
+    var self = this;
     $('#right_layout textarea').each(function(){
-        $(this).redactor({	
+        var r = $(this).redactor({	
             air: false,
             toolbar: 'uber', // false, main, mini, air
             lang: 'ru', // ru, en, fr, ua, pt_br, pl		
@@ -35,6 +37,7 @@ form.prototype.afterInit = function(){
             pathCss: 'css/',
             css: ['wym.css']
         });
+        self.editors[$(this)[0].id] = r;
     })
     //    $('#right_layout textarea').tinymce({
     //        force_p_newlines : false,
