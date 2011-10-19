@@ -9,6 +9,7 @@ function comment(){
         form: this.comment,
         response: function(newComment){
             $('textarea',self.comment).val('');
+            app.getModule('form').editors[$('textarea',self.comment)[0].id].setHtml("<p>&nbsp;</p>")
             $('#commentCounter').html(parseInt($('#commentCounter').html())+1);
             if(self.comment.parent){
                 self.comment.parent.parent().parent().after(newComment);
@@ -88,7 +89,7 @@ function comment(){
         }, 300, null,function(){
             var msg = $('.commentMessage',parent);
             msg.css({
-                backgroundColor:'#0075f6'
+                backgroundColor:'#AACD4E'
             });
             msg.animate({
                 backgroundColor:'#fff'
@@ -104,7 +105,7 @@ function comment(){
         }, 300, null,function(){
             var msg = $('.commentMessage',from);
             msg.css({
-                backgroundColor:'#0075f6'
+                backgroundColor:'#AACD4E'
             });
             msg.animate({
                 backgroundColor:'#fff'
