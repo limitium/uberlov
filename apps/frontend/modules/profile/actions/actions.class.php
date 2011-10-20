@@ -99,29 +99,39 @@ class profileActions extends sfActions {
         if (!in_array($this->view, array('comments', 'profits', 'locations'))) {
             $this->view = 'profile';
         }
-
+        
+        
+        //@todo: join commmented objects
         $this->comments = Doctrine_Query::create()
                 ->from('Comment c')
+                ->leftJoin('c.CreatedBy')                
                 ->where('c.created_by = ? and c.parent > 0', $this->profile->getId())
                 ->andWhere('c.inbox_id is null')
-                ->orderBy('c.created_at desc')
-                ->execute();
+                ->orderBy('c.created_at desc');
 
+        $this->comments = Doctrine::getTable('Comment')->filterScope($this->comments, $this->getUser())->execute();
         $this->profits = Doctrine_Query::create()
                 ->from('Profit p')
                 ->leftJoin('p.ProfitDetail d')
+                ->leftJoin('p.Location l')
                 ->leftJoin('d.Fish f')
                 ->leftJoin('d.Style s')
-                ->where('p.created_by = ?', $this->profile->getId())
-                ->orderBy('p.created_at desc')
-                ->execute();
-        $this->locations = Doctrine_Query::create()
-                ->from('Location l')
+                ->leftJoin('p.CommentProfit')
+                ->leftJoin('p.VoteProfit')
+                ->leftJoin('p.CreatedBy')
+                ->andWhere('p.created_by = ?', $this->profile->getId())
+                ->orderBy('p.created_at desc');
+
+        $this->profits = Doctrine::getTable('Location')
+                ->filterScope($this->profits, $this->getUser())->execute();
+
+        $this->locations = Doctrine::getTable('Location')
+                ->getVisibleLocationsQuery($this->getUser())
                 ->leftJoin('l.VoteLocation v')
                 ->leftJoin('l.CreatedBy p')
                 ->leftJoin('l.CommentLocation c')
                 ->leftJoin('l.Profit pr')
-                ->where('l.created_by = ?', $this->profile->getId())
+                ->andWhere('l.created_by = ?', $this->profile->getId())
                 ->orderBy('l.created_at desc')
                 ->execute();
 //@todo: add events

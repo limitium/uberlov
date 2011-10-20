@@ -12,12 +12,22 @@ class eventComponents extends sfComponents {
 
     public function executeLast() {
         $this->events = array();
-        foreach (Doctrine::getTable('FishEvent')
+
+
+        $query = Doctrine::getTable('FishEvent')
                 ->createQuery('f')
+                ->leftJoin('f.CreatedBy p')
+                ->leftJoin('f.Location l')
+                ->leftJoin('p.User u')
                 ->where('f.date >= ?', array(date('Y-m-d', time())))
                 ->orderBy('f.date ASC')
-                ->limit(5)
-                ->execute() as $event) {
+                ->limit(5);
+
+        Doctrine::getTable('Location')
+                ->filterScope($query, $this->getUser());
+
+
+        foreach ($query->execute() as $event) {
             $this->events[] = $event;
         }
         $this->events = array_reverse($this->events);

@@ -4,8 +4,8 @@ class LocationTable extends Doctrine_Table {
 
     static $uniq = 1;
 
-    public function getVisibleLocations(sfUser $user) {
-        return $this->fliterScope($this->createQuery('l'), $user)->execute();
+    public function getVisibleLocationsQuery(sfUser $user, $alias = 'l') {
+        return $this->filterScope($this->createQuery($alias), $user, $alias);
     }
 
     /**
@@ -15,26 +15,18 @@ class LocationTable extends Doctrine_Table {
      * @param type $alias
      * @return Doctrine_Query 
      */
-    public function fliterScope(Doctrine_Query $query, sfUser $user, $alias = 'l') {
-        $query->where("$alias.location_scope_id = 5");
-
+    public function filterScope(Doctrine_Query $query, sfUser $user, $alias = 'l') {
+        $where = "$alias.location_scope_id = 5";
         if (!$user->isAnonymous()) {
-            $query->orWhere("$alias.location_scope_id = 1 or $alias.location_scope_id = 3")
-                    ->orWhere("$alias.created_by = ?", $user->getProfile()->id);
-
-            $uniq++;
-            $query->leftJoin("$alias.CreatedBy c$uniq")
-                    ->leftJoin("c$uniq.Accepters a$uniq with a$uniq.accepted = 1")
-                    ->leftJoin("a$uniq.Accepter f$uniq")
-                    ->orWhere("$alias.location_scope_id = 2")
-                    ->andWhere("f$uniq.id = ?", $user->getProfile()->id);
-//            $uniq++;
-//            $query->leftJoin("$alias.CreatedBy c$uniq")
-//                    ->leftJoin("c$uniq.Requester f$uniq with accepted = 1")
-//                    ->orWhere("$alias.location_scope_id = 2")
-//                    ->andWhere("f$uniq.id = ?", $user->getProfile()->id);
+            $uniq = self::$uniq++;
+            $where .= " 
+                    or $alias.location_scope_id = 1 
+                    or $alias.location_scope_id = 3 
+                    or $alias.created_by = " . $user->getProfile()->id . " 
+                    or $alias.created_by in(SELECT fa$uniq.accepter_id FROM Friend fa$uniq WHERE fa$uniq.accepted = 1 and fa$uniq.requester_id = " . $user->getProfile()->id . ") 
+                    or $alias.created_by in(SELECT fr$uniq.requester_id FROM Friend fr$uniq WHERE fr$uniq.accepted = 1 and fr$uniq.accepter_id = " . $user->getProfile()->id . ")";
         }
-        fb($query->getSqlQuery());
+        $query->addWhere($where);
         return $query;
     }
 
