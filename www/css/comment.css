@@ -4,8 +4,11 @@
     color:#666666;
     font-size:small;
 }
-.comment .commentBar>a,.comment .commentBar div{
+.comment .commentBar>a,.comment .commentBar div,.commentLast .commentBar>a,.commentLast .commentBar div{
     display: inline-block;
+}
+.commentLast .commentBar{
+    float: right;
 }
 .comment .commentBar #newComment{
     margin-left: 30px;

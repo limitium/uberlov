@@ -100,9 +100,10 @@
             <div id="middle" class="content clear_fix">
                 <div id="left_layout">
                     <?php include_component('user', 'menu') ?>
-                    <?php include_component('event', 'last') ?>
                     <?php include_component('profit', 'last') ?>
+                    <?php include_component('comment', 'last') ?>
                     <?php include_component('location', 'last') ?>
+                    <?php include_component('event', 'last') ?>
                     <?php if (has_slot('extra')): ?>
                         <?php include_slot('extra'); ?>
                     <?php endif; ?>
