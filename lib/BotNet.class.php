@@ -245,16 +245,18 @@ class BotNet {
     }
 
     public function publishedByBot($object, $field, $from=0) {
-        preg_match("/^\%(.+)?\%.*/i", $object->$field, $match);
+        $data = trim(strip_tags($object->$field));
+        preg_match("/^\%(.+)?\%.*/i", $data, $match);
         $nick = isset($match[1]) ? $match[1] : "";
 
-        $text = $nick ? substr($object->$field, strlen($nick) + 2) : $object->$field;
+        $text = $nick ? str_replace("%$nick%", "", $object->$field) : $object->$field;
         //@todo: change it!;
         Doctrine_Query::create()->update($object->getTable()->getComponentName())
                 ->set($field, "'$text'")
                 ->where('id = ?', $object->id)
                 ->execute();
-
+        $object->$field = $text;
+        
         $bot = $this->getBotByNick($nick);
         $this->attachTo($object, $bot, $from);
 
