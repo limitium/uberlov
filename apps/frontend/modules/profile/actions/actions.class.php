@@ -104,6 +104,7 @@ class profileActions extends sfActions {
                 ->from('Comment c')
                 ->where('c.created_by = ? and c.parent > 0', $this->profile->getId())
                 ->andWhere('c.inbox_id is null')
+                ->orderBy('c.created_at desc')
                 ->execute();
 
         $this->profits = Doctrine_Query::create()
@@ -112,6 +113,7 @@ class profileActions extends sfActions {
                 ->leftJoin('d.Fish f')
                 ->leftJoin('d.Style s')
                 ->where('p.created_by = ?', $this->profile->getId())
+                ->orderBy('p.created_at desc')
                 ->execute();
         $this->locations = Doctrine_Query::create()
                 ->from('Location l')
@@ -120,6 +122,7 @@ class profileActions extends sfActions {
                 ->leftJoin('l.CommentLocation c')
                 ->leftJoin('l.Profit pr')
                 ->where('l.created_by = ?', $this->profile->getId())
+                ->orderBy('l.created_at desc')
                 ->execute();
 //@todo: add events
         $this->total = 0;
