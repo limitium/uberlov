@@ -53,7 +53,8 @@ class addressActions extends sfActions {
     }
 
     private function getLocationPager(sfWebRequest $request, sfDoctrineRecord $part, $partUrl) {
-        return htPagerLayout::create(Doctrine_Query::create()->from('Location l')
+        return htPagerLayout::create(Doctrine::getTable('Location')
+                        ->getVisibleLocationsQuery($this->getUser())
                         ->leftJoin('l.Address a')
                         ->leftJoin('a.' . $part->getTable()->getComponentName() . ' part')
                         ->leftJoin('l.CreatedBy p')
@@ -62,8 +63,7 @@ class addressActions extends sfActions {
                         ->leftJoin('l.Profit pr')
                         ->leftJoin('pr.ProfitDetail pd')
                         ->leftJoin('pd.Fish')
-                        ->where('part.id = ?', $part->getId())
-                        ->andWhere('l.location_scope_id=5'), 'address/' . $partUrl . '?id=' . $part->getId() . '&page={%page_number}', $request->getParameter('page', 1));
+                        ->andWhere('part.id = ?', $part->getId()), 'address/' . $partUrl . '?id=' . $part->getId() . '&page={%page_number}', $request->getParameter('page', 1));
     }
 
 }

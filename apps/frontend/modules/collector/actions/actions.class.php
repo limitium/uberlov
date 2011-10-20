@@ -17,27 +17,27 @@ class collectorActions extends sfActions {
      */
     public function executeTop(sfWebRequest $request) {
         $locOrdered = array();
-        foreach (Doctrine_Query::create()
+        foreach (Doctrine::getTable('Location')
+                ->getVisibleLocationsQuery($this->getUser())
                 ->select('sum(v.value) as weight,l.id')
                 ->from('Location l')
                 ->leftJoin('l.VoteLocation v')
                 ->where('l.location_scope_id=5')
                 ->groupBy('l.id')
                 ->orderBy('weight desc')
-                ->limit(10)
-                ->execute() as $loc) {
+                ->limit(10)->execute() as $loc) {
             $locOrdered[$loc->id] = $loc->weight;
         }
 
-        foreach(Doctrine_Query::create()
+        foreach (Doctrine_Query::create()
                 ->from('Location l')
                 ->leftJoin('l.VoteLocation v')
                 ->leftJoin('l.CreatedBy p')
                 ->leftJoin('p.User u')
                 ->leftJoin('l.CommentLocation c')
                 ->leftJoin('l.Profit pr')
-                ->whereIn("l.id", array_keys($locOrdered))
-                ->execute() as $location){
+                ->andWhereIn("l.id", array_keys($locOrdered))
+                ->execute() as $location) {
             $locOrdered[$location->id] = $location;
         }
         $this->locations = $locOrdered;
@@ -106,7 +106,10 @@ class collectorActions extends sfActions {
 //                            ->andWhere('f.id = ?', $this->getUser()->getProfile()->id)
 //                            ->execute());
 //        }
-        $this->locations  = Doctrine::getTable('Location')->getVisibleLocations($this->getUser());
+        $this->locations = Doctrine::getTable('Location')
+                ->getVisibleLocationsQuery($this->getUser())
+                ->leftJoin('l.FishEvent e')
+                ->execute();
     }
 
     public function executeImport(sfWebRequest $request) {

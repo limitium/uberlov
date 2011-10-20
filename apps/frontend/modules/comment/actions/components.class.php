@@ -11,14 +11,16 @@
 class commentComponents extends sfComponents {
 
     public function executeLast() {
-        $this->comments = Doctrine::getTable('Comment')
+        $query = Doctrine::getTable('Comment')
                 ->createQuery('c')
                 ->leftJoin('c.CreatedBy p')
-                ->leftJoin('p.User u')                
+                ->leftJoin('p.User u')
+                ->where('c.parent > 0')
                 ->orderBy('c.created_at desc')
-                ->where("c.parent > 0")
-                ->limit(5)
-                ->execute();
+                ->limit(5);
+
+
+        $this->comments = Doctrine::getTable('Comment')->filterScope($query, $this->getUser())->execute();
     }
 
 }

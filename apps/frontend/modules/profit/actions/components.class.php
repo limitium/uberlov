@@ -11,13 +11,19 @@
 class profitComponents extends sfComponents {
 
     public function executeLast() {
-        $this->profits = Doctrine_Query::create()->select()->from('Profit pf')
-                        ->leftJoin('pf.CreatedBy p')
-                        ->leftJoin('pf.Location l')
-                        ->leftJoin('p.User u')
-                        ->orderBy('pf.created_at desc')
-                        ->limit(5)
-                        ->execute();
+        $query = Doctrine_Query::create()
+                ->select()
+                ->from('Profit pf')
+                ->leftJoin('pf.CreatedBy p')
+                ->leftJoin('pf.Location l')
+                ->leftJoin('p.User u')
+                ->orderBy('pf.created_at desc')
+                ->limit(5);
+
+        Doctrine::getTable('Location')
+                ->filterScope($query, $this->getUser());
+
+        $this->profits = $query->execute();
     }
 
 }
