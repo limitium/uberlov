@@ -16,7 +16,7 @@ class commentComponents extends sfComponents {
                 ->leftJoin('c.CreatedBy p')
                 ->leftJoin('p.User u')                
                 ->orderBy('c.created_at desc')
-                ->where("and c.parent > 0")
+                ->where("c.parent > 0")
                 ->limit(5)
                 ->execute();
     }
