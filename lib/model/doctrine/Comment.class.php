@@ -42,5 +42,27 @@ class Comment extends BaseComment {
         array_shift($comments);
         return $comments;
     }
+    
+     public function save(Doctrine_Connection $conn = null) {
 
+        $conn = $conn ? $conn : $this->getTable()->getConnection();
+        $conn->beginTransaction();
+        try {
+            $ret = parent::save($conn);
+
+            LuceneEngine::updateLuceneIndexFor($this);
+
+            $conn->commit();
+
+            return $ret;
+        } catch (Exception $e) {
+            $conn->rollBack();
+            throw $e;
+        }
+    }
+
+    public function delete(Doctrine_Connection $conn = null) {
+        LuceneEngine::deleteLuceneIndexFor($this);
+        return parent::delete($conn);
+    }
 }
