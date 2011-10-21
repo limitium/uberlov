@@ -135,7 +135,10 @@ class Location extends BaseLocation {
         try {
             $ret = parent::save($conn);
 
-            $this->updateLuceneIndex();
+            //only public locations
+            if ($this->getLocationScopeId() == 5) {
+                LuceneEngine::updateLuceneIndexFor($this);
+            }
 
             $conn->commit();
 
@@ -147,40 +150,8 @@ class Location extends BaseLocation {
     }
 
     public function delete(Doctrine_Connection $conn = null) {
-        $index = LocationTable::getLuceneIndex();
-
-        foreach ($index->find('pk:' . $this->getId()) as $hit) {
-            $index->delete($hit->id);
-        }
-
+        LuceneEngine::deleteLuceneIndexFor($this);
         return parent::delete($conn);
-    }
-
-    public function updateLuceneIndex() {
-        $index = LocationTable::getLuceneIndex();
-
-        // remove existing entries
-        foreach ($index->find('pk:' . $this->getId()) as $hit) {
-            $index->delete($hit->id);
-        }
-
-        // don't index non public locations
-        if ($this->getLocationScopeId() != 5) {
-            return;
-        }
-
-        $doc = new Zend_Search_Lucene_Document();
-
-        // store job primary key to identify it in the search results
-        $doc->addField(Zend_Search_Lucene_Field::Keyword('pk', $this->getId()));
-
-        // index job fields
-        $doc->addField(Zend_Search_Lucene_Field::UnStored('name', $this->getName(), 'utf-8'));
-        $doc->addField(Zend_Search_Lucene_Field::UnStored('description', $this->getDescription(), 'utf-8'));
-
-        // add job to the index
-        $index->addDocument($doc);
-        $index->commit();
     }
 
 }
