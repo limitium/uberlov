@@ -23,10 +23,10 @@ class Comment extends BaseComment {
         $tableName = $object->getTable()->getTableName();
         $componentName = $object->getTable()->getComponentName();
         $q = Doctrine_Query::create()->select('c.message, c.parent, c.created_at, c.updated_at, c.created_by, c.updated_by, p.*, v.*')->from('Comment' . $componentName . ' c')
-                        ->leftJoin('c.CreatedBy p')
-                        ->leftJoin('p.User')
-                        ->leftJoin('c.VoteComment v')
-                        ->where('c.' . $tableName . '_id = ?', $object->getId());
+                ->leftJoin('c.CreatedBy p')
+                ->leftJoin('p.User')
+                ->leftJoin('c.VoteComment v')
+                ->where('c.' . $tableName . '_id = ?', $object->getId());
 
         $treeObject = Doctrine::getTable('Comment' . $componentName)->getTree();
         $treeObject->setBaseQuery($q);
@@ -42,15 +42,20 @@ class Comment extends BaseComment {
         array_shift($comments);
         return $comments;
     }
-    
-     public function save(Doctrine_Connection $conn = null) {
+
+    public function save(Doctrine_Connection $conn = null) {
 
         $conn = $conn ? $conn : $this->getTable()->getConnection();
         $conn->beginTransaction();
         try {
             $ret = parent::save($conn);
 
-            LuceneEngine::updateLuceneIndexFor($this);
+            if (!$this->location_id && !$this->profit_id && !$this->fish_event_id
+                    || ($this->location_id && $this->getLocation()->location_scope_id == 5)
+                    || ($this->profit_id && $this->getProfit()->getLocation()->location_scope_id == 5)
+                    || ($this->fish_event_id && $this->getFishEvent()->getLocation()->location_scope_id == 5)) {
+                LuceneEngine::updateLuceneIndexFor($this);
+            }
 
             $conn->commit();
 
@@ -65,4 +70,5 @@ class Comment extends BaseComment {
         LuceneEngine::deleteLuceneIndexFor($this);
         return parent::delete($conn);
     }
+
 }

@@ -30,21 +30,6 @@ class LocationTable extends Doctrine_Table {
         return $query;
     }
 
-    static public function getLuceneIndex() {
-        ProjectConfiguration::registerZend();
-
-        if (file_exists($index = self::getLuceneIndexFile())) {
-            return Zend_Search_Lucene::open($index);
-        }
-
-        return Zend_Search_Lucene::create($index);
-    }
-
-    static public function getLuceneIndexFile() {
-//        $filename = strtolower(substr(get_called_class(), 0, -5));
-        return sfConfig::get('sf_data_dir') . '/location.' . sfConfig::get('sf_environment') . '.index';
-    }
-
     public function getForLuceneQuery($query) {
         $hits = self::getLuceneIndex()->find($query);
 
