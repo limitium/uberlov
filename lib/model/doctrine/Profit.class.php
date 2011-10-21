@@ -53,4 +53,29 @@ class Profit extends BaseProfit {
         return parent::getPhotoProfit();
     }
 
+    public function save(Doctrine_Connection $conn = null) {
+
+        $conn = $conn ? $conn : $this->getTable()->getConnection();
+        $conn->beginTransaction();
+        try {
+            $ret = parent::save($conn);
+
+            if ($this->getLocation()->location_scope_id == 5) {
+                LuceneEngine::updateLuceneIndexFor($this);
+            }
+
+            $conn->commit();
+
+            return $ret;
+        } catch (Exception $e) {
+            $conn->rollBack();
+            throw $e;
+        }
+    }
+
+    public function delete(Doctrine_Connection $conn = null) {
+        LuceneEngine::deleteLuceneIndexFor($this);
+        return parent::delete($conn);
+    }
+
 }

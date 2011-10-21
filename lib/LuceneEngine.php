@@ -43,4 +43,18 @@ class LuceneEngine {
         $index->commit();
     }
 
+    static public function getLuceneIndex(Doctrine_Record $object) {
+        ProjectConfiguration::registerZend();
+
+        if (file_exists($index = self::getLuceneIndexFile($object))) {
+            return Zend_Search_Lucene::open($index);
+        }
+
+        return Zend_Search_Lucene::create($index);
+    }
+
+    static public function getLuceneIndexFile(Doctrine_Record $object) {
+        return sfConfig::get('sf_data_dir') . '/' . $object->getTable()->getTableName() . '.' . sfConfig::get('sf_environment') . '.index';
+    }
+
 }
