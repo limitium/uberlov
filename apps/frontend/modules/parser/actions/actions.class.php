@@ -99,7 +99,14 @@ class parserActions extends sfActions {
      * @param sfRequest $request A request object
      */
     public function executeAddbot(sfWebRequest $request) {
-        fb(Syncer::create()->doWell("и главное - по путевке можно ловить до 12 часов подряд, в стоимость путевки входит 8 кг рыбы."));
+        $bn = BotNet::create();
+        $lcoations = Doctrine_Query::create()->from('Location')
+//                ->where('created_by = 1')
+                ->execute();
+        
+        foreach ($lcoations as $loc) {
+            LuceneEngine::updateLuceneIndexFor($loc);
+        }
     }
 
     /**
