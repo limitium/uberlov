@@ -156,7 +156,7 @@ class BotNet {
         if (!$nick) {
             return $this->getRandomBot();
         }
-
+        $nick = $nick;
         foreach ($this->activeBots as $bot) {
             foreach ($bot->getNickMap() as $nickMap) {
                 if ($nickMap->nick == $nick) {
@@ -230,7 +230,7 @@ class BotNet {
     }
 
     public function updateObjectVotes($object) {
-        $max = $object instanceof Location ? 43 : 14;
+        $max = $object instanceof Location ? 22 : 11;
         $maxVoters = rand(0, $max);
         $voters = $maxVoters - round(atan(sqrt(rand(0, 10000) / 10000)) * $maxVoters);
         $voteType = "Vote" . ($object instanceof Comment ? "Comment" : get_class($object));
@@ -251,12 +251,13 @@ class BotNet {
 
         $text = $nick ? str_replace("%$nick%", "", $object->$field) : $object->$field;
         //@todo: change it!;
+
         Doctrine_Query::create()->update($object->getTable()->getComponentName())
-                ->set($field, "'$text'")
+                ->set($field, "?", array($text))
                 ->where('id = ?', $object->id)
                 ->execute();
         $object->$field = $text;
-        
+
         $bot = $this->getBotByNick($nick);
         $this->attachTo($object, $bot, $from);
 

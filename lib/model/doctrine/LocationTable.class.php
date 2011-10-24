@@ -31,7 +31,8 @@ class LocationTable extends Doctrine_Table {
     }
 
     public function getForLuceneQuery($query) {
-        $hits = self::getLuceneIndex()->find($query);
+        //@todo: remove object;
+        $hits = LuceneEngine::getLuceneIndex(new Location())->find($query);
 
         $pks = array();
         foreach ($hits as $hit) {

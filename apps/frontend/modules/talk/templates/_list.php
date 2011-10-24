@@ -1,9 +1,10 @@
+<?php use_helper('Text'); ?>
 <?php use_helper('XssSafe'); ?>
 <?php foreach ($pager->execute() as $talk): ?>
     <div class="talkBrief">
         <h2><?php echo link_to($talk->getName(), 'talk/show?id=' . $talk->getId()); ?></h2>
         <div class="text">
-            <?php echo $talk->getMessage(ESC_XSSSAFE); ?>
+            <?php echo truncate_text($talk->getMessage(ESC_XSSSAFE),500) ?>
         </div>
         <div class="assigned-tags">
             <ul>

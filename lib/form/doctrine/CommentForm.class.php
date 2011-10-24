@@ -30,6 +30,7 @@ class CommentForm extends BaseCommentForm {
         $this->widgetSchema['parent'] = new sfWidgetFormInputHidden();
 
         $this->validatorSchema['parent'] = new sfValidatorDoctrineChoice(array('model' => 'Comment', 'required' => false));
+        $this->validatorSchema['message'] = new sfValidatorString(array('max_length' => 4000, 'required' => true));
         $this->widgetSchema->setLabels(array(
             'message' => 'Комментарий',
         ));
