@@ -2,6 +2,7 @@
 
 body{
     background-color: #EFEFEF;
+    background: url("/images/common/backgrounds/back/noisy.png") repeat scroll 0 0 transparent;
 }
 
 /*layout*/
