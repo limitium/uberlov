@@ -58,7 +58,7 @@ class taggableCompleteActions extends sfActions
           from('Tag t')->
           where('t.name LIKE ?', $tagInfo['name'] . '%')->
           limit(sfConfig::get('app_sfDoctrineActAsTaggable_max_suggestions', 10))->
-          execute();
+          execute();        
         foreach ($suggestedTags as $tag) {
           if (isset($presentOrSuggested[$tag->getName()])) {
             continue;

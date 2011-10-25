@@ -133,7 +133,7 @@ ul.error_list li:last-child {
     border-left: 1px solid #DDDDDD;
     border-right: 1px solid #DDDDDD;
 }
-.tag-suggestions ul li:hover{
+.tag-suggestions ul li.selected{
     background-color: #FFFFDD
 }
 .tag-suggestions ul li:first-child{
@@ -148,6 +148,12 @@ ul.error_list li:last-child {
     -moz-border-radius: 0 0 4px 4px;
     -webkit-border-radius: 0 0 4px 4px;
     border-radius: 0 0 4px 4px;
+}
+.tag-suggestions .odd {
+	background-color: #eee;
+}
+.tag-suggestions .even {
+	background-color: #fff;
 }
 /*upload*/
 .labeled {

@@ -23,8 +23,8 @@ class LocationTable extends Doctrine_Table {
                     or $alias.location_scope_id = 1 
                     or $alias.location_scope_id = 3 
                     or $alias.created_by = " . $user->getProfile()->id . " 
-                    or $alias.created_by in(SELECT fa$uniq.accepter_id FROM Friend fa$uniq WHERE fa$uniq.accepted = 1 and fa$uniq.requester_id = " . $user->getProfile()->id . ") 
-                    or $alias.created_by in(SELECT fr$uniq.requester_id FROM Friend fr$uniq WHERE fr$uniq.accepted = 1 and fr$uniq.accepter_id = " . $user->getProfile()->id . ")";
+                    or $alias.created_by in(SELECT fa$uniq.accepter_id FROM friend fa$uniq WHERE fa$uniq.accepted = 1 and fa$uniq.requester_id = " . $user->getProfile()->id . ") 
+                    or $alias.created_by in(SELECT fr$uniq.requester_id FROM friend fr$uniq WHERE fr$uniq.accepted = 1 and fr$uniq.accepter_id = " . $user->getProfile()->id . ")";
         }
         $query->addWhere($where);
         return $query;
