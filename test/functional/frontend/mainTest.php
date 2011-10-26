@@ -3,6 +3,10 @@
 include(dirname(__FILE__) . '/../../bootstrap/functional.php');
 
 $browser = new sfTestFunctional(new sfBrowser());
+$test    = $browser->test();
+$conn    = Doctrine::getConnectionByTableName('location');
+
+$conn->beginTransaction();
 
 $browser->
         get('/')->
@@ -120,3 +124,4 @@ $browser->
         isStatusCode(200)->
         end()
 ;
+$conn->rollback();
