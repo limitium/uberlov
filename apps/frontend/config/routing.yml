@@ -53,7 +53,7 @@ my_profile:
   param: { module: profile, action: my, menu my_profile}
 my_edit:
   url:   /my_edit
-  param: { module: profile, action: edit_my}
+  param: { module: profile, action: editmy}
 
 #profile routes
 address_country:
@@ -276,6 +276,8 @@ profile_show:
 profile_update:
   url:        /profile/update/:id
   params:     { module: profile, action: update }
+  requirements:
+    sf_method: [post]
   
 #profit
 profit_list:
