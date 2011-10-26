@@ -1,4 +1,6 @@
 rendering: ~
+functional_test:
+  class: swFilterFunctionalTest
 remember_me:
   class: sfHtRememberMeFilter
 security: ~
