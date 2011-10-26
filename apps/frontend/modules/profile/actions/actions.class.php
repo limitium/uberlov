@@ -63,6 +63,10 @@ class profileActions extends sfActions {
         $request->setParameter('id', $this->getUser()->getProfile()->getId());
         $this->forward('profile', 'show');
     }
+    public function executeEditMy(sfWebRequest $request) {
+        $request->setParameter('id', $this->getUser()->getProfile()->getId());
+        $this->forward('profile', 'edit');
+    }
 
     public function executeFriends(sfWebRequest $request) {
         $this->csrf = CSRF::getToken();

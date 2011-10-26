@@ -51,6 +51,9 @@ my_locations:
 my_profile:
   url:   /my_profile
   param: { module: profile, action: my, menu my_profile}
+my_edit:
+  url:   /my_edit
+  param: { module: profile, action: edit_my}
 
 #profile routes
 address_country:
