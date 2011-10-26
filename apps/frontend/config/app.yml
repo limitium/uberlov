@@ -4,6 +4,7 @@ all:
     signin_form: FloginForm
     remember_cookie_name: ht_remember
     routes_register: false
+    success_signout_url: "@homepage"
     
   sfForkedApply:
     applyForm: FRegistrationForm
