@@ -210,8 +210,12 @@ $browser
   ->end()
 ;
 
+$testuser = $conn->createQuery()->from('sfGuardUserProfile p')
+        ->leftJoin("p.User u")
+        ->where("u.username = 'testuser'")
+        ->fetchOne();
 $browser
-  ->call('/user/confirm/ne7ba21393a5c4b9ef81c1f2baf89fad5', 'GET', array())
+  ->call('/user/confirm/'.$testuser->validate, 'GET', array())
   ->with('request')->begin()
     ->isParameter('module', 'sfApply')
     ->isParameter('action', 'confirm')
