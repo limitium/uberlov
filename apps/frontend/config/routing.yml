@@ -53,7 +53,7 @@ my_profile:
   param: { module: profile, action: my, menu my_profile}
 my_edit:
   url:   /my_edit
-  param: { module: profile, action: editmy}
+  param: { module: profile, action: editMy}
 
 #profile routes
 address_country:
@@ -225,7 +225,7 @@ photo_upload:
 #profile
 profile_top_profit:
   url:        /profile/top/profit
-  params:     { module: profile, action: TopProfit }
+  params:     { module: profile, action: topProfit }
   requirements:
     sf_method: [get]
 profile_add:
@@ -245,7 +245,7 @@ profile_edit:
     sf_method: [get]    
 profile_editemail:
   url:        /profile/editemail
-  params:     { module: profile, action: edit_email}
+  params:     { module: profile, action: editEmail}
   requirements:
     sf_method: [get]    
 profile_friends:
