@@ -29,7 +29,7 @@ all:
     secure_action:          secure
 
     # Form security secret (CSRF protection)
-    csrf_secret:       d848e27bd011d040b339b721ccd7193ec6652b74     # Unique secret to enable CSRF protection or false to disable
+    csrf_secret:            d848e27bd011d040b339b721ccd7193ec6652b74     # Unique secret to enable CSRF protection or false to disable
 
     # Output escaping settings
     escaping_strategy:      true            # Determines how variables are made available to templates. Accepted values: true, false.
