@@ -4,7 +4,7 @@ default:
 
   metas:
     title:        Uberlov
-    description:  карта рыбных мест, рыбные места, рыбаловные места, рыбалка, места ловли
+    description:  карта рыбных мест, рыбные места, рыбаловные места, рыбалка, места ловли,где ловить
     keywords:     карта, рыбалка, места, ловля
     language:     ru
     robots:       index, follow
