@@ -4,19 +4,9 @@ include(dirname(__FILE__).'/../../bootstrap/functional.php');
 
 $browser = new sfTestFunctional(new sfBrowser());
 $test    = $browser->test();
-$conn    = Doctrine::getConnectionByTableName('lcoation');
+$conn    = Doctrine::getConnectionByTableName('location');
 
-$conn->beginTransaction();
-$browser
-  ->call('/data', 'GET', array())
-  ->with('request')->begin()
-    ->isParameter('module', 'collector')
-    ->isParameter('action', 'data')
-  ->end()
-  ->with('response')->begin()
-    ->isStatusCode(200)
-  ->end()
-;
+//$conn->beginTransaction();
 
 $browser
   ->call('/login', 'GET', array())
@@ -198,8 +188,10 @@ $browser
     ->isStatusCode(200)
   ->end()
 ;
-
+$testuser = $browser->getContext()->getActionStack()->getLastEntry()->getActionInstance()->getVar("form")->getObject();
+$msg = $browser->with('mailer')->getBody();
 $browser
+  ->info($msg)
   ->call('/user/confirm/test', 'GET', array())
   ->with('request')->begin()
     ->isParameter('module', 'sfApply')
@@ -210,11 +202,12 @@ $browser
   ->end()
 ;
 
-$testuser = $conn->createQuery()->from('sfGuardUserProfile p')
-        ->leftJoin("p.User u")
-        ->where("u.username = 'testuser'")
-        ->fetchOne();
+//$testuser = Doctrine_Query::create()->from('sfGuardUserProfile p')
+//        ->leftJoin("p.User u")
+//        ->where("u.username = 'testuser'")
+//        ->fetchOne();
 $browser
+  ->info($testuser->validate)
   ->call('/user/confirm/'.$testuser->validate, 'GET', array())
   ->with('request')->begin()
     ->isParameter('module', 'sfApply')
