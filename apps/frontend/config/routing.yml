@@ -273,6 +273,7 @@ profile_show:
   params:     { module: profile, action: show, view:'' }
   requirements:
     sf_method: [get]
+    id: \d+
 profile_update:
   url:        /profile/update/:id
   params:     { module: profile, action: update }
