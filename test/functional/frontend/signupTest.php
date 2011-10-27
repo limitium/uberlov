@@ -4,7 +4,7 @@ include(dirname(__FILE__).'/../../bootstrap/functional.php');
 
 $browser = new sfTestFunctional(new sfBrowser());
 $test    = $browser->test();
-$conn    = Doctrine::getConnectionByTableName('location');
+$conn    = Doctrine::getConnectionByTableName('lcoation');
 
 $conn->beginTransaction();
 $browser
@@ -156,7 +156,7 @@ $browser
   'column' => 'email',
   'sfApplyApply' => 
   array (
-    'email' => 'test@test.test',
+    'email' => 'testuser@gmail.com',
   ),
 ))
   ->with('request')->begin()
@@ -174,8 +174,8 @@ $browser
   array (
     'username' => 'testuser',
     'password' => 'testuser',
-    'email' => 'test@test.test',
-    'email2' => 'test@test.test',
+    'email' => 'testuser@gmail.com',
+    'email2' => 'testuser@gmail.com',
     'id' => '',
   ),
 ))
@@ -185,8 +185,8 @@ $browser
   array (
     'username' => 'testuser',
     'password' => 'testuser',
-    'email' => 'test@test.test',
-    'email2' => 'test@test.test',
+    'email' => 'testuser@gmail.com',
+    'email2' => 'testuser@gmail.com',
     'id' => '',
   ),
 )) */ 
@@ -200,7 +200,7 @@ $browser
 ;
 
 $browser
-  ->call('/user/confirm/qweqwe', 'GET', array())
+  ->call('/user/confirm/test', 'GET', array())
   ->with('request')->begin()
     ->isParameter('module', 'sfApply')
     ->isParameter('action', 'confirm')
@@ -211,7 +211,7 @@ $browser
 ;
 
 $browser
-  ->call('/user/confirm/n4a8721003a6167b8ed8494575bf070ea', 'GET', array())
+  ->call('/user/confirm/ne7ba21393a5c4b9ef81c1f2baf89fad5', 'GET', array())
   ->with('request')->begin()
     ->isParameter('module', 'sfApply')
     ->isParameter('action', 'confirm')
@@ -222,7 +222,39 @@ $browser
 ;
 
 $browser
-  ->call('/favicon.ico', 'GET', array())
+  ->call('/my_edit', 'GET', array())
+  ->with('request')->begin()
+    ->isParameter('module', 'profile')
+    ->isParameter('action', 'editMy')
+  ->end()
+;
+
+$browser
+  ->with('request')->begin()
+    ->isForwardedTo('profile', 'edit')
+  ->end()
+  ->with('response')->begin()
+    ->isStatusCode(200)
+  ->end()
+;
+
+$browser
+  ->call('/profile/city', 'GET', array (
+  'q' => 'моск',
+  'limit' => '10',
+  'timestamp' => '1319706599403',
+))
+  ->with('request')->begin()
+    ->isParameter('module', 'profile')
+    ->isParameter('action', 'city')
+  ->end()
+  ->with('response')->begin()
+    ->isStatusCode(200)
+  ->end()
+;
+
+$browser
+  ->call('/sfJqueryReloadedPlugin/css/indicator.gif', 'GET', array())
   ->with('request')->begin()
     ->isParameter('module', 'default')
     ->isParameter('action', 'error404')
@@ -233,21 +265,158 @@ $browser
 ;
 
 $browser
-  ->call('/favicon.ico', 'GET', array())
+  ->call('/profile/update/328', 'POST', array (
+  'sf_medtod' => 'put',
+  'profile' => 
+  array (
+    'first_name' => 'tetst',
+    'last_name' => 'test',
+    'birth_date' => '12.10.2011',
+    'city_id' => '2242',
+    'description' => '
+<p>test</p>',
+    'sex' => 'on',
+    'id' => '328',
+  ),
+  'id' => '328',
+))
+  /*   ->get('/profile/update/328')
+  ->click('alt or value of submit here', array (
+  'sf_medtod' => 'put',
+  'profile' => 
+  array (
+    'first_name' => 'tetst',
+    'last_name' => 'test',
+    'birth_date' => '12.10.2011',
+    'city_id' => '2242',
+    'description' => '
+<p>test</p>',
+    'sex' => 'on',
+    'id' => '328',
+  ),
+  'id' => '328',
+)) */ 
   ->with('request')->begin()
-    ->isParameter('module', 'default')
-    ->isParameter('action', 'error404')
+    ->isParameter('module', 'profile')
+    ->isParameter('action', 'update')
   ->end()
+;
+$browser
   ->with('response')->begin()
-    ->isStatusCode(404)
+    ->isRedirected(1)
+    ->isStatusCode(302)
   ->end()
+  ->followRedirect()
 ;
 
 $browser
-  ->call('/profile/edit_email', 'GET', array())
   ->with('request')->begin()
     ->isParameter('module', 'profile')
     ->isParameter('action', 'show')
   ->end()
+  ->with('response')->begin()
+    ->isStatusCode(200)
+  ->end()
+;
+
+$browser
+  ->call('/logout', 'GET', array())
+  ->with('request')->begin()
+    ->isParameter('module', 'sfGuardAuth')
+    ->isParameter('action', 'signout')
+  ->end()
+;
+$browser
+  ->with('response')->begin()
+    ->isRedirected(1)
+    ->isStatusCode(302)
+  ->end()
+  ->followRedirect()
+;
+
+$browser
+  ->with('request')->begin()
+    ->isParameter('module', 'collector')
+    ->isParameter('action', 'locations')
+  ->end()
+  ->with('response')->begin()
+    ->isStatusCode(200)
+  ->end()
+;
+
+$browser
+  ->call('/data', 'GET', array())
+  ->with('request')->begin()
+    ->isParameter('module', 'collector')
+    ->isParameter('action', 'data')
+  ->end()
+  ->with('response')->begin()
+    ->isStatusCode(200)
+  ->end()
+;
+
+$browser
+  ->call('/login', 'GET', array())
+  ->with('request')->begin()
+    ->isParameter('module', 'sfGuardAuth')
+    ->isParameter('action', 'signin')
+  ->end()
+  ->with('response')->begin()
+    ->isStatusCode(401)
+  ->end()
+;
+
+$browser
+  ->call('/sfJqueryFormVal/FloginForm.js', 'GET', array())
+  ->with('request')->begin()
+    ->isParameter('module', 'sfJqueryFormVal')
+    ->isParameter('action', 'index')
+  ->end()
+  ->with('response')->begin()
+    ->isStatusCode(200)
+  ->end()
+;
+
+$browser
+  ->call('/login', 'POST', array (
+  'signin' => 
+  array (
+    'username' => 'testuser',
+    'password' => 'testuser',
+  ),
+  'menu' => 'sf_guard_signin',
+))
+  /*   ->get('/login')
+  ->click('alt or value of submit here', array (
+  'signin' => 
+  array (
+    'username' => 'testuser',
+    'password' => 'testuser',
+  ),
+  'menu' => 'sf_guard_signin',
+)) */ 
+  ->with('request')->begin()
+    ->isParameter('module', 'sfGuardAuth')
+    ->isParameter('action', 'signin')
+  ->end()
+;
+$browser
+  ->with('response')->begin()
+    ->isRedirected(1)
+    ->isStatusCode(302)
+  ->end()
+  ->followRedirect()
+;
+
+$browser
+  ->with('request')->begin()
+    ->isParameter('module', 'collector')
+    ->isParameter('action', 'locations')
+  ->end()
+  ->with('response')->begin()
+    ->isStatusCode(200)
+  ->end()
+;
+
 
 $conn->rollback();

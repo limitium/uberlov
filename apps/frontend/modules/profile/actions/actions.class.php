@@ -63,7 +63,7 @@ class profileActions extends sfActions {
         $request->setParameter('id', $this->getUser()->getProfile()->getId());
         $this->forward('profile', 'show');
     }
-    public function executeEditmy(sfWebRequest $request) {
+    public function executeEditMy(sfWebRequest $request) {
         $request->setParameter('id', $this->getUser()->getProfile()->getId());
         $this->forward('profile', 'edit');
     }
