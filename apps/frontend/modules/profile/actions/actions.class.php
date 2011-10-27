@@ -35,8 +35,8 @@ class profileActions extends sfActions {
         $peopleOrdered = array();
         foreach (Doctrine_Query::create()
                 ->select('sum(pd.qty) as weight,p.created_by as id')
-                ->from('ProfitDetail pd')
-                ->leftJoin('pd.Profit p')
+                ->from('Profit p')
+                ->leftJoin('p.ProfitDetail pd')
                 ->groupBy('p.created_by')
                 ->orderBy('weight desc')
                 ->limit(10)

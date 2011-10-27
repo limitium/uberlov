@@ -166,7 +166,7 @@ $browser
         ->call('/profile/top/profit', 'GET', array())
         ->with('request')->begin()
         ->isParameter('module', 'profile')
-        ->isParameter('action', 'TopProfit')
+        ->isParameter('action', 'topProfit')
         ->end()
         ->with('response')->begin()
         ->isStatusCode(200)
