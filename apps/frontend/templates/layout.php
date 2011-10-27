@@ -64,9 +64,23 @@
                     <div id="logo">
                         <?php echo link_to(image_tag('/images/logo_new.png'), '@homepage') ?>
                     </div>
+                    
                     <div id="bleat">
                         <?php echo image_tag('/images/bleat2.png'); ?>
                     </div>
+                    <?php if ($sf_user->isAnonymous()): ?>
+                        <div class="register_button_wrapper">
+                            <a class="register_button" href="<?php echo url_for('@apply') ?>">    
+                                <span class="border_l png_fix">
+                                    <span class="border_r png_fix">
+                                        <span class="btn_bg png_fix">
+                                            Регистрация!
+                                        </span>
+                                    </span>
+                                </span>
+                            </a>
+                        </div>
+                    <?php endif; ?>
                 </div>
                 <div id="main_menu" class="clear_fix">
                     <ul class="clear_fix">
