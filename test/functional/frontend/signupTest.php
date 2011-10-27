@@ -104,6 +104,7 @@ $browser
   ->end()
   ->with('response')->begin()
     ->isStatusCode(200)
+    ->matches("/false/")
   ->end()
 ;
 
@@ -121,6 +122,7 @@ $browser
   ->end()
   ->with('response')->begin()
     ->isStatusCode(200)
+    ->matches("/true/")
   ->end()
 ;
 
@@ -138,6 +140,7 @@ $browser
   ->end()
   ->with('response')->begin()
     ->isStatusCode(200)
+    ->matches("/false/")
   ->end()
 ;
 
@@ -155,11 +158,12 @@ $browser
   ->end()
   ->with('response')->begin()
     ->isStatusCode(200)
+    ->matches("/true/")
   ->end()
 ;
 
-$browser
-  ->call('/user/new', 'POST', array (
+$browser->get('/user/new')
+  ->click('.button_01', array (
   'sfApplyApply' => 
   array (
     'username' => 'testuser',
@@ -167,31 +171,22 @@ $browser
     'email' => 'testuser@gmail.com',
     'email2' => 'testuser@gmail.com',
     'id' => '',
-  ),
-))
-  /*   ->get('/user/new')
-  ->click('alt or value of submit here', array (
-  'sfApplyApply' => 
-  array (
-    'username' => 'testuser',
-    'password' => 'testuser',
-    'email' => 'testuser@gmail.com',
-    'email2' => 'testuser@gmail.com',
-    'id' => '',
-  ),
-)) */ 
+  ), array('_with_csrf' => true)
+)) 
   ->with('request')->begin()
     ->isParameter('module', 'sfApply')
     ->isParameter('action', 'apply')
   ->end()
+  ->with('form')->begin()
+    ->hasErrors(false)
+  ->end()
   ->with('response')->begin()
     ->isStatusCode(200)
-  ->end()
-;
-$testuser = $browser->getContext()->getActionStack()->getLastEntry()->getActionInstance()->getVar("form")->getObject();
-$msg = $browser->with('mailer')->getBody();
+    ->checkElement('#mail_server')
+  ->end();
+  //Ошибка в процессе отправки почты. Пожалуйста, попробуйте еще раз позже. 
+        
 $browser
-  ->info($msg)
   ->call('/user/confirm/test', 'GET', array())
   ->with('request')->begin()
     ->isParameter('module', 'sfApply')
