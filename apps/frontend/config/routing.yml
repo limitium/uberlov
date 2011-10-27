@@ -260,7 +260,7 @@ profile_list:
     sf_method: [get]
 profile_my:
   url:        /profile/my
-  params:     { module: profile, action: my }
+  paramroutings:     { module: profile, action: my }
   requirements:
     sf_method: [get]
 profile_remove:
