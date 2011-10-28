@@ -4,7 +4,7 @@ function mapModule(){
     this.defaultZoom = 8;
     this.defaultLat = 55.043561639001645;
     this.defaultLng = 36.627886718750005;
-    this.defaultMapType = 'roadmap'
+    this.defaultMapType = 'terrain'
     this.editor = null;
     this.infoWindow = new gm.InfoWindow({
         maxWidth:700
@@ -149,7 +149,7 @@ mapModule.prototype.initMenu = function(){
     .end()
     .eq(1)
     .click(function(){
-        self.setType('roadmap')
+        self.setType('terrain')
     });
     map.append(this.mapType);
 
@@ -395,11 +395,11 @@ mapModule.prototype.closeInfo = function(){
 }
 mapModule.prototype.typeToId = {
     hybrid:0,
-    roadmap:1
+    terrain:1
 }
 mapModule.prototype.idToType = {
     '0':'hybrid',
-    '1':'roadmap'
+    '1':'terrain'
 }
 
 
