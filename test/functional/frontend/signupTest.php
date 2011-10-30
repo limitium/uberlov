@@ -156,7 +156,7 @@ $browser
   'column' => 'email',
   'sfApplyApply' => 
   array (
-    'email' => 'testuser@gmail.com',
+    'email' => 'limitium@googlemail.com',
   ),
 ))
   ->with('request')->begin()
