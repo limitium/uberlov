@@ -4,6 +4,7 @@
     <a class="addthis_button_facebook"></a>
     <a class="addthis_button_twitter"></a>
     <a class="addthis_button_odnoklassniki_ru"></a>
+    <a class="addthis_button_google_plusone" g:plusone:annotation="none" g:plusone:size="large"></a>
     <a class="addthis_button_mymailru"></a>
     <a class="addthis_button_favorites"></a>
     <a class="addthis_button_google"></a>

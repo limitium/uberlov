@@ -44,7 +44,27 @@ class Profit extends BaseProfit {
         }
         return $total;
     }
+        
+     public function updatePhotos($photos) {
+        Doctrine_Query::create()
+                ->update('Photo p')
+                ->set('p.toward', 'null')
+                ->set('p.location_id', 'null')
+                ->where('p.location_id = ?', $this->getId())
+                ->andWhere('toward = ?', "profit")
+                ->execute();
 
+        if (sizeof($photos)) {
+            Doctrine_Query::create()
+                    ->update('Photo p')
+                    ->set('p.toward', '"profit"')
+                    ->set('p.location_id', $this->getId())
+                    ->whereIn('p.id', $photos)
+                    ->execute();
+        }
+        return $this;
+    }
+    
     /**
      *
      * @return Doctrine_Collection 

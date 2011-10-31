@@ -68,6 +68,16 @@ class LocationForm extends BaseLocationForm {
         $addressData->locality = $address->getLocalityId() ? $address->getLocality()->name : '';
 
         $this->setDefault('address', json_encode($addressData));
+        return $this;
+    }
+
+    public function packPhotos() {
+        $photosData = array();
+        foreach ($this->object->getPhotos() as $photo) {
+            $photosData[] = $photo->id;
+        }
+        $this->setDefault('photos', json_encode($photosData));
+        return $this;
     }
 
 }

@@ -13,7 +13,7 @@ locationEdit.prototype.afterInit = function(){
 
 locationEdit.prototype.initListeners = function(){
     var photos = [];
-    $('form.location').submit(function(){
+    $('form.location_form').submit(function(){
         $('.thumbs img').each(function(){
             photos.push(this.id.substr(6));
         });

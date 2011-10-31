@@ -75,7 +75,7 @@ class locationActions extends sfActions {
             $this->form = new LocationEnemyForm($location);
         }
 
-        $this->form->packAddress();
+        $this->form->packAddress()->packPhotos();
     }
 
     public function executeUpdate(sfWebRequest $request) {

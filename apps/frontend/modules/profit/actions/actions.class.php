@@ -54,7 +54,7 @@ class profitActions extends sfActions {
         $this->forward404Unless($profit = Doctrine::getTable('Profit')->find(array($request->getParameter('id'))), sprintf('Object profit does not exist (%s).', $request->getParameter('id')));
 
         $this->form = new ProfitForm($profit);
-        $this->form->packDetails();
+        $this->form->packDetails()->packPhotos();
     }
 
     public function executeUpdate(sfWebRequest $request) {
@@ -76,7 +76,10 @@ class profitActions extends sfActions {
 
         if ($form->isValid()) {
             $detailsData = (array) json_decode($form->getValue('details'));
-            $form->save()->updateDetails($detailsData);
+            $photosData = (array) json_decode($form->getValue('photos'));
+            print_r($photosData);
+            die;
+            $form->save()->updateDetails($detailsData)->updatePhotos($photosData);
             
             BotNet::create()->spammed($form->getObject(), 'description',$form->getObject()->getLocation()->getDateTimeObject('created_at')->format('U'));
             
