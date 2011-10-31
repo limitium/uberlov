@@ -123,6 +123,14 @@ profitAdd.prototype.onSubmit = function(){
     });
 
     $('#profit_details').val($.JSON.encode(details));
+    
+    var photos = [];
+    $('form.profit_form').submit(function(){
+        $('.thumbs img').each(function(){
+            photos.push(this.id.substr(6));
+        });
+        $('#profit_photos').val($.JSON.encode(photos));
+    });
 }
 
 profitAdd.prototype.countDetailQty = function(){

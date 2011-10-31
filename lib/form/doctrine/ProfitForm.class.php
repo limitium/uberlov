@@ -27,7 +27,8 @@ class ProfitForm extends BaseProfitForm {
         $this->widgetSchema['qty'] = new sfWidgetFormInputText();
         $this->widgetSchema['styles'] = new sfWidgetFormDoctrineChoice(array('model' => 'Style', 'add_empty' => true));
         $this->widgetSchema['fishes'] = new sfWidgetFormDoctrineChoice(array('model' => 'Fish', 'add_empty' => true, 'order_by' => array('name', 'asc')));
-
+        $this->widgetSchema['photos'] = new sfWidgetFormInputHidden();
+        
         $this->validatorSchema['location_id'] = new sfValidatorDoctrineChoice(array('model' => 'Location', 'required' => true));
         $this->validatorSchema['name'] = new sfValidatorString(array('required' => true));
 //        $this->validatorSchema['date'] = new sfValidatorDate(array('date_format' => "/(?P<day>[0-3][0-9])\.(?P<month>[0-1][0-9])\.(?P<year>[0-9]{4})/", 'with_time' => false, 'required' => true, 'date_format_error' => 'd.m.Y'));
@@ -41,7 +42,8 @@ class ProfitForm extends BaseProfitForm {
         $this->validatorSchema['qty'] = new sfValidatorString(array('required' => false));
         $this->validatorSchema['styles'] = new sfValidatorString(array('required' => false));
         $this->validatorSchema['fishes'] = new sfValidatorString(array('required' => false));
-
+        $this->validatorSchema['photos'] = new sfValidatorString(array('required' => false));
+        
         $this->widgetSchema->setLabels(array(
             'date' => 'Дата:',
             'name' => 'Название отчета:',
@@ -59,6 +61,15 @@ class ProfitForm extends BaseProfitForm {
         }
         $packed = '[' . implode(',', $detailsData) . ']';
         $this->setDefault('details', $packed);
+        return $this;
     }
-
+    
+    public function packPhotos() {
+        $photosData = array();
+        foreach ($this->object->getPhotos() as $photo) {
+            $photosData[] = $photo->id;
+        }
+        $this->setDefault('photos', json_encode($photosData));
+        return $this;
+    }
 }
