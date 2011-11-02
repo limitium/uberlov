@@ -8,7 +8,7 @@
         <title><?php echo get_slot('title', 'Uberлов — найди свое место.') ?></title>
 
         <?php include_stylesheets() ?>
-        <script language="javascript">
+        <script type="text/javascript" >
             baseUrl = "<?php echo substr(url_for('@homepage'), 0, strlen(url_for('@homepage')) - 1); ?>";
             baseUrlFull = "<?php echo substr(url_for('@homepage', true), 0, strlen(url_for('@homepage', true)) - 1); ?>";
             baseUrl = "<?php echo sfContext::getInstance()->getRequest()->getRelativeUrlRoot(); ?>";
@@ -50,23 +50,25 @@
         </script>
         <script type="text/javascript" language="JavaScript" src="http://reformal.ru/tab6.js">
         </script>
-        <noscript>
-            <a href="http://uberlov.reformal.ru">Uberlov feedback </a>
-            <a href="http://reformal.ru">
-                <img src="http://reformal.ru/i/logo.gif" />
-            </a>
-        </noscript>
+        <object>
+            <noscript>
+                <a href="http://uberlov.reformal.ru">Uberlov feedback </a>
+                <a href="http://reformal.ru">
+                    <img src="http://reformal.ru/i/logo.gif" />
+                </a>
+            </noscript>
+        </object>
     </head>
     <body>
         <div id="page">
             <div id="header" class="content">
                 <div class="clear_fix">
                     <div id="logo">
-                        <?php echo link_to(image_tag('/images/logo_new.png'), '@homepage') ?>
+                        <?php echo link_to(image_tag('/images/logo_new.png',array('alt'=>'uberlov.ru')), '@homepage') ?>
                     </div>
                     
                     <div id="bleat">
-                        <?php echo image_tag('/images/bleat2.png'); ?>
+                        <?php echo image_tag('/images/bleat2.png',array('alt'=>'blyat add')); ?>
                     </div>
                     <?php if ($sf_user->isAnonymous()): ?>
                         <div class="register_button_wrapper">
@@ -183,9 +185,9 @@
                                 Мы в
                             </h3>
                             <ul class="footer_menu_list">
-                                <li><a href="http://www.vkontakte.ru/uberlover"><img src="/images/icons/social/vkontakte.png"/></a></li>
-                                <li><a href="http://www.twitter.com/uberlov"><img src="/images/icons/social/twitter.png"/></a></li>
-                                <li><a href="http://www.facebook.com/pages/Uberlov/190569190994314"><img src="/images/icons/social/facebook.png"/></a></li>
+                                <li><a href="http://www.vkontakte.ru/uberlover"><img src="/images/icons/social/vkontakte.png" alt="vk"/></a></li>
+                                <li><a href="http://www.twitter.com/uberlov"><img src="/images/icons/social/twitter.png" alt="twitter"/></a></li>
+                                <li><a href="http://www.facebook.com/pages/Uberlov/190569190994314"><img src="/images/icons/social/facebook.png" alt="facebok"/></a></li>
                             </ul>
                         </div>
                         <div class="footer_menu">
