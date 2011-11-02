@@ -54,7 +54,7 @@
             <noscript>
                 <a href="http://uberlov.reformal.ru">Uberlov feedback </a>
                 <a href="http://reformal.ru">
-                    <img src="http://reformal.ru/i/logo.gif" />
+                    <img src="http://reformal.ru/i/logo.gif" alt="reformal"/>
                 </a>
             </noscript>
         </object>
@@ -143,7 +143,7 @@
             </div>
             <div class="footer">
                 <div class="content">
-                    <h2><?php echo link_to(image_tag('/images/logo_small.png'), '@homepage') ?></h2>
+                    <h2><?php echo link_to(image_tag('/images/logo_small.png',array('alt'=>'uberlov.ru')), '@homepage') ?></h2>
                     <div class="footer_box_menu clear_fix">
                         <div class="footer_menu">
                             <h3>
