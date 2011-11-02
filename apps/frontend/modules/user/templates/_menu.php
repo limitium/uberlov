@@ -1,4 +1,4 @@
-<?php if($menu): ?>
+<?php if(!$sf_user->isAnonymous()): ?>
     <ul id="user_menu">
         <?php foreach ($menu as $menuItem): ?>
             <li<?php echo substr($menuItem['url'], 1) == $sf_request->getParameter('menu') ? ' class="selected"' : '' ?>>
