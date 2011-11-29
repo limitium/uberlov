@@ -5,7 +5,7 @@
         <?php include_http_metas() ?>
         <?php include_metas() ?>
 
-        <title><?php echo get_slot('title', 'Uberлов — найди свое место.') ?></title>
+        <title><?php echo get_slot('title', 'Uberлов — Узнай, где ловить рыбу!') ?></title>
 
         <?php include_stylesheets() ?>
         <script type="text/javascript" >
