@@ -24,7 +24,7 @@
                 ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
                 var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
             })();
-        </script>        
+        </script>          
         <?php endif; ?>
         <?php include_javascripts() ?>        
         <script type="text/javascript">
@@ -214,6 +214,18 @@
                     <?php endif; ?>
                 </div>
             </div>
+        </div>
+        <div style="display:none">
+        <!-- begin of Top100 code -->
+
+        <script id="top100Counter" type="text/javascript" src="http://counter.rambler.ru/top100.jcn?2609777"></script>
+        <noscript>
+        <a href="http://top100.rambler.ru/navi/2609777/">
+        <img src="http://counter.rambler.ru/top100.cnt?2609777" alt="Rambler's Top100" border="0" />
+        </a>
+
+        </noscript>
+        <!-- end of Top100 code -->
         </div>
     </body>
 </html>
