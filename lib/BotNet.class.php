@@ -12,7 +12,8 @@
  */
 class BotNet {
 
-    public $start = 1278288000;
+//    public $start = 1278288000;
+    public $start = 1308288000; //17 june 2011
     public $spamer = "spamer";
     public $activeBots;
     public $totalBots;
