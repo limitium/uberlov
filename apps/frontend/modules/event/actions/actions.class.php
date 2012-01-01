@@ -86,7 +86,7 @@ class eventActions extends sfActions {
         $form->bind($request->getParameter($form->getName()), $request->getFiles($form->getName()));
         if ($form->isValid()) {
             $fish_event = $form->save();
-
+            BotNet::create()->spammed($fish_event, 'description');    
             $this->redirect('@event_show?id=' . $fish_event->getId());
         }
     }
