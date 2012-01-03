@@ -31,6 +31,7 @@ class BotNet {
     }
 
     private function __construct() {
+        $this->time = time() - 30 * 24 * 60 * 60;
         $this->totalBots = Doctrine_Query::create()
                 ->from('Bot')
                 ->count();
