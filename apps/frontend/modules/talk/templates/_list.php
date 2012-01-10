@@ -16,6 +16,7 @@
             </ul>
         </div>
         <div class="meta">
+            <?php include_partial('vote/vote', array('obj' => $talk)); ?> 
             <?php include_partial('profile/writeBy', array('written' => $talk)); ?>
             <?php include_partial('comment/meta', array('commented' => $talk)); ?>
         </div>
