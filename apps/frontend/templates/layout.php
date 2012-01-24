@@ -126,10 +126,6 @@
                 </div>
 
                 <div id="right_layout">
-                    <div id="content_menu">
-                        <?php include_slot('content_menu') ?>
-                    </div>
-
                     <?php if ($sf_user->hasFlash('notice')): ?>
                         <div class="flash_notice"><?php echo $sf_user->getFlash('notice') ?></div>
                     <?php endif; ?>
