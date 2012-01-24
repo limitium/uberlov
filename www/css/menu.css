@@ -22,7 +22,7 @@
     font-family:"Lucida Sans Unicode", "Lucida Grande", Verdana, Arial, Helvetica, sans-serif;
     border-left:1px solid #b9b9b9;
     text-align: center;
-    width: 16.593%;
+    width: 16.6%;
 }
 
 #main_menu li.first
@@ -82,8 +82,7 @@
 
 /*user menu*/
 #user_menu {
-    margin: -0.5em -0.5em 0 -0.5em
-        /*    border-right: 1px solid #DFDFDF;*/
+    margin:0 -1em 0 -1em /* border-right: 1px solid #DFDFDF;*/
 }
 #user_menu li:first-child, #user_menu li:first-child a, #user_menu li:first-child a span.label {
     -moz-border-radius:8px 8px 0 0;
@@ -152,12 +151,19 @@ strong {
     padding-top: 20px;
 }
 .menu_block li{
-    padding-top: 10px;   
+    padding: 5px 0 0 5px;
+    margin: 10px 0 0 0;
+    border-top: 1px solid #759E1A;
+}
+.menu_block li:first-child{
+    padding-top: 0px;
+    border: none;
 }
 .menu_block h4{
     color: #759E1A;
-    font-size: 16px;    
-    padding-bottom: 5px;
+    font-size: 16px;  
+    font-weight: bold;
+    padding-bottom: 0px;
     text-transform: uppercase;
 }
 .menu_block h5{
@@ -168,7 +174,7 @@ strong {
     height: 24px;
 }
 .menu_block .createdBy{
-    padding-left: 5px;
+    padding-left: 3em;
     text-align: right;
     display: block;
 }
@@ -183,7 +189,6 @@ strong {
 .mini_menu div{
     color: #FFFFFF;
     margin: 0 1.5em;
-    min-width: 1270px;
     margin-top: 2px;
 }
 .mini_menu a{

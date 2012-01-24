@@ -39,9 +39,6 @@ app = {
         ModuleManager.initModules();
         this.$.trigger('inited');
     },
-    getContentMenu:function(){
-        return $('#content_menu').get(0);
-    },
     getModule:function(module){
         return app.modules[module];
     },

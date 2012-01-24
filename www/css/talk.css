@@ -33,7 +33,10 @@
 
 /*list talks*/
 .talkBrief{
-    margin-top: 5em;
+    margin-top: 2em;
+    border-top: 1px solid #759E1A;
+    margin-bottom: 2em;
+    padding: 1em 2em 0 2em;
 }
 .talkBrief .meta{
     clear: both;
