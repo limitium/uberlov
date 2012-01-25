@@ -7,7 +7,8 @@ dev:
   .settings:
     error_reporting:        <?php echo (E_ALL | E_STRICT)."\n" ?>
     web_debug:              true
-    cache:                  false
+    cache:                  true
+    compressed:             true 
     no_script_name:         false
     etag:                   false
 
@@ -41,3 +42,7 @@ all:
     default_culture:        ru_RU
     charset:                utf-8
     i18n:                   true
+    
+    use_flash:              false
+    check_symfony_version:  false
+    check_lock:             false 
