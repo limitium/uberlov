@@ -25,17 +25,17 @@ class locationActions extends sfActions {
         $this->comments = Comment::getFor($this->location);
 
         $this->profits = Doctrine_Query::create()->select()->from('Profit pf')
-                ->leftJoin('pf.ProfitDetail d')
-                ->leftJoin('pf.CreatedBy p')
-                ->leftJoin('pf.VoteProfit v')
-                ->where('pf.location_id = ?', $this->location->getId())
-                ->execute();
+                        ->leftJoin('pf.ProfitDetail d')
+                        ->leftJoin('pf.CreatedBy p')
+                        ->leftJoin('pf.VoteProfit v')
+                        ->where('pf.location_id = ?', $this->location->getId())
+                        ->execute();
 
         $this->events = Doctrine_Query::create()->select()->from('FishEvent e')
-                ->leftJoin('e.CreatedBy p')
-                ->leftJoin('e.VoteFishEvent v')
-                ->where('e.location_id = ?', $this->location->getId())
-                ->execute();
+                        ->leftJoin('e.CreatedBy p')
+                        ->leftJoin('e.VoteFishEvent v')
+                        ->where('e.location_id = ?', $this->location->getId())
+                        ->execute();
 
         $this->csrf = CSRF::getToken();
 
@@ -108,10 +108,12 @@ class locationActions extends sfActions {
         if ($form->isValid()) {
             $addressData = (array) json_decode($form->getValue('address'));
             $photos = (array) json_decode($form->getValue('photos'));
-            
+
             $loc = $form->save()->updateAddress($addressData)->updatePhotos($photos);
             BotNet::create()->spammed($loc, 'description');
-
+            if ($cache = $this->getContext()->getViewCacheManager()) {
+                $cache->remove('@data');
+            }
             return $loc;
         }
         return null;

@@ -13,7 +13,7 @@
 class BotNet {
 
 //    public $start = 1278288000;
-    public $start = 1308288000; //17 june 2011
+    public $start = 1325288000; //30 dec 2011
     public $spamer = "spamer";
     public $activeBots;
     public $totalBots;
@@ -206,7 +206,7 @@ class BotNet {
     }
 
     private function updateBot(Bot $bot) {
-        if (rand(0, 100) < 30) {
+        if (rand(0, 100) < 20) {
             $f = new Friend();
             $f->setAccepter($bot->getProfile());
             $f->setRequester($this->getRandomBot()->getProfile());
@@ -220,7 +220,7 @@ class BotNet {
             }
         }
 
-        $maxVoters = rand(0, 5);
+        $maxVoters = rand(0, 2);
         $voters = $maxVoters - round(atan(sqrt(rand(0, 10000) / 10000)) * $maxVoters);
         for ($i = 0; $i < $voters; $i++) {
             $v = new VoteProfile();
@@ -232,7 +232,7 @@ class BotNet {
     }
 
     public function updateObjectVotes($object) {
-        $max = $object instanceof Location ? 22 : 11;
+        $max = $object instanceof Location ? 6 : 3;
         $maxVoters = rand(0, $max);
         $voters = $maxVoters - round(atan(sqrt(rand(0, 10000) / 10000)) * $maxVoters);
         $voteType = "Vote" . ($object instanceof Comment ? "Comment" : get_class($object));
