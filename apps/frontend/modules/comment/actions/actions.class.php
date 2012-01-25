@@ -54,11 +54,13 @@ class commentActions extends sfActions {
 
             $this->comment = $form->save();
             $this->comment->getNode()->insertAsLastChildOf($parent);
+            
+            $prevCom = $parent->message == 'root'?$this->comment->getNode()->getPrevSibling():$parent;
 
-            BotNet::create()->spammed($this->comment, 'message', $parent->getDateTimeObject('created_at')->format('U'));
+            BotNet::create()->spammed($this->comment, 'message', $prevCom->getDateTimeObject('created_at')->format('U'));
 
             $this->noVote = $form->getValue('noVote', false);
-            $this->setTemplate('created');
+            $this->setTemplate('created');           
         } else {
             foreach ($form->getFormFieldSchema() as $name => $formField) {
                 if ($formField->getError() != "") {

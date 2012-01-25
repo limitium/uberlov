@@ -112,7 +112,7 @@ class locationActions extends sfActions {
             $loc = $form->save()->updateAddress($addressData)->updatePhotos($photos);
             BotNet::create()->spammed($loc, 'description');
             if ($cache = $this->getContext()->getViewCacheManager()) {
-                $cache->remove('@data');
+                $cache->remove('collector/data');
             }
             return $loc;
         }

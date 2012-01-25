@@ -142,7 +142,7 @@ class BotNet {
         }
         if (!$to) {
             $to = time();
-        }
+        }        
         return date("Y-m-d H:i:s", rand($from, $to));
     }
 
