@@ -36,7 +36,7 @@ sf_guard_signout:
 #apply
 user_confirm:
   url:          /user/confirm/:validate
-  param:        { module: sfApply, action: confirm}
+  param:        { module: sfApply, action: confirm, menu sf_guard_signin}
   
 #profile routes
 friends:
@@ -53,7 +53,7 @@ my_profile:
   param: { module: profile, action: my, menu my_profile}
 my_edit:
   url:   /my_edit
-  param: { module: profile, action: editMy}
+  param: { module: profile, action: editMy, menu my_profile}
 
 #profile routes
 address_country:
@@ -88,15 +88,15 @@ comment_for:
 #event
 events_archive:
   url: /events/archive
-  param: {module: event, action archive}
+  param: {module: event, action archive, menu events}
 event_list:
   url:        /event/list
-  params:     { module: event, action: list }
+  params:     { module: event, action: list, menu events }
   requirements:
     sf_method: [get]
 event_new:
   url:        /event/new/:location
-  params:     { module: event, action: new }
+  params:     { module: event, action: new, menu events }
   requirements:
     sf_method: [get]
 event_create:
@@ -106,7 +106,7 @@ event_create:
     sf_method: [post]
 event_edit:
   url:        /event/:id/edit
-  params:     { module: event, action: edit }
+  params:     { module: event, action: edit, menu events }
   requirements:
     sf_method: [get]
 event_update:
@@ -114,7 +114,7 @@ event_update:
   params:     { module: event, action: update }
 event_show:
   url:        /event/:id
-  params:     { module: event, action: show }
+  params:     { module: event, action: show, menu events }
   requirements:
     sf_method: [get]
 
@@ -125,12 +125,12 @@ comment_for:
 #inbox
 inbox_list:
   url:        /inbox/list
-  params:     { module: inbox, action: list }
+  params:     { module: inbox, action: list , menu inboxes}
   requirements:
     sf_method: [get]
 inbox_new:
   url:        /inbox/new/:whom
-  params:     { module: inbox, action: new, whom: '' }
+  params:     { module: inbox, action: new, whom: '' , menu inboxes}
   requirements:
     sf_method: [get]
 inbox_create:
@@ -155,7 +155,7 @@ inbox_delete:
     sf_method: [post]
 inbox_show:
   url:        /inbox/:id
-  params:     { module: inbox, action: show }
+  params:     { module: inbox, action: show , menu inboxes}
   requirements:
     sf_method: [get]
 
@@ -163,12 +163,12 @@ inbox_show:
 #location
 location_list:
   url:        /location/list
-  params:     { module: location, action: list }
+  params:     { module: location, action: list, menu map }
   requirements:
     sf_method: [get]
 location_new:
   url:        /location/new
-  params:     { module: location, action: new }
+  params:     { module: location, action: new, menu map }
   requirements:
     sf_method: [get]
 location_create:
@@ -178,7 +178,7 @@ location_create:
     sf_method: [post]
 location_edit:
   url:        /location/:id/edit
-  params:     { module: location, action: edit }
+  params:     { module: location, action: edit, menu map }
   requirements:
     sf_method: [get]
 location_update:
@@ -186,7 +186,7 @@ location_update:
   params:     { module: location, action: update }
 location_show:
   url:        /location/:id
-  params:     { module: location, action: show }
+  params:     { module: location, action: show, menu map }
   requirements:
     sf_method: [get]
 location_export:
@@ -196,7 +196,7 @@ location_export:
     sf_method: [get]
 location_map:
   url:        /location/map/:id
-  params:     { module: location, action: map }
+  params:     { module: location, action: map, menu map }
   requirements:
     sf_method: [get]
 location_tomy:
@@ -211,7 +211,7 @@ location_frommy:
     sf_method: [post]
 location_my:
   url:        /location/my
-  params:     { module: location, action: my }
+  params:     { module: location, action: my, menu map }
   requirements:
     sf_method: [get]   
   
@@ -225,7 +225,7 @@ photo_upload:
 #profile
 profile_top_profit:
   url:        /profile/top/profit
-  params:     { module: profile, action: topProfit }
+  params:     { module: profile, action: topProfit , menu people}
   requirements:
     sf_method: [get]
 profile_add:
@@ -240,27 +240,27 @@ profile_city:
     sf_method: [post]
 profile_edit:
   url:        /profile/:id/edit
-  params:     { module: profile, action: edit }
+  params:     { module: profile, action: edit , menu people}
   requirements:
     sf_method: [get]    
 profile_editemail:
   url:        /profile/editemail
-  params:     { module: profile, action: editEmail}
+  params:     { module: profile, action: editEmail, menu people}
   requirements:
     sf_method: [get]    
 profile_friends:
   url:        /profile/friends
-  params:     { module: profile, action: friends}
+  params:     { module: profile, action: friends, menu people}
   requirements:
     sf_method: [get]    
 profile_list:
   url:        /profile/list
-  params:     { module: profile, action: list }
+  params:     { module: profile, action: list , menu people}
   requirements:
     sf_method: [get]
 profile_my:
   url:        /profile/my
-  paramroutings:     { module: profile, action: my }
+  paramroutings:     { module: profile, action: my , menu people}
   requirements:
     sf_method: [get]
 profile_remove:
@@ -270,7 +270,7 @@ profile_remove:
     sf_method: [post]
 profile_show:
   url:        /profile/:id/:view
-  params:     { module: profile, action: show, view:'' }
+  params:     { module: profile, action: show, view:'' , menu people}
   requirements:
     sf_method: [get]
     id: \d+
@@ -283,12 +283,12 @@ profile_update:
 #profit
 profit_list:
   url:        /profit/list
-  params:     { module: profit, action: list }
+  params:     { module: profit, action: list, menu profits }
   requirements:
     sf_method: [get]
 profit_new:
   url:        /profit/new/:location
-  params:     { module: profit, action: new }
+  params:     { module: profit, action: new, menu profits }
   requirements:
     sf_method: [get]
 profit_create:
@@ -298,7 +298,7 @@ profit_create:
     sf_method: [post]
 profit_edit:
   url:        /profit/:id/edit
-  params:     { module: profit, action: edit }
+  params:     { module: profit, action: edit, menu profits }
   requirements:
     sf_method: [get]
 profit_update:
@@ -306,7 +306,7 @@ profit_update:
   params:     { module: profit, action: update }
 profit_show:
   url:        /profit/:id
-  params:     { module: profit, action: show }
+  params:     { module: profit, action: show, menu profits }
   requirements:
     sf_method: [get]
     
@@ -318,7 +318,7 @@ talks_with_section:
     sf_method: [get]
 talk_new:
   url:        /talk/new
-  params:     { module: talk, action: new }
+  params:     { module: talk, action: new, menu talks }
   requirements:
     sf_method: [get]
 talk_create:
@@ -328,7 +328,7 @@ talk_create:
     sf_method: [post]
 talk_edit:
   url:        /talk/:id/edit
-  params:     { module: talk, action: edit }
+  params:     { module: talk, action: edit, menu talks }
   requirements:
     sf_method: [get]
 talk_update:
@@ -336,18 +336,18 @@ talk_update:
   params:     { module: talk, action: update }
 talk_section:
   url:        /talk/section
-  params:     { module: talk, action: section }
+  params:     { module: talk, action: section, menu talks }
 talk_suggest:
   url:        /talk/suggest
   params:     { module: talk, action: suggest }
 talk_tag:
   url:        /talk/tag/:tag
-  params:     { module: talk, action: tag}
+  params:     { module: talk, action: tag, menu talks}
   requirements:
     sf_method: [get]
 talk_show:
   url:        /talk/:id
-  params:     { module: talk, action: show }
+  params:     { module: talk, action: show, menu talks }
   requirements:
     sf_method: [get]
     
