@@ -33,7 +33,7 @@ CREATE TABLE `address` (
   CONSTRAINT `address_country_id_country_id` FOREIGN KEY (`country_id`) REFERENCES `country` (`id`),
   CONSTRAINT `address_locality_id_locality_id` FOREIGN KEY (`locality_id`) REFERENCES `locality` (`id`),
   CONSTRAINT `address_route_id_route_id` FOREIGN KEY (`route_id`) REFERENCES `route` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=726 DEFAULT CHARSET=cp1251;
+) ENGINE=InnoDB AUTO_INCREMENT=728 DEFAULT CHARSET=cp1251;
 
 /*Data for the table `address` */
 
@@ -762,6 +762,8 @@ insert  into `address`(`id`,`country_id`,`area_low_id`,`area_high_id`,`locality_
 insert  into `address`(`id`,`country_id`,`area_low_id`,`area_high_id`,`locality_id`,`route_id`) values (723,1,5,NULL,NULL,1);
 insert  into `address`(`id`,`country_id`,`area_low_id`,`area_high_id`,`locality_id`,`route_id`) values (724,1,19,42,23,43);
 insert  into `address`(`id`,`country_id`,`area_low_id`,`area_high_id`,`locality_id`,`route_id`) values (725,1,19,98,23,216);
+insert  into `address`(`id`,`country_id`,`area_low_id`,`area_high_id`,`locality_id`,`route_id`) values (726,1,3,161,NULL,217);
+insert  into `address`(`id`,`country_id`,`area_low_id`,`area_high_id`,`locality_id`,`route_id`) values (727,1,3,162,NULL,218);
 
 /*Table structure for table `area_high` */
 
@@ -775,7 +777,7 @@ CREATE TABLE `area_high` (
   UNIQUE KEY `name` (`name`),
   KEY `area_low_id_idx` (`area_low_id`),
   CONSTRAINT `area_high_area_low_id_area_low_id` FOREIGN KEY (`area_low_id`) REFERENCES `area_low` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=161 DEFAULT CHARSET=cp1251;
+) ENGINE=InnoDB AUTO_INCREMENT=163 DEFAULT CHARSET=cp1251;
 
 /*Data for the table `area_high` */
 
@@ -934,6 +936,8 @@ insert  into `area_high`(`id`,`name`,`area_low_id`) values (157,'Износко�
 insert  into `area_high`(`id`,`name`,`area_low_id`) values (158,'Жиздринский район',5);
 insert  into `area_high`(`id`,`name`,`area_low_id`) values (159,'Заокский район',35);
 insert  into `area_high`(`id`,`name`,`area_low_id`) values (160,'Барятинский район',5);
+insert  into `area_high`(`id`,`name`,`area_low_id`) values (161,'Можайский',3);
+insert  into `area_high`(`id`,`name`,`area_low_id`) values (162,'Рузский',3);
 
 /*Table structure for table `area_low` */
 
@@ -6444,7 +6448,7 @@ CREATE TABLE `comment` (
   CONSTRAINT `comment_profit_id_profit_id` FOREIGN KEY (`profit_id`) REFERENCES `profit` (`id`) ON DELETE CASCADE,
   CONSTRAINT `comment_talk_id_talk_id` FOREIGN KEY (`talk_id`) REFERENCES `talk` (`id`) ON DELETE CASCADE,
   CONSTRAINT `comment_updated_by_sf_guard_user_profile_id` FOREIGN KEY (`updated_by`) REFERENCES `sf_guard_user_profile` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=191 DEFAULT CHARSET=cp1251;
+) ENGINE=InnoDB AUTO_INCREMENT=213 DEFAULT CHARSET=cp1251;
 
 /*Data for the table `comment` */
 
@@ -6577,7 +6581,7 @@ insert  into `comment`(`id`,`parent`,`message`,`toward`,`location_id`,`profit_id
 insert  into `comment`(`id`,`parent`,`message`,`toward`,`location_id`,`profit_id`,`inbox_id`,`talk_id`,`fish_event_id`,`created_by`,`updated_by`,`created_at`,`updated_at`,`root_id`,`lft`,`rgt`,`level`) values (133,132,'\n<p>Для себя делал drop-shot по науке, как советовал Кузьмин, но при применении не видел ни одной поклевки, да и в конечном итоге зацепился им крепко и оторвал. Повторять пройденное пока не хочется, т.к. для себя не увидел никаких достоинств этой снасти.</p>','talk',NULL,NULL,NULL,9,NULL,182,182,'2011-09-21 13:39:47','2011-09-21 13:39:47',132,2,3,1);
 insert  into `comment`(`id`,`parent`,`message`,`toward`,`location_id`,`profit_id`,`inbox_id`,`talk_id`,`fish_event_id`,`created_by`,`updated_by`,`created_at`,`updated_at`,`root_id`,`lft`,`rgt`,`level`) values (134,132,'\n<p>В прошлом году после просмотра фильма братьев Щербаковых подсел на дроп-шот... Окунь ловится замечательно. В качестве приманок применял селиконовые приманки для микро джига</p>','talk',NULL,NULL,NULL,9,NULL,197,197,'2011-09-28 18:06:37','2011-09-28 18:06:37',132,4,7,1);
 insert  into `comment`(`id`,`parent`,`message`,`toward`,`location_id`,`profit_id`,`inbox_id`,`talk_id`,`fish_event_id`,`created_by`,`updated_by`,`created_at`,`updated_at`,`root_id`,`lft`,`rgt`,`level`) values (135,134,'\n<p><span class=\"Apple-style-span\" style=\"line-height: normal; background-color: rgb(248, 248, 248); \">Лично для меня Щербаковы не рулят:- дроп-шот испробовал ,причем нашу бородку причисляю к вышеуказанному способу ловли.Но классический джиг&nbsp;</span><span class=\"Apple-style-span\" style=\"line-height: normal; background-color: rgb(248, 248, 248); \">либо джигголовка с пружинкой,или чебурашка для меня пока на высоте.</span></p>','talk',NULL,NULL,NULL,9,NULL,247,247,'2011-10-10 09:20:52','2011-10-10 09:20:52',132,5,6,2);
-insert  into `comment`(`id`,`parent`,`message`,`toward`,`location_id`,`profit_id`,`inbox_id`,`talk_id`,`fish_event_id`,`created_by`,`updated_by`,`created_at`,`updated_at`,`root_id`,`lft`,`rgt`,`level`) values (136,NULL,'root','talk',NULL,NULL,NULL,10,NULL,245,245,'2011-10-22 01:50:01','2011-10-22 01:50:01',136,1,10,0);
+insert  into `comment`(`id`,`parent`,`message`,`toward`,`location_id`,`profit_id`,`inbox_id`,`talk_id`,`fish_event_id`,`created_by`,`updated_by`,`created_at`,`updated_at`,`root_id`,`lft`,`rgt`,`level`) values (136,NULL,'root','talk',NULL,NULL,NULL,10,NULL,245,245,'2011-10-22 01:50:01','2011-10-22 01:50:01',136,1,54,0);
 insert  into `comment`(`id`,`parent`,`message`,`toward`,`location_id`,`profit_id`,`inbox_id`,`talk_id`,`fish_event_id`,`created_by`,`updated_by`,`created_at`,`updated_at`,`root_id`,`lft`,`rgt`,`level`) values (137,136,'\n<p><span>CORMORAN MASTER FEEDER - 6Pi&nbsp;</span>Эта катушка для Вас будет очень большая и тяжелая. катухен &nbsp;-просто шоколад. Товарищ такую пользует - очень доволен.</p>','talk',NULL,NULL,NULL,10,NULL,236,236,'2011-10-23 08:56:18','2011-10-23 08:56:18',136,2,5,1);
 insert  into `comment`(`id`,`parent`,`message`,`toward`,`location_id`,`profit_id`,`inbox_id`,`talk_id`,`fish_event_id`,`created_by`,`updated_by`,`created_at`,`updated_at`,`root_id`,`lft`,`rgt`,`level`) values (138,137,'\n<p>Спасиба мужики за совет, наверное остановлю свой выбор на CORCAST Feeder 5Pi. Остаетса надеятса что када поеду в магазин она будет в наличии.</p>','talk',NULL,NULL,NULL,10,NULL,210,210,'2011-10-23 12:32:50','2011-10-23 12:32:50',136,3,4,2);
 insert  into `comment`(`id`,`parent`,`message`,`toward`,`location_id`,`profit_id`,`inbox_id`,`talk_id`,`fish_event_id`,`created_by`,`updated_by`,`created_at`,`updated_at`,`root_id`,`lft`,`rgt`,`level`) values (139,136,'\n<p>самая ефективная катушка для фидера это матчевая. ИМХО</p>','talk',NULL,NULL,NULL,10,NULL,162,162,'2011-10-22 09:06:48','2011-10-22 09:06:48',136,6,9,1);
@@ -6632,6 +6636,28 @@ insert  into `comment`(`id`,`parent`,`message`,`toward`,`location_id`,`profit_id
 insert  into `comment`(`id`,`parent`,`message`,`toward`,`location_id`,`profit_id`,`inbox_id`,`talk_id`,`fish_event_id`,`created_by`,`updated_by`,`created_at`,`updated_at`,`root_id`,`lft`,`rgt`,`level`) values (188,186,'\n<p>Может лучше от самого навитела взять навигатор. Там ведь уже карта казахстана в комплекте идет. Тем более появились новые модели 4310 и 5310. Описание на сайте производителя</p>','talk',NULL,NULL,NULL,21,NULL,94,94,'2011-10-21 10:39:28','2011-10-21 10:39:28',186,4,7,1);
 insert  into `comment`(`id`,`parent`,`message`,`toward`,`location_id`,`profit_id`,`inbox_id`,`talk_id`,`fish_event_id`,`created_by`,`updated_by`,`created_at`,`updated_at`,`root_id`,`lft`,`rgt`,`level`) values (189,188,'\n<p>Карты обновлённые 2010 года можешь сам на Flash карту залить и обновить атлас... Навител на навигаторах Explay уже лицензионный идёт, карты хавает все!</p>','talk',NULL,NULL,NULL,21,NULL,122,122,'2011-10-23 00:44:04','2011-10-23 00:44:04',186,5,6,2);
 insert  into `comment`(`id`,`parent`,`message`,`toward`,`location_id`,`profit_id`,`inbox_id`,`talk_id`,`fish_event_id`,`created_by`,`updated_by`,`created_at`,`updated_at`,`root_id`,`lft`,`rgt`,`level`) values (190,186,'\n<p>Все ребята спасибо всем нашел более менее подходящию explay pn-445. Остался один в нашем городе ))). бегу покупать. я так понял что обновить карты можно бесплатно на сайте explay?</p>','talk',NULL,NULL,NULL,21,NULL,249,249,'2011-10-11 20:54:06','2011-10-11 20:54:06',186,8,9,1);
+insert  into `comment`(`id`,`parent`,`message`,`toward`,`location_id`,`profit_id`,`inbox_id`,`talk_id`,`fish_event_id`,`created_by`,`updated_by`,`created_at`,`updated_at`,`root_id`,`lft`,`rgt`,`level`) values (191,136,'\n<p>123123</p>','talk',NULL,NULL,NULL,10,NULL,143,143,'2011-11-25 18:38:12','2011-11-25 18:38:12',136,10,11,1);
+insert  into `comment`(`id`,`parent`,`message`,`toward`,`location_id`,`profit_id`,`inbox_id`,`talk_id`,`fish_event_id`,`created_by`,`updated_by`,`created_at`,`updated_at`,`root_id`,`lft`,`rgt`,`level`) values (192,136,'\n<p>werwet</p>','talk',NULL,NULL,NULL,10,NULL,151,151,'2011-12-25 05:48:22','2011-12-25 05:48:22',136,12,13,1);
+insert  into `comment`(`id`,`parent`,`message`,`toward`,`location_id`,`profit_id`,`inbox_id`,`talk_id`,`fish_event_id`,`created_by`,`updated_by`,`created_at`,`updated_at`,`root_id`,`lft`,`rgt`,`level`) values (193,136,'\n<p>qwerwer</p>','talk',NULL,NULL,NULL,10,NULL,234,234,'2011-11-11 12:29:03','2011-11-11 12:29:03',136,14,15,1);
+insert  into `comment`(`id`,`parent`,`message`,`toward`,`location_id`,`profit_id`,`inbox_id`,`talk_id`,`fish_event_id`,`created_by`,`updated_by`,`created_at`,`updated_at`,`root_id`,`lft`,`rgt`,`level`) values (194,136,'\n<p>4555555555555555</p>','talk',NULL,NULL,NULL,10,NULL,116,116,'2011-11-06 05:33:53','2011-11-06 05:33:53',136,16,17,1);
+insert  into `comment`(`id`,`parent`,`message`,`toward`,`location_id`,`profit_id`,`inbox_id`,`talk_id`,`fish_event_id`,`created_by`,`updated_by`,`created_at`,`updated_at`,`root_id`,`lft`,`rgt`,`level`) values (195,136,'\n<p>234213245345</p>','talk',NULL,NULL,NULL,10,NULL,81,81,'2011-10-23 01:02:16','2011-10-23 01:02:16',136,18,19,1);
+insert  into `comment`(`id`,`parent`,`message`,`toward`,`location_id`,`profit_id`,`inbox_id`,`talk_id`,`fish_event_id`,`created_by`,`updated_by`,`created_at`,`updated_at`,`root_id`,`lft`,`rgt`,`level`) values (196,136,'\n<p>45326236</p>','talk',NULL,NULL,NULL,10,NULL,288,288,'2011-11-06 04:26:25','2011-11-06 04:26:25',136,20,21,1);
+insert  into `comment`(`id`,`parent`,`message`,`toward`,`location_id`,`profit_id`,`inbox_id`,`talk_id`,`fish_event_id`,`created_by`,`updated_by`,`created_at`,`updated_at`,`root_id`,`lft`,`rgt`,`level`) values (197,136,'\n<p>213134254435</p>','talk',NULL,NULL,NULL,10,NULL,221,221,'2011-11-27 19:26:49','2011-11-27 19:26:49',136,22,23,1);
+insert  into `comment`(`id`,`parent`,`message`,`toward`,`location_id`,`profit_id`,`inbox_id`,`talk_id`,`fish_event_id`,`created_by`,`updated_by`,`created_at`,`updated_at`,`root_id`,`lft`,`rgt`,`level`) values (198,136,'\n<p>kj</p>\n<p>\n<br></p>','talk',NULL,NULL,NULL,10,NULL,281,281,'2011-11-24 17:07:55','2011-11-24 17:07:55',136,24,25,1);
+insert  into `comment`(`id`,`parent`,`message`,`toward`,`location_id`,`profit_id`,`inbox_id`,`talk_id`,`fish_event_id`,`created_by`,`updated_by`,`created_at`,`updated_at`,`root_id`,`lft`,`rgt`,`level`) values (199,136,'\n<p>888</p>','talk',NULL,NULL,NULL,10,NULL,213,213,'2012-01-24 16:06:30','2012-01-24 16:06:30',136,26,27,1);
+insert  into `comment`(`id`,`parent`,`message`,`toward`,`location_id`,`profit_id`,`inbox_id`,`talk_id`,`fish_event_id`,`created_by`,`updated_by`,`created_at`,`updated_at`,`root_id`,`lft`,`rgt`,`level`) values (200,136,'\n<p>1111111</p>','talk',NULL,NULL,NULL,10,NULL,103,103,'2012-01-24 22:28:10','2012-01-24 22:28:10',136,28,29,1);
+insert  into `comment`(`id`,`parent`,`message`,`toward`,`location_id`,`profit_id`,`inbox_id`,`talk_id`,`fish_event_id`,`created_by`,`updated_by`,`created_at`,`updated_at`,`root_id`,`lft`,`rgt`,`level`) values (201,136,'\n<p>234</p>','talk',NULL,NULL,NULL,10,NULL,122,122,'2012-01-25 07:51:27','2012-01-25 07:51:27',136,30,31,1);
+insert  into `comment`(`id`,`parent`,`message`,`toward`,`location_id`,`profit_id`,`inbox_id`,`talk_id`,`fish_event_id`,`created_by`,`updated_by`,`created_at`,`updated_at`,`root_id`,`lft`,`rgt`,`level`) values (202,136,'\n<p>sdfs</p>','talk',NULL,NULL,NULL,10,NULL,148,148,'2012-01-25 18:51:36','2012-01-25 18:51:36',136,32,33,1);
+insert  into `comment`(`id`,`parent`,`message`,`toward`,`location_id`,`profit_id`,`inbox_id`,`talk_id`,`fish_event_id`,`created_by`,`updated_by`,`created_at`,`updated_at`,`root_id`,`lft`,`rgt`,`level`) values (203,136,'\n<p>werwerer</p>','talk',NULL,NULL,NULL,10,NULL,92,92,'2012-01-25 19:56:30','2012-01-25 19:56:30',136,34,35,1);
+insert  into `comment`(`id`,`parent`,`message`,`toward`,`location_id`,`profit_id`,`inbox_id`,`talk_id`,`fish_event_id`,`created_by`,`updated_by`,`created_at`,`updated_at`,`root_id`,`lft`,`rgt`,`level`) values (204,136,'\n<p>1111111</p>','talk',NULL,NULL,NULL,10,NULL,288,288,'2012-01-25 20:06:17','2012-01-25 20:06:17',136,36,39,1);
+insert  into `comment`(`id`,`parent`,`message`,`toward`,`location_id`,`profit_id`,`inbox_id`,`talk_id`,`fish_event_id`,`created_by`,`updated_by`,`created_at`,`updated_at`,`root_id`,`lft`,`rgt`,`level`) values (205,136,'\n<p>eeeeee</p>','talk',NULL,NULL,NULL,10,NULL,67,67,'2012-01-25 21:25:29','2012-01-25 21:25:29',136,40,41,1);
+insert  into `comment`(`id`,`parent`,`message`,`toward`,`location_id`,`profit_id`,`inbox_id`,`talk_id`,`fish_event_id`,`created_by`,`updated_by`,`created_at`,`updated_at`,`root_id`,`lft`,`rgt`,`level`) values (206,204,'\n<p>eeeeeeeeeerrrrrrrrrr</p>','talk',NULL,NULL,NULL,10,NULL,136,136,'2012-01-25 22:32:26','2012-01-25 22:32:26',136,37,38,2);
+insert  into `comment`(`id`,`parent`,`message`,`toward`,`location_id`,`profit_id`,`inbox_id`,`talk_id`,`fish_event_id`,`created_by`,`updated_by`,`created_at`,`updated_at`,`root_id`,`lft`,`rgt`,`level`) values (207,136,'\n<p>ert</p>','talk',NULL,NULL,NULL,10,NULL,245,245,'2012-01-26 00:54:16','2012-01-26 00:54:16',136,42,43,1);
+insert  into `comment`(`id`,`parent`,`message`,`toward`,`location_id`,`profit_id`,`inbox_id`,`talk_id`,`fish_event_id`,`created_by`,`updated_by`,`created_at`,`updated_at`,`root_id`,`lft`,`rgt`,`level`) values (208,136,'\n<p>wer</p>','talk',NULL,NULL,NULL,10,NULL,117,117,'2012-01-26 01:07:24','2012-01-26 01:07:24',136,44,45,1);
+insert  into `comment`(`id`,`parent`,`message`,`toward`,`location_id`,`profit_id`,`inbox_id`,`talk_id`,`fish_event_id`,`created_by`,`updated_by`,`created_at`,`updated_at`,`root_id`,`lft`,`rgt`,`level`) values (209,136,'\n<p>sdfsdfdsf</p>','talk',NULL,NULL,NULL,10,NULL,36,36,'2012-01-26 01:15:16','2012-01-26 01:15:16',136,46,47,1);
+insert  into `comment`(`id`,`parent`,`message`,`toward`,`location_id`,`profit_id`,`inbox_id`,`talk_id`,`fish_event_id`,`created_by`,`updated_by`,`created_at`,`updated_at`,`root_id`,`lft`,`rgt`,`level`) values (210,136,'\n<p>ee</p>','talk',NULL,NULL,NULL,10,NULL,151,151,'2012-01-26 01:20:12','2012-01-26 01:20:12',136,48,49,1);
+insert  into `comment`(`id`,`parent`,`message`,`toward`,`location_id`,`profit_id`,`inbox_id`,`talk_id`,`fish_event_id`,`created_by`,`updated_by`,`created_at`,`updated_at`,`root_id`,`lft`,`rgt`,`level`) values (211,136,'\n<p>wer</p>','talk',NULL,NULL,NULL,10,NULL,51,51,'2012-01-26 01:21:03','2012-01-26 01:21:03',136,50,51,1);
+insert  into `comment`(`id`,`parent`,`message`,`toward`,`location_id`,`profit_id`,`inbox_id`,`talk_id`,`fish_event_id`,`created_by`,`updated_by`,`created_at`,`updated_at`,`root_id`,`lft`,`rgt`,`level`) values (212,136,'\n<p>qwe</p>','talk',NULL,NULL,NULL,10,NULL,50,50,'2012-01-26 01:21:33','2012-01-26 01:21:33',136,52,53,1);
 
 /*Table structure for table `country` */
 
@@ -6870,6 +6896,8 @@ insert  into `friend`(`requester_id`,`accepter_id`,`accepted`) values (131,127,1
 insert  into `friend`(`requester_id`,`accepter_id`,`accepted`) values (132,163,1);
 insert  into `friend`(`requester_id`,`accepter_id`,`accepted`) values (132,301,1);
 insert  into `friend`(`requester_id`,`accepter_id`,`accepted`) values (133,133,1);
+insert  into `friend`(`requester_id`,`accepter_id`,`accepted`) values (139,151,1);
+insert  into `friend`(`requester_id`,`accepter_id`,`accepted`) values (139,281,1);
 insert  into `friend`(`requester_id`,`accepter_id`,`accepted`) values (140,140,1);
 insert  into `friend`(`requester_id`,`accepter_id`,`accepted`) values (140,224,0);
 insert  into `friend`(`requester_id`,`accepter_id`,`accepted`) values (143,166,1);
@@ -6909,6 +6937,7 @@ insert  into `friend`(`requester_id`,`accepter_id`,`accepted`) values (187,297,0
 insert  into `friend`(`requester_id`,`accepter_id`,`accepted`) values (192,132,1);
 insert  into `friend`(`requester_id`,`accepter_id`,`accepted`) values (195,156,1);
 insert  into `friend`(`requester_id`,`accepter_id`,`accepted`) values (197,133,1);
+insert  into `friend`(`requester_id`,`accepter_id`,`accepted`) values (198,213,1);
 insert  into `friend`(`requester_id`,`accepter_id`,`accepted`) values (198,228,1);
 insert  into `friend`(`requester_id`,`accepter_id`,`accepted`) values (200,72,1);
 insert  into `friend`(`requester_id`,`accepter_id`,`accepted`) values (202,158,1);
@@ -6939,6 +6968,7 @@ insert  into `friend`(`requester_id`,`accepter_id`,`accepted`) values (219,147,1
 insert  into `friend`(`requester_id`,`accepter_id`,`accepted`) values (220,120,0);
 insert  into `friend`(`requester_id`,`accepter_id`,`accepted`) values (220,208,1);
 insert  into `friend`(`requester_id`,`accepter_id`,`accepted`) values (223,35,1);
+insert  into `friend`(`requester_id`,`accepter_id`,`accepted`) values (225,68,1);
 insert  into `friend`(`requester_id`,`accepter_id`,`accepted`) values (225,81,1);
 insert  into `friend`(`requester_id`,`accepter_id`,`accepted`) values (225,132,1);
 insert  into `friend`(`requester_id`,`accepter_id`,`accepted`) values (227,217,1);
@@ -6977,6 +7007,7 @@ insert  into `friend`(`requester_id`,`accepter_id`,`accepted`) values (301,203,1
 insert  into `friend`(`requester_id`,`accepter_id`,`accepted`) values (303,205,1);
 insert  into `friend`(`requester_id`,`accepter_id`,`accepted`) values (303,228,1);
 insert  into `friend`(`requester_id`,`accepter_id`,`accepted`) values (303,314,1);
+insert  into `friend`(`requester_id`,`accepter_id`,`accepted`) values (305,36,1);
 insert  into `friend`(`requester_id`,`accepter_id`,`accepted`) values (305,286,0);
 insert  into `friend`(`requester_id`,`accepter_id`,`accepted`) values (306,245,1);
 insert  into `friend`(`requester_id`,`accepter_id`,`accepted`) values (308,47,1);
@@ -7178,7 +7209,7 @@ CREATE TABLE `location` (
   CONSTRAINT `location_location_scope_id_location_scope_id` FOREIGN KEY (`location_scope_id`) REFERENCES `location_scope` (`id`),
   CONSTRAINT `location_location_type_id_location_type_id` FOREIGN KEY (`location_type_id`) REFERENCES `location_type` (`id`),
   CONSTRAINT `location_updated_by_sf_guard_user_profile_id` FOREIGN KEY (`updated_by`) REFERENCES `sf_guard_user_profile` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=786 DEFAULT CHARSET=cp1251;
+) ENGINE=InnoDB AUTO_INCREMENT=788 DEFAULT CHARSET=cp1251;
 
 /*Data for the table `location` */
 
@@ -7585,6 +7616,8 @@ insert  into `location`(`id`,`name`,`description`,`depth`,`is_free`,`price`,`loc
 insert  into `location`(`id`,`name`,`description`,`depth`,`is_free`,`price`,`location_flow_id`,`location_fundus_id`,`location_relief_id`,`location_type_id`,`location_scope_id`,`address_id`,`created_by`,`updated_by`,`slug`,`created_at`,`updated_at`,`latitude`,`longitude`,`version`) values (783,'Пруд в Бобрихе','Тлф егеря             8-960-514-52-92   ',NULL,0,'500 р зорька, 1000 р сутки. На меньшую суммы за оптовый приезд егерь не согласился. Норм вылова нет.',NULL,NULL,NULL,3,5,723,290,290,'372','2011-08-10 22:16:41','2011-08-10 22:16:41',54.390688806999997,36.571414845600003,1);
 insert  into `location`(`id`,`name`,`description`,`depth`,`is_free`,`price`,`location_flow_id`,`location_fundus_id`,`location_relief_id`,`location_type_id`,`location_scope_id`,`address_id`,`created_by`,`updated_by`,`slug`,`created_at`,`updated_at`,`latitude`,`longitude`,`version`) values (784,'Братеево','',NULL,1,'',NULL,NULL,NULL,NULL,5,724,226,226,'373','2011-09-08 10:45:06','2011-09-08 10:45:06',55.641063735000003,37.754460896300003,1);
 insert  into `location`(`id`,`name`,`description`,`depth`,`is_free`,`price`,`location_flow_id`,`location_fundus_id`,`location_relief_id`,`location_type_id`,`location_scope_id`,`address_id`,`created_by`,`updated_by`,`slug`,`created_at`,`updated_at`,`latitude`,`longitude`,`version`) values (785,'Москва Батайский проезд','',NULL,1,'',4,NULL,NULL,1,5,725,63,63,'374','2011-02-15 11:44:05','2011-02-15 11:44:05',55.641866429399997,37.725019070899997,1);
+insert  into `location`(`id`,`name`,`description`,`depth`,`is_free`,`price`,`location_flow_id`,`location_fundus_id`,`location_relief_id`,`location_type_id`,`location_scope_id`,`address_id`,`created_by`,`updated_by`,`slug`,`created_at`,`updated_at`,`latitude`,`longitude`,`version`) values (786,'123','',NULL,1,'',NULL,NULL,NULL,NULL,5,726,253,253,'123-1','2011-11-04 10:40:13','2011-11-04 10:40:13',55.619561393500000,35.992401879900001,1);
+insert  into `location`(`id`,`name`,`description`,`depth`,`is_free`,`price`,`location_flow_id`,`location_fundus_id`,`location_relief_id`,`location_type_id`,`location_scope_id`,`address_id`,`created_by`,`updated_by`,`slug`,`created_at`,`updated_at`,`latitude`,`longitude`,`version`) values (787,'345345','',NULL,1,'',NULL,NULL,NULL,NULL,5,727,68,68,'345345','2012-01-18 18:16:46','2012-01-18 18:16:46',55.785548622500002,36.081665795900001,1);
 
 /*Table structure for table `location_flow` */
 
@@ -7678,7 +7711,7 @@ CREATE TABLE `location_show` (
 
 insert  into `location_show`(`id`,`shows`,`location_id`) values (1,87,676);
 insert  into `location_show`(`id`,`shows`,`location_id`) values (2,66,677);
-insert  into `location_show`(`id`,`shows`,`location_id`) values (3,105,678);
+insert  into `location_show`(`id`,`shows`,`location_id`) values (3,107,678);
 insert  into `location_show`(`id`,`shows`,`location_id`) values (4,12,372);
 insert  into `location_show`(`id`,`shows`,`location_id`) values (5,10,427);
 insert  into `location_show`(`id`,`shows`,`location_id`) values (6,43,679);
@@ -8038,9 +8071,9 @@ insert  into `location_show`(`id`,`shows`,`location_id`) values (359,2,561);
 insert  into `location_show`(`id`,`shows`,`location_id`) values (360,12,689);
 insert  into `location_show`(`id`,`shows`,`location_id`) values (361,14,690);
 insert  into `location_show`(`id`,`shows`,`location_id`) values (362,48,691);
-insert  into `location_show`(`id`,`shows`,`location_id`) values (363,55,692);
-insert  into `location_show`(`id`,`shows`,`location_id`) values (364,43,693);
-insert  into `location_show`(`id`,`shows`,`location_id`) values (365,68,695);
+insert  into `location_show`(`id`,`shows`,`location_id`) values (363,58,692);
+insert  into `location_show`(`id`,`shows`,`location_id`) values (364,47,693);
+insert  into `location_show`(`id`,`shows`,`location_id`) values (365,72,695);
 insert  into `location_show`(`id`,`shows`,`location_id`) values (366,28,696);
 insert  into `location_show`(`id`,`shows`,`location_id`) values (367,12,694);
 insert  into `location_show`(`id`,`shows`,`location_id`) values (368,20,697);
@@ -8064,7 +8097,7 @@ insert  into `location_show`(`id`,`shows`,`location_id`) values (385,3,778);
 insert  into `location_show`(`id`,`shows`,`location_id`) values (386,2,779);
 insert  into `location_show`(`id`,`shows`,`location_id`) values (387,2,780);
 insert  into `location_show`(`id`,`shows`,`location_id`) values (388,2,781);
-insert  into `location_show`(`id`,`shows`,`location_id`) values (389,7,782);
+insert  into `location_show`(`id`,`shows`,`location_id`) values (389,14,782);
 insert  into `location_show`(`id`,`shows`,`location_id`) values (390,4,783);
 insert  into `location_show`(`id`,`shows`,`location_id`) values (391,2,784);
 insert  into `location_show`(`id`,`shows`,`location_id`) values (392,2,785);
@@ -8888,6 +8921,8 @@ insert  into `location_version`(`id`,`name`,`description`,`depth`,`is_free`,`pri
 insert  into `location_version`(`id`,`name`,`description`,`depth`,`is_free`,`price`,`location_flow_id`,`location_fundus_id`,`location_relief_id`,`location_type_id`,`location_scope_id`,`address_id`,`created_by`,`updated_by`,`slug`,`created_at`,`updated_at`,`latitude`,`longitude`,`version`) values (783,'Пруд в Бобрихе','Тлф егеря             8-960-514-52-92   ',NULL,0,'500 р зорька, 1000 р сутки. На меньшую суммы за оптовый приезд егерь не согласился. Норм вылова нет.',NULL,NULL,NULL,3,5,NULL,2,2,'372','2011-10-21 23:32:05','2011-10-21 23:32:05',54.390688806999997,36.571414845600003,1);
 insert  into `location_version`(`id`,`name`,`description`,`depth`,`is_free`,`price`,`location_flow_id`,`location_fundus_id`,`location_relief_id`,`location_type_id`,`location_scope_id`,`address_id`,`created_by`,`updated_by`,`slug`,`created_at`,`updated_at`,`latitude`,`longitude`,`version`) values (784,'Братеево','',NULL,1,'',NULL,NULL,NULL,NULL,5,NULL,2,2,'373','2011-10-23 20:08:11','2011-10-23 20:08:11',55.641063735000003,37.754460896300003,1);
 insert  into `location_version`(`id`,`name`,`description`,`depth`,`is_free`,`price`,`location_flow_id`,`location_fundus_id`,`location_relief_id`,`location_type_id`,`location_scope_id`,`address_id`,`created_by`,`updated_by`,`slug`,`created_at`,`updated_at`,`latitude`,`longitude`,`version`) values (785,'Москва Батайский проезд','',NULL,1,'',4,NULL,NULL,1,5,NULL,2,2,'374','2011-10-23 20:37:02','2011-10-23 20:37:02',55.641866429399997,37.725019070899997,1);
+insert  into `location_version`(`id`,`name`,`description`,`depth`,`is_free`,`price`,`location_flow_id`,`location_fundus_id`,`location_relief_id`,`location_type_id`,`location_scope_id`,`address_id`,`created_by`,`updated_by`,`slug`,`created_at`,`updated_at`,`latitude`,`longitude`,`version`) values (786,'123','',NULL,1,'',NULL,NULL,NULL,NULL,5,NULL,2,2,'123-1','2012-01-26 00:52:51','2012-01-26 00:52:51',55.619561393500000,35.992401879900001,1);
+insert  into `location_version`(`id`,`name`,`description`,`depth`,`is_free`,`price`,`location_flow_id`,`location_fundus_id`,`location_relief_id`,`location_type_id`,`location_scope_id`,`address_id`,`created_by`,`updated_by`,`slug`,`created_at`,`updated_at`,`latitude`,`longitude`,`version`) values (787,'345345','',NULL,1,'',NULL,NULL,NULL,NULL,5,NULL,2,2,'345345','2012-01-26 00:55:00','2012-01-26 00:55:00',55.785548622500002,36.081665795900001,1);
 
 /*Table structure for table `nick_map` */
 
@@ -9340,7 +9375,7 @@ CREATE TABLE `route` (
   PRIMARY KEY (`id`),
   KEY `country_id_idx` (`country_id`),
   CONSTRAINT `route_country_id_country_id` FOREIGN KEY (`country_id`) REFERENCES `country` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=217 DEFAULT CHARSET=cp1251;
+) ENGINE=InnoDB AUTO_INCREMENT=219 DEFAULT CHARSET=cp1251;
 
 /*Data for the table `route` */
 
@@ -9560,6 +9595,8 @@ insert  into `route`(`id`,`name`,`country_id`) values (213,'М-3',1);
 insert  into `route`(`id`,`name`,`country_id`) values (214,'М-2',1);
 insert  into `route`(`id`,`name`,`country_id`) values (215,'Р-68',1);
 insert  into `route`(`id`,`name`,`country_id`) values (216,'Батайский пр.',1);
+insert  into `route`(`id`,`name`,`country_id`) values (217,'A100',1);
+insert  into `route`(`id`,`name`,`country_id`) values (218,'P108',1);
 
 /*Table structure for table `schema_migrations` */
 
@@ -9688,14 +9725,14 @@ CREATE TABLE `sf_guard_user` (
   UNIQUE KEY `email_address` (`email_address`),
   UNIQUE KEY `username` (`username`),
   KEY `is_active_idx_idx` (`is_active`)
-) ENGINE=InnoDB AUTO_INCREMENT=326 DEFAULT CHARSET=cp1251;
+) ENGINE=InnoDB AUTO_INCREMENT=329 DEFAULT CHARSET=cp1251;
 
 /*Data for the table `sf_guard_user` */
 
-insert  into `sf_guard_user`(`id`,`first_name`,`last_name`,`email_address`,`username`,`algorithm`,`salt`,`password`,`is_active`,`is_super_admin`,`last_login`,`created_at`,`updated_at`) values (1,'','','uberlov@gmail.com','uberlov','PasswordKeeper::generate','93b8926afa3c763923dc904682439337','93b8926afa3c763923dc904682439337qweqwe123',1,0,'2011-10-21 20:29:33','2011-03-11 20:52:17','2011-10-21 20:29:33');
-insert  into `sf_guard_user`(`id`,`first_name`,`last_name`,`email_address`,`username`,`algorithm`,`salt`,`password`,`is_active`,`is_super_admin`,`last_login`,`created_at`,`updated_at`) values (2,'','','spamer@uberlov.ru','spamer','PasswordKeeper::generate','8c65d6733a4dd32a5510ab6d3793d3d9','8c65d6733a4dd32a5510ab6d3793d3d9qweqwe123',1,0,'2011-10-23 20:06:46','2011-03-11 20:52:31','2011-10-23 20:06:46');
+insert  into `sf_guard_user`(`id`,`first_name`,`last_name`,`email_address`,`username`,`algorithm`,`salt`,`password`,`is_active`,`is_super_admin`,`last_login`,`created_at`,`updated_at`) values (1,'','','uberlov@gmail.com','uberlov','PasswordKeeper::generate','93b8926afa3c763923dc904682439337','93b8926afa3c763923dc904682439337qweqwe123',1,0,'2011-10-27 21:09:45','2011-03-11 20:52:17','2011-10-27 21:09:45');
+insert  into `sf_guard_user`(`id`,`first_name`,`last_name`,`email_address`,`username`,`algorithm`,`salt`,`password`,`is_active`,`is_super_admin`,`last_login`,`created_at`,`updated_at`) values (2,'','','spamer@uberlov.ru','spamer','PasswordKeeper::generate','8c65d6733a4dd32a5510ab6d3793d3d9','8c65d6733a4dd32a5510ab6d3793d3d9qweqwe123',1,0,'2012-01-26 00:24:29','2011-03-11 20:52:31','2012-01-26 00:24:29');
 insert  into `sf_guard_user`(`id`,`first_name`,`last_name`,`email_address`,`username`,`algorithm`,`salt`,`password`,`is_active`,`is_super_admin`,`last_login`,`created_at`,`updated_at`) values (3,'','','admin@uberlov.ru','admin','PasswordKeeper::generate','884f9de044df99d54aedf354eded1a32','884f9de044df99d54aedf354eded1a32qweqwe123',1,0,'2011-05-03 21:50:46','2011-03-11 20:52:47','2011-05-03 21:52:25');
-insert  into `sf_guard_user`(`id`,`first_name`,`last_name`,`email_address`,`username`,`algorithm`,`salt`,`password`,`is_active`,`is_super_admin`,`last_login`,`created_at`,`updated_at`) values (7,'Сергей','Белов','limitium@gmail.com','limitium','PasswordKeeper::generate','df4ec620183da5af8c2df4d1c60f9c53','df4ec620183da5af8c2df4d1c60f9c53qweqwe123',1,0,'2011-09-07 20:02:05','2011-03-31 12:26:05','2011-09-07 20:02:05');
+insert  into `sf_guard_user`(`id`,`first_name`,`last_name`,`email_address`,`username`,`algorithm`,`salt`,`password`,`is_active`,`is_super_admin`,`last_login`,`created_at`,`updated_at`) values (7,'Сергей','Белов','limitium@gmail.com','limitium','PasswordKeeper::generate','df4ec620183da5af8c2df4d1c60f9c53','df4ec620183da5af8c2df4d1c60f9c53qweqwe123',1,0,'2011-10-27 22:09:46','2011-03-31 12:26:05','2011-10-27 22:09:46');
 insert  into `sf_guard_user`(`id`,`first_name`,`last_name`,`email_address`,`username`,`algorithm`,`salt`,`password`,`is_active`,`is_super_admin`,`last_login`,`created_at`,`updated_at`) values (8,NULL,NULL,'strory@inbox.ru','Strory','PasswordKeeper::generate','640adb09b1d4dd25742444cd8099f278','640adb09b1d4dd25742444cd8099f2783101935',1,0,'2011-06-19 15:13:56','2011-06-01 23:16:01','2011-06-19 15:13:56');
 insert  into `sf_guard_user`(`id`,`first_name`,`last_name`,`email_address`,`username`,`algorithm`,`salt`,`password`,`is_active`,`is_super_admin`,`last_login`,`created_at`,`updated_at`) values (9,NULL,NULL,'denis.samohvalov@gmail.com','Deni','PasswordKeeper::generate','910e4a78e92445caa3737babd514af45','910e4a78e92445caa3737babd514af45[ew[ew[ew',1,0,'2011-09-28 13:35:27','2011-06-02 11:38:20','2011-09-28 13:35:27');
 insert  into `sf_guard_user`(`id`,`first_name`,`last_name`,`email_address`,`username`,`algorithm`,`salt`,`password`,`is_active`,`is_super_admin`,`last_login`,`created_at`,`updated_at`) values (10,NULL,NULL,'nail84@mail.ru','nail84','PasswordKeeper::generate','4f474e8bef2ce86bb91c29a06e56b9c9','4f474e8bef2ce86bb91c29a06e56b9c912qwaszx',1,0,'2011-10-14 15:11:15','2011-06-02 13:19:15','2011-10-14 15:11:15');
@@ -10014,6 +10051,9 @@ insert  into `sf_guard_user`(`id`,`first_name`,`last_name`,`email_address`,`user
 insert  into `sf_guard_user`(`id`,`first_name`,`last_name`,`email_address`,`username`,`algorithm`,`salt`,`password`,`is_active`,`is_super_admin`,`last_login`,`created_at`,`updated_at`) values (323,'Александр','Дитковский','140205459@uberlov.ru','nate','sha1',NULL,NULL,1,0,'2011-08-20 06:21:10','2011-08-20 06:21:10','2011-08-20 06:21:10');
 insert  into `sf_guard_user`(`id`,`first_name`,`last_name`,`email_address`,`username`,`algorithm`,`salt`,`password`,`is_active`,`is_super_admin`,`last_login`,`created_at`,`updated_at`) values (324,NULL,NULL,'b4156a62176107d0a3831d51eede1629@uberlov.ru','chartdog','sha1',NULL,NULL,1,0,'2011-08-20 14:55:57','2011-08-20 14:55:57','2011-08-20 14:55:57');
 insert  into `sf_guard_user`(`id`,`first_name`,`last_name`,`email_address`,`username`,`algorithm`,`salt`,`password`,`is_active`,`is_super_admin`,`last_login`,`created_at`,`updated_at`) values (325,NULL,NULL,'187b037e8b16d9e218c21c49f6f063d3@uberlov.ru','Jay','sha1',NULL,NULL,1,0,'2011-08-21 02:58:06','2011-08-21 02:58:06','2011-08-21 02:58:06');
+insert  into `sf_guard_user`(`id`,`first_name`,`last_name`,`email_address`,`username`,`algorithm`,`salt`,`password`,`is_active`,`is_super_admin`,`last_login`,`created_at`,`updated_at`) values (326,NULL,NULL,'test@tes111t.test','testuser111','PasswordKeeper::generate','a83b91450cba20f730709949b637e309','a83b91450cba20f730709949b637e309testuser',1,0,'2011-10-26 23:04:55','2011-10-26 21:57:46','2011-10-26 23:04:56');
+insert  into `sf_guard_user`(`id`,`first_name`,`last_name`,`email_address`,`username`,`algorithm`,`salt`,`password`,`is_active`,`is_super_admin`,`last_login`,`created_at`,`updated_at`) values (327,'1','2','testu123er@gmail.com','233333','PasswordKeeper::generate','a902c27c57046e7748b2c2f64ff9cb8d','a902c27c57046e7748b2c2f64ff9cb8dtestuser',1,0,'2011-10-27 13:02:45','2011-10-27 13:02:05','2011-10-27 13:07:29');
+insert  into `sf_guard_user`(`id`,`first_name`,`last_name`,`email_address`,`username`,`algorithm`,`salt`,`password`,`is_active`,`is_super_admin`,`last_login`,`created_at`,`updated_at`) values (328,'tetst','test','testuser@gmail.com','testuser','PasswordKeeper::generate','32328207f55e9ef6cce6b1509caa2cbd','32328207f55e9ef6cce6b1509caa2cbdtestuser',1,0,'2011-10-27 13:10:39','2011-10-27 13:08:50','2011-10-27 13:10:40');
 
 /*Table structure for table `sf_guard_user_group` */
 
@@ -10076,7 +10116,7 @@ CREATE TABLE `sf_guard_user_profile` (
   KEY `city_id_idx` (`city_id`),
   CONSTRAINT `sf_guard_user_profile_city_id_city_id` FOREIGN KEY (`city_id`) REFERENCES `city` (`id`),
   CONSTRAINT `sf_guard_user_profile_user_id_sf_guard_user_id` FOREIGN KEY (`user_id`) REFERENCES `sf_guard_user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=326 DEFAULT CHARSET=cp1251;
+) ENGINE=InnoDB AUTO_INCREMENT=329 DEFAULT CHARSET=cp1251;
 
 /*Data for the table `sf_guard_user_profile` */
 
@@ -10402,6 +10442,9 @@ insert  into `sf_guard_user_profile`(`user_id`,`email_new`,`validate_at`,`valida
 insert  into `sf_guard_user_profile`(`user_id`,`email_new`,`validate_at`,`validate`,`id`,`sex`,`birth_date`,`userpic`,`description`,`city_id`,`created_at`,`updated_at`) values (323,NULL,'2011-08-20 06:21:10',NULL,323,1,NULL,'97f32845ccdf5c74e0bbde25c1c8ac63.png',NULL,NULL,'2011-08-20 06:21:10','2011-08-20 06:21:10');
 insert  into `sf_guard_user_profile`(`user_id`,`email_new`,`validate_at`,`validate`,`id`,`sex`,`birth_date`,`userpic`,`description`,`city_id`,`created_at`,`updated_at`) values (324,NULL,'2011-08-20 14:55:57',NULL,324,1,NULL,NULL,NULL,NULL,'2011-08-20 14:55:57','2011-08-20 14:55:57');
 insert  into `sf_guard_user_profile`(`user_id`,`email_new`,`validate_at`,`validate`,`id`,`sex`,`birth_date`,`userpic`,`description`,`city_id`,`created_at`,`updated_at`) values (325,NULL,'2011-08-21 02:58:06',NULL,325,1,NULL,NULL,NULL,NULL,'2011-08-21 02:58:06','2011-08-21 02:58:06');
+insert  into `sf_guard_user_profile`(`user_id`,`email_new`,`validate_at`,`validate`,`id`,`sex`,`birth_date`,`userpic`,`description`,`city_id`,`created_at`,`updated_at`) values (326,NULL,NULL,NULL,326,1,NULL,NULL,NULL,NULL,'2011-10-26 21:58:03','2011-10-26 22:00:23');
+insert  into `sf_guard_user_profile`(`user_id`,`email_new`,`validate_at`,`validate`,`id`,`sex`,`birth_date`,`userpic`,`description`,`city_id`,`created_at`,`updated_at`) values (327,NULL,NULL,'',327,1,NULL,NULL,'\r\n<p>йцу</p>',2242,'2011-10-27 13:02:06','2011-10-27 13:07:29');
+insert  into `sf_guard_user_profile`(`user_id`,`email_new`,`validate_at`,`validate`,`id`,`sex`,`birth_date`,`userpic`,`description`,`city_id`,`created_at`,`updated_at`) values (328,NULL,NULL,'',328,1,'2011-10-27',NULL,'\r\n<p>test</p>',2242,'2011-10-27 13:08:58','2011-10-27 13:10:12');
 
 /*Table structure for table `style` */
 
@@ -10712,7 +10755,7 @@ CREATE TABLE `vote` (
   CONSTRAINT `vote_profit_id_profit_id` FOREIGN KEY (`profit_id`) REFERENCES `profit` (`id`) ON DELETE CASCADE,
   CONSTRAINT `vote_talk_id_talk_id` FOREIGN KEY (`talk_id`) REFERENCES `talk` (`id`) ON DELETE CASCADE,
   CONSTRAINT `vote_voter_sf_guard_user_profile_id` FOREIGN KEY (`voter`) REFERENCES `sf_guard_user_profile` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4661 DEFAULT CHARSET=cp1251;
+) ENGINE=InnoDB AUTO_INCREMENT=4686 DEFAULT CHARSET=cp1251;
 
 /*Data for the table `vote` */
 
@@ -15376,6 +15419,31 @@ insert  into `vote`(`id`,`value`,`voter`,`toward`,`location_id`,`comment_id`,`pr
 insert  into `vote`(`id`,`value`,`voter`,`toward`,`location_id`,`comment_id`,`profit_id`,`profile_id`,`talk_id`,`fish_event_id`,`photo_id`) values (4658,1,38,'fish_event',NULL,NULL,NULL,NULL,NULL,12,NULL);
 insert  into `vote`(`id`,`value`,`voter`,`toward`,`location_id`,`comment_id`,`profit_id`,`profile_id`,`talk_id`,`fish_event_id`,`photo_id`) values (4659,1,124,'fish_event',NULL,NULL,NULL,NULL,NULL,12,NULL);
 insert  into `vote`(`id`,`value`,`voter`,`toward`,`location_id`,`comment_id`,`profit_id`,`profile_id`,`talk_id`,`fish_event_id`,`photo_id`) values (4660,1,47,'fish_event',NULL,NULL,NULL,NULL,NULL,12,NULL);
+insert  into `vote`(`id`,`value`,`voter`,`toward`,`location_id`,`comment_id`,`profit_id`,`profile_id`,`talk_id`,`fish_event_id`,`photo_id`) values (4661,1,113,'location',786,NULL,NULL,NULL,NULL,NULL,NULL);
+insert  into `vote`(`id`,`value`,`voter`,`toward`,`location_id`,`comment_id`,`profit_id`,`profile_id`,`talk_id`,`fish_event_id`,`photo_id`) values (4662,1,127,'location',786,NULL,NULL,NULL,NULL,NULL,NULL);
+insert  into `vote`(`id`,`value`,`voter`,`toward`,`location_id`,`comment_id`,`profit_id`,`profile_id`,`talk_id`,`fish_event_id`,`photo_id`) values (4663,1,81,'profile',NULL,NULL,NULL,253,NULL,NULL,NULL);
+insert  into `vote`(`id`,`value`,`voter`,`toward`,`location_id`,`comment_id`,`profit_id`,`profile_id`,`talk_id`,`fish_event_id`,`photo_id`) values (4664,1,235,'comment',NULL,191,NULL,NULL,NULL,NULL,NULL);
+insert  into `vote`(`id`,`value`,`voter`,`toward`,`location_id`,`comment_id`,`profit_id`,`profile_id`,`talk_id`,`fish_event_id`,`photo_id`) values (4665,1,272,'comment',NULL,195,NULL,NULL,NULL,NULL,NULL);
+insert  into `vote`(`id`,`value`,`voter`,`toward`,`location_id`,`comment_id`,`profit_id`,`profile_id`,`talk_id`,`fish_event_id`,`photo_id`) values (4666,1,170,'comment',NULL,196,NULL,NULL,NULL,NULL,NULL);
+insert  into `vote`(`id`,`value`,`voter`,`toward`,`location_id`,`comment_id`,`profit_id`,`profile_id`,`talk_id`,`fish_event_id`,`photo_id`) values (4667,1,289,'profile',NULL,NULL,NULL,221,NULL,NULL,NULL);
+insert  into `vote`(`id`,`value`,`voter`,`toward`,`location_id`,`comment_id`,`profit_id`,`profile_id`,`talk_id`,`fish_event_id`,`photo_id`) values (4668,1,109,'profile',NULL,NULL,NULL,221,NULL,NULL,NULL);
+insert  into `vote`(`id`,`value`,`voter`,`toward`,`location_id`,`comment_id`,`profit_id`,`profile_id`,`talk_id`,`fish_event_id`,`photo_id`) values (4669,1,212,'comment',NULL,199,NULL,NULL,NULL,NULL,NULL);
+insert  into `vote`(`id`,`value`,`voter`,`toward`,`location_id`,`comment_id`,`profit_id`,`profile_id`,`talk_id`,`fish_event_id`,`photo_id`) values (4670,1,170,'profile',NULL,NULL,NULL,213,NULL,NULL,NULL);
+insert  into `vote`(`id`,`value`,`voter`,`toward`,`location_id`,`comment_id`,`profit_id`,`profile_id`,`talk_id`,`fish_event_id`,`photo_id`) values (4671,1,146,'comment',NULL,201,NULL,NULL,NULL,NULL,NULL);
+insert  into `vote`(`id`,`value`,`voter`,`toward`,`location_id`,`comment_id`,`profit_id`,`profile_id`,`talk_id`,`fish_event_id`,`photo_id`) values (4672,1,82,'profile',NULL,NULL,NULL,148,NULL,NULL,NULL);
+insert  into `vote`(`id`,`value`,`voter`,`toward`,`location_id`,`comment_id`,`profit_id`,`profile_id`,`talk_id`,`fish_event_id`,`photo_id`) values (4673,1,228,'comment',NULL,203,NULL,NULL,NULL,NULL,NULL);
+insert  into `vote`(`id`,`value`,`voter`,`toward`,`location_id`,`comment_id`,`profit_id`,`profile_id`,`talk_id`,`fish_event_id`,`photo_id`) values (4674,1,150,'profile',NULL,NULL,NULL,92,NULL,NULL,NULL);
+insert  into `vote`(`id`,`value`,`voter`,`toward`,`location_id`,`comment_id`,`profit_id`,`profile_id`,`talk_id`,`fish_event_id`,`photo_id`) values (4675,1,286,'comment',NULL,204,NULL,NULL,NULL,NULL,NULL);
+insert  into `vote`(`id`,`value`,`voter`,`toward`,`location_id`,`comment_id`,`profit_id`,`profile_id`,`talk_id`,`fish_event_id`,`photo_id`) values (4676,1,323,'profile',NULL,NULL,NULL,288,NULL,NULL,NULL);
+insert  into `vote`(`id`,`value`,`voter`,`toward`,`location_id`,`comment_id`,`profit_id`,`profile_id`,`talk_id`,`fish_event_id`,`photo_id`) values (4677,1,228,'profile',NULL,NULL,NULL,67,NULL,NULL,NULL);
+insert  into `vote`(`id`,`value`,`voter`,`toward`,`location_id`,`comment_id`,`profit_id`,`profile_id`,`talk_id`,`fish_event_id`,`photo_id`) values (4678,1,40,'comment',NULL,206,NULL,NULL,NULL,NULL,NULL);
+insert  into `vote`(`id`,`value`,`voter`,`toward`,`location_id`,`comment_id`,`profit_id`,`profile_id`,`talk_id`,`fish_event_id`,`photo_id`) values (4679,1,45,'profile',NULL,NULL,NULL,245,NULL,NULL,NULL);
+insert  into `vote`(`id`,`value`,`voter`,`toward`,`location_id`,`comment_id`,`profit_id`,`profile_id`,`talk_id`,`fish_event_id`,`photo_id`) values (4680,1,247,'comment',NULL,208,NULL,NULL,NULL,NULL,NULL);
+insert  into `vote`(`id`,`value`,`voter`,`toward`,`location_id`,`comment_id`,`profit_id`,`profile_id`,`talk_id`,`fish_event_id`,`photo_id`) values (4681,1,184,'profile',NULL,NULL,NULL,36,NULL,NULL,NULL);
+insert  into `vote`(`id`,`value`,`voter`,`toward`,`location_id`,`comment_id`,`profit_id`,`profile_id`,`talk_id`,`fish_event_id`,`photo_id`) values (4682,1,219,'comment',NULL,210,NULL,NULL,NULL,NULL,NULL);
+insert  into `vote`(`id`,`value`,`voter`,`toward`,`location_id`,`comment_id`,`profit_id`,`profile_id`,`talk_id`,`fish_event_id`,`photo_id`) values (4683,1,114,'profile',NULL,NULL,NULL,51,NULL,NULL,NULL);
+insert  into `vote`(`id`,`value`,`voter`,`toward`,`location_id`,`comment_id`,`profit_id`,`profile_id`,`talk_id`,`fish_event_id`,`photo_id`) values (4684,1,176,'comment',NULL,212,NULL,NULL,NULL,NULL,NULL);
+insert  into `vote`(`id`,`value`,`voter`,`toward`,`location_id`,`comment_id`,`profit_id`,`profile_id`,`talk_id`,`fish_event_id`,`photo_id`) values (4685,1,117,'comment',NULL,212,NULL,NULL,NULL,NULL,NULL);
 
 /*Table structure for table `wish_list` */
 

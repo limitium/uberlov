@@ -24,7 +24,7 @@ test:
 
 all:
   .settings:
-    enabled_modules:      [default, sfGuardAuth, taggableComplete,sfApply,sfJqueryFormVal]
+    enabled_modules:      [default, sfGuardAuth, taggableComplete,sfApply,sfJqueryFormVal,sfCombine]
     login_module:           sfGuardAuth
     login_action:           signin
 

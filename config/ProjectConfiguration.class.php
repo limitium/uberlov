@@ -36,6 +36,7 @@ class ProjectConfiguration extends sfProjectConfiguration {
         $this->enablePlugins('sfXssSafePlugin');
         $this->enablePlugins('sfJqueryFormValidationPlugin');
         $this->enablePlugins('swFunctionalTestGenerationPlugin');
+        $this->enablePlugins('sfCombinePlugin');
     }
 
     public function setWebDir($webDir) {
