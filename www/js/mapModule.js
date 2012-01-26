@@ -42,20 +42,19 @@ mapModule.prototype.initMap = function(){
     }else{
         var self = this;
         fb('getting maxmind data...');
+        params.lat =  self.defaultLat;
+        params.lng = self.defaultLng;
+        self.startMap.call(self,params);
+        
         $.ajax({
             type: "GET",
             url: "http://j.maxmind.com/app/geoip.js",
             success: function () {
-                params.lat =  geoip_latitude();
-                params.lng = geoip_longitude();
-                self.startMap.call(self,params);
+                self.map.setCenter(new gm.LatLng(parseFloat(geoip_latitude()),parseFloat(geoip_longitude())));
                 fb('recived');
             },
             error : function () {
-                alert('maxmind.com жопят данные :\'(');
-                params.lat =  self.defaultLat;
-                params.lng = self.defaultLng;
-                self.startMap.call(self,params);
+                fb('maxmind.com жопят данные :\'(');                
             },
             dataType: "script"
         });

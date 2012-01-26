@@ -1,3 +1,4 @@
+<?php use_helper('sfCombine'); ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
     <head>
@@ -6,7 +7,7 @@
         <?php include_metas() ?>
 
         <title><?php echo get_slot('title', 'Uberлов — Узнай, где ловить рыбу!') ?></title>
-        <?php include_stylesheets() ?>
+        <?php include_combined_stylesheets() ?>
     </head>
     <body>
         <div id="page">
@@ -190,7 +191,7 @@
             })();
         </script>          
         <?php endif; ?>
-        <?php include_javascripts() ?>        
+        <?php include_combined_javascripts() ?>        
         <script type="text/javascript">
             reformal_wdg_domain    = "uberlov";
             reformal_wdg_mode    = 0;
