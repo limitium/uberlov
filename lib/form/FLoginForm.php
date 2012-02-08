@@ -31,8 +31,9 @@ class FloginForm extends BaseForm {
     }
     
      public function getJavaScripts() {
+        return array('/js/FLoginForm.js');
         $url_params = sfJqueryFormValidationRules::getUrlParams();
         $url_params['form'] = get_class($this);
-        return array_merge(parent::getJavaScripts(), array('/js/lib/jquery.validate.js', url_for($url_params)));
+        return array_merge(parent::getJavaScripts(), array( url_for($url_params)));
     }
 }
