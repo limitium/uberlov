@@ -121,9 +121,10 @@ class FRegistrationForm extends sfApplyApplyForm {
     }
 
     public function getJavaScripts() {
+        return array('/js/FRegistrationForm.js');
         $url_params = sfJqueryFormValidationRules::getUrlParams();
         $url_params['form'] = get_class($this);
-        return array_merge(parent::getJavaScripts(), array('/js/lib/jquery.validate.js', url_for($url_params)));
+        return array_merge(parent::getJavaScripts(), array(url_for($url_params)));
     }
 
     public function doSave($con = null) {
