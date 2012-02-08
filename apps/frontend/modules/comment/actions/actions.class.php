@@ -55,7 +55,7 @@ class commentActions extends sfActions {
             $this->comment = $form->save();
             $this->comment->getNode()->insertAsLastChildOf($parent);
             
-            $prevCom = $parent->message == 'root'?$this->comment->getNode()->getPrevSibling():$parent;
+            $prevCom = $parent->message == 'root'?$parent:$this->comment->getNode()->getPrevSibling();
 
             BotNet::create()->spammed($this->comment, 'message', $prevCom->getDateTimeObject('created_at')->format('U'));
 
