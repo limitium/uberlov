@@ -1,5 +1,3 @@
-<?php use_helper('jQuery') ?>
-
 <div class="assigned-tags">
     <?php if (count($object->getTags())): ?>
         <ul>

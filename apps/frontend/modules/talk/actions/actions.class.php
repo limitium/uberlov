@@ -76,21 +76,6 @@ class talkActions extends sfActions {
         $this->setTemplate('new');
     }
 
-    public function executeEdit(sfWebRequest $request) {
-        $this->forward404Unless($talk = Doctrine::getTable('Talk')->find(array($request->getParameter('id'))), sprintf('Object talk does not exist (%s).', $request->getParameter('id')));
-        $this->form = new TalkForm($talk);
-    }
-
-    public function executeUpdate(sfWebRequest $request) {
-        $this->forward404Unless($request->isMethod(sfRequest::POST) || $request->isMethod(sfRequest::PUT));
-        $this->forward404Unless($talk = Doctrine::getTable('Talk')->find(array($request->getParameter('id'))), sprintf('Object talk does not exist (%s).', $request->getParameter('id')));
-        $this->form = new TalkForm($talk);
-
-        $this->processForm($request, $this->form);
-
-        $this->setTemplate('edit');
-    }
-
     public function executeDelete(sfWebRequest $request) {
         $request->checkCSRFProtection();
 
