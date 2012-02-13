@@ -326,14 +326,6 @@ talk_create:
   params:     { module: talk, action: create }
   requirements:
     sf_method: [post]
-talk_edit:
-  url:        /talk/:id/edit
-  params:     { module: talk, action: edit, menu talks }
-  requirements:
-    sf_method: [get]
-talk_update:
-  url:        /talk/update/:id
-  params:     { module: talk, action: update }
 talk_section:
   url:        /talk/section
   params:     { module: talk, action: section, menu talks }

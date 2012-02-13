@@ -8,11 +8,8 @@
     </ul>
 <?php endif; ?>
 
-<form action="<?php echo url_for('talk/' . ($form->getObject()->isNew() ? 'create' : 'update') . (!$form->getObject()->isNew() ? '?id=' . $form->getObject()->getId() : '')) ?>" method="post" <?php $form->isMultipart() and print 'enctype="multipart/form-data" ' ?>>
-    <fieldset>
-        <?php if (!$form->getObject()->isNew()): ?>
-            <input type="hidden" name="sf_medtod" value="put" />
-        <?php endif; ?>
+<form action="<?php echo url_for('talk/create') ?>" method="post">
+    <fieldset>        
         <dl>
             <dt><?php echo $form['name']->renderLabel() ?></dt>
             <dd>
@@ -47,7 +44,9 @@
     </div>
 </form>
 
-<?php use_javascript('../sfDoctrineActAsTaggablePlugin/js/pkTagahead'); ?>
+
 <script>
-    pkTagahead(<?php echo json_encode(url_for("talk/suggest")) ?>);
+    tagSuggest = <?php echo json_encode(url_for("talk/suggest")) ?>;
 </script>
+<?php use_javascript('../sfDoctrineActAsTaggablePlugin/js/pkTagahead'); ?>
+<?php use_javascript('pkTagahead'); ?>
