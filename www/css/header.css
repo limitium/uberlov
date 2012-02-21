@@ -1,53 +1,8 @@
-#header{
-    padding-top: 30px;
+cufon {
+    height: 22px !important;    
+    padding-top: 6px;
 }
-#logo{
-    float:left;
-    width: 310px;
-    height: 104px;
-}
-#bleat img{
-    margin-top: 5px;
-}
-#bleat{
-    float:right;
-    margin-bottom: -5px;
-}
-#logo a {
-    display: block;
-}
-.register_button_wrapper {
-    float: right;
-    padding-top: 30px;
-    padding-right: 20px;
-}
-.register_button_wrapper {
-}
-.register_button {
-    background: none repeat scroll 0 0 transparent;
-    border: 0 none;
-    cursor: pointer;
-    display: inline-block;
-    text-align: center;
-    vertical-align: middle;
-}
-.register_button span {
-    background: url("/images/common/buttons/register_button/border_l.png") no-repeat scroll left top transparent;
-    display: block;
-    float: left;
-    height: 47px;
-    padding: 0 0 0 8px;
-    text-decoration: none;
-}
-.register_button span span {
-    background: url("/images/common/buttons/register_button/border_r.png") no-repeat scroll right top transparent;
-    padding: 0 8px 0 0;
-}
-.register_button span span span {
-    background: url("/images/common/buttons/register_button/btn_bg.png") repeat-x scroll left top transparent;
-    color: #FFFFFF;
-    font: 17px/47px Arial,Helvetica,sans-serif;
-    padding: 0 16px;
-    text-decoration: none;
-    text-shadow: 1px 1px 1px #415A08;
+.nav cufon {    
+    padding-top: 8px;
+    padding-bottom: -2px;
 }

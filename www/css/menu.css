@@ -15,8 +15,9 @@
 }
 .brand img{
     top:-9px;
-    left:-9px;
+    left:-6px;
     position: absolute;
+    z-index: 100;
 }
 .nav a{
     line-height: 29px !important;
