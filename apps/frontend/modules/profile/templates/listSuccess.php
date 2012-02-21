@@ -2,7 +2,7 @@
 <?php use_javascript('friendShow'); ?>
 <?php use_stylesheet('friend'); ?>
 <script type="text/javascript">
-    app.csrf.friend = "<?php echo $csrf; ?>";
+    csrf.friend = "<?php echo $csrf; ?>";
 </script>
 
 <?php $people = $pager->execute(); ?>

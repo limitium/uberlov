@@ -32,6 +32,9 @@ sf_guard_signin:
 sf_guard_signout:
   url:   /logout
   param: { module: sfGuardAuth, action: signout }
+apply:
+  url:   /user/new
+  param: { module: sfApply, action: apply, menu apply}
 
 #apply
 user_confirm:

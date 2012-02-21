@@ -8,67 +8,61 @@
 
         <title><?php echo get_slot('title', 'Uberлов — Узнай, где ловить рыбу!') ?></title>
         <?php include_combined_stylesheets() ?>
+        <script type="text/javascript" >
+            baseUrl = "<?php echo substr(url_for('@homepage'), 0, strlen(url_for('@homepage')) - 1); ?>";
+            baseUrlFull = "<?php echo substr(url_for('@homepage', true), 0, strlen(url_for('@homepage', true)) - 1); ?>";
+            baseUrl = "<?php echo sfContext::getInstance()->getRequest()->getRelativeUrlRoot(); ?>";
+            csrf = {};
+        </script>
     </head>
     <body>
         <div id="page">
-            <div id="header" class="content">
-                <div class="clear_fix">
-                    <div id="logo">
-                        <?php echo link_to(image_tag('/images/logo_new.png',array('alt'=>'uberlov.ru')), '@homepage') ?>
-                    </div>
-                    
-                    <div id="bleat">
-                        <?php echo image_tag('/images/bleat2.png',array('alt'=>'blyat add')); ?>
-                    </div>
-                    <?php if ($sf_user->isAnonymous()): ?>
-                        <div class="register_button_wrapper">
-                            <a class="register_button" href="<?php echo url_for('@apply') ?>">    
-                                <span class="border_l png_fix">
-                                    <span class="border_r png_fix">
-                                        <span class="btn_bg png_fix">
-                                            Регистрация!
-                                        </span>
-                                    </span>
-                                </span>
-                            </a>
-                        </div>
-                    <?php endif; ?>
-                </div>
-                <div id="main_menu" class="clear_fix">
-                    <ul class="clear_fix">
-                        <li class="first<?php echo 'map' == $sf_request->getParameter('menu') ? ' selected' : '' ?>">
-                            <?php echo link_to('Карта мест', '@map') ?>
-                        </li>
-                        <li<?php echo 'profits' == $sf_request->getParameter('menu') ? ' class="selected"' : '' ?>>
-                            <?php echo link_to('Отчёты', '@profits') ?>
-                        </li>
-                        <li<?php echo 'talks' == $sf_request->getParameter('menu') ? ' class="selected"' : '' ?>>
-                            <?php echo link_to('Обсуждения', '@talks') ?>
-                        </li>
-                        <li<?php echo 'events' == $sf_request->getParameter('menu') ? ' class="selected"' : '' ?>>
-                            <?php echo link_to('События', '@events') ?>
-                        </li>
-                        <li<?php echo 'search' == $sf_request->getParameter('menu') ? ' class="selected"' : '' ?>>
-                            <?php echo link_to('Поиск', '@search') ?>
-                        </li>
-                        <?php if ($sf_user->isAnonymous()): ?>
-                            <li class="last<?php echo 'sf_guard_signin' == $sf_request->getParameter('menu') ? ' selected' : '' ?>">
-                                <?php echo link_to('Вход', '@sf_guard_signin') ?>
+            <div class="navbar navbar-fixed-top">
+                <div class="navbar-inner">
+                    <div class="container" style="width: auto;">
+                        <a class="brand" href="<?php echo url_for('@homepage') ?>"><img alt="uberlov.ru" src="/images/logo_small.png">Uberlov</a>                        
+                        <ul class="nav">
+                            <li<?php echo 'map' == $sf_request->getParameter('menu') ? ' class="active"' : '' ?>>
+                                <?php echo link_to('Карта мест', '@map') ?>
                             </li>
-                        <?php else: ?>
-                            <li class="last">
-                                <?php echo link_to('Выход', '@sf_guard_signout') ?>
+                            <li<?php echo 'profits' == $sf_request->getParameter('menu') ? ' class="active"' : '' ?>>
+                                <?php echo link_to('Отчёты', '@profits') ?>
                             </li>
-                        <?php endif; ?>
-                    </ul>
-                </div>
+                            <li<?php echo 'talks' == $sf_request->getParameter('menu') ? ' class="active"' : '' ?>>
+                                <?php echo link_to('Обсуждения', '@talks') ?>
+                            </li>
+                            <li<?php echo 'events' == $sf_request->getParameter('menu') ? ' class="active"' : '' ?>>
+                                <?php echo link_to('События', '@events') ?>
+                            </li>
+                        </ul>
+                        <ul class="nav pull-right">
+                            <li class="divider-vertical"></li>    
+                            <?php if ($sf_user->isAnonymous()): ?>
+                                <li<?php echo 'apply' == $sf_request->getParameter('menu') ? ' class="active"' : '' ?>>
+                                    <?php echo link_to('Регистрация', '@apply') ?>
+                                </li>
+                                <li<?php echo 'sf_guard_signin' == $sf_request->getParameter('menu') ? ' class="active"' : '' ?>>
+                                    <?php echo link_to('Вход', '@sf_guard_signin') ?>
+                                </li>
+                            <?php else: ?>
+                                <li>
+                                    <?php echo link_to('Выход', '@sf_guard_signout') ?>
+                                </li>
+                            <?php endif; ?>
+                        </ul>
+                        <form class="navbar-search pull-right"  action="<?php echo url_for('location/search') ?>" method="get">
+                            <input type="text" class="search-query span2" placeholder="Поиск" name="query">
+                        </form>
+                        
+                    </div>
+                </div><!-- /navbar-inner -->
             </div>
             <div id="middle" class="content clear_fix">
                 <div id="left_layout">
                     <?php include_component('user', 'menu') ?>
-                    <?php include_component('profit', 'last') ?>
-                    <?php include_component('comment', 'last') ?>
                     <?php include_component('location', 'last') ?>
+                    <?php include_component('comment', 'last') ?>
+                    <?php include_component('profit', 'last') ?>
                     <?php include_component('event', 'last') ?>
                     <?php if (has_slot('extra')): ?>
                         <?php include_slot('extra'); ?>
@@ -87,9 +81,9 @@
                     <?php echo $sf_content ?>
                 </div>
             </div>
-            <div class="footer">
-                <div class="content">
-                    <h2><?php echo link_to(image_tag('/images/logo_small.png',array('alt'=>'uberlov.ru')), '@homepage') ?></h2>
+            <div class="footer row">
+                <div>
+                    <h2 class="small_logo"><?php echo link_to(image_tag('/images/logo_small.png', array('alt' => 'uberlov.ru')), '@homepage') ?></h2>
                     <div class="footer_box_menu clear_fix">
                         <div class="footer_menu">
                             <h3>
@@ -150,48 +144,33 @@
                     </div>
                 </div>
             </div>
-            <div class="mini_menu">
-                <div>
-                    <?php if ($sf_user->isAnonymous()): ?>
-                        <?php echo link_to('Регистрация', '@apply', array('class' => 'last')) ?>
-                        <?php echo link_to('Вход', '@sf_guard_signin') ?>
-                    <?php else: ?>
-                        <?php echo link_to('Выход', '@sf_guard_signout') ?>
-                    <?php endif; ?>
-                </div>
-            </div>
         </div>
         <div style="display:none">
-        <!-- begin of Top100 code -->
+            <!-- begin of Top100 code -->
 
-        <script id="top100Counter" type="text/javascript" src="http://counter.rambler.ru/top100.jcn?2609777"></script>
-        <noscript>
-        <a href="http://top100.rambler.ru/navi/2609777/">
-        <img src="http://counter.rambler.ru/top100.cnt?2609777" alt="Rambler's Top100" border="0" />
-        </a>
+            <script id="top100Counter" type="text/javascript" src="http://counter.rambler.ru/top100.jcn?2609777"></script>
+            <noscript>
+                <a href="http://top100.rambler.ru/navi/2609777/">
+                    <img src="http://counter.rambler.ru/top100.cnt?2609777" alt="Rambler's Top100" border="0" />
+                </a>
 
-        </noscript>
-        <!-- end of Top100 code -->
-        </div>
-        <script type="text/javascript" >
-            baseUrl = "<?php echo substr(url_for('@homepage'), 0, strlen(url_for('@homepage')) - 1); ?>";
-            baseUrlFull = "<?php echo substr(url_for('@homepage', true), 0, strlen(url_for('@homepage', true)) - 1); ?>";
-            baseUrl = "<?php echo sfContext::getInstance()->getRequest()->getRelativeUrlRoot(); ?>";
-        </script>
+            </noscript>
+            <!-- end of Top100 code -->
+        </div>   
+        <?php include_combined_javascripts() ?> 
         <?php if (sfConfig::get('sf_environment') == 'prod'): ?> 
-        <script type="text/javascript">
-            var _gaq = _gaq || [];
-            _gaq.push(['_setAccount', 'UA-22389085-1']);
-            _gaq.push(['_trackPageview']);
+            <script type="text/javascript">
+                var _gaq = _gaq || [];
+                _gaq.push(['_setAccount', 'UA-22389085-1']);
+                _gaq.push(['_trackPageview']);
 
-            (function() {
-                var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-                ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-                var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-            })();
-        </script>          
+                (function() {
+                    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+                    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+                    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+                })();
+            </script>          
         <?php endif; ?>
-        <?php include_combined_javascripts() ?>        
         <script type="text/javascript">
             reformal_wdg_domain    = "uberlov";
             reformal_wdg_mode    = 0;

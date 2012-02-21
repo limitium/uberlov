@@ -1,5 +1,5 @@
 <script type="text/javascript">
-    app.csrf.wishlist = "<?php echo $csrf; ?>";
+    csrf.wishlist = "<?php echo $csrf; ?>";
 </script>
 <?php use_helper('XssSafe') ?>
 <?php use_javascript('wishes'); ?>

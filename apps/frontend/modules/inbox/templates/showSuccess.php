@@ -1,7 +1,7 @@
 <?php use_helper('XssSafe'); ?>
 
 <script type="text/javascript">
-    app.csrf.inbox = "<?php echo $csrf; ?>";
+    csrf.inbox = "<?php echo $csrf; ?>";
 </script>
 <?php use_javascript('inbox'); ?>
 

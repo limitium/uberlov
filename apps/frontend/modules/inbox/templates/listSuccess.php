@@ -1,5 +1,5 @@
 <script type="text/javascript">
-    app.csrf.inbox = "<?php echo $csrf; ?>";
+    csrf.inbox = "<?php echo $csrf; ?>";
 </script>
 <?php use_javascript('inbox'); ?>
 <?php use_helper('Text'); ?>

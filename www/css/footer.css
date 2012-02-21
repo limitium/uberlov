@@ -1,21 +1,21 @@
 .footer
-{
-    padding-top:20px;
-    background-color: #313131;
+{    
+    background-color: #2C2C2C;
     position: relative;
+    padding: 20px;
 }
 .footer .content h2
 {
     color: #FFFFFF;
     font-size: 12px;
 }
-.footer .content h2 a{
+.footer .small_logo a{
     float: right;
 }
-.footer .content h2 a img
+.footer .small_logo a img
 {
     margin-top: -50px;
-    margin-right: 3em;
+    margin-right: 1em;
 }
 .footer_menu h3, .footer_menu h3 a, .footer_menu h3 a:hover {
     color: #D1D1D1;
@@ -39,7 +39,7 @@
 .footer_menu
 {
     float:left;
-    width: 12.9%;
+    width: 12.85%;
     padding-left:16px;
 }
 .footer_menu_list

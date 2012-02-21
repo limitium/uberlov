@@ -1,6 +1,6 @@
 <?php use_javascript('friendShow'); ?>
 <script type="text/javascript">
-    app.csrf.friend = "<?php echo $csrf; ?>";
+    csrf.friend = "<?php echo $csrf; ?>";
 </script>
 
 <div class="friends">

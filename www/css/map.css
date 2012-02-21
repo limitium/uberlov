@@ -63,6 +63,7 @@
     border: 1px solid #99BC3D;
     margin-left: 5px ;
     height: 17px;
+    width: 110px;
 }
 .disabled {
     opacity:0.5;
