@@ -1,3 +1,4 @@
+Cufon.replace(".navbar-inner a");
 if(typeof(console)!='undefined'){
     fb =  function(m){
         console.log(m);
