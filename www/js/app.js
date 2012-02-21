@@ -31,7 +31,7 @@ $.extend({
     }
 });
 app = {
-    csrf: {},
+    csrf: csrf,
     modules: {},
     
     run: function(){

@@ -11,9 +11,7 @@
                     <h5>
                         <a href="<?php echo url_for(strtolower($component == "FishEvent" ? "Event" : $component) . "/show?id=" . $comment->$getter()->id); ?>#comment=<?php echo $comment->getId(); ?>"><?php echo truncate_text(strip_tags($comment->getMessage(ESC_XSSSAFE)), 100); ?></a>
                     </h5>
-                    <span>
-                        <?php include_partial('profile/writeBy', array('written' => $comment, 'size' => 24)); ?>
-                    </span>
+                    <?php include_partial('profile/writeBy', array('written' => $comment, 'size' => 24)); ?>
                 </div>
             </li>
         <?php endforeach; ?>

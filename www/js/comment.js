@@ -84,8 +84,8 @@ function comment(){
         var parent = $('#comment'+$(this).attr('replyTo'));
         $('.commentShowFrom',parent).remove();
         $('.commentBar', parent).append('<a class="commentShowFrom" href="" from="'+$(this).parent().parent().attr('id')+'">&darr;</a>');
-        $('html').animate({
-            scrollTop:parent.offset().top
+        $('html,body').animate({
+            scrollTop:parent.offset().top-50
         }, 300, null,function(){
             var msg = $('.commentMessage',parent);
             msg.css({
@@ -100,8 +100,8 @@ function comment(){
     
     $('.commentShowFrom').live('click', function(){
         var from = $('#'+$(this).attr('from'));
-        $('html').animate({
-            scrollTop: from.offset().top
+        $('html,body').animate({
+            scrollTop: from.offset().top-50
         }, 300, null,function(){
             var msg = $('.commentMessage',from);
             msg.css({
@@ -121,8 +121,8 @@ function comment(){
     });
 
     $('#goToReply').click(function(){
-        $('html').animate({
-            scrollTop: $('#newComment').offset().top
+        $('html,body').animate({
+            scrollTop: $('#newComment').offset().top-50
         }, 300);
         return false;
     });

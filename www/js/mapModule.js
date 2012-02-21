@@ -71,7 +71,8 @@ mapModule.prototype.startMap = function(params){
         },
         scaleControl: true,
         mapTypeControl: false,
-        mapTypeId: params.mt
+        mapTypeId: params.mt,
+        scrollwheel: false
     };
     this.map = new gm.Map($("#map_canvas").get(0), opt);
     this.setType(params.mt); 
@@ -454,6 +455,7 @@ function ht_location(mm,opt){
     this.id = opt.id;
     this.event = opt.event;
     opt.icon = this['icon'+(opt.event||!opt.free?'_':'')+(opt.event?'e':'')+(!opt.free?'p':'')];
+    opt.shadow= this['shadow_'+(opt.event?'e':'l')];
     this.marker = mm.createMarker(opt);
     this.selected = false;
     this.initListeners();
@@ -502,13 +504,13 @@ ht_location.prototype.setSelected = function(selected){
     }
 }
 
-ht_location.prototype.icon = new gm.MarkerImage(app.url('/images/location.png'),
+ht_location.prototype.icon = new gm.MarkerImage(app.url('/images/l_f.png'),
     // This marker is 20 pixels wide by 32 pixels tall.
-    new google.maps.Size(16, 16),
+    new google.maps.Size(9, 22),
     // The origin for this image is 0,0.
     new google.maps.Point(0,0),
     // The anchor for this image is the base of the flagpole at 0,32.
-    new google.maps.Point(8, 8));
+    new google.maps.Point(4, 22));
     
 ht_location.prototype.iconSelected = new gm.MarkerImage(app.url('/images/location_selected.png'),
     new google.maps.Size(16, 16),
@@ -519,26 +521,42 @@ ht_location.prototype.iconHover = new gm.MarkerImage(app.url('/images/location_h
     new google.maps.Point(0,0),
     new google.maps.Point(7, 7));
     
-ht_location.prototype.icon_e = new gm.MarkerImage(app.url('/images/location_e.png'),
+ht_location.prototype.icon_e = new gm.MarkerImage(app.url('/images/l_f_e.png'),
     // This marker is 20 pixels wide by 32 pixels tall.
-    new google.maps.Size(20, 26),
+    new google.maps.Size(18, 22),
     // The origin for this image is 0,0.
     new google.maps.Point(0,0),
     // The anchor for this image is the base of the flagpole at 0,32.
-    new google.maps.Point(8, 18));
+    new google.maps.Point(4, 22));
     
-ht_location.prototype.icon_p = new gm.MarkerImage(app.url('/images/location_p.png'),
+ht_location.prototype.icon_p = new gm.MarkerImage(app.url('/images/l_n.png'),
     // This marker is 20 pixels wide by 32 pixels tall.
-    new google.maps.Size(16, 16),
+    new google.maps.Size(9, 22),
     // The origin for this image is 0,0.
     new google.maps.Point(0,0),
     // The anchor for this image is the base of the flagpole at 0,32.
-    new google.maps.Point(8, 8));
+    new google.maps.Point(4, 22));
     
-ht_location.prototype.icon_ep = new gm.MarkerImage(app.url('/images/location_ep.png'),
+ht_location.prototype.icon_ep = new gm.MarkerImage(app.url('/images/l_n_e.png'),
     // This marker is 20 pixels wide by 32 pixels tall.
-    new google.maps.Size(20, 26),
+    new google.maps.Size(18, 22),
     // The origin for this image is 0,0.
     new google.maps.Point(0,0),
     // The anchor for this image is the base of the flagpole at 0,32.
-    new google.maps.Point(8, 18));
+    new google.maps.Point(4, 22));
+    
+ht_location.prototype.shadow_l = new gm.MarkerImage(app.url('/images/l_s.png'),
+    // This marker is 20 pixels wide by 32 pixels tall.
+    new google.maps.Size(18, 22),
+    // The origin for this image is 0,0.
+    new google.maps.Point(0,0),
+    // The anchor for this image is the base of the flagpole at 0,32.
+    new google.maps.Point(4, 22));
+    
+ht_location.prototype.shadow_e = new gm.MarkerImage(app.url('/images/l_s_e.png'),
+    // This marker is 20 pixels wide by 32 pixels tall.
+    new google.maps.Size(18, 22),
+    // The origin for this image is 0,0.
+    new google.maps.Point(0,0),
+    // The anchor for this image is the base of the flagpole at 0,32.
+    new google.maps.Point(4, 22));    
