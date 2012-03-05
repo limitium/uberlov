@@ -30,7 +30,7 @@ class eventComponents extends sfComponents {
         foreach ($query->execute() as $event) {
             $this->events[] = $event;
         }
-        $this->events = array_reverse($this->events);
+        $this->events = $this->events;
     }
 
 }
