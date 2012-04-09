@@ -17,7 +17,20 @@ class locationActions extends sfActions {
     }
 
     public function executeShow(sfWebRequest $request) {
-        $this->location = Doctrine::getTable('Location')->find($request->getParameter('id'));
+//        $this->location = Doctrine::getTable('Location')->find($request->getParameter('id'));
+        $this->location = Doctrine_Query::create()->select()->from('Location l')
+                                ->leftJoin('l.VoteLocation')
+                                ->leftJoin('l.CommentLocation')
+                                ->leftJoin('l.CreatedBy')
+                                ->leftJoin('l.Address a')
+                                ->leftJoin('a.Country')
+                                ->leftJoin('a.AreaLow')
+                                ->leftJoin('a.AreaHigh')
+                                ->where('l.id = ?', $request->getParameter('id'))
+                                ->execute()
+                                //@todo: WTF???
+                                ->getFirst();
+
         $this->forward404Unless($this->location);
 
         $this->location->showed();
@@ -63,24 +76,28 @@ class locationActions extends sfActions {
 
         if ($this->location = $this->processForm($request, $this->form)) {
             $this->setTemplate('created');
+            if ($cache = $this->getContext()->getViewCacheManager()) {
+               $cache->remove('@sf_cache_partial?module=location&action=_last&sf_cache_key=location','','all');
+               $cache->remove('collector/data');
+            }
         }
     }
 
     public function executeEdit(sfWebRequest $request) {
-        $this->forward404Unless($location = Doctrine::getTable('Location')->find($request->getParameter('id')), sprintf('Object location does not exist (%s).', $request->getParameter('id')));
+        $this->forward404Unless($location = Doctrine::getTable('Location')->find($request->getParameter('id')), sprintf('Location does not exist (%s).', $request->getParameter('id')));
 
         if (!$this->getUser()->isAnonymous() && $this->getUser()->getProfile()->id == $location->created_by) {
             $this->form = new LocationForm($location);
         } else {
             $this->form = new LocationEnemyForm($location);
         }
-
-        $this->form->packAddress()->packPhotos();
+        //@todo: revert packPhotos!!!! strange with form
+        $this->form->packAddress();
     }
 
     public function executeUpdate(sfWebRequest $request) {
         $this->forward404Unless($request->isMethod(sfRequest::POST) || $request->isMethod(sfRequest::PUT));
-        $this->forward404Unless($location = Doctrine::getTable('Location')->find($request->getParameter('id')), sprintf('Object location does not exist (%s).', $request->getParameter('id')));
+        $this->forward404Unless($location = Doctrine::getTable('Location')->find($request->getParameter('id')), sprintf('Location does not exist (%s).', $request->getParameter('id')));
 
         if (!$this->getUser()->isAnonymous() && $this->getUser()->getProfile()->id == $location->created_by) {
             $this->form = new LocationForm($location);
@@ -97,7 +114,7 @@ class locationActions extends sfActions {
     public function executeDelete(sfWebRequest $request) {
         $request->checkCSRFProtection();
 
-        $this->forward404Unless($location = Doctrine::getTable('Location')->find($request->getParameter('id')), sprintf('Object location does not exist (%s).', $request->getParameter('id')));
+        $this->forward404Unless($location = Doctrine::getTable('Location')->find($request->getParameter('id')), sprintf('Location does not exist (%s).', $request->getParameter('id')));
         $location->delete();
 
         $this->redirect('location/index');
@@ -111,16 +128,13 @@ class locationActions extends sfActions {
 
             $loc = $form->save()->updateAddress($addressData)->updatePhotos($photos);
             BotNet::create()->spammed($loc, 'description');
-            if ($cache = $this->getContext()->getViewCacheManager()) {
-                $cache->remove('collector/data');
-            }
             return $loc;
         }
         return null;
     }
 
     public function executeExport(sfWebRequest $request) {
-        $this->forward404Unless($location = Doctrine::getTable('Location')->find($request->getParameter('id')), sprintf('Object location does not exist (%s).', $request->getParameter('id')));
+        $this->forward404Unless($location = Doctrine::getTable('Location')->find($request->getParameter('id')), sprintf('Location does not exist (%s).', $request->getParameter('id')));
         $this->location = $location;
         $this->getResponse()->setContentType('text/wpt');
         $this->getResponse()->addHttpMeta('content-disposition: ', 'attachment; filename="' . $location->getId() . '_uberlov.wpt"', true);
@@ -129,7 +143,7 @@ class locationActions extends sfActions {
 
     public function executeTomy(sfWebRequest $request) {
         $request->checkCSRFProtection();
-        $this->forward404Unless($location = Doctrine::getTable('Location')->find(array($request->getParameter('id'))), sprintf('Object location does not exist (%s).', $request->getParameter('id')));
+        $this->forward404Unless($location = Doctrine::getTable('Location')->find(array($request->getParameter('id'))), sprintf('Location does not exist (%s).', $request->getParameter('id')));
 
 
         if (!$location->isOwner()) {
@@ -142,7 +156,7 @@ class locationActions extends sfActions {
 
     public function executeFrommy(sfWebRequest $request) {
         $request->checkCSRFProtection();
-        $this->forward404Unless($location = Doctrine::getTable('Location')->find(array($request->getParameter('id'))), sprintf('Object location does not exist (%s).', $request->getParameter('id')));
+        $this->forward404Unless($location = Doctrine::getTable('Location')->find(array($request->getParameter('id'))), sprintf('Location does not exist (%s).', $request->getParameter('id')));
 
         Doctrine_Query::create()->delete('WishList')->Where('location_id = ? and profile_id = ?', array($location->getId(), $this->getUser()->getProfile()->getId()))
                 ->execute();

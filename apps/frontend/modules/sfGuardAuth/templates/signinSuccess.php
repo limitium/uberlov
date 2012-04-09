@@ -45,3 +45,6 @@
     </div>
 </form>
 
+<script src="http://loginza.ru/js/widget.js" type="text/javascript"></script>
+<iframe src="http://loginza.ru/api/widget?overlay=loginza&token_url=<?php echo url_for('@signinOpenId') ?>&lang=ru"
+style="width:359px;height:300px;" scrolling="no" frameborder="no"></iframe>

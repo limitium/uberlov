@@ -187,11 +187,7 @@ location_edit:
 location_update:
   url:        /location/update/:id
   params:     { module: location, action: update }
-location_show:
-  url:        /location/:id
-  params:     { module: location, action: show, menu map }
-  requirements:
-    sf_method: [get]
+
 location_export:
   url:        /location/export/:id
   params:     { module: location, action: export }
@@ -203,21 +199,20 @@ location_map:
   requirements:
     sf_method: [get]
 location_tomy:
-  url:        /location/tomy/:id
+  url:        /location/tomy
   params:     { module: location, action: tomy }
   requirements:
     sf_method: [post]
 location_frommy:
-  url:        /location/frommy/:id
+  url:        /location/frommy
   params:     { module: location, action: frommy }
   requirements:
     sf_method: [post]
-location_my:
-  url:        /location/my
-  params:     { module: location, action: my, menu map }
+location_show:
+  url:        /location/:id
+  params:     { module: location, action: show, menu map }
   requirements:
-    sf_method: [get]   
-  
+    sf_method: [get]
 #photo
 photo_upload:
   url:        /photo/upload

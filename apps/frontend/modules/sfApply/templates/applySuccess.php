@@ -52,6 +52,6 @@
                     <span class="btn_bg">Я С ВАМИ</span>
                 </span>
             </span>
-        </button> или <a href="<?php echo url_for('@resetRequest') ?>"><span>уже зарегистрирован?</span></a>
+        </button> или <a href="<?php echo url_for('@sf_guard_signin') ?>"><span>уже зарегистрирован?</span></a>
     </div>
 </form>

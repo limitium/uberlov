@@ -48,6 +48,7 @@ class profileActions extends sfActions {
         foreach (Doctrine_Query::create()
                 ->from('sfGuardUserProfile p')
                 ->leftJoin('p.User u')
+                ->leftJoin('p.VoteProfile')
                 ->whereIn("u.id", array_keys($peopleOrdered))
                 ->execute() as $profile) {
             $peopleOrdered[$profile->id] = (object) array('profile' => $profile, 'weight' => $peopleOrdered[$profile->id]);

@@ -16,6 +16,8 @@ class profitActions extends sfActions {
         $query = Doctrine::getTable('Profit')->createQuery('p')
                 ->leftJoin('p.CommentProfit')
                 ->leftJoin('p.CreatedBy pr')
+                ->leftJoin('p.VoteProfit')
+                ->leftJoin('p.ProfitDetail')
                 ->leftJoin('pr.User')
                 ->leftJoin('p.Location ')
                 ->orderBy('p.created_at desc');
@@ -82,7 +84,9 @@ class profitActions extends sfActions {
             $form->save()->updateDetails($detailsData)->updatePhotos($photosData);
             
             BotNet::create()->spammed($form->getObject(), 'description',$form->getObject()->getLocation()->getDateTimeObject('created_at')->format('U'));
-            
+            if ($cache = $this->getContext()->getViewCacheManager()) {
+                $cache->remove('@sf_cache_partial?module=profit&action=_last&sf_cache_key=profit','','all');
+            }
             $this->redirect('profit/show?id=' . $form->getObject()->getId());
         } else {
 //            foreach ($form->getFormFieldSchema() as $name => $formField) {

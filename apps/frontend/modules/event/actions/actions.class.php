@@ -14,6 +14,8 @@ class eventActions extends sfActions {
         $this->pager = htPagerLayout::create(Doctrine::getTable('FishEvent')
                                 ->createQuery('f')
                                 ->leftJoin('f.CreatedBy p')
+                                ->leftJoin('f.VoteFishEvent v')
+                                ->leftJoin('f.CommentFishEvent c')
                                 ->leftJoin('p.User')
                                 ->where('f.date >= ?', array(date('Y-m-d', time())))
                                 ->orderBy('f.date ASC'), 'event/list?page={%page_number}', $request->getParameter('page', 1));
@@ -21,6 +23,9 @@ class eventActions extends sfActions {
     public function executeArchive(sfWebRequest $request) {
         $this->pager = htPagerLayout::create(Doctrine::getTable('FishEvent')
                                 ->createQuery('f')
+                                ->leftJoin('f.Location')
+                                ->leftJoin('f.VoteFishEvent v')
+                                ->leftJoin('f.CommentFishEvent c')
                                 ->leftJoin('f.CreatedBy p')
                                 ->leftJoin('p.User')
                                 ->where('f.date < ?', array(date('Y-m-d', time())))
@@ -86,7 +91,10 @@ class eventActions extends sfActions {
         $form->bind($request->getParameter($form->getName()), $request->getFiles($form->getName()));
         if ($form->isValid()) {
             $fish_event = $form->save();
-            BotNet::create()->spammed($fish_event, 'description');    
+            BotNet::create()->spammed($fish_event, 'description');
+            if ($cache = $this->getContext()->getViewCacheManager()) {
+                $cache->remove('@sf_cache_partial?module=event&action=_last&sf_cache_key=event','','all');
+            }
             $this->redirect('@event_show?id=' . $fish_event->getId());
         }
     }
