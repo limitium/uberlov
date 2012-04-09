@@ -66,6 +66,10 @@ class commentActions extends sfActions {
             BotNet::create()->spammed($this->comment, 'message', $prevCom->getDateTimeObject('created_at')->format('U'));
 
             $this->noVote = $form->getValue('noVote', false);
+            if ($cache = $this->getContext()->getViewCacheManager()) {
+                $cache->remove('@sf_cache_partial?module=comment&action=_last&sf_cache_key=comment','','all');
+            }
+
             $this->setTemplate('created');
         } else {
             foreach ($form->getFormFieldSchema() as $name => $formField) {

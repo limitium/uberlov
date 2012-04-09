@@ -5,5 +5,5 @@ data:
 locations:
   enabled:     false
   contextual:  true
-  with_layout: true
+  with_layout: false
   lifetime:    86400

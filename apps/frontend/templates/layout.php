@@ -14,6 +14,7 @@
             baseUrl = "<?php echo sfContext::getInstance()->getRequest()->getRelativeUrlRoot(); ?>";
             csrf = {};
         </script>
+        <meta name='loginza-verification' content='79a39381b6f4a696e75f87e7f9d0d38d' />
     </head>
     <body>
         <div id="page">
@@ -60,10 +61,10 @@
             <div id="middle" class="content clear_fix">
                 <div id="left_layout">
                     <?php include_component('user', 'menu') ?>
-                    <?php include_component('location', 'last') ?>
-                    <?php include_component('comment', 'last') ?>
-                    <?php include_component('profit', 'last') ?>
-                    <?php include_component('event', 'last') ?>
+                    <?php include_component('location', 'last',array('sf_cache_key' => 'location')) ?>
+                    <?php include_component('comment', 'last',array('sf_cache_key' => 'comment')) ?>
+                    <?php include_component('profit', 'last',array('sf_cache_key' => 'profit')) ?>
+                    <?php include_component('event', 'last',array('sf_cache_key' => 'event')) ?>
                     <?php if (has_slot('extra')): ?>
                         <?php include_slot('extra'); ?>
                     <?php endif; ?>

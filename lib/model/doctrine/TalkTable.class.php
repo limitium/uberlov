@@ -6,6 +6,7 @@ class TalkTable extends Doctrine_Table {
         return $this
                 ->createQuery('t')
                 ->leftJoin('t.CommentTalk')
+                ->leftJoin('t.VoteTalk')
                 ->leftJoin('t.CreatedBy p')
                 ->leftJoin('p.User')
                 ->leftJoin('t.Tagging tg')
