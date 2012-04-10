@@ -10,6 +10,31 @@
  */
 class collectorActions extends sfActions {
 
+    public function executeListFree(sfWebRequest $request) {
+            $this->pager = htPagerLayout::create(Doctrine::getTable('Location')
+                            ->getVisibleLocationsQuery($this->getUser())
+                            ->leftJoin('l.CreatedBy u')
+                            ->leftJoin('u.User')
+                            ->leftJoin('l.CommentLocation')
+                            ->leftJoin('l.VoteLocation')
+                            ->leftJoin('l.Profit p')
+                            ->leftJoin('p.ProfitDetail pd')
+                            ->addWhere('l.is_free = 1'), '@location_free?page={%page_number}', $request->getParameter('page', 1));
+
+        }
+    public function executeListPaid(sfWebRequest $request) {
+            $this->pager = htPagerLayout::create(Doctrine::getTable('Location')
+                            ->getVisibleLocationsQuery($this->getUser())
+                            ->leftJoin('l.CreatedBy u')
+                            ->leftJoin('u.User')
+                            ->leftJoin('l.CommentLocation')
+                            ->leftJoin('l.VoteLocation')
+                            ->leftJoin('l.Profit p')
+                            ->leftJoin('p.ProfitDetail pd')
+                            ->addWhere('l.is_free = 0'), '@location_free?page={%page_number}', $request->getParameter('page', 1));
+
+        }
+
     /**
      * Executes map action
      *

@@ -35,6 +35,9 @@ sf_guard_signout:
 apply:
   url:   /user/new
   param: { module: sfApply, action: apply, menu apply}
+signin_openid:
+  url:   /openid
+  param: { module: sfApply, action: openid}
 
 #apply
 user_confirm:
@@ -82,6 +85,16 @@ top:
 data:
   url: /data
   param: {module: collector, action data}
+location_free:
+  url:        /location/free
+  params: { module: collector, action: listFree, menu map }
+  requirements:
+    sf_method: [get]
+location_paid:
+  url:        /location/paid
+  params: { module: collector, action: listPaid, menu map }
+  requirements:
+    sf_method: [get]
 
 #comment
 comment_for:
@@ -282,6 +295,16 @@ profile_update:
 profit_list:
   url:        /profit/list
   params:     { module: profit, action: list, menu profits }
+  requirements:
+    sf_method: [get]
+profit_list_winter:
+  url:        /profit/list/winter
+  params:     { module: profit, action: listWinter, menu profits }
+  requirements:
+    sf_method: [get]
+profit_list_summer:
+  url:        /profit/list/summer
+  params:     { module: profit, action: listSummer, menu profits }
   requirements:
     sf_method: [get]
 profit_new:

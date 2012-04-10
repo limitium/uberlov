@@ -72,13 +72,13 @@
     <ul>
         <li><span href="#" id="commentTab" class="selected">Комментарии (<i id="commentCounter"><?php echo sizeof($comments); ?></i>)</span></li>
         <li><span href="#" id="profitTab">Отчеты (<i id="profitCounter"><?php echo sizeof($profits); ?></i>)</span></li>
-        <li><span href="#" id="eventTab">События (<i id="eventCounter"><?php echo sizeof($events); ?></i>)</span></li>
+        <li><span href="#" id="eventTab">События (<i id="eventCounter"><?php echo sizeof($locations); ?></i>)</span></li>
     </ul>
 </div>
 
 <?php include_partial('commentTab', array('form' => $form, 'comments' => $comments)); ?>
 <?php include_partial('profitTab', array('profits' => $profits, 'location' => $location)); ?>
-<?php include_partial('eventTab', array('events' => $events, 'location' => $location)); ?>
+<?php include_partial('eventTab', array('events' => $locations, 'location' => $location)); ?>
 
 
 

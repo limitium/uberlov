@@ -21,7 +21,7 @@
             <div class="navbar navbar-fixed-top">
                 <div class="navbar-inner">
                     <div class="container" style="width: auto;">
-                        <a class="brand" href="<?php echo url_for('@homepage') ?>"><img alt="uberlov.ru" src="/images/logo_small.png">Uberlov</a>                        
+                        <a class="brand" href="<?php echo url_for('@homepage') ?>"><img alt="uberlov.ru" src="/images/logo_small.png"/>Uberlov</a>
                         <ul class="nav">
                             <li<?php echo 'map' == $sf_request->getParameter('menu') ? ' class="active"' : '' ?>>
                                 <?php echo link_to('Карта мест', '@map') ?>
@@ -52,7 +52,7 @@
                             <?php endif; ?>
                         </ul>
                         <form class="navbar-search pull-right"  action="<?php echo url_for('location/search') ?>" method="get">
-                            <input type="text" class="search-query span2" placeholder="Поиск" name="query">
+                            <input type="text" class="search-query span2" placeholder="Поиск" name="query"/>
                         </form>
                         
                     </div>
@@ -93,12 +93,18 @@
                             <ul class="footer_menu_list">
                                 <li><?php echo link_to('По рейтингу', '@top') ?></li>
                                 <li><?php echo link_to('По регионам', '@regions') ?></li>
+                                <li><?php echo link_to('Бесплатная рыбалка', '@location_free') ?></li>
+                                <li><?php echo link_to('Платная рыбалка', '@location_paid') ?></li>
                             </ul>
                         </div>
                         <div class="footer_menu">
                             <h3>
                                 <?php echo link_to('Отчёты', '@profits') ?>
                             </h3>
+                            <ul class="footer_menu_list">
+                                <li><?php echo link_to('Зимняя рыбалка', '@profit_list_winter') ?></li>
+                                <li><?php echo link_to('Летняя рыбалка', '@profit_list_summer') ?></li>
+                            </ul>
                         </div>
                         <div class="footer_menu">
                             <h3>
