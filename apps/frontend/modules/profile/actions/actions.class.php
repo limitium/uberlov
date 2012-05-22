@@ -42,7 +42,7 @@ class profileActions extends sfActions {
                         ->limit(10)
                         ->execute(array(), Doctrine::HYDRATE_NONE);
         foreach ($ps as $p) {
-            $peopleOrdered[$p[1]] = $p[0];
+            $peopleOrdered[$p[0]] = $p[1];
         }
         
         foreach (Doctrine_Query::create()

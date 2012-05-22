@@ -177,8 +177,7 @@ $browser->get('/user/new')
     'username' => 'testuser',
     'password' => 'testuser',
     'email' => 'testuser@gmail.com',
-    'email2' => 'testuser@gmail.com',
-    'id' => '',
+    'email2' => 'testuser@gmail.com'
   ), array('_with_csrf' => true)
 )) 
   ->info("create user")
@@ -191,7 +190,7 @@ $browser->get('/user/new')
   ->end()
   ->with('response')->begin()
     ->isStatusCode(200)
-  //->debug()
+//  ->debug()
     ->checkElement('#mail_server')
   ->end();
   //Ошибка в процессе отправки почты. Пожалуйста, попробуйте еще раз позже. 

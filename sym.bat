@@ -1,1 +1,1 @@
-D:\WebServers\usr\local\php5\php.exe D:\WebServers\symfony-1.4.3\data\bin\symfony %*
+c:\WebServers\usr\local\php5\php.exe c:\WebServers\symfony-1.4.17\data\bin\symfony %*
