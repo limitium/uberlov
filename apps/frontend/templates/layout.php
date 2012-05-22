@@ -7,7 +7,8 @@
         <?php include_metas() ?>
 
         <title><?php echo get_slot('title', 'Uberлов — Узнай, где ловить рыбу!') ?></title>
-        <?php include_combined_stylesheets() ?>
+        <?php include_stylesheets() ?>
+<!--        --><?php //include_combined_stylesheets() ?>
         <script type="text/javascript" >
             baseUrl = "<?php echo substr(url_for('@homepage'), 0, strlen(url_for('@homepage')) - 1); ?>";
             baseUrlFull = "<?php echo substr(url_for('@homepage', true), 0, strlen(url_for('@homepage', true)) - 1); ?>";
@@ -152,19 +153,7 @@
                 </div>
             </div>
         </div>
-        <div style="display:none">
-            <!-- begin of Top100 code -->
-
-            <script id="top100Counter" type="text/javascript" src="http://counter.rambler.ru/top100.jcn?2609777"></script>
-            <noscript>
-                <a href="http://top100.rambler.ru/navi/2609777/">
-                    <img src="http://counter.rambler.ru/top100.cnt?2609777" alt="Rambler's Top100" border="0" />
-                </a>
-
-            </noscript>
-            <!-- end of Top100 code -->
-        </div>   
-        <?php include_combined_javascripts() ?> 
+        <?php include_combined_javascripts() ?>
         <?php if (sfConfig::get('sf_environment') == 'prod'): ?> 
             <script type="text/javascript">
                 var _gaq = _gaq || [];
@@ -209,5 +198,17 @@
                 </a>
             </noscript>
         </object>
+        <div style="display:none">
+            <!-- begin of Top100 code -->
+
+            <script id="top100Counter" type="text/javascript" src="http://counter.rambler.ru/top100.jcn?2609777"></script>
+            <noscript>
+                <a href="http://top100.rambler.ru/navi/2609777/">
+                    <img src="http://counter.rambler.ru/top100.cnt?2609777" alt="Rambler's Top100" border="0" />
+                </a>
+
+            </noscript>
+            <!-- end of Top100 code -->
+        </div>
     </body>
 </html>

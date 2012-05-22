@@ -47,7 +47,11 @@
         <?php endif; ?>
     </div>
     <div class="photo">
-        <?php include_partial('photo/show', array('object' => $location)) ?>
+        <?php if (!$sf_user->isAnonymous()): ?>
+        <?php include_partial('photo/upload', array('object' => $location)); ?>
+        <?php else: ?>
+        <?php include_partial('photo/show', array('object' => $location)); ?>
+        <?php endif; ?>
     </div>
 
     <div class="description"><?php echo $location->getDescription(ESC_XSSSAFE); ?></div>
@@ -66,19 +70,18 @@
     </div>
 </div>
 
-
 <?php use_javascript('tabPanel'); ?>
 <div class="tabPanel">
     <ul>
         <li><span href="#" id="commentTab" class="selected">Комментарии (<i id="commentCounter"><?php echo sizeof($comments); ?></i>)</span></li>
         <li><span href="#" id="profitTab">Отчеты (<i id="profitCounter"><?php echo sizeof($profits); ?></i>)</span></li>
-        <li><span href="#" id="eventTab">События (<i id="eventCounter"><?php echo sizeof($locations); ?></i>)</span></li>
+        <li><span href="#" id="eventTab">События (<i id="eventCounter"><?php echo sizeof($events); ?></i>)</span></li>
     </ul>
 </div>
 
 <?php include_partial('commentTab', array('form' => $form, 'comments' => $comments)); ?>
 <?php include_partial('profitTab', array('profits' => $profits, 'location' => $location)); ?>
-<?php include_partial('eventTab', array('events' => $locations, 'location' => $location)); ?>
+<?php include_partial('eventTab', array('events' => $events, 'location' => $location)); ?>
 
 
 
