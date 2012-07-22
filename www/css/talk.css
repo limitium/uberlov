@@ -2,11 +2,12 @@
 /*talks show*/
 .talkWrapper .meta{
     clear: both;
-    display: block;
+    padding: 1em 0 1em;
 }
 .talk {
     display: block;
     float: left;
+    width: 67%;
 }
 .talk h2{
     padding-top: 1em;
@@ -81,10 +82,15 @@
     background-color: #F6F6F6;
     border: 1px solid #DFDFDF;
 }
-#talkRelated span{
+#talkRelated .createdBy{
+    font-size: 70%;
     display: block;
-    font-size: x-small;
-    text-align: right;
+    padding-left: 2em;
+    text-align: left;
+}
+#talkRelated .createdBy .when{
+    float: right;
+    padding-top: 6px;
 }
 #talkRelated div {
 }

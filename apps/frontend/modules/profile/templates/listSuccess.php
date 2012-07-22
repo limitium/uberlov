@@ -6,8 +6,7 @@
 </script>
 
 <?php $people = $pager->execute(); ?>
-<?php foreach ($people as $user): ?>
-    <?php $profile = $user->getProfile(); ?>
+<?php foreach ($people as $profile): ?>
     <?php include_partial('profile/listItem', array('profile' => $profile, 'friends' => $friends)); ?>
 <?php endforeach; ?>
 <?php $pager->display(); ?>

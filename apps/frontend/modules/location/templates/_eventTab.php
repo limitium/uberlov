@@ -1,5 +1,5 @@
 <div id="eventContainer">
-    <?php foreach ($locations as $event): ?>
+    <?php foreach ($events as $event): ?>
     <?php include_partial('event/listItemWOloc', array('event' => $event)); ?>
     <?php endforeach; ?>
     <?php if ($sf_user->isAnonymous()): ?>

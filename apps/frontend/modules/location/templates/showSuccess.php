@@ -9,7 +9,8 @@
 <div class="ilike clear_fix">
     <?php include_partial('default/ilike', array('url' => '@location_show?id=' . $location->getId())) ?>
     <div class="export">
-        <div class="ozi"><?php echo link_to(image_tag('/images/icons/location/ozi.gif'), '@location_export?id=' . $location->getId()); ?></div>
+        <div
+            class="ozi"><?php echo link_to(image_tag('/images/icons/location/ozi.gif'), '@location_export?id=' . $location->getId()); ?></div>
     </div>
 </div>
 
@@ -20,30 +21,96 @@
 <div class="location">
     <div class="stat">
         <table>
-            <tr><td>Глубина:</td><td><?php echo $location->depth ? $location->getDepth() . ' м.' : '' ?></td></tr>
-            <tr><td>Течение:</td><td><?php echo $location->getLocationFlow() ?></td></tr>
-            <tr><td>Рельеф:</td><td><?php echo $location->getLocationRelief() ?></td></tr>
-            <tr><td>Дно:</td><td><?php echo $location->getLocationFundus() ?></td></tr>
-            <tr><td>Наловили:</td><td><?php echo $location->getTotalProfit() ?> кг.</td></tr>
+            <tr>
+                <td>Глубина:</td>
+                <td>
+                    <?php if ($location->depth): ?>
+                    <?php echo $location->getDepth() ?> м.
+                    <?php else: ?>
+                    — <?php echo link_to('указать глубину', 'location/edit?id=' . $location->getId()); ?>
+                    <?php endif; ?>
+                </td>
+            </tr>
+            <tr>
+                <td>Течение:</td>
+                <td>
+                    <?php if ($location->location_flow_id): ?>
+                    <?php echo $location->getLocationFlow() ?>
+                    <?php else: ?>
+                    — <?php echo link_to('указать течение', 'location/edit?id=' . $location->getId()); ?>
+                    <?php endif; ?>
+                </td>
+            </tr>
+            <tr>
+                <td>Рельеф:</td>
+                <td>
+                    <?php if ($location->location_relief_id): ?>
+                    <?php echo $location->getLocationRelief() ?>
+                    <?php else: ?>
+                    — <?php echo link_to('указать рельеф', 'location/edit?id=' . $location->getId()); ?>
+                    <?php endif; ?>
+                </td>
+            </tr>
+            <tr>
+                <td>Дно:</td>
+                <td><?php if ($location->location_fundus_id): ?>
+                    <?php echo $location->getLocationFundus() ?>
+                    <?php else: ?>
+                    — <?php echo link_to('указать тип дна', 'location/edit?id=' . $location->getId()); ?>
+                    <?php endif; ?>
+                </td>
+            </tr>
+            <tr>
+                <td>Всего поймали:</td>
+                <td>
+                    <?php if (sizeof($profits)): ?>
+                    <?php echo $location->getTotalProfit() ?> кг.
+                    <?php else: ?>
+                    — <?php echo link_to('добавить отчет', 'profit/new?location=' . $location->getId()); ?>
+                    <?php endif; ?>
+                </td>
+            </tr>
+            <tr>
+                <td>Средний улов:</td>
+                <td>
+                    <?php if (sizeof($profits)): ?>
+                    <?php echo $location->getAverageProfit() ?> кг.
+                    <?php else: ?>
+                    — <?php echo link_to('добавить отчет', 'profit/new?location=' . $location->getId()); ?>
+                    <?php endif; ?>
+                    </td>
+            </tr>
+            <tr>
+                <td>Сезон:</td>
+                <td>
+                    <?php if (sizeof($profits)): ?>
+                    <?php echo $location->isSummer() ? "Летний" : "Зимний" ?>
+                    <?php else: ?>
+                    — <?php echo link_to('добавить отчет', 'profit/new?location=' . $location->getId()); ?>
+                    <?php endif; ?>
+                </td>
+            </tr>
         </table>
         <div class="fish">
+            <h5>Клюет:</h5>
             <?php if ($fishes->count()): ?>
-                <p>Клюет</p>
-                <ul>
-                    <?php foreach ($fishes as $fish): ?>
-                        <li><?php echo $fish->name; ?></li>
-                    <?php endforeach; ?>
-                </ul>
+            <ul>
+                <?php foreach ($fishes as $fish): ?>
+                <li><?php echo $fish->name; ?></li>
+                <?php endforeach; ?>
+            </ul>
+            <?php else: ?>
+            Не известно
             <?php endif; ?>
         </div>
         <div class="clear_fix"></div>
         <?php if ($location->getIsFree()): ?>
-            <p class="free"></p>
+        <p class="free"></p>
         <?php else: ?>
-            <div class="price">
-                <p class="icon"></p>
-                <?php echo $location->getPrice(ESC_XSSSAFE) ?>
-            </div>
+        <div class="price">
+            <p class="icon"></p>
+            <?php echo $location->getPrice(ESC_XSSSAFE) ?>
+        </div>
         <?php endif; ?>
     </div>
     <div class="photo">
@@ -61,11 +128,9 @@
         <?php include_partial('vote/vote', array('obj' => $location)); ?>
         <div>
             <a href="" id="goToReply">□</a> <?php include_partial('profile/addBy', array('added' => $location)); ?>
-            <?php if (!$sf_user->isAnonymous()): ?>
-                | <?php echo link_to('тут не так', 'location/edit?id=' . $location->getId()); ?>
-            <?php endif; ?>
+            | <?php echo link_to('тут не так', 'location/edit?id=' . $location->getId()); ?>
             <?php include_partial('wish', array('location' => $location)); ?>
-            | <a href="" class="commentShowAuthor" author="user<?php echo $location->getCreatedBy(); ?>">●</a>
+            | <a href="" class="commentShowAuthor" author="user<?php echo $location->getCreatedBy()->getId(); ?>">●</a>
         </div>
     </div>
 </div>
@@ -73,7 +138,8 @@
 <?php use_javascript('tabPanel'); ?>
 <div class="tabPanel">
     <ul>
-        <li><span href="#" id="commentTab" class="selected">Комментарии (<i id="commentCounter"><?php echo sizeof($comments); ?></i>)</span></li>
+        <li><span href="#" id="commentTab" class="selected">Комментарии (<i
+            id="commentCounter"><?php echo sizeof($comments); ?></i>)</span></li>
         <li><span href="#" id="profitTab">Отчеты (<i id="profitCounter"><?php echo sizeof($profits); ?></i>)</span></li>
         <li><span href="#" id="eventTab">События (<i id="eventCounter"><?php echo sizeof($events); ?></i>)</span></li>
     </ul>

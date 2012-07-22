@@ -88,7 +88,7 @@ class sfApplyActions extends BasesfApplyActions
         $authresult = json_decode($b, true); //Получаем PHP массив с данными авторизации
         print_r($kk);
         print_r($authresult);
-        die;;
+        die;
         echo 123;
     }
 }

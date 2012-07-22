@@ -54,7 +54,7 @@ a.dashed:link, a.dashed:active, a.dashed:visited, a.dashed:hover {
 }
 .location .stat{
     float:left;
-    width: 46%;
+    width: 75%;
     min-width: 420px
 }
 .location .stat table {
@@ -81,7 +81,7 @@ a.dashed:link, a.dashed:active, a.dashed:visited, a.dashed:hover {
 
 }
 .location .stat table tr td{
-    width: 120px;
+    width: 130px;
     text-align: left;
     line-height: 2em;
 }
@@ -98,26 +98,27 @@ div.fish ul li {
 }
 .location .photo{
     float:right;
+    width: 200px;
 }
-.photo div.photos div.image{
-    height: 350px;
-    line-height: 350px;
-}
-.location .photo div.photos,.location .photo div.photos div.image,.location .photo div.photos ul.thumbs,.location .photo img{
-    width: 498px;
-}
-.location .photo img{
-    height: 350px;
-}
-.location .photo img.loading{
-    height: 5px;
-}
-.location .photo div.photos ul.thumbs li a img{
-    width: 83px
-}
+/*.photo div.photos div.image{*/
+    /*height: 350px;*/
+    /*line-height: 350px;*/
+/*}*/
+/*.location .photo div.photos,.location .photo div.photos div.image,.location .photo div.photos ul.thumbs,.location .photo img{*/
+    /*width: 498px;*/
+/*}*/
+/*.location .photo img{*/
+    /*height: 350px;*/
+/*}*/
+/*.location .photo img.loading{*/
+    /*height: 5px;*/
+/*}*/
+/*.location .photo div.photos ul.thumbs li a img{*/
+    /*width: px*/
+/*}*/
 .location .description{
     padding: 2em 0 0 1em;
-    clear: both;
+    float: left;
 }
 .location p.free{
     background: url("/images/icons/location/free.png") no-repeat scroll left top transparent;

@@ -51,15 +51,22 @@ class talkActions extends sfActions {
     }
 
     public function executeShow(sfWebRequest $request) {
-        $this->talk = Doctrine::getTable('Talk')->find(array($request->getParameter('id')));
+        $this->talk =Doctrine::getTable('Talk')->createQuery("t")
+            ->leftJoin('t.VoteTalk')
+            ->leftJoin('t.CreatedBy p')
+            ->leftJoin('t.TalkSection')
+            ->leftJoin('p.User')
+            ->where('t.id = ?', $request->getParameter('id'))
+            ->execute()
+            ->getFirst();
         $this->forward404Unless($this->talk);
 
         $this->comments = Comment::getFor($this->talk);
 
         $this->form = new CommentTalkForm();
-        $this->form->setDefault('talk_id', $this->talk->getId());
+        $this->form->setCommented($this->talk);
 
-        $this->related = TagTable::getObjectTaggedWith(array_keys($this->talk->getTags()), array('nb_common_tags' => 2, 'leftJoin' => 't.CreatedBy'));
+        $this->related = TagTable::getObjectTaggedWith(array_keys($this->talk->getTags()), array('nb_common_tags' => 2, 'leftJoin' => 't.CreatedBy p,p.User'));
     }
 
     public function executeNew(sfWebRequest $request) {

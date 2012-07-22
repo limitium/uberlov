@@ -14,7 +14,7 @@ all:
     apply:
       subject: "Подтверждение аккаунта на uberlov.ru"
     from:
-      email: "spamer@uberlov.ru"
+      email: "mailer@uberlov.ru"
       fullname: "Uberlov"
       routes:
           apply: /register

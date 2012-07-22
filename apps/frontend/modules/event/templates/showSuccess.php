@@ -64,7 +64,7 @@
         <?php include_partial('vote/vote', array('obj' => $event)); ?>
         <div>
             <a href="" id="goToReply">□</a>
-            <?php include_partial('profile/addBy', array('added' => $event)); ?> | <a href="" class="commentShowAuthor" author="user<?php echo $event->getCreatedBy(); ?>">●</a>
+            <?php include_partial('profile/addBy', array('added' => $event)); ?> | <a href="" class="commentShowAuthor" author="user<?php echo $event->getCreatedBy()->getId(); ?>">●</a>
         </div>
     </div>
 </div>
