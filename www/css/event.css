@@ -1,19 +1,26 @@
-.eventFull h2{
+.eventFull h2 {
     display: inline-block;
     padding-top: 1em;
 }
-.eventFull .where{
+
+.eventFull .where {
     padding-top: 1em;
     float: right;
 }
-.eventListItem{
+
+.eventFull .meta {
+    clear: both;
+    padding: 2em 0 1em;
+}
+
+.eventListItem {
     padding-top: 1em;
     padding-bottom: 1.5em;
     border-top: 1px solid #759E1A;
 }
 
 /*from*/
-#fish_event_contact,#fish_event_description,#fish_event_price,#fish_event_schedule,#fish_event_rules,#fish_event_users{
+#fish_event_contact, #fish_event_description, #fish_event_price, #fish_event_schedule, #fish_event_rules, #fish_event_users {
     width: 700px;
     height: 300px;
 

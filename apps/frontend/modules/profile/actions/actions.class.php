@@ -8,50 +8,55 @@
  * @author     Your name here
  * @version    SVN: $Id: actions.class.php 23810 2009-11-12 11:07:44Z Kris.Wallsmith $
  */
-class profileActions extends sfActions {
+class profileActions extends sfActions
+{
 
-    public function executeCity(sfWebRequest $request) {
+    public function executeCity(sfWebRequest $request)
+    {
         $this->cities = Doctrine_Query::create()
-                        ->from('City c')
-                        ->where('c.name LIKE ?', $request->getParameter('q') . '%')
-                        ->leftJoin('c.Region')
-                        ->limit($request->getParameter('limit', 10))
-                        ->orderBy('c.weight desc, c.name desc')
-                        ->execute();
+            ->from('City c')
+            ->where('c.name LIKE ?', $request->getParameter('q') . '%')
+            ->leftJoin('c.Region')
+            ->limit($request->getParameter('limit', 10))
+            ->orderBy('c.weight desc, c.name desc')
+            ->execute();
     }
 
-    public function executeList(sfWebRequest $request) {
-        $this->pager = htPagerLayout::create(Doctrine::getTable('sfGuardUser')
-                                ->createQuery('f')
-                                ->leftJoin('f.Profile')
-                                ->orderBy('f.created_at ASC'), '@people?page={%page_number}', $request->getParameter('page', 1));
+    public function executeList(sfWebRequest $request)
+    {
+        $this->pager = htPagerLayout::create(Doctrine::getTable('sfGuardUserProfile')
+            ->createQuery('p')
+            ->leftJoin('p.User ')
+            ->leftJoin('p.VoteProfile')
+            ->orderBy('p.created_at ASC'), '@people?page={%page_number}', $request->getParameter('page', 1));
 
         $this->csrf = CSRF::getToken();
 
         $this->friends = !$this->getUser()->isAnonymous() ? $this->getUser()->getProfile()->getFriends() : null;
     }
 
-    public function executeTopProfit(sfWebRequest $request) {
+    public function executeTopProfit(sfWebRequest $request)
+    {
         $peopleOrdered = array();
         $ps = Doctrine_Query::create()
-                        ->select('sum(pd.qty) as weight,p.created_by as id')
-                        ->from('ProfitDetail pd')
-                        ->leftJoin('pd.Profit p')
-                        ->groupBy('p.created_by')
-                        ->orderBy('weight desc')
-                        ->limit(10)
-                        ->execute(array(), Doctrine::HYDRATE_NONE);
+            ->select('sum(pd.qty) as weight,p.created_by as id')
+            ->from('ProfitDetail pd')
+            ->leftJoin('pd.Profit p')
+            ->groupBy('p.created_by')
+            ->orderBy('weight desc')
+            ->limit(10)
+            ->execute(array(), Doctrine::HYDRATE_NONE);
         foreach ($ps as $p) {
             $peopleOrdered[$p[0]] = $p[1];
         }
-        
+
         foreach (Doctrine_Query::create()
-                ->from('sfGuardUserProfile p')
-                ->leftJoin('p.User u')
-                ->leftJoin('p.VoteProfile')
-                ->whereIn("u.id", array_keys($peopleOrdered))
-                ->execute() as $profile) {
-            $peopleOrdered[$profile->id] = (object) array('profile' => $profile, 'weight' => $peopleOrdered[$profile->id]);
+                     ->from('sfGuardUserProfile p')
+                     ->leftJoin('p.User u')
+                     ->leftJoin('p.VoteProfile')
+                     ->whereIn("u.id", array_keys($peopleOrdered))
+                     ->execute() as $profile) {
+            $peopleOrdered[$profile->id] = (object)array('profile' => $profile, 'weight' => $peopleOrdered[$profile->id]);
         }
 
         $this->people = $peopleOrdered;
@@ -61,23 +66,27 @@ class profileActions extends sfActions {
         $this->friends = !$this->getUser()->isAnonymous() ? $this->getUser()->getProfile()->getFriends() : null;
     }
 
-    public function executeMy(sfWebRequest $request) {
+    public function executeMy(sfWebRequest $request)
+    {
         $request->setParameter('id', $this->getUser()->getProfile()->getId());
         $this->forward('profile', 'show');
     }
 
-    public function executeEditMy(sfWebRequest $request) {
+    public function executeEditMy(sfWebRequest $request)
+    {
         $request->setParameter('id', $this->getUser()->getProfile()->getId());
         $this->forward('profile', 'edit');
     }
 
-    public function executeFriends(sfWebRequest $request) {
+    public function executeFriends(sfWebRequest $request)
+    {
         $this->csrf = CSRF::getToken();
         $this->friends = $this->getUser()->getProfile()->getFriends();
         $this->profile = $this->getUser()->getProfile();
     }
 
-    public function executeAdd(sfWebRequest $request) {
+    public function executeAdd(sfWebRequest $request)
+    {
         $request->checkCSRFProtection();
 
         $this->profile = Doctrine::getTable('sfGuardUserProfile')->find(array($request->getParameter('id')));
@@ -89,7 +98,8 @@ class profileActions extends sfActions {
         }
     }
 
-    public function executeRemove(sfWebRequest $request) {
+    public function executeRemove(sfWebRequest $request)
+    {
         $request->checkCSRFProtection();
 
         $this->profile = Doctrine::getTable('sfGuardUserProfile')->find(array($request->getParameter('id')));
@@ -98,8 +108,16 @@ class profileActions extends sfActions {
         $this->getUser()->getProfile()->removeFriend($this->profile);
     }
 
-    public function executeShow(sfWebRequest $request) {
-        $this->profile = Doctrine::getTable('sfGuardUserProfile')->find(array($request->getParameter('id')));
+    public function executeShow(sfWebRequest $request)
+    {
+
+        $this->profile= Doctrine::getTable('sfGuardUserProfile')->createQuery("p")
+            ->leftJoin('p.VoteProfile')
+            ->leftJoin('p.User')
+            ->where('p.id = ?', $request->getParameter('id'))
+            ->execute()
+            ->getFirst();
+
         $this->forward404Unless($this->profile);
 
         $this->view = $request->getParameter('view');
@@ -110,37 +128,34 @@ class profileActions extends sfActions {
 
         //@todo: join commmented objects
         $this->comments = Doctrine_Query::create()
-                        ->from('Comment c')
-                        ->leftJoin('c.CreatedBy')
-                        ->where('c.created_by = ? and c.parent > 0', $this->profile->getId())
-                        ->andWhere('c.inbox_id is null')
-                        ->orderBy('c.created_at desc');
+            ->from('Comment c')
+            ->leftJoin('c.VoteComment')
+            ->where('c.created_by = ? and c.parent > 0', $this->profile->getId())
+            ->andWhere('c.inbox_id is null')
+            ->orderBy('c.created_at desc');
 
         $this->comments = Doctrine::getTable('Comment')->filterScope($this->comments, $this->getUser())->execute();
         $this->profits = Doctrine_Query::create()
-                        ->from('Profit p')
-                        ->leftJoin('p.ProfitDetail d')
-                        ->leftJoin('p.Location l')
-                        ->leftJoin('d.Fish f')
-                        ->leftJoin('d.Style s')
-                        ->leftJoin('p.CommentProfit')
-                        ->leftJoin('p.VoteProfit')
-                        ->leftJoin('p.CreatedBy')
-                        ->andWhere('p.created_by = ?', $this->profile->getId())
-                        ->orderBy('p.created_at desc');
+            ->from('Profit p')
+            ->leftJoin('p.ProfitDetail d')
+            ->leftJoin('p.Location l')
+            ->leftJoin('d.Fish f')
+            ->leftJoin('d.Style s')
+            ->leftJoin('p.CommentProfit')
+            ->leftJoin('p.VoteProfit')
+            ->andWhere('p.created_by = ?', $this->profile->getId())
+            ->orderBy('p.created_at desc');
 
         $this->profits = Doctrine::getTable('Location')
-                        ->filterScope($this->profits, $this->getUser())->execute();
+            ->filterScope($this->profits, $this->getUser())->execute();
 
         $this->locations = Doctrine::getTable('Location')
-                        ->getVisibleLocationsQuery($this->getUser())
-                        ->leftJoin('l.VoteLocation v')
-                        ->leftJoin('l.CreatedBy p')
-                        ->leftJoin('l.CommentLocation c')
-                        ->leftJoin('l.Profit pr')
-                        ->andWhere('l.created_by = ?', $this->profile->getId())
-                        ->orderBy('l.created_at desc')
-                        ->execute();
+            ->getVisibleLocationsQuery($this->getUser())
+            ->leftJoin('l.VoteLocation v')
+            ->leftJoin('l.CommentLocation c')
+            ->andWhere('l.created_by = ?', $this->profile->getId())
+            ->orderBy('l.created_at desc')
+            ->execute();
 //@todo: add events
         $this->total = 0;
         $this->best = array(
@@ -155,14 +170,15 @@ class profileActions extends sfActions {
                 $this->best['location'] = $profit->getLocation();
             }
             foreach ($profit->getProfitDetail() as $pd) {
-                $this->total+=$pd->getQty();
+                $this->total += $pd->getQty();
             }
         }
 
         $this->csrf = CSRF::getToken();
     }
 
-    public function executeEdit(sfWebRequest $request) {
+    public function executeEdit(sfWebRequest $request)
+    {
         $this->forward404Unless($profile = Doctrine::getTable('sfGuardUserProfile')->find(array($request->getParameter('id'))), sprintf('Object profile does not exist (%s).', $request->getParameter('id')));
         $this->form = new sfGuardUserProfileForm($profile);
         $this->form->setDefault('first_name', $profile->getFirstName());
@@ -171,12 +187,12 @@ class profileActions extends sfActions {
 
         $this->forward404Unless(sfConfig::get('app_sfForkedApply_mail_editable'));
         $formClass = sfConfig::get('app_sfForkedApply_editEmailForm');
-        if (!( ($this->mailForm = new $formClass() ) instanceof sfApplyEditEmailForm)) {
+        if (!(($this->mailForm = new $formClass()) instanceof sfApplyEditEmailForm)) {
             // if the form isn't instance of sfApplySettingsForm, we don't accept it
             throw new InvalidArgumentException(sfContext::getInstance()->
-                            getI18N()->
-                            __('The custom %action% form should be instance of %form%', array('%action%' => 'editEmail',
-                                '%form%' => 'sfApplyEditEmailForm'), 'sfForkedApply')
+                    getI18N()->
+                    __('The custom %action% form should be instance of %form%', array('%action%' => 'editEmail',
+                    '%form%' => 'sfApplyEditEmailForm'), 'sfForkedApply')
             );
         }
 
@@ -185,27 +201,28 @@ class profileActions extends sfActions {
             $this->redirect('@sf_guard_signin');
         }
         // we're getting default or customized resetForm for the task
-        if (!( ($this->resetform = new sfApplyResetForm() ) instanceof sfApplyResetForm)) {
+        if (!(($this->resetform = new sfApplyResetForm()) instanceof sfApplyResetForm)) {
             // if the form isn't instance of sfApplyResetForm, we don't accept it
             throw new InvalidArgumentException(
-                    'The custom reset form should be instance of sfApplyResetForm'
+                'The custom reset form should be instance of sfApplyResetForm'
             );
         }
     }
 
-    public function executeUpdate(sfWebRequest $request) {
+    public function executeUpdate(sfWebRequest $request)
+    {
         $this->forward404Unless($request->isMethod(sfRequest::POST) || $request->isMethod(sfRequest::PUT));
         $this->forward404Unless($profile = Doctrine::getTable('sfGuardUserProfile')->find(array($request->getParameter('id'))), sprintf('Object profile does not exist (%s).', $request->getParameter('id')));
         $this->form = new sfGuardUserProfileForm($profile);
 
         $this->processForm($request, $this->form);
         $formClass = sfConfig::get('app_sfForkedApply_editEmailForm');
-        if (!( ($this->mailForm = new $formClass() ) instanceof sfApplyEditEmailForm)) {
+        if (!(($this->mailForm = new $formClass()) instanceof sfApplyEditEmailForm)) {
             // if the form isn't instance of sfApplySettingsForm, we don't accept it
             throw new InvalidArgumentException(sfContext::getInstance()->
-                            getI18N()->
-                            __('The custom %action% form should be instance of %form%', array('%action%' => 'editEmail',
-                                '%form%' => 'sfApplyEditEmailForm'), 'sfForkedApply')
+                    getI18N()->
+                    __('The custom %action% form should be instance of %form%', array('%action%' => 'editEmail',
+                    '%form%' => 'sfApplyEditEmailForm'), 'sfForkedApply')
             );
         }
 
@@ -215,17 +232,18 @@ class profileActions extends sfActions {
             $this->redirect('@sf_guard_signin');
         }
         // we're getting default or customized resetForm for the task
-        if (!( ($this->resetform = new sfApplyResetForm() ) instanceof sfApplyResetForm)) {
+        if (!(($this->resetform = new sfApplyResetForm()) instanceof sfApplyResetForm)) {
             // if the form isn't instance of sfApplyResetForm, we don't accept it
             throw new InvalidArgumentException(
-                    'The custom reset form should be instance of sfApplyResetForm'
+                'The custom reset form should be instance of sfApplyResetForm'
             );
         }
 
         $this->setTemplate('edit');
     }
 
-    protected function processForm(sfWebRequest $request, sfForm $form) {
+    protected function processForm(sfWebRequest $request, sfForm $form)
+    {
         $files = $request->getFiles($form->getName());
         $form->bind($request->getParameter($form->getName()), $files);
         if ($form->isValid()) {
@@ -254,7 +272,8 @@ class profileActions extends sfActions {
         }
     }
 
-    public function executeEditEmail() {
+    public function executeEditEmail()
+    {
         $this->forward('sfApply', 'editEmail');
     }
 

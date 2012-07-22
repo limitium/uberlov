@@ -42,7 +42,7 @@ body{
 
 /*tab panel*/
 .tabPanel{
-    height: 2.6em;
+    height: 26px;
     margin-bottom: 1.2em;
     overflow: hidden;
     position: relative;
@@ -59,7 +59,7 @@ body{
     background: none repeat scroll 0 0 #FFFFFF;
     float: left;
     list-style-type: none;
-    margin-bottom: -1px;
+    margin-bottom: -2px;
     height: 22px;
     margin-right: 8px;
     white-space: nowrap;

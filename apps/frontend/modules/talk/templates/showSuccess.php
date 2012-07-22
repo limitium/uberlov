@@ -50,7 +50,7 @@
             <?php include_partial('vote/vote', array('obj' => $talk)); ?>
             <a href="" id="goToReply">□</a>
             <?php include_partial('profile/writeBy', array('written' => $talk)); ?>
-            <a href="" class="commentShowAuthor" author="user<?php echo $talk->getCreatedBy(); ?>">●</a>
+            <a href="" class="commentShowAuthor" author="user<?php echo $talk->getCreatedBy()->getId(); ?>">●</a>
         </div>
     </div>
 </div>

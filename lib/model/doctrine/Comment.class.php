@@ -10,23 +10,27 @@
  * @author     Your name here
  * @version    SVN: $Id: Builder.php 6820 2009-11-30 17:27:49Z jwage $
  */
-class Comment extends BaseComment {
+class Comment extends BaseComment
+{
 
     public $plused = false;
     public $minused = false;
 
-    public function getRating() {
+    public function getRating()
+    {
         return Vote::getRating($this, 'Comment');
     }
 
-    public static function getFor(Doctrine_Record $object) {
+    public static function getFor(Doctrine_Record $object)
+    {
         $tableName = $object->getTable()->getTableName();
         $componentName = $object->getTable()->getComponentName();
-        $q = Doctrine_Query::create()->select('c.message, c.parent, c.created_at, c.updated_at, c.created_by, c.updated_by, p.*, v.*')->from('Comment' . $componentName . ' c')
-                ->leftJoin('c.CreatedBy p')
-                ->leftJoin('p.User')
-                ->leftJoin('c.VoteComment v')
-                ->where('c.' . $tableName . '_id = ?', $object->getId());
+        $q = Doctrine_Query::create()->select('c.message, c.parent, c.created_at, c.updated_at, c.created_by, c.updated_by, p.*, v.*,u.*')->from('Comment' . $componentName . ' c')
+            ->leftJoin('c.CreatedBy p')
+            ->leftJoin('p.User u')
+            ->leftJoin('c.VoteComment v')
+            ->where('c.' . $tableName . '_id = ?', $object->getId());
+
 
         $treeObject = Doctrine::getTable('Comment' . $componentName)->getTree();
         $treeObject->setBaseQuery($q);
@@ -43,7 +47,8 @@ class Comment extends BaseComment {
         return $comments;
     }
 
-    public function save(Doctrine_Connection $conn = null) {
+    public function save(Doctrine_Connection $conn = null)
+    {
 
         $conn = $conn ? $conn : $this->getTable()->getConnection();
         $conn->beginTransaction();
@@ -51,9 +56,10 @@ class Comment extends BaseComment {
             $ret = parent::save($conn);
 
             if (!$this->location_id && !$this->profit_id && !$this->fish_event_id
-                    || ($this->location_id && $this->getLocation()->location_scope_id == 5)
-                    || ($this->profit_id && $this->getProfit()->getLocation()->location_scope_id == 5)
-                    || ($this->fish_event_id && $this->getFishEvent()->getLocation()->location_scope_id == 5)) {
+                || ($this->location_id && $this->getLocation()->location_scope_id == 5)
+                || ($this->profit_id && $this->getProfit()->getLocation()->location_scope_id == 5)
+                || ($this->fish_event_id && $this->getFishEvent()->getLocation()->location_scope_id == 5)
+            ) {
                 LuceneEngine::updateLuceneIndexFor($this);
             }
 
@@ -66,9 +72,20 @@ class Comment extends BaseComment {
         }
     }
 
-    public function delete(Doctrine_Connection $conn = null) {
+    public function delete(Doctrine_Connection $conn = null)
+    {
         LuceneEngine::deleteLuceneIndexFor($this);
         return parent::delete($conn);
     }
 
+    public function getToward()
+    {
+        return $this->_data['toward'] == "fish_event" ? "event" : $this->_data['toward'];
+    }
+
+    public function getTowardId()
+    {
+        $towardIdField = $this->getToward() . "_id";
+        return $this->$towardIdField;
+    }
 }

@@ -38,7 +38,7 @@ class profitActions extends sfActions
     public function executeListWinter(sfWebRequest $request)
     {
         $query = $this->getListQuery()
-            ->where('month(p.date) in (12,1,2,3,4)');
+            ->where('month(p.date) in (' . implode(',', Location::$winter) . ')');
 
         $this->getList($request, 'profit/list/winter?page={%page_number}', $query);
     }
@@ -46,14 +46,26 @@ class profitActions extends sfActions
     public function executeListSummer(sfWebRequest $request)
     {
         $query = $this->getListQuery()
-            ->where('month(p.date) in (5,6,7,8,9,10,11)');
+            ->where('month(p.date) in (' . implode(',', Location::$summer) . ')');
 
         $this->getList($request, 'profit/list/summer?page={%page_number}', $query);
     }
 
     public function executeShow(sfWebRequest $request)
     {
-        $this->profit = Doctrine::getTable('Profit')->find(array($request->getParameter('id')));
+        $this->profit = Doctrine::getTable('Location')->addLocation(
+            Doctrine::getTable('Profit')->createQuery("p")
+                ->leftJoin('p.VoteProfit')
+                ->leftJoin('p.CreatedBy c')
+                ->leftJoin('c.User')
+                ->leftJoin('p.Fish')
+                ->leftJoin('p.ProfitDetail pd')
+                ->leftJoin('pd.Fish')
+                ->leftJoin('pd.Style'), 'p')
+            ->where('p.id = ?', $request->getParameter('id'))
+            ->execute()
+            ->getFirst();
+
         $this->forward404Unless($this->profit);
 
         $this->comments = Comment::getFor($this->profit);

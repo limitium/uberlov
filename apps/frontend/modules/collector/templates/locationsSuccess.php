@@ -7,6 +7,3 @@
 
 <?php use_javascript('fullMapModule'); ?>
 <?php include_partial('map') ?>
-<script type="text/javascript">
-    user_ip = "<?php echo $ip; ?>";
-</script>

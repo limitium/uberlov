@@ -55,7 +55,7 @@
         <?php include_partial('vote/vote', array('obj' => $profit)); ?>
         <div>
             <a href="" id="goToReply">□</a> <?php include_partial('profile/writeBy', array('written' => $profit)); ?> |
-            <a href="" class="commentShowAuthor" author="user<?php echo $profit->getCreatedBy(); ?>">●</a>
+            <a href="" class="commentShowAuthor" author="user<?php echo $profit->getCreatedBy()->getId(); ?>">●</a>
         </div>
     </div>
 </div>

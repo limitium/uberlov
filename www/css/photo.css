@@ -1,28 +1,9 @@
 .photos {
-    width:800px;
     margin-bottom:1em;
-    border: 1px solid #DFDFDF;
-    background-color: #F6F6F6
 }
 
 .photos {
     position:relative;
-}
-
-.photos .image {
-    height:600px;
-    line-height:600px;
-    vertical-align:bottom;
-    width:800px;
-}
-.photos .image img{
-    margin: auto;
-    /*    width:452px;*/
-}
-
-.photos .image img.loading{
-    margin: 150px auto;
-    width:100px;
 }
 
 .photos .image {
@@ -35,11 +16,9 @@
 .photos .thumbs {
     list-style:none outside none;
     overflow:hidden;
-    width: 800px;
 }
 .photos .thumbs {
     list-style:none outside none;
-    border-top: 1px solid #DFDFDF;
 }
 
 .photos .thumbs li {
@@ -61,8 +40,8 @@
 }
 .photos .thumbs li a img {
     display:block;
-    opacity:0.5;
-    height: 60px;
-    width: 80px;
+    /*opacity:0.5;*/
+    height: 75px;
+    width: 100px;
     border:0 none;
 }
