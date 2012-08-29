@@ -47,7 +47,7 @@ $browser->
         end()
 ;
 $browser->
-        info('2 - main links')->
+        info('2 - main linkчёs')->
         get('/')->
         info('2.2 - talks')->
         click("Обсуждения")->

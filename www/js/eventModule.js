@@ -20,8 +20,7 @@ eventModule.prototype.afterInit = function(){
 
 eventModule.prototype.initMenu = function(){
     this.menu = {
-        link: $('#new_event',this.mm.addEditItem('<a id="new_event" href=""><img src="' + app.url('/images/event.png') + '"/>добавить событие</a>'))
-        .click(this.startEdit.delegate(this))
+        link: $('#new_event').attr("href","#").click(this.startEdit.delegate(this))
     };
 }
 

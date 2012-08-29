@@ -19,6 +19,8 @@
     background-color:black;
     text-decoration:none;
     margin-left:5px;
+    font-size: 15px;
+    font-weight: bold;
 }
 .mapOverLay a:hover,map_footer a:hover {
     background-color:#99BC3D;
@@ -28,6 +30,7 @@
     border:0px;
     margin-bottom:-2px;
     margin-left: 5px;
+    margin-right: 2px;
 }
 .mapOverLay {
     position: absolute;

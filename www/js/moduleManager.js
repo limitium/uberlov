@@ -1,34 +1,49 @@
-function baseModule(){}
-baseModule.prototype.afterInit = function(){}
+function baseModule() {
+}
+baseModule.prototype.afterInit = function () {
+}
 
-function ModuleManager(){}
+function ModuleManager() {
+}
 
 ModuleManager.modules = {};
-ModuleManager.add = function(module){
+ModuleManager.add = function (module) {
     fb('add module ' + module.name);
     module.prototype = new baseModule();
     module.prototype.constructor = module;
     module.parent = baseModule.prototype;
     ModuleManager.modules[module.name] = module;
 }
-ModuleManager.initModules = function(){
-    for(module in ModuleManager.modules){
-        try{
+ModuleManager.createModules = function () {
+    for (module in ModuleManager.modules) {
+        try {
+            fb('cretate module ' + module);
             app.modules[module] = new ModuleManager.modules[module]();
-            fb('created module ' + module);
-            app.$.bind('inited',function(module){
-                return function(){
-                    try{
-                        app.modules[module].afterInit();
-                    }catch (e){
-                        fb('error while initing ' + module);
-                        fb(e);
-                    }
-                }
-            }(module));
-        }catch(e){
+        } catch (e) {
             fb('error while creating module ' + module);
             fb(e)
+        }
+    }
+}
+ModuleManager.afterCreate = function () {
+    for (module in ModuleManager.modules) {
+        try {
+            if (typeof app.modules[module].afterCreate == "function") {
+                app.modules[module].afterCreate();
+            }
+        } catch (e) {
+            fb('error while create ' + module);
+            fb(e);
+        }
+    }
+}
+ModuleManager.afterInit = function () {
+    for (module in ModuleManager.modules) {
+        try {
+            app.modules[module].afterInit();
+        } catch (e) {
+            fb('error while initing ' + module);
+            fb(e);
         }
     }
 }

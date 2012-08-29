@@ -1,11 +1,17 @@
 function fullMapModule(){
+
 }
 
 fullMapModule.name = 'fullMapModule';
 ModuleManager.add(fullMapModule);
 
-fullMapModule.prototype.afterInit = function(){
+fullMapModule.prototype.afterCreate= function(){
     this.mm = app.getModule('mapModule');
+    this.mm.addEditItem('<a id="new_location" href="' + app.url('user/new') + '"><img src="' + app.url('/images/location_m.png') + '"/>добавить место</a>');
+    this.mm.addEditItem('<a id="new_profit" href="' + app.url('user/new') + '"><img src="' + app.url('/images/profit.png') + '"/>добавить отчет</a>');
+    this.mm.addEditItem('<a id="new_event" href="' + app.url('user/new') + '"><img src="' + app.url('/images/event.png') + '"/>добавить событие</a>');
+}
+fullMapModule.prototype.afterInit = function(){
     this.mm.$.bind('startMap',this.onStartMap.delegate(this));
 }
 

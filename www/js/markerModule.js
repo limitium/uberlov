@@ -18,8 +18,7 @@ markerModule.prototype.afterInit = function(){
 }
 markerModule.prototype.initMenu = function(){
     this.menu = {
-        link: $('#new_location',this.mm.addEditItem('<a id="new_location" href=""><img src="' + app.url('/images/location_m.png') + '"/>добавить место</a>'))
-        .click(this.startEdit.delegate(this))
+        link: $('#new_location').attr("href","#").click(this.startEdit.delegate(this))
     };
 }
 
