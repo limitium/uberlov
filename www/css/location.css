@@ -1,77 +1,131 @@
 /*form*/
-.location_form{
+.location_form {
 
 }
-.location_form fieldset{
+
+.location_form fieldset {
     float: left;
     display: block;
 }
-.location_form .photowraper{
+
+.location_form .photowraper {
     padding-top: 1em;
     clear: both;
 }
-.location_form_wrapper{
+
+.location_form_wrapper {
     width: 700px;
     display: block;
 }
-.form_footer{
+
+.form_footer {
     display: block;
     clear: both;
 }
-#right_layout>.location_form #location_price,#right_layout>.location_form #location_description{
+
+#right_layout>.location_form #location_price, #right_layout>.location_form #location_description {
     width: 400px;
     height: 200px;
 }
-.search_empty{
+
+.search_empty {
     padding: 1em 0 0.5em 0em;
 }
-.search_form button.button_01{
+
+.search_form button.button_01 {
     margin-top: -4px;
 }
+
 .search_list .address {
     padding: 0 0 0 0.5em;
     font-size: medium;
 }
+
 /*map partial*/
 
 a.dashed:visited {
-    color:#0053E4;
+    color: #0053E4;
 }
+
 a.dashed:link, a.dashed:active, a.dashed:visited, a.dashed:hover {
-    border-bottom:1px dashed #0053E4;
-    text-decoration:none;
+    border-bottom: 1px dashed #0053E4;
+    text-decoration: none;
 }
-.map_location .location_footer{
+
+.map_location {
+    width: 520px;
+}
+
+.map_location .rating{
+    color:#666;
+    font-size: 18px;
+    vertical-align: top;
+}
+.map_location .rating, .map_location h2 {
+    display: inline-block;
+}
+
+.map_location .info {
+    max-height: 350px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+.map_location .info .text{
+    width: 400px;
+    float: left;
+}
+.map_location .info .fish-list{
+    float: right;
+}
+.map_location .info .photos{
+    float:left;
+    width: 420px;
+}
+.map_location .info .photos .thumbs li {
+    display: inline-block;
+}
+
+.map_location .info .photos .thumbs li img {
+    height: 75px;
+    width: 100px;
+}
+
+.map_location .location_footer {
     padding-top: 1em;
     padding-bottom: 1em;
     font-size: smaller;
 }
 
-
 /*details*/
-.location{
+.location {
     position: relative;
 }
-.location .stat{
-    float:left;
+
+.location .stat {
+    float: left;
     width: 75%;
     min-width: 420px
 }
+
 .location .stat table {
     margin: 1em 0 0 2em;
     float: left;
 }
+
 .location .stat table, .location .stat th, .location .stat td, .location .stat tr {
     border: none;
 }
-.location .stat p{
+
+.location .stat p {
     line-height: 1.6em;
 }
-.location .price{
-    float:left;
+
+.location .price {
+    float: left;
     padding: 1em;
 }
-.location .price .icon{
+
+.location .price .icon {
     background: url("/images/icons/location/price.png") no-repeat scroll left top transparent;
     height: 128px;
     width: 128px;
@@ -80,47 +134,53 @@ a.dashed:link, a.dashed:active, a.dashed:visited, a.dashed:hover {
     float: left;
 
 }
-.location .stat table tr td{
+
+.location .stat table tr td {
     width: 130px;
     text-align: left;
     line-height: 2em;
 }
-div.fish{
+
+div.fish {
     margin: 1em 0 0 0.5em;
     padding: 0 0 0 0.5em;
     border-left: 1px solid #DFDFDF;
     float: left;
     width: 50%;
 }
+
 div.fish ul li {
     float: left;
     padding: 0.5em 0 0 1em;
 }
-.location .photo{
-    float:right;
+
+.location .photo {
+    float: right;
     width: 200px;
 }
+
 /*.photo div.photos div.image{*/
-    /*height: 350px;*/
-    /*line-height: 350px;*/
+/*height: 350px;*/
+/*line-height: 350px;*/
 /*}*/
 /*.location .photo div.photos,.location .photo div.photos div.image,.location .photo div.photos ul.thumbs,.location .photo img{*/
-    /*width: 498px;*/
+/*width: 498px;*/
 /*}*/
 /*.location .photo img{*/
-    /*height: 350px;*/
+/*height: 350px;*/
 /*}*/
 /*.location .photo img.loading{*/
-    /*height: 5px;*/
+/*height: 5px;*/
 /*}*/
 /*.location .photo div.photos ul.thumbs li a img{*/
-    /*width: px*/
+/*width: px*/
 /*}*/
-.location .description{
+.location .description {
     padding: 2em 0 0 1em;
     float: left;
 }
-.location p.free{
+
+.location p.free {
     background: url("/images/icons/location/free.png") no-repeat scroll left top transparent;
     height: 150px;
     margin-left: -35px;
@@ -128,12 +188,12 @@ div.fish ul li {
     clear: both;
 }
 
-.location .meta{
-    clear:both;
+.location .meta {
+    clear: both;
     padding: 2em 0 1em 0;
 }
 
-.location .meta .rating{
+.location .meta .rating {
     font-size: 1em;
     font-weight: bold;
 }
@@ -143,52 +203,65 @@ div.fish ul li {
     padding-left: 1em;
     display: none;
 }
-#commentContainer.selected{
+
+#commentContainer.selected {
     display: block;
 }
+
 #profitContainer {
     padding-left: 1em;
     display: none;
 }
-#profitContainer .button_01{
+
+#profitContainer .button_01 {
     margin-top: 1em;
 }
-#profitContainer.selected{
+
+#profitContainer.selected {
     display: block;
 }
+
 #eventContainer {
     padding-left: 1em;
     display: none;
 }
-#eventContainer .button_01{
+
+#eventContainer .button_01 {
     margin-top: 1em;
 }
-#eventContainer.selected{
+
+#eventContainer.selected {
     display: block;
 }
+
 /*regions*/
-.contries li h3{
+.contries li h3 {
     padding-top: 1em;
 }
+
 ul.regions {
     display: block;
     padding-left: 1em;
 }
-.regions li{
+
+.regions li {
     display: inline-block;
     padding: 0 0.5em 0 1em;
 }
+
 /*my locvaitons*/
-#locationMy ul li{
+#locationMy ul li {
     padding-top: 2em;
 }
 
-.ilike .addthis_toolbox{
+.ilike .addthis_toolbox {
     float: left;
 }
-.ilike .export{
-    float:right;
+
+.ilike .export {
+    float: right;
 }
-.ilike .export .ozi{
+
+.ilike .export .ozi {
     padding: 1em;
 }

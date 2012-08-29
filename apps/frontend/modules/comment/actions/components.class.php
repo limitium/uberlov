@@ -20,7 +20,9 @@ class commentComponents extends sfComponents {
                 ->limit(5);
 
 
-        $this->comments = Doctrine::getTable('Comment')->filterScope($query, $this->getUser())->execute();
+        $this->comments = Doctrine::getTable('Comment')
+            ->filterScope($query, $this->getUser())
+            ->execute();
     }
 
 }

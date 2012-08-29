@@ -13,7 +13,7 @@ function mapModule(){
 
     this.selected = [];
     this.locations = {};
-    
+
 }
 
 mapModule.name = 'mapModule';
@@ -22,12 +22,12 @@ ModuleManager.add(mapModule);
 mapModule.prototype.afterInit = function(){
     this.initMenu();
     this.initMap();
-    
+
 }
 mapModule.prototype.initMap = function(){
-    var params = {}; 
+    var params = {};
     if(window.location.hash.length){
-        params = $.unparam(window.location.hash.substr(1));    
+        params = $.unparam(window.location.hash.substr(1));
     }
     params.z = parseInt(params.z) || this.defaultZoom;
     params.mt = this.idToType[parseFloat(params.mt)] || this.defaultMapType;
@@ -45,7 +45,7 @@ mapModule.prototype.initMap = function(){
         params.lat =  self.defaultLat;
         params.lng = self.defaultLng;
         self.startMap.call(self,params);
-        
+
         $.ajax({
             type: "GET",
             url: "http://j.maxmind.com/app/geoip.js",
@@ -54,7 +54,7 @@ mapModule.prototype.initMap = function(){
                 fb('recived');
             },
             error : function () {
-                fb('maxmind.com жопят данные :\'(');                
+                fb('maxmind.com жопят данные :\'(');
             },
             dataType: "script"
         });
@@ -75,11 +75,11 @@ mapModule.prototype.startMap = function(params){
         scrollwheel: false
     };
     this.map = new gm.Map($("#map_canvas").get(0), opt);
-    this.setType(params.mt); 
-    
+    this.setType(params.mt);
+
     this.$.trigger('startMap');
-    
-    this.initHandlers();    
+
+    this.initHandlers();
     this.loadData();
 }
 
@@ -115,19 +115,19 @@ mapModule.prototype.initMenu = function(){
         bottom:0
     });
     map.append(this.bar);
-    
+
     this.searchMenu = $('<div class="mapOverLay"><input id="serch_field" type="text" /><img id="serch_button" class="map_button" src="' + app.url('/images/search.png') + '"/></div>').css({
         opacity:0.8,
         top:0,
         right:569
     });
-    
+
     $('input',this.searchMenu).keyup(function(event){
         if (event.keyCode == '13') {
             $('img',self.searchMenu).trigger('click');
         }
     });
-    
+
     $('img',this.searchMenu).click(function(){
         var word = $('#serch_field').val();
         if(word){
@@ -135,7 +135,7 @@ mapModule.prototype.initMenu = function(){
         }
     });
     map.append(this.searchMenu);
-    
+
     this.mapType = $('<div class="mapOverLay"><input class="map_button" type="button" value="карта"/><input class="map_button" type="button" value="схема"/></div>').css({
         opacity:0.8,
         top:0,
@@ -174,7 +174,7 @@ mapModule.prototype.initMenu = function(){
 
 mapModule.prototype.showList = function(){
     if(this.mapList.is(":visible")){
-        return false; 
+        return false;
     }
     this.mapType.css({
         right: 200 + 10
@@ -182,7 +182,7 @@ mapModule.prototype.showList = function(){
     this.searchMenu.css({
         right: 200 + 569 + 10
     });
-    
+
     this.mapList.hider.css({
         right: 200 + 5
     });
@@ -201,7 +201,7 @@ mapModule.prototype.showList = function(){
 }
 mapModule.prototype.hideList = function(){
     if(!this.mapList.is(":visible")){
-        return false; 
+        return false;
     }
     this.mapType.css({
         right: 0
@@ -234,24 +234,24 @@ mapModule.prototype.openList = function(items){
     this.mapList.markers=[];
     $.each(items,function(){
         var item = this;
-        
+
         var serachMarker = new gm.Marker({
             map: self.map,
             title: item.formatted_address,
             position: item.geometry.location
         });
-        
+
         self.mapList.markers.push(serachMarker);
-        
+
         list.append($('<li><span>'+item.formatted_address+'</span></li>').click(function(){
             self.map.fitBounds(item.geometry.viewport);
         }));
     });
     this.mapList.html(list);
-  
+
     this.showList();
     this.mapList.hider.show();
-  
+
     $('#list_hider a').toggle(this.hideList.delegate(this),this.showList.delegate(this));
     return this.mapList;
 }
@@ -303,7 +303,7 @@ mapModule.prototype.loadData = function(){
 mapModule.prototype.createLocation = function(opt){
     if(!this.locations[opt.id]){
         this.locations[opt.id] = new ht_location(this,opt);
-    }    
+    }
 }
 
 mapModule.prototype.createMarker = function(opt){
@@ -369,8 +369,19 @@ mapModule.prototype.openInfo = function(point,html,closeHandler){
 
     gm.event.addListener(this.infoWindow,'closeclick',this.closeInfo.delegate(this));
     this.infoWindow.open(this.map);
+    this.initPhotos();
 
     return this.infoWindow;
+}
+mapModule.prototype.initPhotos = function(){
+    $(".thumbs a").colorbox({
+        rel:".location_photo",
+        current: "Фото {current} из {total}",
+        maxWidth:"1024px",
+        maxHeight:"600px",
+        fixed:true,
+        scalePhotos:true
+    });
 }
 mapModule.prototype.search = function(word){
     var self = this;
@@ -427,7 +438,7 @@ mapOverlay.prototype.onAdd = function(){
 }
 mapOverlay.prototype.draw = function(){
     var overlayProjection = this.getProjection();
-    
+
     var point = overlayProjection.fromLatLngToDivPixel(this.point);
     if(this.y){
         point.y -= this.y;
@@ -500,7 +511,7 @@ ht_location.prototype.setSelected = function(selected){
         if((index = $.inArray(this, this.mm.selected)) != -1){
             this.mm.selected.splice(index, 1);
         }
-        this.marker.setIcon(this.icon);        
+        this.marker.setIcon(this.icon);
     }
 }
 
@@ -511,7 +522,7 @@ ht_location.prototype.icon = new gm.MarkerImage(app.url('/images/l_f.png'),
     new google.maps.Point(0,0),
     // The anchor for this image is the base of the flagpole at 0,32.
     new google.maps.Point(4, 22));
-    
+
 ht_location.prototype.iconSelected = new gm.MarkerImage(app.url('/images/location_selected.png'),
     new google.maps.Size(16, 16),
     new google.maps.Point(0,0),
@@ -520,7 +531,7 @@ ht_location.prototype.iconHover = new gm.MarkerImage(app.url('/images/location_h
     new google.maps.Size(16, 16),
     new google.maps.Point(0,0),
     new google.maps.Point(7, 7));
-    
+
 ht_location.prototype.icon_e = new gm.MarkerImage(app.url('/images/l_f_e.png'),
     // This marker is 20 pixels wide by 32 pixels tall.
     new google.maps.Size(18, 22),
@@ -528,7 +539,7 @@ ht_location.prototype.icon_e = new gm.MarkerImage(app.url('/images/l_f_e.png'),
     new google.maps.Point(0,0),
     // The anchor for this image is the base of the flagpole at 0,32.
     new google.maps.Point(4, 22));
-    
+
 ht_location.prototype.icon_p = new gm.MarkerImage(app.url('/images/l_n.png'),
     // This marker is 20 pixels wide by 32 pixels tall.
     new google.maps.Size(9, 22),
@@ -536,7 +547,7 @@ ht_location.prototype.icon_p = new gm.MarkerImage(app.url('/images/l_n.png'),
     new google.maps.Point(0,0),
     // The anchor for this image is the base of the flagpole at 0,32.
     new google.maps.Point(4, 22));
-    
+
 ht_location.prototype.icon_ep = new gm.MarkerImage(app.url('/images/l_n_e.png'),
     // This marker is 20 pixels wide by 32 pixels tall.
     new google.maps.Size(18, 22),
@@ -544,7 +555,7 @@ ht_location.prototype.icon_ep = new gm.MarkerImage(app.url('/images/l_n_e.png'),
     new google.maps.Point(0,0),
     // The anchor for this image is the base of the flagpole at 0,32.
     new google.maps.Point(4, 22));
-    
+
 ht_location.prototype.shadow_l = new gm.MarkerImage(app.url('/images/l_s.png'),
     // This marker is 20 pixels wide by 32 pixels tall.
     new google.maps.Size(18, 22),
@@ -552,7 +563,7 @@ ht_location.prototype.shadow_l = new gm.MarkerImage(app.url('/images/l_s.png'),
     new google.maps.Point(0,0),
     // The anchor for this image is the base of the flagpole at 0,32.
     new google.maps.Point(4, 22));
-    
+
 ht_location.prototype.shadow_e = new gm.MarkerImage(app.url('/images/l_s_e.png'),
     // This marker is 20 pixels wide by 32 pixels tall.
     new google.maps.Size(18, 22),

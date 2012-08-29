@@ -13,7 +13,24 @@ class locationActions extends sfActions
 
     public function executeMap(sfWebRequest $request)
     {
-        $this->location = Doctrine::getTable('Location')->find($request->getParameter('id'));
+        $this->location = Doctrine::getTable('Location')->createQuery("l")
+            ->leftJoin('l.VoteLocation')
+            ->leftJoin('l.CreatedBy p')
+            ->leftJoin('p.User')
+            ->leftJoin('l.LocationShow')
+            ->leftJoin('l.Address a')
+            ->leftJoin('a.Country')
+            ->leftJoin('a.AreaLow')
+            ->leftJoin('a.AreaHigh')
+            ->leftJoin('l.LocationFlow')
+            ->leftJoin('l.LocationFundus')
+            ->leftJoin('l.LocationRelief')
+            ->leftJoin('l.PhotoLocation')
+
+            ->where('l.id = ?', $request->getParameter('id'))
+            ->execute()
+            ->getFirst();
+
         $this->forward404Unless($this->location);
         $this->location->showed();
     }
@@ -60,20 +77,18 @@ class locationActions extends sfActions
                 ->execute()
         );
 
-        $this->profits = $this->location->getProfit();
-
-        $this->events = $this->location->getFishEvent();
-
-        $this->fishes = $this->location->getFishes();
+        $this->location->showed();
 
         $this->comments = Comment::getFor($this->location);
+
+        $this->profits = $this->location->getProfit();
+        $this->events = $this->location->getFishEvent();
+        $this->fishes = $this->location->getFishes();
 
         $this->form = new CommentLocationForm();
         $this->form->setCommented($this->location);
 
         $this->csrf = CSRF::getToken();
-
-        $this->location->showed();
     }
 
     public function executeMy(sfWebRequest $request)

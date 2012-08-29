@@ -160,7 +160,8 @@
         </div>
     </div>
 </div>
-<?php include_combined_javascripts() ?>
+<?php include_javascripts() ?>
+<?php //include_combined_javascripts() ?>
 <?php if (sfConfig::get('sf_environment') == 'prod'): ?>
 <script>
     var _gaq = [

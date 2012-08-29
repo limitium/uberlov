@@ -18,8 +18,7 @@ profitModule.prototype.afterInit = function(){
 
 profitModule.prototype.initMenu = function(){
     this.menu = {
-        link: $('#new_profit',this.mm.addEditItem('<a id="new_profit" href=""><img src="' + app.url('/images/profit.png') + '"/>добавить отчет</a>'))
-        .click(this.startEdit.delegate(this))
+        link: $('#new_profit').attr("href","#").click(this.startEdit.delegate(this))
     };
 }
 

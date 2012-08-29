@@ -5,5 +5,8 @@
 <?php use_javascript('voting'); ?>
 <?php endif; ?>
 
+<?php use_javascript('lib/jquery.colorbox.js'); ?>
+<?php use_stylesheet('lib/colorbox'); ?>
+
 <?php use_javascript('fullMapModule'); ?>
 <?php include_partial('map') ?>

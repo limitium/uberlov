@@ -37,8 +37,9 @@ app = {
     
     run: function(){
         this.$ = $(this);
-        ModuleManager.initModules();
-        this.$.trigger('inited');
+        ModuleManager.createModules();
+        ModuleManager.afterCreate();
+        ModuleManager.afterInit();
     },
     getModule:function(module){
         return app.modules[module];
