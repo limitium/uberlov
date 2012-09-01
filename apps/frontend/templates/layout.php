@@ -76,7 +76,9 @@
 
         <div id="right_layout">
             <?php if ($sf_user->hasFlash('notice')): ?>
-            <div class="flash_notice"><?php echo $sf_user->getFlash('notice') ?></div>
+            <div class="alert alert-success">
+                <?php echo $sf_data->getRaw('sf_user')->getFlash('notice') ?>
+            </div>
             <?php endif; ?>
 
             <?php if ($sf_user->hasFlash('error')): ?>

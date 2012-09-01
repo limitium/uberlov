@@ -9,6 +9,11 @@ all:
   sfForkedApply:
     applyForm: FRegistrationForm
     mail_editable: true
+    confirmation:
+      reset: false
+      apply: false
+      email: true
+      reset_logged: false
     
   sfApplyPlugin:
     apply:

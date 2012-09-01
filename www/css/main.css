@@ -1,19 +1,22 @@
 @charset "utf-8";
 
-body{
+body {
     background: url("/images/common/backgrounds/back/noisy.png") repeat scroll 0 0 transparent;
     background-color: #EFEFEF;
 }
-#page{    
+
+#page {
     min-width: 1150px;
 }
+
 /*layout*/
-#middle{
+#middle {
     padding-bottom: 20px;
     padding-top: 60px;
 }
-#left_layout{
-    float:left;
+
+#left_layout {
+    float: left;
     width: 20%;
     padding: 1em 1em 1.5em 1em;
     -moz-border-radius: 8px;
@@ -23,10 +26,10 @@ body{
     border: 1px solid #DFDFDF;
 }
 
-#right_layout{
-    float:right;
+#right_layout {
+    float: right;
     width: 74%;
-/*    margin-left: 0.5em;*/
+    /*    margin-left: 0.5em;*/
     padding: 1em;
     -moz-border-radius: 8px;
     -webkit-border-radius: 8px;
@@ -34,20 +37,27 @@ body{
     background-color: white;
     border: 1px solid #DFDFDF;
 }
-.content{
+
+#right_layout .alert ul li {
+    list-style: square outside;
+    margin-left: 15px;
+}
+
+.content {
     /*    width: 90%;*/
-/*    min-width: 1150px;*/
-    padding:0 1.5em;
+    /*    min-width: 1150px;*/
+    padding: 0 1.5em;
 }
 
 /*tab panel*/
-.tabPanel{
+.tabPanel {
     height: 26px;
     margin-bottom: 1.2em;
     overflow: hidden;
     position: relative;
 }
-.tabPanel ul{
+
+.tabPanel ul {
     border-bottom: 1px solid #BBBBBB;
     bottom: 0;
     margin: 0;
@@ -55,7 +65,8 @@ body{
     position: absolute;
     width: 2000px;
 }
-.tabPanel ul li{
+
+.tabPanel ul li {
     background: none repeat scroll 0 0 #FFFFFF;
     float: left;
     list-style-type: none;
@@ -64,17 +75,17 @@ body{
     margin-right: 8px;
     white-space: nowrap;
 }
-.tabPanel ul li span{
 
+.tabPanel ul li span {
 
     background-color: #EEEEEE;
     border-left: 1px solid #BBBBBB;
     border-right: 1px solid #BBBBBB;
     border-top: 1px solid #BBBBBB;
     border-bottom: 1px solid #BBBBBB;
-    -moz-border-radius: 0.3em 0.3em  0 0;
-    -webkit-border-radius: 0.3em 0.3em  0 0;
-    border-radius:0.3em 0.3em  0 0;
+    -moz-border-radius: 0.3em 0.3em 0 0;
+    -webkit-border-radius: 0.3em 0.3em 0 0;
+    border-radius: 0.3em 0.3em 0 0;
 
     display: inline;
     font-size: 0.9em;
@@ -86,39 +97,43 @@ body{
 
 }
 
-.tabPanel ul li span:hover{
+.tabPanel ul li span:hover {
     cursor: pointer;
     background-color: #ffffdd;
 }
-.tabPanel ul li span.selected{
+
+.tabPanel ul li span.selected {
     background: none repeat scroll 0 0 #FFFFFF;
     border-bottom: 1px solid #FFFFFF;
 }
 
-.addthis_toolbox{
+.addthis_toolbox {
     padding: 1em;
 }
-.addthis_toolbox a{
+
+.addthis_toolbox a {
     margin-left: 0.5em !important;
 }
 
 /*meta*/
-.meta{
+.meta {
     /*    padding-top: 1em;*/
 }
-.meta div{
+
+.meta div {
     display: inline-block;
 }
 
-.text{
+.text {
     padding: 0.5em 0 0.3em 1em;
 }
+
 /*table fix*/
 table, th, td, tr {
     border: none;
 }
 
-.blockUI{
+.blockUI {
     -moz-border-radius: 8px;
     -webkit-border-radius: 8px;
     border-radius: 8px;
