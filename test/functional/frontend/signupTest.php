@@ -179,40 +179,21 @@ $browser->get('/user/new')
     ->hasErrors(false)
     ->end()
     ->with('response')->begin()
-    ->isStatusCode(200)
-//  ->debug()
-    ->checkElement('#mail_server')
-    ->end();
-//Ошибка в процессе отправки почты. Пожалуйста, попробуйте еще раз позже.
+    ->isRedirected(1)
+    ->isStatusCode(302)
+    ->end()
+    ->followRedirect();
 
 $browser
-    ->call('/user/confirm/test', 'GET', array())
     ->with('request')->begin()
-    ->isParameter('module', 'sfApply')
-    ->isParameter('action', 'confirm')
+    ->isParameter('module', 'collector')
+    ->isParameter('action', 'locations')
     ->end()
     ->with('response')->begin()
     ->isStatusCode(200)
-    ->matches("/является не правильным/")
+    ->matches("/Поздравляем с успешной регистрацией/")
     ->end();
 
-$testuser = Doctrine_Query::create()->from('sfGuardUserProfile p')
-    ->leftJoin("p.User u")
-    ->where("u.username = 'testuser'")
-    ->fetchOne();
-$browser
-    ->info("validate user:" . $testuser->getUser()->username)
-    ->info("validate key:" . $testuser->validate)
-    ->call('/user/confirm/' . $testuser->validate, 'GET', array())
-    ->with('request')->begin()
-    ->isParameter('module', 'sfApply')
-    ->isParameter('action', 'confirm')
-    ->end()
-    ->with('response')->begin()
-    ->isStatusCode(200)
-    ->info("user validated!")
-    ->matches("/Теперь Вы вошли на сайт/")
-    ->end();
 
 $browser
     ->call('/my_edit', 'GET', array())

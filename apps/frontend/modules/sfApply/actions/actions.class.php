@@ -45,15 +45,13 @@ class sfApplyActions extends BasesfApplyActions
                 $this->form->save();
                 $confirmation = sfConfig::get('app_sfForkedApply_confirmation');
                 if ($confirmation['apply']) {
-                    try
-                    {
+                    try {
                         //Extracting object and sending creating verification mail
                         $profile = $this->form->getObject();
                         $this->sendVerificationMail($profile);
                         return 'After';
                     }
-                    catch (Exception $e)
-                    {
+                    catch (Exception $e) {
                         //Cleaning after possible exception thrown in ::sendVerificationMail() method
                         $profile = $this->form->getObject();
                         $user = $profile->getUser();
@@ -68,9 +66,20 @@ class sfApplyActions extends BasesfApplyActions
                         return 'MailerError';
                     }
                 }
-                else
-                {
+                else {
                     $this->activateUser($this->form->getObject()->getUser());
+                    $this->getUser()->setFlash('notice', "<h3>Поздравляем с успешной регистрацией!</h3>
+
+                <p>Теперь Вы можете пользоваться всеми возможностями сервиса:</p>
+                <ul>
+                    <li>Добавлять новые места</li>
+                    <li>Добавлять отчеты</li>
+                    <li>Добавлять события</li>
+                    <li>Открывать обсуждения</li>
+                    <li>Голосовать комментировать и все подряд</li>
+                    <li>Заводить друзей</li>
+                    <li>И многое другое...</li>
+                </ul>");
                     return $this->redirect('@homepage');
                 }
             }

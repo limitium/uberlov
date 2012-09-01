@@ -8,61 +8,66 @@
  * @author     Your name here
  * @version    SVN: $Id: actions.class.php 12479 2008-10-31 10:54:40Z fabien $
  */
-class collectorActions extends sfActions {
+class collectorActions extends sfActions
+{
 
-    public function executeListFree(sfWebRequest $request) {
-            $this->pager = htPagerLayout::create(Doctrine::getTable('Location')
-                            ->getVisibleLocationsQuery($this->getUser())
-                            ->leftJoin('l.CreatedBy u')
-                            ->leftJoin('u.User')
-                            ->leftJoin('l.CommentLocation')
-                            ->leftJoin('l.VoteLocation')
-                            ->leftJoin('l.Profit p')
-                            ->leftJoin('p.ProfitDetail pd')
-                            ->addWhere('l.is_free = 1'), '@location_free?page={%page_number}', $request->getParameter('page', 1));
+    public function executeListFree(sfWebRequest $request)
+    {
+        $this->pager = htPagerLayout::create(Doctrine::getTable('Location')
+            ->getVisibleLocationsQuery($this->getUser())
+            ->leftJoin('l.CreatedBy u')
+            ->leftJoin('u.User')
+            ->leftJoin('l.CommentLocation')
+            ->leftJoin('l.VoteLocation')
+            ->leftJoin('l.Profit p')
+            ->leftJoin('p.ProfitDetail pd')
+            ->addWhere('l.is_free = 1'), '@location_free?page={%page_number}', $request->getParameter('page', 1));
 
-        }
-    public function executeListPaid(sfWebRequest $request) {
-            $this->pager = htPagerLayout::create(Doctrine::getTable('Location')
-                            ->getVisibleLocationsQuery($this->getUser())
-                            ->leftJoin('l.CreatedBy u')
-                            ->leftJoin('u.User')
-                            ->leftJoin('l.CommentLocation')
-                            ->leftJoin('l.VoteLocation')
-                            ->leftJoin('l.Profit p')
-                            ->leftJoin('p.ProfitDetail pd')
-                            ->addWhere('l.is_free = 0'), '@location_free?page={%page_number}', $request->getParameter('page', 1));
+    }
 
-        }
+    public function executeListPaid(sfWebRequest $request)
+    {
+        $this->pager = htPagerLayout::create(Doctrine::getTable('Location')
+            ->getVisibleLocationsQuery($this->getUser())
+            ->leftJoin('l.CreatedBy u')
+            ->leftJoin('u.User')
+            ->leftJoin('l.CommentLocation')
+            ->leftJoin('l.VoteLocation')
+            ->leftJoin('l.Profit p')
+            ->leftJoin('p.ProfitDetail pd')
+            ->addWhere('l.is_free = 0'), '@location_free?page={%page_number}', $request->getParameter('page', 1));
+
+    }
 
     /**
      * Executes map action
      *
      * @param sfRequest $request A request object
      */
-    public function executeTop(sfWebRequest $request) {
+    public function executeTop(sfWebRequest $request)
+    {
         $locOrdered = array();
         foreach (Doctrine::getTable('Location')
-                ->getVisibleLocationsQuery($this->getUser())
-                ->select('sum(v.value) as weight,l.id')
-                ->from('Location l')
-                ->leftJoin('l.VoteLocation v')
-                ->where('l.location_scope_id=5')
-                ->groupBy('l.id')
-                ->orderBy('weight desc')
-                ->limit(10)->execute() as $loc) {
+                     ->getVisibleLocationsQuery($this->getUser())
+                     ->select('sum(v.value) as weight,l.id')
+                     ->from('Location l')
+                     ->leftJoin('l.VoteLocation v')
+                     ->where('l.location_scope_id=5')
+                     ->groupBy('l.id')
+                     ->orderBy('weight desc')
+                     ->limit(10)->execute() as $loc) {
             $locOrdered[$loc->id] = $loc->weight;
         }
 
         foreach (Doctrine_Query::create()
-                ->from('Location l')
-                ->leftJoin('l.VoteLocation v')
-                ->leftJoin('l.CreatedBy p')
-                ->leftJoin('p.User u')
-                ->leftJoin('l.CommentLocation c')
-                ->leftJoin('l.Profit pr')
-                ->andWhereIn("l.id", array_keys($locOrdered))
-                ->execute() as $location) {
+                     ->from('Location l')
+                     ->leftJoin('l.VoteLocation v')
+                     ->leftJoin('l.CreatedBy p')
+                     ->leftJoin('p.User u')
+                     ->leftJoin('l.CommentLocation c')
+                     ->leftJoin('l.Profit pr')
+                     ->andWhereIn("l.id", array_keys($locOrdered))
+                     ->execute() as $location) {
             $locOrdered[$location->id] = $location;
         }
         $this->locations = $locOrdered;
@@ -73,13 +78,14 @@ class collectorActions extends sfActions {
      *
      * @param sfRequest $request A request object
      */
-    public function executeRegions(sfWebRequest $request) {
+    public function executeRegions(sfWebRequest $request)
+    {
         $this->countries = Doctrine_Query::create()
-                ->select()
-                ->from('Country c')
-                ->leftJoin('c.AreaLow a')
-                ->orderBy('c.name, a.name')
-                ->execute();
+            ->select()
+            ->from('Country c')
+            ->leftJoin('c.AreaLow a')
+            ->orderBy('c.name, a.name')
+            ->execute();
     }
 
     /**
@@ -87,7 +93,8 @@ class collectorActions extends sfActions {
      *
      * @param sfRequest $request A request object
      */
-    public function executeLocations(sfWebRequest $request) {
+    public function executeLocations(sfWebRequest $request)
+    {
         $this->ip = $request->getRemoteAddress();
     }
 
@@ -96,7 +103,8 @@ class collectorActions extends sfActions {
      *
      * @param sfRequest $request A request object
      */
-    public function executeData(sfWebRequest $request) {
+    public function executeData(sfWebRequest $request)
+    {
 //        $this->locations = Doctrine::getTable('Location')
 //                ->createQuery('r')
 //                ->leftJoin('r.FishEvent e')
@@ -132,17 +140,18 @@ class collectorActions extends sfActions {
 //                            ->execute());
 //        }
         $this->locations = Doctrine::getTable('Location')
-                ->getVisibleLocationsQuery($this->getUser())
-                ->leftJoin('l.FishEvent e')
-                ->execute();
+            ->getVisibleLocationsQuery($this->getUser())
+            ->leftJoin('l.FishEvent e')
+            ->execute();
     }
 
-    public function executeImport(sfWebRequest $request) {
+    public function executeImport(sfWebRequest $request)
+    {
         $form = new ImportForm();
 
         if ($request->isMethod(sfRequest::POST)) {
             $form->bind(
-                    $request->getParameter($form->getName()), $request->getFiles($form->getName())
+                $request->getParameter($form->getName()), $request->getFiles($form->getName())
             );
             if ($form->isValid()) {
                 $file = $form->getValue('file');
