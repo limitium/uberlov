@@ -5,7 +5,7 @@
         <a class="dashed" href=""><?php echo $location->getName(); ?></a>
     </div>
     <div class="address">
-        <?php echo htmlspecialchars_decode($location->getAddress()); ?>
+        <?php include_partial('address/row', array('address' => $location->getAddress())) ?>
     </div>
     <?php include_partial('collector/map') ?>
 </div>
