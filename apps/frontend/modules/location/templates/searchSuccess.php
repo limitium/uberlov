@@ -7,9 +7,9 @@
         <ul>
             <?php foreach ($locations as $location): ?>
                 <li>
-                    <h3><?php echo link_to($location->getName(), 'location/show?id=' . $location->getId()); ?></h3>     
+                    <h3><?php echo link_to($location->getName(), 'location/show?id=' . $location->getId()); ?></h3>
                     <div class="address">
-                        <?php echo htmlspecialchars_decode($location->getAddress()); ?>
+                        <?php include_partial('address/row', array('address' => $location->getAddress())) ?>
                     </div>
                     <?php if ($location->getDescription(ESC_XSSSAFE)) : ?>
                         <div class="text">
