@@ -21,6 +21,7 @@
     margin-left:5px;
     font-size: 15px;
     font-weight: bold;
+    line-height: 19px;
 }
 .mapOverLay a:hover,map_footer a:hover {
     background-color:#99BC3D;

@@ -116,7 +116,6 @@ class FRegistrationForm extends sfApplyApplyForm {
     public function getStylesheets() {
         return array(
             '/css/form.css' => 'screen',
-            '/sfForkedDoctrineApplyPlugin/css/forked.css' => 'screen',
         );
     }
 
