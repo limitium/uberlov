@@ -8,8 +8,8 @@
     <?php include_metas() ?>
 
     <title><?php echo get_slot('title', 'Uberлов — Узнай, где ловить рыбу!') ?></title>
-    <?php include_stylesheets() ?>
-    <!--            --><?php //include_combined_stylesheets() ?>
+    <!--    --><?php //include_stylesheets() ?>
+    <?php include_combined_stylesheets() ?>
     <script type="text/javascript">
         baseUrl = "<?php echo substr(url_for('@homepage'), 0, strlen(url_for('@homepage')) - 1); ?>";
         baseUrlFull = "<?php echo substr(url_for('@homepage', true), 0, strlen(url_for('@homepage', true)) - 1); ?>";
@@ -162,8 +162,8 @@
         </div>
     </div>
 </div>
-<?php include_javascripts() ?>
-<?php //include_combined_javascripts() ?>
+<?php //include_javascripts() ?>
+<?php include_combined_javascripts() ?>
 <?php if (sfConfig::get('sf_environment') == 'prod'): ?>
 <script>
     var _gaq = [
