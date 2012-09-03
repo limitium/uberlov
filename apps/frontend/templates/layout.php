@@ -152,8 +152,6 @@
                         powered by
                     </h3>
                     <ul class="footer_menu_list">
-                        <li><a href="http://www.symfony-project.com/">Symfony</a></li>
-                        <li><a href="http://www.jquery.com/">jQuery</a></li>
                         <li><a href="http://www.imageshack.us/">ImageShack</a></li>
                         <li><a href="http://www.gravatar.com/">Gravatar</a></li>
                     </ul>
