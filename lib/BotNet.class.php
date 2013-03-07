@@ -13,7 +13,8 @@
 class BotNet {
 
 //    public $start = 1278288000;
-    public $start = 1325288000; //30 dec 2011
+//    public $start = 1338508800; //1.6.2012
+    public $start = 1360508800; //10.2.2013
     public $spamer = "spamer";
     public $activeBots;
     public $totalBots;
@@ -231,7 +232,7 @@ class BotNet {
         }
     }
 
-    public function updateObjectVotes($object) {
+    private function updateObjectVotes($object) {
         $max = $object instanceof Location ? 6 : 3;
         $maxVoters = rand(0, $max);
         $voters = $maxVoters - round(atan(sqrt(rand(0, 10000) / 10000)) * $maxVoters);
@@ -246,7 +247,7 @@ class BotNet {
         }
     }
 
-    public function publishedByBot($object, $field, $from=0) {
+    private function publishedByBot($object, $field, $from=0) {
         $data = trim(strip_tags($object->$field));
         preg_match("/^\%(.+)?\%.*/i", $data, $match);
         $nick = isset($match[1]) ? $match[1] : "";

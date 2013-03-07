@@ -65,10 +65,10 @@
     <div id="middle" class="content clear_fix">
         <div id="left_layout">
             <?php include_component('user', 'menu') ?>
+            <?php include_component('event', 'last', array('sf_cache_key' => 'event')) ?>
             <?php include_component('location', 'last', array('sf_cache_key' => 'location')) ?>
             <?php include_component('comment', 'last', array('sf_cache_key' => 'comment')) ?>
             <?php include_component('profit', 'last', array('sf_cache_key' => 'profit')) ?>
-            <?php include_component('event', 'last', array('sf_cache_key' => 'event')) ?>
             <?php if (has_slot('extra')): ?>
             <?php include_slot('extra'); ?>
             <?php endif; ?>

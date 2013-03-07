@@ -152,6 +152,7 @@ class Location extends BaseLocation
         $show = $this->getLocationShow();
         if (!$show) {
             $this->LocationShow = new LocationShow();
+            $show=$this->LocationShow;
         }
         $show->shows++;
         $show->save();
